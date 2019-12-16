@@ -1,0 +1,349 @@
+WEBVTT
+
+00:00.800 --> 00:03.910
+Now the syntax is actually really easy to write.
+
+00:03.950 --> 00:10.010
+All we do is we declare the contest that we want to dynamically import and wrap it in lazy.
+
+00:10.070 --> 00:18.860
+So we'll say that our new home page component is equal to lazy which is a function that gets passed
+
+00:19.250 --> 00:25.160
+a function that calls import and then the string to the path that we want.
+
+00:26.500 --> 00:29.390
+So for us it will be this home page component.
+
+00:29.650 --> 00:39.280
+And now if we remove this our home page is now lazy loaded in meaning that when the application mounts
+
+00:39.280 --> 00:45.280
+for the first time it won't get this chunk that represents everything except for the home page.
+
+00:45.310 --> 00:50.470
+The moment though that the home page needs to be actually rendered because rack router sees Oh you're
+
+00:50.470 --> 00:52.780
+on this path this route path.
+
+00:52.780 --> 00:59.140
+I need to render this component the home page will then be pulled from the back end and lazy loaded
+
+00:59.260 --> 01:01.000
+into this route.
+
+01:01.030 --> 01:07.240
+So this is actually really cool because we're using RAC router we get this root level lazy loading right
+
+01:07.360 --> 01:12.220
+out the jump with react lazy and react router.
+
+01:12.230 --> 01:16.160
+Now the problem with this however is because this is a synchronous.
+
+01:16.160 --> 01:19.240
+This home page has an opportunity where it might not exist.
+
+01:19.250 --> 01:23.510
+And it depends on how fast our server is because of our server slow.
+
+01:23.510 --> 01:29.000
+You can see that when we request for our home page from our back and server it might take some time
+
+01:29.030 --> 01:30.840
+and the user will see nothing.
+
+01:30.860 --> 01:33.540
+In fact there might actually be an error.
+
+01:33.570 --> 01:37.910
+So what we want to do is we want to leverage react suspense.
+
+01:38.010 --> 01:39.320
+Now I'm not going to use it yet.
+
+01:39.330 --> 01:44.550
+And what we're going to see what happens is you'll see that there's this error right here because there's
+
+01:44.700 --> 01:49.140
+something unknown that are react context is trying to build from the root.
+
+01:49.230 --> 01:53.280
+And right now home page is undefined because it's not loaded yet.
+
+01:53.280 --> 02:00.600
+That's why we need to wrap it in suspense and what's suspense is is a new component that react has released.
+
+02:00.600 --> 02:07.470
+That allows you to wrap any part of your application that might be rendering asynchronous components
+
+02:08.160 --> 02:10.020
+so lazy loading components.
+
+02:10.020 --> 02:12.610
+It's actually meant to be used with react lazy.
+
+02:12.660 --> 02:20.190
+So now if I rack suspense around our road suspense is a component that must take a fallback property
+
+02:20.820 --> 02:27.270
+and the fallback property points to any HDMI element or component itself.
+
+02:27.360 --> 02:31.970
+So because it can render any component I'm just going to manually write one for now called div.
+
+02:32.190 --> 02:34.930
+And what this div inside is just going to say loading.
+
+02:34.950 --> 02:40.860
+So now if I save this and we go back to our application we'll see that there was a split second where
+
+02:40.860 --> 02:42.440
+you saw the loading text.
+
+02:42.540 --> 02:50.460
+Well that's what suspense is doing suspense just renders are fallback DIV and waits until the actual
+
+02:50.460 --> 02:56.760
+component is finished being lazy loaded dynamically imported and then it will automatically switch to
+
+02:56.760 --> 02:59.650
+the right component for us.
+
+02:59.670 --> 03:05.010
+So this is pretty much all react lazy as it's a really simple way for us to get this lazy load.
+
+03:05.190 --> 03:08.860
+And now in fact if we were to look at the console.
+
+03:09.060 --> 03:18.180
+Let me just make sure that I'm plotting this out if we look at the network we actually will see that
+
+03:18.180 --> 03:21.630
+we have broken our chunk into two.
+
+03:21.630 --> 03:23.090
+So there's our initial bundle.
+
+03:23.160 --> 03:25.200
+And this again is all the libraries.
+
+03:25.370 --> 03:31.920
+There is that main chunk we were looking at before and this is a zero chunk zero chunk is the first
+
+03:31.920 --> 03:34.340
+chunk of our home page.
+
+03:34.440 --> 03:40.200
+So we've see that we've actually broken our application into two chunks instead of the one main chunk
+
+03:40.200 --> 03:41.850
+that we were getting before.
+
+03:41.850 --> 03:48.420
+So this is really great for us because now we can see that we've properly chunked up and code split
+
+03:48.450 --> 03:51.170
+our application and that's really all there is to it.
+
+03:51.240 --> 03:57.360
+You just use suspense and you use this react lazy to import the home page.
+
+03:57.370 --> 04:04.770
+Now we can actually convert all of our other components over to this lazy style and it literally just
+
+04:04.770 --> 04:10.190
+is gonna follow the exact same format so we can do it for all these other ones as well.
+
+04:10.230 --> 04:13.260
+Or just do concerts shop page equals lazy
+
+04:16.060 --> 04:23.410
+and lazy just takes a dynamic import of the string of our shopping
+
+04:27.950 --> 04:34.700
+let's just make sure to do this for all of our other components like our sign in and sign up page and
+
+04:34.700 --> 04:46.970
+then our checkout page and now if we also convert this one over as well as our checkout page
+
+04:52.590 --> 05:02.030
+we can remove these other imports that we have before now the great thing as as well about suspense
+
+05:02.150 --> 05:09.170
+is that suspense can actually encapsulate multiple components and it will wait and render this fallback
+
+05:09.260 --> 05:13.390
+until every single component inside has finished lazy loading.
+
+05:13.400 --> 05:22.870
+So if I were to do this and move our suspense to wrap all of our new lazy loaded routes right that are
+
+05:22.870 --> 05:27.000
+pointing to our lazy loaded components.
+
+05:27.110 --> 05:28.700
+Let me also just fix this.
+
+05:28.940 --> 05:30.290
+Import string here.
+
+05:30.290 --> 05:31.450
+That's an extra period.
+
+05:32.240 --> 05:40.700
+But now that we have all of our lazy loaded routes if we go back to our application and I reopen my
+
+05:41.060 --> 05:50.010
+Network tab I do a hard refresh we'll see we have our main chunks but also now if we see if we go to
+
+05:50.010 --> 05:55.210
+our shop page we'll notice that we're actually also getting in new chunks.
+
+05:55.230 --> 06:04.780
+This for chunk let's go to a side and page there is the 6 chunk and if I go to check out there's some
+
+06:04.780 --> 06:12.310
+more chunks so reactors is now properly chunking all of those pages that we set up as their own dynamic
+
+06:12.610 --> 06:16.710
+imports so we're lazy loaded into these components now.
+
+06:16.870 --> 06:22.960
+So this is pretty much going to make our performance a little bit faster because our route is now being
+
+06:22.960 --> 06:31.310
+broken up into smaller and smaller chunks that only get downloaded when they need to be I will say that.
+
+06:31.310 --> 06:39.530
+One big thing is that because our code is not extremely heavy it's not you're not going to see massive
+
+06:39.530 --> 06:39.940
+results.
+
+06:39.950 --> 06:46.550
+You're not going to see us go from say like hundreds of killer bytes down to tens of kilobytes because
+
+06:46.570 --> 06:51.860
+obligation shot's not that large to begin with but on larger applications you'll definitely feel these
+
+06:51.860 --> 06:52.700
+improvements.
+
+06:52.700 --> 06:53.830
+And it's so easy to write.
+
+06:53.830 --> 06:56.810
+It makes no sense for us not to do so.
+
+06:56.810 --> 07:04.220
+So with that we now have a much more applicable chunking system for code scaling our application by
+
+07:04.220 --> 07:07.500
+simply just using suspense and react lazy.
+
+07:07.690 --> 07:12.290
+Now instead of rendering this loading div let's say I want to render a component that we're familiar
+
+07:12.290 --> 07:18.290
+with let's actually render our spinner component what we have to do is move the spinner into its own
+
+07:18.290 --> 07:23.000
+component because it's currently sitting inside of our with spin or higher order component.
+
+07:23.720 --> 07:31.910
+So what we'll do is we will make a new folder called spinner and inside will be both our spinner adopts
+
+07:31.940 --> 07:39.290
+styles dot J.S. as well as our spinner dock component J OS X.
+
+07:39.550 --> 07:45.940
+So what I want to do is I want to move all of these spinner styles into my new spinner component here
+
+07:46.810 --> 07:52.170
+and then I'm going to import them the way that I did before.
+
+07:52.170 --> 07:53.610
+Inside of that component
+
+07:57.230 --> 07:58.750
+ups this is from react
+
+08:01.490 --> 08:10.620
+and these are from the spinner styles and all our spinner component is going to be is just a presentational
+
+08:10.620 --> 08:19.680
+component that shows our spinner overlay with our spinner container inside of it.
+
+08:19.760 --> 08:21.890
+So this is pretty much all we were rendering.
+
+08:24.380 --> 08:28.280
+Inside of our with Spinner component.
+
+08:28.320 --> 08:33.330
+So now instead of rendering this what I want to render is my new spinner component
+
+08:38.310 --> 08:42.420
+because we're going to use the spare component inside of our coat
+
+08:46.280 --> 08:49.640
+now because this concept is now conflicting.
+
+08:49.730 --> 08:54.110
+We see that all we're doing from this function is simply just returning this function.
+
+08:54.620 --> 08:59.480
+So instead what we can do is we can just set this up as a default
+
+09:03.340 --> 09:10.130
+and our component should still work the same but now what we have access to is that new spinner component.
+
+09:10.190 --> 09:15.260
+So let's delete this with Spinner styles because we've moved that code into its own spinner component
+
+09:16.640 --> 09:20.080
+and now we can just simply import that into our app code.
+
+09:21.280 --> 09:23.990
+Let's just import that right here.
+
+09:29.900 --> 09:42.280
+Spinner spinner component and let's just render our new spinner component so now when our app loads
+
+09:42.580 --> 09:44.350
+we see that there's there are spinner.
+
+09:44.350 --> 09:47.680
+So it looks way closer and way better.
+
+09:47.680 --> 09:53.170
+So that's what's really great about suspense and react lazy is that we can literally render any place
+
+09:53.170 --> 09:55.560
+holder component that we want.
+
+09:55.570 --> 10:03.310
+So with that we have our roots on our main app split into lazy loaded components.
+
+10:03.310 --> 10:10.990
+The only other place where I believe we have other routes is our shop page our shop page actually holds
+
+10:10.990 --> 10:15.760
+two routes in themselves as well which is the collections or view container and the collection page
+
+10:15.760 --> 10:16.760
+container.
+
+10:16.780 --> 10:23.410
+So as an exercise I want you to practice what we did using suspense and react lazy and turn these into
+
+10:23.410 --> 10:26.980
+lazy loaded components and render them in the roads.
+
+10:26.980 --> 10:32.800
+So after you've done that I'll meet you in the next lesson where we'll talk about further optimizing
+
+10:32.890 --> 10:33.760
+our components.

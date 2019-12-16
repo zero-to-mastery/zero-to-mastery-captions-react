@@ -1,0 +1,364 @@
+WEBVTT
+
+00:00.740 --> 00:03.880
+Welcome back everybody in this section.
+
+00:03.880 --> 00:11.530
+We are going to talk about a big feature overreact called hooks now hooks is a new feature that was
+
+00:11.590 --> 00:21.900
+introduced in February of 20 19 with react sixteen point eight hooks is a really really interesting
+
+00:21.900 --> 00:27.320
+feature especially on its impact in the rap community.
+
+00:27.440 --> 00:35.480
+It aims to replace the way that we write certain components as well as how we write our applications.
+
+00:35.540 --> 00:42.440
+That is a little different from how we've currently written our components and code.
+
+00:42.440 --> 00:49.820
+Up until now it is important that I mentioned though that right now the community is very divided on
+
+00:49.940 --> 00:57.260
+how to use hooks and whether or not they're actually worth replacing and to what extent to replace our
+
+00:57.260 --> 01:01.160
+existing applications code with hooks related code.
+
+01:01.440 --> 01:08.810
+I we'll talk about all of that while we actually learn how to use hooks but before we apply and convert
+
+01:08.900 --> 01:16.370
+our crown clothing application over to using some hooks we're going to test and play around with the
+
+01:16.370 --> 01:23.660
+base hooks first so we understand what they do and how to use them because they do have a bit of caveats
+
+01:23.660 --> 01:31.580
+to them that we've got to understand before we start replacing our code base with these hooks so in
+
+01:31.580 --> 01:35.590
+this little quick test create react at Black location.
+
+01:35.690 --> 01:43.130
+We have just this basic component that has a header with a name value and then a button that when clicked
+
+01:43.220 --> 01:46.190
+should set this value to something else.
+
+01:46.190 --> 01:47.740
+In this case Andre.
+
+01:48.020 --> 01:54.710
+Now this functionality is not in yet but we need to explore how we would do this using a non hooked
+
+01:54.710 --> 02:00.950
+approach in order for us to understand how hooks differ in how we use them.
+
+02:01.430 --> 02:05.470
+So let's go to the application now.
+
+02:05.710 --> 02:13.780
+Normally all we do if we were to solve this using the RAC code that we're comfortable with is we would
+
+02:13.780 --> 02:20.940
+use something like a class component where we would set an internal state of name to the value of what
+
+02:21.690 --> 02:23.650
+we would display that name.
+
+02:23.760 --> 02:30.330
+And then when we click our button we simply call this dot set state and we change name to the value
+
+02:30.360 --> 02:30.990
+that we want.
+
+02:30.990 --> 02:39.550
+In this case Andre The thing is though that this class component is clunky higher than a functional
+
+02:39.550 --> 02:40.830
+component that we would write.
+
+02:40.990 --> 02:47.380
+But this is the only type of component that we can use if we wanted to leverage internal state in our
+
+02:47.380 --> 02:49.610
+components.
+
+02:49.740 --> 02:56.400
+A lot of the react core team that built the hooks API we're thinking and getting feedback from the community
+
+02:56.970 --> 03:04.980
+that cross components and their lifecycle methods particularly are kind of confusing because of how
+
+03:04.980 --> 03:12.470
+we have to determine the order in which these lifecycle methods are going to fire right.
+
+03:12.480 --> 03:18.990
+We don't know where we should be doing different functionality of our component in what lifecycle method
+
+03:19.860 --> 03:22.530
+depending on the kind of feature that you're building.
+
+03:22.530 --> 03:29.670
+It actually becomes very confusing about which lifecycle methods to use and then the fact that we're
+
+03:29.670 --> 03:32.870
+keeping track of state and how state triggers render.
+
+03:32.910 --> 03:37.530
+It's all things that a lot of developers struggle with.
+
+03:37.530 --> 03:46.120
+So the REACT team thought well maybe there's a way for us to simplify this and their solution was hooks.
+
+03:46.170 --> 03:53.220
+So that's the thing to understand about hooks hooks is a way for us to write functional components but
+
+03:53.310 --> 04:00.930
+gain access to new functionality that was previously only available to us if we wrote class component
+
+04:01.990 --> 04:06.760
+so that's the big caveat we cannot use hooks inside of class components.
+
+04:06.760 --> 04:14.690
+We can only use them inside a functional component and we only have access to hooks again if we're running
+
+04:14.690 --> 04:21.170
+reactive versions sixteen point eight or higher if you join a project that uses an older version of
+
+04:21.170 --> 04:21.780
+react.
+
+04:21.800 --> 04:27.200
+Unfortunately you won't have access to hooks but it's still important to learn because the community
+
+04:27.350 --> 04:32.270
+and the react core team as a whole are saying that folks are here to stay
+
+04:35.290 --> 04:41.140
+in order for us to use hooks we have to import them in from the react library and there's actually two
+
+04:41.140 --> 04:48.400
+main hooks we're gonna look at the first hook we're gonna look at is the use state hook and we import
+
+04:48.400 --> 04:56.390
+it like so now you state is exactly like it sounds it allows are functional components to have access
+
+04:56.390 --> 05:03.800
+to internal state features that we could only leverage before using class components and the way that
+
+05:03.800 --> 05:09.070
+you state works is that it is a function that gets a parameter.
+
+05:09.230 --> 05:16.490
+But before we explore what that parameter is we got to know what you state gives us back you state gives
+
+05:16.550 --> 05:27.630
+us back a array with two values in it and in order for us to understand these two values we will actually
+
+05:27.690 --> 05:30.790
+need to first explore array D structuring.
+
+05:30.780 --> 05:37.620
+So if you've not heard of array structuring it's very similar to object structuring that we're completely
+
+05:37.620 --> 05:45.390
+familiar with now let's say we have an example of some array which is equal to an array of three numbers
+
+05:46.790 --> 05:52.790
+if we wanted to set each of those elements in this array to a constant variable that we have access
+
+05:52.790 --> 06:02.080
+to in our application we can use what's called array D structuring and set them like this so very similar
+
+06:02.080 --> 06:08.710
+to the syntax of our object structuring and then pointing to an object to cast that object's properties
+
+06:08.800 --> 06:10.300
+as our cost.
+
+06:10.360 --> 06:18.520
+We do this in the order inside of square brackets that we want the cost variables to point to in their
+
+06:18.520 --> 06:22.190
+respective positions of the array we're pointing to.
+
+06:22.240 --> 06:28.420
+So if we type this we'll see that a now equals one B now equals 2.
+
+06:28.710 --> 06:33.290
+What's and C now equals 3.
+
+06:33.330 --> 06:35.790
+So this is pretty much already structuring.
+
+06:35.790 --> 06:43.880
+It just allows us to set variables inside of this square bracket to certain elements in an array.
+
+06:43.910 --> 06:51.410
+Now you state gives us back to parameters inside of our array.
+
+06:51.430 --> 06:55.020
+So we d structure these two things that we get back.
+
+06:55.310 --> 07:00.770
+The first one is going to be the state value itself that we're trying to set.
+
+07:00.770 --> 07:07.040
+Now we can name this whatever we want right but it's pretty much going to be the variable that we want
+
+07:07.130 --> 07:08.240
+our state to hold.
+
+07:08.240 --> 07:13.460
+So here for example in the context of our application we're trying to set a name so I'm going to call
+
+07:13.460 --> 07:14.870
+it name.
+
+07:14.900 --> 07:22.010
+The second thing we get back from you state is a function that allows us to set this property and this
+
+07:22.010 --> 07:24.930
+property I'm going to call set name.
+
+07:25.010 --> 07:32.600
+So typically we want to be very explicit about what these two cost that we're getting back will be.
+
+07:32.650 --> 07:40.480
+Now what we pass into you state is going to be the value that we want the initial value of this state
+
+07:40.480 --> 07:41.380
+to be.
+
+07:41.380 --> 07:43.500
+So for example we're trying to set a string.
+
+07:43.600 --> 07:52.720
+I'm just going to set you state and the initial value to a string value of equal and now I'm actually
+
+07:52.720 --> 08:00.490
+able to use these values inside of my component and this one now equal that state value.
+
+08:00.760 --> 08:07.750
+And if I wanted to change that value I simply just call our new set.
+
+08:07.750 --> 08:14.350
+Name feature and then pass it the value I want to change this name value too.
+
+08:14.380 --> 08:17.170
+So now I can just set it to Andre.
+
+08:17.210 --> 08:20.140
+This is equivalent to this.
+
+08:20.240 --> 08:22.220
+It's the same thing.
+
+08:22.220 --> 08:28.400
+The only main difference is that now we have a functional component that is leveraging this internal
+
+08:28.400 --> 08:29.320
+state.
+
+08:29.630 --> 08:31.850
+And we'll see that when I click my button.
+
+08:31.880 --> 08:37.990
+It does change the state of my new functional component.
+
+08:38.010 --> 08:44.880
+The thing about you state here is that typically if we had multiple values we would have to put them
+
+08:44.910 --> 08:48.620
+all into the same state object and then we would.
+
+08:48.660 --> 08:56.420
+For example if I also wanted an address I would have to do it like this and then if I needed to set
+
+08:56.420 --> 09:03.870
+the state of this address right I would make a for example just another button and this would be set
+
+09:03.950 --> 09:10.410
+dress and what I would have to do is manually still just change the object value that I'm trying to
+
+09:10.410 --> 09:12.000
+point to in this state.
+
+09:12.240 --> 09:16.200
+But I would still be calling the same set state.
+
+09:16.410 --> 09:23.640
+The difference now is that we're able to use this you state hook as many times as we want to instantiate
+
+09:23.670 --> 09:28.320
+new values and new set of functions for our state.
+
+09:28.320 --> 09:35.390
+So if I wanted to duplicate that feature in our functional component I would just make a new use state
+
+09:35.400 --> 09:49.780
+hook and say set address here and set this to Amsterdam and then I would simply use the new set address
+
+09:50.860 --> 09:52.240
+and change this value
+
+09:56.760 --> 10:01.320
+and get the same functionality.
+
+10:01.420 --> 10:10.810
+In fact it's preferred that we use more set states and break apart are states that we're trying to store
+
+10:11.230 --> 10:21.760
+on our components rather than for example store really deeply nested objects and that is a recommendation
+
+10:21.790 --> 10:25.590
+but not necessarily something that the REACT team is enforcing.
+
+10:25.930 --> 10:33.980
+But it's a thing to keep in mind regarding how we use that you state hook but it's a pretty simple hook.
+
+10:34.100 --> 10:37.250
+In fact all the hooks are pretty simple to use.
+
+10:37.250 --> 10:40.790
+There's just caveats about how to use them.
+
+10:41.120 --> 10:44.160
+But the you state one is definitely the most simple.
+
+10:44.360 --> 10:48.490
+If we wanted to set more states we're totally able to do so right.
+
+10:48.500 --> 10:54.290
+Just calling you state as many times as we need to to set new values as well as their own set of functions
+
+10:55.230 --> 10:58.430
+but this is the main thing about the you state hook.
+
+10:58.530 --> 11:05.910
+It just gives our functional components access to the state features that we had before on a class component
+
+11:06.980 --> 11:15.260
+and the times when we would use this you state hook is if we were trying to build a feature or a component
+
+11:15.920 --> 11:21.510
+that needed local state inside of its component but it didn't need any lifecycle method.
+
+11:21.680 --> 11:27.170
+That's the main time we would use the you state now in our next lesson.
+
+11:27.220 --> 11:38.500
+We are going to explore the next hook which is the use of fact hook and that one actually tackles using
+
+11:38.500 --> 11:45.520
+component lifecycle methods or similar implementations to lifecycle methods from our classes into functional
+
+11:45.520 --> 11:46.780
+components.
+
+11:46.840 --> 11:48.080
+So let's tackle that one.

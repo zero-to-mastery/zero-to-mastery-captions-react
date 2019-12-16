@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.690 --> 00:08.430
+Now that we have our fire base utility library inside of our project let's actually set it up so that
+
+00:08.430 --> 00:11.750
+we can start using it in our application.
+
+00:11.790 --> 00:19.830
+Now what we want to do is go into our project directory and we are going to add a new folder in our
+
+00:19.830 --> 00:25.290
+source called firebase inside of this fire base.
+
+00:25.290 --> 00:34.220
+We are going to make a new file called firebase dot utilize dot J.S. now in order to properly use and
+
+00:34.220 --> 00:39.950
+set up our fire base utility files or utility methods.
+
+00:39.950 --> 00:43.270
+We actually need that config object.
+
+00:43.520 --> 00:46.880
+So if you accidentally lost it somehow.
+
+00:46.910 --> 00:54.780
+I'll show you how you can navigate back to finding that configuration we want to go from our dashboard
+
+00:54.810 --> 01:01.350
+to project overview which is this page and then you'll see this grid item here.
+
+01:01.350 --> 01:05.680
+If you click this you'll see our application or sorry.
+
+01:05.700 --> 01:08.610
+You'll see our fire project.
+
+01:08.610 --> 01:13.830
+So we want to click this and then scroll down.
+
+01:13.830 --> 01:17.900
+You should see this SDK snippet with the CBN.
+
+01:18.300 --> 01:21.820
+That object that we want is right here.
+
+01:21.900 --> 01:29.250
+So we just want to copy this go back to our firebase utilize and then we're going to import firebase
+
+01:29.340 --> 01:39.420
+from firebase slash app so by doing this we're pulling in the firebase utility library that belongs
+
+01:39.480 --> 01:42.120
+at this firebase slash app.
+
+01:42.120 --> 01:48.090
+Now the reason we do firebase slash app is because firebase has all of the utility libraries loaded
+
+01:48.090 --> 01:54.570
+when we included the entire dependency when we installed firebase with ya.
+
+01:55.200 --> 02:00.030
+But we don't want any that we're not using because they are quite large.
+
+02:00.270 --> 02:01.940
+So whenever we need them.
+
+02:01.950 --> 02:06.920
+So in this case we need off and storage.
+
+02:07.380 --> 02:17.550
+We can import them themselves by exporting firebase slash fire store for the database and firebase slash
+
+02:17.700 --> 02:26.040
+off for the off we always need the base import though because that keyword is going to give us access
+
+02:26.040 --> 02:33.490
+to fast or an author when we import them in they'll be just automatically attached to this firebase
+
+02:33.540 --> 02:42.110
+keyword and then what we're want to do is we want to set our content config equal to that object that
+
+02:42.110 --> 02:51.560
+we just stored and then we call firebase dot initialize app with that config.
+
+02:51.730 --> 02:58.200
+Now what I'm about to type next will be quite a bit of code.
+
+02:58.330 --> 03:04.420
+It will make sense once we start using it but because it's config it might seem a little confusing because
+
+03:04.420 --> 03:11.440
+we are mainly configuring the firebase utility that we get all of it is in the documentation on firebase
+
+03:11.500 --> 03:16.650
+itself but these are the ones that we need for Google authentication.
+
+03:16.780 --> 03:25.480
+So what we want to do is we want to export const off which is equal to Firebase dot off.
+
+03:25.480 --> 03:30.770
+So when I mentioned that we imported firebase off that is what we manage to get access to is the dart
+
+03:30.790 --> 03:36.790
+off method on Firebase and we want to export this out anywhere that we we need to use anything related
+
+03:36.790 --> 03:38.800
+to authentication.
+
+03:38.900 --> 03:47.300
+Next we are also going to export the store that we imported the same way that we did with the off so
+
+03:47.300 --> 03:55.380
+we don't need this yet but it's better for us to just export this for now now to set up our Google authentication
+
+03:55.380 --> 03:56.090
+utility.
+
+03:56.100 --> 04:02.380
+So this part is a little bit complicated but just follow along.
+
+04:02.610 --> 04:12.870
+We're gonna do a cost provider equals new firebase off Google off provider and this gives us access
+
+04:12.870 --> 04:18.250
+to this new Google auth provider class from the authentication library.
+
+04:18.420 --> 04:29.810
+It takes a couple custom parameters using the custom parameters method and what we want to set is prompt
+
+04:30.320 --> 04:32.900
+select account.
+
+04:32.900 --> 04:40.670
+What this means is that we want to always trigger the Google pop up when ever we use this Google auth
+
+04:40.670 --> 04:47.150
+provider for authentication and sign in and I'll show you what I mean when we use it.
+
+04:47.180 --> 04:57.190
+So we're also going to export out sign in this sign in with Google method that is equal to a function
+
+04:57.940 --> 05:06.460
+that calls off dot sign in with pop up because sign and with pop up takes this provider class that we
+
+05:06.460 --> 05:11.260
+made but it takes it for many different types of pop ups right.
+
+05:11.260 --> 05:14.120
+We just want the Google want but there's a Twitter one right.
+
+05:14.350 --> 05:20.530
+There's all kinds available to us in our sign in but we just set we want to set sign on with pop up
+
+05:20.650 --> 05:28.780
+and then we want to pass this provider through now we also want to finally export default will be firebase
+
+05:28.790 --> 05:31.010
+in case we want the whole library.
+
+05:31.010 --> 05:34.180
+But you know how I mentioned that there's multiple pop ups.
+
+05:34.190 --> 05:40.340
+Well let's actually configure our firebase project to allow us to use Google sign it and I'll show you
+
+05:40.340 --> 05:41.830
+how easy that is.
+
+05:41.870 --> 05:48.800
+So all we do is we go back to our firebase project and we click this authentication under the developer
+
+05:49.040 --> 05:56.810
+tag here we're gonna click set up sign and method and under this Google option we just hit the edit
+
+05:57.320 --> 06:04.700
+pencil enable it we'll select the email that we want.
+
+06:04.710 --> 06:06.800
+Projects support to have.
+
+06:06.810 --> 06:07.080
+Right.
+
+06:07.110 --> 06:12.930
+So in case anything goes wrong with firebase at all for anything related to support they're going to
+
+06:12.930 --> 06:15.020
+send it to this email that you have here.
+
+06:15.030 --> 06:21.490
+And usually it's the email from your Google account that you use to sign into firebase.
+
+06:21.600 --> 06:30.420
+We just hit save and now it's enabled we have 0 off enabled for our project using Google and now we're
+
+06:30.420 --> 06:35.340
+going to use this signing with Google inside of our sign and component.
+
+06:35.340 --> 06:45.710
+So we're going to import it in sign with Google from firebase firebase use hills.
+
+06:46.110 --> 06:47.140
+Get rid of that dog.
+
+06:47.180 --> 06:47.930
+Yes.
+
+06:48.390 --> 06:49.900
+And to see how easy it is.
+
+06:49.980 --> 07:00.280
+We just are going to copy our button remove type submit and fire a on click that calls our sign and
+
+07:00.280 --> 07:01.570
+with Google method.
+
+07:01.780 --> 07:10.720
+And now if we do sign in with Google whenever we click it our button in our application so let's refresh
+
+07:11.870 --> 07:19.520
+we see our button we click it and there's the Google prompt it will load any Google accounts that we
+
+07:19.520 --> 07:22.970
+already have or the users already signed in with.
+
+07:22.970 --> 07:28.000
+And we select it and firebase will handle the authentication there.
+
+07:28.790 --> 07:32.900
+Just like that we have authentication with Google tied into our application.
+
+07:33.140 --> 07:38.970
+But how do we actually utilize these users that firebase is logging in with.
+
+07:39.460 --> 07:41.270
+Well let's do that right now.

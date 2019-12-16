@@ -1,0 +1,130 @@
+WEBVTT
+
+00:01.020 --> 00:08.970
+Now the next thing we're going to tackle is a pretty big feature and the feature is our cart.
+
+00:09.780 --> 00:17.850
+So if we go to our final application we'll see that our cart is represented as this shopping bag icon
+
+00:17.940 --> 00:23.670
+with a number inside that increases whenever you add items to it.
+
+00:25.100 --> 00:33.440
+Inside when you click this icon it will create this dropdown that shows you the items that you currently
+
+00:33.440 --> 00:35.900
+have in your cart.
+
+00:35.900 --> 00:43.070
+Now we have to keep in mind how we're going to store these items because if we go to our checkout we
+
+00:43.130 --> 00:45.920
+also see the same items.
+
+00:45.920 --> 00:53.240
+And if we start increasing the quantity here we actually see that our shopping icon is also increasing
+
+00:53.240 --> 01:02.470
+in that number so this seems like it's two places in the application that uses the same state which
+
+01:02.470 --> 01:09.370
+is perfect for what we know about redux because we know that these two components are going to share
+
+01:09.370 --> 01:12.270
+the same state.
+
+01:12.270 --> 01:15.270
+Now how do we build this.
+
+01:15.270 --> 01:17.440
+Well there's a lot going on here.
+
+01:17.510 --> 01:24.750
+So in this section we're going to put together a lot of the concepts that we just learned and expand
+
+01:24.750 --> 01:34.550
+upon them to build this exciting feature so let's go back to our application code and what we first
+
+01:34.550 --> 01:40.660
+need to do is bring in the actual SPG for the shopping bag icon.
+
+01:40.700 --> 01:46.580
+Now I've already provided it for you so you can just add it into this folder of our assets
+
+01:49.490 --> 01:55.560
+and inside of our assets you are just going to drop the SPG and so I'm just going to copy and paste
+
+01:55.560 --> 02:09.010
+it in and then what we'll do is make the actual car icon component that represents both the icon and
+
+02:09.010 --> 02:10.100
+the number.
+
+02:10.210 --> 02:18.740
+So when our components let's make a cart icon component an inside will need our cart icon component
+
+02:18.850 --> 02:28.370
+dodgy OSX and our cart icon dot styles dot size.
+
+02:28.400 --> 02:39.480
+So first of all import in react from react will import in our style she and we're also going to import
+
+02:39.570 --> 02:41.500
+in our shopping icon.
+
+02:41.550 --> 02:55.850
+So we're gonna do react component as shopping icon from and then the year all of our SPG assets shopping
+
+02:55.850 --> 02:59.030
+backed up that's.
+
+02:59.070 --> 03:01.920
+Now what we're gonna write is a concept.
+
+03:01.930 --> 03:15.140
+Carl Icahn equals a functional component that renders a div and this div is going to have the class
+
+03:15.140 --> 03:30.020
+name of cart icon because it will hold both our shopping icon as well as our span that will represent
+
+03:32.470 --> 03:35.440
+our total number of items.
+
+03:35.520 --> 03:41.080
+Now for this span we're just going to say item count as its class name.
+
+03:41.390 --> 03:47.980
+And for our shopping icon we're gonna give it the class name of shopping icon
+
+03:50.750 --> 04:00.110
+and then let's export out by default our cart icon is spelled Defoe.
+
+04:00.150 --> 04:08.020
+Now I have provided for you the styling for this card icon as I usually do and you can just paste this
+
+04:08.110 --> 04:16.030
+into your cart icon styles but all I'm doing is I'm pretty much just setting our item count to be positioned
+
+04:16.120 --> 04:21.500
+above and absolutely in the middle of our shopping icon.
+
+04:21.500 --> 04:29.160
+So now let's bring this into our header component.
+
+04:29.200 --> 04:40.830
+Now let's import in cart icon from cart icon card icon component and let's just drop it at the very
+
+04:40.890 --> 04:44.400
+end of our header.
+
+04:44.430 --> 04:51.290
+Now if we save and look at our code we see that we have our kite icon now right now.
+
+04:51.300 --> 04:59.080
+None of that functionality is tied to it but we have our icon component in the next section.
+
+04:59.100 --> 05:06.960
+We are going to actually start building out the dropdown and all of the redux that's going to be associated
+
+05:06.960 --> 05:07.890
+to setting that up.

@@ -1,0 +1,121 @@
+WEBVTT
+
+00:06.110 --> 00:10.940
+And you can already start to see some things that we can clean up here.
+
+00:11.030 --> 00:18.590
+We can just copy and paste this let's just create one more instance and says filters robot correctly
+
+00:19.280 --> 00:33.530
+to we'll say that the we'll say 3 4 now just to keep this clean we'll say that the concept filter or
+
+00:33.530 --> 00:40.840
+filtered robots should equal an empty array.
+
+00:40.840 --> 00:46.230
+And this time we're searching for the letter A which doesn't exist in name.
+
+00:46.420 --> 00:56.750
+And we expect the filtered robots to equal the dummy filter robots that we gave it
+
+01:00.150 --> 01:00.690
+let's save
+
+01:03.750 --> 01:05.430
+and we see that something is failing
+
+01:08.350 --> 01:11.290
+because my mock props to is not defined.
+
+01:11.290 --> 01:14.620
+We need to give it three.
+
+01:14.850 --> 01:16.840
+And there you have it.
+
+01:17.010 --> 01:24.420
+We've now tested our main page at least the main page method of filtered robots
+
+01:27.250 --> 01:32.380
+and we also have some snapshot testing as well so let's just look at our code coverage for now.
+
+01:33.190 --> 01:39.660
+Let's just around NPM run test dash dash dash dash coverage
+
+01:44.280 --> 01:48.820
+and again this is always with testing there's always many more things they can do.
+
+01:48.840 --> 01:49.670
+We see that May.
+
+01:49.710 --> 01:56.860
+Main Page has a hundred percent but there is a branch percentage.
+
+01:56.880 --> 01:59.820
+We're only testing 50 percent of the branch.
+
+02:00.090 --> 02:03.540
+And you see that the uncovered line is on 28.
+
+02:03.540 --> 02:14.230
+If we go back we can go to main page and see that we have an is pending on line 28.
+
+02:14.230 --> 02:15.930
+How cool is that the test says.
+
+02:16.060 --> 02:18.370
+All right we're testing that.
+
+02:18.460 --> 02:27.790
+The card list is rendering because we're always testing with is pending is true as you can see here
+
+02:27.820 --> 02:31.910
+and our in our mock props.
+
+02:31.990 --> 02:33.850
+We always have is pending to false.
+
+02:33.850 --> 02:37.510
+So we might want a test is pending to true as well.
+
+02:37.510 --> 02:43.780
+And I'm going to leave that up to you to add the important concept here is that there are so many ways
+
+02:43.780 --> 02:45.150
+to test.
+
+02:45.280 --> 02:51.040
+You can always use the coverage your report as a reference but try to be smart about your tests and
+
+02:51.040 --> 02:57.760
+make sure that you spend your time wisely because you're just going to have infinite things that you
+
+02:57.760 --> 03:01.880
+can do but you only have limited time.
+
+03:02.020 --> 03:03.220
+That's it for now.
+
+03:03.250 --> 03:09.850
+I hope you have a better understanding of how container and components testing can be enhanced with
+
+03:10.180 --> 03:12.760
+enzyme and snapshot testing.
+
+03:12.760 --> 03:18.700
+And obviously the tools that come with just the rest of the test is something I'm leaving up to you
+
+03:18.700 --> 03:21.010
+to complete four components and containers.
+
+03:21.010 --> 03:26.010
+But let's get to actions constants and reduce hours.
+
+03:26.200 --> 03:28.900
+We're gonna want to test those as well.
+
+03:29.110 --> 03:32.020
+So in the next video we're going to do just that.
+
+03:32.020 --> 03:33.740
+I'll see on that one by.

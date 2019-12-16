@@ -1,0 +1,214 @@
+WEBVTT
+
+00:00.800 --> 00:04.020
+Let's get started with react basics.
+
+00:04.400 --> 00:11.450
+Now if you've taken any of my previous courses where I've taught react or you're not a react beginner
+
+00:11.900 --> 00:18.230
+and you've built some applications before with react then you can actually just skim through these videos
+
+00:18.350 --> 00:23.260
+or skip this entire section as this section covers the react basics.
+
+00:23.270 --> 00:29.060
+We're going to build our first react application from scratch using something called Create react app
+
+00:29.330 --> 00:33.160
+and then we're going to deploy it to get help pages again.
+
+00:33.240 --> 00:39.210
+If you're completely new to react then you have to finish this section to move on with the course.
+
+00:39.210 --> 00:43.500
+However for those with a bit of experience you might find this section a little bit easy.
+
+00:43.500 --> 00:48.200
+Determine for yourself which direction you want to go remember.
+
+00:48.200 --> 00:55.160
+Our goal here is to build these basics so that we can build our giant application our e-commerce platform
+
+00:55.220 --> 00:56.680
+using react.
+
+00:56.750 --> 00:59.990
+Now in this section we're gonna learn a few things.
+
+00:59.990 --> 01:04.000
+However we're going to make a few assumptions here.
+
+01:04.010 --> 01:11.800
+First we're going to assume you know how to use your terminal or your command prompt and you can also
+
+01:11.800 --> 01:19.570
+use any code editor you want you can use Visual Studio code Sublime Text or any other popular javascript
+
+01:19.570 --> 01:21.720
+developer environments.
+
+01:21.740 --> 01:24.290
+Now this section is going to be a code along.
+
+01:24.560 --> 01:31.610
+So I highly recommend if you're following along to have your terminal or command prompt setup if you're
+
+01:31.610 --> 01:39.620
+on Windows Terminal if you're on mac or linux system and have your code editor so you follow along.
+
+01:39.620 --> 01:45.560
+Now over the next couple of videos we're going to install node if you don't have it already.
+
+01:45.680 --> 01:50.160
+And also the create react app that is going to allow us to write react.
+
+01:50.210 --> 01:54.970
+I do want to make a few notes though first with this course.
+
+01:55.010 --> 02:00.340
+As long as you have a version 10 or higher for node you're going to be fine.
+
+02:00.770 --> 02:10.160
+If you don't have a version of node on your system that is 10 or lower then I recommend updating node
+
+02:10.790 --> 02:17.330
+or if not you can use something called End VM and end VM is a node version manager.
+
+02:17.390 --> 02:23.550
+So it's a simple way in the terminal for us to switch node versions.
+
+02:23.580 --> 02:29.420
+Now this is something you can go through on your own the easiest way to do things is to just simply
+
+02:29.570 --> 02:32.450
+download node from the node j J.S..
+
+02:32.550 --> 02:33.530
+Dot org Web site.
+
+02:34.680 --> 02:41.280
+Now the second thing we're going to do is we're going to actually install something called Create react.
+
+02:41.730 --> 02:50.660
+And if I go to react J.S. talk here and I go to Doc's under the create a new react app.
+
+02:50.800 --> 02:55.720
+We have this thing called Create react app which we're gonna talk about in the upcoming video.
+
+02:55.720 --> 03:03.220
+Now the one thing I want to mention is that you'll see this command and p x and MP X is actually new
+
+03:03.850 --> 03:14.310
+and comes with version of NPM 5.2 so if your NPM version is lower than this this command won't work
+
+03:15.310 --> 03:18.090
+so you might want to update your NPM version as well.
+
+03:19.430 --> 03:22.470
+Now MP X for those that haven't seen it before.
+
+03:22.580 --> 03:27.370
+Runs a command of a package without installing it explicit.
+
+03:28.010 --> 03:29.810
+So what does that mean.
+
+03:29.810 --> 03:35.300
+Well before we had MP X this is what we had to do.
+
+03:35.300 --> 03:39.680
+You see here that this is the current version of react based on when you're watching the video you might
+
+03:39.680 --> 03:41.400
+have versions that are higher.
+
+03:41.450 --> 03:46.040
+But again this course will work with any versions higher than sixteen point eight.
+
+03:46.100 --> 03:50.780
+If I go here and go to an older version of React let's say fifteen point six.
+
+03:50.780 --> 03:57.560
+If I click on documentation and then let's do docs and then finally we look at the installation
+
+04:00.970 --> 04:08.440
+you'll see that we had to run npm install globally create reactor and then we ran the create react up
+
+04:08.440 --> 04:10.820
+command to create our app.
+
+04:10.840 --> 04:17.680
+MP X allows us to not install this global version of create react app and just simply run that one comment
+
+04:17.860 --> 04:19.820
+to create our app.
+
+04:19.820 --> 04:28.950
+All right now let's go back if for some reason during this section you are unable to get this started.
+
+04:29.020 --> 04:35.410
+There is a another option where you can use this code sandbox style which I'll link to that actually
+
+04:35.410 --> 04:40.980
+allows you within the browser to use react online.
+
+04:41.000 --> 04:47.090
+Now one last thing we're gonna get started and go step by step into building our ReACT application.
+
+04:47.360 --> 04:49.580
+But I also want to point something out to you.
+
+04:49.700 --> 04:58.010
+You see when we study or learn libraries or frameworks or tools like react the best place to learn about
+
+04:58.010 --> 05:05.210
+something is often the documentation and most tutorials don't mentioned this fact that well we have
+
+05:05.720 --> 05:12.980
+the official react documentation that explains how we act works inside and out and most tutorials that
+
+05:12.980 --> 05:16.550
+you see online are taught using this basic template.
+
+05:16.970 --> 05:21.980
+So remember if you ever have questions this is always the best place to start.
+
+05:23.160 --> 05:27.380
+Now we're going to be covering some main concepts and react here.
+
+05:27.720 --> 05:33.810
+But remember that the way you learn a library is not like reading a dictionary where you just learn
+
+05:33.930 --> 05:37.230
+every single thing that this library gives you.
+
+05:37.320 --> 05:43.680
+The thing to understand that we'll go into later on in this course is how to build bigger and bigger
+
+05:43.680 --> 05:44.460
+applications.
+
+05:44.460 --> 05:52.200
+How to architect your app so that instead of learning something like a dictionary one by one we learn
+
+05:52.200 --> 05:58.350
+the principles and the concepts that allow us to do advanced things and build real life applications
+
+05:58.590 --> 06:01.390
+something that I'm really excited to do in this course.
+
+06:01.440 --> 06:04.700
+So enough talk it's time for us to get started.
+
+06:04.710 --> 06:07.800
+We're going to start setting up our environment in the next video.
+
+06:07.870 --> 06:11.420
+We're going to build our first app and it's gonna be a fun one.
+
+06:11.550 --> 06:12.350
+I'll see you on that one.
+
+06:12.350 --> 06:12.740
+Bye bye.

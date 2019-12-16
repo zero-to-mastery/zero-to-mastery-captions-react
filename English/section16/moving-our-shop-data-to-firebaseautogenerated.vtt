@@ -1,0 +1,259 @@
+WEBVTT
+
+00:00.820 --> 00:07.870
+So now that we know the two types of objects references and snapshots that we can get back from the
+
+00:07.870 --> 00:16.770
+fire store library let's actually talk about the structure of our database on fire store.
+
+00:16.810 --> 00:22.930
+So let's go back to fire store and let's look at our collections.
+
+00:23.110 --> 00:25.370
+So we only have one collection right now.
+
+00:25.420 --> 00:34.090
+Our users collection if we look at our users collection and we look at how this database looks we can
+
+00:34.240 --> 00:41.890
+almost see that this collection of users is like an object.
+
+00:41.910 --> 00:50.280
+There is this key of users that points to this object that contains these key ideas that point to the
+
+00:50.370 --> 00:58.190
+actual value of an object that contains the document information.
+
+00:58.220 --> 01:01.720
+This is almost identical to our shop data.
+
+01:01.730 --> 01:11.510
+If you look at our shop data is an object that has these keys of these category names that point to
+
+01:11.510 --> 01:19.140
+these objects that hold the values of these actual categories.
+
+01:19.140 --> 01:28.630
+This is by no means a coincidence firebase is what's considered a no sequel database the no sequel database
+
+01:28.720 --> 01:35.770
+is different from a sequel database because of the way that it can store data.
+
+01:35.800 --> 01:42.880
+We'll talk about sequel databases more in a later lesson as well as how they differ from no single databases.
+
+01:42.880 --> 01:48.450
+But let's first explore no sequel databases because we're using firestorm right now
+
+01:51.770 --> 01:55.420
+just like our chase on objects inside of our front end.
+
+01:55.490 --> 02:03.950
+They can have any number of properties and values are user documents right now have the same properties
+
+02:04.670 --> 02:13.010
+and the same values as each other in the sense that both documents have created at a display name and
+
+02:13.100 --> 02:23.170
+email property but it doesn't have to be the case we can make a new user document that has completely
+
+02:23.170 --> 02:33.110
+different fields from the other objects this one can have a name where the value can say you or it can
+
+02:33.140 --> 02:44.000
+even have an address value that says let's say Toronto our object is still a user Document object but
+
+02:44.030 --> 02:49.100
+it's different from the other user documents inside of the collection.
+
+02:49.100 --> 02:56.090
+This becomes troublesome because on our front end if we get all these documents we might not know that
+
+02:56.090 --> 03:06.020
+these values are different but the advantage is that you're able to have these really flexible documents
+
+03:06.050 --> 03:15.050
+that can store any properties right regardless of what the actual conflict on the front end will be
+
+03:16.350 --> 03:23.640
+we'll explore that later as well but that's just one thing to keep in mind is that when we're using
+
+03:23.670 --> 03:34.680
+a no secret database we have to make sure that we enforce ourselves to store the same values across
+
+03:34.680 --> 03:42.240
+our documents if we can because we don't want to pull in all of our users and iterate through them only
+
+03:42.240 --> 03:50.040
+to find that some objects don't have properties that we expect them to have beyond that.
+
+03:50.050 --> 03:55.340
+The other thing to keep in mind is what types of properties we can store.
+
+03:55.510 --> 04:02.630
+Now let's look at what types of properties we can actually store on documents so here we can see that
+
+04:02.630 --> 04:07.500
+we can add a field as we did earlier and this is the field name.
+
+04:07.730 --> 04:16.520
+And this is the type that this field expects the value to be so we can have strings numbers boolean
+
+04:16.790 --> 04:24.440
+and then we see here maps maps you can pretty much see as Jason objects and we would prefer to store
+
+04:24.440 --> 04:32.930
+a list of things as maps because as we saw with our data normalization course that it's easier for the
+
+04:32.930 --> 04:41.830
+fire store database to find specific elements inside of a list by the property name or the key rather
+
+04:41.830 --> 04:46.690
+than just searching through an array for what the element is which is the same reason why we switched
+
+04:46.690 --> 04:56.530
+our shot data from an array to an object arrays are not actually arrays inside a fire store their maps
+
+04:56.590 --> 04:59.960
+except the index is the key.
+
+05:00.010 --> 05:02.710
+So the first element has a key of zero.
+
+05:02.710 --> 05:04.720
+The second has a key of one.
+
+05:04.750 --> 05:07.590
+The third a key of two and so on and so forth.
+
+05:08.230 --> 05:13.330
+So they're kind of like maps that resemble arrays and we'll explore those later you don't have to get
+
+05:13.330 --> 05:20.200
+too caught up in them there's no there's timestamp which is like a date object and then there's geo
+
+05:20.200 --> 05:25.690
+point which is kind of like a coordinate but we don't have to worry about these two we're probably also
+
+05:25.690 --> 05:31.550
+not use them so those are the types of properties we can store.
+
+05:31.630 --> 05:39.910
+Now what we want to do is we actually want to add in our collection from our code base because manually
+
+05:39.970 --> 05:45.310
+adding a collection and adding all the documents and the field is going to be extremely tedious for
+
+05:45.310 --> 05:48.210
+this huge object that we have here.
+
+05:48.220 --> 05:55.970
+So what we'll do is we'll actually make a new you tell for it and we'll make a you tool that we can
+
+05:55.970 --> 05:58.530
+see ourselves using again in the future.
+
+05:58.580 --> 06:11.820
+So what we'll call our you tool is export concept ad collection and items and what it will take is a
+
+06:11.820 --> 06:17.120
+collection name or we can call it collection key
+
+06:21.010 --> 06:29.200
+and then we can say for the objects that we want to add in let's call it objects to add which can be
+
+06:29.200 --> 06:33.320
+an array now inside of our function.
+
+06:33.610 --> 06:41.380
+What we're going to do is we are going to create the collection using the collection key so we will
+
+06:41.380 --> 06:52.710
+get back a collection ref from fire store dot collection and then passing in our collection key.
+
+06:52.890 --> 06:58.570
+And if you remember firebase will give us back a rough object no matter what.
+
+06:58.680 --> 07:03.930
+And this is great for us because using this collection ref we don't actually have to manually make one
+
+07:03.990 --> 07:06.130
+in the database firebase.
+
+07:06.150 --> 07:12.330
+We'll make this collection rough object for us and then if we start adding elements to it as documents
+
+07:12.690 --> 07:18.510
+then firebase will start creating both the collection and the documents inside a fire store.
+
+07:18.540 --> 07:24.210
+In fact let's actually rename our function to add collection and documents because that's what we're
+
+07:24.220 --> 07:26.890
+adding documents not items.
+
+07:26.910 --> 07:33.060
+Now what we need to do is we need to call our ad collection and documents function somewhere in our
+
+07:33.150 --> 07:36.790
+app where we have access to the shop data.
+
+07:36.840 --> 07:43.530
+Now we can get access by passing the data in through a selector but we do want to only fire this function
+
+07:43.530 --> 07:44.760
+one time.
+
+07:44.760 --> 07:51.810
+So let's do it in our app because our app only mounts once and after we've updated our data in our fire
+
+07:51.810 --> 07:52.350
+store.
+
+07:52.350 --> 07:57.240
+We're going to remove this code because we only want to add it programmatically.
+
+07:57.240 --> 07:57.620
+Right.
+
+07:57.630 --> 08:03.480
+We're just adding our shop data to our back end one time so we don't have to write it out by hand in
+
+08:03.480 --> 08:04.890
+our fire store.
+
+08:04.920 --> 08:10.620
+So what we'll do is we will actually bring in our selector from redux.
+
+08:10.620 --> 08:21.950
+So let's bring it in from our redux folder shop and our shop selectors and then we need are select collections
+
+08:22.520 --> 08:31.240
+for preview and also our new function add collection and documents.
+
+08:31.280 --> 08:38.690
+So now that we have these imported in let's put this in our map state to props as the collections array
+
+08:42.190 --> 08:50.050
+and what we'll do is we will D structure our collections array from our props and pass it into our new
+
+08:50.080 --> 09:02.090
+function so what we'll need is the key which is collections and our collections array and now if we
+
+09:02.090 --> 09:07.310
+look inside of our console we'll see our collections reference where the I.D. points the collections
+
+09:07.550 --> 09:17.060
+but we'll also see in our crown firebase that if we refresh we won't see the collection which is exactly
+
+09:17.060 --> 09:20.150
+what we want because we haven't instantiated any documents in it.
+
+09:20.180 --> 09:27.700
+So the reference doesn't truly point to anything real in the database yet and now that we have our collection
+
+09:27.700 --> 09:35.710
+ref we need to actually add these objects into this collection and we'll do it in the next video because
+
+09:35.710 --> 09:39.840
+this video is getting a little bit long so I'll see you guys in the next video.

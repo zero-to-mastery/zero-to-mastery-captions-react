@@ -1,0 +1,283 @@
+WEBVTT
+
+00:00.660 --> 00:06.240
+Now in order for us to duplicate that session persistence that we had before.
+
+00:06.600 --> 00:13.170
+We want to make sure that we check against our awful library whether or not this current user session
+
+00:13.230 --> 00:15.710
+is still persisting.
+
+00:15.750 --> 00:18.430
+So before when we did off to on state.
+
+00:18.440 --> 00:24.890
+Changed once this code initialized the off library would of course give us our user auth object.
+
+00:24.900 --> 00:27.250
+The moment it was called for the first time.
+
+00:27.420 --> 00:29.980
+Even if auth state had not changed.
+
+00:30.420 --> 00:37.470
+But we're actually going to duplicate this functionality except using a saga as well as that action
+
+00:37.470 --> 00:39.240
+pattern that we've got.
+
+00:39.240 --> 00:46.320
+So what we can do is we've got to make a new action to actually issue our saga to check.
+
+00:46.320 --> 00:56.220
+So we're gonna need a new user action called check user session and what this will do is this will tell
+
+00:56.220 --> 00:56.980
+our saga.
+
+00:57.030 --> 01:03.690
+Once the app initialize is so we're still going to put it in component in Mount to check again if the
+
+01:03.810 --> 01:05.680
+user's off has persisted.
+
+01:07.060 --> 01:17.140
+So what we're going to also make is a new action called check user section and it's just a call to make
+
+01:17.260 --> 01:20.410
+the method user action type.
+
+01:20.470 --> 01:24.760
+Check user session.
+
+01:24.940 --> 01:32.480
+We're gonna pass this into our dispatch so we're gonna make sure to bring this in
+
+01:36.460 --> 01:39.680
+to our app code.
+
+01:39.840 --> 01:46.320
+We've got to recreate our map dispatch to props which gets the dispatch
+
+01:50.750 --> 01:55.280
+and is simply a method that dispatches our action
+
+01:58.050 --> 02:02.940
+pass that back into our connect and d structure us in our component did mount
+
+02:11.030 --> 02:19.420
+and then we issue it and now we should see that when our app initialize us we fire off our check user
+
+02:19.570 --> 02:20.640
+social action.
+
+02:20.700 --> 02:26.960
+So we now we just got to write the listener to actually perform this check now it is out of our user
+
+02:26.960 --> 02:37.570
+saga we are going to make a new saga called check user session or let's say on Czech user session because
+
+02:37.570 --> 02:40.390
+we're listening for it and we'll yield.
+
+02:40.390 --> 02:51.670
+Take the latest user action stock check user session and here we're gonna make a new method write a
+
+02:51.670 --> 02:55.040
+new generator function that will perform the check.
+
+02:55.230 --> 02:59.820
+So what we're gonna write is the method is gonna be called is user authenticated
+
+03:04.650 --> 03:09.680
+and this will be our generator function.
+
+03:09.690 --> 03:12.000
+Now how do we actually perform this check.
+
+03:12.930 --> 03:20.430
+Well it turns out that there's no promise based way for us to get a snapshot of whether or not our current
+
+03:20.430 --> 03:21.570
+user exists or not.
+
+03:22.990 --> 03:32.020
+The only way we can do it is we can actually make a new utility method that will leverage the existing
+
+03:32.020 --> 03:39.030
+code that we had before of checking against that on snapshot authenticated method.
+
+03:39.460 --> 03:43.570
+But we'll just unsubscribe immediately after we get the initial value.
+
+03:44.530 --> 03:45.670
+So what does that mean.
+
+03:45.700 --> 03:47.370
+Well let's let's write it up first.
+
+03:49.180 --> 03:56.070
+So we're going to export out this new method called get current user
+
+04:00.220 --> 04:02.440
+and what we want to do is want to.
+
+04:02.440 --> 04:04.630
+We want to return a new promise.
+
+04:04.630 --> 04:04.920
+Right.
+
+04:04.930 --> 04:13.490
+Because we want to return a promise oriented solution that our sagas can yield for because our saga
+
+04:13.490 --> 04:16.500
+is just like async await work off of promises.
+
+04:17.490 --> 04:19.360
+So we're gonna make a new promise.
+
+04:19.370 --> 04:23.170
+Right we're going to pass our resolve and reject values.
+
+04:23.580 --> 04:30.510
+And then what we're gonna do is we're going to actually do the same unsubscribe pattern we had calling
+
+04:30.510 --> 04:36.520
+our off dot on off state changed method that we had before.
+
+04:36.650 --> 04:39.470
+We'll get our user off object
+
+04:42.380 --> 04:47.790
+and then once we get it we're going to immediately unsubscribe once we unsubscribe.
+
+04:47.820 --> 04:56.190
+We're gonna resolve with our user object our user object and if it fails we'll just reject it with whatever
+
+04:56.220 --> 04:57.600
+air we get back.
+
+04:57.600 --> 05:04.260
+So again if you remember this on off state changed or on snapshot methods on or off take either the
+
+05:04.260 --> 05:12.000
+sexy call way which gives us back the correct value or they take a secondary error functional callback
+
+05:12.030 --> 05:13.230
+that gives us the error.
+
+05:13.260 --> 05:15.210
+So we're just gonna pass it to reject.
+
+05:15.210 --> 05:20.940
+So now when we return this promise this promise will resolve to the correct user off value.
+
+05:20.940 --> 05:22.990
+If there is one if there isn't.
+
+05:22.990 --> 05:28.140
+It'll just resolve us back not as we had before in our AFGE code if you remember.
+
+05:28.140 --> 05:33.660
+And then of course we'll be able to reject and catch any errors inside of this API call or this API
+
+05:33.660 --> 05:36.310
+listener.
+
+05:36.320 --> 05:43.470
+So now we're gonna get current user pass it in to our utility and into our saga and what we're gonna
+
+05:43.480 --> 05:49.810
+do is we're going to actually check for this thing how we're gonna use it is the same way as we did
+
+05:49.810 --> 05:57.170
+with all of our other API calls we're gonna write our tribal and we're gonna make sure to have our catch
+
+05:59.040 --> 06:03.750
+and our catch is going to do a similar sign and failure right.
+
+06:03.780 --> 06:09.000
+Because if there is a failure in this process then we know for sure there might be something wrong with
+
+06:09.000 --> 06:17.470
+our sign in and now what we're gonna do is we're gonna get back our user off object when we call this
+
+06:17.530 --> 06:25.810
+method because as we remember what the on off state change gives us back is the same user off object
+
+06:26.110 --> 06:26.920
+that we get here.
+
+06:26.920 --> 06:27.200
+Right.
+
+06:27.220 --> 06:33.190
+Except it's under the user key when we get it back using these methods here as we remember we get back
+
+06:33.220 --> 06:39.630
+that user off object and now we're gonna say if user off is null.
+
+06:39.640 --> 06:39.850
+Right.
+
+06:39.850 --> 06:43.450
+So let's say it turns out the user has never actually signed it.
+
+06:43.510 --> 06:44.800
+So there's no session here.
+
+06:44.800 --> 06:46.640
+We're just going to return out of this function.
+
+06:46.740 --> 06:47.870
+We don't want to do anything else.
+
+06:47.890 --> 06:55.990
+We're going to end the function if instead there is a value what we want to do is we want to call the
+
+06:55.990 --> 07:03.260
+same get snapshot from user off except we're going to use our user off and we also have to make sure
+
+07:03.260 --> 07:13.950
+to pass this into our user saga to make sure we're listening for that action as well and we know where
+
+07:14.280 --> 07:16.740
+instantiating it on component amount.
+
+07:16.770 --> 07:23.610
+So if we go back we'll see that we have our check user session and then sign it success.
+
+07:24.120 --> 07:31.050
+So now we have persistence if we refresh write our application we'll check if there's such a user exists
+
+07:31.590 --> 07:36.170
+and then sign them in if there is one if we don't have one.
+
+07:36.180 --> 07:40.330
+So I just click sign off status update and if I refresh right.
+
+07:40.340 --> 07:41.760
+Check user session checks.
+
+07:41.800 --> 07:47.580
+There's no user signed in because we just signed out and now our state our app just continues as normal
+
+07:49.310 --> 07:56.750
+so pretty cool we've managed to extrapolate pretty much all of our persistence into this new saga as
+
+07:56.750 --> 08:04.340
+well as create a way for us to in a promise oriented way get back whether or not the user off exists
+
+08:04.370 --> 08:09.550
+using this new get current user utility that we wrote.
+
+08:09.560 --> 08:16.220
+So now let's actually update our code so that when we sign out it's also successful because right now
+
+08:16.220 --> 08:19.570
+there's no way for our application to actually sign out properly.
+
+08:19.700 --> 08:21.530
+So let's build that in the next lesson.

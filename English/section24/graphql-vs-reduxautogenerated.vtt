@@ -1,0 +1,292 @@
+WEBVTT
+
+00:00.480 --> 00:02.140
+OK everyone.
+
+00:02.160 --> 00:06.060
+So now that we have at least learned how to query against graft.
+
+00:06.140 --> 00:14.640
+Well let's take a bit of time to understand how we can leverage graft Q On a polo to replace the existing
+
+00:14.640 --> 00:19.110
+redux implementation we have inside of our applications.
+
+00:19.110 --> 00:23.700
+Now you can use graft you all alongside redux.
+
+00:23.700 --> 00:25.680
+It's not impossible.
+
+00:25.680 --> 00:33.750
+The only issue with doing so is that you end up running two different kinds of front end state management
+
+00:33.750 --> 00:34.830
+libraries.
+
+00:34.830 --> 00:37.240
+If you decide to use Apollo.
+
+00:37.620 --> 00:46.230
+Generally speaking the information around whether or not to use graph QR and Apollo alongside redux
+
+00:46.320 --> 00:49.030
+is not fully fleshed out yet.
+
+00:49.230 --> 00:53.930
+There are people that have done it and there are people that advise against it.
+
+00:54.030 --> 01:00.900
+In my personal opinion I am going to teach you everything about Apollo replacing redux in our front
+
+01:00.900 --> 01:07.710
+end and then at that point you can at least be equipped with the tools required to decide for yourself
+
+01:07.740 --> 01:15.420
+whether or not redux with Apollo or with just Apollo alone is a better solution for you when you decide
+
+01:15.420 --> 01:16.090
+to use Graf.
+
+01:16.100 --> 01:25.250
+Q Well personally I would see benefits in both redux has a really fleshed out architecture and ecosystem
+
+01:25.710 --> 01:28.890
+that is really easy to learn and use.
+
+01:28.890 --> 01:35.520
+Once you've become familiar with redux structure graph Q On Apollo on the other hand are still relatively
+
+01:35.520 --> 01:36.320
+new.
+
+01:36.450 --> 01:44.320
+So Apollo does not have that much almost community support answering a lot of the questions that you
+
+01:44.320 --> 01:50.110
+might encounter if you try and just use Apollo alone to manage your local state.
+
+01:50.110 --> 01:56.500
+You might encounter unique cases or it's difficult for you to actually figure out how to leverage local
+
+01:56.500 --> 02:01.030
+state with the same robustness that you would be able to do with redux.
+
+02:01.090 --> 02:03.170
+But that's simply my personal opinion.
+
+02:03.190 --> 02:05.380
+It's entirely up to you how you want to do it.
+
+02:05.830 --> 02:13.230
+I just want to equip you with all of the tools so that you can do it best now before we actually move
+
+02:13.230 --> 02:14.940
+on to any of the coding.
+
+02:14.940 --> 02:21.850
+We have to understand what the structure of Apollo vs. redux will be.
+
+02:21.870 --> 02:29.670
+So in this diagram here we can see how we currently have our application setup using sagas as well as
+
+02:29.670 --> 02:30.870
+redux.
+
+02:30.870 --> 02:37.140
+So here we see that we have our reduced hours which pass our state as props to our components.
+
+02:37.140 --> 02:41.430
+And here is where we have our selectors which would pluck off the specific properties that we want to
+
+02:41.430 --> 02:47.970
+leverage inside of our components and then our components end up firing actions using dispatch.
+
+02:48.000 --> 02:52.320
+These actions will hit the middleware before they end up hitting the producers but at this point the
+
+02:52.320 --> 02:58.350
+middleware is able to use those actions and fire off different asynchronous event handling middleware
+
+02:58.380 --> 03:06.570
+that we are familiar with now such as Thanks sagas etc. which could fire more actions or they might
+
+03:06.570 --> 03:12.480
+fetch data from our firebase application so we'll end up fetching our data from the database which would
+
+03:12.480 --> 03:18.150
+then end up firing more actions so that our reducer is get updated with this data.
+
+03:18.150 --> 03:24.080
+So this image represents the flow of everything that we've done up until now.
+
+03:24.120 --> 03:30.020
+Now if we were to replace those with Apollo and graph Q all this is what it would look like.
+
+03:30.120 --> 03:36.810
+So we still have components and we have now instead of our reducer this thing called a local cache so
+
+03:36.810 --> 03:42.840
+the local cache is this thing that Apollo provides us so that we're able to cache data on the client
+
+03:42.840 --> 03:50.880
+side the same way that redux does it we're able to access this cache from anywhere inside of our componentry
+
+03:50.940 --> 03:59.460
+the same way we can with redux connect the only thing is that in order for us to get data or modified
+
+03:59.460 --> 04:05.580
+data on the local cache we have to do so through a query or a mutation.
+
+04:05.580 --> 04:10.900
+Now a query as we know is a way for us to request data from our back end.
+
+04:11.070 --> 04:17.190
+But the way that Apollo has its setup is that you would make the exact same query request for any data
+
+04:17.280 --> 04:23.100
+on your local cache so you can almost see it as if you have two places where there's data you have a
+
+04:23.100 --> 04:26.310
+local cache and you have your back end database.
+
+04:26.580 --> 04:32.100
+Pretty much the same way that we have firebase as our back end database and Redux as our local state
+
+04:33.030 --> 04:36.030
+the local cache that comes with Apollo is the exact same idea.
+
+04:36.030 --> 04:41.760
+The only difference is that the only way that you can make a query or mutation against your local cache
+
+04:41.820 --> 04:45.920
+as well is to use a query or a mutation.
+
+04:45.930 --> 04:52.860
+Now what is a mutation mutation is simply any code that is not simply trying to read against the data
+
+04:53.130 --> 04:54.960
+you want to write against the data.
+
+04:55.200 --> 04:58.170
+You either want to update it add something to it or delete it.
+
+04:58.470 --> 05:02.920
+So that's pretty much what mutations are in graph QoL as well as Apollo.
+
+05:03.000 --> 05:05.090
+They separate them into two different things.
+
+05:05.100 --> 05:09.170
+Queries simply get data mutations modify data.
+
+05:09.450 --> 05:18.090
+Now the way that we actually need to define to our application as well as to Apollo what we're able
+
+05:18.090 --> 05:23.360
+to query for or modify we do in this thing called a resolve.
+
+05:23.850 --> 05:28.020
+Now the resolve or you can kind of see as a function very similar to our reducer.
+
+05:28.020 --> 05:36.780
+The only difference is that that function that resolve or function once it's called will either modify
+
+05:36.780 --> 05:38.430
+some data or get some data.
+
+05:38.460 --> 05:44.430
+So it's simply a function that has access to the local cache and fetches data and then plucks off the
+
+05:44.430 --> 05:46.200
+data that you want to display.
+
+05:46.410 --> 05:52.530
+Or it allows you to merge data together on a local cache so you can perform some specific type of function
+
+05:52.650 --> 05:54.990
+in order to update the local cache.
+
+05:55.110 --> 06:00.600
+Now I know that might sound confusing but it's pretty much just the place where we have to write our
+
+06:00.600 --> 06:07.640
+code that defines what types of queries or mutations we have access to inside of our application.
+
+06:07.680 --> 06:13.710
+So just keep this in mind because we will end up writing resolves inside of this section.
+
+06:13.890 --> 06:20.820
+Now these resolves are also going to be the type of resolves we have on our backend that allows us to
+
+06:20.820 --> 06:23.190
+do the same thing to our database.
+
+06:23.550 --> 06:29.370
+So if you are to ever look at a graph queue all back in server you would also see resolve or functions
+
+06:29.400 --> 06:36.600
+because those resolve or functions is what allows the graph queue all server to know what exactly users
+
+06:36.690 --> 06:42.500
+are allowed to query for or allowed to mutate so keeping this in mind.
+
+06:42.650 --> 06:49.050
+This is where the flow of data will be components will fire often or Apollo quest the Apollo request
+
+06:49.070 --> 06:55.380
+my check against our resolves to see if it's a local or non-local request if it's a non-local request
+
+06:55.380 --> 07:02.510
+it simply is a external query or mutation it will then depending on what is looking for gets update
+
+07:02.570 --> 07:09.620
+or delete data on the back end and it will send that over to our graph you all server our graph QR server
+
+07:09.650 --> 07:16.340
+then processes the request and it makes either a request to update data or get some data based on the
+
+07:16.370 --> 07:20.160
+rescue all or no Eskew or database we actually have.
+
+07:20.240 --> 07:26.960
+So if that's successful it will send that data back up and then through to our application and components
+
+07:26.960 --> 07:32.240
+where we can either store on a local cache or we can simply use it in our components.
+
+07:32.270 --> 07:38.810
+Now with Apollo it will always cache that data for us so that we don't end up querying the same data
+
+07:39.410 --> 07:41.120
+because that is pretty expensive.
+
+07:41.630 --> 07:47.510
+So that's the great thing about Apollo is this local cache we're able to not only leverage local data
+
+07:48.020 --> 07:53.840
+the same way that we can with redux but we're also able to automatically cache any data that we pull
+
+07:53.840 --> 07:58.550
+from our database so that we don't end up wasting requests.
+
+07:58.550 --> 08:03.960
+So this is kind of the flow that we're going to explore when we write in the upcoming lessons.
+
+08:03.980 --> 08:05.610
+So just keep this in mind.
+
+08:05.780 --> 08:10.940
+I know a lot of it is going to be brand new information and brand new patterns that you've never seen
+
+08:10.940 --> 08:16.310
+before but this is at least a visual representation of what it is that we're going to build.
+
+08:16.400 --> 08:18.280
+And it's okay if it doesn't make sense.
+
+08:18.320 --> 08:24.590
+Even when we do those lessons because Apollo and Graf Q Are quite frankly quite complex to implement
+
+08:24.890 --> 08:30.770
+so let's move forward with actually figuring out how this image looks like code.

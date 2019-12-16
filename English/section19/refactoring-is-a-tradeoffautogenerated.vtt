@@ -1,0 +1,175 @@
+WEBVTT
+
+00:01.240 --> 00:08.140
+Hey everyone I want to talk quickly about what we just saw in the previous video that is that we learned
+
+00:08.140 --> 00:16.040
+about this container pattern that we can use and some of you might be wondering why we even bothered.
+
+00:16.150 --> 00:23.710
+I mean things were just fine in the shop component and instead we just created two new files that seemingly
+
+00:23.800 --> 00:29.620
+don't do anything other than pass props down to their respective components.
+
+00:29.980 --> 00:38.190
+And that is a valid question what we've done is shown you a pattern a container pattern that you can
+
+00:38.190 --> 00:48.510
+use to separate a component that render something and a container that essentially connects the redux
+
+00:49.020 --> 00:54.540
+part of our app in the store and passes props to a single component.
+
+00:54.540 --> 01:00.820
+Now the key here is that refactoring is always a tradeoff when it comes to code.
+
+01:00.830 --> 01:06.020
+There are always things that you can do that you can change that you can improve.
+
+01:06.020 --> 01:07.420
+You can break things down.
+
+01:07.550 --> 01:13.610
+Add the container pattern to simplify each component and make sure that each file.
+
+01:13.610 --> 01:15.420
+That's one thing really well.
+
+01:15.740 --> 01:19.550
+But at the same time it always adds a bit of complexity.
+
+01:19.550 --> 01:20.340
+Right.
+
+01:20.390 --> 01:23.550
+You now have more files to go back and forth with.
+
+01:23.720 --> 01:31.060
+And when people usually talk about refactoring they assume that all refactoring is good and it is.
+
+01:31.160 --> 01:37.940
+And usually it tends to be because what we do with refactoring is we clean up our code we make things
+
+01:38.030 --> 01:42.110
+easier to read easier to understand and less complicated.
+
+01:42.260 --> 01:45.760
+However refactoring comes in different forms.
+
+01:46.130 --> 01:51.830
+So depending on your project depending on your team for example if you're working by yourself maybe
+
+01:51.830 --> 01:58.370
+you don't need to do the container pattern but if you're working in a large team with lots of people
+
+01:58.700 --> 02:04.130
+maybe having the container pattern that everybody follows might be a good idea as the app gets bigger
+
+02:04.130 --> 02:04.920
+and bigger.
+
+02:05.060 --> 02:12.500
+While you have to decide for yourself is that when you refactor or you modify a file is it worth the
+
+02:12.500 --> 02:13.030
+tradeoff.
+
+02:13.850 --> 02:19.790
+Because sure we can make things simple and keep things in just a few files with long code.
+
+02:19.910 --> 02:27.080
+We don't have to go back and forth between files or we can break things down into simple functionalities.
+
+02:27.080 --> 02:32.690
+And you have to decide for yourself that tradeoff should you be spending that time maybe refactoring
+
+02:32.690 --> 02:38.420
+your code or should you be working on a new feature or fixing a bug.
+
+02:38.490 --> 02:45.330
+We have limited resources and limited time as a developer and as a good senior developer you have to
+
+02:45.330 --> 02:51.030
+decide for yourself when to refactor your code so that technical debt doesn't accumulate.
+
+02:51.030 --> 02:56.880
+But at the same time not end up in this endless loop where you're trying to constantly improve your
+
+02:56.880 --> 03:03.480
+code your existing code and breaking things down smaller and smaller maybe into different files because
+
+03:03.720 --> 03:05.710
+again refactoring is a tradeoff.
+
+03:06.150 --> 03:08.040
+It's a tradeoff on your time.
+
+03:08.040 --> 03:13.510
+Anytime you're refactoring you're not working on a new feature or an existing bug.
+
+03:13.860 --> 03:17.930
+And there comes a time where refactoring has diminishing returns.
+
+03:17.970 --> 03:23.140
+So this is a skill that will just come to you naturally as you progressed through your career.
+
+03:23.160 --> 03:24.240
+But keep that in mind.
+
+03:24.300 --> 03:32.820
+Not all refactoring is good just writing code to be clever or just cleaning up code for no reason isn't
+
+03:32.820 --> 03:33.930
+always a good thing.
+
+03:33.930 --> 03:40.180
+Always make sure there's value in why you're doing by the way this idea of refactoring is something
+
+03:40.180 --> 03:45.360
+we're going to explore a lot in the next section when it comes to redux sagas.
+
+03:45.370 --> 03:50.260
+This is a warning reader sagas is a very complex topic.
+
+03:50.290 --> 03:56.680
+The next section you might have to watch a couple of times to really get it even experienced developers
+
+03:56.680 --> 03:59.760
+find redux sagas very frustrating to learn.
+
+04:00.700 --> 04:07.900
+But what you'll notice is that we're going to learn about refactoring in that section and in that section
+
+04:08.230 --> 04:14.410
+we'll be doing some refactoring that doesn't actually benefit us but instead allows us to demonstrate
+
+04:14.410 --> 04:16.170
+how we ducks saga works.
+
+04:16.210 --> 04:22.180
+But I want you to notice how when we implement redux sagas we're adding more and more complexity into
+
+04:22.180 --> 04:23.200
+our app.
+
+04:23.380 --> 04:28.090
+So all those sagas might be really good as apps get bigger and bigger.
+
+04:28.090 --> 04:35.460
+You'll notice that this extra layer of complexity can actually be bad for a smaller application.
+
+04:35.530 --> 04:41.120
+So keep an eye out on that and remember the next section is going to be a tough one.
+
+04:41.140 --> 04:46.270
+It's now mandatory for you to absolutely get that section if you're afraid of sagas you can even skip
+
+04:46.270 --> 04:47.590
+the next section.
+
+04:47.800 --> 04:50.140
+But for now hopefully I don't scare you off.
+
+04:50.140 --> 04:51.690
+I'll see in the next one by.

@@ -1,0 +1,184 @@
+WEBVTT
+
+00:00.950 --> 00:08.510
+We have reached a point in the application where we have to start reconsidering how we manage state
+
+00:10.330 --> 00:11.950
+now in this section.
+
+00:11.950 --> 00:19.650
+I'm really excited because we're about to cover redux if you've looked at the react ecosystem at all.
+
+00:19.670 --> 00:29.120
+You've heard this been spoken about almost extensively and constantly because it's such a huge and integral
+
+00:29.120 --> 00:38.930
+part of not only react developments history but also it's a humungous part of how apps are built today
+
+00:39.410 --> 00:47.230
+and how they have been built for the last two to three years now before we actually start writing any
+
+00:47.230 --> 00:48.640
+redux code.
+
+00:48.640 --> 00:58.780
+We have to understand some fundamental concepts of redux but also why we need a solution like redux.
+
+00:58.780 --> 01:05.680
+So in order to understand why we need it the solution we have to understand the problems that it's aiming
+
+01:05.680 --> 01:16.340
+to solve now in this lesson I'm going to try and explain to you where the problem comes from in our
+
+01:16.340 --> 01:27.940
+existing app already so where it begins is let's look at our app component so anything related to when
+
+01:27.950 --> 01:35.530
+our user that we just built and authenticated and stored in our database and then store in our state
+
+01:36.250 --> 01:46.440
+is all kept on our app state inside of our top level app component if we wanted for example to pass
+
+01:46.440 --> 01:50.610
+this current user into the header component as we already have.
+
+01:50.880 --> 01:53.090
+We just pass it to the header.
+
+01:53.400 --> 02:01.950
+But let's say inside of our header we had a cart component and that cart component for some reason needed
+
+02:02.490 --> 02:04.080
+the current user.
+
+02:04.080 --> 02:10.740
+So if we were to imagine that we had some car component nested in here that need a current user as well
+
+02:11.580 --> 02:20.820
+we would be passing current user from our header which gets it from the app but if our header component
+
+02:20.820 --> 02:28.470
+did not need the current user and only our cart component needed it but our car component was still
+
+02:28.470 --> 02:37.320
+nested inside of our header component then we would have to drill that prop down from our app into our
+
+02:37.320 --> 02:45.950
+header before finally passing it from our header into our cart this style of drilling props down from
+
+02:46.040 --> 02:55.760
+components into their children is a bad pattern because the props in between those components in between
+
+02:56.330 --> 02:59.110
+don't actually need that prop.
+
+02:59.240 --> 03:05.750
+Only the child needs that prop and potentially the child of the child is the only one that needs that
+
+03:05.750 --> 03:06.900
+prop.
+
+03:07.010 --> 03:11.180
+So let's look at a diagram and see how this looks.
+
+03:11.180 --> 03:15.100
+Let's say we have these squares that represent components.
+
+03:15.290 --> 03:18.580
+And the further they go down is where they're nested.
+
+03:18.590 --> 03:18.800
+Right.
+
+03:18.800 --> 03:24.200
+So this component is a is a child of this component which is a child of this component which is a child
+
+03:24.200 --> 03:31.530
+of this component before finally being a child of our app component so our app component stores the
+
+03:31.530 --> 03:36.060
+state of the current user on its local component state.
+
+03:37.310 --> 03:44.720
+If our header component had a car component inside as we just demonstrated that needs the current user
+
+03:45.190 --> 03:49.850
+while we would be passing it from our app component to our header component.
+
+03:50.000 --> 03:53.300
+Before I had a component finally passes it to our car component.
+
+03:53.300 --> 03:59.200
+But what if our car component was also being used in a different section of the application.
+
+03:59.270 --> 04:00.070
+Right.
+
+04:00.200 --> 04:03.710
+And in that application it's even deeper nested.
+
+04:03.710 --> 04:09.230
+So there's a page component some component and some other component before finally reaching the car
+
+04:09.230 --> 04:10.460
+component.
+
+04:10.460 --> 04:17.180
+We see that we would end up passing our current user down three to four components that all might not
+
+04:17.210 --> 04:19.700
+even need the current user.
+
+04:19.700 --> 04:26.720
+And in that sense this component suddenly now has to consider that it might get current user as a prop
+
+04:27.500 --> 04:34.070
+even if that component gets use somewhere else and car component is not even a child of that component.
+
+04:34.240 --> 04:40.150
+We have to write our code suddenly to be flexible and have these conditional prompts just because there's
+
+04:40.210 --> 04:45.740
+a chance that car component is a child of one of its children.
+
+04:46.150 --> 04:53.150
+We can see how that makes our code way less reusable and just in order to make it reusable.
+
+04:53.200 --> 05:00.670
+We have to add these sudden conditional properties that makes it so that this parent has to be aware
+
+05:00.730 --> 05:06.070
+of its children's component props without it really being necessary.
+
+05:07.710 --> 05:15.750
+Now one way that you might be thinking that we could remedy this is what if we were to take this state
+
+05:15.810 --> 05:23.460
+right and this component did mount all these all this code that gives our current user property or site
+
+05:23.490 --> 05:27.270
+current user data to be stored on this component.
+
+05:27.270 --> 05:30.150
+And what if we moved it into car component right.
+
+05:30.270 --> 05:32.100
+Because car component needs current user.
+
+05:32.100 --> 05:36.490
+So why don't we make it so the car components also listening for the current user right.
+
+05:36.600 --> 05:40.850
+And then they store the state locally and then that would avoid this problem.
+
+05:40.890 --> 05:47.970
+Well the issue with doing it that way is now that anywhere where we have that component that car component
+
+05:48.300 --> 05:58.700
+it suddenly has its own state of the current user and that current user might be reused in App State
+
+05:58.790 --> 06:05.720
+header car component and then this car component and other components not only are we repeating the
+
+06:05.720 --> 06:14.600
+code which is bad but we're also having multiple states of the exact same current user data.

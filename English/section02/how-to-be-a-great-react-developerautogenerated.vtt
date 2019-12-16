@@ -1,0 +1,145 @@
+WEBVTT
+
+00:01.130 --> 00:05.920
+We learned the four main concepts that really made react takeoff.
+
+00:06.990 --> 00:12.710
+It gave developers a whole new way to think about their applications and how we built them.
+
+00:12.960 --> 00:20.580
+And it was architected in such a way that it made building large scale applications a lot more pleasant
+
+00:20.790 --> 00:22.910
+than what we had before now.
+
+00:22.950 --> 00:30.300
+Since then a lot of libraries have come out that have taken some of the react concepts angular was rewritten
+
+00:30.570 --> 00:35.610
+to a new version that is more in line with these concepts.
+
+00:35.610 --> 00:43.470
+Libraries like Vue are also using these concepts because people have realized that these are some really
+
+00:43.470 --> 00:45.090
+good principles.
+
+00:45.240 --> 00:52.110
+So now you have things like react to angular a view that developers are using to build front end applications
+
+00:52.500 --> 00:59.340
+but react really had this initial jump and it's still the most popular library and the library with
+
+00:59.340 --> 01:07.220
+the most job demand because it was the first to introduce these principles and the beauty is that although
+
+01:07.220 --> 01:13.620
+we haven't written any code you've now learned a little bit about some of the key words that will encounter
+
+01:13.640 --> 01:14.670
+throughout this course.
+
+01:14.720 --> 01:19.430
+And don't worry you're not supposed to get them 100 percent just now because all of these things are
+
+01:19.430 --> 01:24.650
+something that we need to practice code and build projects with to really understand them.
+
+01:24.680 --> 01:30.920
+But now when you hear the words like declarative J.S. x component state props virtual Dawn You'll least
+
+01:30.920 --> 01:38.930
+have an idea of what it is because we've learned that react as a declarative paradigm that is instead
+
+01:38.930 --> 01:42.060
+of telling our apps exactly what to do.
+
+01:42.200 --> 01:50.390
+We simply give it some state some components that are built with something called J.S. X and these components
+
+01:50.390 --> 01:54.050
+sometimes receive properties which are called Props.
+
+01:54.050 --> 02:02.900
+We give all that information a giant javascript object in a declarative way which creates a virtual
+
+02:02.900 --> 02:13.040
+DOM in JavaScript in that virtual DOM is used by the react library to update the DOM for us in a declarative
+
+02:13.220 --> 02:23.510
+way but your question is this how do I become the best reactive helper I can be and to be a great reactive
+
+02:23.510 --> 02:24.090
+helper.
+
+02:24.140 --> 02:29.900
+It actually comes down to three things three things that really really good senior reactive operas do
+
+02:29.900 --> 02:34.940
+well and we're going to focus on these three skills throughout the course.
+
+02:35.060 --> 02:41.860
+The first one is to decide on components really good reactive helpers decide what is a component.
+
+02:41.870 --> 02:44.030
+How much do we want to break down a component.
+
+02:44.030 --> 02:47.120
+How do we build these reusable components.
+
+02:47.150 --> 02:53.880
+As we've seen in deciding on how to break down the app into different components is a very important
+
+02:53.880 --> 02:54.900
+skill.
+
+02:54.900 --> 02:59.450
+The next thing is to decide the state and where it lives.
+
+02:59.460 --> 03:04.410
+Now we're going to explore this idea of state or data of our app a lot more.
+
+03:04.410 --> 03:11.580
+But this state can live in different locations in our virtual dorm so whether we put the state here
+
+03:11.850 --> 03:16.110
+or we put the state here or here or here or in multiple locations.
+
+03:16.110 --> 03:23.400
+That decision is very important in architecting your app and really good react developers do a really
+
+03:23.400 --> 03:28.090
+good job placing state in the appropriate component.
+
+03:28.110 --> 03:37.020
+The third is what changes should we make when the state changes based on what this javascript object
+
+03:37.170 --> 03:40.000
+called state is changed.
+
+03:40.050 --> 03:48.720
+We have to decide what to render what part of the virtual DOM changes and deciding on this is also important
+
+03:48.750 --> 03:51.230
+because it has huge effects on performance.
+
+03:53.060 --> 03:57.860
+Now don't worry these are the things that we're going to really work on but I want you to keep this
+
+03:57.890 --> 04:04.340
+as a reference because if you want to become a senior react developer These are the things that you
+
+04:04.340 --> 04:10.520
+have to become really good at making these decisions and knowing when something is good when when something
+
+04:10.520 --> 04:11.000
+is bad.
+
+04:12.250 --> 04:16.000
+We're going to explore that and a lot more in the next section.
+
+04:16.000 --> 04:17.070
+I'll see in the next one.
+
+04:17.460 --> 04:17.680
+Bobby.

@@ -1,0 +1,244 @@
+WEBVTT
+
+00:01.690 --> 00:09.970
+OK so now that we have our cart as well as our ability display cart items we want to tackle something
+
+00:09.970 --> 00:15.920
+like displaying the number of items we have in our cart inside of our cart icon.
+
+00:15.970 --> 00:23.690
+Because right now it just displays zero well thinking about what we know already about pulling redux
+
+00:23.690 --> 00:25.830
+state into local components.
+
+00:26.030 --> 00:33.320
+Maybe we do something where we would write a map state to props where we would pull the state in and
+
+00:33.320 --> 00:35.100
+then get the value.
+
+00:35.120 --> 00:36.970
+Now what would this look like.
+
+00:36.980 --> 00:44.910
+Well we would write our map states of props value and here we would get our state where we would destruction
+
+00:44.940 --> 00:54.570
+if cart and from cart we'd pull off the cart items and maybe we'd pass in the value of item count which
+
+00:54.570 --> 01:01.080
+is equal to accumulating the quantity on each of our cart items.
+
+01:01.080 --> 01:07.020
+Now if we were to look at our code of what our state looks like and let's look at the items themselves
+
+01:08.230 --> 01:14.350
+we know that the quantity value is a number and we want to add them all together to get the total number
+
+01:14.500 --> 01:16.450
+of items we have.
+
+01:16.680 --> 01:21.480
+Well this is a good time to use our reduce function if we remember where we want to bring it down to
+
+01:21.480 --> 01:23.310
+one final value.
+
+01:23.310 --> 01:32.430
+So what we could call is something like cart items reduce where we would pass and 0 as the initial accumulator
+
+01:32.430 --> 01:33.300
+value.
+
+01:33.300 --> 01:41.670
+Because if you remember we want to add all of the values in our quantity so we would get our accumulated
+
+01:42.540 --> 01:50.890
+quantity as the first argument in our first function and then we would get the actual cart item as the
+
+01:50.890 --> 01:53.350
+second argument.
+
+01:53.350 --> 02:02.170
+And what we would return is accumulated quantity plus cart item quantity and what this will do for us
+
+02:02.920 --> 02:11.070
+is it will accumulate all the number values of the quantities on all the cart items.
+
+02:11.080 --> 02:19.570
+Now if you remember from our reducer lesson how we added up those values together this is doing the
+
+02:19.570 --> 02:23.350
+exact same thing but using our quantity value.
+
+02:23.350 --> 02:31.180
+So if we can imagine we had three card items and the quantities were 1 2 3 respectively while the first
+
+02:31.180 --> 02:39.610
+time our reducer code gets called it will add 0 and 1 giving us 1 then one plus two giving us three
+
+02:39.880 --> 02:42.240
+then three plus three giving us six.
+
+02:42.250 --> 02:46.620
+And we would end up with an item count of six.
+
+02:46.640 --> 02:54.170
+So what this will do then is pass that six in as our item count parameter which we would then pass in
+
+02:54.260 --> 03:05.690
+as a prop to our component so we then D structure it off of our props and pass it in place of 0.
+
+03:05.780 --> 03:14.130
+And now if we save and we look at our app we'll see that our account goes up for every item that we
+
+03:14.130 --> 03:16.350
+add and we'll see that it matches.
+
+03:16.350 --> 03:22.160
+We have two two and one which gives us five total quantity of items.
+
+03:22.200 --> 03:30.720
+Now what we've written just now is called a selector because what we're doing here is we are writing
+
+03:30.810 --> 03:39.250
+some kind of code that gets a state as in the whole state object and then pulls off just a small portion
+
+03:39.580 --> 03:48.550
+or a slice of that state because what we're getting is we're getting the cart then the cart items and
+
+03:48.550 --> 03:51.990
+then reducing over those cart items that get a new value.
+
+03:52.120 --> 03:57.120
+We're computing out a new value based off of the state.
+
+03:57.340 --> 04:05.500
+Now the caveat to this even though this is how redux suggests the code to be written is that we'll notice
+
+04:05.500 --> 04:14.470
+that when ever any reducer updates when we remember looking at our reduced code we're always returning
+
+04:14.530 --> 04:16.440
+a new object.
+
+04:16.480 --> 04:24.730
+Now whenever we return a new object and Redux re composes and rebuilds the entire state object map states
+
+04:24.730 --> 04:34.310
+of props is actually getting called every single time which is always passing in new props to our components.
+
+04:34.310 --> 04:41.380
+And why this is important is because this is always re rendering R components.
+
+04:41.460 --> 04:44.400
+Now I can actually show you how this will happen.
+
+04:44.550 --> 04:53.010
+Let's say for example we console log whenever a map states of props gets called and I'll say I am being
+
+04:53.010 --> 05:05.470
+called so even though our car icon component only cares about card items what ends up happening is whenever
+
+05:05.530 --> 05:06.660
+we change the state.
+
+05:06.700 --> 05:11.860
+So let's say for example we're not modifying our cart state let alone our cart item state.
+
+05:11.860 --> 05:15.190
+We're modifying our current user on our user state.
+
+05:15.190 --> 05:21.640
+If I sign in right now you'll see that I am being called gets triggered because the map states of props
+
+05:21.730 --> 05:29.960
+inside of our cart icon component is still being called and then if I sign out right again it's just
+
+05:29.960 --> 05:36.410
+use our current user getting changed and but again our console log is still firing which means that
+
+05:36.530 --> 05:40.400
+our map states of props keeps firing.
+
+05:40.400 --> 05:49.310
+And this is important because our reduce is always returning a new value because reduce doesn't know
+
+05:49.340 --> 05:52.940
+that the car items coming in might be the exact same.
+
+05:53.810 --> 06:01.460
+So let's say we have two items in our cart and it reduces down to the value of two if these car items
+
+06:01.460 --> 06:02.330
+come in again.
+
+06:02.330 --> 06:09.740
+But it's the exact same two items reduce is still getting called so we're still always getting a new
+
+06:09.860 --> 06:19.750
+computed value and you might be thinking why would that happen if the objects are the same well they're
+
+06:19.770 --> 06:28.480
+actually not because our state is always a new object which means that everything even if the value
+
+06:28.570 --> 06:37.520
+is identical the object of our total state is a brand new object which means everything inside of it
+
+06:38.000 --> 06:46.820
+all of the data inside of it is brand new and that's why every time reduced gets called whatever those
+
+06:46.820 --> 06:49.890
+crimes will be will also be brand new.
+
+06:49.940 --> 06:54.200
+Even if the value is the same two car items.
+
+06:54.200 --> 07:01.490
+Now this is not good for performance because we don't want to re render our component every time the
+
+07:01.490 --> 07:10.010
+state changes especially if those state changes don't actually modify the parts of the state that our
+
+07:10.010 --> 07:11.470
+component cares about.
+
+07:12.440 --> 07:21.890
+So what we would want to do is to be able to store or cache the value of what our selector is using
+
+07:21.890 --> 07:24.020
+to compute its value.
+
+07:24.080 --> 07:31.820
+So if the car item values don't actually change right and if the output of the selector doesn't change
+
+07:32.360 --> 07:35.760
+we don't want to re render our component.
+
+07:36.000 --> 07:44.500
+Well what this is actually called is memorization which is the caching of the selectors value and we
+
+07:44.500 --> 07:51.880
+can actually achieve this kind of memorization using a library called Re select and re select allows
+
+07:51.880 --> 07:59.560
+us to write these selectors in such a way so that it knows that if the properties that it's pulling
+
+07:59.560 --> 08:06.430
+from the state and using are the same in the sense that their value hasn't changed and the output of
+
+08:06.430 --> 08:14.680
+the selector is not different then it won't actually pass them into our component it'll just pass the
+
+08:14.770 --> 08:20.460
+old value and R react component will know not to re render.
+
+08:20.630 --> 08:26.710
+There's also other benefits in the sense that it allows us to actually separate our selectors and make
+
+08:26.710 --> 08:28.260
+them reusable.
+
+08:28.300 --> 08:31.740
+Now let's actually take a look at how to do this.

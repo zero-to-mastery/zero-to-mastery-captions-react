@@ -1,0 +1,151 @@
+WEBVTT
+
+00:00.480 --> 00:01.940
+Hey it's Andre here.
+
+00:02.010 --> 00:07.650
+I want to talk quickly about architecting our components in our final project.
+
+00:07.650 --> 00:13.350
+If you remember one of the key things that we want to do is to decide on components.
+
+00:13.350 --> 00:19.370
+So as we move through the course I want you to always have a mental image of what we're building in
+
+00:19.370 --> 00:21.260
+and how things are connected.
+
+00:21.510 --> 00:28.170
+Because how things are connected and how we pass down information from component to component because
+
+00:28.200 --> 00:32.730
+at the end of the day it's all a tree like structure of the virtual Don.
+
+00:32.850 --> 00:34.740
+That's really really important.
+
+00:34.740 --> 00:39.910
+So make sure you don't get lost as we move through different components back and forth.
+
+00:39.930 --> 00:45.430
+Now here's my tip for you to better understand how things are connected what you want to do.
+
+00:45.690 --> 00:50.820
+And I have a version of the Web site here that will actually go into built so there are some things
+
+00:50.820 --> 00:52.890
+here that you probably won't have yet.
+
+00:53.070 --> 01:02.000
+But what do you want to do is to open up your developer tools and use the react developer tools.
+
+01:02.220 --> 01:07.290
+Now in here this is a good way to see how components are connected.
+
+01:07.290 --> 01:13.020
+For example if I scroll all the way up and keep in mind that you'll see components here that we haven't
+
+01:13.020 --> 01:14.120
+talked about yet.
+
+01:14.430 --> 01:18.260
+But the key thing is that we have our app component.
+
+01:18.430 --> 01:19.470
+We have our header.
+
+01:19.480 --> 01:23.240
+So if we scroll up we see that we're going to build a header component.
+
+01:23.380 --> 01:30.690
+If we keep scrolling down we see we have our home page and then if we keep scrolling down we have our
+
+01:30.690 --> 01:35.750
+directory which is the items that we have on our home page.
+
+01:36.000 --> 01:43.470
+And then within the directories we have what we call the menu items and then menu item component as
+
+01:43.470 --> 01:48.070
+you can see is these individual components that we can link to.
+
+01:48.300 --> 01:55.740
+And each time we can see what prompts we receive from higher above like directory for example and so
+
+01:55.740 --> 02:02.500
+on and so forth so you want to use the reactive helper tools to understand how things are connected
+
+02:02.620 --> 02:05.260
+if within your code you start getting confused.
+
+02:05.260 --> 02:13.480
+Keep in mind the reason that we organize our folders the way they are is so that it's easy for us to
+
+02:13.480 --> 02:15.830
+look at our app and understand how things are working.
+
+02:15.850 --> 02:21.970
+For example right now we know that we have pages and at the moment we only have one page which is the
+
+02:21.970 --> 02:22.460
+homepage.
+
+02:22.510 --> 02:25.500
+But eventually we'll build the shop page as well.
+
+02:25.870 --> 02:30.520
+If we go back and look at the our components we have some components here that we haven't built yet
+
+02:31.060 --> 02:35.470
+but we have the directory which is our home page and then the menu items that we saw.
+
+02:35.470 --> 02:39.680
+We're also going to start building our collection preview and collection items.
+
+02:40.090 --> 02:44.380
+And those ones are going to be what we call these things.
+
+02:44.380 --> 02:56.850
+These again if I inspect them and open up react you'll see that this is a collection item so these are
+
+02:56.850 --> 02:58.610
+our collections and these are the items.
+
+02:58.610 --> 03:05.940
+If I scroll up I see that this entire thing gets surrounded in the collection component.
+
+03:06.020 --> 03:08.790
+So again I can go back to the folder and understand that.
+
+03:08.810 --> 03:09.100
+OK.
+
+03:09.110 --> 03:15.800
+This is the collection item and the collection preview is probably what we're building to display the
+
+03:16.070 --> 03:18.880
+collection items that groups the collection items.
+
+03:18.950 --> 03:25.400
+So start looking at the folder structures and understand how things are connected because eventually
+
+03:25.400 --> 03:28.690
+by the end of this course we're gonna have a lot of things.
+
+03:28.730 --> 03:36.380
+If we look at the components folder yep we have a lot of components and it's easy to get lost in all
+
+03:36.380 --> 03:44.280
+this component connections but again that's why reactive all power tool exists and it's also what makes
+
+03:44.280 --> 03:50.490
+a great developer you need to make sure that as we move along that these component structures make sense
+
+03:50.490 --> 03:58.590
+to you and you notice the small things that EU does to keep things very simple and small in each component
+
+03:58.650 --> 04:04.770
+and keeping each one specific to its concern doing one thing really really well.
+
+04:05.980 --> 04:06.460
+Let's move on.

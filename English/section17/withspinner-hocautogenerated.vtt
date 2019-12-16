@@ -1,0 +1,361 @@
+WEBVTT
+
+00:00.530 --> 00:09.200
+So now that we have are reducer listening for the back an update to store the actual collections value
+
+00:09.800 --> 00:15.710
+we don't need this initial state and the shot data that we have in our front end anymore.
+
+00:15.750 --> 00:22.550
+So what we're going to do is we're actually going to remove shop data and we're even gonna delete the
+
+00:22.550 --> 00:25.260
+shop data file because we don't need it anymore.
+
+00:27.840 --> 00:36.300
+And then what we'll do is we're going to set our initial collections value to no by doing this will
+
+00:36.310 --> 00:42.320
+actually run into a couple new issues with how we've set up our application.
+
+00:42.370 --> 00:46.410
+In fact we should see an error right away when we go to our application.
+
+00:46.420 --> 00:48.690
+Right there's two errors on the page.
+
+00:48.730 --> 00:57.610
+The first is that our selector is expecting that an object exists because we cannot convert right this
+
+00:57.610 --> 00:59.700
+value with object.
+
+00:59.710 --> 01:01.130
+He's on null.
+
+01:01.150 --> 01:10.150
+So what we got to do in our selector is we have to go and make it so that it knows that if this collections
+
+01:10.690 --> 01:16.270
+is a null object right then we want to return something different.
+
+01:16.270 --> 01:20.750
+So here we are saying if collections exists then call object.
+
+01:21.160 --> 01:22.780
+If it's false.
+
+01:22.780 --> 01:23.010
+Right.
+
+01:23.020 --> 01:23.680
+If it doesn't.
+
+01:23.680 --> 01:30.160
+If it's not then instead what you want to return is a empty version of our collections which in this
+
+01:30.160 --> 01:32.370
+case will be just an empty array.
+
+01:32.440 --> 01:37.590
+And now if we go back to our application we'll see that the error is fixed.
+
+01:37.720 --> 01:46.380
+Now the other issue we're going to encounter is when we go to our collection page if we select this
+
+01:47.450 --> 01:55.100
+and we refresh we'll see that we run into the problem where we cannot read the property womens of no
+
+01:55.580 --> 02:04.040
+because as you remember inside of our selector we receive your collection you are all parameter and
+
+02:04.040 --> 02:11.750
+then we start to look inside of our collections Map object to find the corresponding collection object
+
+02:12.170 --> 02:20.700
+and pass it through to our collection page component so right now not only is our selector having a
+
+02:20.700 --> 02:27.840
+problem but it's also having an issue with the way that there's no collection that's passing through
+
+02:29.640 --> 02:37.740
+so one thing we're gonna have to be aware of is what we do if there is another value for our collections
+
+02:37.740 --> 02:49.560
+object while in this case if this collections object does not exist then what we want to return is the
+
+02:49.560 --> 02:52.300
+similar thing to what we wrote above.
+
+02:52.380 --> 03:00.450
+If collections exists then return collections with the collection your pram if it doesn't then we're
+
+03:00.450 --> 03:01.860
+just going to return.
+
+03:01.860 --> 03:06.840
+No it's better we return null or we can just return to collections because we know it's not.
+
+03:06.870 --> 03:12.930
+But it's more explicit this way it's better we return null so that the components that use the selector
+
+03:13.380 --> 03:19.110
+will get a null object and naturally they themselves will know oh OK there's no data here.
+
+03:19.140 --> 03:19.550
+Right.
+
+03:19.560 --> 03:29.140
+There's nothing here so I'm just going to render an empty state if I need to and then what we do inside
+
+03:29.230 --> 03:36.610
+of our actual component now we'll see that we are getting title and items of no value.
+
+03:36.610 --> 03:36.940
+Right.
+
+03:37.630 --> 03:46.090
+Which is fine because our application is going to be in the state where a collection could possibly
+
+03:46.090 --> 03:47.270
+be No.
+
+03:47.380 --> 03:54.160
+The reason is because when our app first boots up and this collection page amounts it's going to look
+
+03:54.160 --> 04:03.250
+inside the reducer and try and find a collections map that we have however because we have not received
+
+04:03.760 --> 04:10.150
+the data back yet from our back end because that search as we know is a synchronous R app can possibly
+
+04:10.150 --> 04:13.000
+be in a state where the data does not exist.
+
+04:13.000 --> 04:20.260
+So we have to create what's called a loading state and in this loading state what we want to do is actually
+
+04:20.260 --> 04:22.550
+render a spinner of some kind right.
+
+04:22.570 --> 04:26.830
+You know those typical loading spinners that you see when the data is trying to come in.
+
+04:26.980 --> 04:30.240
+Well we want to render something like that.
+
+04:30.290 --> 04:37.910
+So what we'll do is actually leverage a couple high end concepts that we've already done before in order
+
+04:37.910 --> 04:42.520
+to build this spinner let's actually just do that first.
+
+04:42.550 --> 04:50.700
+So the first thing we'll do is we will build a spinner component but that component we want to be able
+
+04:50.700 --> 04:52.140
+to reuse.
+
+04:52.200 --> 04:58.760
+So we'll going to use the higher order component pattern that we've explored before.
+
+04:58.890 --> 05:04.710
+Now this might be a little bit confusing as we write this but I promise you that I will explain every
+
+05:04.710 --> 05:05.410
+step of it.
+
+05:05.520 --> 05:11.300
+Again after we've written it also while we're writing it.
+
+05:11.340 --> 05:14.880
+So first we're going to make a new folder called with Spinner
+
+05:17.740 --> 05:19.600
+now inside of our with Spinner.
+
+05:19.630 --> 05:24.080
+We are going to make our width spinner dot component Duchess ex.
+
+05:24.190 --> 05:26.750
+So this will be our higher component.
+
+05:26.760 --> 05:31.650
+We're also going to make our with Spinner dot styles dodge ASX
+
+05:34.880 --> 05:41.010
+and now what we're going to do is we are going to create our style objects right.
+
+05:41.060 --> 05:46.710
+So our style components now I already have them for you.
+
+05:46.900 --> 05:54.100
+So you can just copy them in and they leverage them CSF key frame animations in order to do the actual
+
+05:54.100 --> 05:55.080
+spinning animation.
+
+05:55.600 --> 06:02.290
+I'm not going to spend any time to explain it because it requires its own dedicated lesson on CSX and
+
+06:02.680 --> 06:05.580
+that is a pretty lengthy lesson to be honest.
+
+06:05.680 --> 06:07.500
+So because there's so much we have to cover.
+
+06:07.510 --> 06:13.150
+I'm just going to move past this and if you would like to learn more about animations there's numerous
+
+06:13.180 --> 06:18.070
+articles written about just the basics of how to write a CSI animation
+
+06:20.710 --> 06:25.960
+what we'll do is we're actually going to build out our now with Spinner harder component.
+
+06:26.590 --> 06:33.020
+So we got to import react from react and import in these two star components that we just made.
+
+06:33.040 --> 06:39.400
+One is the overlay and one is the spinner itself the overlay just make sure that our spinner is always
+
+06:39.400 --> 06:48.430
+center so we've got to import in our spinner container and our spinner overlay from our new spy with
+
+06:48.430 --> 06:50.200
+Spinner styles.
+
+06:50.230 --> 06:58.040
+And now we're gonna declare are with Spinner hada component which takes some component.
+
+06:58.040 --> 06:58.590
+Right.
+
+06:58.790 --> 07:05.930
+Which we're going to call our wrapped component and then as you remember with any hired a component
+
+07:06.320 --> 07:10.950
+it returns you back a new functional component.
+
+07:10.970 --> 07:14.060
+So in fact let's just write the component itself.
+
+07:14.120 --> 07:21.080
+We're going to write a component that gets an is loading property and then every other property that
+
+07:21.080 --> 07:24.020
+our regular component that is being wrapped we'll expect
+
+07:27.440 --> 07:29.780
+and then this component will render
+
+07:32.430 --> 07:38.550
+either are spinner depending on this is loading property right whether or not it's going to be true
+
+07:38.550 --> 07:39.530
+or false.
+
+07:39.570 --> 07:45.110
+So is loading is going to be a property that only takes a boolean value if it's true.
+
+07:45.120 --> 07:52.770
+So if loading is true we want to render our spinner component so we're going to have our spin or overlay
+
+07:53.250 --> 08:03.860
+and then our spinner container and that's our spare component if loading is false then we want to return
+
+08:03.950 --> 08:07.110
+the rapt component that we have.
+
+08:07.400 --> 08:11.810
+Except we're going to pass it every other prop except for the is loading prop
+
+08:14.730 --> 08:20.580
+and then we'll export default are with Spinner component.
+
+08:20.620 --> 08:24.530
+Now if this is a little confusing let's just go over this again.
+
+08:25.540 --> 08:32.370
+What we're doing is we're making a new with Spinner component right higher order component.
+
+08:32.380 --> 08:38.620
+It's a function that takes some component that we want to wrap with the functionality of our spinner
+
+08:38.680 --> 08:46.660
+loading feature and that wrapped component gets passed into this new component that wraps around it.
+
+08:46.660 --> 08:46.920
+Right.
+
+08:46.930 --> 08:56.010
+This one right here and then what it does is it turns based on and is loading property that's past into
+
+08:56.010 --> 08:57.480
+this component.
+
+08:57.840 --> 09:05.910
+If it's loading render my spin or overlay if is loading is false then just render the component that
+
+09:06.390 --> 09:11.190
+we passed in as normal receiving all the props that it would receive.
+
+09:11.240 --> 09:19.540
+Now if we want to make this a more explicit we can actually write it like this we can set this equal
+
+09:19.540 --> 09:22.640
+to a concept spinner.
+
+09:23.040 --> 09:23.360
+Right.
+
+09:23.390 --> 09:26.120
+So it's just like our regular components.
+
+09:26.480 --> 09:34.820
+And then what we'll do is we just have to make sure to return outside our spinner
+
+09:38.150 --> 09:38.810
+so this way.
+
+09:38.810 --> 09:44.450
+Now we know what we're getting back from this hired component is a spinner component a functional spinner
+
+09:44.450 --> 09:45.270
+component.
+
+09:45.560 --> 09:49.040
+And you just use it the same way that you would use your wrap component.
+
+09:49.040 --> 09:54.530
+The only difference is that if you want to render the spinner you use the is loading prop and pass it
+
+09:54.560 --> 10:00.380
+a boolean value that will conditionally render the spinner or are a component.
+
+10:00.380 --> 10:07.700
+One thing we have to consider is how we're going to use this with the spinner component you might think
+
+10:07.700 --> 10:11.290
+that the place where it's causing the error is the collection page.
+
+10:11.360 --> 10:18.350
+So let's put our width spinner on the collection page and this is not necessarily incorrect however
+
+10:18.530 --> 10:27.270
+because our shot page is actually going to be the one sorry our shop component is going to be the component
+
+10:27.630 --> 10:34.800
+that actually will be able to know whether or not the loading state that we're considering is actually
+
+10:35.220 --> 10:41.700
+finished because the shop component is the one that actually receives and makes the call to update our
+
+10:41.700 --> 10:50.720
+reducer after getting the data back from our backend then due to this reason we have to put the logic
+
+10:50.720 --> 10:57.950
+for determining the width spinner on our shop component and I'll show you how we'll do that in the next
+
+10:57.950 --> 10:58.370
+lesson.

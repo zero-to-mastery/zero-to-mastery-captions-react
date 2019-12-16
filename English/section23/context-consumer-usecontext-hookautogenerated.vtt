@@ -1,0 +1,424 @@
+WEBVTT
+
+00:00.830 --> 00:02.060
+Welcome back.
+
+00:02.060 --> 00:09.710
+In this section we are going to actually start replacing the redux in our application with the new context
+
+00:09.710 --> 00:13.030
+API and it's quite simple to get started with.
+
+00:13.100 --> 00:19.220
+But there is a few caveats and patterns of course that we need to understand in order to properly use
+
+00:19.220 --> 00:20.090
+it.
+
+00:20.090 --> 00:25.610
+Now let's start with an easy component to replace.
+
+00:25.750 --> 00:31.630
+The first thing that we're going to do is we are going to look at our collection component now currently
+
+00:31.720 --> 00:33.180
+our collection component.
+
+00:33.190 --> 00:41.710
+Leverage is the select collection selector and redux of course in order to pull in the collection item.
+
+00:42.460 --> 00:49.750
+So of course we are using our select collection selector which is pulling off the collections Map object
+
+00:49.840 --> 00:58.900
+from our shop reducer you might not have seen this reducer in a while because it's been a little bit
+
+00:58.900 --> 01:05.730
+since we've seen it in the state but in this application shop data is a local file.
+
+01:05.770 --> 01:12.580
+If you remember when we first instantiated our shop data it's still the object that we know it as the
+
+01:12.580 --> 01:18.600
+only differences that we were instantiating it as initial state inside of our shop producer.
+
+01:18.640 --> 01:25.060
+So we're going to do pretty much the same thing except using context API instead of a reducer but conceptually
+
+01:25.060 --> 01:31.570
+they serve a very similar purpose a reducer is just an object that stores data that we pull into our
+
+01:31.570 --> 01:39.710
+components using selectors the context API you can kind of see like a reducer so I'm going to write
+
+01:39.770 --> 01:46.340
+out a little bit of code and I want you to just follow along for now type along and I'll explain to
+
+01:46.340 --> 01:46.910
+you what it is.
+
+01:46.910 --> 01:49.880
+Once we write it but it's actually very simple.
+
+01:49.880 --> 01:57.710
+So inside of our source folder you're gonna make a new folder and you're gonna call it contents and
+
+01:57.790 --> 02:04.250
+in here is going to store our new context files as well as the folders that represent what they are.
+
+02:05.090 --> 02:09.180
+So we're gonna make a new one and we're going to call it our collections.
+
+02:09.200 --> 02:17.080
+So it's just collections and inside of collections we're making new collections dog context dodgy us.
+
+02:17.090 --> 02:21.550
+So this context is only going to store our collections object.
+
+02:21.550 --> 02:21.800
+Right.
+
+02:21.800 --> 02:28.780
+That massive object that holds all of our collection items and in order to make this new context we
+
+02:28.780 --> 02:39.890
+have to import in this method from react called create context from Rhea and all it is is it is a method
+
+02:40.010 --> 02:43.600
+that can take anything it can take.
+
+02:43.740 --> 02:46.740
+Strings integers objects functions.
+
+02:46.740 --> 02:53.520
+What ever you want it to be erased anything and why it's so flexible is because that's literally what
+
+02:53.520 --> 02:56.640
+it's storing as its initial state.
+
+02:56.640 --> 03:03.150
+So that context is going to be the thing that we pull and store the values that we want inside of our
+
+03:03.150 --> 03:04.490
+components.
+
+03:04.500 --> 03:06.730
+So let me show you how we're gonna do that.
+
+03:06.750 --> 03:12.570
+So first we're gonna make a new value and we're going to call it collections context right.
+
+03:12.570 --> 03:18.090
+So make sure to capitalize the C because we're gonna use it like a component.
+
+03:18.090 --> 03:24.620
+Now we're just going to say create context here and we're gonna pass it our shop data.
+
+03:24.690 --> 03:32.440
+So if you remember inside of our redux folder for our shop our shop data is this file so I just want
+
+03:32.440 --> 03:41.820
+you to copy it and then paste it into our context collections folder paste it in and then just import
+
+03:41.820 --> 03:43.750
+that into this file.
+
+03:43.890 --> 03:53.860
+So import in that shop data object from our shop data and pass this into your create context.
+
+03:53.860 --> 03:59.500
+So what we're doing here is we're saying I want you to create this new context called collections context
+
+04:00.370 --> 04:09.200
+that stores this shop data and this will be the initial value of our context we can of course set the
+
+04:09.200 --> 04:12.970
+value later dynamically but we won't do that yet.
+
+04:12.980 --> 04:16.810
+We first got to understand how we consume it because now we have an initial state.
+
+04:16.810 --> 04:19.340
+In this context our shop data.
+
+04:19.340 --> 04:28.270
+So we're just gonna export this out as the default value from this file and then inside of our collections
+
+04:28.270 --> 04:29.740
+component.
+
+04:29.740 --> 04:37.960
+We are now going to replace our existing redux implementation of getting the collection and how we're
+
+04:37.960 --> 04:45.150
+gonna do that is we are going to first import in our new context that we just made.
+
+04:45.940 --> 04:56.300
+So important in your collections context from our contexts slash collections slash collections context
+
+04:59.010 --> 05:06.460
+and now in order to use it we actually need to get the value into our component.
+
+05:06.660 --> 05:13.320
+So before the way that we did it was with our connect higher order component and the map state to promising
+
+05:13.410 --> 05:17.850
+our collection into our component as a prop.
+
+05:17.850 --> 05:19.710
+But we're not going to do that anymore.
+
+05:19.710 --> 05:26.020
+So just remove this connect because we're not going to leverage redux anymore what we are going to do
+
+05:26.080 --> 05:29.490
+is we are going to use this new collections context.
+
+05:29.650 --> 05:35.050
+Now I'm going to show you the two ways that we can get the value that we've stored in this context into
+
+05:35.050 --> 05:36.490
+our component.
+
+05:36.700 --> 05:42.510
+The first way is that we use collections context as a component.
+
+05:42.550 --> 05:45.500
+So this is actually the more complicated way to use it.
+
+05:45.760 --> 05:51.430
+But the way that it works is that you use it as a component and you wrap the part of the application
+
+05:51.430 --> 05:55.480
+where you want access to whatever is stored inside of this context.
+
+05:55.840 --> 05:58.230
+So in our case it's our shop data.
+
+05:58.310 --> 06:02.880
+Well I want access to it inside of this component.
+
+06:02.980 --> 06:10.480
+So what I'm going to do is I'm going to wrap this entire div here inside of the collection context as
+
+06:10.510 --> 06:19.430
+a component but I'm going to call dot consumer and the DOT consumer just means that I want to leverage
+
+06:19.490 --> 06:22.700
+the collections context consumer component.
+
+06:22.940 --> 06:27.530
+There's only two components here there's a consumer there's a provider but we'll look at the provider
+
+06:27.530 --> 06:30.370
+later what we want to do is consume the value.
+
+06:30.380 --> 06:35.240
+So we'll use the consumer and we'll wrap this entire div inside of it.
+
+06:36.430 --> 06:43.330
+Now in order to actually access what we have stored inside of this context we have access to it in the
+
+06:43.330 --> 06:44.830
+form of a function.
+
+06:45.220 --> 06:52.270
+And this function we can leverage the same way that we pretty much use to render anything inside of
+
+06:52.270 --> 07:00.450
+these javascript curly braces in our ASX we get access to our stored object right as the parameter that
+
+07:00.450 --> 07:02.030
+gets passed into this function.
+
+07:02.040 --> 07:04.140
+So in our case it's collections.
+
+07:04.470 --> 07:13.200
+And what we want to do is we want to actually pork the specific collection object that we want off of
+
+07:13.200 --> 07:19.840
+this collection so if you remember what we were doing before as we were using the selector but now instead
+
+07:19.930 --> 07:27.260
+we are going to manually pull it off instead of using the Select so what we'll say is instead of passing
+
+07:27.260 --> 07:32.510
+in collection like this right we actually just want the match property.
+
+07:32.610 --> 07:40.660
+We are going to say cost collection equals our collections object at that collection I.D..
+
+07:40.660 --> 07:46.240
+So as you remember collection I.D. is the part you are all parameter value of our specific collection
+
+07:46.240 --> 07:46.600
+page.
+
+07:46.600 --> 07:48.870
+So if it's slash hat those hats.
+
+07:49.090 --> 07:51.010
+If it's slash women then it's women.
+
+07:51.010 --> 07:51.330
+Right.
+
+07:51.340 --> 07:53.290
+Etc. etc..
+
+07:53.320 --> 07:59.020
+So if you remember our collections as an object map we're getting that specific collection based on
+
+07:59.020 --> 08:00.280
+this parameter.
+
+08:00.940 --> 08:10.450
+And now we want to pluck off the title and the items and then out of this function we are going to return
+
+08:10.930 --> 08:14.740
+all of this HD hymnal that represents what we need to render
+
+08:17.890 --> 08:19.190
+and just like that.
+
+08:19.330 --> 08:21.200
+That's all it is.
+
+08:21.220 --> 08:28.450
+We just made sure to wrap the part of our component that needs access to what's stored inside of our
+
+08:28.450 --> 08:30.070
+context.
+
+08:30.070 --> 08:38.260
+We called concoctions context consumer when we got the ability to pass this function that has access
+
+08:38.260 --> 08:41.250
+to the value that we stored in our context.
+
+08:41.260 --> 08:47.890
+So now if we go back to our application we'll see that if we navigate to this page it still works right.
+
+08:47.890 --> 08:53.690
+Everything is the exact same and that's pretty much all the context API is is.
+
+08:53.790 --> 08:59.790
+It allows us to store and then pull these values into our components because the value is stored on
+
+08:59.790 --> 09:05.700
+this context that we can pass an import into the components that need it.
+
+09:05.760 --> 09:08.730
+Now I'll show you how the dynamic is set the value later.
+
+09:08.730 --> 09:15.840
+But let me show you the other way the easier way for us to actually leverage this context value inside
+
+09:15.930 --> 09:25.500
+of our components without having to introduce another component that wraps our component itself so we're
+
+09:25.500 --> 09:29.360
+going to first undo all this code that we just wrote right.
+
+09:29.370 --> 09:30.930
+Let's just go back to what we had before
+
+09:34.000 --> 09:43.360
+what we're going to do here is we are going to import in a new hook called use context and what use
+
+09:43.360 --> 09:53.770
+context does is it allows us to get the value inside of our context and store it as a concept inside
+
+09:53.890 --> 09:56.690
+of our component.
+
+09:56.740 --> 10:05.530
+So it's very easy because what we can do is we can say concept collection is equal to use context and
+
+10:05.530 --> 10:11.570
+then what we pass in is the context we want to use so we got to make sure to also switch it back to
+
+10:11.570 --> 10:17.500
+match right now if you remember what we are getting back is our collections object.
+
+10:17.630 --> 10:25.600
+So here we can make sure to set our collection equal to our new collections at our match.
+
+10:25.610 --> 10:38.360
+Don Paramus John collection I and now if we go back to our application it still works right.
+
+10:38.360 --> 10:43.160
+It's much easier to refactor using than new used context.
+
+10:43.730 --> 10:44.660
+It's that simple.
+
+10:44.660 --> 10:47.390
+That's all it is when we call use context.
+
+10:47.390 --> 10:53.780
+It will literally just pull whatever value the collection context is storing and then cast it to whatever
+
+10:53.780 --> 10:55.280
+content we want to set it to.
+
+10:55.940 --> 11:01.580
+So it's a really easy hook to use and this is pretty much all we need in order to use it but we've pretty
+
+11:01.580 --> 11:07.640
+much replaced our redux that we were using before to get that collection object value.
+
+11:07.870 --> 11:11.430
+In fact let's get rid of all of the redux bindings that we had here.
+
+11:11.740 --> 11:15.520
+So let's just make sure to get rid of this because we don't need this anymore.
+
+11:15.820 --> 11:17.980
+We don't need the map states props.
+
+11:18.070 --> 11:24.920
+We don't need the Kinect and we don't need the selector let's save and let's make sure everything still
+
+11:24.920 --> 11:25.220
+works.
+
+11:25.700 --> 11:28.710
+So if we refresh there it is right.
+
+11:28.740 --> 11:35.370
+We see that we are still pulling in the context and we're still leveraging our new collections map inside
+
+11:35.370 --> 11:36.820
+of the context.
+
+11:36.990 --> 11:37.530
+So that's it.
+
+11:38.250 --> 11:44.530
+That's pretty much all it is in order to consume the context API.
+
+11:44.620 --> 11:49.330
+What about dynamically setting the value because right now we're pretty much just leveraging the initial
+
+11:49.330 --> 11:50.200
+state.
+
+11:50.350 --> 11:50.730
+Right.
+
+11:50.740 --> 11:57.600
+We're leveraging initial state based on what we passed into the context when we first instantiated it.
+
+11:57.820 --> 12:02.170
+But what if we want to dynamically update the value right the way that we were doing before when we
+
+12:02.170 --> 12:05.060
+dispatched actions that updated our reduced hours.
+
+12:05.170 --> 12:07.980
+How do we actually dynamically update the context.
+
+12:07.990 --> 12:11.020
+Well that's exactly what we're going to explore in the next lesson.

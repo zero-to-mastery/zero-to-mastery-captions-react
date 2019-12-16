@@ -1,0 +1,70 @@
+WEBVTT
+
+00:01.450 --> 00:07.710
+Now that we understand progressive web apps I just wanted to add a few closing thoughts progressive
+
+00:07.710 --> 00:10.500
+web apps have a great goal in mind.
+
+00:10.860 --> 00:20.100
+Make Web sites faster and better for the user however as with all new technology it still has some kinks
+
+00:20.190 --> 00:20.790
+to work out.
+
+00:22.260 --> 00:26.700
+As you can imagine it isn't really in the best interests of Apple.
+
+00:26.850 --> 00:33.020
+As we mentioned before that's why safari support is really slow right now for progressive web apps will
+
+00:33.090 --> 00:34.490
+improve over time.
+
+00:34.710 --> 00:39.190
+But you have to be careful between the browsers what works and what doesn't.
+
+00:39.210 --> 00:46.020
+When building a progressive web apps things such as push notifications can be achieved on some browsers
+
+00:46.110 --> 00:55.350
+and not others and push API and the notification API that uses push notifications requires integration
+
+00:55.350 --> 00:56.440
+with the end.
+
+00:56.550 --> 00:59.380
+That adds an extra layer of complexity.
+
+00:59.670 --> 01:04.680
+And does everybody love push notifications and getting bugged from an app.
+
+01:05.870 --> 01:10.940
+I know that when I'm visiting a Web site getting notifications to add it to my home screen is really
+
+01:10.940 --> 01:12.350
+really annoying.
+
+01:12.350 --> 01:19.270
+Did you actually ever download an app to home screen notification companies like Twitter and Tinder
+
+01:19.270 --> 01:26.410
+use progressive web apps and companies like Lyft are really trying to make their progressive web apps
+
+01:26.560 --> 01:33.580
+as similar as possible to their native apps which is always a good sign with these sort of technologies.
+
+01:33.580 --> 01:37.050
+Be careful not to just get caught up in the hype.
+
+01:37.150 --> 01:43.810
+Every situation is different and depending on your project goals you may or may not benefit from progressive
+
+01:43.810 --> 01:49.780
+web apps as always decide if the effort is worth the benefit.
+
+01:49.780 --> 01:56.320
+Luckily for most projects progressive web apps does help because even if it's not all the features that
+
+01:56.320 --> 02:02.550
+are being used the browsers that do support it will give a better experience for the user.

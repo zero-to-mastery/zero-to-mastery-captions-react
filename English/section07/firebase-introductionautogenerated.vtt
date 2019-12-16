@@ -1,0 +1,193 @@
+WEBVTT
+
+00:00.870 --> 00:09.300
+OK so now we're at the section where we are going to integrate firebase into our application for mostly
+
+00:09.360 --> 00:13.480
+authentication and a bit of storage.
+
+00:13.650 --> 00:24.090
+Now in order to understand what firebase is as well as why we want to use a service like firebase I
+
+00:24.330 --> 00:30.330
+want to show you a little diagram before we write any firebase code at all
+
+00:33.050 --> 00:37.520
+weapon development is generally divided into two sections.
+
+00:37.550 --> 00:47.320
+There is front end and then there's back backend front end development consists of any javascript H2
+
+00:47.340 --> 00:56.090
+AML or CSF code that comprises the application that our users see and interact with.
+
+00:56.090 --> 01:02.290
+So all of the code that we have written up to this point is all front end development.
+
+01:02.400 --> 01:05.040
+This includes any of the components we've built.
+
+01:05.040 --> 01:12.240
+Any of the pages we've built any of the styling we've written everything that we've done is all front
+
+01:12.240 --> 01:14.270
+end development.
+
+01:14.410 --> 01:24.050
+You can see front end development as essentially anything that the user does see or is able to see back
+
+01:24.050 --> 01:32.450
+in on the other hand is mostly code regarding things that the user will not see and what is back in
+
+01:32.450 --> 01:41.640
+development well back in development generally consists of three things at least for our intents and
+
+01:41.640 --> 01:49.890
+purposes with our application there is anything related to a server anything related to a database and
+
+01:49.890 --> 01:52.420
+anything related to authentication.
+
+01:52.470 --> 02:01.240
+Now the database is generally where we store any data that is important for our application.
+
+02:01.320 --> 02:02.760
+So what do I mean by this.
+
+02:03.360 --> 02:13.140
+Well right now in our application we have this list of shop data that we use in our shop component our
+
+02:13.140 --> 02:22.410
+shop component creates these collection previews based off of this shop data that has category items
+
+02:22.560 --> 02:29.210
+and in the category items there are the specific items that we want to display right.
+
+02:29.220 --> 02:34.530
+These are all the items that our user is able to purchase or see.
+
+02:34.730 --> 02:42.250
+We only have around 40 items so it's not that big of a deal for us to store on our front end.
+
+02:42.440 --> 02:51.920
+But if this list was thousands of items in hundreds of categories we can see how this would be really
+
+02:52.250 --> 02:56.340
+heavy in terms of performance for our browser.
+
+02:56.360 --> 03:03.260
+So what we would want to do is store this on a database so that our application loads quickly and at
+
+03:03.260 --> 03:12.650
+the same time it's not like at any point we want to display all 1000 of our hats for example when our
+
+03:12.650 --> 03:19.790
+user navigate store has page nor do they need any of the information related to shoes related to jackets
+
+03:19.880 --> 03:21.070
+or whatever category.
+
+03:21.140 --> 03:31.180
+If they only want to see the hats well all of that data those thousands of items would be stored in
+
+03:31.270 --> 03:40.600
+a database and then the server would store the code that determines the most efficient way to request
+
+03:41.260 --> 03:44.890
+any of that data from the database.
+
+03:44.980 --> 03:53.980
+So we on our front end for example a user navigates to a Hearts page they would say in our code we would
+
+03:53.980 --> 04:03.230
+write something like I want from our server the 20 latest hats that are available while our server would
+
+04:03.230 --> 04:11.930
+figure out the best way to query the database for the 20 latest hats in all those thousands of items
+
+04:11.930 --> 04:18.740
+that are available it would have to figure out what our hats right and what are the latest 20 and then
+
+04:18.740 --> 04:26.690
+what's the most efficient way to fetch that data that code is all back in coding.
+
+04:26.710 --> 04:34.860
+We on the front end don't generally do any of that stuff authentication is the means in which our server
+
+04:34.920 --> 04:42.840
+determines that the user at that is trying to access the server or the database is who they say they
+
+04:42.840 --> 04:43.670
+are.
+
+04:43.680 --> 04:52.530
+So if our user logs into our application and they want to request say all of the card items that they
+
+04:52.530 --> 05:00.300
+stored in their last session three weeks ago we would generally store that information on our database
+
+05:00.720 --> 05:08.070
+so that when they come back and they log in again they would send that request to the server with their
+
+05:08.070 --> 05:10.580
+user profile information.
+
+05:10.740 --> 05:16.710
+Our server would then authenticate that that user is who they say they are usually with the email password
+
+05:17.190 --> 05:25.770
+and then they would be able to properly query the database for that stuff because we don't want users
+
+05:26.070 --> 05:33.510
+that aren't the right user asking for information that we don't want them to be able to have.
+
+05:33.600 --> 05:34.400
+Right.
+
+05:34.440 --> 05:41.250
+So one user could not access another user sensitive information that we would be storing on our database
+
+05:42.420 --> 05:53.300
+firebase is generally a solution or a platform that has all of this handled for us so we don't actually
+
+05:53.300 --> 05:56.260
+have to write any back in code at all.
+
+05:56.270 --> 05:57.680
+If we did not want to
+
+06:00.480 --> 06:07.230
+this course is ninety nine percent front end related that last remaining 1 percent is mostly going to
+
+06:07.230 --> 06:15.210
+cover some of the concepts of our backend so that we know what we're doing with firebase as well as
+
+06:15.470 --> 06:23.760
+there is a point where we have to spin up a small server to handle our payments but I will show you
+
+06:23.790 --> 06:25.050
+all of that stuff later.
+
+06:25.050 --> 06:31.550
+So definitely don't worry about that but we need to understand this separation so we understand where
+
+06:31.550 --> 06:40.360
+firebase ends and our application begins and vice versa firebase in itself is a great solution for us
+
+06:40.360 --> 06:47.530
+front end developers because it's created by Google so it handles a lot of the stuff that a back end
+
+06:47.530 --> 06:54.550
+developer would normally do for us including efficiently querying our database efficiently storing our
+
+06:54.550 --> 07:04.510
+stuff it gives us a very easy way to do o authentication which normally to do from scratch is extremely
+
+07:04.510 --> 07:11.350
+difficult and it also does a lot more than what I'm covering.
+
+07:11.390 --> 07:18.630
+There's so much great things about firebase that really helps us front end developers to get access
+
+07:18.630 --> 07:26.080
+to back end features without having to do back in development so let's dive right in.

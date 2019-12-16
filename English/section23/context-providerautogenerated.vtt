@@ -1,0 +1,388 @@
+WEBVTT
+
+00:00.680 --> 00:04.400
+So in the last lesson we learn how to consume our context API.
+
+00:04.940 --> 00:09.620
+But how do we dynamically set values in the new context that we've created.
+
+00:09.620 --> 00:15.650
+Well I'm going to show you how we can do that but we got to first make a new context to replace our
+
+00:15.710 --> 00:24.610
+current user reducer that stores the value of our user that we pull in from our fire store so instead
+
+00:24.610 --> 00:31.720
+of using these set current user dispatch action and then our current user reducer we are going to use
+
+00:31.720 --> 00:42.370
+the new context API to create a current user context so just like last time we are going to make a new
+
+00:42.370 --> 00:52.000
+context folder called current user because what is stored is the context of our current user so we'll
+
+00:52.000 --> 01:03.890
+make a create user context Dutch J.S. if you remember we import in create context from react and then
+
+01:03.890 --> 01:05.890
+we just set this concept.
+
+01:06.170 --> 01:15.800
+Current user context equal to create context and then we'll have a default value of undefined because
+
+01:16.130 --> 01:22.800
+there's no initial value for our user so we're just gonna set it on fire and then we're gonna export
+
+01:22.800 --> 01:30.880
+this out so we set to undefined in the same way that we might have set to null or undefined inside of
+
+01:31.000 --> 01:38.110
+our reducer whenever we set initial value that we knew that value would probably be an object because
+
+01:38.110 --> 01:40.690
+we know our current user is an object of some kind.
+
+01:41.850 --> 01:47.880
+So now in order for us to actually set this value we need to figure out where inside of our component
+
+01:47.910 --> 01:53.610
+we're going to get access to it and access to that will of course be in the app G.S. because this is
+
+01:53.610 --> 01:55.920
+where we perform the actual fetch itself
+
+01:58.620 --> 02:06.570
+one caveat that I must mention about setting this value is that just like we saw in our previous lesson
+
+02:07.320 --> 02:16.170
+in our collection component before we use the use context took we had to leverage our collection context
+
+02:16.250 --> 02:23.010
+dot consumer component in order to consume it we actually have to now use that other one that I was
+
+02:23.020 --> 02:31.290
+high about the provider component and unlike used context the hook we don't have access to a hook that
+
+02:31.290 --> 02:37.380
+allows us to make that easier which means that we actually have the code in a specific way when we want
+
+02:37.380 --> 02:41.760
+to pass that value around and update the context value.
+
+02:41.760 --> 02:44.140
+So let me show you what we're gonna do.
+
+02:44.300 --> 02:49.370
+First I'm going to import in our new current user content.
+
+02:49.670 --> 02:59.240
+So here you can import in that current user context from context slash current user slash current user
+
+02:59.240 --> 02:59.780
+context
+
+03:02.800 --> 03:05.260
+the place that we are going to set.
+
+03:05.260 --> 03:09.580
+This value is also the place where we're probably going to leverage it.
+
+03:09.610 --> 03:12.450
+So we can really put this anywhere really.
+
+03:13.060 --> 03:21.470
+But if you remember our app represents the highest level of our component tree so we got to think about
+
+03:21.470 --> 03:27.750
+where it is inside of this tree that needs access to this value.
+
+03:27.770 --> 03:35.540
+Now the reason why we do this is because you remember that I mentioned that this provider is going to
+
+03:35.540 --> 03:46.850
+be a actual component while this injects the context into the tree at that level meaning that let's
+
+03:46.850 --> 03:54.260
+say for example we know that the only other place where we use our current user is in our head our component
+
+03:56.620 --> 03:58.510
+if it's inside of our head or component.
+
+03:58.510 --> 04:08.170
+That means that we need to wrap this new provider around that head or component at the very least because
+
+04:08.350 --> 04:16.520
+our header is going to consume this current user context inside of it if we wrap this somewhere else
+
+04:16.910 --> 04:26.510
+like let's say we put this current user context around this right instead we actually would not be able
+
+04:26.510 --> 04:34.280
+to access the dynamically changed values of our context from this header if we say inside of a header
+
+04:34.850 --> 04:41.490
+used a context dot consumer somewhere inside of here dot consumer
+
+04:44.510 --> 04:48.640
+if we had this somewhere here we wouldn't actually be able to access the dynamic value.
+
+04:48.890 --> 04:52.980
+We would only ever be able to access the initial value.
+
+04:53.000 --> 05:00.980
+The reason for this is because the way that the context API works is it goes up the tree right from
+
+05:00.980 --> 05:02.210
+where it currently is.
+
+05:02.210 --> 05:07.910
+The actual consumer itself so inside of the header component right whenever we wrap it it will go up
+
+05:07.910 --> 05:12.930
+the tree of components until it finds the same context.
+
+05:12.950 --> 05:19.880
+So in our case the current user context and it will look for a provider if there is no provider that
+
+05:19.880 --> 05:26.210
+has supplied a new value then it will just use the initial state that we instantiated our current user
+
+05:26.210 --> 05:26.950
+context with.
+
+05:27.500 --> 05:31.440
+So that's one very important thing to keep in mind about context API.
+
+05:31.760 --> 05:37.220
+So because we know that our header is probably going to be the only place that uses the current user
+
+05:37.880 --> 05:41.200
+we are just going to wrap this header component.
+
+05:41.300 --> 05:49.670
+Let's say we did this but not consumer it is actually provider here.
+
+05:49.710 --> 05:56.040
+What we're going to do is we are going to now make sure to set the value and the way we do it is we
+
+05:56.040 --> 05:59.210
+all will leverage our render.
+
+05:59.260 --> 06:07.420
+So how we're going to do that is we need to now switch over to leveraging our component state because
+
+06:07.420 --> 06:16.170
+our component state is going to be the way that we store this current user object so we're going to
+
+06:16.170 --> 06:25.590
+make a constructor call our super and set this dot state equals our current user which starts off as
+
+06:25.590 --> 06:25.830
+no
+
+06:29.670 --> 06:38.420
+we're going to say is that when ever this component did mount instantiate instantiated right and then
+
+06:38.420 --> 06:44.870
+we subscribe to our off on off state changed when ever we actually get the snapshot of the object we
+
+06:44.870 --> 06:50.990
+want to store as our current user instead of calling set current user like we did before we are now
+
+06:50.990 --> 07:04.450
+just going to call this dot set state and we're going to set state where are current user object is
+
+07:04.570 --> 07:15.940
+equal to this object we're also going to make sure that this dot sets state when our user logs out.
+
+07:15.960 --> 07:18.670
+So as you remember when a user logs out we get null.
+
+07:18.670 --> 07:18.900
+Right.
+
+07:18.900 --> 07:25.450
+We also want to set the current user equal to that null value as well.
+
+07:26.130 --> 07:33.450
+So we've pretty much just replaced our reducer that was storing our secret user over to using local
+
+07:33.450 --> 07:34.560
+state.
+
+07:34.560 --> 07:41.610
+Now the reason we do this is because this value that changes here is what we're going to pass into our
+
+07:41.670 --> 07:43.220
+context.
+
+07:43.260 --> 07:54.860
+So here we're gonna say value using the value key as this dot state DOT current user and now when ever
+
+07:54.890 --> 08:03.890
+this state of current user changes it will pass that value into the provider and any consumer that is
+
+08:03.890 --> 08:10.460
+consuming this value will re render whenever this value changes because that's the nature of how context
+
+08:10.490 --> 08:18.840
+API updates are react application so by doing this we now are leveraging our local state again.
+
+08:19.800 --> 08:28.610
+And we actually have to do this because in order for us to actually make sure that we're keeping track
+
+08:28.640 --> 08:33.470
+of whatever is happening inside of this component of course we've got to do it inside the component
+
+08:33.530 --> 08:37.340
+as well so that's just the one caveat.
+
+08:37.600 --> 08:43.960
+This is actually one of the issues some people have with context API is that you have to re leverage
+
+08:43.960 --> 08:51.540
+component state in order to pass that value around inside of your application.
+
+08:51.640 --> 08:58.090
+But this is just because the actual paradigm of the context API is a little different from the paradigm
+
+08:58.210 --> 09:07.600
+of our products that we're used to using context API is kind of just an easier way for you to pass around
+
+09:07.780 --> 09:16.610
+the value of this thing that you want to store into components that are nested deep because our app
+
+09:16.610 --> 09:22.680
+component is still a component that will be the one that mounts first right is at the highest level.
+
+09:22.820 --> 09:26.420
+So it holds access to actual user information right.
+
+09:26.780 --> 09:33.140
+So just like before when we had to think about where do we want to make sure that we put the code that
+
+09:33.140 --> 09:40.280
+fetches the data we have to think about that again because this is going to be the place where we actually
+
+09:40.730 --> 09:47.240
+put the provider that will wrap the rest of the component treat that needs access to that value that
+
+09:47.240 --> 09:53.550
+we want to pass around because as you remember the problem we're trying to solve is prop drilling we're
+
+09:53.570 --> 09:54.820
+solving prop drilling here.
+
+09:54.820 --> 09:58.000
+So for that reason this is just how we have to do it.
+
+09:58.040 --> 10:04.790
+We have to leverage the component state of the component at the level that has access to the actual
+
+10:04.790 --> 10:10.980
+value that we want to dynamically update our context with.
+
+10:11.090 --> 10:16.190
+We also need to switch this props over to leveraging this dot state because of course we're not getting
+
+10:16.340 --> 10:18.190
+it from state anymore right.
+
+10:18.740 --> 10:23.950
+So now we've pretty much switched over this component to leveraging our context the
+
+10:29.640 --> 10:35.720
+so let's get rid of of course what we had before which was our redux findings.
+
+10:35.760 --> 10:38.100
+So let's just remove this connect
+
+10:46.800 --> 10:52.890
+so now we're storing our current user locally but we actually need to consume it from our header compound
+
+10:54.210 --> 10:59.310
+so the place that consumes it inside of our head our component is this section of the code right here
+
+10:59.610 --> 11:02.110
+right where we store this current user.
+
+11:02.130 --> 11:09.790
+Well now it's actually really easy because all we need to do is bring in our use context hook and we'll
+
+11:09.790 --> 11:13.210
+bring in that current user context that we just made
+
+11:16.040 --> 11:28.470
+current user context from context current user per user context and now we just gotta make sure that
+
+11:28.560 --> 11:34.290
+we use that new hook right.
+
+11:34.290 --> 11:42.630
+So we convert our default return from this function over instead to a explicit return because we need
+
+11:42.630 --> 11:53.150
+to pull off the current user from our current user context for user content we're no longer pulling
+
+11:53.150 --> 11:56.180
+this in right from a selector.
+
+11:56.180 --> 12:00.140
+So now current user is being passed in like this and that's it.
+
+12:01.400 --> 12:08.540
+If we save now let's actually also get rid of this map state props.
+
+12:08.540 --> 12:10.160
+Actually we still might leverage the hidden.
+
+12:10.160 --> 12:13.570
+So you know what let's just get rid of this for right.
+
+12:13.600 --> 12:18.140
+Because we're not using these select current user selector anymore right.
+
+12:18.160 --> 12:25.120
+We're using our context we're sending current user code still looks the exact same if we look now we
+
+12:25.120 --> 12:28.760
+see that where we have access to our sign and user.
+
+12:28.760 --> 12:29.160
+Right.
+
+12:29.170 --> 12:36.730
+If I click sign out as we see everything still works we sign back in our office still triggering inside
+
+12:36.730 --> 12:42.730
+of our app J.S. we're storing the user right on the local state passing it into our provider and then
+
+12:42.730 --> 12:46.090
+our provider updates on the actual context.
+
+12:46.360 --> 12:52.740
+And then the context will propagate that current user change into any places that's consuming the context
+
+12:54.560 --> 13:00.920
+so I know it's a lot of words for something that actually seem pretty simple but the only reason for
+
+13:00.920 --> 13:07.400
+that is just because there are these caveats around using it that I just want to highlight because there
+
+13:07.820 --> 13:11.830
+are certain issues that will arise if you don't think about it.
+
+13:11.840 --> 13:16.550
+So the main thing is just how you're going to structure the hierarchy of your application in terms of
+
+13:16.550 --> 13:21.730
+where you're going to put your providers and where you're going to put your consumers.
+
+13:21.780 --> 13:23.190
+So with that.
+
+13:23.190 --> 13:24.090
+That's it.
+
+13:24.120 --> 13:28.860
+We are now leveraging our current user inside of this header context.

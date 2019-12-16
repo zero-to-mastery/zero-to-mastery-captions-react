@@ -1,0 +1,460 @@
+WEBVTT
+
+00:00.750 --> 00:06.910
+OK in this lesson we are going to explore the use of facts hook.
+
+00:07.100 --> 00:13.020
+Now the use of fact took is going to be different from the use state hook and what the use of facts
+
+00:13.020 --> 00:21.440
+hook does is it gives us the ability to fire side effects inside of our functional components by before
+
+00:21.440 --> 00:22.970
+we explore what that means.
+
+00:23.030 --> 00:29.720
+Let's just look at what we are trying to build so that we know what we're doing with this use effector.
+
+00:29.770 --> 00:37.110
+So right now we have some input and depending on the name that you type into this input we're going
+
+00:37.110 --> 00:46.580
+to make an API request to our J sign place holder to get some specific user in this user list by the
+
+00:46.580 --> 00:51.070
+name of this user specifically the user name.
+
+00:51.350 --> 00:59.290
+So if we look at the code we haven't written it yet but the structure of the H2 AML is that we have
+
+00:59.290 --> 01:08.170
+some simple input and right now all we've done is we've leveraged the use state hook that we just learned.
+
+01:08.170 --> 01:15.670
+So this is a good chance also for us to continue looking at both hooks in unison but also for us to
+
+01:15.670 --> 01:20.590
+see how you stay hooked might be used in a real world application.
+
+01:20.620 --> 01:27.760
+Now we have some user object that we're setting with our set user right these two parameters that we
+
+01:27.760 --> 01:35.220
+get back from use state so we're calling you state for this use our state value that we want and the
+
+01:35.220 --> 01:37.260
+default value will be no.
+
+01:37.260 --> 01:43.400
+But what we expect to get back of course is some object.
+
+01:43.540 --> 01:46.450
+The next thing we're going to set is this query.
+
+01:46.450 --> 01:50.120
+Right so our search query what the user types and what their input.
+
+01:50.200 --> 01:54.010
+And here we're going to set our set search query value as well.
+
+01:54.010 --> 02:00.070
+So when you state default value is Brett whenever the user type something different that will be the
+
+02:00.070 --> 02:05.000
+new string value that's going to be in our search query state.
+
+02:05.090 --> 02:09.920
+The main difference is that instead of sending this as a default value of an empty string we set it
+
+02:09.980 --> 02:11.120
+as Brett.
+
+02:11.420 --> 02:15.410
+And that's why when we refresh we get Brett right here.
+
+02:15.410 --> 02:23.780
+So now before we actually proceed with the use effect all we have done is that in our input we set our
+
+02:23.780 --> 02:26.470
+value to our search query value.
+
+02:26.480 --> 02:26.780
+Right.
+
+02:26.780 --> 02:28.880
+So we're leveraging internal state.
+
+02:28.880 --> 02:35.750
+And then whenever this value changes we get the target and the value itself and then put it into our
+
+02:35.750 --> 02:41.400
+search query value using the search search query property.
+
+02:41.410 --> 02:44.210
+Now if a user exists and it's not now.
+
+02:44.230 --> 02:44.530
+Right.
+
+02:44.530 --> 02:49.120
+We just simply display a div and show the name user name and email.
+
+02:49.120 --> 02:57.470
+Otherwise if user is null we just show a p tag that says no user found in order for us to leverage our
+
+02:57.530 --> 03:00.560
+use affect hook.
+
+03:00.600 --> 03:08.410
+We've got to bring it in first and then we got to put it into our component.
+
+03:08.830 --> 03:17.300
+Now use effect is different from you state in the sense that it does not get back any value.
+
+03:17.440 --> 03:27.970
+Instead what it does is it gets a function that gets called when ever the component changes or whenever
+
+03:27.970 --> 03:32.900
+the component updates and re renders so let me show you what this means.
+
+03:32.900 --> 03:36.510
+Let's say we have some function that console logs Hello.
+
+03:36.710 --> 03:44.780
+That's all it does when our component mounts for the first time this effect will fire the one that we
+
+03:44.780 --> 03:51.070
+just passed here because this is mimicking our component did mount lifecycle method.
+
+03:51.350 --> 03:59.310
+So the effect fires but it will also fire as we notice when ever our component reenters.
+
+03:59.330 --> 04:07.670
+And the reason our component renders is because we're firing off our set search query method which is
+
+04:07.670 --> 04:15.530
+similar to calling set state as you remember in a class component whenever you call set state the render
+
+04:15.590 --> 04:16.730
+method gets called.
+
+04:16.730 --> 04:26.120
+So just like that method are used state does a similar thing when ever any of our set parameters from
+
+04:26.120 --> 04:36.320
+our use state gets called it does re render and update the component as a result the use effect affects
+
+04:36.320 --> 04:38.730
+will also fire.
+
+04:38.750 --> 04:46.820
+So that's the thing to remember is that our use effect is not just for mounting is not just for mimicking
+
+04:46.820 --> 04:55.310
+component did mount lifecycle methods but also for any of the Update lifecycle methods that fire when
+
+04:55.400 --> 04:58.730
+ever render gets called.
+
+04:58.890 --> 05:05.970
+Now you might be wondering well what if we don't want to fire our use effect method on every update.
+
+05:06.030 --> 05:13.170
+What if we only want to fire it in a way that's similar to component did mount Well the way we would
+
+05:13.170 --> 05:21.730
+do that is we would pass in a secondary parameter to use effect now this secondary parameter will be
+
+05:21.820 --> 05:33.560
+an array and what this array takes is properties that this affects has access to that will not trigger
+
+05:34.400 --> 05:36.210
+a rerun under.
+
+05:36.280 --> 05:44.710
+So for example if inside of here we only want to trigger a use affects re render.
+
+05:44.710 --> 05:54.310
+If our search query value changes right then we will see that of course we're re rendering our effect
+
+05:54.310 --> 05:57.100
+right because our search create property has changed.
+
+05:57.280 --> 06:03.490
+But let's say we only wanted to fire when our user property changed one.
+
+06:03.490 --> 06:07.300
+Now we'll see that we're no longer getting the effect right.
+
+06:07.300 --> 06:18.010
+It only fires the first time when are actual component mounted because the user stake here this value
+
+06:18.070 --> 06:19.590
+was brand new.
+
+06:19.600 --> 06:27.700
+That's the thing to keep in mind this array is taking an array of properties that we want to watch and
+
+06:27.730 --> 06:29.270
+our effect only fires.
+
+06:29.290 --> 06:35.800
+If those properties ever change and usually we want to in such a way so that these properties are going
+
+06:35.800 --> 06:41.320
+to be properties that our function our use affects function is dependent on.
+
+06:41.350 --> 06:45.370
+So we'll talk about this once we actually implement the feature.
+
+06:45.370 --> 06:51.550
+But if for example we want it only our effects of fire simply the one time when it mounted we passed
+
+06:51.550 --> 06:58.750
+in an empty array because what we're saying is that I want this effect to depend on nothing only.
+
+06:58.780 --> 07:07.030
+So if this array is saying only render are use effect again whenever anything in this array property
+
+07:07.030 --> 07:11.290
+wise changes if it's an empty array then we're not watching for anything.
+
+07:11.350 --> 07:18.610
+So no matter what changes are use effect does not fire again because it's not firing at all unless anything
+
+07:18.610 --> 07:19.170
+changes.
+
+07:19.210 --> 07:22.360
+And because we're not watching anything right then we don't care.
+
+07:22.360 --> 07:31.630
+So now we of course fire the first time but then we don't fire for any subsequent changes.
+
+07:31.840 --> 07:35.200
+How do we actually do our fetch.
+
+07:35.260 --> 07:43.510
+Well if we were to use our async await function you would probably think that what we should do is write
+
+07:43.570 --> 07:50.950
+an async function but if we do this we'll actually see that we do get an error and the error is that
+
+07:51.220 --> 07:56.540
+the effect function must not return anything besides what is used for cleanup.
+
+07:56.560 --> 07:59.200
+Now there's two caveats here to look at.
+
+07:59.200 --> 08:05.060
+The first is that the effect function must not return anything but the function.
+
+08:05.170 --> 08:05.980
+What does this mean.
+
+08:06.670 --> 08:14.530
+Well the function that we pass to use affect async functions actually return us an async func object.
+
+08:15.250 --> 08:22.390
+So what this is saying is that when we declare our async func method we're actually returning back an
+
+08:22.510 --> 08:26.970
+async func object which use effect does not want.
+
+08:26.980 --> 08:31.330
+So how do we actually use an async await function in our use effects function.
+
+08:32.230 --> 08:37.630
+Well what we would do is return a function that returns our async function.
+
+08:37.660 --> 08:49.690
+So here we can return a function and then set a new fetch func which is equal to async await loops which
+
+08:49.690 --> 08:51.890
+is where we'll perform our fetch.
+
+08:51.910 --> 08:53.320
+So here's what we'll do.
+
+08:53.910 --> 09:06.070
+We are going to call R a wait for fetching to our Jason Place holder string because we're trying to
+
+09:06.070 --> 09:14.450
+get the user and we're going to say where the name or let's say the user name equals.
+
+09:14.800 --> 09:24.030
+And then here we're going to use our property of search query so essentially what the user types in
+
+09:24.120 --> 09:25.060
+right here.
+
+09:25.410 --> 09:28.280
+I'm using the wrong string.
+
+09:29.040 --> 09:35.020
+So we're doing string interpolation and we want to set this equal to our response.
+
+09:37.580 --> 09:41.960
+Next what we want to do is we want to convert this to Jason.
+
+09:41.990 --> 09:46.210
+Jason equals response start.
+
+09:46.210 --> 09:51.690
+Jason we want to await this as well.
+
+09:51.760 --> 09:56.490
+Now the thing to remember here is what we get back from this.
+
+09:56.770 --> 09:59.260
+You are l will be an array.
+
+09:59.500 --> 10:08.990
+So even if we do let's say we want Brett if we do users karma user name equals Brett we see that this
+
+10:08.990 --> 10:15.650
+is still an array so we always want the first object.
+
+10:15.690 --> 10:23.150
+So here's what we're gonna do we are simply going to say course we're going to set our user right when
+
+10:23.150 --> 10:31.540
+we get this Jason object back and we're gonna pluck the first user and then inside of this function
+
+10:31.720 --> 10:37.510
+we're just going to call our fetch but we're not going to actually return it.
+
+10:37.510 --> 10:45.410
+We're just going to call it and now what will happen is that we will so let's actually get rid of that
+
+10:45.410 --> 10:46.220
+first right.
+
+10:46.310 --> 10:49.310
+Because I need to point out something we will pretty much just save this.
+
+10:49.310 --> 10:55.940
+And what will happen is that when our component mounts we are going to call this fetch funk method which
+
+10:55.940 --> 11:00.190
+will fetch from the Jason based on the search query.
+
+11:00.200 --> 11:03.430
+It'll give us back the response we converted Jason.
+
+11:03.530 --> 11:12.630
+And then we call that user but what happens when we save this if we look we're actually going to see
+
+11:12.660 --> 11:14.040
+if I console log this
+
+11:19.610 --> 11:21.200
+we see that we're going crazy.
+
+11:21.200 --> 11:26.100
+We keep firing this over and over and over and over again.
+
+11:26.180 --> 11:27.940
+Why is that.
+
+11:27.950 --> 11:35.630
+Well that's something we have to understand about the way that this used effect works what's happening
+
+11:35.660 --> 11:41.200
+is that we are firing off this effect whenever the component gets re rendered.
+
+11:41.200 --> 11:48.680
+Right or the component updates but our component updates whenever we set the state and we set the state
+
+11:48.740 --> 11:50.210
+we're setting our user state.
+
+11:50.210 --> 11:54.230
+When ever this value comes in whenever a user comes in.
+
+11:54.230 --> 12:01.160
+So what happens is that the component mounts for the first time we fetch from this euro using the bread
+
+12:01.220 --> 12:08.540
+state we get back our object and then we set our user which in turn really renders our component and
+
+12:08.540 --> 12:10.670
+then triggers our effect again.
+
+12:10.670 --> 12:17.510
+And then we researched for the user reset the response reset the value right calling that state again
+
+12:17.600 --> 12:22.430
+and then this triggers another render and onwards and onwards and upwards and onwards ours because we
+
+12:22.430 --> 12:30.780
+keep setting the user inside of our effect so because of this this is a thing we have to watch out for
+
+12:30.840 --> 12:38.700
+and explicitly why they give us this array because what we're trying to say in this array is that I
+
+12:38.700 --> 12:46.950
+want you to watch for properties that I have I might have access to inside of my function that only
+
+12:47.040 --> 12:57.960
+if that value changes will I then update this effect if that property doesn't change that I don't want
+
+12:57.960 --> 13:00.870
+to re fire this effect.
+
+13:01.010 --> 13:07.820
+Now one way that we can do this is of course if we just pass in this empty string outside this empty
+
+13:07.880 --> 13:13.200
+array if I save we fire for the first time.
+
+13:13.300 --> 13:15.930
+But now the effect doesn't fire again right.
+
+13:15.970 --> 13:17.920
+No matter what even if I change this.
+
+13:17.920 --> 13:18.120
+Right.
+
+13:18.130 --> 13:23.910
+You see that nothing is happening well this is pretty much how we would mimic a component did mount
+
+13:23.910 --> 13:32.720
+method to fetch code by passing an empty array but we want to trigger a change when ever we type anything
+
+13:32.780 --> 13:42.640
+in so the way for us to do that is we simply say whenever the search query value changes then I want
+
+13:42.640 --> 13:47.340
+you to actually refire this effect.
+
+13:47.350 --> 13:57.310
+So now if I type you'll see that we're updating and if I were to choose another user then we are able
+
+13:57.310 --> 14:02.690
+to update our state with our new user.
+
+14:02.710 --> 14:10.360
+So this is pretty much the main thing of use effect is just how we have to be careful of what properties
+
+14:10.480 --> 14:18.010
+we're using inside of the function that we pass use a fact that may cause an infinite loop inside of
+
+14:18.100 --> 14:27.700
+our component or how we can use it in order to fire and represent our component did mount methods but
+
+14:28.240 --> 14:29.960
+this is pretty much it.
+
+14:30.100 --> 14:36.520
+Now they're pretty simple when you look at them but they are very complicated in how we can utilize
+
+14:36.520 --> 14:42.580
+them to replace features in our application so let's actually use what we've learned with you state
+
+14:42.670 --> 14:49.330
+and use effect to replace some of the features inside of our clothing application and we'll do that
+
+14:49.570 --> 14:50.470
+in the next lesson.

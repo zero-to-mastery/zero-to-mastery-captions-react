@@ -1,0 +1,85 @@
+WEBVTT
+
+00:00.510 --> 00:05.070
+Hello and welcome to the best react course online.
+
+00:05.070 --> 00:10.830
+Wow that's a that's a bit of a bold statement and OK I may be biased here but I'm definitely looking
+
+00:10.830 --> 00:17.850
+forward to us diving into some fun topics and coming out the other end as great react developers this
+
+00:17.850 --> 00:23.750
+course tries to build onto each topic and gets more and more advanced as you progressed.
+
+00:23.760 --> 00:27.240
+Trust me if you go through everything you will come out the other end.
+
+00:27.240 --> 00:34.310
+Confident with react and be able to manage or even lead react projects your company now.
+
+00:34.320 --> 00:40.440
+Before we dive into coding building projects and learning about react I want to take a moment and understand
+
+00:40.500 --> 00:42.710
+why react exists.
+
+00:42.810 --> 00:44.810
+What problem does it solve.
+
+00:44.820 --> 00:51.600
+Why it makes front end development easier and also what principles we need to understand to be more
+
+00:51.600 --> 00:54.090
+than the average react developer.
+
+00:54.360 --> 01:00.810
+You see a lot of times people learn a tool a library or a framework without understanding the core principles
+
+01:00.840 --> 01:04.770
+that make it great by learning these things first.
+
+01:04.860 --> 01:11.010
+We'll have a foundation as we move through the course and understand what the best practices are.
+
+01:11.040 --> 01:15.840
+The goal of this course is not to be another react course like thousands of others already out there
+
+01:15.840 --> 01:17.040
+in existence.
+
+01:17.070 --> 01:20.770
+The goal is to make you a reactive helper that can think on your own.
+
+01:20.880 --> 01:27.570
+Make good architectural decisions and lead projects instead of only following tutorials.
+
+01:27.570 --> 01:32.820
+Therefore in this section let's dive into the important principles that will help us get through this
+
+01:32.820 --> 01:33.670
+course.
+
+01:33.750 --> 01:38.730
+If you are new to react some of these principles may be hard to understand at first.
+
+01:38.730 --> 01:44.400
+Rest assured that we will keep revisiting them throughout the course as we learn for those that have
+
+01:44.430 --> 01:46.070
+already worked with react.
+
+01:46.080 --> 01:48.800
+You may learn a thing or two so hang in there.
+
+01:48.810 --> 01:53.700
+My goal by the end of this section is for you to be able to explain to other programmers the benefit
+
+01:53.700 --> 02:00.350
+of react without writing a single line of code I do recommend that this section is something you come
+
+02:00.350 --> 02:03.830
+back to after you've watched through the entire course.
+
+02:03.840 --> 02:05.670
+All right enough talk let's get started.

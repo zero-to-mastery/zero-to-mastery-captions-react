@@ -1,0 +1,445 @@
+WEBVTT
+
+00:00.900 --> 00:08.140
+There's one more thing about hooks that I want to cover and that is writing reusable custom hooks yourself.
+
+00:09.130 --> 00:13.300
+Now I know it seems kind of complicated but it's actually really easy.
+
+00:13.330 --> 00:20.480
+But we have to first explore why we would want to do such a thing so inside of our test application
+
+00:21.170 --> 00:24.050
+what we have are these two components.
+
+00:24.050 --> 00:29.200
+One is a user component and one is a post component what you pass.
+
+00:29.220 --> 00:36.480
+Each of these components is an I.D. which we will then use to fetch against our Jason Place holder API
+
+00:36.510 --> 00:41.070
+that we've been using to see whether or not the user or the post exists.
+
+00:41.070 --> 00:47.790
+If the user exists will display the name and the user name and if the post exists we'll show the title
+
+00:47.850 --> 00:49.230
+and the body.
+
+00:49.230 --> 00:55.330
+Now if they don't exist what we'll do is we'll just show this text user not found or post nothing.
+
+00:56.900 --> 01:00.040
+And the code is pretty simple in terms of how we're rendering it.
+
+01:00.050 --> 01:05.840
+We just need to actually figure out how to get our user using the user I.D. we pass into our user component
+
+01:06.620 --> 01:08.790
+and our post is going to be similar.
+
+01:08.810 --> 01:09.830
+Lee the same thing.
+
+01:11.480 --> 01:17.390
+Now one of the hunches that we get when we write this code is that we'll probably end up writing very
+
+01:17.390 --> 01:18.310
+similar code.
+
+01:19.070 --> 01:24.980
+But let's just write it for practices sake so that we can flush it out and see what we got to do before
+
+01:24.980 --> 01:31.250
+we write our custom hook let's just write the independent solutions to create what we need inside of
+
+01:31.250 --> 01:33.680
+our respective components.
+
+01:33.730 --> 01:41.440
+Now we probably will need are used state hook and our use effect hook as we're most commonly used to
+
+01:41.440 --> 01:49.610
+using them by now and what we're going to do is we are going to get a post and also a set post from
+
+01:49.670 --> 01:58.020
+this use state Hook where our default object will be null because we're going to get back an object.
+
+01:58.020 --> 02:05.430
+Now what we want to do in our use effect hook is we will pass in this function and then we're going
+
+02:05.430 --> 02:12.960
+to do our async pattern as we remember where we write the actual async function inside of our function.
+
+02:12.960 --> 02:23.880
+So we'll set we'll call it fetch post equals a sync function and what it does is inside we are going
+
+02:23.880 --> 02:33.200
+to get a concept of our response back from our FETCH AND THEN WE'RE GONNA PASS in R U or L.
+
+02:33.240 --> 02:36.060
+So let's go to our Jason Place holder you are all here.
+
+02:37.830 --> 02:47.010
+Let's just go to our posts so we know what we need is we need to go to this euro and we are gonna say
+
+02:47.400 --> 02:56.090
+we want the post where the I.D. goes to the actual I.D. that we're gonna pass to it.
+
+02:56.090 --> 02:59.310
+So let's say post I.D. right here right.
+
+02:59.330 --> 03:02.050
+Using our string interpolation.
+
+03:02.180 --> 03:03.970
+So there's nothing too new here.
+
+03:04.220 --> 03:12.910
+We just have to make sure to await for this as well as our cost much post and then we're gonna say cost
+
+03:13.900 --> 03:19.950
+posts will be equal to our away call of our Red Dog Jason.
+
+03:20.210 --> 03:25.630
+And as we remember when we fetch it from a you are all like this with our Jason Place holder we'll get
+
+03:25.630 --> 03:26.680
+back in array right.
+
+03:26.740 --> 03:31.960
+Where this I.D. matches the post I.D. but because we now work our I.D. are gonna be unique.
+
+03:31.960 --> 03:34.000
+Well of course always get the first one.
+
+03:34.750 --> 03:43.450
+So it'll be easier for us then to just say something like sup post equal to posts at zero
+
+03:46.310 --> 03:47.630
+if this is the case right.
+
+03:47.660 --> 03:52.910
+If we have something inside of our array then this will be the object that gets sent to our post.
+
+03:52.910 --> 03:57.780
+If there's nothing then we'll just get undefined which is still fine for us.
+
+03:58.250 --> 04:00.560
+And then we've got to make sure to call our fetch post
+
+04:03.390 --> 04:10.650
+and then once we say we will now see at least that we are fetching our post right.
+
+04:10.710 --> 04:16.080
+Because the I.D. we actually have inside of our app just being passed in right here.
+
+04:16.080 --> 04:22.590
+So we're bringing in our post and we're passing a post idea 15 the same we're gonna apply for our user
+
+04:22.590 --> 04:26.080
+I.D. So let's write the same code.
+
+04:26.870 --> 04:36.020
+We know we are going to use state and use affect and we know that we're going to get a user and that
+
+04:36.020 --> 04:45.220
+user which equals our used state again with a default value of not and then we're going to call our
+
+04:45.220 --> 04:46.000
+use affect
+
+04:48.820 --> 04:50.310
+and do something very similar.
+
+04:50.320 --> 04:59.320
+Fudge user equals an async function where we'll get our response from our fetch.
+
+04:59.600 --> 05:07.340
+Except this time instead of posts we're gonna fetch users and we're gonna pass an I.D. equal to our
+
+05:07.340 --> 05:07.830
+user.
+
+05:10.700 --> 05:17.420
+Similarly we're going to get users which equals are going to await this call.
+
+05:17.690 --> 05:20.160
+We've got to wait for our response Dot.
+
+05:20.160 --> 05:25.110
+Jason and then we're call set user on our users.
+
+05:25.320 --> 05:28.960
+0 and then we call fetch user
+
+05:32.460 --> 05:39.410
+and now we'll see that we should be getting our user string interpolation ups.
+
+05:39.510 --> 05:42.150
+So I was using the wrong type of string area.
+
+05:44.160 --> 05:51.150
+So here we see we're able to get our code we're able to get the object of the user for user 5 or 15
+
+05:51.180 --> 05:59.210
+if they exist but if we look at this code between this code and our postcode we'll actually see that
+
+05:59.210 --> 06:02.120
+it's pretty much the same code that we're writing.
+
+06:02.120 --> 06:07.320
+It's just that what is setting posts and one is setting users.
+
+06:07.560 --> 06:15.270
+So what we can do here is we can move this into a reusable affect that we can bring into our components
+
+06:16.720 --> 06:24.430
+so let's do it like this in order for us to write this we have to make a new folder we're gonna call
+
+06:24.430 --> 06:33.180
+it an inside of our effects folder we're gonna make a new effect called use fetch.
+
+06:33.180 --> 06:41.220
+So the thing about R affects if their custom is that they always must use the syntax of use and then
+
+06:41.310 --> 06:42.920
+the functionality.
+
+06:42.930 --> 06:44.730
+So for us we're trying to use our fetch.
+
+06:44.760 --> 06:50.150
+So we're going to call it use fetch and this is just the naming practice that the react team wants us
+
+06:50.150 --> 06:50.690
+to follow.
+
+06:50.930 --> 06:58.610
+So we'll just do use fetch dot effect dog J us so that we know it's in effect and inside what we're
+
+06:58.610 --> 07:05.540
+going to do is we're pretty much going to import in what we had before except we're gonna modify this
+
+07:05.540 --> 07:14.570
+code so that it's reusable what we'll say is we will bring in our use state and our use effect from
+
+07:14.570 --> 07:21.260
+react and then we're gonna make a function that we're gonna call use fetch
+
+07:24.640 --> 07:32.200
+now because we're not passing in a specific I.D. We're gonna get the I.D. from our component we instead
+
+07:32.230 --> 07:38.920
+are gonna pass a whole U or L that we're gonna call our affection and then inside we're gonna duplicate
+
+07:38.980 --> 07:44.990
+this code that we have here except we're gonna make it more generic so instead of user we're probably
+
+07:44.990 --> 07:52.280
+going to use a generic data and we're gonna set set data and then you stay is the same because we don't
+
+07:52.280 --> 08:01.730
+want to end up with one object now instead of fetch user we're gonna call it fetch data and then instead
+
+08:01.730 --> 08:08.690
+of manually passing in and string and terminating this you are all we're gonna get the URL from our
+
+08:08.690 --> 08:16.210
+function anyways so that's the great thing about these custom effects that we write we can send in any
+
+08:16.210 --> 08:21.970
+number of parameters because all we're writing is a function we're just leveraging a function that has
+
+08:21.970 --> 08:28.420
+leverage to these hooks because as we remember our functional components are also functions and hooks
+
+08:28.600 --> 08:30.050
+function inside of functions.
+
+08:30.340 --> 08:34.960
+So that's why we're able to just write functions how powerful we are but then leverage the existing
+
+08:34.960 --> 08:41.020
+code that we need in fact don't even have to use this function syntax we can completely write our code
+
+08:42.270 --> 08:45.240
+like we normally would with our aero functions.
+
+08:45.240 --> 08:46.500
+It's entirely up to you.
+
+08:46.530 --> 08:47.800
+It's very flexible.
+
+08:48.060 --> 08:54.300
+So we'll say use fetch we'll pass in the URL we'll get this URL we'll get the response and then we know
+
+08:54.300 --> 08:56.150
+that what we'll have is a data array.
+
+08:56.190 --> 08:56.490
+Right.
+
+08:56.490 --> 08:58.160
+Because of what we're fetching from.
+
+08:58.270 --> 09:04.050
+So if we knew that the year if we wanted to make a more generic one for fetching any URL right we can
+
+09:04.050 --> 09:04.620
+do that too.
+
+09:04.620 --> 09:10.590
+But in our case we know we'll always end up getting an array because of the URLs that we're using in
+
+09:10.590 --> 09:18.570
+our application and now we have pretty much completed this effect inside.
+
+09:18.720 --> 09:24.450
+And we just got to make sure that from this use fetch what we're returning is the data that we finished
+
+09:24.450 --> 09:24.840
+fetching
+
+09:28.020 --> 09:29.920
+and now if we save and export this out
+
+09:33.670 --> 09:40.580
+we can bring this effect now into our components.
+
+09:40.630 --> 09:47.190
+We're just gonna import in our use effect from facts use effect of
+
+09:50.550 --> 10:01.880
+and now what we do in order to use it is we set cost user equal to our use effect and now this pretty
+
+10:01.880 --> 10:05.450
+much is how we're going to use it how it was used fetch.
+
+10:05.510 --> 10:08.190
+Sorry I name that wrong.
+
+10:08.190 --> 10:14.580
+There we go so let's just pass this here okay.
+
+10:14.940 --> 10:20.220
+A little mistake in naming conventions we can remove these now because we're no longer using them we're
+
+10:20.220 --> 10:25.740
+using our custom effect and we'll see their user still works we refresh.
+
+10:25.740 --> 10:30.720
+We see that we got a flash of our message if there was no user I will pull in our user once it comes
+
+10:30.720 --> 10:33.580
+in and all our code still works the same.
+
+10:33.630 --> 10:40.020
+So I use fudge hook is now reusable here and you can imagine similarly it will be the same thing inside
+
+10:40.020 --> 10:41.740
+of our post component.
+
+10:42.000 --> 10:44.790
+So let's just import that again.
+
+10:44.920 --> 10:52.250
+Are you such from facts you such a fact or just copy.
+
+10:52.290 --> 11:05.130
+Are you are l 0 seconds post equals use fetch on r u r l and now we see both our code works we don't
+
+11:05.130 --> 11:16.290
+need this import any more either and we've now got this reusable fetch inside of our components so simply
+
+11:16.470 --> 11:21.840
+it's just like writing utility functions right we're just extrapolating out these effects that we see
+
+11:21.840 --> 11:28.800
+our reusable and then compose them into these reusable effects that we can bring into our components
+
+11:30.000 --> 11:31.590
+so very handy.
+
+11:31.890 --> 11:39.110
+This is the great thing about writing our own hooks now of course this can be done in any way we want
+
+11:39.120 --> 11:45.270
+right we can use these effects hooks and these use state hooks right as well as the other hooks that
+
+11:45.270 --> 11:52.590
+are a little bit more obscure in the react hook world to build our own custom hooks and we're able to
+
+11:52.590 --> 12:00.210
+now extrapolate out reusable code in our components and share them across our components which is the
+
+12:00.210 --> 12:01.880
+big advantage of writing hooks.
+
+12:02.580 --> 12:08.490
+Once you start writing hooks in a certain way for your applications you start thinking about what parts
+
+12:08.490 --> 12:14.460
+of my components can share the same functionality and then you end up just making custom hooks that
+
+12:14.460 --> 12:23.040
+will share that for you so hopefully this is a good introduction to what the potential for hooks can
+
+12:23.040 --> 12:23.670
+be.
+
+12:23.970 --> 12:28.760
+And again at the point of this time hooks are still a pretty new technology.
+
+12:28.770 --> 12:31.610
+So there's a lot that you can do with it right.
+
+12:31.670 --> 12:33.670
+It's really just a tool.
+
+12:34.110 --> 12:40.170
+And different companies and different projects you join may end up using these tools in completely different
+
+12:40.170 --> 12:41.550
+ways.
+
+12:41.550 --> 12:47.070
+As of yet there's not that many best practices other than what the react hooks documentation suggests
+
+12:47.130 --> 12:51.750
+which I definitely suggest you take a look at as well especially if you want to see some of the other
+
+12:51.750 --> 12:54.600
+hooks that are available to us now.
+
+12:54.640 --> 12:58.860
+There will definitely be projects where you join where they may not want to use hooks at all because
+
+12:58.860 --> 13:02.170
+the existing ecosystem works for them right.
+
+13:02.250 --> 13:08.770
+And if you've been on a project for three years that's been built using the react redux saga or whatever
+
+13:08.790 --> 13:16.050
+library combination of the react project it might not make sense to suddenly migrate your entire application
+
+13:16.080 --> 13:21.180
+over to using hooks if you've been using class components perfectly fine.
+
+13:21.270 --> 13:26.730
+Again it all comes down to the project that you join and the team that you join as well as the business
+
+13:26.730 --> 13:33.600
+goals of the companies that you end up working with but it's good to know what tools you have available
+
+13:33.720 --> 13:40.110
+in case the team you join does eventually one day want to migrate slowly over to hooks or they want
+
+13:40.110 --> 13:48.260
+to write the code that they write from now on in hooks so having knowledge of it is good OK.
+
+13:48.460 --> 13:50.020
+Now let's move forward with our course.

@@ -1,0 +1,256 @@
+WEBVTT
+
+00:01.210 --> 00:02.220
+All right guys.
+
+00:02.440 --> 00:08.310
+Now that we have our collections overview let's actually put it in a root.
+
+00:08.400 --> 00:14.730
+So what we'll do is import root from react root or Dom
+
+00:18.460 --> 00:27.400
+and instead of just rendering our component like this let's render a root where the component goes to
+
+00:27.460 --> 00:37.270
+our collection overview and what we'll say is when the exact path is equal to.
+
+00:37.270 --> 00:43.190
+And now what we want is to actually display the current path that we're on right.
+
+00:43.210 --> 00:46.660
+Because our shop page is also a rooted component.
+
+00:46.660 --> 00:52.360
+Now in order to do this what we have to do instead of restructuring collections which we actually should
+
+00:52.360 --> 00:55.150
+remove accidentally this is still there.
+
+00:55.150 --> 01:06.040
+We know that we have access to the match object because inside of our app J.S. are shot page is being
+
+01:06.040 --> 01:14.860
+nested in a root and root automatically passes those three objects in to our component as prompts we
+
+01:14.860 --> 01:20.920
+get match location and history and we want match because we want to display.
+
+01:21.010 --> 01:30.200
+And here we're going use string interpolation Match dot part and let's just log it to see what matched
+
+01:30.520 --> 01:37.720
+that path actually gives us back so let's return this let's console log match
+
+01:43.030 --> 01:45.770
+we see that path is on slash shop right.
+
+01:45.850 --> 01:49.930
+And we want this because we want to know what's the current path that we're matching.
+
+01:49.990 --> 01:56.470
+So we get to our shop page and we want the shop page path because we got to build our roots off of this
+
+01:56.470 --> 01:57.220
+one right.
+
+01:57.310 --> 02:00.700
+And we don't actually know where our shop page is currently.
+
+02:00.700 --> 02:09.370
+Our shop page only cares that the next path which is slash category will be after wherever it's currently
+
+02:09.370 --> 02:12.220
+placed on the path.
+
+02:12.230 --> 02:16.210
+Now what does that mean well before we actually do that.
+
+02:16.220 --> 02:20.030
+Let's actually build our collection page.
+
+02:20.230 --> 02:31.650
+So what we need is to build the actual page component so inside of our pages we need a new folder called
+
+02:31.800 --> 02:44.740
+category and inside we will have our category Dog component dodgy OSX as well as category dot styles.
+
+02:44.750 --> 02:45.130
+Does
+
+02:48.650 --> 02:53.340
+and what we need in our category page we've got to import react from react
+
+02:56.350 --> 03:06.020
+and then we need to import in our style sheet now as you remember from our final application.
+
+03:06.020 --> 03:09.710
+It's going to look remarkably similar to our collections overview.
+
+03:09.740 --> 03:12.200
+We're just going to use the same collection item.
+
+03:12.200 --> 03:17.150
+We also got a pull in our respective shopped item category.
+
+03:17.150 --> 03:18.100
+Right.
+
+03:18.140 --> 03:20.060
+So let's actually do that.
+
+03:20.510 --> 03:32.750
+So what we'll do is we'll import in collection item which is our component that displays our items and
+
+03:32.750 --> 03:35.810
+then we're going to set our contest category
+
+03:38.710 --> 03:53.490
+equals a component that renders out a div and inside that div we have a class name of collection or
+
+03:53.510 --> 04:00.330
+sorry category and then we'll have our H two and we'll just say category page for now.
+
+04:02.060 --> 04:03.350
+And let's export this out
+
+04:08.370 --> 04:14.870
+let's import this into our shop component.
+
+04:15.020 --> 04:19.910
+Now I mentioned earlier that we need to nest our route.
+
+04:20.010 --> 04:22.530
+So what does that mean well.
+
+04:22.530 --> 04:30.380
+This is actually going to be interesting because what we want is our collection to dynamically pluck
+
+04:30.380 --> 04:40.380
+off the right category from our reducer so that it knows which ones to display when you're on the right
+
+04:40.380 --> 04:41.010
+page right.
+
+04:41.010 --> 04:43.150
+Because when you're on the hats you want all the hats.
+
+04:43.170 --> 04:47.780
+We don't want all of the other items like for jackets and men's and sneakers and women's.
+
+04:48.030 --> 04:49.240
+We don't want any of that.
+
+04:49.260 --> 04:53.950
+We just want the ones related to the category or on.
+
+04:54.110 --> 05:02.580
+So what we're going to do is we're actually going to tell our route that the route name is going to
+
+05:02.580 --> 05:04.190
+be a parameter.
+
+05:04.440 --> 05:09.240
+So you see how it's a slash hats or slash jackets.
+
+05:09.240 --> 05:15.000
+Well we want to actually be able to access the string that's in our U.R.L. so we can use it to determine
+
+05:15.090 --> 05:22.740
+which item we want to fetch and this is going to be a little bit different from how are typically used
+
+05:22.740 --> 05:23.310
+to writing.
+
+05:23.310 --> 05:25.110
+So here's how it'll go.
+
+05:25.110 --> 05:31.380
+We're going to say path equals right and then we're going to string interpolation again because we want
+
+05:31.500 --> 05:32.940
+our matched path.
+
+05:32.950 --> 05:33.820
+Right.
+
+05:33.900 --> 05:39.910
+So we want to say we don't really know what route we're on up until this point.
+
+05:39.930 --> 05:46.680
+Right that our shop page could be we know that we've coded it so that our RF gas is slash shop that
+
+05:46.680 --> 05:52.290
+takes us to shop page but in reality if we move it around we don't want to have to have our shop page
+
+05:52.350 --> 05:59.310
+like let's say we hardcoded in for example slash shop we don't want to do that because then we'd have
+
+05:59.310 --> 06:04.140
+to manually think about where our shop pages and our shop page doesn't need to be aware of what route
+
+06:04.170 --> 06:05.550
+it's actually on.
+
+06:05.550 --> 06:08.630
+And that's how we circumvents it with matched path.
+
+06:08.700 --> 06:20.270
+And now we can chain on it using colon we say category I.D. Now what this does is it actually allows
+
+06:20.270 --> 06:28.250
+us to access this category I.D. as a parameter on the match object when we're inside of our category
+
+06:28.250 --> 06:30.750
+page so I'll show you that actually.
+
+06:31.070 --> 06:35.230
+And this is actually what makes it really cool and really easy for us to do this
+
+06:38.060 --> 06:44.060
+so we know that we're going to our category page and then inside of our category page component we know
+
+06:44.060 --> 06:52.230
+we have access to match because again matches root is what our category page is being put into a row
+
+06:52.240 --> 06:57.700
+component which gives us access to a match object and now if we were to log
+
+07:03.330 --> 07:15.920
+we will see that when we go to slash That's right here we see that we get this object.
+
+07:15.920 --> 07:17.660
+That's what we're logging our match.
+
+07:17.660 --> 07:23.030
+And you see inside this piranhas we actually get the category item which is the string that we're currently
+
+07:23.030 --> 07:29.660
+on our You are all from and this is super handy because if we want your all parameters that are dynamic
+
+07:29.690 --> 07:36.540
+inside of our You are all we will just do it like this with this colon as we saw when we wrote our path
+
+07:36.660 --> 07:43.700
+inside of our route and this gives us access in the parameter and we're telling react router dom that
+
+07:43.700 --> 07:47.020
+this route we want it to have parameters.
+
+07:47.060 --> 07:47.300
+Right.
+
+07:47.350 --> 07:49.340
+And that's the parameter that we want to link to.
+
+07:49.970 --> 07:57.300
+So now what we can do is we can actually pull that off of match stop her rounds dot category.
+
+07:57.730 --> 07:58.000
+Right.
+
+07:58.010 --> 08:04.790
+Which is what we called it and then using this parameter we can then pass it into our selector but I'll
+
+08:04.790 --> 08:06.890
+show you how to do that in the next lesson.

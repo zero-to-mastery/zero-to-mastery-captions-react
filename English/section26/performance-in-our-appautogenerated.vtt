@@ -1,0 +1,328 @@
+WEBVTT
+
+00:00.300 --> 00:01.380
+Welcome back everybody.
+
+00:01.950 --> 00:07.880
+So in the last less than we talked about reactive memo and a little bit about react pure component now
+
+00:07.920 --> 00:10.830
+pure component and RAC memo are very similar.
+
+00:10.830 --> 00:14.570
+So it just depends on which component you're using it on.
+
+00:14.640 --> 00:16.950
+If you're using it on a class component use pure component.
+
+00:16.980 --> 00:19.800
+If you're using a functional component use react memo.
+
+00:20.340 --> 00:24.980
+I'm going to focus on react memo because it's pretty much the same lesson.
+
+00:24.990 --> 00:27.870
+The only difference is just what you use when you instantiate your component.
+
+00:28.170 --> 00:34.830
+So it's very much overlapping but let's continue with our lesson on react memo and optimizations with
+
+00:34.830 --> 00:35.600
+it.
+
+00:35.610 --> 00:41.880
+So another concern we have to remember is that while this react memo saves us on shallow comparisons
+
+00:41.970 --> 00:46.800
+of our props it does not save us on referential quality.
+
+00:46.800 --> 00:54.120
+Meaning that if instead of passing person in this way where we have it as a static value or it always
+
+00:54.120 --> 00:57.010
+points to the same object in memory.
+
+00:57.300 --> 01:06.940
+If I were to instead change it so that I pass in a value like so where I'm instantiating the actual
+
+01:08.020 --> 01:15.580
+object directly in line of my return statement what happens is that every time return and render it
+
+01:15.580 --> 01:24.340
+gets called a new object is getting generated every single time because javascript is simply re instantiating
+
+01:24.430 --> 01:29.650
+everything when it runs through our render which means that when it hits this line it sees that a new
+
+01:29.740 --> 01:31.750
+object declaration in line has been made.
+
+01:31.750 --> 01:38.980
+So it's just going to create a new object which means that even though we've memorized our actual button
+
+01:40.650 --> 01:45.690
+we're still going to re render every single time because every time the rendered cat call gets made
+
+01:46.020 --> 01:51.690
+a new object gets made that gets passed into our person and wrap moment which would save us then because
+
+01:51.690 --> 01:57.720
+it says that oh person is actually a new object I'm just going to assume that we need to re render because
+
+01:57.810 --> 02:04.740
+it's a brand new prop so that's one thing to remember that we have to be careful about if we're trying
+
+02:04.740 --> 02:09.750
+to actually optimize our code is in lining objects like this.
+
+02:09.750 --> 02:18.680
+So let's change this back to using our person state property but let's also keep in mind that in JavaScript
+
+02:19.160 --> 02:21.610
+functions and arrays are also objects.
+
+02:21.620 --> 02:28.370
+So if we inline functions or if we inline arrays we have to remember to be careful there as well.
+
+02:28.370 --> 02:35.030
+Just to be aware that those are going to be re renders that will skip our ReACT memorization because
+
+02:35.030 --> 02:41.810
+those props will also always evaluate to being a different prop if we're in lining and passing and functions
+
+02:41.900 --> 02:46.640
+as properties to memorize components again.
+
+02:46.640 --> 02:51.560
+The main thing to remember as well is that before you start optimizing and moving your functions out
+
+02:51.560 --> 02:56.840
+into places where they don't change and we try and make them more static by the reference of what we're
+
+02:56.840 --> 03:03.140
+passing into our memoirs components think about whether or not that's actually worthwhile because again
+
+03:03.530 --> 03:09.830
+actually doing that and instantiating that does come with some performance risks itself.
+
+03:09.920 --> 03:16.680
+When we look at how it's slowed down the initial mount time of our person component when we called react
+
+03:16.720 --> 03:22.220
+memo so Jews are just again things that you've got to keep in mind always optimize when there a problem
+
+03:22.220 --> 03:27.920
+first but these aren't gotchas that you should be aware of when it comes to optimizing your components
+
+03:27.950 --> 03:30.230
+when you actually need to.
+
+03:30.230 --> 03:36.380
+So let's take this and actually apply to something in our application that we've already seen because
+
+03:37.010 --> 03:39.190
+now that we've learned what it is that it does.
+
+03:39.320 --> 03:41.810
+How do we actually apply it into our application.
+
+03:42.230 --> 03:47.780
+Well there's actually a couple of caveats we have to remember with our application we are using react
+
+03:47.780 --> 03:53.930
+redux and we're also using re select which means that a lot of our components get their prompts not
+
+03:53.930 --> 03:57.500
+from their pair of components but from redux.
+
+03:57.500 --> 04:05.120
+And the Kinect higher order component pattern that we used because a lot of our actual prop derivation
+
+04:05.180 --> 04:12.290
+is decided by map states of props and are re select because we've used create select or re select everywhere
+
+04:12.380 --> 04:20.480
+a lot of our actual props are already memorized meaning that unless the actual props coming into our
+
+04:20.480 --> 04:27.650
+selector functions has changed we will not actually get new props meaning that our components will not
+
+04:27.650 --> 04:28.360
+re render.
+
+04:28.700 --> 04:32.090
+So that's a very important thing to remember about our application.
+
+04:32.090 --> 04:39.740
+We do already have performance improvements over native react applications because we're using the right
+
+04:39.800 --> 04:44.360
+redux libraries to optimize our code already.
+
+04:44.400 --> 04:50.640
+Other than that though you might want to look around the application and only when you notice that there
+
+04:50.640 --> 04:53.960
+is some slowdowns then perform an optimization.
+
+04:54.060 --> 05:02.910
+So one that I can guess probably is going to be a problem is in our card dropdown component if we were
+
+05:02.910 --> 05:12.590
+to open up our dev tools and go to our ReACT profiler and let's say for example we go to our jackets
+
+05:12.590 --> 05:21.490
+page we open our dropdown and I start adding items if I start profiling and I add two black jackets
+
+05:21.850 --> 05:30.860
+to Blue Jackets and five grey jackets if I stopped the profiler we'll see there's really much larger
+
+05:30.860 --> 05:37.210
+nest of components because we have way more components inside of our application but if I go into my
+
+05:37.210 --> 05:44.110
+header and then in the header component I go down to the car drop the inside of the car dropdown I will
+
+05:44.110 --> 05:51.140
+see the car item that I had this car item is my black jean shilling jacket.
+
+05:51.200 --> 05:57.170
+Well actually see here that my black jean shilling jacket ended up getting re rendered nine times even
+
+05:57.170 --> 06:02.960
+though I only modified the value that got passed in as the prompted black shilling which was the quantity
+
+06:02.960 --> 06:07.090
+object on our car item twice the first time when I added it.
+
+06:07.120 --> 06:11.600
+And the second time when I added another one these are technically the only times that this component
+
+06:11.900 --> 06:13.240
+should have re rendered.
+
+06:13.370 --> 06:17.390
+But why did it render for every single new component that got added.
+
+06:18.080 --> 06:25.550
+Well this is because inside of the card dropdown component are car items is changing the array of car
+
+06:25.550 --> 06:29.260
+items is completely changed meaning that all every car item is getting re rendered.
+
+06:29.360 --> 06:31.510
+But we don't actually want to do that.
+
+06:31.670 --> 06:35.570
+We want our cart item to only update when it has to.
+
+06:35.570 --> 06:41.000
+So this only should occur if the item that got passed in ever changes.
+
+06:41.000 --> 06:43.980
+So this is a great time for us to memorize this card.
+
+06:43.980 --> 06:51.720
+Item so here what we can do is we can say react on the memo on our cart item.
+
+06:51.720 --> 07:03.360
+Like so if I save this and now if I go back to my application and then I start the profiler and then
+
+07:03.360 --> 07:12.010
+I add one black shilling to Blue Jackets and five more gray jackets if we look inside of our head or
+
+07:12.010 --> 07:19.770
+now and we look inside of our car dropdown we'll see that our car components are getting normalized
+
+07:20.260 --> 07:27.480
+but what we'll also see is that we're only rendering them the one additional time whenever we added
+
+07:27.480 --> 07:28.210
+something to it.
+
+07:28.710 --> 07:35.700
+So here we'll see that our black shilling jacket only added 1 3 render instead of the possible 7 because
+
+07:35.700 --> 07:37.510
+we updated 7 items.
+
+07:37.710 --> 07:43.800
+If we go back up and look at the blue jean jacket we'll see that they've got to renders because I added
+
+07:43.800 --> 07:51.300
+two items for blue jean jacket and subsequently we'll see that are great jean jacket will render five
+
+07:51.300 --> 07:57.870
+times for the five that they got added It didn't get the initial three from the black and the Blue Jackets
+
+07:57.870 --> 07:59.120
+respectively being added.
+
+08:00.030 --> 08:06.120
+So here we can see we've done a performance optimization because we've saved ourselves on numerous re
+
+08:06.120 --> 08:12.190
+renders across any number of car items that were inside of our cart dropdown to begin with.
+
+08:12.210 --> 08:16.110
+So this is a handy re render that we just did.
+
+08:16.130 --> 08:21.860
+Now if you would like you can go around the application and play with the profiler and actually see
+
+08:21.860 --> 08:27.260
+how many re renders are happening and decide from there whether or not the performance saves based on
+
+08:27.260 --> 08:32.450
+the amount of milliseconds you save and the amount of re renders that are actually happening is worth
+
+08:32.450 --> 08:32.600
+it.
+
+08:32.630 --> 08:38.810
+Because this is a great time to practice and performance is all about getting dirty with the optimizer
+
+08:38.840 --> 08:45.320
+and reading it and getting in there and just seeing what's actually improving and what's not.
+
+08:45.320 --> 08:48.410
+This is more of an exercise for you get comfortable with the profiler.
+
+08:48.500 --> 08:55.040
+Again in actual production when you actually see slowdowns or you when you actually see complaints then
+
+08:55.040 --> 09:01.970
+is when you should start identifying a problem and then optimizing don't get too overzealous with optimizing
+
+09:02.000 --> 09:06.580
+ahead of time just because you assume there might be a performance problem.
+
+09:06.680 --> 09:12.960
+You always want to measure with the profiler first before you start optimizing.
+
+09:13.010 --> 09:15.280
+So hopefully this lesson helps.
+
+09:15.290 --> 09:21.410
+Optimization is really just in react these few steps adding lazy loading to routes whenever you can
+
+09:21.760 --> 09:26.270
+memorizing components when you see that there is slow down because of the number of renters that are
+
+09:26.270 --> 09:31.790
+happening and you either use pure component or react memo depending on the type of component that you
+
+09:31.790 --> 09:36.550
+have so hopefully that was a useful lesson.
+
+09:36.550 --> 09:44.590
+And I just hope that you got there with that idea that always you should only optimize when necessary
+
+09:45.100 --> 09:46.040
+in the next lesson.
+
+09:46.060 --> 09:49.720
+We are actually going to go back and explore some optimization hooks.
+
+09:49.780 --> 09:51.280
+So I'll see you in the next lesson.

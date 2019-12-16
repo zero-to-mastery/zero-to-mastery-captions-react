@@ -1,0 +1,277 @@
+WEBVTT
+
+00:00.630 --> 00:06.860
+So in the last lessons we learned the two main hooks that we have access to and react now.
+
+00:06.930 --> 00:12.880
+There are other hooks of course but the two main hooks are you state and use effect.
+
+00:12.900 --> 00:20.490
+So let's use them and change our components so that we use those hooks in place of perhaps class components
+
+00:20.490 --> 00:23.770
+that can just simply be functional components.
+
+00:23.820 --> 00:27.180
+So the first one we're going to look at is our silent component.
+
+00:27.330 --> 00:35.100
+Now in this component we see that all we really do is leverage our state in order to set the values
+
+00:35.250 --> 00:38.830
+of our form so that we can fire it off.
+
+00:38.940 --> 00:48.640
+So let's change this over to using a used state hook so let's bring in our used state hook and the first
+
+00:48.640 --> 00:51.670
+thing we know that we don't need anymore is this constructor.
+
+00:51.670 --> 00:59.960
+So let's get rid of our constructor and convert our class itself into this hook as well.
+
+01:02.640 --> 01:08.840
+So of course any methods that we had on will now have to be their own methods which is perfectly fine
+
+01:09.890 --> 01:21.550
+and then we know that what we're using now is our set credentials or sorry our user credentials and
+
+01:21.550 --> 01:31.110
+set credentials which is our used state passing in let's say it was e mail which will be default empty
+
+01:31.110 --> 01:34.810
+string and password which is default empty string.
+
+01:34.890 --> 01:40.330
+So all we did here was convert r this dot state over to you state.
+
+01:40.380 --> 01:44.190
+Now we're still want to use our object because we want our method to still work.
+
+01:45.060 --> 01:48.330
+So we'll see how we can change that.
+
+01:48.340 --> 01:53.380
+Well first we know we're getting this dot email sign and no longer from props but from the props that
+
+01:53.380 --> 01:54.440
+we pass it.
+
+01:54.640 --> 01:54.870
+Right.
+
+01:54.880 --> 01:56.560
+So we don't have this stock props anymore.
+
+01:56.560 --> 02:04.970
+Instead we d structure like this and instead of state now we get email and password from user credentials
+
+02:08.140 --> 02:13.430
+and pretty much our handle submit is now up to date with what we had before now instead of Klein this
+
+02:13.430 --> 02:17.680
+dot said state we're going to call set credentials right.
+
+02:17.750 --> 02:25.110
+And we passed the object we want our state to be so as before we know the name and the value that we're
+
+02:25.110 --> 02:31.620
+getting in are going to be dynamic based on the actual form input that we're updating so all we need
+
+02:31.620 --> 02:36.270
+to do is actually very similar to when we return our reduced value.
+
+02:36.270 --> 02:43.020
+We want to spread it in all of our user credentials and then we're just going to update the value that
+
+02:43.080 --> 02:48.960
+actually needs to be changed and this will pretty much allow us to use our handle change method the
+
+02:48.960 --> 02:54.050
+way we have it as well we see that we get our Google sign and start from the Stop props.
+
+02:54.060 --> 02:57.700
+So we just make sure to restructure it when it comes in as our props.
+
+02:58.380 --> 03:00.150
+And then we remove our render
+
+03:03.740 --> 03:11.690
+and now we just update our methods so that instead of calling this dot handle submit we just call the
+
+03:11.690 --> 03:12.680
+respective method
+
+03:16.220 --> 03:22.640
+and instead of calling this dot state DOT password or this dot state DOT email we can also make sure
+
+03:22.640 --> 03:29.140
+to restructure off the appropriate values now because we know we're going to use them in these user
+
+03:29.140 --> 03:38.260
+credentials as well we can actually do this D structure a little higher right and now we'll have access
+
+03:38.710 --> 03:41.960
+inside of our return.
+
+03:42.020 --> 03:45.320
+So now if we just pass an email and password
+
+03:48.020 --> 03:50.830
+we should have actually pretty much the same component
+
+03:53.760 --> 04:02.360
+so let's test and see if this actually worked so we sign up we go back to our component and what we
+
+04:02.360 --> 04:05.080
+change was our signing component.
+
+04:05.320 --> 04:11.240
+Chain of clothes that if we hit our sign and we see we trigger a sign and start and our sign is success
+
+04:11.250 --> 04:17.730
+worth so our component is pretty well converted so there were just a couple of things to keep in mind
+
+04:17.730 --> 04:19.810
+when doing the conversion.
+
+04:19.920 --> 04:27.560
+Mainly that instead of destructing off this props we just destructor inside of our function and if she
+
+04:27.570 --> 04:28.770
+Asian right.
+
+04:28.980 --> 04:32.450
+Just like we would when we did structure any props off of a functional component.
+
+04:33.330 --> 04:36.850
+And then we structure off of our new state value.
+
+04:36.960 --> 04:38.700
+So that's pretty much it.
+
+04:38.700 --> 04:40.590
+That was our sign and component.
+
+04:40.590 --> 04:45.720
+Now let's do the same thing for our sign up component very similarly.
+
+04:45.740 --> 04:51.730
+The sign up component pretty much calls you state as we did with our sign a component.
+
+04:51.830 --> 04:52.580
+So let's bring it in
+
+04:57.510 --> 05:07.460
+and let's convert our sign up over to a functional component we can copy this object over as well
+
+05:10.920 --> 05:12.090
+and similarly right.
+
+05:12.180 --> 05:18.330
+We can pretty much call it use our credentials set user credentials because that's pretty much what
+
+05:18.330 --> 05:18.800
+they are.
+
+05:19.530 --> 05:25.550
+And then we'll just instantiate with what we had before us our state.
+
+05:25.580 --> 05:32.990
+Now if you wanted to for example just instantiate four different states for each value and have display
+
+05:32.990 --> 05:39.420
+name email password confirmed password as their own value with their own set value you can totally do
+
+05:39.420 --> 05:39.940
+that.
+
+05:40.080 --> 05:45.570
+But I prefer to keep it this way just because our method already pretty much does the same thing right.
+
+05:46.700 --> 05:54.170
+In my opinion there are less functions that we have to use or write.
+
+05:54.280 --> 06:01.360
+Now we will D structure off this from props instead of calling this stuff prompts.
+
+06:01.530 --> 06:09.210
+We will get this from user credentials and in fact we're probably going to need this in multiple places
+
+06:09.210 --> 06:09.810
+in our app
+
+06:12.450 --> 06:19.330
+and instead of calling this dot sets day we'll call set user credentials.
+
+06:19.530 --> 06:23.000
+And similarly it will spread in any user credentials.
+
+06:25.580 --> 06:31.650
+And then update the respective the correct value that we need to use it for.
+
+06:31.860 --> 06:34.720
+We don't need this from state anymore.
+
+06:34.920 --> 06:36.240
+We don't need a render anymore
+
+06:39.950 --> 06:43.920
+and we just need to make sure that we're not referencing the wrong methods.
+
+06:43.920 --> 06:50.760
+So we got to of course update these as well to their own functions whereas before they were class methods
+
+06:53.180 --> 06:55.940
+and now we can just remove this dot
+
+07:00.490 --> 07:03.180
+and that's pretty much the conversion.
+
+07:03.250 --> 07:10.800
+So if we go back to our application we can sign out again and let's sign in with the new user or sign
+
+07:10.800 --> 07:12.090
+up with the new user.
+
+07:12.090 --> 07:15.370
+So let's just say m is easy right.
+
+07:15.570 --> 07:16.180
+Easy.
+
+07:16.350 --> 07:25.390
+Email dot com just fake emails before we sign up an upstart sign of success sign and success.
+
+07:25.400 --> 07:26.840
+Our component works the same.
+
+07:26.930 --> 07:28.940
+Our sagas are still working.
+
+07:28.940 --> 07:32.750
+Everything is properly converted so that's pretty easy.
+
+07:32.750 --> 07:39.710
+With our you state hook that we just learned we're able to quickly convert our components over into
+
+07:39.710 --> 07:45.040
+these functional components that call you state instead.
+
+07:45.170 --> 07:48.230
+And it was a pretty simple change right.
+
+07:48.230 --> 07:50.950
+It wasn't that significant.
+
+07:50.980 --> 07:57.520
+Now if we need to leverage more state right we can simply just either make new states using you state
+
+07:57.580 --> 08:00.800
+or if we want to more properties we can just add them here.
+
+08:00.880 --> 08:06.510
+So all in all it was pretty easy to make this chain now and the next lesson.
+
+08:06.510 --> 08:11.550
+Let's actually see a little bit more of a complicated case in using use effect.

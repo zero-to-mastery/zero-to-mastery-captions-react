@@ -1,0 +1,124 @@
+WEBVTT
+
+00:00.740 --> 00:06.890
+So now we have our user reducer and our user actions.
+
+00:07.100 --> 00:15.260
+We know conceptually that we need to bring our user reducer as current user value into where we need
+
+00:15.260 --> 00:22.100
+it which will be our header component because right now our header component is getting current user
+
+00:22.550 --> 00:26.550
+from app J.S. and we don't want that.
+
+00:26.630 --> 00:35.030
+What we want is for our header component to pull that current user value off of our reducer.
+
+00:35.090 --> 00:37.240
+So how do we do that.
+
+00:37.460 --> 00:46.370
+While the first thing that we would do is we have to actually import in Connect hopes capitalized by
+
+00:46.370 --> 00:47.900
+accident there.
+
+00:47.900 --> 00:56.520
+We have to import this function called Connect from react redux Connect is a higher order component
+
+00:57.090 --> 01:03.790
+that lets us modify our component to have access to things related to redux.
+
+01:03.870 --> 01:11.340
+Now as we remember higher the components are just functions that take components as arguments and then
+
+01:11.430 --> 01:14.590
+return you a new souped up component.
+
+01:15.360 --> 01:21.720
+So what we'll do with Kinect is we are actually going to pass it to functions.
+
+01:21.750 --> 01:27.690
+The second one being optional and then that'll give us back another higher component that we pass it
+
+01:27.780 --> 01:34.130
+our header now what is it that we pass as the first argument of Kinect.
+
+01:34.130 --> 01:43.700
+It's going to be the function that allows us to access the states with the state being are reducer our
+
+01:43.700 --> 01:46.040
+root producer to be specific.
+
+01:46.040 --> 01:51.860
+We know that with our route reducer it is an object that has a property of user that points to our user
+
+01:51.860 --> 01:59.870
+reducer which right now is just this initial state because we haven't triggered any actions that update
+
+02:00.110 --> 02:01.720
+the value of current user.
+
+02:01.790 --> 02:07.000
+So we know that we will end up getting current user of No but we want that value.
+
+02:07.720 --> 02:14.770
+So how do we get it while we're going to write that map state to props function and it's gonna be equal
+
+02:14.770 --> 02:22.900
+to a function and what we're going to return from that function will be an object where the value or
+
+02:22.900 --> 02:28.720
+site where the name of the property will be the actual property want to pass in and then the value will
+
+02:28.720 --> 02:30.270
+be the value.
+
+02:30.340 --> 02:38.200
+So what do we get in this function is the state object this state is the root reducer.
+
+02:38.200 --> 02:46.190
+So the top level root reducer and we want to pass in a current user property where the value of it will
+
+02:46.190 --> 02:52.780
+be state John user dot current user so we're saying we want the root reducer right.
+
+02:52.910 --> 02:56.860
+We want the user value and then which will give us our user reducer.
+
+02:57.080 --> 03:05.160
+And then from there we want the current user value and by doing this and passing maps sets of props
+
+03:05.160 --> 03:07.260
+to connect.
+
+03:07.340 --> 03:14.610
+Now we're getting that null value as current user being passed in as current user.
+
+03:14.620 --> 03:25.010
+So now we can remove the passing of current user from our App State into our header and if we now go
+
+03:25.010 --> 03:29.410
+to our header component we'll see that we're no longer signed in.
+
+03:29.690 --> 03:36.380
+In fact now we're signed out but that's because we're getting our current user which is a value of null
+
+03:36.380 --> 03:43.660
+from our maps to props which is then respectively triggering us to see our sign and link.
+
+03:43.710 --> 03:52.180
+Now this map states a process and this connect will we'll use anywhere we need properties from our reduced
+
+03:52.180 --> 03:52.800
+hours.
+
+03:52.890 --> 03:57.870
+So this pattern we're going to write in a lot of our future components.
+
+03:58.230 --> 04:05.640
+But just remember that connect is a higher component that gets either one of these two functions the
+
+04:05.640 --> 04:11.730
+first one being this one and the second one we're going to cover in the next lesson.

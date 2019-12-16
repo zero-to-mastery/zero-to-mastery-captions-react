@@ -1,0 +1,439 @@
+WEBVTT
+
+00:00.980 --> 00:07.870
+In the last lesson we explored the concepts of what graft Q all brings to the development world.
+
+00:07.880 --> 00:15.440
+Well here I've actually set up a little playground for you to interact with a different database from
+
+00:15.440 --> 00:22.160
+the fire store database that you've built so that you can see what it's like to actually make requests
+
+00:22.190 --> 00:23.560
+against a graph.
+
+00:23.720 --> 00:31.010
+Server for the data that you're used to using already inside of your crown clothing application.
+
+00:31.140 --> 00:38.700
+Now all you gotta do in order to access this playground is simply go to h TTP s colon slash slash w
+
+00:38.700 --> 00:42.840
+w w dot Crown slash clothing dot com.
+
+00:42.840 --> 00:48.750
+I've set up this playground with a graph q a server for you to play against so that you can see and
+
+00:48.750 --> 00:55.160
+make queries against it to actually get a live example of what it's like to actually use the graph q
+
+00:55.180 --> 00:56.830
+a library.
+
+00:57.040 --> 01:03.670
+I'm going to actually directly demonstrate to you what it's like to write a query for our collections
+
+01:03.670 --> 01:04.780
+data.
+
+01:04.840 --> 01:08.710
+Now let's actually remove this so that we can write one from scratch ourselves.
+
+01:10.480 --> 01:16.210
+The first thing that we need to know as we see from this comment is that there are two types of things
+
+01:16.210 --> 01:17.400
+we can request right.
+
+01:17.410 --> 01:24.040
+We can either make a query for some data or we can make a mutation to modify some data but we don't
+
+01:24.040 --> 01:30.340
+want to make any modifications because again so many students are going to end up using this database.
+
+01:30.400 --> 01:36.850
+We want to not have any data that is inconsistent so that different students have different experiences.
+
+01:37.510 --> 01:42.370
+Instead we're just going to make queries to request data but I'll show you how to make mutations on
+
+01:42.370 --> 01:45.410
+the front end in a few lessons from now.
+
+01:45.430 --> 01:52.090
+Now with our query we have to first telegraphed you all that we're making a query and we do that literally
+
+01:52.090 --> 01:54.150
+by writing the query keyword.
+
+01:54.400 --> 02:01.480
+And what's really great about this playground is that it actually helps you with this autocomplete feature.
+
+02:01.480 --> 02:06.400
+So if you're trying to type something it will try and guess what it is that you want and at the same
+
+02:06.400 --> 02:10.890
+time it will also let you know if what you're asking for does not exist.
+
+02:10.990 --> 02:12.710
+And what do I mean by this.
+
+02:12.760 --> 02:19.480
+Well inside of our query there are only certain things that we have access to that are defined by our
+
+02:19.480 --> 02:24.550
+database as the kind of data objects that we're allowed to get.
+
+02:24.550 --> 02:31.890
+Now our server that I've set up for you guys only holds collections and the items inside of those collections.
+
+02:32.110 --> 02:38.440
+So those will be the things that we see here as well as the collections themselves that represent the
+
+02:38.440 --> 02:40.840
+things that hold the items inside of them.
+
+02:43.140 --> 02:50.280
+And what we're going to do is we are actually going to hit this little schema tab on the side here.
+
+02:50.340 --> 02:58.150
+This schema tab will tell you what properties are on what objects that you are able to access.
+
+02:58.170 --> 03:04.620
+So let's look at the collection object first on this collection object here.
+
+03:04.650 --> 03:10.460
+It will define to you the shape of the data that you have access to and every graph.
+
+03:10.460 --> 03:16.260
+Q Well playground that you interact with we'll have this for you because you need to be able to see
+
+03:16.260 --> 03:16.460
+it.
+
+03:16.470 --> 03:24.360
+This is actually set up through a different library called Prisoner and this is pretty much just a little
+
+03:24.390 --> 03:30.840
+tool that allows us on the front end to visualize the data and prison was a very very popular tool on
+
+03:30.840 --> 03:34.220
+the back and that gives us access to this playground.
+
+03:34.620 --> 03:36.900
+But other tools will also have this.
+
+03:36.900 --> 03:42.990
+If you're working with a back in graph you a server that is built on something similar because on the
+
+03:42.990 --> 03:46.110
+front end we need to know the shape of the data.
+
+03:46.140 --> 03:51.930
+We might be requesting so that we know what we can request for now here.
+
+03:51.950 --> 03:54.060
+I'm gonna walk you through what this looks like.
+
+03:54.200 --> 03:58.830
+So the type defines the type of objects that are available.
+
+03:58.880 --> 04:06.430
+So here for example is a type object called collection on this collection.
+
+04:06.540 --> 04:13.410
+You'll see this I.D. and then you'll see this type of I.D. And what this means is that it's actually
+
+04:13.410 --> 04:19.380
+just a type that exists on the back end specific to graph Q all meaning that it is an identifier that
+
+04:19.380 --> 04:23.870
+must be unique if you see this exclamation mark.
+
+04:23.920 --> 04:28.080
+It means that this field is mandatory meaning that it will always be there.
+
+04:28.120 --> 04:31.470
+If this collection object exists in the back in.
+
+04:31.660 --> 04:34.050
+So this is just one property we can query for.
+
+04:34.090 --> 04:41.640
+We can query for I.D. there's a title property which is a string which is exactly the same string type
+
+04:41.640 --> 04:45.060
+that we've seen on our front end in JavaScript.
+
+04:45.060 --> 04:53.220
+And this is also necessary now here what you'll see is this property called items and this items points
+
+04:53.220 --> 05:03.330
+to an array as indicated by the square boxes and inside are items items being this next type.
+
+05:03.330 --> 05:03.600
+Right.
+
+05:03.630 --> 05:05.010
+So here we have a type collection.
+
+05:05.010 --> 05:12.040
+Well then there's also another object type called item meaning that this items property will always
+
+05:12.040 --> 05:16.660
+be an array of items and the items are necessary.
+
+05:16.660 --> 05:24.680
+So there must be items inside of this array and this next bang after the array means that there will
+
+05:24.770 --> 05:35.130
+always be an array as the value of our items property the item object itself has an idea as well.
+
+05:35.390 --> 05:42.800
+A name that's a string a price that's a float float being very similar to the same float object type
+
+05:42.800 --> 05:52.390
+that we have in JavaScript which is a decimal integer value so integers are whole numbers floats are
+
+05:52.540 --> 05:54.130
+numbers that have decimal places.
+
+05:54.130 --> 06:03.790
+That's all it is image you are all is a string and then collection which is the owner of this item is
+
+06:03.880 --> 06:05.170
+a collection.
+
+06:05.170 --> 06:08.230
+So this collection points to this collection.
+
+06:08.350 --> 06:11.050
+Now you might be wondering why there's no exclamation mark here.
+
+06:11.080 --> 06:17.140
+While there's no exclamation mark because in the back end definition it's just the way that if you were
+
+06:17.140 --> 06:20.460
+to delete these items you also don't delete the collection.
+
+06:20.500 --> 06:26.800
+It's a nuanced thing about the server of writing back in graph Q all servers that you don't really need
+
+06:26.800 --> 06:33.560
+to worry about but that's the main reason why this bang is not here finally here we have these types
+
+06:33.560 --> 06:41.530
+called queries and the query is similar to the same query that we asked for and what it allows us to
+
+06:41.530 --> 06:42.000
+do.
+
+06:42.010 --> 06:45.330
+It defines the type of things we can ask for.
+
+06:45.340 --> 06:52.630
+So here we can ask for all of the collections right as our query and what we can expect it to give us
+
+06:52.630 --> 07:01.150
+back is an array of collections these collection items the same ones.
+
+07:01.250 --> 07:06.980
+Now there's also our ability to ask for a collection by the idea of the collection.
+
+07:07.010 --> 07:13.940
+So if we know the idea of the collection while we can get back a collection object or write a specific
+
+07:13.940 --> 07:19.320
+collection object where that I.D. matches the idea that we passed into it.
+
+07:19.580 --> 07:23.960
+Now if the idea does not exist it won't give us back a collection and that's why you see there's no
+
+07:23.990 --> 07:30.650
+exclamation mark because it cannot guarantee that it will give us back a collection if the idea does
+
+07:30.650 --> 07:34.470
+not actually exist as an idea of an object.
+
+07:34.490 --> 07:35.680
+So that's why there's no bank here.
+
+07:35.690 --> 07:38.850
+And that's how you read this schema when you actually look at this.
+
+07:38.870 --> 07:40.700
+If you ever interact with another graph.
+
+07:40.700 --> 07:47.740
+Q Well database finally there's there's no unique query that we have access to which is called Get collection
+
+07:47.740 --> 07:57.480
+by title which similar to the idea it allows us to pass this title to it which will be a string.
+
+07:57.480 --> 08:00.910
+And what we'll get back is a collection object.
+
+08:00.930 --> 08:05.780
+Now this is also something that must be written on the back end server.
+
+08:05.810 --> 08:12.510
+So wherever you see that you have access to is what the person who wrote the back end server wants you
+
+08:12.510 --> 08:14.380
+to be able to access.
+
+08:14.400 --> 08:18.480
+So this schema is going to be defined by the person writing your backend server.
+
+08:18.510 --> 08:22.800
+So if you don't see certain things it just means that you're a person that wrote your back and server
+
+08:23.040 --> 08:28.740
+doesn't want you to get access to it or they made a mistake and you can request them to do so to give
+
+08:28.740 --> 08:30.430
+you that stuff.
+
+08:30.440 --> 08:33.680
+So this is just something that you need to keep in mind about working with graph.
+
+08:33.680 --> 08:41.460
+Q Well so again this is a very very extensive workflow in order for us to work with graph.
+
+08:41.460 --> 08:49.520
+Q Well now that you understood the schema I'm going to show you how we can actually query for collections
+
+08:50.180 --> 08:57.990
+so let's actually use this query collection Well it's simply just say that I want collections and then
+
+08:58.800 --> 09:05.090
+we always have to add these brackets around what these specific requests we want is.
+
+09:05.190 --> 09:08.900
+So we'll take a little bit of a deeper look about it as well.
+
+09:08.910 --> 09:13.670
+But it's just something you kind of have to get used to as far as where these actual brackets will go.
+
+09:14.370 --> 09:19.980
+But inside we're going to define the properties that we want when we get back our collections object.
+
+09:19.980 --> 09:25.140
+So off of this thing I want the I.D. because I know I can get it and I want the title.
+
+09:25.140 --> 09:31.560
+So for now let's just get that if you have this play button you'll see the requests get made and we
+
+09:31.560 --> 09:40.940
+get back an object with a data property and that data property actually points to our collections so
+
+09:40.940 --> 09:49.550
+this collections object comes back to us as an array and each object inside is these specific different
+
+09:49.550 --> 09:53.450
+collection objects that we have stored in our database.
+
+09:53.450 --> 09:59.240
+And here you'll see that they look pretty much exactly like the things that we had already been using
+
+09:59.240 --> 10:05.450
+with inside of our back and there there's an I.D. and then the title as other hats jackets men's sneakers
+
+10:05.540 --> 10:06.610
+women's.
+
+10:06.650 --> 10:10.280
+These are the objects that we work with.
+
+10:10.330 --> 10:13.470
+Now if I wanted the items as well.
+
+10:13.510 --> 10:20.770
+Well as I know from my schema I know that I can query for the items property and I'll get back in array
+
+10:20.770 --> 10:21.910
+of the items.
+
+10:21.910 --> 10:24.450
+So here I'm just going to say I want the items.
+
+10:24.700 --> 10:30.040
+And then on the items if we see this little red tag it actually tells us something we must have a selection
+
+10:30.040 --> 10:30.970
+of sub fields.
+
+10:30.970 --> 10:31.240
+Right.
+
+10:31.510 --> 10:40.770
+So did you mean and then you see that red tag asking us to add properties to this item while here we
+
+10:40.770 --> 10:44.730
+can now add the fields of what the items that we want are.
+
+10:44.730 --> 10:46.340
+So this is an important thing to note.
+
+10:46.380 --> 10:52.680
+If you want this field you must specify the sub fields meaning the properties that you also want on
+
+10:52.680 --> 10:59.370
+these objects that you get back inside of this sub collection of this property items.
+
+10:59.370 --> 11:05.310
+So what I want is the I.D. I want the name I want the price right and that's it.
+
+11:06.210 --> 11:09.810
+I don't want the image you're all let's just say that I just want the actual data.
+
+11:09.810 --> 11:18.320
+For some reason I hit play and here you'll see that I get back those objects except now I get this new
+
+11:18.470 --> 11:25.540
+items property as well pointing to the array of the objects that I want if I want the image you are
+
+11:25.540 --> 11:30.820
+all I can simply just put it here so I can put this property actually anywhere.
+
+11:30.840 --> 11:36.960
+The order that you put these properties does not matter but it will be the order that they show up in
+
+11:36.960 --> 11:42.090
+the object which is really not significant but it's just something that maybe you want to keep in mind
+
+11:43.110 --> 11:48.990
+so once we do this if I hit play again you'll see that now I have our image you are all associated to
+
+11:48.990 --> 11:57.490
+the item object I'm getting back as well and this is pretty much making our first query.
+
+11:57.770 --> 12:00.200
+That's all it really is.
+
+12:00.320 --> 12:07.580
+It's just like writing a Jason object giving it the shape of the data that we want and then expecting
+
+12:07.640 --> 12:09.720
+our server to give it back to us.
+
+12:10.010 --> 12:16.070
+And with the playground because we get this autocomplete feature these warnings as well as access to
+
+12:16.070 --> 12:17.030
+the schema.
+
+12:17.030 --> 12:19.530
+Right which tells us what we have access to.
+
+12:19.640 --> 12:27.530
+It's really easy for us to figure out what data we need to get or have access to from the back server.
+
+12:27.590 --> 12:33.050
+Now in the next lesson let's keep playing around with this playground so we have a better understanding
+
+12:33.110 --> 12:35.200
+of what else we can do.
+
+12:35.240 --> 12:36.950
+So I will see you in the next lesson.

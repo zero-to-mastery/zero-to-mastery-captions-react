@@ -1,0 +1,595 @@
+WEBVTT
+
+00:00.870 --> 00:10.710
+We have entered into a very interesting section of the course where we are going to start tackling asynchronous
+
+00:10.710 --> 00:19.520
+event handling with redux now explaining the concepts is going to seem way more complicated than it
+
+00:19.520 --> 00:21.110
+actually is.
+
+00:21.110 --> 00:28.610
+But I'm going to definitely make this easy for you while we build out and convert our existing code
+
+00:29.180 --> 00:38.360
+to leverage redux more in handling these async get requests that we've got right here making this API
+
+00:38.390 --> 00:42.800
+call to get the data which would then store in our state.
+
+00:43.040 --> 00:49.430
+So as we mentioned in the last lesson our shot page right now is the only part of the application that
+
+00:49.430 --> 00:56.850
+is actually able to fetch this collection information but if we had other parts of the application that
+
+00:56.850 --> 01:04.110
+needed to leverage this code we would have to rewrite it or move it out somehow.
+
+01:04.170 --> 01:11.410
+But the problem is that our loading state is also attached to this collection right inside of this component
+
+01:11.410 --> 01:12.720
+and mount code.
+
+01:12.780 --> 01:20.260
+We want to be able to extract all of this into its own reusable part of the code.
+
+01:20.280 --> 01:26.070
+Now the great thing is that as far as the state goes we can probably actually already imagine that we
+
+01:26.070 --> 01:29.880
+should put this on a redux state.
+
+01:29.890 --> 01:37.300
+The other thing however is that if ever redux was actually able to handle asynchronous event handling
+
+01:38.080 --> 01:44.730
+we could actually move all of this asynchronous code into an action and then have it dispatch accordingly.
+
+01:44.740 --> 01:52.180
+Now I'm going to show you the structure of how we should write that code using redux and a new library
+
+01:52.210 --> 01:59.530
+that allows us to handle asynchronous event handling and firing multiple actions called redux thunk
+
+02:00.770 --> 02:01.460
+now.
+
+02:01.820 --> 02:07.160
+Before I dive into writing that code and explaining what things are let's include the library first
+
+02:09.000 --> 02:15.260
+once thunk is inside of our library we just need to include it into our store.
+
+02:15.570 --> 02:22.020
+Now all thunk is is it's a piece of middleware that allows us to fire functions.
+
+02:22.020 --> 02:23.500
+That's all it is.
+
+02:23.610 --> 02:27.030
+I'm going to actually show you what it looks like once we actually bring it in.
+
+02:27.120 --> 02:35.740
+So I'm gonna import func inside of my store yes from redux thunk and then put it in the middle whereas
+
+02:35.730 --> 02:42.330
+array and that's all we need as far as setup goes to actually start using it.
+
+02:42.340 --> 02:49.990
+We need to start re configuring our shop reducer writing new shop actions and modifying our code to
+
+02:49.990 --> 02:52.840
+be ready for our new products code.
+
+02:53.470 --> 02:58.510
+So let me write the code first before I start diving too deep into it because this is one of those things
+
+02:58.510 --> 03:07.310
+where you kind of have to see it all first before it starts to really click but I'm definitely in explain
+
+03:07.480 --> 03:10.180
+some key concepts along the way.
+
+03:10.220 --> 03:17.000
+Now the first thing we need to do is modify our types before we had a simple update collections action
+
+03:17.000 --> 03:21.350
+call because we were handling all the asynchronous activity here.
+
+03:21.470 --> 03:27.890
+Instead what we're gonna do now is we are actually going to set multiple states that are shop actions
+
+03:27.890 --> 03:32.250
+could be in as far as fetching the asynchronous data goes.
+
+03:32.330 --> 03:41.090
+Now what I mean by this is that we're actually going to have a fetch collections start to call which
+
+03:41.090 --> 03:47.810
+exactly as you imagine is what tells redux we're starting to fetch the data.
+
+03:47.840 --> 03:50.380
+So this is actually before any data gets fact.
+
+03:50.390 --> 03:54.190
+This is when the first API call to our firestorm begins.
+
+03:54.350 --> 04:02.630
+It's just the start and then we're gonna have a fetch collections success call which is where it comes
+
+04:02.630 --> 04:10.250
+back from us with a successful API request and hopefully the data that we need is also come back as
+
+04:10.250 --> 04:12.740
+well and we need an action for that as well.
+
+04:13.420 --> 04:19.630
+And then we're gonna have a fetch collections failure call.
+
+04:19.670 --> 04:25.400
+So this is pretty much what happens if for example our server is down our internet connection is poor
+
+04:25.670 --> 04:31.360
+we don't have the proper credentials whatever it is that makes an API call fail.
+
+04:31.370 --> 04:37.800
+We want to handle that in its own action as well now in our shop reducer.
+
+04:37.810 --> 04:41.980
+We now have to update not only our initial state but also our reducer.
+
+04:41.980 --> 04:48.190
+So all we're going to add to this is an is fetching property with a boolean value.
+
+04:48.220 --> 04:50.530
+So by default with so it's a false.
+
+04:50.530 --> 04:57.460
+And all this tells anyone looking at this value is whether or not we're fetching the data for our collections
+
+04:57.460 --> 04:58.630
+property.
+
+04:58.630 --> 05:06.040
+So prior we had the loading value here inside of our shop page because our component was the one that
+
+05:06.040 --> 05:07.830
+was doing the API call.
+
+05:07.840 --> 05:09.700
+Now we're going to move it into redux.
+
+05:09.700 --> 05:17.770
+So our reduce our needs to be aware or at least reduce our needs to tell anyone looking into it whether
+
+05:17.770 --> 05:22.510
+or not data is being fetched or successfully fetched.
+
+05:22.510 --> 05:28.540
+All this is indicating is that there is a state where our application is fetching data related to the
+
+05:28.540 --> 05:31.600
+shop producer again.
+
+05:31.600 --> 05:34.340
+This will make more sense once we write this up.
+
+05:34.360 --> 05:39.940
+Now what we're gonna do is we're going to replace this update collections call after we write the other
+
+05:39.940 --> 05:40.850
+ones first.
+
+05:41.110 --> 05:48.640
+So we're gonna now need a new case for shop action type stuff fetch collections start and all this does
+
+05:48.670 --> 05:56.310
+is it indicates again to our producer right that where is fetching is going to be true.
+
+05:56.920 --> 05:58.690
+And that's all it is.
+
+05:58.690 --> 06:02.630
+Next we'll be our shop action types.
+
+06:02.670 --> 06:09.620
+Dot fetch collections success which is going to replace the code that we had here.
+
+06:09.910 --> 06:17.900
+So we can just get rid of this and we're going to set is fetching two false as well as updating our
+
+06:17.900 --> 06:19.240
+collections with our payload.
+
+06:20.030 --> 06:26.840
+If you can understand we're pretty much saying once our API successful right we're going to now update
+
+06:26.840 --> 06:29.060
+our collections right with our payload.
+
+06:29.060 --> 06:38.530
+We're also going to tell our reducer that it's no longer fetching now this will also be the case when
+
+06:38.530 --> 06:46.390
+our action types dot fetch collections failure comes through because technically it's not fetching anymore
+
+06:46.450 --> 06:48.550
+either.
+
+06:48.550 --> 06:53.710
+So we're just going to say dot state right is fetching is false because it is false it's already finished
+
+06:53.710 --> 06:54.520
+the API request.
+
+06:54.820 --> 06:59.010
+But what we're going to do is we want to do something with our error.
+
+06:59.050 --> 07:06.340
+Now we can either store the entire air object ourselves or we can store the error message for our case.
+
+07:06.340 --> 07:08.050
+Let's just store the error message.
+
+07:08.050 --> 07:13.690
+So we're just going to add a new thing called error message and we're going to make it an empty string
+
+07:14.050 --> 07:16.330
+by default or at least undefined
+
+07:19.620 --> 07:26.500
+and now what we'll do is we'll just say that error message is going to go to action dot Halo.
+
+07:26.670 --> 07:31.400
+So our payload that we're going to make sure we're passing through is the error message string.
+
+07:31.620 --> 07:37.920
+So now that we have our reduced hours we have to think about our actions and in order for us to write
+
+07:37.950 --> 07:39.000
+our actions.
+
+07:39.000 --> 07:43.910
+This is where we're going to leverage thanks all.
+
+07:43.910 --> 07:54.720
+Thanks are is a action creator that returns a function that gets the dispatch very similar to the map
+
+07:54.750 --> 08:02.320
+dispatch the props instead of creating an action that returns an action right.
+
+08:02.320 --> 08:02.910
+That's all we're doing.
+
+08:02.920 --> 08:07.150
+Writing a function that returns an action write an action object.
+
+08:07.150 --> 08:13.690
+We're going to write a function that returns a function that gets dispatch in it so that whenever dispatch
+
+08:13.690 --> 08:16.300
+is called it will fire multiple actions.
+
+08:16.330 --> 08:18.580
+I know it sounds confusing but let's write it out.
+
+08:19.000 --> 08:20.790
+I promise it'll make sense once we write it out.
+
+08:21.640 --> 08:29.210
+First what we're going to do is we're going to change this update collections to match collections start.
+
+08:29.620 --> 08:38.650
+And this is going to be our fetch collections start call with no payload because all this action does
+
+08:38.680 --> 08:45.160
+is it switches are reduced this is fetching state that's all it does then what we're gonna do is we're
+
+08:45.160 --> 08:55.940
+going to make a new concept called fetch collections start async this is going to be the actual function
+
+08:55.940 --> 09:02.700
+that we pass into our components to begin this process and I'll show you why we name it this way after.
+
+09:02.900 --> 09:08.190
+So again all we're doing is we are returning a function right.
+
+09:08.420 --> 09:14.460
+And inside of this function we are going to return that function I told you that gets a dispatch.
+
+09:14.560 --> 09:21.790
+Now what we want to do inside of this function is we want to do all of the code that we had in our shop
+
+09:21.790 --> 09:22.450
+component.
+
+09:22.450 --> 09:30.930
+All this asynchronous stuff in fact we're just gonna copy this over pasted in and bring in all of these
+
+09:30.990 --> 09:35.810
+other things that we need except for this one.
+
+09:35.820 --> 09:42.990
+So what we're gonna do is we're gonna import all those dependencies that we had in our shop
+
+09:45.830 --> 09:54.410
+and we are going to bring in the fire store as well as our convert collections snapshot to map and here
+
+09:55.370 --> 10:02.360
+we're pretty much doing exactly the same thing right that we had before except what we're going to do
+
+10:03.230 --> 10:11.700
+is that once this starts we are going to actually dispatch our fetch collections start call.
+
+10:11.750 --> 10:17.480
+So what we're doing is we're dispatching the moment this function gets called right our fetch collection
+
+10:17.480 --> 10:25.120
+started and gets called the moment we call that function redux is going to then go through this function
+
+10:25.140 --> 10:29.610
+it's going to instantiate this function the moment we call this in our application code what's going
+
+10:29.610 --> 10:34.780
+to happen is it's going to create the collection ref and then it's going to dispatch the action fetch
+
+10:34.780 --> 10:41.190
+collection start which will switch our reducer state is fetching to true and then it's going to begin
+
+10:41.220 --> 10:46.860
+this asynchronous request it's going to go out fetch the code right from our back end it's going to
+
+10:46.860 --> 10:54.000
+come back we're going to build our collection map and then we are going to make a fetch collections
+
+10:55.040 --> 11:02.770
+success call and this is where we're gonna get our collections map and return what we had.
+
+11:02.770 --> 11:09.580
+Very similar to our earlier update collections action except this time it's going to be fetch collections
+
+11:09.580 --> 11:16.120
+success and as we remember in our reducer this is where we've put in the payload right of our collections.
+
+11:16.120 --> 11:20.140
+So just like we had before we're just going to send our collections map.
+
+11:20.510 --> 11:30.840
+And this is where we are going to now dispatch this method right here.
+
+11:30.900 --> 11:39.380
+There's no longer any need for set state and that is all it is the moment that this code comes in.
+
+11:39.490 --> 11:47.400
+We are going to dispatch this success once this asynchronous quest resolves as far as our error handling
+
+11:47.400 --> 11:51.430
+goes as we know we can throw a catch or we get our error.
+
+11:51.660 --> 11:57.400
+And as you can expect we're going to now dispatch the error call that our reducer is expecting.
+
+11:57.650 --> 12:00.020
+Our fetch collections failure.
+
+12:00.160 --> 12:03.160
+And as we remember that is expecting the error message.
+
+12:03.190 --> 12:14.170
+So we are going to export cost fetch collections failure and this is going to be our error message
+
+12:17.100 --> 12:25.620
+and here we're going to return type of shop action types fetch collections failure where the payload
+
+12:25.980 --> 12:33.830
+goes to our error message and in order for us to use this we just got to make sure to Pastor into our
+
+12:33.980 --> 12:46.220
+error creator the error message and now if we save we now have this asynchronous action creator.
+
+12:46.290 --> 12:54.870
+This is all a thunk is it's just a function that returns a function that gets access to dispatch so
+
+12:54.870 --> 13:00.630
+that we can dispatch multiple actions and handle asynchronous code inside of it.
+
+13:00.650 --> 13:05.840
+We've also moved our is loading state into the shop reducer.
+
+13:05.960 --> 13:12.410
+So now anything related to this asynchronous code is handled by redux inside of a reusable action now
+
+13:13.130 --> 13:18.720
+it's no longer tied to our shop component but we will need it inside of our shop component.
+
+13:18.830 --> 13:23.450
+So what we'll do is we'll remove all this code that we don't need anymore
+
+13:26.310 --> 13:28.260
+and I'll show you what we'll do to bring it in.
+
+13:28.920 --> 13:35.180
+So we don't need this either because now it's all getting handled by our reducer.
+
+13:35.220 --> 13:39.930
+So now instead of this we're going to bring in our fetch collections start async method
+
+13:43.190 --> 13:47.870
+and then we're also going to bring in create structured selector because we know we're going to want
+
+13:47.870 --> 13:55.600
+to select certain values off of our state structures selector from reason like
+
+13:58.840 --> 14:06.020
+what else we know we need to do is actually create the selector that will pull in that is fetching property.
+
+14:06.310 --> 14:13.710
+So we're gonna go to our shop selectors and we're just going to make a new selector called export concept.
+
+14:13.720 --> 14:24.650
+Select is collection fetching and this is going to be our create selector call where we pass in select
+
+14:24.650 --> 14:25.390
+shop.
+
+14:25.500 --> 14:25.740
+Right.
+
+14:25.760 --> 14:31.070
+Because we want the shop object and then off it we're just going to return shop that is fetching.
+
+14:31.430 --> 14:33.590
+That's all it is.
+
+14:33.660 --> 14:36.660
+We're not going to bring this into our selector
+
+14:43.350 --> 14:44.210
+shop.
+
+14:44.490 --> 14:52.480
+Shop selectors and now we need to write our map states props.
+
+14:52.570 --> 14:57.890
+So now that we know that we don't have this anymore we're just going to clear this out first and what
+
+14:57.890 --> 15:05.210
+we're gonna do is we're in a constant map state to props which is equal to create structure and selector
+
+15:06.280 --> 15:11.950
+where it is fetching is going to point to our select is collection fetching.
+
+15:12.040 --> 15:12.620
+Right.
+
+15:12.640 --> 15:17.160
+In fact we'll call it is collection fetching to be more explicit.
+
+15:18.700 --> 15:25.210
+And then in our map dispatch to props we now need our fetch collections start async method.
+
+15:25.210 --> 15:33.400
+So here what we're going to call is a function that dispatches are fetch collections staff async method
+
+15:34.290 --> 15:38.810
+we're going gonna pass our maps states of props into our connect function as well.
+
+15:38.810 --> 15:43.550
+And now we need both of these from our props to replace these values.
+
+15:43.550 --> 15:50.960
+So now instead of pulling in loading from the state that we had before we're going to pull in is collection
+
+15:50.960 --> 15:58.310
+fetching from our props because it comes in as props and we're gonna pass this into our is loading calls
+
+15:58.790 --> 16:05.140
+exact same way except the true false is Don a producer next in our fetch collection start async we got
+
+16:05.150 --> 16:13.400
+to make sure to call it in our component amount so let's D structure it off of our props and then we're
+
+16:13.400 --> 16:17.100
+just gonna call it the moment component mounts.
+
+16:17.150 --> 16:23.840
+Now if we save and we go back to our application we'll see that our code works the exact same way that
+
+16:23.840 --> 16:24.800
+we expected it to.
+
+16:24.800 --> 16:31.670
+The only difference now is that we have these new methods that kick start once this component mounts
+
+16:32.410 --> 16:38.620
+a fetch collection start method gets called and what it does is that before when we look at our shop
+
+16:38.660 --> 16:42.450
+right before the actual fire we see we have our initial state is fetching as false.
+
+16:42.470 --> 16:44.950
+No error message collections is no.
+
+16:45.220 --> 16:51.550
+Our method fires and suddenly now are is fetching is true which is what caused our spinner to appear
+
+16:52.430 --> 17:01.440
+the moment it came back right with the correct API request inside of our action right.
+
+17:01.480 --> 17:08.350
+The moment this comes back we then dispatch our new fetch collection success and that's what this action
+
+17:08.350 --> 17:15.810
+is right here fetch collections success once fetch collect and success comes in the payload is of our
+
+17:15.810 --> 17:21.510
+objects we go through the appropriate transform so that's why our payload looks like the final object
+
+17:21.510 --> 17:28.980
+that it needs to be and then it updates our shop reducer accordingly and with that our components and
+
+17:28.980 --> 17:37.980
+our code work the same way that they did before but now we've moved our code out into a redux handled
+
+17:38.220 --> 17:47.420
+asynchronous event process and this pattern is a very very common pattern in redux especially for asynchronous
+
+17:47.420 --> 17:54.590
+event handling when it comes to having components that depend on external API is to provide it with
+
+17:54.590 --> 18:03.270
+the data now I know that what I explained might seem very confusing this idea of like thongs and like
+
+18:03.270 --> 18:11.370
+passing in functions if you got it amazing if you did it that's perfectly fine we're gonna have to go
+
+18:11.370 --> 18:15.300
+through it again and again anyways because practice makes perfect.
+
+18:15.390 --> 18:17.680
+So watch this video a couple times right.
+
+18:17.730 --> 18:25.980
+Reid redux thanks get repository the more you look at it the more it makes sense but all it is is just
+
+18:25.980 --> 18:32.940
+that we now are able to return this function which can now dispatch multiple actions which in turn allows
+
+18:32.940 --> 18:38.850
+us to now handle a synchronous activity inside of an action instead of our component.
+
+18:39.090 --> 18:45.360
+So if we have multiple components that possibly need this shocked data right they can just fire the
+
+18:45.360 --> 18:50.700
+action and then all the other components don't even have to worry because the data will now be stored
+
+18:50.760 --> 18:55.460
+inside of our reducer and we'd have to rewrite that code.
+
+18:55.560 --> 19:01.530
+Now I know guys that was a really long video but thank you for sticking through to it because this is
+
+19:01.530 --> 19:04.200
+a very very important thing to look at.
+
+19:04.830 --> 19:13.070
+This pattern is incredibly incredibly common to see especially in terms of how these actions influence
+
+19:13.130 --> 19:20.780
+the state of how we store this is fetching state on our reducer you might see it named is loading or
+
+19:20.780 --> 19:22.810
+something else but this start.
+
+19:22.820 --> 19:30.620
+Success failure pattern is everywhere in react redux web development now in the next lesson we are going
+
+19:30.620 --> 19:40.400
+to tackle a new pattern with using hired components but in such a way that allows us to extrapolate
+
+19:40.540 --> 19:47.630
+our with Spinner modified components a level higher so I'll see you in the next lesson.

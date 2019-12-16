@@ -1,0 +1,313 @@
+WEBVTT
+
+0
+00:00.750 --> 00:07.770
+In this lesson what we're going to tackle is moving the shop information that we're displaying in our
+
+1
+00:07.770 --> 00:11.250
+shop page into its own reducer.
+
+2
+00:11.250 --> 00:19.800
+The same way that we just did with our directory so we want to move our shop.data.js into
+
+3
+00:19.860 --> 00:24.360
+its own reducer rather than keep it on our shop page component.
+
+4
+00:24.420 --> 00:31.020
+The way that we have in its internal state right now some of you might be wondering in a traditional
+
+5
+00:31.020 --> 00:39.900
+application how is this data stored especially if this list of items grows beyond the maximum of 10 per
+
+6
+00:39.900 --> 00:41.770
+category that we have.
+
+7
+00:41.880 --> 00:47.760
+While a lot of times it's actually stored on a backend, and on a backend it's easier for them to put in
+
+8
+00:47.760 --> 00:54.300
+the new items and then have all the respective frontend applications like a web application or a mobile
+
+9
+00:54.300 --> 00:55.500
+application
+
+10
+00:55.640 --> 00:57.080
+pull in the data from the back end,
+
+11
+00:57.120 --> 01:00.640
+so that it's always consistent versus keeping this data on the frontend.
+
+12
+01:01.530 --> 01:06.340
+However, we won't be doing that in this lesson.
+
+13
+01:06.630 --> 01:12.200
+We would do that in a future lesson on firebase in a more advanced firebase section,
+
+14
+01:12.530 --> 01:17.280
+just so you're familiar with the actual pattern of what it's like to pull that information into your
+
+15
+01:17.280 --> 01:18.490
+shop component.
+
+16
+01:18.690 --> 01:24.150
+But right now there's a lot that we can still get out of keeping it on our frontend because there's
+
+17
+01:24.150 --> 01:32.040
+a lot of additional redux things that we can take advantage of that we'll cover in the next lesson.
+
+18
+01:32.040 --> 01:38.490
+But in this lesson simply the practice of putting our shop data inside of a reducer is still valuable
+
+19
+01:39.030 --> 01:41.290
+and I know we just did it with our directory.
+
+20
+01:41.400 --> 01:46.860
+But as I mentioned practice makes perfect and there's gonna be a couple of things that we're gonna do
+
+21
+01:46.860 --> 01:52.160
+that will get really interesting with the way that we're doing our shop data right now so let's actually
+
+22
+01:52.160 --> 02:03.680
+start. The first thing we need to do is add a new shop redux folder and inside we need our shop.reducer.js
+
+23
+02:04.630 --> 02:09.440
+and also our shop.selectors.js
+
+24
+02:14.210 --> 02:20.780
+we're also going to bring our shop data down from our component folder into our redux folder
+
+25
+02:24.280 --> 02:27.250
+and then in our reducer we're going to use it.
+
+26
+02:27.340 --> 02:29.140
+So when I declare our initial state
+
+27
+02:32.960 --> 02:37.240
+and here we're gonna say collections point to our shop.data
+
+28
+02:37.360 --> 02:38.580
+So we have to import that in
+
+29
+02:44.000 --> 02:47.000
+and we'll say collections points to that array
+
+30
+02:49.820 --> 02:58.460
+and now for our actual reducer function, we're gonna say shop reducer equals a function that gets
+
+31
+02:58.460 --> 03:08.640
+the state which by default is initial state as well as an action and then we'll write our usual switch
+
+32
+03:08.640 --> 03:09.630
+statement.
+
+33
+03:09.630 --> 03:16.020
+But just like we do with our directory because there's no modifications we only have our default which
+
+34
+03:16.020 --> 03:23.380
+returns the state and then we'll export out our shop reducer and pull it into our root reducer.
+
+35
+03:26.150 --> 03:28.250
+So let's import in our shop reducer
+
+36
+03:33.460 --> 03:40.340
+and let's say shop points to shop reducer inside of our root reducer.
+
+37
+03:40.370 --> 03:47.240
+So now that we have our root reducer set up with our shop reducer we need to actually pull it into
+
+38
+03:47.330 --> 03:58.050
+our shop component. So inside of our shop component we know that we don't need shop data anymore and
+
+39
+03:58.060 --> 04:05.470
+we don't need the constructor so we can actually switch our class component over to a functional component.
+
+40
+04:05.470 --> 04:07.300
+And we know we'll be passing collections in
+
+41
+04:13.010 --> 04:14.540
+and let's just fix up our brackets here
+
+42
+04:19.600 --> 04:25.840
+and then we need to actually connect this new component now to our redux, but before we do that
+
+43
+04:25.840 --> 04:33.610
+we also know that we need our selectors. So let's go to our new shop.selectors file and let's bring
+
+44
+04:33.610 --> 04:34.840
+in our create selector
+
+45
+04:37.560 --> 04:48.530
+from reselect, and then first we'll declare our initial input selector which is our select shop; which
+
+46
+04:48.530 --> 04:59.030
+gets the state and returned state.shop and then we'll have our select shop items
+
+47
+05:01.750 --> 05:08.060
+which will be equal to create selector taking our select shop
+
+48
+05:10.800 --> 05:22.030
+and then with a function of shop.shopItems let's go back to our shop component and pull in both
+
+49
+05:22.030 --> 05:23.650
+the selector as well as connect
+
+50
+05:26.980 --> 05:27.940
+redux
+
+51
+05:32.030 --> 05:34.710
+shop.selectors
+
+52
+05:34.910 --> 05:39.470
+We also need both connect and our create structured selector.
+
+53
+05:39.890 --> 05:41.600
+So we need connect from react-redux
+
+54
+05:44.610 --> 05:49.320
+and createStructuredSelector from reselect
+
+55
+05:52.890 --> 06:03.340
+and now in our const mapStateToProps it will be createStructuredSelector with collections going
+
+56
+06:03.340 --> 06:06.820
+to our selectShopItems
+
+57
+06:10.110 --> 06:17.320
+actually this name is wrong it's supposed to be selectCollections.
+
+58
+06:17.540 --> 06:21.140
+I just realized that we actually named that incorrectly.
+
+59
+06:21.150 --> 06:28.590
+So inside our shop selectors let's just fix up that naming and then change our component to be the right
+
+60
+06:28.590 --> 06:36.440
+one point to the right thing and then connect our mapStatesToProps in
+
+61
+06:40.880 --> 06:46.700
+and now let's see our shop component reselect is spelled wrong.
+
+62
+06:46.700 --> 06:51.530
+reselect
+
+63
+06:51.720 --> 06:53.090
+Everything works.
+
+64
+06:53.250 --> 06:57.720
+So as you saw, it's a lot at! It's so many files right, with react and Redux.
+
+65
+06:57.720 --> 07:01.930
+It's always just getting used to making all the right files.
+
+66
+07:01.950 --> 07:05.570
+Calling in the right libraries setting up the right code.
+
+67
+07:05.640 --> 07:07.810
+It's definitely something that needs a lot of practice.
+
+68
+07:07.890 --> 07:10.680
+And the more practice we have the better.
+
+69
+07:10.680 --> 07:17.670
+But as you saw even I stumble, just keeping track mentally of all the things, the pieces, and
+
+70
+07:17.670 --> 07:19.370
+the moving parts that we need.
+
+71
+07:19.440 --> 07:24.960
+It's always difficult once you do the first setup but after that we saw before how easy it was just
+
+72
+07:24.960 --> 07:26.470
+to add new actions.
+
+73
+07:26.480 --> 07:27.620
+pull in state
+
+74
+07:27.640 --> 07:33.360
+Once all of our correct components are connected to the state it's just the initial setup is a little
+
+75
+07:33.960 --> 07:35.280
+lengthier.
+
+76
+07:35.280 --> 07:42.050
+So now that we have our shop component and we have a connected let's start actually building our category
+
+77
+07:42.060 --> 07:47.460
+pages because now we're able to leverage the collections that we've got stored on our redux state.

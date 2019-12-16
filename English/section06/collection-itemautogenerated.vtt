@@ -1,0 +1,313 @@
+WEBVTT
+
+00:00.810 --> 00:08.340
+OK so now that we have our collection preview we need to start looking at building our menu item component
+
+00:09.120 --> 00:20.670
+so we know that our menu item component is going to consist of a image as well as a title a price.
+
+00:20.670 --> 00:24.740
+And this button that allows us to add it to the cart.
+
+00:24.780 --> 00:29.890
+Now we're not going to actually add any of the functionality in just yet.
+
+00:29.970 --> 00:33.440
+We haven't really considered how to handle our cart yet.
+
+00:33.750 --> 00:37.700
+But let's just build out this component first.
+
+00:37.950 --> 00:47.070
+So let's add in a collection item into our components and in our folder we're going to do the same thing
+
+00:47.070 --> 00:57.150
+we've been doing our collection item dot component DHS X and then our collection item dot styles thought
+
+00:57.600 --> 00:59.310
+SPSS.
+
+00:59.310 --> 01:03.310
+The more you type this the better you'll get at it.
+
+01:03.720 --> 01:10.710
+Which is always what's really interesting is that at first it always seems a little repetitive but you
+
+01:10.710 --> 01:16.950
+actually find that you really do end up remembering everything and what their purpose is.
+
+01:16.950 --> 01:23.480
+The more you practice typing the same folder structure for your components and what to do with them.
+
+01:23.490 --> 01:24.390
+OK.
+
+01:24.480 --> 01:31.680
+So now for our collection item we know that we need certain things to come in and it's a popular menu
+
+01:31.680 --> 01:33.690
+item but we don't need any state.
+
+01:33.690 --> 01:43.950
+So let's make a another Functional Component so cost collection item is equal to this functional component
+
+01:45.530 --> 01:57.950
+returns this div with our class name collection item and then we're gonna give it a div and now that
+
+01:57.950 --> 02:01.100
+div is going to hold our image.
+
+02:01.250 --> 02:04.450
+So let's just give it the class name of image for now.
+
+02:06.150 --> 02:12.870
+And let's do the same thing we did before with our directory items.
+
+02:12.870 --> 02:21.520
+So instead we know that what we're going to pass in will be an I.D. We will also get our name.
+
+02:21.760 --> 02:30.360
+We will get our price and our image URL and we have all these when we brought in that data earlier in
+
+02:30.450 --> 02:36.860
+our collection or sorry in our shop page right in our shop data specifically.
+
+02:36.990 --> 02:41.440
+So we need an I.D. name image URL and price.
+
+02:41.950 --> 02:44.350
+Now we are going to
+
+02:46.780 --> 02:54.490
+put in what we did before with our style and we are going to do background image goes to our string
+
+02:54.490 --> 02:59.240
+interpolation value of image.
+
+02:59.370 --> 03:07.190
+You are so nothing new here just yet and then we're going to add another div.
+
+03:07.630 --> 03:10.430
+And here we're going to add our collection footer
+
+03:13.130 --> 03:18.720
+inside of our footer we have is this double repeat.
+
+03:18.830 --> 03:21.140
+Actually we don't even need this closing tag.
+
+03:21.500 --> 03:35.900
+We are going to bring in our span which will be our name as well as our price awesome.
+
+03:36.140 --> 03:36.960
+OK.
+
+03:37.280 --> 03:44.860
+Now let's export this out and let's bring in the styles that we have for this component.
+
+03:44.890 --> 03:49.900
+So I've written them already for us but we can take a quick look at what they are
+
+03:53.280 --> 03:54.920
+inside of our collection item.
+
+03:55.140 --> 03:59.590
+We are styling our image so that its height is ninety five percent.
+
+04:00.030 --> 04:06.420
+Now that means that our collection photos height will be 5 percent of the total height of our collection
+
+04:06.420 --> 04:09.540
+item which will be 350 pixels.
+
+04:09.560 --> 04:13.550
+So this is pretty much going to be the layout for our actual component.
+
+04:13.550 --> 04:22.630
+What we see here so one important thing to note is that this flex column on our collection item will
+
+04:22.720 --> 04:30.480
+essentially allow our footer and our image to sit in a vertical alignment right and then our collection
+
+04:30.480 --> 04:33.390
+footer is just our regular display flex.
+
+04:33.390 --> 04:40.680
+And then we have some space between them so that our content gets pushed apart our title takes up 90
+
+04:40.680 --> 04:46.350
+percent of the space in our total footer and then the price is going to be 10 percent.
+
+04:46.380 --> 04:52.650
+So because our price is probably never going to grow that large we've got to make sure to have our name
+
+04:52.680 --> 04:57.500
+take up the majority of the space here OK.
+
+04:57.660 --> 05:09.970
+Now if we import in our collection item to our collection preview so that we can access the new collection
+
+05:10.030 --> 05:10.930
+item we wrote
+
+05:15.420 --> 05:25.020
+we can now instead of doing this div just map it through like so and because we need the properties
+
+05:25.050 --> 05:26.990
+on the item that we had before.
+
+05:27.000 --> 05:35.180
+We're just going to do what we did earlier and we're gonna do structure off our I.D. but we're also
+
+05:35.180 --> 05:41.500
+going to g structure the rest of our item props and pass that through.
+
+05:41.600 --> 05:46.580
+Like so let's do other item props.
+
+05:49.790 --> 06:00.780
+And now it's no longer a div we'll just make sure to restructure or spread our other item props into
+
+06:00.780 --> 06:01.260
+our collection.
+
+06:01.260 --> 06:14.570
+Item Oh we also have the star collection preview so those stylings is down here.
+
+06:14.750 --> 06:15.790
+OK.
+
+06:15.840 --> 06:16.410
+There we go.
+
+06:17.380 --> 06:21.790
+So we have our price and we have our thing because there's no styling coming through.
+
+06:21.820 --> 06:25.450
+Let's just inspect quickly and see if we're missing something.
+
+06:25.450 --> 06:31.420
+So while you code you might see this happen you just want to make sure that our naming is correct for
+
+06:31.420 --> 06:31.920
+everything.
+
+06:31.930 --> 06:33.400
+And we're getting the styles.
+
+06:33.940 --> 06:43.790
+So I don't see the stars that we wrote being applied here although we are getting the actual image right
+
+06:43.790 --> 06:56.870
+here being rendered so Oh I see our collection preview our collection item oh we didn't save now we
+
+06:56.880 --> 06:59.570
+go silly mistakes.
+
+06:59.880 --> 07:08.430
+So sometimes if you just take a look inside of your dev tools it's very easy to see where perhaps we
+
+07:08.430 --> 07:15.330
+are going wrong because we know for sure due to the way that react is set up everything should be in
+
+07:15.330 --> 07:16.470
+at a specific time.
+
+07:16.470 --> 07:21.440
+So if it's not being loaded then we probably messed up our import right.
+
+07:21.690 --> 07:22.920
+Which we checked first.
+
+07:22.920 --> 07:23.250
+Right.
+
+07:23.250 --> 07:28.770
+We made sure that we're importing we're in the right collection item which we were and then we checked
+
+07:28.830 --> 07:37.810
+if we had our naming like our class names correct which we did so then it just turned out we didn't
+
+07:37.810 --> 07:38.200
+save it.
+
+07:38.230 --> 07:41.600
+So it's a silly error but there are tons of those.
+
+07:41.620 --> 07:47.230
+As you become a professional developer a lot of times you'll find that you are just banging your head
+
+07:47.230 --> 07:52.870
+against the wall for 30 minutes only to find out that you had a slight typo.
+
+07:52.870 --> 07:53.950
+It's very common.
+
+07:54.700 --> 08:02.500
+But just like that we now have our collection component so the only thing we're missing is the hover
+
+08:02.500 --> 08:04.220
+effect with the add button.
+
+08:04.300 --> 08:11.170
+But we can add that in a little later when we actually build out our cart because that's what that feature
+
+08:11.230 --> 08:12.870
+will be tied to.
+
+08:12.970 --> 08:20.650
+And one more thing before we commit our code we should add a little bit of padding on our overall project
+
+08:21.160 --> 08:24.620
+so that it aligns closer to this.
+
+08:24.640 --> 08:34.330
+So let's go into our app Dot's RSS and let's do padding 20 pixels and 80 pixels.
+
+08:34.330 --> 08:38.480
+So I want 20 pixels on the top and bottom and then 80 pixels on the side.
+
+08:38.530 --> 08:45.240
+And now it looks closer so this may be a little bit more than what we had.
+
+08:45.240 --> 08:48.080
+So let's actually make this 60 pixels.
+
+08:48.090 --> 08:48.600
+Maybe
+
+08:52.350 --> 08:53.230
+it's a little better.
+
+08:53.250 --> 08:53.800
+That's pretty good.
+
+08:54.540 --> 08:56.100
+So now let's commit our code.
+
+08:56.100 --> 09:02.540
+Let's go back to our terminal let's do a get add.
+
+09:02.630 --> 09:02.930
+All right.
+
+09:02.930 --> 09:04.780
+Let's see what we first have to commit.
+
+09:05.060 --> 09:06.150
+OK.
+
+09:06.290 --> 09:20.640
+And then let's do get commit updating our app with a shop page collection preview component and collection
+
+09:20.760 --> 09:21.840
+item component.
+
+09:23.130 --> 09:28.800
+And now let's just get push origin master OK.
+
+09:28.950 --> 09:29.940
+Our code is up.
+
+09:29.940 --> 09:31.020
+Now let's move on.

@@ -1,0 +1,244 @@
+WEBVTT
+
+00:00.970 --> 00:08.110
+Now in the last lesson we created our Remove button with our X icon winking.
+
+00:08.140 --> 00:16.220
+Now we actually need to create the functionality in our redux code in order to clear this item out now.
+
+00:16.220 --> 00:23.480
+This is actually going to be very similar to what we did from a redux standpoint.
+
+00:23.690 --> 00:30.200
+As far as when we added items and you can imagine it must be similar because what we're doing is we're
+
+00:30.200 --> 00:40.490
+trying to update our cart items reducer value inside of our cart reducer so that we clear out an item
+
+00:40.580 --> 00:42.550
+regardless of its quantity.
+
+00:42.590 --> 00:50.870
+When ever we hit this x button so of course we now know that we need to dispatch a new action that will
+
+00:50.870 --> 00:59.240
+clear out that item based on an item that we pass in as the payload for this new action that we're trying
+
+00:59.240 --> 01:03.690
+to write so let's actually do this.
+
+01:03.720 --> 01:08.570
+Now we already know what we need to do from a redux standpoint.
+
+01:08.700 --> 01:15.060
+We need to first make the new action type so inside of our car types.
+
+01:15.060 --> 01:23.760
+Let's make a new one called Clear item from cart which is equal to the string value of clear item from
+
+01:23.760 --> 01:25.390
+cart.
+
+01:25.400 --> 01:33.810
+Now what we want to do with the actual action is we want to make a new action that dispatches the new
+
+01:33.960 --> 01:35.790
+cleared him from cart that we just made.
+
+01:36.570 --> 01:42.790
+So we will call it clear item from car as well which gets an item.
+
+01:42.810 --> 01:46.830
+So it's a function that gets an item as a property just like our add item.
+
+01:47.250 --> 01:54.280
+And in exactly similar way as our add item action creator we're going to set the type equal to our new
+
+01:54.280 --> 02:02.390
+clear item from cart and set the payload equal to the item that we're trying to clear now that we have
+
+02:02.390 --> 02:10.640
+this we need to actually update our reducer so that our reducer removes the appropriate item from the
+
+02:10.640 --> 02:19.730
+array so inside of our cart reducer we're going to make a new case that will listen to our new action
+
+02:21.060 --> 02:23.560
+so this will be our car action type stuff.
+
+02:23.560 --> 02:32.190
+Clear item from cart and what it will return is going to be a new object where we spread everything
+
+02:32.190 --> 02:41.900
+in our state but we also want to update our cart items so that now it will return a new array with out
+
+02:42.290 --> 02:47.730
+any instance of that item that we're trying to clear away.
+
+02:47.810 --> 02:55.090
+Now the code that we need to right here in our reducer is going to be a filter if you remember from
+
+02:55.090 --> 03:05.240
+filter we're just going to call on our existing car items array that exists on our state right now and
+
+03:05.240 --> 03:09.750
+we're going to filter it passing in the appropriate car.
+
+03:09.760 --> 03:20.360
+Item and then what we'll say is that if the cart item I.D. does not match the action payload which we
+
+03:20.360 --> 03:25.710
+know is the item we're trying to remove I.D. then I want you to keep it.
+
+03:26.070 --> 03:32.790
+If that car item I.D. does match the items I.D. that we're trying to remove from our payload then I
+
+03:32.790 --> 03:33.770
+want you to filter it out.
+
+03:34.470 --> 03:43.110
+Now as you remember filter returns us back anything that yields true inside of the actual function as
+
+03:43.110 --> 03:49.880
+the return of the function here what it's saying is that if the car items I.D. does not match the item
+
+03:49.880 --> 03:52.400
+we're trying to filter then return true.
+
+03:52.400 --> 03:58.310
+So we'll keep that item right because we want to keep any item where the idea is not the one that we're
+
+03:58.310 --> 03:59.510
+trying to clear up.
+
+03:59.600 --> 04:05.190
+So that's what filter does and it gives us back a new array with this.
+
+04:05.200 --> 04:07.390
+We've made our clear item from cart.
+
+04:07.600 --> 04:12.160
+We just need to now bind it to our checkout item component.
+
+04:12.250 --> 04:20.220
+So what we're going to do is inside of our checkout item component we are going to now import interconnect
+
+04:20.710 --> 04:31.220
+because we need to use we need to bind our actual new action to our component very similar to how we
+
+04:31.220 --> 04:43.350
+did it with ADD item so we'll just import that in as clear item from cart from our redux folder cart
+
+04:43.720 --> 04:54.300
+cart action then we need to make our map dispatch to props which is equal to this function that gets
+
+04:54.300 --> 05:06.720
+dispatch from the redux store and then we will return our new clear item and with this clear item function
+
+05:07.620 --> 05:13.480
+we are going to set it to pretty much what we had earlier with our ad item.
+
+05:13.500 --> 05:20.150
+The only difference is that now we're using our new clear item for cart function.
+
+05:20.340 --> 05:27.790
+So we'll make sure to dispatch clear item from cart passing in our item as you see this shape is very
+
+05:27.790 --> 05:32.860
+similar to the code that we wrote inside of our collection item.
+
+05:32.860 --> 05:35.550
+When we map dispatch our an item.
+
+05:35.540 --> 05:45.310
+Function and then we just have to make sure to connect passing info and our map dispatch to props
+
+05:48.330 --> 05:49.470
+wrapping our checkout.
+
+05:49.500 --> 05:51.560
+Item.
+
+05:51.650 --> 05:54.860
+So now we need the cart item.
+
+05:54.860 --> 06:01.650
+So instead of destruction these values off here remember by doing this and destruction these values
+
+06:01.740 --> 06:03.600
+this way one layer deep.
+
+06:03.600 --> 06:09.090
+So we're pulling cart item off the props object and then pulling these values off of the cart item.
+
+06:09.090 --> 06:12.970
+We actually don't have access to the car item property.
+
+06:13.080 --> 06:21.090
+So what we need to do is we need to again do an explicit return in this function and just make sure
+
+06:21.090 --> 06:29.760
+to set the concept of these values inside of the squiggly lines of our function definition and now we'll
+
+06:29.760 --> 06:37.340
+have access to our cart item as well as our new clear item function that we're passing in.
+
+06:37.400 --> 06:45.230
+So now on our Remove button we can do our on click where we create a new anonymous function that will
+
+06:45.230 --> 06:52.250
+call our new clear item function that we're passing in as a prop and we'll pass the cart item in like
+
+06:52.250 --> 06:58.120
+so and now we have our clear item working.
+
+06:58.120 --> 07:04.360
+So this is very similar to our ad item functionality that we wrote a couple lessons ago except now the
+
+07:04.420 --> 07:11.930
+main difference is that our reducer changes its functionality instead of doing our ad item to cart.
+
+07:12.040 --> 07:20.860
+We're doing this new filter which returns us a new array with the appropriate item filtered out.
+
+07:20.930 --> 07:25.550
+Now if we go back to our application we go back to our shop.
+
+07:25.780 --> 07:32.780
+We add some items and let's say I wanted to get rid of brown cowboy if I hit the x.
+
+07:33.080 --> 07:34.850
+We see that it got removed.
+
+07:34.850 --> 07:38.150
+We see our clear item from car action being fired.
+
+07:38.390 --> 07:46.580
+And of course we see our cart cart items array reflecting the new changes and just like that we've now
+
+07:46.580 --> 07:51.780
+built in our clear item from cart feature that was actually pretty simple.
+
+07:51.830 --> 07:59.000
+It's pretty much just the same pattern that we were used to from writing our ad item feature and you'll
+
+07:59.000 --> 08:04.370
+see that much of redux is pretty much just this pattern that we've written twice now.
+
+08:04.370 --> 08:13.580
+We mainly want to do something with our reducer passing in some specific object as a payload maybe not
+
+08:13.580 --> 08:14.290
+even an object.
+
+08:14.300 --> 08:19.400
+Maybe it's some property and what we do is we just want to update our reducer.
+
+08:19.400 --> 08:26.060
+So we want to update our state values accordingly depending on what we're getting we'll actually see
+
+08:26.060 --> 08:34.390
+this in bit more detail once we add in our arrows and we reuse our add item as well as make a new remove
+
+08:34.460 --> 08:40.490
+item feature inside of our checkout item we'll do that in the next lesson.

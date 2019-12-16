@@ -1,0 +1,196 @@
+WEBVTT
+
+00:00.990 --> 00:04.160
+So we've learned the first two concepts.
+
+00:04.370 --> 00:12.620
+The third concept that made to react really popular is this idea of you need directional data flow.
+
+00:12.620 --> 00:14.170
+What do I mean by that.
+
+00:14.210 --> 00:23.000
+Well so far we understand that React is just a javascript library that allows us to write more javascript
+
+00:23.360 --> 00:28.330
+to have interactivity on our Web sites and in react.
+
+00:28.330 --> 00:34.840
+We have this idea of state which you can think of it as a javascript object that describes our app.
+
+00:34.840 --> 00:39.680
+So all the data of our app is within this state.
+
+00:40.030 --> 00:48.190
+And then we also learned about this idea of components that we can build using react with this weird
+
+00:48.550 --> 00:57.280
+e-mail looking thing but inside of our JavaScript files this idea of state which is the data over app
+
+00:57.940 --> 01:05.670
+works with the components which are built using what will eventually learn is called J.S. X..
+
+01:05.860 --> 01:17.420
+So it's a simple like syntax inside of JavaScript and These all combine to essentially give our reactive
+
+01:17.420 --> 01:24.480
+library to things that is the components that we've built the state over application and you can think
+
+01:24.480 --> 01:31.890
+of this as a function a react library is simply a function that we give all these things to what it's
+
+01:31.890 --> 01:41.490
+going to do is it's going to create what we call a virtual DOM that is it creates a javascript version
+
+01:41.580 --> 01:43.370
+of the Dom.
+
+01:43.490 --> 01:45.060
+Remember this.
+
+01:45.080 --> 01:51.800
+This isn't the Dom we installed the react plugin to have something that looks like the elements tab
+
+01:52.010 --> 01:52.760
+but isn't.
+
+01:52.790 --> 01:53.690
+Exactly.
+
+01:53.750 --> 02:03.190
+And this is just a javascript object that describes our app into what we called this virtual Dawn which
+
+02:03.190 --> 02:12.520
+is a tree like object like this that gives react a blueprint of how it should update the actual Dawn.
+
+02:13.150 --> 02:15.360
+So what happens then is react.
+
+02:15.370 --> 02:23.220
+Takes all of this and says hey here is the actual dawn or the document object model of the Web site
+
+02:23.890 --> 02:32.080
+and the react little bot over here is going to go look at the blueprint of what it needs to build and
+
+02:32.680 --> 02:41.610
+modifies the DOM for us now this idea of a unique directional data flow means that any time we want
+
+02:41.610 --> 02:44.480
+something to change on our Web page.
+
+02:44.790 --> 02:48.030
+Well the state has to change.
+
+02:48.030 --> 02:51.160
+That is the data has to change in our app.
+
+02:51.210 --> 02:57.450
+So what happens if as a user I click on let's say a button while I click on a button.
+
+02:57.690 --> 03:03.030
+React is going to intercept that and say hey somebody just clicked on the bottom.
+
+03:03.030 --> 03:04.530
+How does that.
+
+03:04.530 --> 03:06.120
+Let's say I click on the sign up.
+
+03:06.300 --> 03:10.590
+React is going to say hey somebody just clicked on the sign out button.
+
+03:10.590 --> 03:13.150
+How are we going to change the state.
+
+03:13.170 --> 03:18.960
+Well internally we would say that if somebody clicks on the sign out we're gonna change is logged in
+
+03:19.140 --> 03:29.130
+to now say false and react as soon as the state changes reacts to that change and says hey the state
+
+03:29.130 --> 03:37.440
+just Shane combine the new state and the components we have and update the dot you see the data only
+
+03:37.440 --> 03:47.270
+flows one way a better way to think about this is like this our application is simply built with this
+
+03:47.270 --> 03:48.440
+virtual Dawn.
+
+03:48.530 --> 03:58.210
+This javascript object that describes our app and as soon as a state changes it's going to trickle down
+
+03:58.210 --> 04:04.900
+that information and let everybody know hey the state just changed if is logged in is now false.
+
+04:04.900 --> 04:10.690
+Display this version of the app data can never move up.
+
+04:10.690 --> 04:17.740
+So for example the state as we'll learn can live in different locations different components and if
+
+04:17.980 --> 04:22.280
+the state lets say changes here the data can never move up.
+
+04:22.330 --> 04:27.480
+That is all these changes can only trickle down now.
+
+04:27.520 --> 04:31.060
+This concept is hard to explain without actually seeing it in code.
+
+04:31.060 --> 04:33.460
+So if you don't get this right away don't worry.
+
+04:33.520 --> 04:39.200
+We will explore this idea and revisit this idea of one way data flow throughout the course.
+
+04:39.280 --> 04:47.710
+But the key takeaway here is that by having this restriction of data only being able to move down from
+
+04:47.770 --> 04:54.190
+the state of our application all the way to the DOM and if any changes or events happen that change
+
+04:54.190 --> 05:01.120
+the state while we go back to the state and that's state change trickles down to different components
+
+05:01.150 --> 05:09.760
+in one direction is a restriction on how data can move through our app and by adding this restriction
+
+05:10.030 --> 05:12.350
+it's really easy to debug code.
+
+05:12.550 --> 05:16.500
+For example if there's something wrong with our sign our function.
+
+05:16.750 --> 05:20.720
+I can go to wherever the state is logged in lives.
+
+05:20.740 --> 05:26.920
+Let's say it lives in this top component here I can go over here and know that this is where the bug
+
+05:26.980 --> 05:30.910
+is happening and whatever is underneath this component.
+
+05:30.910 --> 05:32.140
+Well that's it.
+
+05:33.290 --> 05:38.840
+I don't have to look outside of the component of the tree was massive with thousands and millions of
+
+05:38.840 --> 05:39.440
+components.
+
+05:39.440 --> 05:47.230
+I only have to look in the place where the data exists and where the data flows through.
+
+05:47.290 --> 05:51.340
+Again this is a really hard concept that we will explore throughout the course.
+
+05:51.340 --> 05:54.750
+But this idea of one way data flow is the restriction.
+
+05:54.820 --> 06:02.350
+And because of this restriction it's easier for us to understand how our app works unlike the arrows
+
+06:02.440 --> 06:08.890
+and points that we saw with an angular app where things got confusing really really fast.

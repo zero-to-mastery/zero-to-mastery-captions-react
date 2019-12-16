@@ -1,0 +1,103 @@
+WEBVTT
+
+00:00.620 --> 00:06.890
+Now that we have our car icon component let's start building our car dropdown.
+
+00:06.920 --> 00:11.750
+So if we look at our dropdown we know that there is a container.
+
+00:11.840 --> 00:15.930
+There is this section with items inside that a scroll level.
+
+00:16.010 --> 00:25.610
+And there's also a go to checkout button and it opens and is seemingly stuck to that area just underneath
+
+00:25.790 --> 00:27.920
+our cart icon.
+
+00:27.920 --> 00:31.740
+So let's start building this component.
+
+00:31.780 --> 00:39.940
+The first thing we're going to do is we are going to create a cart component here.
+
+00:39.980 --> 00:48.920
+We'll just call it cart and inside of it actually let's call it cart dropdown.
+
+00:48.950 --> 00:53.060
+It's a bit more direct about what it is.
+
+00:53.130 --> 01:01.980
+So we're going to create our cart dropdown component Dutch assets as well as our cart dropdown dot styles
+
+01:02.010 --> 01:08.440
+DOT says we are gonna import react from react.
+
+01:08.700 --> 01:14.370
+And we're also going to import in our custom button because we know we need one at the very end
+
+01:20.090 --> 01:32.370
+or import in our style sheet and what we're going to use for our component is a regular stateless component
+
+01:33.870 --> 01:48.920
+and inside will be a containing do with the class name of cart dropdown and also this div that has the
+
+01:48.920 --> 01:56.090
+class name of our cart items because this will be the thing that contains our cart items which will
+
+01:56.090 --> 02:00.830
+keep empty for now and then our custom button
+
+02:03.790 --> 02:19.440
+and we will say go to checkout on the inside and here we will export t fault our cart dropdown cart
+
+02:19.800 --> 02:23.360
+dropped it.
+
+02:23.420 --> 02:36.470
+Now let's bring in our style sheet so I have the styles here for you as well for this component and
+
+02:36.560 --> 02:42.600
+I'm pushing the margin top of auto for our button so that it's always at the bottom.
+
+02:42.890 --> 02:51.690
+The car items takes up 240 pixels it aligns everything inside so that it flows vertically and it has
+
+02:51.690 --> 02:56.350
+an oversight flow of scroll but we won't create car items just yet.
+
+02:56.670 --> 03:05.420
+We have to bring our cart dropdown into our header component and we got to import in our cart dropdown
+
+03:05.420 --> 03:05.900
+component
+
+03:10.240 --> 03:19.350
+cart dropdown cart dropdown component and we're going to place it just outside of our options div because
+
+03:19.410 --> 03:24.570
+we want it to sit just outside of that div.
+
+03:25.320 --> 03:32.190
+So now if we go back to our application we'll see it right there awesome.
+
+03:32.930 --> 03:41.750
+OK now what we have to do is conditionally show or hide this card dropdown and to do so we are going
+
+03:41.750 --> 03:52.840
+to trigger something that will show or hide this component based off of some true or false value.
+
+03:52.850 --> 03:59.810
+Now we are going to create a cart reducer to do this and we're going to set the value of some property
+
+04:00.050 --> 04:08.390
+probably called Hidden on that reducer based on clicking this icon because maybe there are other ways
+
+04:08.390 --> 04:15.050
+that we want to hide this in the future we don't know but what we do want to do is we want to keep that
+
+04:15.080 --> 04:23.150
+in our global state in case anywhere else wants to trigger the ability to hide or show our dropdown.
+
+04:23.150 --> 04:24.440
+So let's implement that.

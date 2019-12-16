@@ -1,0 +1,445 @@
+WEBVTT
+
+00:00.690 --> 00:08.940
+OK now before we continue I think it's really important to cover a couple fundamental concepts in react
+
+00:08.940 --> 00:11.420
+rather Don and to do so.
+
+00:11.430 --> 00:17.680
+I've built this very quick little application to demonstrate all it is is.
+
+00:17.700 --> 00:19.660
+It has three pages.
+
+00:19.980 --> 00:21.700
+It has a home page.
+
+00:22.050 --> 00:32.500
+It has a topics page and it has a topic ideas page right a topic detailed in so three pages.
+
+00:32.500 --> 00:38.590
+Now if we were to look at the code for this we would see that it's just three functional components
+
+00:38.620 --> 00:42.830
+that render divs with the H1 telling us where we're at.
+
+00:43.090 --> 00:49.250
+And then it's all nested in roots inside of our app component.
+
+00:49.250 --> 00:57.420
+Right our home route is the base slash path with the component home page.
+
+00:57.540 --> 01:00.600
+Our topics route slash topics and then our topics.
+
+01:00.600 --> 01:06.400
+Detail is slash topics slash colon topic I.D..
+
+01:06.510 --> 01:13.480
+Now I know that this colon topic idea is kind of new but we're going to cover that a little later.
+
+01:13.500 --> 01:18.320
+The first thing that I want us to look at is our home page.
+
+01:18.390 --> 01:25.620
+The reason why is because one of the things that react writer Dom does for us is that any component
+
+01:25.650 --> 01:32.020
+that gets rendered by our root gets past three arguments.
+
+01:32.020 --> 01:37.810
+The component that gets rendered is going to be the component we pass into our component property on
+
+01:37.810 --> 01:43.790
+our root but what do those three properties look like.
+
+01:43.920 --> 01:45.600
+Well let's lock them out and see
+
+01:50.160 --> 01:55.730
+Let's navigate to our home page and let's open up our dev tools.
+
+01:55.920 --> 02:03.300
+We'll see that the three props that we got past were a history prop a location and a match.
+
+02:03.300 --> 02:10.980
+Now the one I want to look at first is the match so there's four things we get inside of our match.
+
+02:11.000 --> 02:23.170
+The first is the URL the you URL is just the you are L of our component that it got rendered up to from
+
+02:23.170 --> 02:24.680
+the root.
+
+02:24.680 --> 02:33.950
+Now what do I mean by this so if we were to look at our root for home page right we learned that in
+
+02:33.950 --> 02:42.530
+our last lesson without this exact keyword any of our paths that start with a slash and then anything
+
+02:42.590 --> 02:49.760
+after is also going to render our home page because technically if we were to navigate to slash topics
+
+02:49.790 --> 02:56.660
+now we are still matching the forward slash portion of our if you are L right.
+
+02:56.690 --> 03:06.210
+Which means that this root pattern is matching for our home page but if we were to look at our match
+
+03:06.390 --> 03:14.040
+we actually see that you are our only matches up till the slash not the slash topics so that you are
+
+03:14.040 --> 03:21.450
+all no matter what we type even if we were to navigate all the way here and the you are L property on
+
+03:21.450 --> 03:27.720
+our match will always only display the You are all up until where it actually matched
+
+03:30.930 --> 03:36.290
+the path property is just the pattern that the route is looking to map.
+
+03:37.080 --> 03:43.710
+So the path property for our home page would be just the slash the path property for our topics list
+
+03:43.740 --> 03:50.370
+would just be slash topics and then for topic detail will be slash topics slash colon topic ideas which
+
+03:50.370 --> 04:01.830
+is what we see here if we were to log this in each of these components we will see that that is exactly
+
+04:02.550 --> 04:03.570
+what we'll show.
+
+04:03.570 --> 04:13.270
+So if we were to navigate to topics we'll see in our topics that the path is just the slash topics which
+
+04:13.270 --> 04:18.870
+is the pattern that it's matching in the root the is exact.
+
+04:19.000 --> 04:30.040
+Property is the one that's matching that is only true if the entire U R L matches the pattern.
+
+04:30.080 --> 04:38.810
+So while it's true for is first topics because we're at slash topics it is false for our homepage that
+
+04:38.810 --> 04:47.370
+despite it being rendered it's not a perfect match because there's more of the U.R.L. than what is being
+
+04:47.370 --> 04:50.210
+matched by the root.
+
+04:50.240 --> 04:57.830
+Finally the Paramus property is an object of you are all parameters.
+
+04:57.830 --> 05:00.040
+Now what's a You are all parameter.
+
+05:00.050 --> 05:04.880
+This is a useful parameter or a root parameter.
+
+05:04.880 --> 05:12.020
+When we write this in our path we're saying that this route is waiting to match anything up to slash
+
+05:12.020 --> 05:17.120
+topics and then slash anything in this spot.
+
+05:17.120 --> 05:22.350
+After it can be a dynamically changing value.
+
+05:22.500 --> 05:23.030
+Right.
+
+05:23.140 --> 05:28.900
+But that topic ideas value we want to be able to access as a parameter.
+
+05:28.900 --> 05:30.950
+Now why is this important.
+
+05:31.060 --> 05:34.920
+If we were to navigate so let's make our home page exact right.
+
+05:34.930 --> 05:43.200
+If we were to navigate to slash topics slash 13 we actually now have access to that in our pram.
+
+05:43.270 --> 05:44.950
+But let's log it first
+
+05:52.000 --> 05:54.970
+we'll see that in our match.
+
+05:54.970 --> 06:00.370
+We now have access to this topic I.D. 13.
+
+06:00.490 --> 06:08.410
+This is really useful because let's say in our topics detail we wanted to show which topic we're looking
+
+06:08.410 --> 06:08.560
+at.
+
+06:09.460 --> 06:16.150
+While we would be able to access it by going topics not matched up her Ram's dot topic idea
+
+06:19.190 --> 06:26.220
+and if we wanted to use this I.D. to fetch a set of data related to this specific topic right.
+
+06:26.300 --> 06:35.870
+It's good that in r topic detail page we have access to that specific ideas so these parameters.
+
+06:35.870 --> 06:43.490
+And doing it with this style allows our topic detail to populate itself if we needed it to from some
+
+06:43.490 --> 06:50.950
+kind of backend database based off of what specific detail it's at and our topic.
+
+06:50.950 --> 06:56.390
+Detail now is aware of it and usually we store this based on your URL parameter.
+
+06:56.450 --> 06:56.840
+Right.
+
+06:56.840 --> 06:57.900
+Like if we were to.
+
+06:57.920 --> 07:04.310
+If you look at many web applications you'll see that if you are looking at one of your friends for example
+
+07:04.310 --> 07:11.450
+on Facebook it'll say Facebook dot com slash profile slash and then they're either email or some unique
+
+07:11.480 --> 07:12.720
+identifier.
+
+07:13.040 --> 07:21.050
+So that is why this program pattern is so valuable now.
+
+07:21.120 --> 07:29.740
+The next thing is the history now the history one is quite complicated but the main thing I want to
+
+07:29.740 --> 07:32.950
+focus on is the push.
+
+07:32.950 --> 07:42.370
+So there's two ways to navigate in react router Dom between our pages right now we've just been dynamically
+
+07:42.460 --> 07:45.360
+updating the URL and getting to different pages.
+
+07:45.580 --> 07:54.130
+But in reality the first one is the use of this link component and the link component is a special component
+
+07:54.730 --> 08:03.850
+that RAC writer Dom gives us that lets us dynamically pass in this property of two and then the string
+
+08:03.850 --> 08:14.460
+of where we want this link to take us to and now if I go to home I have this what looks like a modified
+
+08:14.550 --> 08:17.260
+a link that will take me to this link.
+
+08:17.280 --> 08:25.450
+The only difference between this and are actual topics is that react.
+
+08:25.680 --> 08:33.360
+You've got to remember is a single page application which means that it's not actually read directing
+
+08:33.360 --> 08:38.840
+you and rebuilding the entire application every time the URL changes.
+
+08:38.850 --> 08:46.860
+We're really just hijacking the your Ls position to determine with JavaScript what part of the Dom to
+
+08:46.860 --> 08:50.240
+take off and then what part of the Dom to replace right.
+
+08:50.310 --> 08:53.600
+What component do we want to remount or mount.
+
+08:53.610 --> 09:00.300
+We're not trying to re render the entire application which was typically the case before we were building
+
+09:00.420 --> 09:06.630
+react application because react is an SBA a single page application.
+
+09:06.630 --> 09:13.620
+So because of this an ailing would actually force you to redirect and re render the entire application
+
+09:14.160 --> 09:23.170
+whereas using the react route or Dom link where just borrowing the URL to to tell our application what
+
+09:23.170 --> 09:32.890
+to re render now the other way to do this type of navigation is using the history prof so if instead
+
+09:32.890 --> 09:42.340
+of a link we wanted to use a button and in the on click of our button we would pass it a function that
+
+09:42.340 --> 09:44.020
+gets called whenever it gets clicked.
+
+09:44.020 --> 09:50.800
+And in this function we would call the history prop right and we would tell it dot push and then the
+
+09:50.800 --> 09:53.030
+string where we want to go.
+
+09:53.050 --> 09:59.010
+So this is equivalent to using a link but it gives us more dynamic access.
+
+09:59.010 --> 09:59.320
+Right.
+
+09:59.320 --> 10:04.510
+We can dynamically functionally control when we want this to work.
+
+10:04.510 --> 10:08.740
+So if for example we wanted to do this in a component did mount instead.
+
+10:08.740 --> 10:09.210
+Right.
+
+10:09.280 --> 10:14.290
+We couldn't render a link in our component did mount because it's just a functional call.
+
+10:14.290 --> 10:14.500
+Right.
+
+10:14.500 --> 10:21.160
+It's a method we would use history dot push and we'll see that here right.
+
+10:21.170 --> 10:22.500
+We have this topics button.
+
+10:22.700 --> 10:30.730
+We can just click it and go so that's the main use that we get out of the history prof.
+
+10:30.770 --> 10:41.540
+The third prop that we have is the location the location prop actually tells us where we are currently.
+
+10:41.540 --> 10:43.460
+Like what is our application.
+
+10:43.490 --> 10:46.710
+The main thing I want us to focus on is the path name.
+
+10:46.820 --> 10:54.430
+Ignore these other properties let's just look at the Parthenon if we were to navigate.
+
+10:54.500 --> 11:03.770
+Let's say let's not make our home page exact again if we were to navigate to slash like all these random
+
+11:05.300 --> 11:12.870
+savvy URLs even though our home page still matches our location gives us the full path name of where
+
+11:12.930 --> 11:16.110
+we are currently.
+
+11:16.110 --> 11:24.750
+So this is useful because our application our components in some way can become aware of what the full
+
+11:24.750 --> 11:25.220
+you are.
+
+11:25.230 --> 11:29.190
+Looks like now.
+
+11:29.360 --> 11:38.060
+Why would we use these properties while the history one with the push we understand location we can
+
+11:38.060 --> 11:44.510
+see why we might need the path name at some point but the main usage of match beyond being inside of
+
+11:44.510 --> 11:55.720
+a specific topic detail another useful thing about it is that this allows our components to build out
+
+11:55.840 --> 12:00.970
+a nested root structure so what do I mean by nested roots.
+
+12:00.970 --> 12:07.990
+Well let's say for example our topic detail page renders out a bunch of links right or sorry our topic
+
+12:07.990 --> 12:14.880
+list page renders out a bunch of links to a bunch of topic details while we get out of the link.
+
+12:17.270 --> 12:23.130
+And this link will go to a dynamically generated root.
+
+12:23.150 --> 12:30.410
+Let's say we want to say prop stop match dot.
+
+12:30.620 --> 12:31.990
+You are all right.
+
+12:32.030 --> 12:41.380
+So we want to use the current you are all and then we want to say that we want to go to any topic detail
+
+12:42.290 --> 12:42.730
+right.
+
+12:42.760 --> 12:51.610
+We want to go to let's say I want to go to 13 for example and this one is too topic 13 and let's do
+
+12:51.610 --> 12:55.810
+this for a couple others 17 21.
+
+12:55.810 --> 13:03.890
+These are all just random Well now it doesn't matter where our topics list is.
+
+13:04.140 --> 13:12.400
+It will always now be aware and know how to take us to that you are all right.
+
+13:12.420 --> 13:27.110
+Even if our topics list was at some obscure long you are Al that it was not aware of assuming that this
+
+13:27.110 --> 13:31.790
+was the case right.
+
+13:32.020 --> 13:34.000
+Now we can change it in our route
+
+13:39.350 --> 13:42.260
+but now our topics list doesn't care.
+
+13:42.290 --> 13:44.920
+Let me just hide our home page as well.
+
+13:45.140 --> 13:51.410
+Now our topics list doesn't care about anything regarding where are you are.
+
+13:51.410 --> 14:01.130
+L is from the point of where it matched all it cares about is that I'm trying to render out or take
+
+14:01.130 --> 14:07.340
+you to different topics right from my path onwards.
+
+14:07.360 --> 14:16.060
+So this is how we can build out dynamic routing without our topics list being aware of the entire You
+
+14:16.060 --> 14:24.520
+are all right and we can now reuse this topic list in multiple places as long as our topic right our
+
+14:24.520 --> 14:25.500
+topic detail.
+
+14:25.560 --> 14:32.390
+As long as we have the appropriate routes for it so we can even replicate this with just a blog topics
+
+14:35.150 --> 14:43.540
+but we can still use the same component for it because now right we have this topic list that works
+
+14:45.070 --> 14:52.500
+but we also have this topic list that works and they can take you to different topics.
+
+14:52.540 --> 14:59.770
+It's actually we've still just we've compartmentalized and able to reuse our topic list and topic detail
+
+15:00.700 --> 15:02.780
+with dynamic routing.
+
+15:02.830 --> 15:11.740
+That's why this match property is useful so we will see this a little bit more so these are still very
+
+15:11.800 --> 15:19.770
+abstract concepts but it's very valuable for us right now to know what they are so armed with this knowledge.
+
+15:19.810 --> 15:21.790
+Let's keep building our application.

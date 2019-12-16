@@ -1,0 +1,490 @@
+WEBVTT
+
+00:00.810 --> 00:08.730
+In the last few lessons we covered a lot of concepts about redux because redux is a very conceptual
+
+00:08.730 --> 00:17.080
+paradigm of how to build your application and of course we are definitely in this lesson going to set
+
+00:17.170 --> 00:20.070
+up our code to have redux inside of it.
+
+00:20.470 --> 00:25.250
+But before I do there's one more thing I want to cover now.
+
+00:25.310 --> 00:30.530
+The reason I want to cover this is because we're going to write a lot of code just to set up a redux
+
+00:30.650 --> 00:34.330
+and it's a lot of new concepts and code that you might not understand.
+
+00:34.970 --> 00:41.090
+But if you at least understand from a high level what we're doing you can see why we have to configure
+
+00:41.090 --> 00:48.820
+the code the way that we do so looking back at this diagram of how our actions flow through redux in
+
+00:48.820 --> 00:56.290
+order to trigger changes inside of our Dom we look at this flow of events.
+
+00:56.460 --> 01:00.280
+We have some action that goes into our producer right.
+
+01:00.300 --> 01:07.830
+Our route reducer which then propagates changes into it which update our store and then our store finally
+
+01:07.830 --> 01:16.070
+results in Dom changes in the right components along the way of these actions occurring before it ever
+
+01:16.070 --> 01:18.170
+even hits the root reducer.
+
+01:18.260 --> 01:27.530
+It can hit something in the middle called a middleware and all Middleware is is a piece of code that
+
+01:27.770 --> 01:30.770
+gets the action before the root reducer.
+
+01:30.770 --> 01:36.680
+What that middleware does with the actual action is entirely up to the middleware but that's all it
+
+01:36.740 --> 01:37.570
+is.
+
+01:37.670 --> 01:43.670
+They're just something that receive these action objects before they reach the root reducer.
+
+01:43.670 --> 01:47.120
+Now we're going to explore a lot of middle west throughout this course.
+
+01:47.120 --> 01:54.440
+But the most important one that we're actually going to use and explore in order for us to better understand
+
+01:54.440 --> 02:01.700
+redux is the redux logger a middleware and all that middleware does is it logs out actions that get
+
+02:01.700 --> 02:08.040
+fired and then what the state of these reduces arc before and after the action.
+
+02:08.060 --> 02:14.720
+So pretty much just a visual representation of what it is that actions do which is very useful for us
+
+02:14.720 --> 02:16.570
+to understand redux.
+
+02:16.610 --> 02:19.930
+So let's actually write this out in the code.
+
+02:21.100 --> 02:29.110
+So if we go back to our terminal we need to actually install both redux as well as the redux bindings
+
+02:29.110 --> 02:34.620
+for react because redux can be used in multiple frameworks not just react.
+
+02:34.750 --> 02:37.810
+And we also need that redux logger middleware.
+
+02:37.810 --> 02:46.770
+So what we're going to do is we're gonna say yarn ad redux space redux logger and react redux.
+
+02:46.780 --> 02:53.750
+So those are the three lives that we need so as those are being added to our application let's go back
+
+02:53.750 --> 03:01.280
+to our application and go into our index J.S. file our index J S file is where we are actually going
+
+03:01.280 --> 03:10.940
+to put the new component that we get from react redux that will give our application access to not only
+
+03:10.940 --> 03:19.070
+the store but also those reduces that we're going to also right now that thing that we get is going
+
+03:19.070 --> 03:27.200
+to be called the provider and the provider is a component that we get from reactive redux this provider
+
+03:27.230 --> 03:33.950
+is a component that we want to wrap around the entire application because we want everything inside
+
+03:33.950 --> 03:40.490
+to have access to this store object that we get from redux.
+
+03:40.610 --> 03:45.590
+So we'll actually write the store object but first let's just understand this provider.
+
+03:45.770 --> 03:51.830
+This provider is a component that is the parent of everything inside of our application.
+
+03:52.070 --> 03:59.210
+And as the parent it allows us to get access to all of the things related to the store that we're going
+
+03:59.210 --> 04:03.980
+to put all of the actual code we want to store on our reading stage.
+
+04:04.010 --> 04:09.980
+So that's all this provider is and it's a component and it's got to be the parent of everything.
+
+04:10.100 --> 04:15.760
+So now that we have our provider we actually need to write the store itself.
+
+04:15.880 --> 04:22.240
+Now how we're going to do that is we are going to make a new folder inside of our source called redux
+
+04:22.780 --> 04:29.200
+and inside of here it will be all the code related to r redux that we're going to write.
+
+04:29.230 --> 04:38.800
+So what we want to write first is actually this root reducer and what the root reducer is is the actual
+
+04:39.670 --> 04:47.130
+base reducer object that represents all of the state of our application so this root reducer will end
+
+04:47.130 --> 04:53.580
+up being the actual code that combines all of our other states together.
+
+04:53.580 --> 04:55.450
+Now why do we want to do that.
+
+04:55.470 --> 05:01.500
+Well if we wrote all of the code related to all the states in our application in one file you can imagine
+
+05:01.530 --> 05:04.340
+that it becomes really unwieldy.
+
+05:04.350 --> 05:10.290
+So what we want to do is break the code up into its individual sections and I'll show you how we'll
+
+05:10.290 --> 05:16.530
+do that but just understand that all of the reducer that we're going to write is going to go into this
+
+05:16.530 --> 05:24.890
+root reducer Now the other thing that we're going to write is actually going to be the user reducer
+
+05:24.980 --> 05:32.810
+because the user reducer is going to be that reducer that will store the state of our current user.
+
+05:32.810 --> 05:34.990
+Now right now we do store it.
+
+05:35.180 --> 05:40.490
+Our current user inside of our App State so we just want to move that into a reducer that is pretty
+
+05:40.490 --> 05:43.510
+much going to be the same type of object.
+
+05:43.520 --> 05:50.540
+So what we're going to do is we are going to make a new folder called the user and any redux code related
+
+05:50.540 --> 05:56.660
+to this user is going to go into this folder and the first thing we're going to make is that user reducer
+
+05:58.210 --> 06:04.420
+and we're just gonna say it's user dot reducer dodgy OSX and this lets us know that this file is a reducer
+
+06:05.680 --> 06:15.940
+now a reducer is actually just a function that gets two properties it gets a state object which represents
+
+06:16.000 --> 06:20.100
+the last state or an initial state right.
+
+06:20.140 --> 06:25.390
+Which is just an object that represents what it is that we're trying to store.
+
+06:25.700 --> 06:34.570
+And then it receives an action that action is just an object that has a type which is a string value.
+
+06:34.620 --> 06:37.990
+So it's just the name that tells us what specific action this is.
+
+06:38.040 --> 06:43.940
+And when I say specific it literally means like we are going to write a bunch of actions we're going
+
+06:43.940 --> 06:46.720
+to name them whatever it is that we want.
+
+06:46.740 --> 06:53.880
+So we want to make sure that our reducer is are aware of what specific type of action that's coming
+
+06:53.880 --> 06:57.320
+through is and it's gonna be based off this type property.
+
+06:57.340 --> 07:02.390
+The other thing it's going to have which it might or might not is something called a payload.
+
+07:02.410 --> 07:09.460
+Now this payload can be anything and the only reason that we can say it's anything is because maybe
+
+07:09.670 --> 07:14.950
+with this payload object we want to do something with it in order to update our state we might pass
+
+07:15.040 --> 07:22.150
+an object that we literally set as the value in our state or we might use this value to make some transformations
+
+07:22.150 --> 07:22.900
+on our state.
+
+07:22.990 --> 07:29.770
+We don't know but it's just a very flexible property that we get on this action object that we can or
+
+07:29.770 --> 07:31.590
+cannot use.
+
+07:31.630 --> 07:37.090
+Now that's all actions are they're just objects that have these two properties of type and payload and
+
+07:37.090 --> 07:40.120
+this will make more sense once we write more of the code.
+
+07:40.300 --> 07:47.080
+But as I was mentioning before our reducer is just going to be this function.
+
+07:47.080 --> 07:52.150
+So I want to call it user reducer because that's what it is and it's a function that again gets the
+
+07:52.150 --> 07:55.730
+state and some action.
+
+07:55.770 --> 08:03.910
+Now again the state is going to be something that the redux store is going to pass to this reducer.
+
+08:04.080 --> 08:04.530
+Right.
+
+08:04.530 --> 08:11.160
+Whenever an action fires and the state will be whatever the state it is currently when that action gets
+
+08:11.160 --> 08:18.880
+fired so because when we actually fire the state for the first time it's going to be nothing right.
+
+08:18.890 --> 08:23.820
+Because redux doesn't know that we have any state when the app version nationalizes.
+
+08:23.870 --> 08:26.450
+So when an action gets fired there's gonna be no state.
+
+08:26.450 --> 08:29.480
+So we want to make sure to set an initial state.
+
+08:29.590 --> 08:35.650
+So what we'll do is we will write a new concept called initial state and this will just be an object
+
+08:35.800 --> 08:43.360
+that represents the initial state of this reducer very similar to when we instantiate state on r class
+
+08:43.360 --> 08:44.740
+components right.
+
+08:44.770 --> 08:49.270
+We make sure to set some initial state value which is the default values when this component mounts
+
+08:49.270 --> 08:50.020
+for the first time.
+
+08:50.080 --> 08:53.350
+And we're doing pretty much the exact same thing in our reducer.
+
+08:53.350 --> 08:58.720
+So we're actually going to take this current user value and put it into our initial state because it's
+
+08:58.720 --> 09:01.850
+going to be pretty much the exact same thing.
+
+09:01.870 --> 09:06.910
+So now that we have our initial state we're going to make sure that inside of this function call we're
+
+09:06.910 --> 09:12.530
+going to use that initial value as what is called a default parameter value.
+
+09:12.550 --> 09:19.390
+So this is an iOS 6 feature for functions where you can actually pass some default value here with this
+
+09:19.480 --> 09:22.500
+equals and then the value syntax.
+
+09:22.600 --> 09:29.890
+What this means is that if state is ever undefined meaning that it's not set then it will fall back
+
+09:29.950 --> 09:33.110
+and leverage this initial state value that we passed here.
+
+09:33.130 --> 09:36.350
+But remember no is considered a value.
+
+09:36.370 --> 09:45.290
+So if this value inside when you use this default parameter is ever no like as in state is ever null.
+
+09:45.520 --> 09:52.330
+It will still pass null in as the state value and consider an actual valid value and it won't fall back
+
+09:52.420 --> 09:54.970
+on this default value that we set.
+
+09:54.970 --> 09:56.760
+So this is just the thing we've got to keep in mind.
+
+09:57.640 --> 10:04.300
+But now that we have our reduced our function written inside of this we have to actually think about
+
+10:04.450 --> 10:09.140
+how do we return the actual state we want based on the action.
+
+10:09.190 --> 10:15.460
+So what we're going to do here is we are going to write what's called a switch statement and a switch
+
+10:15.460 --> 10:22.450
+statement is pretty much just this statement that looks like this based on some condition and then inside
+
+10:22.450 --> 10:26.040
+of it we setup case statements and a default value.
+
+10:26.140 --> 10:27.780
+So it's actually very simple.
+
+10:27.910 --> 10:35.730
+What we're gonna say is that based on the action dot type value which will be a string if the case of
+
+10:35.730 --> 10:44.780
+that action type is one that we want right then what we'll do is we'll render something otherwise by
+
+10:44.780 --> 10:48.720
+default we are going to just return the state.
+
+10:48.860 --> 10:57.980
+Now the caveat here to remember is that every single reducer gets every single action that ever gets
+
+10:57.980 --> 10:58.680
+fired.
+
+10:58.940 --> 11:06.290
+Even if those actions are not related to this reducer so the reason why we want a default return the
+
+11:06.290 --> 11:12.440
+state is because if none of the action types match inside of the switch statement about the ones that
+
+11:12.440 --> 11:17.270
+we care about then we just want to return the state.
+
+11:17.270 --> 11:25.130
+So for us the case that we care about is set current user when Emre said current user is the action
+
+11:25.130 --> 11:26.980
+type that gets fired.
+
+11:27.020 --> 11:34.040
+We then want to return a new object which represents the new state that our user reducer is going to
+
+11:34.040 --> 11:39.840
+transform into and what that value will be is everything else on the state.
+
+11:39.860 --> 11:45.050
+We always want to spread in everything on the state right because we only want to modify the values
+
+11:45.050 --> 11:50.160
+that we care about and the value that we care to set is our current user.
+
+11:50.160 --> 11:53.530
+And this is going to be the payload and that's all it is.
+
+11:53.540 --> 11:57.830
+You remember how I said the action object is just the type and then a payload.
+
+11:58.280 --> 12:02.690
+Well for us we're literally setting the current user value with this payload.
+
+12:03.590 --> 12:11.000
+So this reducer I know might be a lot of new concepts that you're not used to but if you just look at
+
+12:11.000 --> 12:18.950
+this statement it's a function that gets a state object and an action depending on what the type of
+
+12:19.010 --> 12:20.230
+action is.
+
+12:20.300 --> 12:29.340
+This switch statement will then check if the case for this action type is equal to set current user.
+
+12:29.540 --> 12:32.570
+Then I want to return this new object out of this.
+
+12:32.570 --> 12:40.280
+Reduce our function if none of these action types match any of the case statements that we write then
+
+12:40.280 --> 12:46.400
+just default to return the current state of what the reducer is so that's pretty much all a reducer
+
+12:46.420 --> 12:46.780
+code.
+
+12:47.710 --> 12:54.830
+What we'll do is we will export this out as the default value from this user reduce our And then what
+
+12:54.830 --> 13:02.170
+we'll do is we will bring this into our route reducer because now we have our reducer our first reducer.
+
+13:02.210 --> 13:09.380
+Now if you remember I mentioned that the root reducer represents the overall reducer based on all of
+
+13:09.380 --> 13:13.470
+the reduces that it pulls in in order for us to combine them all together.
+
+13:13.490 --> 13:21.570
+We actually need to import this function called combine reduces and this comes from the redux library.
+
+13:21.590 --> 13:29.960
+So with this when we import our user reducer from our new user user reducer file we are going to export
+
+13:30.020 --> 13:38.030
+out this as the default value which gets returned from combined producers passing in this object where
+
+13:38.030 --> 13:42.740
+the key goes to the actual reducer that we want.
+
+13:42.740 --> 13:49.340
+So if you remember our full state in redux is just one big Jason object.
+
+13:49.580 --> 13:57.140
+The key is that represent the individual slices of state i.e. the actual reducer as is the actual individual
+
+13:57.140 --> 13:59.440
+red doors users that we've wrote.
+
+13:59.450 --> 14:05.320
+So this user reducer is just currently this object with a current user value that will get set whenever
+
+14:05.330 --> 14:08.380
+the set current user action fires.
+
+14:08.540 --> 14:14.630
+We are then pulling that into this combined reducer which will return it into one giant object that
+
+14:14.690 --> 14:19.510
+is appropriately bound with all the redux functionality that we want.
+
+14:19.610 --> 14:21.490
+So I know it seems complex.
+
+14:21.500 --> 14:28.760
+I know there's a lot of code that we wrote but this is what we need in order to get started so with
+
+14:28.760 --> 14:35.900
+this we've written our first reducer but we still have to actually bring it into our store and instantiate
+
+14:35.900 --> 14:37.100
+our store.
+
+14:37.220 --> 14:39.430
+Well how do we do that.
+
+14:39.470 --> 14:42.490
+Well this video's a little long so I'm going to end it here.
+
+14:42.500 --> 14:48.590
+But in the next section we're going to bring our new route reducer into our store as well as create
+
+14:48.590 --> 14:55.640
+some other stuff such as actions so that we can actually flesh out the first redux feature inside of
+
+14:55.640 --> 14:56.870
+our application.
+
+14:56.870 --> 14:58.090
+So see you in the next lesson.

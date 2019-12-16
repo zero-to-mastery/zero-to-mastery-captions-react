@@ -1,0 +1,103 @@
+WEBVTT
+
+00:01.010 --> 00:02.560
+Hey it's Andre here.
+
+00:02.570 --> 00:10.210
+I wanted to take a second and talk about what we just saw in the previous video now for some of you.
+
+00:10.290 --> 00:14.580
+You might be thinking wow style components are really really cool.
+
+00:14.850 --> 00:18.990
+While others might be saying that is the ugliest thing I've ever seen.
+
+00:19.020 --> 00:27.980
+We've just made things so complicated and this is important because moving forward in our course we're
+
+00:27.990 --> 00:35.990
+going to talk about these advanced react topics like style components like redux sagas like graph Q
+
+00:35.990 --> 00:45.820
+Well context API hooks and all of these advanced topics are advanced because they come with tradeoffs
+
+00:46.250 --> 00:53.630
+with pros and cons and when you learn about something like style components which is such a new and
+
+00:53.630 --> 01:01.040
+different way to think about CSX then while we had before it's really easy for us to say I hate it or
+
+01:01.100 --> 01:07.880
+I don't like it and what I found in my career is that when I think like that when I immediately have
+
+01:07.880 --> 01:11.980
+a knee jerk reaction and say I hate this or this is ugly.
+
+01:12.080 --> 01:15.090
+Most likely that means I don't understand it enough.
+
+01:15.890 --> 01:24.210
+Now with that said I actually don't like stealth components and this is just my personal preference.
+
+01:24.530 --> 01:36.080
+But there is always pros and cons to using tools so as we move through the course I want you to not
+
+01:36.320 --> 01:39.860
+immediately decide that you love this or you hate this.
+
+01:39.890 --> 01:43.840
+Instead start to notice the pros and cons of each.
+
+01:43.910 --> 01:50.300
+For example style components have some really interesting concepts that EA who are mentioned about that
+
+01:50.300 --> 01:57.290
+really help us make sure that we keep all our components and what the component is concerned about in
+
+01:57.410 --> 02:04.710
+one place in our javascript but at the same time we notice that it adds an extra layer of complexity.
+
+02:05.230 --> 02:11.450
+If you're working on a large team and you're in charge of that project and you decide to bring installed
+
+02:11.470 --> 02:16.960
+components or any other tool that we're going to talk about throughout the course you have to think
+
+02:16.960 --> 02:19.780
+to yourself is this overhead.
+
+02:19.780 --> 02:27.280
+Is this extra complexity extra knowledge that my developer team needs to learn.
+
+02:27.280 --> 02:29.330
+Is that worth it.
+
+02:29.380 --> 02:38.030
+Are the tradeoffs worth it because as we make our apps more and more complex we make it harder and harder
+
+02:38.240 --> 02:43.460
+for people that are joining our team or looking at our code to understand what's going on.
+
+02:44.270 --> 02:53.650
+I love keeping things as simple as possible but I also understand that as applications grow you need
+
+02:53.650 --> 03:02.560
+to perhaps add a few library add a new style add a new architectural pattern to make it less buggy and
+
+03:02.560 --> 03:06.260
+more extensible so always think about tradeoffs.
+
+03:06.280 --> 03:10.570
+That's why there is no right or wrong answer when it comes to these advanced topics.
+
+03:10.630 --> 03:18.900
+Really good developers senior developers are good because they're able to make these judgment calls
+
+03:19.170 --> 03:25.710
+not necessarily jump on the trend library do the hippest thing that everybody's talking about they can
+
+03:25.710 --> 03:32.620
+think about pros and con on each project each situation and make the right call.
+
+03:32.820 --> 03:37.020
+So start to notice these things in these various let's get back to it.

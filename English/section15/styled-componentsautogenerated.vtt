@@ -1,0 +1,229 @@
+WEBVTT
+
+00:01.020 --> 00:05.500
+So we just explored the issues with CSX.
+
+00:05.520 --> 00:14.180
+The main one being styles leaking across components because of the shared namespace in CSF.
+
+00:14.190 --> 00:18.120
+Well as I mentioned CSX and Jess solves this problem.
+
+00:18.960 --> 00:27.390
+But before we test out one library we just have to remind ourselves about how we did it before in react
+
+00:27.660 --> 00:30.940
+or how we at least capable of doing it and react.
+
+00:30.990 --> 00:39.450
+We could write this object and append it to the style property on our div which does solve the CSX problem
+
+00:39.480 --> 00:43.560
+because this is also extremely specific.
+
+00:43.560 --> 00:52.380
+Doing it this way will never cause Stiles to bleed across our components because when we see how it's
+
+00:52.380 --> 01:00.810
+rendered it's applied to a style property on our development and actually not in the CSF namespace.
+
+01:00.810 --> 01:10.040
+This is technically CSX and J.S. because we are still technically using JavaScript to render R CSX.
+
+01:10.290 --> 01:17.700
+The only issue with this is that we don't have access to all of our selectors because the HDL which
+
+01:17.700 --> 01:25.290
+this is does not support all of the selectors that we might want to add to our components right.
+
+01:26.700 --> 01:37.360
+So as a result what we need to do is use a C CSX and just library and we can get all of this functional
+
+01:37.360 --> 01:39.940
+scoping but in a different way.
+
+01:40.150 --> 01:45.820
+So the library we're using is styled components and it's the most popular library.
+
+01:45.820 --> 01:49.120
+So in order to use it we just have to include it in our project.
+
+01:49.180 --> 01:56.860
+So I did a yarn add style components earlier and now it's in our project and to use it we import in
+
+01:57.430 --> 02:00.820
+the styled keyword from styled components.
+
+02:02.050 --> 02:09.170
+And this styled keyword allows us to actually generate components and I'll show you how it works.
+
+02:09.190 --> 02:14.110
+So first we're gonna declare a new component the same way we normally would write would use our capital
+
+02:14.110 --> 02:22.160
+case as we do with our components and then what we say is it's equal to styled dot and then the HDMI
+
+02:22.190 --> 02:23.000
+element we want.
+
+02:23.300 --> 02:28.430
+So if I want to do I'm going to do styled octave if I wanted a paragraph tag I would you start that
+
+02:28.430 --> 02:33.700
+P if I wanted to image tag I would do style dot image but I want to do.
+
+02:34.400 --> 02:42.510
+And after that we give it a string an interpolation string right as we're used to using inside of here
+
+02:42.510 --> 02:44.050
+we can just write CSX.
+
+02:44.070 --> 02:48.150
+We don't need to do this camel case that we had to do in this style.
+
+02:48.240 --> 02:57.720
+We can just write color goes to red and then we can write font size in our cardboard case goes to 28
+
+02:57.730 --> 03:08.310
+pixels and now we actually are able to use this component the same way that we use it anywhere else.
+
+03:09.030 --> 03:14.700
+So instead of using this Div I am instead going to use this text component and inside I'm going to say
+
+03:14.760 --> 03:23.820
+I am a component and now if we look at our application we'll see that our component is updated and the
+
+03:23.820 --> 03:30.720
+way that it works is what it does is it gives that component a unique string class.
+
+03:30.720 --> 03:40.170
+So you see all this text that was suddenly added to our class of our div which is this text.
+
+03:40.410 --> 03:48.060
+Well what it does is it generates this unique string for the class and then in the head it appends a
+
+03:48.060 --> 04:01.850
+unique style CSF file so a style tag with that specificity specific to just this div.
+
+04:01.970 --> 04:09.710
+So now because it's so specific and it's so unique these styles will never bleed across our application
+
+04:10.130 --> 04:17.600
+because for every new style component that we create it gets a unique class name and then it will generate
+
+04:17.690 --> 04:23.300
+a new style sheet with those unique styles pointing to this unique class name.
+
+04:24.110 --> 04:32.800
+So now we couldn't name even our components the same names whatever it would not matter because those
+
+04:32.800 --> 04:40.280
+styles are scoped to this uniquely generated class name for our components.
+
+04:40.420 --> 04:50.600
+And this is possible because we're leveraging javascript to render our CSX and this is extremely powerful
+
+04:50.630 --> 04:57.370
+because we get true isolation right scoping our selectors and CSX the way that we did.
+
+04:57.380 --> 05:04.280
+Well even in SAS where we nested off everything as deep as it did is not shrewdly enough because we
+
+05:04.280 --> 05:07.260
+still might accidentally make mistakes.
+
+05:07.280 --> 05:09.410
+It's still possible.
+
+05:09.410 --> 05:17.120
+Whereas using style components it's not because these are guaranteed to be unique class names whereas
+
+05:17.120 --> 05:24.340
+when we write we can never guarantee that the class names or writing will 100 percent be unique.
+
+05:24.370 --> 05:30.450
+It also becomes hard for us to sift through massive CSX files to remove unused styles.
+
+05:30.460 --> 05:36.010
+Whereas here we know that if we're not using the style anymore we're literally removing the component
+
+05:37.020 --> 05:37.260
+right.
+
+05:37.260 --> 05:43.170
+So if we didn't need text anymore for example while we just would never see an instance of text in the
+
+05:43.170 --> 05:52.610
+component that we're writing it to in the same way we're now able to also share this component anywhere
+
+05:52.610 --> 05:54.600
+that it might be needed.
+
+05:54.650 --> 06:00.680
+So we're actually able to reuse more of our code because it's almost like sharing properties right or
+
+06:00.680 --> 06:10.640
+sharing constants as we're commonly used to inside of our components and react architecture.
+
+06:10.640 --> 06:16.880
+The other great thing is that because we're rendering javascript unlike that previous style where we
+
+06:16.880 --> 06:23.750
+had the style property we were mentioning that the H then all does not support all of the possible selectors
+
+06:23.780 --> 06:32.960
+but because this is just C assess all of our selectors are supported and the great thing is that we're
+
+06:33.050 --> 06:43.350
+also now suddenly able to leverage props in our styled components to render their CSX ruling.
+
+06:43.400 --> 06:52.460
+This was extremely difficult to do with just CSX but we can now use javascript to control our styles
+
+06:53.270 --> 07:02.060
+and how we would do that is very similar to how we can pass prompts into our regular components just
+
+07:02.150 --> 07:09.260
+because our text is pretty much considered a component and what we pass to it would be for example we
+
+07:09.260 --> 07:16.920
+passed and is active property and it's a boolean value and depending on whether or not is active as
+
+07:16.920 --> 07:25.810
+true or false we render a different border so we could do border and now we actually are able to access
+
+07:25.810 --> 07:30.810
+our profits by using a function now because this is a string we have to interpolate.
+
+07:30.850 --> 07:31.610
+Right.
+
+07:31.690 --> 07:39.640
+So we use our string interpolation and we say in this function I want to d structure off of the props
+
+07:39.820 --> 07:50.840
+which are passed in right I want the prop of is active and what I'm going to return is a string where
+
+07:50.870 --> 07:59.600
+I'm going to check if is active is true in fact I'm not gonna do it like this I mean I say is active
+
+07:59.630 --> 08:10.210
+is true if it is then I want to return a 1 pixel solid black border if it's false I want to return a
+
+08:10.210 --> 08:18.860
+3 pixel dotted green border and now if we save and we go back to our application we see that because
+
+08:18.890 --> 08:26.390
+it's true our border was generated with the one pixel solid black but if I were to change this to force
+
+08:28.720 --> 08:35.270
+what we suddenly see our dotted green border and this is extremely powerful because now our components
+
+08:35.300 --> 08:42.470
+are able to leverage props to decide on their style which makes them even more specific it gives us
+
+08:42.500 --> 08:46.890
+even a greater degree of control over our sea assess.
+
+08:47.720 --> 08:56.540
+So with all of this we can now start converting our ReACT application using style components.

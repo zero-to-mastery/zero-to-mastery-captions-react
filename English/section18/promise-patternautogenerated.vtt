@@ -1,0 +1,370 @@
+WEBVTT
+
+00:00.530 --> 00:01.670
+Welcome back.
+
+00:01.670 --> 00:09.710
+In the last lesson we just handled the observer pattern that we are currently using when interfacing
+
+00:09.710 --> 00:13.370
+with the firestorm library in our application.
+
+00:13.370 --> 00:21.110
+But I did mention that there is a very high likelihood that in a future project that you join you might
+
+00:21.110 --> 00:29.030
+not be using either the observable slash observer pattern or you might have your own server of some
+
+00:29.030 --> 00:31.520
+kind that is not firebase.
+
+00:31.520 --> 00:38.760
+If that were the case you may not use this observer pattern that we've implemented here.
+
+00:38.780 --> 00:41.870
+Instead you'll use a promise based pattern.
+
+00:42.140 --> 00:48.910
+And I just want to quickly go over how we would do that but still leveraging our firebase firestorm
+
+00:48.950 --> 00:50.120
+database.
+
+00:50.300 --> 00:56.570
+We're just going to treat it like some regular API endpoint that we can make requests to or make API
+
+00:56.570 --> 00:57.440
+calls to.
+
+00:57.440 --> 01:02.710
+Because firebase allows us to do so there's actually two ways we can do this.
+
+01:02.760 --> 01:10.700
+The first way is we still leverage the fire store collection ref objects that we get back from the fire
+
+01:10.700 --> 01:19.380
+store or library except instead of returning this observable style of object we return promises.
+
+01:19.380 --> 01:25.360
+I'm going to show you that way and then I'll show you the other way where we use the native fetch in
+
+01:25.360 --> 01:31.090
+order for us to still use our collection rough to do so except doing it in a promise oriented manner
+
+01:31.870 --> 01:43.040
+instead of using on snapshot what we use is dot get what dot get does for us is it makes a API call
+
+01:43.370 --> 01:48.030
+to fetch back the data associated to this collection.
+
+01:48.530 --> 01:55.670
+Which will it be the exact same as the snapshot object that we're getting back from are back in.
+
+01:55.810 --> 02:05.160
+The only difference is that instead now we call dot then and we pass our Snapshot transformation into
+
+02:05.160 --> 02:05.720
+this dot.
+
+02:05.730 --> 02:06.000
+Then
+
+02:08.970 --> 02:16.320
+and if we save and go back we'll see that our application behaves the exact same way and our shop is
+
+02:16.320 --> 02:21.620
+still getting updated with the correct items from our fire start back end.
+
+02:21.690 --> 02:26.160
+So that's a very simple way to just switch over to using a promised style.
+
+02:26.160 --> 02:32.790
+If you're more comfortable with it the only caveat here is that the only time we'll ever get new data
+
+02:32.820 --> 02:37.210
+from our back end is when we remount our shop.
+
+02:37.220 --> 02:43.880
+This is because we're no longer leveraging the live updates stream style that the observable pattern
+
+02:43.880 --> 02:47.840
+lended us when we were using on snapshot as before.
+
+02:48.650 --> 02:55.670
+Now we're literally doing one off API calls inside of our component at Mount leveraging the promised
+
+02:55.670 --> 03:01.680
+change style of doing asynchronous event handling now.
+
+03:01.690 --> 03:09.890
+How would we do this if instead we were to try this using the fetch pattern that might be more common.
+
+03:09.910 --> 03:16.780
+If you were using any other type of database while firebase actually allows us to use their database
+
+03:16.840 --> 03:26.030
+their fire store databases as API which are accessible by a euro and if we go to the dogs here we actually
+
+03:26.030 --> 03:31.910
+see that all of the your Ls are nested under this base your URL.
+
+03:31.940 --> 03:39.380
+The only thing that we have to do is we need to add and switch out this your projects I.D. with our
+
+03:39.380 --> 03:45.680
+database I.D. which in my case you can always find it if you go to your firebase console inside of your
+
+03:45.680 --> 03:47.590
+project that you're using.
+
+03:47.630 --> 03:54.200
+You hit the gear you go to project settings and you'll find whatever your project ideas here.
+
+03:54.200 --> 03:56.050
+Now for me it's Crown DV.
+
+03:56.360 --> 04:01.490
+So what you're gonna do is you're gonna take this I.D. and you're going to replace the section of this
+
+04:01.490 --> 04:05.360
+your URL where it says your project document I.D..
+
+04:06.080 --> 04:12.650
+So just replace that with your I.D. and then what you want to do is you're going to copy this string
+
+04:13.100 --> 04:20.420
+up until the documents slash section so we don't want everything up until the cities L.A. portion of
+
+04:20.420 --> 04:26.620
+the URL you're going to copy that you're gonna go back to your application and you're going to comment
+
+04:26.680 --> 04:27.370
+out this code.
+
+04:29.000 --> 04:35.070
+And then what you're gonna do is you're gonna just use the native fetch API as we remember and we're
+
+04:35.070 --> 04:39.560
+gonna paste our string in and then we're gonna get our collections.
+
+04:39.930 --> 04:40.860
+So we want to go.
+
+04:40.860 --> 04:42.030
+Documents slash.
+
+04:42.060 --> 04:48.330
+And then we just want to say collections and we want the whole collections collection.
+
+04:48.480 --> 04:54.660
+And now we're just going to chain our dog then and as you remember from fetch we have to convert our
+
+04:54.660 --> 05:01.200
+response to Jason and let's just log out what our collections looks like.
+
+05:01.200 --> 05:07.140
+So we have an idea of what it is that this endpoint actually gives us back because we're not dealing
+
+05:07.140 --> 05:10.740
+with snapshot or reference objects anymore.
+
+05:10.750 --> 05:18.670
+Now if we look inside of our actual console log we'll see we get an object that has this documents array
+
+05:18.820 --> 05:21.690
+on it inside of this array.
+
+05:21.790 --> 05:30.550
+We have these objects that represent the collection documents that we have inside however the fields
+
+05:30.550 --> 05:40.150
+are actually on this Field's property and the fields have the actual name of the field but not the value
+
+05:40.720 --> 05:43.920
+the value is actually in another property.
+
+05:43.930 --> 05:46.040
+And here we say it's called array value.
+
+05:46.660 --> 05:49.900
+And then on the array value we see it's a values.
+
+05:50.170 --> 05:56.350
+And even in the values we see that their map values that goes to the field that finally give us the
+
+05:56.470 --> 05:59.970
+actual objects that we need.
+
+05:59.970 --> 06:03.370
+Now this is extremely nested.
+
+06:03.400 --> 06:07.490
+This is at least eight levels nested just for us to get these values.
+
+06:07.690 --> 06:11.900
+So we're not actually going to use them not for this case at least.
+
+06:11.920 --> 06:19.540
+But we did see how we can use fetch to get at least the objects that we need if we had to interface
+
+06:19.630 --> 06:27.160
+with such a nested object like this we would just modify our actual modification function so that it
+
+06:27.250 --> 06:31.680
+properly navigates through that and then builds out the object we need.
+
+06:31.930 --> 06:37.540
+But the pattern would largely remain the same as pretty much what we have here right in this final thought
+
+06:37.570 --> 06:46.330
+then we would still just convert the collections array into the collections Map object we need fire
+
+06:46.360 --> 06:53.400
+our update collections and then set the state so hopefully you've seen at the very least how simple
+
+06:53.400 --> 07:00.030
+it is based on the pattern that we've already written to pretty much just convert what was already before
+
+07:00.030 --> 07:06.130
+our Observer pattern into this promise pattern very simple very easy.
+
+07:06.540 --> 07:13.860
+It's just that with this final fetch method and fire store in particular it's just such an unnecessary
+
+07:13.860 --> 07:18.360
+amount of work for us to do right now especially when we have a working solution.
+
+07:18.600 --> 07:25.170
+So let's actually remove this fetch from our code base and just go back to using our collection ref
+
+07:25.320 --> 07:34.080
+dog get method because here we're going to actually segue way in to a lesson on redux asynchronous event
+
+07:34.080 --> 07:35.850
+handling.
+
+07:35.890 --> 07:44.440
+So right now what we're doing is we're handling the asynchronous nature of fetching data inside of this
+
+07:44.440 --> 07:52.360
+component our shop component is the one that actually does the call to get and then to update the snapshot
+
+07:52.360 --> 07:54.970
+on all of this information here.
+
+07:54.970 --> 08:03.040
+But technically speaking it does not have to be the actual location that gets this information or actually
+
+08:03.040 --> 08:12.300
+handles the logic regarding the fetching of this information instead what we might want to do is have
+
+08:12.390 --> 08:20.190
+this code inside of a redux action that will handle all of the asynchronous nature and then fire the
+
+08:20.190 --> 08:27.180
+event because that's really all we're doing here but in order for us to do that we need to understand
+
+08:27.180 --> 08:32.480
+the reasons why why would we want to move the logic out of our component at Mount.
+
+08:32.550 --> 08:40.320
+The only reason why we would ever want to do such a thing is because there's a chance that we need to
+
+08:40.470 --> 08:47.370
+do this call where we're fetching some kind of data from our back end and then converting it and storing
+
+08:47.370 --> 08:51.040
+it or a reducer somewhere else in our application.
+
+08:51.150 --> 08:58.350
+What do I mean by this if we never go to this page this shop page at all right let's say we refresh
+
+08:58.350 --> 09:07.670
+our application we will actually see that we have never fired our set categories or set shot collections
+
+09:07.890 --> 09:14.280
+our collections is always know our action only fires when our shop component mounts for the first time
+
+09:14.460 --> 09:21.240
+either if we go to the slash shop route or slash shop category I.D. slash heart slash jacket whatever
+
+09:22.510 --> 09:28.970
+there's a chance that there's another component that we want to leverage this exact same method.
+
+09:29.020 --> 09:34.570
+We don't want to have to rewrite this exact same code in another page component because it needs to
+
+09:34.570 --> 09:41.140
+access the shop component and we also don't want to move everything up into our top level objects component
+
+09:41.230 --> 09:45.460
+because then we might be rendering so much data in our application.
+
+09:45.460 --> 09:50.070
+Once our initial application mounts that it seems really tedious.
+
+09:50.140 --> 09:56.220
+We just want to reuse this piece of the code if you understand what I'm saying.
+
+09:56.300 --> 10:02.210
+If we were to move this ability to fetch from the database and store it into our reducer into the top
+
+10:02.210 --> 10:07.790
+level such as into our app component which is our highest level component that we know always mounts
+
+10:07.880 --> 10:10.010
+if our application loads.
+
+10:10.010 --> 10:16.110
+Then imagine if we had five six data endpoints that we needed to do the exact same pattern for right.
+
+10:16.130 --> 10:20.540
+Let's say we had to do it for multiple documents and multiple collections.
+
+10:20.540 --> 10:26.200
+Well we would be fetching and waiting and rendering a lot of data the moment the application mounts.
+
+10:26.210 --> 10:29.210
+And that's really bad on performance.
+
+10:29.270 --> 10:35.120
+What we instead want to do is keep this pattern where we kept it on the appropriate page which was our
+
+10:35.120 --> 10:37.550
+shot page that cares about the data.
+
+10:37.610 --> 10:42.230
+It's just that there's a chance that there's more parts of our application that might also need to leverage
+
+10:42.260 --> 10:48.620
+this collection and should not be dependent on our shot Page mounting for them to get the collection
+
+10:48.620 --> 10:50.730
+data that they need.
+
+10:50.730 --> 10:57.480
+So what we're gonna do as I mentioned earlier is move this into an asynchronous redux action that will
+
+10:57.840 --> 11:01.170
+allow us to reuse this in multiple places.
+
+11:01.170 --> 11:03.810
+But we are going to tackle that in the next lesson.
+
+11:04.290 --> 11:12.200
+But now is also probably a good time for us to commit our code so let's just check what we've added
+
+11:12.390 --> 11:13.460
+and we've added a lot.
+
+11:14.000 --> 11:15.990
+So we are going to get an
+
+11:18.820 --> 11:31.140
+all this code that we have so let's just say what we did was implement code that pulls in our shop data
+
+11:31.860 --> 11:46.590
+from fire store and stores it into the shop reducer from our shop page also included are with Spinner
+
+11:48.150 --> 11:56.080
+HFC and now let's push this up and move on to the next lesson.

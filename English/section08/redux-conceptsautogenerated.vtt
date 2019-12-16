@@ -1,0 +1,301 @@
+WEBVTT
+
+00:00.630 --> 00:09.590
+Why do we want to use redux as we mentioned before redux is really really good at managing state especially
+
+00:09.600 --> 00:16.580
+a large state so redux is a library that we would want to use if our apps get bigger and bigger and
+
+00:16.580 --> 00:19.240
+bigger and they have larger and larger state.
+
+00:19.340 --> 00:25.460
+Remember we want to use tools based on the problems of the self and we duck solves the problem of what
+
+00:25.460 --> 00:33.500
+happens when react apps get really really big and using just this dot state just doesn't make sense
+
+00:33.500 --> 00:34.200
+anymore.
+
+00:34.280 --> 00:39.540
+It gets more and more complicated remember react is what we call a view layer.
+
+00:39.650 --> 00:43.540
+It's really good at The View side but not necessarily at managing state.
+
+00:43.640 --> 00:48.340
+So use redux when things get really really complicated.
+
+00:48.410 --> 00:56.420
+The second point is useful for sharing data between containers and this is another thing with when projects
+
+00:56.420 --> 01:04.400
+become large when they need to start sharing state between containers with react.
+
+01:04.400 --> 01:11.390
+This is actually a little bit difficult and you have to move the state up one layer so that you have
+
+01:11.420 --> 01:14.450
+a parent that can share state between the two.
+
+01:14.450 --> 01:21.290
+But with redux this becomes really really easy as we're going to demonstrate in our coding section and
+
+01:21.290 --> 01:28.330
+finally redux has predictable state management using the three principles.
+
+01:28.500 --> 01:35.980
+Now what are the three principles these three principles and Redux are gonna really really make sense.
+
+01:35.990 --> 01:41.680
+At the end but I want to still introduce them to you so that we're aware of them.
+
+01:41.690 --> 01:49.010
+The first one is the idea of single source of truth and this is a fancy way of saying that we have one
+
+01:49.070 --> 01:53.740
+single big object that describes the entire state of the app.
+
+01:53.780 --> 02:01.760
+Remember this we had one massive state object that describes everything within our app.
+
+02:01.940 --> 02:09.520
+So we have our single source of truth because react reacts based on whatever the state is.
+
+02:09.710 --> 02:15.590
+We can just have one big object that describes how the app should look and react we'll take care of
+
+02:15.590 --> 02:15.710
+it.
+
+02:17.070 --> 02:24.560
+The second principle is the idea that state is read only and this encourages something called Image
+
+02:24.570 --> 02:32.400
+ability which is not modifying the object and it prevents unexpected errors this way.
+
+02:33.210 --> 02:41.190
+So the state object that we will create with redux will actually never get modified and instead we would
+
+02:41.190 --> 02:48.960
+create a new state after each action is taken by the user and then finally the third principle is the
+
+02:48.960 --> 02:56.580
+idea that changes are made only using pure functions something that we've talked about in my previous
+
+02:56.580 --> 02:57.080
+course.
+
+02:57.150 --> 03:05.460
+The idea that a pure function is something that receives an input and always returns an output that
+
+03:05.460 --> 03:06.870
+is predictable.
+
+03:06.870 --> 03:13.500
+If we enter the same end but a thousand times we expect that function to have the same output a thousand
+
+03:13.500 --> 03:21.450
+times using these principles redux has some new words that we're going to introduce in our vocabulary
+
+03:22.380 --> 03:25.520
+and we're gonna be comfortable with them by the end of this section.
+
+03:25.620 --> 03:31.860
+The first one is action and action is something that a user does such as clicking on a button or a drop
+
+03:31.860 --> 03:39.800
+down menu and what happens in redux is as soon as a user clicks on something a button and creates an
+
+03:39.800 --> 03:40.620
+action.
+
+03:40.820 --> 03:46.040
+It goes through something called a reducer and a reducer is simply a function.
+
+03:46.400 --> 03:54.230
+A pure function that receives an input which is the action so the user just clicked on a button and
+
+03:54.230 --> 04:06.230
+creates an output and this output is the state or the store as we call it in redux which is the entire
+
+04:06.230 --> 04:08.480
+state of the app.
+
+04:08.570 --> 04:16.100
+So as it goes through the function the store gets updated and react because it notices this state change
+
+04:16.490 --> 04:18.340
+makes changes to the view.
+
+04:19.790 --> 04:23.420
+Again these are wars that we're going to encounter as we start coding along.
+
+04:23.780 --> 04:25.780
+Now why do this.
+
+04:26.120 --> 04:33.410
+I mean can we just have an action and then an action happens and then we just make changes.
+
+04:33.410 --> 04:39.690
+I mean that's how something like Jake we're used to work and yeah it looks more complicated doesn't
+
+04:39.690 --> 04:39.830
+it.
+
+04:39.840 --> 04:47.100
+Adding all these steps beforehand but as you can see above if you have tons of actions happening which
+
+04:47.130 --> 04:49.470
+with modern apps that are very interactive.
+
+04:49.470 --> 04:55.440
+This happens a lot where the users scroll action and then the clicks a button and then highlight something
+
+04:55.710 --> 04:56.720
+and so on and so forth.
+
+04:56.790 --> 05:02.280
+You see that the more and more actions we have the more changes we have to make and those changes might
+
+05:02.280 --> 05:07.220
+trigger other actions which trigger other changes and so on and so forth.
+
+05:07.230 --> 05:10.530
+And you can get pretty pretty complicated as you can see in this diagram.
+
+05:11.540 --> 05:20.330
+With redux we make sure that all the actions go through one reducer everything flows through this function
+
+05:21.230 --> 05:30.350
+and through this function it always because it's pure returns the same state based on the action and
+
+05:30.440 --> 05:36.200
+updates the store and this store now which represents what our app should look like.
+
+05:36.260 --> 05:43.700
+Makes changes so it kind of funnels all these actions into one reducer so that everything is predictable
+
+05:43.700 --> 05:44.780
+and nice.
+
+05:44.780 --> 05:49.940
+Again one of those things that's hard to really explain without encountering the problem first which
+
+05:50.120 --> 05:58.060
+we'll get to now redux and I want to teach this just for historical purposes uses an architectural Pradhan
+
+05:58.070 --> 06:05.540
+called Flux pattern architecture and software is used as a way to make sure that we're able to solve
+
+06:05.570 --> 06:13.100
+problems in a logical sense and in an organized fashion in this flux pattern which inspired the library
+
+06:13.100 --> 06:13.970
+redux.
+
+06:13.970 --> 06:22.250
+Has this idea of having an action and then having a dispatcher that dispatches this action to the store
+
+06:22.550 --> 06:29.840
+which is our state which updates the view and it's one way data flow everything flows one way if the
+
+06:29.840 --> 06:35.570
+view gets updated we go back to the action and again goes to dispatcher that dispatches the change to
+
+06:35.570 --> 06:45.450
+the store and then to the view and this was a pretty revolutionary idea because before that we had something
+
+06:45.450 --> 06:53.960
+called MVC or model view controller and you may have heard of it it was quite quite popular the idea
+
+06:53.960 --> 07:02.150
+with an MVC pattern is we have an action and that action is read by a controller.
+
+07:02.150 --> 07:09.740
+So again another JavaScript file that looks for actions user clicks on a button and based on whatever
+
+07:09.740 --> 07:13.850
+the controller says we update the model or the data.
+
+07:13.850 --> 07:20.360
+In this case so we can think of it as state we change something in the model and then it updates the
+
+07:20.360 --> 07:20.630
+view.
+
+07:22.530 --> 07:29.310
+Now the problem with the MVC pattern is well this diagram over here we have the controller that changes
+
+07:29.310 --> 07:31.930
+different pieces of the model.
+
+07:32.130 --> 07:38.020
+And this model can change the view that can trigger a another change.
+
+07:38.100 --> 07:42.200
+And that model can change another part of the view and so on and so forth.
+
+07:42.300 --> 07:44.340
+And we have this thing that we saw before.
+
+07:45.030 --> 07:51.930
+We have the craziness of actions and making changes all these arrows just criss crossing and not looking
+
+07:51.930 --> 07:52.540
+very nice.
+
+07:53.440 --> 07:59.180
+And although it might not be bad when your apps are smaller as your apps get bigger you want to do something
+
+07:59.180 --> 07:59.650
+like this.
+
+07:59.650 --> 08:04.700
+So it's logical and makes sense and that's what we want to do with architecture.
+
+08:04.700 --> 08:11.900
+We want to architect our apps in ways that as they grow although we may add a few things in the end
+
+08:12.440 --> 08:21.710
+everything is easier to reason about and understand so we have the flux pattern which enforces a unique
+
+08:21.710 --> 08:30.770
+directional data flow we have the MVC pattern which could definitely be improved if you get anything
+
+08:30.860 --> 08:32.430
+out of this video.
+
+08:32.480 --> 08:40.790
+The one thing I want you to understand is the idea that redux at the end of the day is pretty much the
+
+08:40.790 --> 08:49.310
+same as this DOD state and react with three ducks so we can replace this dot state and theoretically
+
+08:49.310 --> 08:58.430
+remove all of this dot state from react and have it all happen inside of this redux library which again
+
+08:58.610 --> 09:09.320
+we're going to do but one caveat you could technically have redux with the state but also still keep
+
+09:09.650 --> 09:17.300
+a little bit of React state in a component redux doesn't replace completely the this dot state or this
+
+09:17.300 --> 09:19.390
+dot set state and react.
+
+09:19.520 --> 09:26.750
+You can still use them together but like I said before without having gone into any of the code of redux
+
+09:27.560 --> 09:30.630
+this might look a little bit overwhelming and confusing.
+
+09:30.800 --> 09:33.460
+I promise you things are going to make sense by the end.
+
+09:33.680 --> 09:40.100
+Before I throw code onto the screen I want to make sure that you have some principles and concepts that
+
+09:40.100 --> 09:40.850
+we're working from.

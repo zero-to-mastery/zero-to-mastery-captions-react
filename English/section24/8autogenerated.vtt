@@ -1,0 +1,235 @@
+WEBVTT
+
+00:01.310 --> 00:08.730
+In our last section we just wrote our new Togo card hidden mutation on our client side.
+
+00:08.810 --> 00:16.820
+So what we need to do now is replace any use of the card hidden toggling from our redux actions as well
+
+00:16.880 --> 00:23.200
+as any components that are listening for the hidden value on our card reducer.
+
+00:23.240 --> 00:29.260
+We want to replace it now with our use of Apollo's client side state management.
+
+00:29.390 --> 00:36.350
+So what we'll do is we'll actually modify our header component so that it doesn't use the select card
+
+00:36.380 --> 00:38.430
+hidden selector that we have.
+
+00:38.540 --> 00:44.210
+So let's just remove that from our map states props but we won't remove our maps that's a prop set of
+
+00:44.210 --> 00:50.930
+course because we have not modified our select current user and current user reducer storage.
+
+00:50.930 --> 00:54.350
+So we do want our application to break.
+
+00:54.410 --> 01:01.850
+Now we're going to make a new header dot container dot ASX and we'll import all those things that we're
+
+01:01.850 --> 01:09.440
+used to importing now for our graph fuel containers let's import in react from react.
+
+01:09.440 --> 01:14.180
+We need to import in our query component from reactive Paulo.
+
+01:14.720 --> 01:20.570
+We also need to import in GQ El from Apollo boost.
+
+01:20.820 --> 01:26.300
+And then finally we need to import in our header component.
+
+01:26.390 --> 01:34.040
+Now the actual definition for our head our container is just going to be querying for that card hidden
+
+01:34.760 --> 01:38.730
+and our cart hit and query is actually the same one that we have here.
+
+01:38.810 --> 01:46.250
+So we can just actually copy this over and use it as the query value for a query.
+
+01:46.250 --> 01:51.950
+Now we can easily put these in a different file and pull them in but it's easier I find to be able to
+
+01:51.950 --> 01:55.520
+visually see what it is that we're actually using as our graph.
+
+01:55.520 --> 02:04.830
+Q I'll query so we're going to set our new cost as our header container which is going to be equal to
+
+02:04.830 --> 02:15.250
+this functional component that returns back the query where the query goes to get card hidden and because
+
+02:15.280 --> 02:20.540
+again of this client directive we're looking for card hidden on our local cache.
+
+02:20.590 --> 02:26.370
+It's not going to go to the back end to try and find some card hidden value inside of our database.
+
+02:28.060 --> 02:35.470
+Now in the function we'll get back our data and off that data we're gonna get our cart hit in value
+
+02:37.650 --> 02:46.760
+and what we want to do is return the header component where hidden goes to card hidden.
+
+02:46.780 --> 02:54.070
+So now our header component is receiving the hidden value from our new query so let's export out our
+
+02:54.070 --> 03:02.880
+header container and let's replace our use of it inside of our app J.S. with our new header.
+
+03:03.060 --> 03:07.610
+So default as a header from header container.
+
+03:07.670 --> 03:13.340
+So now hopefully nothing is broken our code still works.
+
+03:13.480 --> 03:18.560
+We need to now modify our click to fire our new mutation.
+
+03:18.690 --> 03:26.460
+So how do we do that is we're going to modify the cart icon component to use our new toggle car hit
+
+03:26.460 --> 03:33.730
+a mutation instead of our redux action so let's just get rid of this one remove it from the map.
+
+03:33.730 --> 03:34.570
+Dispatch
+
+03:37.650 --> 03:43.930
+and again we stop to keep the map states a props because we haven't done the item count yet either but
+
+03:44.050 --> 03:51.280
+what we're going to do is we are now going to use our mutation inside of the car icon container Dutch
+
+03:51.280 --> 03:52.130
+ASX.
+
+03:52.690 --> 03:58.660
+So the mutation is similar to the query in the sense that instead of getting a query component we are
+
+03:58.660 --> 04:03.180
+going to use a mutation component that we get from react Apollo.
+
+04:03.430 --> 04:16.080
+So let's in part react from react and let's import in that new mutation component from react Apollo.
+
+04:16.170 --> 04:23.660
+Now this mutation component is going to behave almost identically to the query component in the sense
+
+04:23.660 --> 04:30.760
+that instead of passing a query to it we're just going to pass a mutation query right our mutation GQ
+
+04:30.760 --> 04:32.010
+Wall Street.
+
+04:32.120 --> 04:33.680
+So let's see what that looks like.
+
+04:34.610 --> 04:41.170
+So we're going to important Carl Icahn from Carl Icahn component and then we're going to write out our
+
+04:41.170 --> 04:44.220
+new toggle cart hidden value.
+
+04:44.330 --> 04:52.100
+Now the way that this thing is going to look is that we are going to write it the same way toggle cart
+
+04:52.100 --> 05:00.460
+hidden right as we did when we wrote our queries except we're gonna set it equal to this GQ Elle where
+
+05:00.460 --> 05:08.160
+we're calling the mutation that we have defined in our typed FS which is a capital toggle cart hit in
+
+05:10.870 --> 05:18.190
+and then what we're going to get back is the toggle cart hidden mutation that we wrote inside of our
+
+05:18.190 --> 05:18.870
+resolve.
+
+05:19.060 --> 05:27.170
+So if you remember here the actual resolve our close all these has it as lowercase.
+
+05:27.290 --> 05:35.250
+So that's what we're going to pass through into here and we're gonna get this from the client now finally
+
+05:35.520 --> 05:43.170
+we're just going to define the actual container cart icon container is equal to this functional component
+
+05:43.680 --> 05:55.160
+that returns us are mutation component receiving our mutation query toggle cart hit in and how we receive
+
+05:55.160 --> 06:01.010
+it is going to be just inside of a function but we don't have to pull it off because all we're getting
+
+06:01.010 --> 06:02.540
+is the mutation.
+
+06:02.540 --> 06:05.740
+So if we just call it toggle cart hit in here right.
+
+06:05.870 --> 06:10.700
+We can name it whatever we want but this is pretty much what we're getting as the parameter from this
+
+06:10.700 --> 06:24.010
+function so here we are going to pass this into Carl Icahn as the toggle cart hidden value and then
+
+06:24.010 --> 06:28.120
+we're gonna export out our cart icon container as the default
+
+06:30.780 --> 06:39.530
+and then we're just going to replace it in our head component and now where we had Carl Icahn we are
+
+06:39.530 --> 06:50.170
+going to switch it out for our container using our default as pattern and now if we save we should see
+
+06:50.890 --> 06:54.400
+that it should work now so that's it.
+
+06:54.570 --> 06:55.560
+There we go.
+
+06:55.650 --> 07:03.240
+We've pretty much managed to get our code working using the new pattern that we have so every time we
+
+07:03.300 --> 07:08.790
+fire off our mutation our mutation will update our actual value.
+
+07:08.790 --> 07:09.310
+Right.
+
+07:09.330 --> 07:17.890
+The one that we've set right here inside of our initial right data then when ever that value updates
+
+07:18.400 --> 07:25.400
+all of our containers will refresh because they're listening for that value right.
+
+07:25.400 --> 07:32.050
+Anything that's pulled that cart hit in value into their components will end up rendering.
+
+07:32.060 --> 07:37.250
+So that's really good because it pretty much mimics the redux flow that we're used to where whenever
+
+07:37.250 --> 07:45.520
+we update the state the state will then update anything that is subscribed to it using a selector so
+
+07:45.610 --> 07:51.400
+in a similar way we've pretty much managed to mimic what redux solves in its local state management
+
+07:51.520 --> 07:57.590
+with our new resolve pattern albeit it is more verbose to write.
+
+07:57.670 --> 08:05.540
+This is the way that Apollo does it so hopefully that made more sense once we saw it in action.
+
+08:05.580 --> 08:10.410
+We'll definitely get more practice with writing more mutations and what we're gonna do next is we are
+
+08:10.410 --> 08:18.660
+going to update our ad item feature that we were using redux for into our new client side.
+
+08:18.660 --> 08:22.710
+Apollo local state management so we'll do that in the next lesson.

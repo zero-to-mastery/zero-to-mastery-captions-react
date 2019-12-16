@@ -1,0 +1,97 @@
+WEBVTT
+
+00:00.890 --> 00:05.310
+So let's get started with our first react app.
+
+00:05.340 --> 00:10.560
+The first thing we're going to build is this application called Monster's roll attacks.
+
+00:10.560 --> 00:14.610
+It's a web app that has these cards that have monsters in them.
+
+00:14.700 --> 00:20.610
+And these cards have a name and an email and then there's also this search box that we can use to filter
+
+00:20.610 --> 00:25.850
+out the monsters by what we type in now through building this application.
+
+00:25.850 --> 00:33.600
+We are going to understand the basics of what react does how to write react code and also some of the
+
+00:33.600 --> 00:41.310
+fundamental things we need to understand when building an application and react before we get started.
+
+00:41.310 --> 00:49.500
+We're going to use a tool called Create react app create react app is a tool that was built by Facebook
+
+00:49.860 --> 00:56.100
+to help developers get started with building react projects very quickly.
+
+00:56.100 --> 01:05.400
+The reason for this tool is because react is actually written in a version of JavaScript that is further
+
+01:05.520 --> 01:11.280
+along than the version of JavaScript that our browsers understand.
+
+01:11.280 --> 01:18.240
+So there are actually these two tools called Babel and web pack that take the react code that we write
+
+01:18.690 --> 01:26.940
+and convert them into that older version of JavaScript and HD email that our browser is able to understand.
+
+01:26.970 --> 01:33.660
+Now the Facebook team understood that it would be a lot of work for new developers in order to learn
+
+01:33.660 --> 01:40.870
+REACT TO LEARN ALL THIS CONFIGURATION regarding web pack and Babel if they just want to write react.
+
+01:40.900 --> 01:45.930
+Then there should be a quick way just to start writing a react project.
+
+01:45.960 --> 01:52.920
+So this tool helps us spin up a project that already has all this configuration done for us.
+
+01:53.700 --> 02:02.010
+Now later on in the course I will definitely show you guys how create react app works under the hood.
+
+02:02.010 --> 02:05.720
+I'm going to show you some of the web pack and some of the Babel.
+
+02:05.730 --> 02:12.990
+So you understand how to do it yourself but right now I just want us to start learning react now in
+
+02:12.990 --> 02:14.370
+order to use this tool.
+
+02:14.430 --> 02:20.930
+We see that we got a call NPM create react app and then the name of our application in our command line
+
+02:22.250 --> 02:26.870
+so before we begin we got to make sure we're using the latest version of node.
+
+02:27.050 --> 02:33.380
+So if we check the node Web site we'll see that the latest stable recommended version is ten point one
+
+02:33.380 --> 02:34.880
+five point three.
+
+02:34.880 --> 02:42.560
+So let's go to our terminal and I use end VM so I'm gonna call envy them install ten point one five
+
+02:42.560 --> 02:52.560
+point three and end VM will install this version of node and then we're gonna use it and VM use ten
+
+02:52.560 --> 02:56.530
+point one five point three.
+
+02:56.540 --> 03:05.930
+Now we're going to call what we saw earlier NDP X create react app monster's Rolodex
+
+03:08.640 --> 03:14.550
+now create react app is now building out our project and setting up the files.
+
+03:14.610 --> 03:23.270
+The Web hack the Babel all the stuff we need so that we can start using react right away and after this
+
+03:23.270 --> 03:30.710
+project gets built let's C.D. into it and then let's see what create react app gives us.

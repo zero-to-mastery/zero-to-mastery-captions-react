@@ -1,0 +1,208 @@
+WEBVTT
+
+00:00.390 --> 00:06.300
+So in order for us to understand I'm just going to look quickly at this life cycles component that I've
+
+00:06.300 --> 00:06.630
+written.
+
+00:06.960 --> 00:09.110
+It's just called life cycles right.
+
+00:09.120 --> 00:09.900
+That's all it is.
+
+00:09.900 --> 00:19.000
+It's just a component called life cycles which is a class component extending the react component inside
+
+00:19.000 --> 00:19.560
+of here.
+
+00:19.720 --> 00:25.430
+Are The Possible Life Cycle methods that we want to look at and inside of each one.
+
+00:25.450 --> 00:31.690
+I'm just logging the name of the life cycle that it is so that when it gets called and we look in our
+
+00:31.690 --> 00:37.420
+console we'll see the order in which they're getting fired.
+
+00:37.420 --> 00:44.500
+Now before we take a look into what these life cycles are there's actually a diagram we can look at
+
+00:44.800 --> 00:54.670
+on the react Web site and on this diagram it will show us in this graph form when each method fires
+
+00:54.670 --> 00:57.900
+depending on what phase the component is in.
+
+00:58.090 --> 01:07.220
+So the first phase we gonna look at is the mounting phase the mounting phase is the phase when the component
+
+01:07.340 --> 01:16.540
+is being put on the DOM for the first time so when it's mounting when it's in the mounting phase it
+
+01:16.540 --> 01:24.370
+starts before our component is actually on our dot right before it's on our page when it starts mounting
+
+01:24.430 --> 01:26.650
+it first looks at the component.
+
+01:26.650 --> 01:34.400
+So for us our life cycles component and then it sees the constructor and it calls the constructor first.
+
+01:34.480 --> 01:41.800
+So inside of our constructor we have our super right and the super is pretty much just a method on all
+
+01:41.800 --> 01:50.290
+classes inside of their constructors that say if I'm extending from some other class component I want
+
+01:50.290 --> 01:55.330
+to pull in all of their methods and all of their functionality right.
+
+01:55.390 --> 02:00.670
+Which might sound complicated but all you need to know is that what that does is it allows are class
+
+02:00.670 --> 02:07.120
+component to have access to these lifecycle components because you can see it as if these lifecycle
+
+02:07.120 --> 02:13.570
+components and when they get called in the order of all this functionality is actually originally bound
+
+02:13.570 --> 02:15.470
+to this react component.
+
+02:15.550 --> 02:19.180
+This react class component that we need to borrow from.
+
+02:19.180 --> 02:25.630
+So we're essentially saying extend me all of that functionality into my class component called lifecycle
+
+02:26.530 --> 02:27.350
+and then the constraint.
+
+02:27.370 --> 02:28.920
+So the constructor and we call super.
+
+02:28.920 --> 02:32.880
+It's like okay this is when I want you to give me all that functionality right.
+
+02:33.010 --> 02:40.060
+So that I can bind it all to my class component inside of the constructor as well is when we can declare
+
+02:40.150 --> 02:40.970
+our state.
+
+02:41.110 --> 02:41.490
+Right.
+
+02:41.500 --> 02:47.320
+So when we call this dot state we do it inside of our constructor specifically for this reason because
+
+02:47.320 --> 02:56.180
+this is when our state becomes initialized on our class so the constructor gets called first for this
+
+02:56.180 --> 02:56.560
+reason.
+
+02:56.570 --> 03:04.160
+So that our components other lifecycle methods if they need to use the state are aware of the state
+
+03:04.670 --> 03:11.910
+because it's initialized inside of our constructor after the constructor call it then calls are render
+
+03:11.910 --> 03:19.230
+method and the render method is when our component tells javascript.
+
+03:19.230 --> 03:19.530
+OK.
+
+03:19.560 --> 03:24.570
+This is what I want you to display in terms of HDMI out.
+
+03:24.600 --> 03:29.240
+This is also where any prop values get evaluated in the HMO.
+
+03:29.280 --> 03:34.800
+So because we're passing in that text string this is when javascript like oh I'm calling the render
+
+03:34.800 --> 03:35.800
+method on this class.
+
+03:35.820 --> 03:41.940
+I'm also going to evaluate the value of this prop stock text and then turn it into something that I
+
+03:41.940 --> 03:48.450
+can display in the mill and that's how we're able to see that string value that would get passed in
+
+03:48.450 --> 03:51.330
+as a prop or anything for that matter.
+
+03:51.330 --> 04:00.230
+This evaluation is happening inside of our render call after the render comes when react actually updates
+
+04:00.230 --> 04:00.940
+the dawn.
+
+04:01.120 --> 04:01.500
+Right.
+
+04:01.520 --> 04:08.030
+Or it makes updates to our component but the main thing here is where reacts like OK now that I know
+
+04:08.030 --> 04:12.710
+what the component looks like because of the render and I know what state and whatever things are on
+
+04:12.710 --> 04:18.470
+the class component because the constructor I'm not going to put it on the page I'm going to mount it.
+
+04:18.470 --> 04:28.110
+And then once it mounts the component did mount lifecycle method gets fired and inside of here is where
+
+04:28.110 --> 04:28.800
+it's like OK.
+
+04:28.800 --> 04:32.710
+The component has mounted its in its base state right.
+
+04:32.730 --> 04:39.470
+It's properly evaluated then I'm gonna call my lifecycle method component did mount and if we look at
+
+04:39.470 --> 04:43.810
+our application we'll see that that's the order that it happens.
+
+04:43.910 --> 04:51.470
+We get the constructor first then the render gets called and then our component did mount gets called.
+
+04:51.470 --> 04:59.090
+And usually this is where after we've loaded our base their class component inside of a component did
+
+04:59.090 --> 05:03.440
+mount is where we start to do things like our API calls.
+
+05:03.440 --> 05:09.320
+If you remember from our earlier instance where we made an API call to get all the users for our monster's
+
+05:09.320 --> 05:16.520
+Rolodex and the reason for this is because we want to load the base component first before we start
+
+05:16.520 --> 05:23.710
+fetching data and updating our component so that it looks different from the base state right.
+
+05:23.720 --> 05:29.750
+Because we don't know how long that API call might take latency might be slow your connection might
+
+05:29.750 --> 05:37.430
+be poor but this is the order and how we should leverage this lifecycle method is that we wait for the
+
+05:37.430 --> 05:43.880
+base component to mount and then we're like OK let's use our component did mount method to update it
+
+05:43.940 --> 05:46.040
+into its next state.
+
+05:46.040 --> 05:55.410
+And this next state this updating phase is the next phase of our component after the base mounted state
+
+05:56.430 --> 06:02.910
+is on our Don so let's take a look at the next phase the updating phase.

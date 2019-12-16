@@ -1,0 +1,109 @@
+WEBVTT
+
+00:00.720 --> 00:06.710
+I want to take a moment to look at what it is we're going to do in the upcoming lessons.
+
+00:06.830 --> 00:13.070
+Right now we have everything downloading as one big main chunk as we saw in the last lesson.
+
+00:13.220 --> 00:18.200
+The reason for this is because of the tool called Web PAC which we've discussed before.
+
+00:18.200 --> 00:24.470
+Throughout this course that actually helps us bundle together all of our files whenever we see these
+
+00:24.500 --> 00:27.170
+imports that we've written throughout this course so far.
+
+00:27.230 --> 00:33.140
+We're actually using what's called a static import meaning that when Westpac encounters this file it
+
+00:33.140 --> 00:38.630
+sees that we're importing in home page shop page sign and page all these components all these files
+
+00:38.990 --> 00:44.910
+and it just bundles them all together because we want to statically include them together instead.
+
+00:44.990 --> 00:50.120
+When we want to leverage is the new dynamic import syntax dynamic.
+
+00:50.120 --> 00:55.400
+Import means that it pulls in the import almost like a promise.
+
+00:55.550 --> 01:01.340
+So you can imagine where we only want to import the file and then load it when necessary.
+
+01:01.370 --> 01:03.860
+That's pretty much what dynamic import means.
+
+01:03.860 --> 01:09.010
+Now this is a feature that actually gets included due to a babble configuration that create reactive
+
+01:09.050 --> 01:10.100
+hides away from us.
+
+01:10.340 --> 01:13.370
+We'll learn more about battle or Westpac in a later lesson.
+
+01:13.370 --> 01:17.870
+But all you need to know right now is that that's the main thing we need to leverage now leveraging
+
+01:17.870 --> 01:25.880
+it in react is actually really easy because we use what's called react lazy and react lazy is something
+
+01:25.880 --> 01:29.980
+we simply import in from react now with react lazy.
+
+01:29.990 --> 01:36.770
+We're able to wrap our components inside of the lazy function that we got back from react and we are
+
+01:36.800 --> 01:43.040
+able to use it really well in conjunction with react router because react router by default allows us
+
+01:43.040 --> 01:48.320
+to support code splitting which is what we're trying to do split up our code into chunks.
+
+01:48.320 --> 01:54.530
+So all we would do is just end up replacing any place where we have root components with these new lazy
+
+01:54.590 --> 02:01.130
+loaded components what will end up happening is that whenever a user navigates to this route and then
+
+02:01.130 --> 02:07.640
+we need to actually load this root web pack ahead of time during the build step will have already chunked
+
+02:07.730 --> 02:14.900
+our code accordingly using that new lazy load function so that what happens is that when they hit home
+
+02:15.020 --> 02:17.590
+they will get the home page chunk when they hit shop.
+
+02:17.660 --> 02:22.430
+They'll get the shop page chunk when they have the checkout they'll get the checkout page chunk and
+
+02:22.430 --> 02:26.210
+we're actually able to leverage this at any point where there are routes.
+
+02:26.210 --> 02:30.010
+So as you remember inside of our shop page we also have routes.
+
+02:30.080 --> 02:33.260
+So here we can also lazy load these components as well.
+
+02:33.320 --> 02:36.560
+In the same syntax we're going to write in the upcoming lessons.
+
+02:36.560 --> 02:42.920
+But mainly what we're doing is we're leveraging react lazy with rack router so that we download chunks
+
+02:43.010 --> 02:49.280
+at the root level instead of at a certain time where it might seem awkward and discombobulated routing
+
+02:49.280 --> 02:53.460
+seems to make the most sense out the place where we need to add chunking.
+
+02:53.480 --> 02:58.430
+So I just want to take this moment to take a quick high level look at what we're going to do now the
+
+02:58.490 --> 03:02.630
+actual implementation of it is very simple and we'll see that in the next lesson.

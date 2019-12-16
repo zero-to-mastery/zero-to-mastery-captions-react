@@ -1,0 +1,103 @@
+WEBVTT
+
+00:00.800 --> 00:08.810
+One caveat that I want to point out when we look at our option land component and our option div component
+
+00:10.040 --> 00:17.450
+one of the great things about using the CSA as Block was that if we needed to ever change the appearance
+
+00:17.600 --> 00:26.150
+of our links in our header and we were rendering different types of base HDMI components such as here
+
+00:26.150 --> 00:26.980
+how we're using a link.
+
+00:27.020 --> 00:36.710
+And here we're using div we're able to easily modify the styles in one place versus if we had written
+
+00:36.710 --> 00:39.680
+this inside of each component respectively.
+
+00:39.680 --> 00:44.550
+Like so then we would have to modify them.
+
+00:44.630 --> 00:50.980
+So for example if we needed to change the padding we would have to manually change it here to 15 and
+
+00:51.040 --> 01:00.100
+also reflectively change it in the option div whereas by using these optional container style CSF blocks
+
+01:00.400 --> 01:03.850
+we can change it here and have those changes reflected everywhere right.
+
+01:04.300 --> 01:08.620
+So that's a great usage in the C Ss block style which I wanted to us to learn.
+
+01:09.430 --> 01:16.480
+But there's actually another way to make it even easier if the only difference between these two style
+
+01:16.480 --> 01:21.610
+components is what type of base element it needs to return.
+
+01:22.920 --> 01:30.270
+So what we can actually use instead of doing it like this and using the C Ss block is inside of the
+
+01:30.270 --> 01:37.400
+component itself if option Lincoln option div are say the same and we just want this option linked but
+
+01:37.400 --> 01:46.120
+as a div we can actually literally change it by using the as property and then passing in the string
+
+01:46.210 --> 01:53.080
+of the element we want and you can even also pass a component like so if you pass it in like this.
+
+01:53.170 --> 02:00.140
+If you wanted to use say any of our regular components that we've written before but instead I want
+
+02:00.140 --> 02:09.640
+it div so I'll pass it as a string and now I'm able to see that our sign up button which is the component
+
+02:09.640 --> 02:13.510
+we just replace is still a div.
+
+02:13.510 --> 02:18.850
+So that's what's really cool is that by just doing this we're actually now able to reduce the amount
+
+02:18.850 --> 02:20.990
+of code that we've written.
+
+02:21.130 --> 02:25.080
+So now we can remove the CSX remove this.
+
+02:25.410 --> 02:33.190
+Actually let's copy over these styles first right because now we can remove this we can remove the option
+
+02:33.190 --> 02:40.990
+div component and now we can just paste in these styles we can remove our option div import
+
+02:43.660 --> 02:48.900
+and we're no longer importing link as well inside of this component because all of our components are
+
+02:48.900 --> 02:51.420
+now in the styles folder.
+
+02:51.420 --> 02:57.540
+So now we'll see that we've reduced the amount of overhead we have in the amount of code we had earlier
+
+02:58.380 --> 03:04.470
+while also keeping sure that our header is the same so I just want to point out that that's actually
+
+03:04.590 --> 03:07.470
+a really cool little thing we can also use.
+
+03:07.560 --> 03:12.840
+So we're just trying to explore as many of the tools that style components gives us and how much flexibility
+
+03:12.840 --> 03:14.430
+we have within this paradigm.
+
+03:16.380 --> 03:16.790
+OK.
+
+03:16.890 --> 03:22.200
+Now let's continue converting our application over using style components.

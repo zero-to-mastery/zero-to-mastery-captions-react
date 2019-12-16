@@ -1,0 +1,364 @@
+WEBVTT
+
+00:00.560 --> 00:01.730
+Hey it's Andre here.
+
+00:01.730 --> 00:08.480
+I just wanted to spend a quick moment looking at what create react app gives us now the first thing
+
+00:08.480 --> 00:14.510
+we saw in the previous video is that we have this package that Jason File and we also saw that we had
+
+00:14.510 --> 00:17.040
+these commands available to us.
+
+00:17.180 --> 00:23.320
+Now if I open up the terminal here in my visual studio code make sure that we're inside of our project.
+
+00:23.330 --> 00:31.870
+In my case I will C.D. into the Test folder and for some of you maybe when you ran yarn start.
+
+00:32.040 --> 00:33.650
+Nothing happened.
+
+00:34.020 --> 00:38.460
+And that's because you may not have a yarn installed on your computer.
+
+00:38.520 --> 00:40.620
+Instead you might have NPM.
+
+00:40.620 --> 00:52.430
+So if you do NPM start this should now work now for those that don't know NPM is a package manager.
+
+00:52.430 --> 00:59.690
+It's essentially a way for us to automate the process of installing upgrading configuring or removing
+
+00:59.960 --> 01:02.060
+any libraries that we want.
+
+01:02.150 --> 01:07.970
+For example installing react which create react app did automatically for us.
+
+01:08.060 --> 01:12.850
+Now there's also this other package manager called ja.
+
+01:13.550 --> 01:15.620
+You can use whichever one you want.
+
+01:15.620 --> 01:18.820
+The only difference is the commands that you put into your terminal.
+
+01:18.860 --> 01:27.440
+So it could be NPM start or yarn start yarn was actually created by Facebook at a time where NPM had
+
+01:27.440 --> 01:29.440
+a few issues.
+
+01:29.520 --> 01:30.710
+So this is just up to you.
+
+01:30.720 --> 01:32.540
+Whichever one you choose.
+
+01:32.760 --> 01:39.090
+Now one thing you notice here is that I've successfully start my app but it didn't show up on my browser.
+
+01:39.090 --> 01:40.200
+Sometimes that could happen.
+
+01:40.200 --> 01:45.510
+So all you have to do in that case is just go to a local host three thousand and you'll see that your
+
+01:45.510 --> 01:46.850
+app is now here.
+
+01:46.950 --> 01:55.690
+Everything is working now the other thing I want to talk about is this NPM run built fight close this
+
+01:55.690 --> 01:57.480
+application.
+
+01:57.710 --> 02:00.130
+Again I can use either NPM or.
+
+02:00.530 --> 02:08.620
+But if I do NPM run build I want you to notice what's going to happen over here.
+
+02:08.920 --> 02:17.160
+As you said we have the source folder where we have all our files and you can think of this as our workspace.
+
+02:17.170 --> 02:19.920
+This is our workbench where we're going to work on our application.
+
+02:20.560 --> 02:28.360
+But when we actually put it to the outside world when we actually deploy our application if we give
+
+02:28.480 --> 02:35.110
+all these files to the browser the browser is going to be like I have no idea where you're trying to
+
+02:35.110 --> 02:35.800
+do.
+
+02:35.800 --> 02:39.160
+I have no idea what this syntax is.
+
+02:39.160 --> 02:40.560
+Yeah I'm going to pass.
+
+02:40.570 --> 02:44.830
+I have no idea and it's going to error out instead by running NPM run built.
+
+02:44.830 --> 02:47.350
+I want you to notice what's going to happen to the public folder
+
+02:50.320 --> 02:56.020
+you see here that says it's creating an optimized production built one of the beauty things of create
+
+02:56.020 --> 03:00.010
+react app is that it optimizes the code for you.
+
+03:00.040 --> 03:09.060
+Let me show you what I mean you see here that we now have a build folder if I click on this build folder
+
+03:09.450 --> 03:17.580
+you see that I have all my files in here that well some of them I've seen before like the fab icon.
+
+03:17.580 --> 03:18.270
+Index.
+
+03:18.270 --> 03:19.590
+Dot e-mail file.
+
+03:19.590 --> 03:28.070
+But you see this has been Minnifield so it's going to take less data that we can send from our server.
+
+03:28.260 --> 03:34.170
+If we go to the static we see that we have our CSF files which again have been modified.
+
+03:34.170 --> 03:39.070
+We have our JavaScript files which over here looks like we have a bunch of them.
+
+03:39.480 --> 03:47.790
+All of them magnified it kind of looks like gibberish but inside here we have all the code that we wrote
+
+03:48.750 --> 03:55.870
+in our source folder and it went through this step to create optimized built files for us.
+
+03:56.250 --> 04:02.650
+So what we want to do now is take this built folder and put it on a server.
+
+04:02.670 --> 04:09.060
+Now we're going to go over deployment later on in the course but I want to go back to the power of create
+
+04:09.070 --> 04:10.760
+reactor.
+
+04:10.930 --> 04:18.030
+You see a uses Westpac and Babel something we'll talk about later on in the course now.
+
+04:18.060 --> 04:26.430
+Babel and Westpac allow us to take our source folder which I mean we had a lot of JavaScript files and
+
+04:26.430 --> 04:28.920
+we're gonna write a lot more throughout the course.
+
+04:28.920 --> 04:35.280
+What they're going to do is they're going to take these files and Babel is going to do this thing first
+
+04:35.500 --> 04:40.980
+table is going to say hey all these JavaScript files with that weird react syntax that we're not really
+
+04:40.980 --> 04:43.590
+too sure what's what's going on.
+
+04:43.590 --> 04:50.610
+Well I'm going to take all those files for you and remember how traditionally we had all these browsers
+
+04:51.540 --> 04:58.650
+that well implemented the browser differently Babel is going to make sure that our JavaScript files
+
+04:58.740 --> 05:04.830
+are going to work on all these browsers no matter what version no matter how old they are how new they
+
+05:04.830 --> 05:10.470
+are they're going to make sure for us that hey every single one of these JavaScript files is going to
+
+05:10.470 --> 05:11.370
+be understood.
+
+05:11.400 --> 05:16.950
+So it's kind of like J query did back in the day when we had this idea of making sure that the browsers
+
+05:16.980 --> 05:21.530
+understand us awesome but what about wetback.
+
+05:21.590 --> 05:28.270
+Well what pack is a module bundler it's letting us write a modular code.
+
+05:28.520 --> 05:32.330
+So what does that mean this built folder.
+
+05:32.460 --> 05:37.500
+You'll see that we have a lot of JavaScript files in our source folder but the build folder actually
+
+05:37.500 --> 05:40.620
+has well just a few JavaScript files.
+
+05:40.920 --> 05:51.340
+It has the main JavaScript file see that we only have actually three JavaScript files and that's because
+
+05:51.340 --> 05:58.660
+wetback is going to take all our javascript remember all these imports that we're doing and create well
+
+05:58.750 --> 06:03.970
+bundle everything up together and optimize it for production.
+
+06:03.970 --> 06:10.720
+Now you don't need to understand this whole process because the beauty is that react has a dedicated
+
+06:10.840 --> 06:17.620
+team of developers really really smart developers that implements this behind the scenes for you.
+
+06:17.650 --> 06:20.520
+That's the power of a tool like create react app.
+
+06:20.530 --> 06:23.240
+It's a CLIA or command line interface.
+
+06:23.290 --> 06:29.800
+Other frameworks like angular or view have the same thing a way for us to start a project really really
+
+06:29.800 --> 06:30.430
+fast.
+
+06:30.430 --> 06:37.480
+Have all this configuration done for us optimized for us so that we can build really nice performance
+
+06:37.510 --> 06:38.260
+applications.
+
+06:39.130 --> 06:48.340
+So remember this built folder is what we'll use to actually deploy our application this source folder
+
+06:48.760 --> 06:53.720
+is our playground our workplace.
+
+06:53.740 --> 06:55.630
+Now let's go back to Pakistan Jason.
+
+06:56.350 --> 07:04.450
+When we look at Pakistan Jason the reason we have this is that it allows us to have this package manager
+
+07:04.660 --> 07:11.080
+so that remember how we said react is all about this component architecture and we can use other people's
+
+07:11.080 --> 07:12.440
+code and other components.
+
+07:12.520 --> 07:19.220
+Well we can use this packaged to Jason to install other perhaps react components.
+
+07:19.330 --> 07:26.830
+So if we go to something like material UI you'll see that I can install component library material UI
+
+07:26.890 --> 07:33.030
+just by running npm install and it's going to get added to our packaged Jason File.
+
+07:33.250 --> 07:39.750
+We're going to be exploring create react app and other parts of this application throughout the course.
+
+07:39.790 --> 07:45.060
+But the last thing I want to touch on is what react is actually doing underneath the hood.
+
+07:45.280 --> 07:53.130
+If we go to the public folder and go to index dot HMO we have all this pre setup code for us.
+
+07:53.260 --> 08:01.660
+But the key thing is that when we look at the body tag the only thing we have is this div I.D. of route.
+
+08:01.720 --> 08:06.170
+Now this is where we're going to inject our ReACT application.
+
+08:06.340 --> 08:14.270
+But at the end of the day all we're doing is just replacing whatever is here with a react application.
+
+08:14.300 --> 08:20.790
+But that doesn't mean that I can't keep just coding along and building something else like a hello a
+
+08:20.820 --> 08:34.200
+simple tag if I save this and run NPM start if I go back to my app over here and I scroll down you'll
+
+08:34.200 --> 08:37.070
+see that look at that I've added Hello.
+
+08:37.560 --> 08:46.480
+So my app is part react part HDMI very very cool so react is something that we can inject even into
+
+08:46.480 --> 08:47.770
+parts of our application.
+
+08:49.680 --> 08:58.410
+If I right click here and do inspect and go to the elements tab you'll see that this application is
+
+08:58.680 --> 09:00.040
+well Dave ideal route.
+
+09:00.060 --> 09:05.760
+And then we have this app inside of here that is just to HMO tags.
+
+09:05.940 --> 09:15.560
+If I open up my react developer tools once again you'll see that the developer tools actually just notices
+
+09:15.560 --> 09:21.450
+are react app and it has this app component that it's created for us.
+
+09:21.470 --> 09:28.680
+But at the end of the day it's the same thing as the Asian mall we see here finally if we go to app
+
+09:28.830 --> 09:36.030
+dog yes we'll notice that we are importing react and if we go to index dodges we have something called
+
+09:36.270 --> 09:45.930
+react Don now moving forward I want you to think of these two libraries are just doing these things.
+
+09:45.950 --> 09:55.430
+One is that this react library allows us to write this HCM El like syntax inside a javascript file and
+
+09:55.430 --> 09:59.350
+it understands it because of this react library.
+
+09:59.360 --> 10:07.330
+The second thing is that this react Dom is that little robot from our previous section.
+
+10:07.520 --> 10:12.830
+Remember this little guy that actually interacts with the dump that's the react arm.
+
+10:12.950 --> 10:18.710
+That's the little robot that can be replaced with well different robots maybe the one that interacts
+
+10:18.710 --> 10:22.080
+with a mobile phone or a desktop.
+
+10:22.130 --> 10:24.290
+This is the react package.
+
+10:24.290 --> 10:32.030
+It allows us to write Jeff Sachs and Bill components and build that virtual dorm and the react Dom is
+
+10:32.090 --> 10:36.550
+this little robot that interacts actually interact with the DOM.
+
+10:36.650 --> 10:45.470
+So if we go to the code you see that react on render allows us to grab an element from HMO and insert
+
+10:45.680 --> 10:46.520
+app into it.
+
+10:46.550 --> 10:48.420
+That's all it's doing.
+
+10:48.530 --> 10:49.700
+All right that's enough for now.
+
+10:49.970 --> 10:51.470
+Let's keep going in the next video.

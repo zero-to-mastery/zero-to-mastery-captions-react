@@ -1,0 +1,217 @@
+WEBVTT
+
+00:00.810 --> 00:06.720
+Before I continue I just want to take a second and say how proud I am of you for having completed the
+
+00:06.720 --> 00:09.270
+course up until this section.
+
+00:09.270 --> 00:17.190
+Believe it or not almost 80 percent to 90 percent of applications built in react and Redux followed
+
+00:17.190 --> 00:20.390
+the exact patterns that we've done up until this point.
+
+00:20.420 --> 00:27.480
+There is of course more complexity and more optimizations you can bring in from other libraries or using
+
+00:27.630 --> 00:29.190
+other patterns.
+
+00:29.190 --> 00:35.880
+But the foundation of what we're learning is pretty much all there is to react and Redux The way that
+
+00:35.880 --> 00:42.720
+we tackle features and we think about how to break them down and splay out the problems and then correspondingly
+
+00:42.960 --> 00:49.950
+solve them in the existing react in a redux architecture that we are now so familiar with is pretty
+
+00:49.950 --> 00:55.460
+much the majority of what it's like to build Web sites in react and redux.
+
+00:55.650 --> 00:59.730
+And I'm so proud of you guys for coming up until this point.
+
+00:59.760 --> 01:06.600
+Now I will say we will definitely continue to Van Ness our basics from this point forward but we're
+
+01:06.600 --> 01:14.160
+going to start looking at other perspectives and other ways that we can possibly build upon what we
+
+01:14.160 --> 01:20.840
+already learned and expand upon the concepts that we are only going to become more familiar with.
+
+01:21.240 --> 01:28.890
+Now in this specific section we're actually going to look at something regarding of slight tweak to
+
+01:28.890 --> 01:35.850
+our redux state so that it becomes more performance in what it is that we're about to attempt.
+
+01:35.850 --> 01:45.160
+So what we want to build next is our category page and right now the category is going to pull in one
+
+01:45.160 --> 01:50.120
+of the collection objects in order to display the items inside.
+
+01:50.140 --> 01:54.790
+So in our final application we can see this when we look at our hearts page.
+
+01:54.790 --> 02:00.580
+We see that we've pulled in the hats category and we've displayed the items inside.
+
+02:00.850 --> 02:07.810
+So let's actually build this into our existing application and what we'll need to do is actually render
+
+02:07.930 --> 02:16.350
+inside of our shot Page nested roots because right now we mostly have roots our app level.
+
+02:16.510 --> 02:23.410
+So if we look at our app Jess we only have rows here but we can actually put roots in our other components
+
+02:23.800 --> 02:31.470
+and they'll start from where that page is being rendered as their base Slash.
+
+02:31.470 --> 02:34.200
+So we'll see what that looks like once we actually start writing it.
+
+02:34.890 --> 02:39.090
+So let's go to our shop page and look at what we need to do.
+
+02:39.390 --> 02:46.470
+So inside of our shop component we actually want to move our collections map into its own component.
+
+02:46.770 --> 02:52.070
+And once we move it out we won't need the collections anymore on our shop page component.
+
+02:52.110 --> 02:58.650
+We're going to tie everything that we need that's attached to our collections previews into a collections
+
+02:58.740 --> 03:04.070
+overview component that is connected to the state that will get the collections.
+
+03:04.230 --> 03:11.720
+So let's make that folder now so inside of our components we're gonna make a new folder called collections
+
+03:11.780 --> 03:17.810
+overview and inside we need our collections overview.
+
+03:17.810 --> 03:25.250
+So we're going to copy this so I don't make a spelling mistake later component Jess X as well as a collections
+
+03:25.250 --> 03:34.150
+overview Dutch style start SAS and we're going to do our usual import react from react as well as importing
+
+03:34.150 --> 03:36.390
+in our style sheet.
+
+03:36.450 --> 03:45.100
+Now we know we're gonna need connect from reactor redux and we also know that we're gonna need our create
+
+03:45.100 --> 03:46.000
+structured selector
+
+03:50.180 --> 03:55.540
+because we're pretty much just gonna do everything that we need to do that we've already got in our
+
+03:55.540 --> 04:02.630
+shop page except move it into our collections overview and now we know that our collections overview
+
+04:03.780 --> 04:12.260
+is going to be a functional component that gets the collections and then we're going to render a div
+
+04:14.610 --> 04:17.930
+with the class name of collections overview
+
+04:21.590 --> 04:25.120
+and then inside will be our map.
+
+04:25.130 --> 04:32.310
+So let's go to shop and let's copy this code over and paste it in.
+
+04:32.350 --> 04:35.190
+Now we also need our collection preview component.
+
+04:35.470 --> 04:36.520
+Let's bring that in as well
+
+04:43.990 --> 04:45.770
+art collection preview component.
+
+04:45.780 --> 04:48.510
+Oh this is not dark component.
+
+04:48.530 --> 04:53.420
+So let's actually rename this so that it's consistent with our other naming.
+
+04:53.420 --> 04:59.830
+I think I must have accidentally forgot to put dot component there but nowhere is.
+
+05:00.030 --> 05:06.120
+So now that we have our collection preview we need to connect our collection preview accordingly.
+
+05:06.190 --> 05:14.840
+So we also need our selector so we can actually just pull this off as well as this.
+
+05:15.000 --> 05:16.640
+We know we won't need any of this.
+
+05:17.190 --> 05:23.210
+So let's just get rid of it so let's copy this code
+
+05:25.840 --> 05:36.950
+into our collections overview and then we're going to call our connect on our map states prompts which
+
+05:36.950 --> 05:39.680
+is going to connect to our collection over
+
+05:46.670 --> 05:49.730
+and now we're missing our selector which will also copy over
+
+05:57.440 --> 06:05.300
+and we will also need to now modify and bring our collections overview into our shop component
+
+06:10.190 --> 06:16.970
+components collection overview collections overview component.
+
+06:16.980 --> 06:21.950
+Now let's just render just our collections overview.
+
+06:22.070 --> 06:30.020
+I think we need to also modify our style sheet and we'll just target our collections overview high level
+
+06:30.020 --> 06:38.660
+div component and we'll give it a display flex and a flex direction of column just so that all of our
+
+06:38.660 --> 06:46.610
+content sets vertically and now if we look at our app collection preview is not exported from collection
+
+06:46.610 --> 06:48.020
+preview component
+
+06:52.090 --> 06:56.490
+don't think we need those brackets OK.
+
+06:56.650 --> 07:01.550
+So it is a default export and now for our shop hedge.
+
+07:01.600 --> 07:07.600
+Everything is still working as it was before except now our collection preview is in its own component.
+
+07:07.690 --> 07:14.880
+So now for our shop component what we're gonna do next is actually selectively render inside of nested
+
+07:14.880 --> 07:22.630
+accounts where one route is going to lead us to our collections overview when we're only on shop.
+
+07:22.710 --> 07:23.100
+Right.
+
+07:23.110 --> 07:31.300
+So nothing but just slash shop but then we'll also render our new category page which will build when
+
+07:31.300 --> 07:35.410
+we land on our slash category.
+
+07:35.500 --> 07:37.900
+So let's see how we're going to build that next.

@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00.680 --> 00:01.520
+OK.
+
+00:01.730 --> 00:05.330
+Now that we have our search field value stored on our state.
+
+00:05.330 --> 00:11.950
+Let's actually use it to filter out the monsters where their names don't match the field.
+
+00:11.970 --> 00:15.990
+Now how we'll do this is in the render.
+
+00:16.180 --> 00:24.700
+We don't want to actually modify our state's monster array because we want to keep the raw data in case
+
+00:24.700 --> 00:26.680
+somewhere in this component.
+
+00:26.680 --> 00:37.010
+We need to use the base unmodified array what we'll do instead is make a new array using the DOT filter
+
+00:37.010 --> 00:40.400
+method that we've learned.
+
+00:40.460 --> 00:48.680
+So what we'll do is we will actually first use a concept called D structuring and what D structuring
+
+00:48.680 --> 00:57.860
+allows us to do is pull properties off of an object and set them to constants that we put inside of
+
+00:57.860 --> 00:58.850
+here.
+
+00:58.850 --> 01:09.150
+So the syntax is we say concept and then we put our SQL bracket notation and here we'll use the actual
+
+01:09.150 --> 01:15.540
+object we want a d structure from so the state object is what we want to pull the properties off of
+
+01:16.770 --> 01:24.080
+and what we want to do is use the same property name that we want to set as the constant.
+
+01:24.080 --> 01:32.000
+So when we say monsters and search fields like this we'll be pulling off the search field value and
+
+01:32.000 --> 01:39.550
+the monster's value off of our state object and setting them to constants called Monsters and search
+
+01:39.550 --> 01:40.640
+field.
+
+01:40.700 --> 01:48.920
+This is the equivalent of saying constant monsters equals this dot state DOT monsters and this and constant
+
+01:48.920 --> 01:59.650
+search field is equal to this dot state DOT search field it's just an easier way and a quicker way for
+
+01:59.650 --> 02:08.630
+us to write this out and now that we have our monsters and search field what we'll do is set a new concept
+
+02:08.630 --> 02:17.820
+called filtered monsters that we will set as our monsters dot filter right and we were from our filter
+
+02:17.820 --> 02:25.260
+method we get back a new array based off of the function that we pass into it where we'll get the monster
+
+02:25.290 --> 02:35.010
+that it's currently iterating over and what we want to do is take the name call to lower case on it
+
+02:35.760 --> 02:37.860
+which is a method on all strings.
+
+02:37.860 --> 02:43.620
+And here we see converts all the alphabetic characters in a string to lowercase and we want to do this
+
+02:43.650 --> 02:46.830
+because we don't want our search to be case sensitive.
+
+02:47.460 --> 02:50.740
+If we did it we would just not use the two lowercase.
+
+02:51.120 --> 02:54.410
+And then we'll call dot includes.
+
+02:54.410 --> 02:59.080
+And what this includes method does is similar to our array method.
+
+02:59.130 --> 03:08.430
+It just checks whether or not the string value we pass inside of our includes is actually in the string
+
+03:08.430 --> 03:10.010
+that it's being called on.
+
+03:10.020 --> 03:20.060
+So here we'll use our search field and we also want to lowercase it because again we want to make sure
+
+03:20.060 --> 03:28.290
+that if the user types in capitals we don't want that to be case sensitive either so includes just like
+
+03:28.290 --> 03:37.410
+the array method includes will return true or false based off of whether or not this string includes
+
+03:37.410 --> 03:45.390
+the string we're passing to it and now instead of passing in our state of monsters we'll just pass in
+
+03:45.390 --> 03:47.640
+our new filtered monsters.
+
+03:47.640 --> 03:50.280
+And now we see that as we type
+
+03:53.010 --> 04:00.580
+we're filtering out the monsters that don't have what we've typed in inside of their name now we'll
+
+04:00.580 --> 04:05.940
+notice that our component is actually re rendering every type.
+
+04:06.120 --> 04:13.770
+This is because when ever set state is called and the properties change react re renders our component
+
+04:14.700 --> 04:22.680
+it recalls the render method which means that our filtered monsters method here is actually getting
+
+04:22.680 --> 04:31.230
+called again and this is great because what we've done is we've triggered this set state when ever they've
+
+04:31.230 --> 04:39.600
+typed something in which in turn sets the state value of search field which then in turn causes are
+
+04:39.930 --> 04:48.910
+component to re render and recall the render method which then re filters out the monsters by calling
+
+04:49.150 --> 04:56.290
+our monsters that filter again setting a new array which it'll then pass to our card list which then
+
+04:56.660 --> 04:58.180
+renders card lists.
+
+04:58.390 --> 05:07.840
+And this way we're able to just dynamically live update our card list based on what we're typing in
+
+05:09.880 --> 05:18.310
+and this is what's great about react is that react is able to take control of what to render what to
+
+05:18.310 --> 05:26.680
+re render in its views without us having to do all of the extensive calls of showing elements and hiding
+
+05:26.680 --> 05:33.570
+elements react is able to do so for us as long as we understand the rules.
+
+05:33.700 --> 05:42.250
+Now we will definitely explore this in greater depth a little bit later because right now we have to
+
+05:42.250 --> 05:52.000
+just expand upon some other concepts but I promise you that we will take a deeper dive into how this
+
+05:52.000 --> 05:53.950
+works in just a little bit.

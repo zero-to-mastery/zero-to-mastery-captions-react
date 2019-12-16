@@ -1,0 +1,457 @@
+WEBVTT
+
+00:01.090 --> 00:08.870
+Okay everyone let's continue with modifying our application to be more mobile responsive.
+
+00:09.130 --> 00:16.080
+So the next thing I want to update is our header component so our header right now is not optimized
+
+00:16.080 --> 00:17.960
+for the mobile view.
+
+00:18.030 --> 00:25.410
+So inside of our hairstyles I'm just going to modify the actual width and height to be a little bit
+
+00:25.680 --> 00:34.110
+more aligned with the actual browser view inside of a mobile device now inside of this header container.
+
+00:34.110 --> 00:41.540
+We are going to just paste in that same media query that we had before because we're using the same
+
+00:41.540 --> 00:45.830
+media query in any of our mobile style changes.
+
+00:46.490 --> 00:53.660
+So here what I'm going to do is I'm going to write it so that what I want to set in terms of the actual
+
+00:53.660 --> 01:00.260
+header container is I want to shrink the height to 60 pixels instead of 70 pixels just literally shaving
+
+01:00.260 --> 01:01.770
+off 10 pixels here.
+
+01:02.030 --> 01:08.180
+I want to make sure that there's some padding all around the header of 10 pixels and then I'm going
+
+01:08.180 --> 01:17.480
+to have a margin bottom of 20 pixels so that we push the content down with our new header.
+
+01:17.490 --> 01:24.690
+So with that we need to now modify the actual size of the components inside of the header but the header
+
+01:24.690 --> 01:32.080
+is shaped more like how I want it to be now inside of the actual logo container.
+
+01:32.100 --> 01:39.870
+I am going to add in this media query again and what I want to change is I want the width of this logo
+
+01:39.870 --> 01:46.980
+to be way smaller so I only want it to be fit 50 pixels and then I don't want any padding anymore.
+
+01:46.980 --> 01:50.460
+I just want a padding of zero.
+
+01:50.460 --> 01:57.990
+So now if we go back and we see we see that our logo is more aligned with where we want it to be inside
+
+01:58.080 --> 02:04.270
+of this header Now I also want to make sure that the options container.
+
+02:04.290 --> 02:09.980
+So that section containing the option links we have that navigate us to different web pages.
+
+02:10.080 --> 02:16.140
+I want to make sure that that is now taking up more of the space of the header than before before it
+
+02:16.140 --> 02:21.450
+only took up 50 percent of the total width of the header because with so much real estate space with
+
+02:21.480 --> 02:30.330
+a web view instead I'm going to do a width of 80 percent because the only other thing on this browser
+
+02:30.330 --> 02:35.340
+page when we're in this mobile view or in any view in fact is just the logo.
+
+02:35.820 --> 02:42.630
+So now with this with set this way we have way more space as we can see in fact everything still works
+
+02:43.260 --> 02:45.210
+which is really great for us.
+
+02:45.210 --> 02:50.980
+We just need to make sure to update our views like our home page to also be responsive.
+
+02:51.120 --> 02:57.590
+Now what it is that I want to change is I want the menu item to fit in a nicer way.
+
+02:57.630 --> 03:07.880
+So what we can do is go into our menu item styles and modify them so that they have a similar media
+
+03:07.910 --> 03:15.180
+query and then render a different shape on the actual menu item container.
+
+03:15.200 --> 03:22.790
+So as you remember we set the height based on this size property which does dictate to it how big it
+
+03:22.790 --> 03:26.570
+should be based on which image it is.
+
+03:26.570 --> 03:32.210
+Because when you remember inside of our web view the men and women sections are larger than the three
+
+03:32.270 --> 03:35.160
+other sections that we have now.
+
+03:35.470 --> 03:42.610
+What we want to do here is we want to actually modify this height value so that it stays pretty consistent
+
+03:42.820 --> 03:43.930
+regardless of size.
+
+03:44.710 --> 03:51.500
+So what we can do is at the end append our media screen query and we'll just say is simply height 200
+
+03:51.580 --> 04:00.560
+pixels now media queries have a higher specificity than anything else inside of our styles.
+
+04:00.560 --> 04:08.750
+So no matter what styles inside of this here the media query if it has the same style will always over
+
+04:08.780 --> 04:16.040
+write the styles here because media queries always have a higher specificity order than regular selectors.
+
+04:16.040 --> 04:23.870
+So now if we go back we'll see that our elements are aligned much better because the heights are statically
+
+04:23.870 --> 04:31.370
+200 pixels and the width will always adjust so the screen will try and fit these elements on the page
+
+04:32.240 --> 04:34.750
+in the right order that they have access to.
+
+04:35.570 --> 04:39.800
+And then the moment that a new one starts on a new page it fills the remaining space but the height
+
+04:39.830 --> 04:44.030
+is always set to a specific static two hundred pixels.
+
+04:44.030 --> 04:50.970
+So with that we now have a mobile view now our home page is set up.
+
+04:51.060 --> 04:58.790
+The next thing that we need to modify is our shop page our shop page is going to be a little bit more
+
+04:58.790 --> 05:03.500
+complicated because our shop page it doesn't look terrible.
+
+05:03.530 --> 05:10.530
+We have these elements but the problem with this is that this item you have to actually click it in
+
+05:10.530 --> 05:15.750
+order to see the add to cart which you'd then have to click instead with a mobile view.
+
+05:15.750 --> 05:22.770
+This button seems too small in order to just put here the style and the actual design needs it to be
+
+05:22.800 --> 05:29.130
+a little bit more deliberate in how we can actually add items because we want our users to be able to
+
+05:29.130 --> 05:31.800
+add items as easily as possible.
+
+05:31.800 --> 05:41.440
+So what we're going to modify is both the collection preview as well as are actual collection item.
+
+05:41.490 --> 05:49.820
+So let's go back to our application code and what we need to do is go to the collection items styles.
+
+05:49.860 --> 05:55.420
+Now I do think actually I have a slight typo in our collection item here.
+
+05:55.440 --> 06:03.540
+I accidentally put collection styles dot styles but A6 this should actually be a collection item.
+
+06:03.540 --> 06:10.960
+Dot styles such as so if we make that modification we also have to make sure that we update it here.
+
+06:11.140 --> 06:17.290
+Now mine automatically updated it for me because my vest code is intelligent like that.
+
+06:17.290 --> 06:22.090
+If yours is not you just gotta make sure to modify the place where you imported all of these stock components
+
+06:22.150 --> 06:22.650
+in.
+
+06:22.750 --> 06:24.950
+So that is pointing to the right route.
+
+06:25.060 --> 06:26.630
+Just a little typo.
+
+06:26.650 --> 06:26.880
+Right.
+
+06:26.890 --> 06:28.590
+These things happen to everybody.
+
+06:28.960 --> 06:35.650
+So inside of our collection items styles what we're going to do is we are going to go into this collection
+
+06:35.680 --> 06:46.840
+item container and we are going to modify how large this width will be based on the actual mobile view
+
+06:47.620 --> 06:54.520
+so inside of here I want the width to be 40 view with meaning that it takes up 40 percent of the total
+
+06:54.550 --> 06:57.310
+width of the full view.
+
+06:57.310 --> 07:03.160
+Then I need to overwrite some of these hover features because these hover features I don't want inside
+
+07:03.160 --> 07:05.760
+of my mobile view with our mobile view.
+
+07:05.770 --> 07:07.210
+I don't care about the hover.
+
+07:07.330 --> 07:11.600
+You don't actually hover that much with touch as you're used to with the mobile.
+
+07:12.160 --> 07:19.120
+So what I'm gonna say is that the image just unset the opacity unset pretty much says that this was
+
+07:19.180 --> 07:20.550
+never set in the first place.
+
+07:20.580 --> 07:26.920
+So there's actually no image styles here on the hover effect of the image.
+
+07:26.940 --> 07:34.600
+When you're inside of this medium sized for any buttons in here I also want to unset the opacity as
+
+07:34.600 --> 07:35.180
+well.
+
+07:37.000 --> 07:44.250
+So now if we go back to our application we'll see that we're looking at the wrong file.
+
+07:44.250 --> 07:51.900
+This is probably because we didn't save this file so once my vest code actually updated this route it
+
+07:51.910 --> 07:56.670
+didn't actually manually save the file for me so I had to manually make that save.
+
+07:56.670 --> 08:02.190
+And now here we'll see this looks a little bit more tightly coupled because the width is larger.
+
+08:02.190 --> 08:09.180
+The only reason it's still stacking like this is because we need to update our actual collection preview
+
+08:09.180 --> 08:10.080
+view.
+
+08:10.260 --> 08:18.670
+So what we'll do here is we will go to our collections preview styles and inside of the preview container
+
+08:19.210 --> 08:24.030
+we need to write our media query so let's copy back our old media query here.
+
+08:26.660 --> 08:40.590
+And inside we are going to say that I want this now to have a line items property so this allows us
+
+08:40.590 --> 08:49.530
+to have everything centered when ever our content is inside of this display flex.
+
+08:49.530 --> 08:53.280
+Now I know that this is a lot of CSX that we haven't touched upon before.
+
+08:53.310 --> 08:56.890
+If you're unfamiliar with CSX this might be completely new to you.
+
+08:57.840 --> 09:03.490
+Honestly this CSX is pretty extensive in terms of what rules there are.
+
+09:03.540 --> 09:06.920
+I'm going to link the Flex box ruling documentation for you.
+
+09:06.930 --> 09:12.090
+It's actually an amazing resource to read through because it's really a matter of where the more you
+
+09:12.090 --> 09:18.060
+practice it the more that you'll see it's really comprehensive and it's difficult for me to cover inside
+
+09:18.060 --> 09:23.130
+of a course on react because I'll have to spend so much time on actual CSX things.
+
+09:23.130 --> 09:29.820
+So if this gets confusing for you at any point I will definitely include a version of our application
+
+09:29.820 --> 09:32.820
+where everything is converted to be mobile friendly for you.
+
+09:33.060 --> 09:37.670
+Otherwise you can pause the video and read up on some of these styling rules.
+
+09:37.680 --> 09:44.190
+If my explanations are not fully clear and you don't have the full context of everything but it's really
+
+09:44.190 --> 09:49.170
+just a matter of doing this assess on your own with practice right.
+
+09:51.290 --> 09:56.810
+So one of the other things that we have to do after we did this a line items is we need to modify our
+
+09:56.810 --> 10:06.100
+preview container as well so that instead of being a display flex what it will be is a display grid.
+
+10:06.120 --> 10:12.290
+Now this is a new CSX feature that I will also link the documentation for and this is another version
+
+10:12.380 --> 10:13.750
+of display flex.
+
+10:13.970 --> 10:19.190
+We've actually used display grid before inside of our application and it literally just lets us place
+
+10:19.310 --> 10:27.110
+elements inside of whatever this top level component is in a grid like shape so here.
+
+10:27.170 --> 10:33.530
+I'm gonna say grid template is always going to just have columns where it's one F R one that far if
+
+10:33.530 --> 10:37.340
+you remember from that lesson on CSX grids really quickly.
+
+10:37.450 --> 10:44.900
+One half hour just means whatever space is remaining inside of this screen meaning that there will always
+
+10:44.900 --> 10:52.490
+be essentially columns and the two columns here will each take up one full portion of the application
+
+10:52.520 --> 10:58.280
+which means that they are equally 50 percent of what space is available inside of this preview container.
+
+10:59.240 --> 11:08.210
+And then I also want a grid gap of 15 pixels so grid gap is pretty much just the spacing between these
+
+11:08.240 --> 11:09.310
+elements.
+
+11:09.320 --> 11:15.840
+So with this now we see that our application looks more like that grid I was telling you about right.
+
+11:15.910 --> 11:24.050
+There's always two columns and they always take up one f r of space they're also 40 of you with in size
+
+11:24.080 --> 11:29.340
+and there's a 15 pixel gap in between all of these items.
+
+11:29.350 --> 11:34.760
+So now our application looks way closer to what we need it to be.
+
+11:34.910 --> 11:38.300
+Now the only thing missing is our actual button.
+
+11:38.360 --> 11:44.120
+So what we're going to do is we're gonna go back to our collection item styles and we're going to modify
+
+11:44.120 --> 11:53.150
+the button itself so that the button is always displayed whenever we're in a mobile view we're gonna
+
+11:53.150 --> 11:56.170
+say that the display is block instead of display none.
+
+11:56.180 --> 11:59.690
+So block is the default you can do blocker inline block.
+
+11:59.930 --> 12:04.440
+We're going to make sure that the opacity is zero point nine.
+
+12:04.490 --> 12:08.610
+We're also going to set a mean with value where we unset it.
+
+12:08.630 --> 12:13.130
+The reason why we have to unset it even though it's not here is because the button leverages custom
+
+12:13.130 --> 12:18.710
+button and custom button is a custom button container with a min width of one hundred and sixty five
+
+12:18.710 --> 12:21.390
+pixel but that's too big for mobile view.
+
+12:21.530 --> 12:23.010
+That's pretty much half our screen.
+
+12:23.090 --> 12:29.780
+So we just want to unset it and we also want to modify the padding so that what it will do is it'll
+
+12:29.780 --> 12:38.970
+set a top value of 0 10 pixels on the right zero on the bottom and then 10 pixels on the left so this
+
+12:38.970 --> 12:42.180
+way we're getting 0 10 pixels 0 10 pixels.
+
+12:42.210 --> 12:47.760
+In fact you don't even need this this syntax is also the same way if you just put two values for patting
+
+12:48.030 --> 12:50.640
+it saying 0 for top bottom 10 pixels left right.
+
+12:51.290 --> 12:57.200
+And now if we save this we'll actually see that our button is always present.
+
+12:57.480 --> 13:00.220
+If we click this we'll see that it still works.
+
+13:00.330 --> 13:06.480
+Our items are being added to our checkout our collection preview is pretty close to what we actually
+
+13:06.480 --> 13:07.260
+wanted to look like
+
+13:10.070 --> 13:10.280
+now.
+
+13:10.310 --> 13:15.710
+At this point I definitely encourage you to take a crack at trying to modify the styles for the rest
+
+13:15.710 --> 13:16.490
+of this yourself.
+
+13:17.060 --> 13:22.880
+It's a good exercise to maybe work on some CSF that we haven't really touched upon too much of in this
+
+13:22.880 --> 13:30.420
+course because this is a react course once you've played around with the styles you can always check
+
+13:30.420 --> 13:33.540
+back to the get hub for what it is that we have done.
+
+13:33.700 --> 13:39.270
+Now I will also include a get hub link of everything we've done up until this point right now so you
+
+13:39.270 --> 13:44.240
+have something to reference against but just like with all the other exercises that we did.
+
+13:44.310 --> 13:50.010
+This is a great chance to take some time of your own to play around with some styling.
+
+13:50.090 --> 13:56.450
+So good luck with that and always refer to the completed version and see how your styles match up to
+
+13:56.450 --> 13:57.150
+mine.
+
+13:57.350 --> 14:01.000
+Again mine is just my own attempt at the solution right.
+
+14:01.010 --> 14:05.540
+It's totally up to you how you want your application to look in a mobile view.
+
+14:05.690 --> 14:06.830
+So with that.
+
+14:06.950 --> 14:09.790
+Good luck with the exercise and I'll see you in the next lesson.

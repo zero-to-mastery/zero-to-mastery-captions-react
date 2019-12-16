@@ -1,0 +1,334 @@
+WEBVTT
+
+00:00.270 --> 00:06.660
+Now in order for us to start using a redux saga we have to include it into our application so we can
+
+00:06.660 --> 00:12.200
+do that by yarn adding the library redux saga.
+
+00:12.270 --> 00:20.130
+And while this package is loading in we have to change up our code base a little bit to incorporate
+
+00:20.160 --> 00:23.870
+the redux saga middleware into our store.
+
+00:23.910 --> 00:33.170
+So let's go to our store Jeff and what we want to do is we actually want to import in create saga middleware
+
+00:34.920 --> 00:37.350
+from redux saga.
+
+00:37.440 --> 00:42.240
+We're also going to remove our thunk middleware because we're not going to need it anymore.
+
+00:42.300 --> 00:51.360
+We're now replacing things with redux saga to handle our asynchronous actions inside of redux.
+
+00:51.380 --> 00:59.340
+Now what we're going to do is we're going to make a new variable called Saga middleware using our create
+
+00:59.340 --> 01:01.060
+saga middleware function.
+
+01:01.410 --> 01:06.930
+And this can take an object with certain configuration settings on it that we don't need but that's
+
+01:06.960 --> 01:08.400
+what you can do with the function.
+
+01:08.400 --> 01:09.990
+And that's why you invoke it.
+
+01:10.290 --> 01:16.290
+But we're going to pass the saga middleware into our middleware as array and then after applying middleware
+
+01:16.290 --> 01:22.880
+I get called we're going to run an ad in the individual sagas that we're going to write.
+
+01:22.920 --> 01:32.130
+So we're going to use our saga middleware right to run and inside of run we pass each individual saga.
+
+01:32.130 --> 01:37.380
+So let's comment this out for now because we're not going to do it until we write our actual saga code
+
+01:40.250 --> 01:42.620
+from a file architecture standpoint.
+
+01:42.710 --> 01:50.840
+All we do with Saga is is we put them in the same redux folders that are going to handle things related
+
+01:50.840 --> 01:53.260
+to for example our shot.
+
+01:53.630 --> 01:59.900
+We're gonna put our shop sagas in our shop folder as you would expect so in here we're gonna make a
+
+01:59.900 --> 02:01.940
+new shop dot saga dot J.
+
+02:01.940 --> 02:12.000
+S and this file will hold all of our saga code related to our shop and what we want to do is we want
+
+02:12.000 --> 02:19.440
+to move the functionality that we currently have related to this fetch collection start async action
+
+02:20.900 --> 02:28.020
+and we want to put all this logic into our saga and we've got to do it using the almost generator function
+
+02:28.020 --> 02:34.740
+style that sagas expect so we learn a little bit about yield and we looked at a generator functions
+
+02:34.980 --> 02:38.450
+in the last lesson but we're going to flush it out a little bit more.
+
+02:38.450 --> 02:40.880
+In this lesson.
+
+02:40.980 --> 02:49.860
+So what we're going to do is we actually need to import in certain effects from sagas and these effects
+
+02:49.860 --> 02:57.480
+allow us to do different things with either the store like creating actions or listening for actions
+
+02:58.670 --> 03:06.680
+first thing we're gonna bring in is what's called take every and what take every does is that lessons
+
+03:06.680 --> 03:14.400
+for every action of a specific type that we pass to it so let's just bring this in first from a redux
+
+03:14.580 --> 03:20.910
+saga right slash affects which is the effects library where we're gonna take all these effects that
+
+03:20.910 --> 03:28.640
+we used to compose our saga Cote we also need to import in our shop action types because we know we're
+
+03:28.640 --> 03:31.420
+listening for specific action types
+
+03:34.440 --> 03:41.460
+and now what we're going to do is we're just going to write our first based saga and it's going to be
+
+03:41.580 --> 03:50.540
+a function that takes that star syntax as we saw and it's going to say Fetch collections start.
+
+03:51.280 --> 03:54.270
+That's what the sagas can be called.
+
+03:54.280 --> 04:02.710
+Now what this saga does with the effect is it's going to pause when ever a specific action type that
+
+04:02.710 --> 04:04.240
+we want comes in.
+
+04:04.240 --> 04:10.690
+So we have to make sure to yield our function right and then call our take every passing in the shot
+
+04:10.840 --> 04:18.940
+action types dot whatever the action we want which for us will be fetch collections start has the first
+
+04:18.940 --> 04:28.690
+parameter the second parameter that take every guess is a nother generator function that will run in
+
+04:28.690 --> 04:32.690
+response to this take every listener.
+
+04:32.830 --> 04:40.120
+So this is how we actually are able to trigger more code to run depending on an action type.
+
+04:40.150 --> 04:47.150
+We need to write another generator that will then do the expected thing that we're looking for.
+
+04:47.170 --> 04:53.880
+So I'm just going to make another one called a function fetch collections async right.
+
+04:53.900 --> 04:58.830
+So this is going to actually be are generally a function that does the asynchronous code that we wanted
+
+04:58.850 --> 04:59.480
+to do.
+
+05:00.590 --> 05:01.620
+For now.
+
+05:01.640 --> 05:11.050
+All I'm going to do with this code is I am going to console dot log something in here like I am.
+
+05:11.090 --> 05:20.590
+Fire so here we're going to pass our fetch collections async and this is pretty much all we're doing.
+
+05:20.630 --> 05:23.240
+Now we might get an error because we have to yield something.
+
+05:23.360 --> 05:30.360
+So we could just yield this right our console log all generator functions must have yields in them.
+
+05:30.510 --> 05:33.660
+Now what is the point of the yield.
+
+05:33.660 --> 05:38.940
+I know we've seen it a couple times and we know that our functions pause whenever we hit the yield right
+
+05:39.030 --> 05:40.910
+until we call next.
+
+05:40.920 --> 05:44.700
+And then our functions continue as we saw our generator lesson.
+
+05:45.000 --> 05:54.960
+But what sagas do what the saga middleware does is its whole purpose is to run these sagas all concurrently
+
+05:55.680 --> 06:03.270
+concurrently meaning it wants to run them all together in a way that does not block the execution.
+
+06:03.310 --> 06:05.980
+So what does that technical jargon mean.
+
+06:06.670 --> 06:12.910
+Well imagine if we had multiple sagas that were listening right for different actions that were then
+
+06:12.910 --> 06:20.730
+triggering these other function well we might want our code not to be waiting for each of these functions
+
+06:20.730 --> 06:24.180
+to finish because in here we know we're going to make our asynchronous request right.
+
+06:24.180 --> 06:29.540
+We know we're going to query the database if we're waiting for the data is come back.
+
+06:29.540 --> 06:31.760
+We want our application to continue to run.
+
+06:31.790 --> 06:33.100
+No problem.
+
+06:33.170 --> 06:35.900
+It doesn't need to wait for that request to come back.
+
+06:35.930 --> 06:44.150
+Because that would be blocking our javascript code well take every which is this saga effect actually
+
+06:44.150 --> 06:53.330
+creates a non blocking call in order to not stop our application to continue running either other sagas
+
+06:53.360 --> 06:59.720
+or whatever the user wants to do it doesn't pause the javascript waiting for anything inside of our
+
+06:59.720 --> 07:09.640
+fetch collections async to come back alternatively we are also actually able to cancel these tasks that
+
+07:09.640 --> 07:17.950
+are coming out of our function and by task I mean whenever we kick start this saga it's actually a task
+
+07:17.950 --> 07:24.940
+that are saga Middleware is running in the background of our code to perform the action that it's supposed
+
+07:24.940 --> 07:31.170
+to do write whatever code we write in it like say our fetch collections code if say for example the
+
+07:31.170 --> 07:34.980
+user fired the action again fetch clutch and start again.
+
+07:34.980 --> 07:42.000
+While the previous get collections request was still processing we want to be able to cancel that one
+
+07:42.030 --> 07:44.310
+because we don't want to fetch that multiple times.
+
+07:44.310 --> 07:52.710
+We only want the most recent one that we got or that the user fired and at every yield.
+
+07:52.710 --> 07:59.640
+What's happening is that we're yielding control over this saga back to the middleware to the saga middleware
+
+07:59.960 --> 08:05.160
+and then the saga middleware if it gets say another take every action call from here.
+
+08:05.160 --> 08:12.810
+It can then determine whether or not to cancel any of the previous League started sagas from the other
+
+08:12.810 --> 08:17.800
+actions that came in we can control that because of the yield.
+
+08:17.820 --> 08:19.680
+Now I'll show you how we're gonna do it.
+
+08:19.680 --> 08:25.170
+It's actually very easy but conceptually that's why there are these yields and we write these yields
+
+08:25.170 --> 08:29.720
+whenever we can inside of our generator functions.
+
+08:29.730 --> 08:34.260
+I know it's all extremely technical but the more we write it it will make sense.
+
+08:34.350 --> 08:37.530
+I promise it'll make sense but for now just keep that in mind.
+
+08:37.530 --> 08:44.120
+That's why we have these yields because we want to yield control of these sagas back to the library.
+
+08:44.250 --> 08:49.640
+But let's actually throw our saga into our store where we want to run it.
+
+08:49.680 --> 09:02.210
+So what we'll do is we will import in our fetch collection start saga from shop shop saga and dodge
+
+09:02.290 --> 09:02.910
+it.
+
+09:03.140 --> 09:07.770
+Some guys say this should be plural sagas
+
+09:11.180 --> 09:15.340
+and then we just put it in this run and we uncommon to our code.
+
+09:15.550 --> 09:26.480
+Now if we go back open up our console and go to the shop we will see that all right because our finance
+
+09:26.480 --> 09:28.230
+star async action right we did it.
+
+09:28.240 --> 09:29.710
+We removed our thunk middleware.
+
+09:29.710 --> 09:35.740
+We have to remove our thunk middleware as well so get inside of our shop component.
+
+09:35.740 --> 09:43.910
+Let's switch over this fetch collection start async to just such collection start.
+
+09:44.070 --> 09:47.130
+We just want to use our fetch collections start method
+
+09:51.770 --> 10:00.160
+and now all that happens is that once our fetch collections start fires are sagas code logs I am fired.
+
+10:00.180 --> 10:07.050
+So what ended up happening if we look at our saga code our fetch collections start action came in our
+
+10:07.050 --> 10:12.390
+saga fetch collections start was listening for this action the moment I heard it it fired off our fetch
+
+10:12.390 --> 10:18.960
+collections async generator function and then ah I am fired got logged and that's the order that it
+
+10:18.960 --> 10:26.210
+happened so that's pretty much sagas and how they listen for action we just write them with this format
+
+10:26.930 --> 10:28.790
+and we use this take every effect.
+
+10:29.030 --> 10:34.670
+There are other variations of this listener affect that slightly modify how the songs are listening
+
+10:34.700 --> 10:36.850
+but we'll explore that later.
+
+10:37.040 --> 10:39.280
+Right now this is just all.
+
+10:39.320 --> 10:47.620
+This saga is doing now let's flesh out our fetch collections async saga to replace what we had before
+
+10:47.980 --> 10:49.660
+in our thunk action.

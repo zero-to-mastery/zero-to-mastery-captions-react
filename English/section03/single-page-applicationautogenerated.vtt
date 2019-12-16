@@ -1,0 +1,181 @@
+WEBVTT
+
+00:01.360 --> 00:02.220
+Welcome back.
+
+00:02.290 --> 00:09.040
+In the next video we're going to start talking about something called lifecycle methods and API is no
+
+00:09.060 --> 00:11.130
+one in order to prepare for that lesson.
+
+00:11.140 --> 00:13.020
+I want to go over something that we already saw.
+
+00:13.360 --> 00:19.820
+There is this component class app extends component.
+
+00:19.840 --> 00:22.830
+Now what does that really mean component.
+
+00:22.900 --> 00:28.900
+If we look here is part of the react library and we're using de structuring here.
+
+00:28.900 --> 00:37.450
+But if I didn't include it like this I could still use it using the react dot component because component
+
+00:37.540 --> 00:41.020
+well is a property on react that we can use.
+
+00:41.350 --> 00:45.480
+And when we do something like class app extends react component.
+
+00:45.790 --> 00:53.170
+What we're doing is saying hey I want whatever functionality that this a react component that was already
+
+00:53.170 --> 00:55.540
+built into the library by somebody.
+
+00:55.540 --> 00:58.850
+I want that functionality and I'm going to add onto it.
+
+00:58.870 --> 01:08.420
+So for example this render method comes built in with real component in this react component gives us
+
+01:08.450 --> 01:16.400
+some batteries included options to use in our component so that we don't have to constantly repeat ourself
+
+01:16.970 --> 01:23.810
+we use something that reacts says hey this is a component and we just tack on some specific functionality
+
+01:23.810 --> 01:30.530
+to it as you'll see we'll learn about lifecycle methods and how these components have some important
+
+01:30.530 --> 01:39.770
+methods already on them such as if I type in CRM here you'll see that I have some methods that comes
+
+01:39.770 --> 01:45.650
+from the react dot component lifecycle but we'll get to that shortly.
+
+01:45.650 --> 01:52.990
+Another thing I want to talk about is this idea of an API remember how we talked about the birth of
+
+01:52.990 --> 01:54.760
+the single page application.
+
+01:54.760 --> 02:01.380
+How initially all we had to do with a normal web page was we visited a link and we got the Asian all
+
+02:01.390 --> 02:04.570
+javascript and assets file when we clicked on another link.
+
+02:04.690 --> 02:06.240
+We went to a different page.
+
+02:06.250 --> 02:13.080
+So we got a whole new 80 mile javascript and assets file however with single page applications.
+
+02:13.080 --> 02:20.160
+We now have this idea of communicating with the backend initially where we get a tiny Asia male page.
+
+02:20.160 --> 02:27.900
+Remember with our just ideas of route where we fill in our ReACT component and then we have this massive
+
+02:27.960 --> 02:35.610
+JavaScript file or a least bigger than he usually was with our ReACT library with our components with
+
+02:35.610 --> 02:37.430
+any of our logic.
+
+02:37.440 --> 02:42.540
+So now instead of having to communicate back and forth with the server if I click on something and let's
+
+02:42.540 --> 02:47.970
+say visit a different part of the page I don't have to go back I can just have a javascript or react
+
+02:47.980 --> 02:52.110
+say hey just we rendered the DOM with something else.
+
+02:52.110 --> 02:59.430
+So now with a single page application instead of requesting a page it's turn more into requesting for
+
+02:59.430 --> 03:00.480
+data.
+
+03:00.780 --> 03:06.720
+And this is when we have the ability to let's say communicate with outside servers maybe servers that
+
+03:06.720 --> 03:08.700
+we don't control.
+
+03:08.760 --> 03:17.390
+For example in our big project we're going to talk to the Google firebase database we might talk to
+
+03:17.390 --> 03:26.180
+some different API endpoints so that now we can communicate with different API is back and forth and
+
+03:26.210 --> 03:37.360
+using JavaScript just receive the data for example we saw that this Jason Place holder Web site by entering
+
+03:37.360 --> 03:41.260
+into this Web site all I get is well not an Asia MLP trade.
+
+03:41.320 --> 03:46.820
+All I get is this data that is formatted in what we call Jason.
+
+03:46.840 --> 03:53.600
+So this Jason data can be converted into let's say a javascript object that we can use.
+
+03:53.770 --> 04:03.750
+But all this does is provide us an API a way for us to access information from well this server so that
+
+04:03.750 --> 04:12.360
+now single page applications instead of just rendering AML can use this data to perhaps display different
+
+04:12.360 --> 04:15.120
+monsters different to user information.
+
+04:15.120 --> 04:23.250
+And as we'll see it will allow us to do interesting things like sign in sign out add items to the shopping
+
+04:23.250 --> 04:28.130
+cart and we'll explore that idea throughout the course and by the way.
+
+04:28.150 --> 04:33.480
+There's a way for you to actually check this if we open up our developer tools and we go to network
+
+04:33.990 --> 04:35.800
+and I refresh the page here.
+
+04:36.120 --> 04:44.600
+You'll see that I have this user's this users document if I click on it and if I go to response we see
+
+04:44.600 --> 04:48.570
+that this is the response that we get.
+
+04:48.580 --> 04:54.790
+So as you start to build larger and larger applications what you'll find is that you'll start talking
+
+04:54.790 --> 05:02.650
+to API eyes and trying to get different data for your application and these end points or servers that
+
+05:02.650 --> 05:08.530
+we speak to can be third party servers like Google servers or they can be your own server where you
+
+05:08.530 --> 05:10.530
+perhaps have your own database.
+
+05:10.570 --> 05:14.410
+Now that's something that we explore a little bit more later on.
+
+05:14.410 --> 05:23.100
+But the key thing is that the way we build applications now is very dynamic most of the time we don't
+
+05:23.160 --> 05:26.000
+hard code all the information into these files.
+
+05:26.070 --> 05:32.910
+Instead when a user opens something we are always communicating with outside servers.
+
+05:32.910 --> 05:36.940
+So we're going to start structuring our app this way let's keep on.

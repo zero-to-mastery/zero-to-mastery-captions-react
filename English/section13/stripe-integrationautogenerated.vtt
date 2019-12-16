@@ -1,0 +1,526 @@
+WEBVTT
+
+00:00.690 --> 00:02.370
+And welcome back.
+
+00:02.370 --> 00:10.500
+Now that you've signed up or signed in to your stripe account you will see that there is this walk a
+
+00:10.500 --> 00:13.680
+message which we will ignore for now.
+
+00:13.830 --> 00:20.370
+The main thing that we need to understand of what this dashboard shows us is the information regarding
+
+00:20.430 --> 00:28.190
+any payments that we've processed using stripe so because we of course have not processed any payments
+
+00:28.190 --> 00:35.870
+yet we are going to see zero for everything and we're actually not going to process any live payments
+
+00:35.870 --> 00:37.160
+using the stripe integration.
+
+00:37.280 --> 00:45.610
+So the bulk of this dashboard is actually pointless for the course of this lesson there does need to
+
+00:45.610 --> 00:53.020
+be this activation that you need to do for your stripe account if you actually want to see the data
+
+00:53.140 --> 00:55.120
+as well as process live payments.
+
+00:55.960 --> 01:00.910
+And this is due to legal reasons that stripe needs to make sure that you are who you say you are so
+
+01:00.910 --> 01:08.530
+they have to confirm your address certain things about your business etc. but we're not going to do
+
+01:08.530 --> 01:15.830
+that because we're not actually processing any payments at all what we will do is actually just integrate
+
+01:16.370 --> 01:23.510
+the stripe elements into our page but we don't necessarily have to actually go through this whole activation
+
+01:23.510 --> 01:25.830
+process to do that.
+
+01:25.880 --> 01:30.740
+Now if you want to you completely can now that you have your own stripe account you can go through the
+
+01:30.740 --> 01:37.880
+documentation you can set it up right and play around with all of the wonderful settings in this platform
+
+01:37.910 --> 01:38.930
+that stripe provides.
+
+01:39.650 --> 01:46.290
+But we are going to ignore this for the course of this lesson well we will do however is go to this
+
+01:46.290 --> 01:47.940
+developer section.
+
+01:47.940 --> 01:54.060
+So if we click this developer's tab we will see this new dropdown with the API keys in it.
+
+01:54.150 --> 01:56.770
+And that is what we want.
+
+01:56.790 --> 02:06.400
+So inside of here we will see a publishable key as well as a secret key and what these keys do is they
+
+02:06.430 --> 02:16.840
+tell stripe when we put them inside of our application that our application wants to access this account.
+
+02:16.850 --> 02:20.630
+Now the secret key is hidden and you click it and it will show you.
+
+02:20.630 --> 02:28.760
+But the secret key is going to be the live key that we use inside of a server or a server or like service
+
+02:29.770 --> 02:33.000
+that allows us to actually make charges.
+
+02:33.220 --> 02:38.050
+And you can only make charges using a back end server of some kind.
+
+02:38.800 --> 02:42.400
+So because we're not doing that we are going to ignore this.
+
+02:42.490 --> 02:49.300
+Instead what we need is this publishable key and we need this publishable key in order to access the
+
+02:49.390 --> 02:54.590
+elements that stripe gives us including our checkout.
+
+02:54.670 --> 03:00.460
+So let's actually bring in the appropriate libraries enterprise application.
+
+03:00.460 --> 03:10.580
+So going back to our terminal what we need to do is we need to yarn add the library react stripe checkout
+
+03:11.940 --> 03:21.060
+into our packages and what it gives us is this react bound version of The Checkout button that stripe
+
+03:21.060 --> 03:31.030
+provides that opens up that component that we saw that we want and in order to use it we are going to
+
+03:31.060 --> 03:39.970
+create a new component that leverages the underlying stripe checkout button and we'll do that inside
+
+03:40.030 --> 03:42.110
+of our components folder.
+
+03:42.190 --> 03:50.250
+So let's make one called stripe button and then inside of our stripe button we'll make a new file called
+
+03:50.250 --> 03:55.110
+stripe button dot component dodgy OSX.
+
+03:55.140 --> 04:02.750
+Now what we need is we've got to import react from react and then we need to import stripe checkout
+
+04:03.810 --> 04:14.940
+from react stripe checkout and now that we have this we pretty much have the bulk of what we need to
+
+04:14.940 --> 04:17.290
+import as far as library go.
+
+04:17.340 --> 04:22.860
+Well we do have to write though is our component which will be a functional component which we'll call
+
+04:22.860 --> 04:30.610
+the stripe checkout button which will take in a price as a property
+
+04:34.210 --> 04:41.980
+and then before we do our return there is a caveat about the price that we got to talk about so in order
+
+04:41.980 --> 04:44.440
+for a proper charge to be made.
+
+04:44.650 --> 04:53.430
+Stripe wants the price in sense so because we're processing everything in USD we have something like
+
+04:53.490 --> 04:56.520
+50 dollars represented as the price of our items.
+
+04:56.520 --> 04:56.790
+Right.
+
+04:57.570 --> 05:03.750
+So for example we know that the price of our items here is 18 35 90.
+
+05:04.430 --> 05:07.370
+But what stripe wants to see is that value in sense.
+
+05:07.380 --> 05:14.670
+So instead of 50 dollars they want 5000 cents or just the whole integer 5000.
+
+05:15.540 --> 05:24.220
+So what we'll say is this cost price first stripe is going to be equal to price times one hundred and
+
+05:24.220 --> 05:26.980
+then we also need our publishable key.
+
+05:27.070 --> 05:33.400
+So here we're going to make our cost publishable key which is going to be that key that we were looking
+
+05:33.400 --> 05:34.600
+at this one.
+
+05:34.680 --> 05:43.120
+So just copy this over and set it into a string value for our constant next.
+
+05:43.230 --> 05:49.830
+We're gonna do our return and inside of our return we're going to return the stripe checkout component
+
+05:51.130 --> 05:57.250
+and this stripe checkout component takes a bunch of different possible properties that enable or disable
+
+05:57.250 --> 06:03.960
+different features that we have access to inside of our checkout dropdown so if we go to the actual
+
+06:03.960 --> 06:13.110
+strike react strike checkout GitHub repo we'll see that it has these properties that we can access and
+
+06:13.110 --> 06:20.940
+a little explanation about what it does but all we want are the ones that we need to think about.
+
+06:21.300 --> 06:23.730
+You can actually set all kinds of settings right.
+
+06:23.730 --> 06:30.210
+You can change the currency you can change what you want to display what name what image you wanted
+
+06:30.210 --> 06:31.680
+to point to.
+
+06:31.710 --> 06:34.530
+You can set what component class you want it to be.
+
+06:34.530 --> 06:37.350
+So instead of a button you can sell it to a div.
+
+06:37.350 --> 06:45.600
+You can even set disable or enable billing address shipping address Ali pay if you want to process Chinese
+
+06:45.600 --> 06:46.950
+payments.
+
+06:46.950 --> 06:51.480
+Bitcoin if you want to take bitcoin payments remember me as an option.
+
+06:51.480 --> 06:56.070
+There's just so many things that you can set but we're just going to look at the ones that are relevant
+
+06:56.130 --> 06:57.450
+to the ones that we want.
+
+06:57.450 --> 07:04.030
+So inside of our strike check out what we want is the label.
+
+07:04.030 --> 07:04.480
+Pay
+
+07:08.760 --> 07:14.620
+and then instead of the name I'm going to set it as Crown clothing so you can set it as whatever you
+
+07:14.620 --> 07:23.340
+set the name of your application to and then I'm gonna enable billing address by putting billing address
+
+07:23.460 --> 07:24.600
+and shipping address.
+
+07:25.080 --> 07:31.590
+So these allow and provide those fields that request the user making the check out to fill these information
+
+07:31.590 --> 07:40.680
+out and then for the image I actually have the address for you that I'm going to show in your resources
+
+07:42.410 --> 07:50.870
+and then in description we're going to use a string interpolation to say your total is and then we're
+
+07:50.870 --> 07:53.330
+going to use our price value.
+
+07:53.520 --> 07:58.590
+And the reason we want to use our price value and not our price for stripe is because we actually want
+
+07:58.590 --> 08:04.680
+the user to see the physical dollar value not the converted sense value that we've got to pass to our
+
+08:04.680 --> 08:09.480
+stripe checkout which we actually will pass in as amount.
+
+08:09.660 --> 08:17.740
+So we'll say price for striped and then we will add as well our panel label which we'll say is pay now
+
+08:20.350 --> 08:25.030
+and then what we want to pass is the token.
+
+08:25.030 --> 08:30.880
+So the token is the on success callback that triggers is when we submit.
+
+08:30.880 --> 08:37.990
+So the submission is gonna get handled by this component but for us we pretty much just want on token
+
+08:38.410 --> 08:46.700
+to be a function that takes the token and then logs it out because we aren't going to process the payment.
+
+08:46.760 --> 08:50.330
+So with the token you would pass this to your back in.
+
+08:50.360 --> 08:52.130
+Which then creates the charge.
+
+08:52.130 --> 08:52.490
+Right.
+
+08:53.250 --> 08:55.740
+But because for us we're not actually processing the payment.
+
+08:55.760 --> 08:56.600
+We don't need this.
+
+08:56.780 --> 09:02.150
+We're just going to alert payment successful as well as logging the tokens so we can see what it looks
+
+09:02.150 --> 09:06.330
+like and here we're gonna pass on token
+
+09:11.990 --> 09:22.940
+social cost and then our stripe key will be our publishable key and with that that's all we need.
+
+09:23.100 --> 09:29.950
+A lot of settings a lot of props but that's all it is and then we're just gonna export out our actual
+
+09:29.950 --> 09:30.610
+button.
+
+09:30.630 --> 09:35.400
+Right our stripe checkout button as the default
+
+09:38.080 --> 09:40.900
+and then we're going to import it into our checkout component
+
+09:45.890 --> 09:55.450
+components striped button straight button component we'll just put out at the very end here and for
+
+09:55.450 --> 10:04.570
+the price we're gonna pass in the total which if you remember we get from our selector and now if we
+
+10:04.570 --> 10:12.060
+go back to our application we'll see at the bottom we have our pay now button and if we click this we
+
+10:12.060 --> 10:19.580
+see that it renders this dropdown where we ask for an email the name the street the postcode the city.
+
+10:19.620 --> 10:19.820
+Right.
+
+10:19.830 --> 10:22.020
+And then it automatically detects where you live.
+
+10:22.020 --> 10:25.230
+So I currently reside in Amsterdam in the Netherlands.
+
+10:25.230 --> 10:28.740
+But this will probably tell you where you currently live.
+
+10:28.740 --> 10:35.360
+And then if you answer like this it asks you to either fill in billing or fill in shipping otherwise
+
+10:36.290 --> 10:37.100
+on trigger.
+
+10:37.100 --> 10:42.830
+What it does is it just assumes that what you're going to fill in is going to be the same billing address
+
+10:42.890 --> 10:44.110
+as your shipping address.
+
+10:45.140 --> 10:50.210
+Now you might see these errors here but these just have to do with the way that this component is trying
+
+10:50.210 --> 10:52.460
+to render its own fort.
+
+10:52.940 --> 10:58.410
+But it's not important it doesn't actually impact any of the functionality of our application.
+
+10:58.430 --> 11:04.170
+It just has to do with how this component is currently trying to nest and bring in its own font.
+
+11:04.310 --> 11:06.920
+So these errors are irrelevant to us
+
+11:10.490 --> 11:16.630
+let's say we fill in with just summit address and then for the card number.
+
+11:16.630 --> 11:24.250
+This is where we actually need to leverage stripes fake credit card number which I had listed here inside
+
+11:24.730 --> 11:26.560
+at the end of this component.
+
+11:26.560 --> 11:33.590
+So we're just going to place this warning message inside of our component as well and what we'll do
+
+11:33.650 --> 11:38.360
+is that whenever the person using our application is going to pay we just got to make sure that they
+
+11:38.360 --> 11:39.490
+see that message first.
+
+11:39.530 --> 11:45.700
+So we'll put it in red text at the bottom here so that they fill that in but we know that it's 4 2 4
+
+11:45.700 --> 12:02.120
+2 4 2 4 2 4 2 4 2 4 2 4 2 month in year is 0 1 20 and then see BW is 1 2 3 so 0 1 20 1 2 3 and we hit
+
+12:02.120 --> 12:04.000
+our pay now.
+
+12:04.230 --> 12:05.960
+We'll get our check mark.
+
+12:06.130 --> 12:13.530
+We got our alert that says the payment was successful and we should actually log the object and this
+
+12:13.530 --> 12:22.650
+you'll see is just the format of the token object that stripe needs in order to create a charge and
+
+12:22.650 --> 12:28.680
+that's all this is we just take this we make a API call and throw it to our back and then our back in
+
+12:28.680 --> 12:33.960
+code would handle the actual charge so that's how it would typically work in a real flow.
+
+12:34.000 --> 12:35.790
+But for us we're not doing that.
+
+12:35.860 --> 12:43.560
+This is enough to demonstrate that as a react developer you know how to integrate with stripe Now the
+
+12:43.560 --> 12:52.470
+reason we have to use these react like tools is because react requires a specific set of bindings that
+
+12:52.470 --> 12:59.580
+the base stripe documentation and the stripe code does not integrate well with because that's just vanilla
+
+12:59.580 --> 13:00.600
+javascript.
+
+13:00.660 --> 13:07.450
+So we actually leverage these stripe components that people have rapped on our behalf as a library.
+
+13:07.800 --> 13:14.310
+And usually they're very simple wrappers that allow us to actually use them inside of our ReACT application
+
+13:15.220 --> 13:17.140
+but it's that simple just like that.
+
+13:17.170 --> 13:22.340
+We now have a fully integrated stripe feature.
+
+13:22.400 --> 13:31.480
+Now let's actually throw in our warning and modify the style so that we see it in red so we'll go back
+
+13:31.480 --> 13:43.100
+to our code and what we will do is at the bottom of our code here we are going to put a div with the
+
+13:43.100 --> 13:52.200
+class name of test warning and we want to say with the star.
+
+13:52.210 --> 13:55.470
+Please use the following test.
+
+13:55.480 --> 13:58.050
+Credit card for payment
+
+14:01.440 --> 14:06.650
+we're gonna put a brake element here so that our tux goes on the next line and we're just going to say
+
+14:06.650 --> 14:14.630
+4 2 4 2 4 2 4 2 4 2 4 2 4 2 4 2 flash expiry
+
+14:17.390 --> 14:28.210
+0 1 20 CV 1 2 3 so there's different numbers that you can find in the stripe docs for different cards
+
+14:28.240 --> 14:29.920
+like you can test the MasterCard.
+
+14:30.160 --> 14:37.710
+This I believe is visa but they're just test cards that stripe provides that they recognize in their
+
+14:37.770 --> 14:40.900
+checkout flow that the credit card is accurate.
+
+14:40.980 --> 14:43.250
+Otherwise the checkout photo actually throws an error.
+
+14:43.290 --> 14:51.230
+It just tells you that the card isn't valid and what we're gonna need to do is we need to add inside
+
+14:51.240 --> 15:06.070
+at the very bottom just after the total we'll say test warning text align center margin Top 40 pixels
+
+15:07.460 --> 15:11.810
+font size 24 pixels and then color is red.
+
+15:13.550 --> 15:14.260
+Now if we say
+
+15:17.290 --> 15:20.280
+looks like we're not getting our color.
+
+15:20.350 --> 15:21.720
+Oh forgot the ah.
+
+15:21.790 --> 15:23.490
+That's what I was out for at the end.
+
+15:23.490 --> 15:24.360
+Test warning
+
+15:28.440 --> 15:38.070
+and let's just also modify the button that we have inside so that we'll do margin left auto and margin
+
+15:38.130 --> 15:43.470
+top of 50 pixels just so that everything's spaced out a little better Erica.
+
+15:43.770 --> 15:44.700
+Okay cool.
+
+15:45.970 --> 15:51.830
+And sorry as I was saying before if you don't fill in this information it component doesn't let you
+
+15:51.830 --> 15:52.590
+proceed.
+
+15:53.750 --> 15:59.700
+So if like your email is wrong for example also tells you that this is still incorrect.
+
+15:59.700 --> 16:01.440
+It has to follow the right format.
+
+16:02.240 --> 16:05.740
+And if you're card that you use is not the correct one.
+
+16:06.790 --> 16:11.560
+This will also fail so that's the great thing about this component.
+
+16:11.670 --> 16:13.520
+Everything is pretty much built for us.
+
+16:13.560 --> 16:15.920
+All the checks all of the validations.
+
+16:16.110 --> 16:18.690
+It's incredible incredible service.
+
+16:18.690 --> 16:23.700
+And now that we have this integration built in we've pretty much built the majority of the features
+
+16:23.700 --> 16:30.680
+in our application and in the next sections we are going to start covering some more advanced topics.

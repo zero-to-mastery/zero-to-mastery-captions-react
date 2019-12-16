@@ -1,0 +1,181 @@
+WEBVTT
+
+00:00.360 --> 00:04.200
+Now let's take a look at what create react app has made for us.
+
+00:04.590 --> 00:11.900
+SO WE'RE GONNA GO INTO OUR MONSTER'S Rolodex and if we hit unless we see that it's actually generated
+
+00:11.900 --> 00:17.870
+this project for us it's got all our dependencies inside of node modules and it's got a package Jason
+
+00:17.930 --> 00:20.850
+and then some of these other file folders and files.
+
+00:20.870 --> 00:25.740
+So now if we open that up and take a look let's look at the package.
+
+00:25.750 --> 00:32.500
+Jason first we see that it's included for us react and react Dom which is great as well as this other
+
+00:32.500 --> 00:34.410
+library called react scripts.
+
+00:35.220 --> 00:40.770
+Now what react scripts does for us is it's what makes create react app so great.
+
+00:40.770 --> 00:47.150
+It's actually what allows us to have to not worry about web pack and babble.
+
+00:47.380 --> 00:53.350
+It includes these four scripts for us and it calls that library react scripts to do these four things
+
+00:53.800 --> 00:57.620
+start build test and eject.
+
+00:57.640 --> 01:01.580
+Now what start does is it actually starts the project.
+
+01:01.660 --> 01:09.970
+So let's try that first so if we call yarn start we act scripts start right there.
+
+01:10.150 --> 01:17.050
+And what this does is it serves up this sample application of react inside of our local host which is
+
+01:17.050 --> 01:17.790
+pretty awesome.
+
+01:17.800 --> 01:20.530
+We have a working react app right away.
+
+01:20.530 --> 01:23.390
+If we look at the next one built.
+
+01:23.530 --> 01:27.850
+So before we start looking at the script let's actually look at these two folders.
+
+01:28.090 --> 01:34.880
+Now the source folder is actually where our application lives all of the real code that we write for
+
+01:34.880 --> 01:38.800
+our application is going to go into the source folder.
+
+01:38.800 --> 01:46.630
+This public folder is actually where all those files that I mentioned earlier where our browser needs
+
+01:46.630 --> 01:50.980
+an older version of JavaScript and him all to understand.
+
+01:51.010 --> 01:53.670
+So while this is actually the folder where all that's going to go.
+
+01:54.130 --> 02:01.360
+So when we call this build script what create racked up I was gonna do is it's going to turn all of
+
+02:01.360 --> 02:07.480
+the react code in our source folder into that version that the browser understands and put it inside
+
+02:07.480 --> 02:15.810
+of this public folder test just runs the test code that we're gonna write and then eject will actually
+
+02:16.500 --> 02:22.920
+take out all of the configuration files that it's hidden from us for Babylon web hack in case we wanted
+
+02:22.920 --> 02:26.580
+to manage it ourselves now.
+
+02:26.770 --> 02:31.970
+Now that we understand what the basics of what create react app has done for us here.
+
+02:32.020 --> 02:34.630
+Let's actually look at some of the code.
+
+02:34.710 --> 02:39.330
+Now the first thing I want us to look at is this app dot J.S. file.
+
+02:39.330 --> 02:46.230
+Now I know this looks a little overwhelming but let's just take it line by line so first we're going
+
+02:46.230 --> 02:49.710
+to import all the things from react that we need.
+
+02:49.880 --> 02:51.080
+And it's called react right.
+
+02:51.080 --> 02:56.930
+We import react from react and that's going to hold everything related to react that we need inside
+
+02:57.140 --> 03:06.230
+into this file then we're going to import the logo from logo dot SPG which is essentially just this
+
+03:06.290 --> 03:17.930
+logo image then we're going to import the CSX and now let's look at the actual meat of this file let's
+
+03:17.930 --> 03:19.550
+look at line 5.
+
+03:19.610 --> 03:24.320
+This is just a function called app that returns a block of H Timo.
+
+03:24.320 --> 03:26.180
+That's all it is.
+
+03:26.210 --> 03:32.860
+So everything that we see here is actually just the HDMI here.
+
+03:32.860 --> 03:41.700
+Now how this works is that when we look at this index such as file we see that we import that app function
+
+03:41.760 --> 03:43.480
+that we were just looking at.
+
+03:43.740 --> 03:52.080
+And then there's this react on library that calls render and then it renders our app function in the
+
+03:52.080 --> 03:54.310
+form of what looks like an HDMI tag.
+
+03:54.450 --> 03:54.780
+Right.
+
+03:55.410 --> 04:00.600
+And then you see this thing here that says document dot yet element by idea of root.
+
+04:00.630 --> 04:09.840
+So what this is is it's looking on the document object for some elements with an idea of root and it's
+
+04:09.840 --> 04:15.670
+replacing it with this function that we saw that returns HMO.
+
+04:15.720 --> 04:20.550
+So it's going to replace that element with the idea of root with all of that age them out from our function
+
+04:21.610 --> 04:30.550
+and where that div is with the idea of root is inside of index relational inside of this body tag is
+
+04:30.550 --> 04:37.490
+a single div with the idea of root and this is the entry way for our application.
+
+04:37.650 --> 04:47.520
+It's essentially just this library replacing that div with the idea of root with our function that returns
+
+04:48.090 --> 04:50.750
+some HMO.
+
+04:50.780 --> 04:59.930
+Now one of the great things about create react app is that if we make any changes to any of our files
+
+05:00.560 --> 05:04.570
+it'll automatically update inside of our local host.
+
+05:04.580 --> 05:13.440
+So if I wanted to change this to say hello my name is e Hua we will automatically see this update.
+
+05:13.610 --> 05:18.620
+And that's really awesome because that means that we don't have to worry about refreshing anything we
+
+05:18.620 --> 05:22.130
+just code and see those changes like.
+
+05:22.160 --> 05:27.050
+Now let's get started with actually converting this into this.

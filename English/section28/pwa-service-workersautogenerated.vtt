@@ -1,0 +1,406 @@
+WEBVTT
+
+00:01.660 --> 00:01.950
+All right.
+
+00:01.960 --> 00:10.170
+It's time to talk about the very last point the service worker to make our progressive web at what is
+
+00:10.170 --> 00:11.890
+a service worker.
+
+00:12.000 --> 00:19.730
+Sounds like something useful doesn't it service worker is a script that your browser runs in the background
+
+00:20.210 --> 00:24.510
+separate from the web page web app.
+
+00:24.740 --> 00:31.270
+It is generally used for features that don't need a web page or user interaction.
+
+00:31.280 --> 00:38.030
+Remember the main thread that I kept talking about how there's one worker that's trying to work with
+
+00:38.510 --> 00:47.170
+a simple CSX and JavaScript well think of service worker as a another worker that you now have in the
+
+00:47.170 --> 00:47.590
+browser.
+
+00:48.490 --> 00:59.040
+A background worker and it acts as what we call a programmable proxy allowing us to control what happens
+
+00:59.400 --> 01:08.530
+on a request by request basis and it's the reason that we can make our apps our progressive web apps
+
+01:08.740 --> 01:10.870
+work offline.
+
+01:10.870 --> 01:13.090
+That sounds pretty interesting right.
+
+01:14.040 --> 01:22.720
+Now if service workers have been recently added into browsers including safari and besides offline experiences
+
+01:22.900 --> 01:27.610
+it also helps with background sinks and push notifications.
+
+01:27.610 --> 01:34.330
+But we're only going to talk about how service worker allows for our offline experiences because that's
+
+01:34.330 --> 01:40.720
+its main feature and things such as background sync and push notifications are still fairly new and
+
+01:40.720 --> 01:46.850
+best practices are still forming around them I believe resources for you to explore this further if
+
+01:46.850 --> 01:54.350
+you're interested in those topics but for now let's get back to the most important part How do we use
+
+01:54.380 --> 02:02.710
+a service worker well if we go back to our create react app you might remember that we created within
+
+02:02.710 --> 02:05.170
+our create react app Well we didn't really create it.
+
+02:05.170 --> 02:06.620
+It created it for us.
+
+02:06.730 --> 02:16.260
+This file called register service worker and we go to index stored yes we remember that in our main
+
+02:16.350 --> 02:24.690
+app that we render we had our react on the render but also we had this function register service worker
+
+02:25.170 --> 02:26.670
+that I kind of brushed it off.
+
+02:26.670 --> 02:35.010
+Up until now this register service worker gets imported from yep you guessed it our register service
+
+02:35.010 --> 02:41.040
+worker file and as you go through this file it can look pretty overwhelming but they have great commerce
+
+02:41.040 --> 02:43.020
+to show you what it does.
+
+02:44.140 --> 02:47.860
+But let me show you the gist of it and what this entire file is doing.
+
+02:47.860 --> 02:57.030
+It's a lot simpler than you think let's open up a new tab here and open up our console.
+
+02:57.080 --> 03:00.830
+This is what the register service worker is doing.
+
+03:00.860 --> 03:02.000
+That's a little too big.
+
+03:02.000 --> 03:03.200
+Let's see if that works
+
+03:06.050 --> 03:09.960
+it checks for browser support of service worker.
+
+03:09.980 --> 03:16.910
+So it's saying hey do we actually have service worker in our navigator or our browser.
+
+03:17.150 --> 03:25.520
+And remember each browser has its own developer teams in each browser can decide to implement this new
+
+03:25.520 --> 03:28.020
+feature called service worker or not.
+
+03:28.290 --> 03:36.370
+There's actually a really good Web site called is service worker ready that I'll link to where you can
+
+03:36.370 --> 03:42.960
+see which versions of the browsers have implemented service workers if we go back.
+
+03:43.310 --> 03:49.520
+We do this check because we want to make sure that when we do navigator dot service worker we don't
+
+03:49.520 --> 03:56.270
+get an error saying we don't know about service worker why are you talking about so we say if there
+
+03:56.270 --> 04:02.990
+is a service worker we want to use this service worker property of the navigator.
+
+04:03.000 --> 04:09.970
+That is the browser and we want to do something called register and we want to register it using this
+
+04:09.970 --> 04:10.380
+file.
+
+04:10.390 --> 04:18.100
+The service worker dot s file and registering is just the common way for you to create a service worker
+
+04:18.250 --> 04:21.920
+on your web page now.
+
+04:22.150 --> 04:31.800
+Whereas this service worker J.S. coming from if we go back to our app the service worker J.S. is getting
+
+04:31.800 --> 04:36.330
+created from this file in our build folder.
+
+04:36.510 --> 04:45.450
+When we run NPM run build and create react app we see that we now have a service worker dot J.S. file
+
+04:46.140 --> 04:47.450
+and it's modified.
+
+04:47.460 --> 04:55.590
+So it's really really hard to read but all it's doing is running the default registration of the service
+
+04:55.590 --> 04:58.860
+worker that you can pretty much grab anywhere online
+
+05:01.770 --> 05:03.330
+and that's it.
+
+05:03.360 --> 05:11.310
+It's literally just one single line you see that it's a promise that returns the registration and we
+
+05:11.310 --> 05:14.070
+can just log out some properties on it.
+
+05:14.090 --> 05:21.240
+But there's a successful registration and if it fails well it fails and we can say whoops service worker
+
+05:21.240 --> 05:26.940
+registration fails with just this if statement we check if the browser has a service worker and if it
+
+05:26.940 --> 05:36.670
+does we just simply run the register function fairly simple now registering the service worker is going
+
+05:36.670 --> 05:41.710
+to cause the browser to start the service worker install step in the background.
+
+05:41.770 --> 05:52.740
+Again with the other worker and once a service worker is activated and registered this successful case
+
+05:53.250 --> 06:02.550
+it's going to be in one of two states it's either going to be terminated to save memory or it's going
+
+06:02.550 --> 06:10.300
+to be running in the background to fetch messages and events that occurs in the network request.
+
+06:10.310 --> 06:13.480
+Now what does that mean before I get to that.
+
+06:13.590 --> 06:16.580
+Let's go back to our application.
+
+06:16.650 --> 06:18.570
+Let me make this smaller.
+
+06:18.720 --> 06:25.170
+Go to the application tab and you'll see here that we have below manifest.
+
+06:25.310 --> 06:31.990
+The service worker tab and we see that service worker right now.
+
+06:32.130 --> 06:33.860
+There's nothing here.
+
+06:33.860 --> 06:42.350
+But if I go to our demo app that is a progressive web app and I click on service workers we see that
+
+06:42.550 --> 06:44.360
+oh there's something here.
+
+06:44.420 --> 06:49.730
+It looks like there is a service worker that has been registered from service worker Dodge.
+
+06:49.740 --> 06:50.660
+Yes.
+
+06:50.930 --> 06:58.130
+It shows us when it was registered and the status and right now it's stopped because while we're not
+
+06:58.130 --> 07:05.140
+doing anything with this page we can register on register the service worker if we want but it looks
+
+07:05.140 --> 07:08.350
+like on this web page we have this service worker running.
+
+07:08.410 --> 07:16.060
+Let me show you a diagram to illustrate to you what this all means and why we care.
+
+07:16.190 --> 07:22.460
+You see without a service worker our browser is going to send a request to the network.
+
+07:22.460 --> 07:26.690
+This little icon you can think of it as the Internet network.
+
+07:26.690 --> 07:31.750
+We send a request we find the server and the server responds back with some files.
+
+07:31.790 --> 07:39.080
+Let's say a javascript file but now that we have a service worker registered we tell the browser Hey
+
+07:39.320 --> 07:41.470
+before you go ahead and do this.
+
+07:41.780 --> 07:48.020
+Talk to the service worker first maybe he knows something you see in a progressive web app.
+
+07:48.040 --> 07:56.950
+The service worker acts as a what we call a network proxy it intercepts any requests made first to the
+
+07:56.950 --> 07:57.610
+network.
+
+07:57.610 --> 08:05.700
+Like I said step one over here and checks to see if you really need to communicate with the network
+
+08:05.910 --> 08:09.060
+because maybe he already has those files.
+
+08:09.060 --> 08:16.500
+When a user opens a new screen of a progressive web app the request for that page first goes to the
+
+08:16.560 --> 08:19.440
+service worker not the network.
+
+08:19.440 --> 08:27.890
+The service worker then tries to access something called the cache API and this is something that the
+
+08:27.890 --> 08:29.060
+browsers give you.
+
+08:29.060 --> 08:35.360
+Again most browsers have this because they included this feature with service worker and this cache
+
+08:35.360 --> 08:44.840
+API is kind of like a box where the browser stores files such as JavaScript files SS files any static
+
+08:44.840 --> 08:53.090
+files could be images it could be anything you want the worker tries to access check the box and see
+
+08:54.350 --> 09:02.120
+is whatever I'm requesting inside of this box if the content is available then we'll get the new page
+
+09:02.540 --> 09:08.780
+through here and the service worker is going to return the page regardless of the network activity we're
+
+09:08.780 --> 09:17.210
+never requesting to the network but if the service worker comes back and says Mr. browser I don't have
+
+09:17.270 --> 09:22.850
+the file that you request that you're gonna have to talk to the network then we go back to talking to
+
+09:22.850 --> 09:27.550
+the network the old way that we did thanks and getting those files.
+
+09:27.640 --> 09:30.980
+Now what does this cache storage API.
+
+09:31.100 --> 09:41.920
+Again if we go back to our example and scroll down to cache we have something called cache storage and
+
+09:41.920 --> 09:47.590
+this cash storage is exactly what the service worker checks.
+
+09:47.590 --> 09:49.780
+If I click over here we see that.
+
+09:49.990 --> 09:50.470
+Oh yeah.
+
+09:50.560 --> 10:03.480
+We have a cash of a few JavaScript files and also some HMO if I go to the other one.
+
+10:03.490 --> 10:09.800
+I see some icons that are also and some list that are also being cashed
+
+10:12.920 --> 10:20.200
+variable so we cash the Web site or the shell of the Web site.
+
+10:20.210 --> 10:22.020
+Remember whatever we wanted to.
+
+10:22.040 --> 10:30.750
+We want to work offline in this cash storage API via the service worker so that on repeat visits even
+
+10:30.750 --> 10:36.870
+though the very first time the user browses and goes to a Web site they'll have to go to the network
+
+10:36.900 --> 10:44.620
+because this cache API will be empty once the network returns with those files we can cache those files
+
+10:44.830 --> 10:51.210
+and on repeat visits the app shell can be loaded instantly all right.
+
+10:51.230 --> 10:54.260
+Stop talking Andre show me how we can actually do this thing.
+
+10:54.260 --> 10:55.450
+Show me some code.
+
+10:55.460 --> 11:02.000
+Well you're in luck in the next few videos we're gonna go through these steps and finally turn our app
+
+11:02.210 --> 11:06.410
+into a progressive web app before I do that again.
+
+11:06.420 --> 11:14.010
+I just want to show you how things work underneath the hood if we go back to our create react app.
+
+11:14.070 --> 11:18.870
+I wanted to show you how this would work before create react app implemented.
+
+11:18.900 --> 11:24.060
+Service workers because right now it's kind of being done behind the scenes for you which is really
+
+11:24.060 --> 11:24.720
+really nice.
+
+11:25.740 --> 11:32.500
+But what if you had to implement it on your own it's actually quite easy and you can look at this page
+
+11:32.500 --> 11:38.810
+that I'm going to link to to show you what you would have done if you go over here.
+
+11:38.840 --> 11:46.960
+We see that all we needed to do was download something called service worker pre cash and in our built
+
+11:46.960 --> 11:51.380
+step where we say react scripts build we would just run this command.
+
+11:51.400 --> 12:01.050
+The service worker Prakash with config of this file kind of similar to how Web pack config worked.
+
+12:01.390 --> 12:08.890
+So we give it this configuration file in our index not H2 AML we do the classic if service worker exists
+
+12:08.950 --> 12:17.270
+in the browser we're going to register the service worker we have our manifest file that we add and
+
+12:17.270 --> 12:27.500
+then finally with this package that we installed s w Prakash will here all we're doing is setting up
+
+12:27.500 --> 12:34.550
+the config telling it that we want to use the built folder and I want you to put in the cache any file
+
+12:34.550 --> 12:42.440
+that's an issue in my file and any J sound files or manifest that Jason File and anything in the static
+
+12:42.620 --> 12:49.030
+folder and we're gonna use the service worker dot J.S. thought that that's it.
+
+12:49.250 --> 12:57.240
+And if you remember in the static folder for create react app we have our CSX javascript and some media
+
+12:57.240 --> 13:03.350
+files how simple is that very very cool.
+
+13:03.350 --> 13:11.430
+Again remember we're just using the tools that browsers provide for us to make our websites faster.
+
+13:11.510 --> 13:12.200
+That's it for now.
+
+13:13.070 --> 13:14.900
+I'll see in the next one by.

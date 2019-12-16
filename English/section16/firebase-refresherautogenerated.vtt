@@ -1,0 +1,406 @@
+WEBVTT
+
+00:01.000 --> 00:08.950
+Now what we are going to cover in this lesson and the upcoming lessons are those objects we just mentioned.
+
+00:09.010 --> 00:15.210
+Now those objects are query reference objects and snapshot objects.
+
+00:15.250 --> 00:22.900
+We'll also talk about security rules near the end about how to protect the data that we're passing into
+
+00:22.930 --> 00:24.370
+our database.
+
+00:24.370 --> 00:33.370
+But after we fundamentally understood both the query reference object and the snapshot objects so what
+
+00:33.450 --> 00:36.680
+are query reference objects and snapshot objects.
+
+00:36.700 --> 00:46.640
+Well we can only get these types of two objects whenever we make a query to fire store and a query is
+
+00:46.640 --> 00:50.700
+a request we make to give us something from the database.
+
+00:50.780 --> 00:56.810
+So whenever we ask for something to the forest or library from the database what we will get back from
+
+00:56.810 --> 00:59.400
+fire store is one of these two objects.
+
+00:59.420 --> 01:09.170
+Now of these two objects both of them can either be of a document type or a collection type what this
+
+01:09.170 --> 01:16.160
+means is that we can either get a document reference object or a collection reference object or we can
+
+01:16.160 --> 01:23.390
+get a document snapshot object or a collection snapshot object but that collection snapshot object is
+
+01:23.390 --> 01:25.640
+called a query snapshot.
+
+01:25.730 --> 01:33.770
+That's just one thing to remember by our store will also always return us these objects even if nothing
+
+01:33.830 --> 01:36.280
+exists in that query.
+
+01:36.340 --> 01:37.180
+So what do I mean.
+
+01:37.180 --> 01:39.690
+Well we will see that in the example.
+
+01:39.730 --> 01:44.680
+But let's just define these objects first.
+
+01:44.690 --> 01:51.560
+Now we'll start with the reference objects query reference object is an object that represents the correct
+
+01:51.560 --> 01:59.720
+place in the database that we are querying so in order for us to get a clear reference object we do
+
+01:59.720 --> 02:02.710
+it by querying using one of these two methods.
+
+02:02.780 --> 02:10.330
+And again we query either a document or we query either a collection and we do it by calling firestorm
+
+02:10.370 --> 02:20.620
+dot doc and then passing it the path to that document such as user slash and then the user I.D. or we
+
+02:20.620 --> 02:27.190
+get it at a collection path by calling firestorm collections and then the path to the collections slash
+
+02:27.280 --> 02:34.810
+users for example a query reference object does not have the actual data though of either the collection
+
+02:34.840 --> 02:43.040
+or the document it just represents the place in that path in our database for us to actually get the
+
+02:43.040 --> 02:47.510
+properties or the data that is related to the firestorm.
+
+02:47.510 --> 02:54.700
+We have to get the snapshot object and we get that using the reference object but we'll talk about the
+
+02:54.700 --> 03:00.350
+snapshot object after we finish exploring the reference object now.
+
+03:00.620 --> 03:05.290
+As I mentioned there are two types of reference objects that we can get back.
+
+03:05.450 --> 03:12.120
+There are document reference objects and collection reference objects we use the document reference
+
+03:12.150 --> 03:20.310
+object to perform credit methods which are the create retrieve update and delete related methods on
+
+03:20.310 --> 03:23.490
+that document in our database.
+
+03:23.520 --> 03:31.440
+Now the methods that we need to call on document wrath are dot set in order to create it dot yet in
+
+03:31.440 --> 03:39.330
+order to retrieve it dot update in order for us to update the data and then dot delete for us to just
+
+03:39.330 --> 03:42.740
+delete that entry entirely.
+
+03:42.760 --> 03:50.230
+Now we can also add documents to collections using the collection ref as long as we use the method.
+
+03:50.350 --> 03:51.750
+Add on that collection.
+
+03:52.360 --> 04:00.880
+So as you can see here if we call collection rough dot add and then we pass in an object with the value
+
+04:00.880 --> 04:07.900
+props of what we want to add as a new document to this collection collection Rooftop ad we'll do that
+
+04:07.900 --> 04:09.350
+for us.
+
+04:09.570 --> 04:18.690
+We also are able to get our Snapshot objects from these reference objects by calling the dot get method
+
+04:19.080 --> 04:25.890
+on either the document ref or the collection ref and the document ref gives us back a documents snapshot
+
+04:25.890 --> 04:33.540
+object whereas the collection ref gives us back a query snapshot object which I also call a collection
+
+04:33.540 --> 04:35.280
+snapshot object.
+
+04:35.280 --> 04:42.090
+Now we get these snapshot objects with our get method which is equivalent to the retrieved method in
+
+04:42.090 --> 04:43.480
+the KRudd paradigm.
+
+04:43.680 --> 04:52.740
+If you're unfamiliar with KRudd credit is the main way that we interact with our database which is through
+
+04:52.830 --> 05:00.940
+these create retrieve update or delete methods that exist on our reference objects if this paradigm
+
+05:00.940 --> 05:04.530
+concept seems a bit confusing as to why it is this way.
+
+05:04.780 --> 05:12.030
+It is easy to find articles written about this extensively cos KRudd has been around for quite a long
+
+05:12.040 --> 05:18.430
+time and it's a pretty popular paradigm of working with databases but moving on to the document snapshot
+
+05:18.430 --> 05:26.510
+object that we get from our document reference object allows us to check if a document exists at this
+
+05:26.510 --> 05:34.310
+query using the DOT exists property which gives us back a bullet we can also get the actual properties
+
+05:34.400 --> 05:41.970
+on the object by calling the DOT data method which returns us adjacent object of the document.
+
+05:42.060 --> 05:48.330
+So what we'll do is let's just take a quick refresher about what we were doing way back when we set
+
+05:48.330 --> 05:54.360
+up our authentication and storing our authenticated users in our database because we actually saw those
+
+05:54.420 --> 06:03.220
+objects when we did this now what we did was we use the auth library that we got from Firebase and we
+
+06:03.220 --> 06:11.070
+said whatever the authentication state changed we want you to pass us the user off object and then we
+
+06:11.070 --> 06:19.470
+will listen for all of the user auth objects that auth state change will give us that use our auth object
+
+06:19.890 --> 06:20.610
+is stored.
+
+06:20.640 --> 06:27.600
+If you remember inside of a different database than the one that we have it's in the authentication
+
+06:27.600 --> 06:35.660
+table whenever a user signed in with email or password or our Google sign in the authentication what
+
+06:35.660 --> 06:45.070
+store that user's information and then it was sign a user I.D. to it called the UI de and what we did
+
+06:45.640 --> 06:53.800
+was we would pass that whole user object with the UIC into our create user profile document method and
+
+06:53.890 --> 06:55.510
+inside of that method.
+
+06:55.780 --> 07:05.800
+What we did was we would essentially use the user auth object to query our database for a document reference
+
+07:05.800 --> 07:14.210
+object as we see with our firestorm Doc we would say our users collections slash and then the user I.D.
+
+07:14.330 --> 07:17.560
+that are authentication library assigned for us.
+
+07:18.520 --> 07:22.670
+Which was this idea using the user reference.
+
+07:22.700 --> 07:31.110
+We would then call dot get to get the snapshot object because as you remember even if we did not have
+
+07:31.110 --> 07:38.570
+a actual user object in the database firebase will always give us back a snapshot object because using
+
+07:38.570 --> 07:41.390
+it we would check whether or not it exists or not.
+
+07:41.420 --> 07:45.530
+Using the DOT exists property as we just spoke about.
+
+07:45.710 --> 07:51.510
+Now what we did was we would say if the snapshot.
+
+07:51.710 --> 07:51.980
+Right.
+
+07:51.980 --> 07:59.600
+So if the snapshot object if the document exists then we don't want to do anything but if it does not
+
+07:59.600 --> 08:09.720
+exist then we want to create a new document object inside of our user ref which is why we say user ref
+
+08:09.750 --> 08:17.370
+dot set by saying user reports that we're saying I want you to create a new document using this object
+
+08:17.370 --> 08:25.090
+with all these properties on it inside of our database and that's exactly what we did.
+
+08:25.140 --> 08:28.650
+And that's how we were able to create those users.
+
+08:28.730 --> 08:32.950
+That's how these users in our database is generated.
+
+08:32.990 --> 08:38.650
+Now we can actually walk through this in a more comprehensive way.
+
+08:38.750 --> 08:46.960
+Let's first console log this out as I mentioned firebase will always give us back the reference object
+
+08:47.050 --> 08:50.600
+and the snapshot object even if nothing exists there.
+
+08:50.620 --> 08:56.620
+So instead of using our user auth you I.D. Let's use something completely random that I just made up
+
+08:56.620 --> 09:00.730
+just now if I save this and console dot log.
+
+09:00.740 --> 09:03.660
+They use our ref that we get right.
+
+09:03.670 --> 09:10.780
+We know that our authentication state updates because our application always keeps track of whether
+
+09:10.780 --> 09:14.140
+or not our user has signed in before or not.
+
+09:14.140 --> 09:19.870
+So even though our application refreshes we are still getting the authentication state update to us.
+
+09:20.770 --> 09:23.460
+So that will trigger what we just console logged.
+
+09:23.470 --> 09:30.190
+And here we see our document reference we see the I.D. is the made up I.D. that I had and we see the
+
+09:30.190 --> 09:36.030
+path that we passed to the firestorm dot dot call right here.
+
+09:36.090 --> 09:42.270
+That's what it's giving us back inside of our document reference object but we know this object can't
+
+09:42.270 --> 09:47.670
+exist because if we look in our database we see that we only have these two not the made up one that
+
+09:47.670 --> 09:54.980
+I just made with the 1 2 3 0 6 whatever now this is good for us because we don't want firestorm to air
+
+09:55.010 --> 09:57.620
+out if we don't know if an object exists or not.
+
+09:57.620 --> 09:57.880
+Right.
+
+09:57.890 --> 10:02.680
+In a way it gives us way more flexibility in how we do things.
+
+10:02.780 --> 10:05.990
+By the same time we do have to code with this in mind.
+
+10:06.830 --> 10:10.590
+So what we would do is we would get the snapshot using that use a ref.
+
+10:10.580 --> 10:10.920
+Right.
+
+10:10.940 --> 10:20.710
+That we just made and then what we can do is we can now see whether or not the snapshot exists right
+
+10:20.710 --> 10:25.750
+we can see what's on it because we know that faster will still give us a snapshot object.
+
+10:25.750 --> 10:32.230
+So now if we look back we'll see that the second object is our documents snapshot object on here we
+
+10:32.230 --> 10:38.960
+see the exists is false because as we know no such object exists.
+
+10:39.030 --> 10:45.660
+We also see that the idea is the one that we just randomly generated because firebase uses the I.D.
+
+10:45.660 --> 10:47.030
+path that you provided it.
+
+10:47.040 --> 10:47.580
+Right.
+
+10:47.580 --> 10:54.150
+So for us it's the path that we randomly wrote As the I.D. of the document that you're trying to get.
+
+10:54.180 --> 11:01.390
+But now let's actually test this code that we wrote so we know that our Snapshot does not exist.
+
+11:01.410 --> 11:06.450
+So we know that we're going to create a new object in that user ref that we got.
+
+11:06.450 --> 11:07.310
+Right.
+
+11:07.560 --> 11:18.450
+And let's manually set display name to something new like test user email can be random email at gmail
+
+11:18.450 --> 11:23.010
+dot com create it out will be the creator and then we don't have any additional data.
+
+11:23.040 --> 11:24.320
+So it's not relevant.
+
+11:24.510 --> 11:33.580
+But now if we save we will see that our new object actually got created in our five star database.
+
+11:33.720 --> 11:41.830
+If we check we'll see now that in our users there's that user we just made we just created this user
+
+11:41.830 --> 11:47.940
+with those properties that I just wrote in and this is just because of how user rough dot set works.
+
+11:47.950 --> 11:48.150
+Right.
+
+11:48.160 --> 11:54.770
+We're setting that user object using these properties that I want but this is the main thing we can
+
+11:54.770 --> 12:02.330
+do with both our user ref object but also our Snapshot object our Snapshot object.
+
+12:02.360 --> 12:09.990
+Now we know that our Snapshot exists we'll also see that what we're able to now see on our Snapshot
+
+12:09.990 --> 12:21.190
+object if we refresh will see that we actually have access to this dot data method that will return
+
+12:21.190 --> 12:23.110
+us the data regarding our snapshot.
+
+12:23.260 --> 12:25.080
+We actually can see it in our console log.
+
+12:25.090 --> 12:34.740
+But if I just called data like this and save will now see an object representing the end user that we
+
+12:34.770 --> 12:39.470
+created and that's how we get the values of our documents.
+
+12:39.500 --> 12:41.620
+We have to call dot data on that snapshot.
+
+12:41.630 --> 12:47.500
+Object my hopefully now you understand what the documents snapshot object and the document reference
+
+12:47.500 --> 12:52.930
+objects are respectively used for and we'll definitely explore more of using those because it's the
+
+12:52.930 --> 12:59.000
+key of how we're going to build and pull data from our database.
+
+12:59.000 --> 13:05.740
+Now let's talk about collection snapshots or as they're called inside a fire store query snapshot.

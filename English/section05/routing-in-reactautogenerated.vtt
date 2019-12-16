@@ -1,0 +1,142 @@
+WEBVTT
+
+00:01.420 --> 00:08.470
+Let's talk about routing in a single page application which is why we're building.
+
+00:08.470 --> 00:12.080
+We saw that single page applications are really really neat.
+
+00:12.130 --> 00:13.490
+There's some pros to it.
+
+00:13.630 --> 00:14.310
+Right.
+
+00:14.320 --> 00:22.540
+One is that initially when we send the file from the server we only send the files once an e-mail file
+
+00:23.080 --> 00:31.200
+a CSX file and a massive JavaScript file usually now back in the day when we clicked on a link we would
+
+00:31.200 --> 00:38.460
+go back to the server ask for a new H2 mail page and that server would send it back with CSX and JavaScript.
+
+00:38.460 --> 00:41.360
+This time around things are a little bit different.
+
+00:41.370 --> 00:47.640
+We request the page and then all the navigation happens within here because we don't need to talk to
+
+00:47.640 --> 00:48.840
+the server anymore.
+
+00:48.900 --> 00:57.440
+The JavaScript file or our Ria library allows us to manipulate the DOM so that now our servers can just
+
+00:57.560 --> 01:04.700
+focus on sending data instead of focusing on Hey what view to render what H2 Mel page dissent we can
+
+01:04.700 --> 01:11.610
+just make API requests and get Jason data back which is really really nice.
+
+01:11.660 --> 01:18.980
+And now our server maybe if we had a mobile app as well can also be used as the same one because that
+
+01:19.040 --> 01:26.470
+Jason data can be sent to a mobile phone because we're not gonna be sending HCM all files back and forth.
+
+01:26.520 --> 01:32.640
+It also makes changing the DOM more users interacting with your Web site faster because it doesn't have
+
+01:32.640 --> 01:37.630
+to go back and forth back and forth to communicate but there's also downsides to it.
+
+01:37.710 --> 01:43.170
+Now the idea of server side rendering and single page application is something we'll cover later on
+
+01:43.170 --> 01:49.410
+in the course such as the fact that now we have a bigger JavaScript file so it's more data that we have
+
+01:49.410 --> 01:52.990
+to send from the server to the front end.
+
+01:53.100 --> 02:00.960
+But what I want to focus on here is routing remember react as just a UI library so it doesn't provide
+
+02:01.050 --> 02:03.030
+a routing for us.
+
+02:03.030 --> 02:09.690
+We need to add that functionality unlike angular for example that is a framework and comes with routing
+
+02:09.690 --> 02:16.230
+pre-built react says I don't care about running you figure it out because it's a smaller library.
+
+02:16.230 --> 02:19.180
+It lets us pick and choose what routing we want to do.
+
+02:19.260 --> 02:23.210
+Do we want to implement our own or do we want to use a library.
+
+02:23.290 --> 02:29.710
+Now we're going to be using react router which I would say is a standard in large react projects.
+
+02:29.710 --> 02:33.400
+It's the main one that reactive operas use for routing.
+
+02:33.400 --> 02:39.190
+And the problem and tries to solve is the fact that we now don't have the default browser navigation
+
+02:39.280 --> 02:45.610
+provided by the browser because the browsers are built around this idea of clicking on links and getting
+
+02:45.610 --> 02:52.180
+a new HDMI Alpha and react says well no everything is going to be in jail sex and we'll just change
+
+02:52.180 --> 02:57.540
+and update the Dom and we'll let that little robot change the page for us.
+
+02:57.590 --> 03:04.970
+So how do we solve this well this package we're going to use react router lets us do some interesting
+
+03:04.970 --> 03:05.580
+things.
+
+03:05.690 --> 03:13.740
+For example if I click on a page here like hats you see that my your world changed from an empty home
+
+03:13.780 --> 03:23.640
+page to shops slash hats initially when single page applications started to take off because single
+
+03:23.640 --> 03:29.820
+page applications didn't really have this functionality you had this back button problem where you couldn't
+
+03:29.820 --> 03:32.770
+go back because everything while there weren't any links.
+
+03:32.790 --> 03:35.380
+This wouldn't happen and this would just keep staying empty.
+
+03:35.400 --> 03:39.360
+So when the browser said back well it wouldn't work.
+
+03:39.720 --> 03:46.480
+And this was a common problem because the navigation inside the application you URL didn't change.
+
+03:46.740 --> 03:54.240
+But the problem is now solved because the browser provides something called a history API and internally
+
+03:54.540 --> 04:02.250
+libraries like react Browder and other single page application routing libraries use this API provided
+
+04:02.250 --> 04:10.640
+by the browser to essentially hijack and mimic you or else so that as we'll see over the next couple
+
+04:10.640 --> 04:17.530
+of videos with this library we can have the same functionality that we had with apps back in the day
+
+04:17.780 --> 04:23.840
+but with single page applications and still have functionality where we can go back and forth and use
+
+04:23.840 --> 04:30.590
+the URL even enter a specific you URL and get to that page let's find out more in the next video.

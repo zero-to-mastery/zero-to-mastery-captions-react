@@ -1,0 +1,64 @@
+WEBVTT
+
+00:01.470 --> 00:07.690
+This advice works not just with react but in programming in general.
+
+00:07.920 --> 00:10.570
+And right here I say trim the fat.
+
+00:10.680 --> 00:18.570
+But what I really mean is that breaking down things into small simple units is a good way of programming.
+
+00:18.600 --> 00:22.260
+You have a giant component with a lot of sex.
+
+00:22.350 --> 00:22.840
+Good.
+
+00:22.890 --> 00:28.190
+Then most likely why you want to do is break that into smaller components.
+
+00:28.200 --> 00:31.420
+Sure it might be more JavaScript files you might say.
+
+00:31.440 --> 00:33.280
+Oh that's gonna get a little too messy.
+
+00:33.300 --> 00:34.470
+Too many JavaScript files.
+
+00:34.500 --> 00:41.470
+Well then I argue that perhaps you should organize your files in a better system because although Yeah
+
+00:41.530 --> 00:45.400
+we might have more JavaScript files we'll have more components.
+
+00:45.400 --> 00:52.750
+What we do by breaking things down is that we make things easier to test easier to understand and less
+
+00:52.750 --> 00:59.710
+likely to break right if things are just small units that just concern themselves with one specific
+
+00:59.710 --> 01:02.450
+thing they're less likely to break.
+
+01:02.470 --> 01:04.750
+They're also easier for people to understand.
+
+01:04.750 --> 01:08.880
+They open up a file and you have 30 lines of code that's easy to read.
+
+01:08.890 --> 01:13.370
+Then a giant component that you have to go line by line to figure out what's happening.
+
+01:13.600 --> 01:20.570
+So ninety nine percent of the time if you think that component can be broken down into smaller components.
+
+01:20.740 --> 01:27.990
+Yeah go ahead and do it although it just may generate more files a code in the end.
+
+01:28.030 --> 01:35.690
+As projects get larger and larger the idea of having reusable components becomes more and more important.
+
+01:35.770 --> 01:37.690
+So trim the fat people.

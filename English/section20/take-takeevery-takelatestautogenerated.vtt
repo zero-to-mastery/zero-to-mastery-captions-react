@@ -1,0 +1,493 @@
+WEBVTT
+
+00:01.220 --> 00:09.080
+OK in this lesson we are going to explore more deeply some of the things that we can do with sagas so
+
+00:09.080 --> 00:14.950
+that we can get a better understanding as well of how the saga library works.
+
+00:15.350 --> 00:21.590
+Now unfortunately we have to step outside of our existing library in order to take a better understanding
+
+00:21.680 --> 00:27.980
+of just the base functionality of some of these other effects that we've explored inside of read saga
+
+00:28.850 --> 00:29.780
+and to demonstrate.
+
+00:29.810 --> 00:37.660
+We have a very simple application that is pretty much just a typical numbers logger.
+
+00:37.700 --> 00:44.420
+We have this button that increases the number and then this other button that decreases the number and
+
+00:44.510 --> 00:45.520
+all it is is.
+
+00:45.590 --> 00:50.230
+It's a simple reducer right that holds a value number.
+
+00:50.240 --> 00:56.160
+And then depending on the action if it's an increment or decrement it increases or decreases the value.
+
+00:56.360 --> 01:00.090
+And then our component just pulls in both the action creator.
+
+01:00.100 --> 01:00.370
+Right.
+
+01:00.410 --> 01:06.260
+That will dispatch an increment or dispatch a decrement action and pull in the value of the prop as
+
+01:06.260 --> 01:14.900
+well and set it to the value which we then just display inside of a simple component very simple application
+
+01:14.900 --> 01:16.500
+setup.
+
+01:16.530 --> 01:24.970
+The main thing that we want to demonstrate here is our ability to understand what sagas can do so inside
+
+01:24.970 --> 01:30.960
+of our code we have this app saga file that we can write our sagas for the first time.
+
+01:31.300 --> 01:36.640
+And what we want to do is we want to look at the difference between some of the at the very least the
+
+01:36.640 --> 01:44.940
+base listener effects that I talked about so we want for example we're going to look at the base one.
+
+01:44.970 --> 01:48.330
+So we've seen take every but there's actually a base.
+
+01:48.330 --> 01:52.410
+Take one as well and there is a difference of what it does.
+
+01:52.440 --> 01:55.830
+So I'm going to explain to you what this one does.
+
+01:55.890 --> 02:01.890
+Right just the base take and how it differs from take every and take the latest.
+
+02:01.890 --> 02:04.520
+Which is another one that we're gonna look at.
+
+02:04.600 --> 02:06.830
+So here we just want to look at take.
+
+02:06.830 --> 02:15.950
+Now we don't want to write a very basic saga so I'm going to export a saga function called Basic or
+
+02:15.980 --> 02:20.640
+I'm going to increment saga.
+
+02:20.690 --> 02:27.380
+Now what we're going to do is we're going to yield to our take function and our take is just expecting
+
+02:27.380 --> 02:36.230
+the increment keyword unlike take every we don't pass to it anything in the second argument instead
+
+02:36.230 --> 02:44.930
+what take does is it waits for this action of increment to happen when it does we're able to actually
+
+02:44.930 --> 02:52.670
+get the payload from this action as well if we want it to if we wanted to what take does is it gives
+
+02:52.670 --> 03:00.220
+us back as a promise that gets resolved the actual payload value of this action.
+
+03:00.290 --> 03:08.870
+If we had one if we wanted to set it we could just say increment payload and we would set it like that.
+
+03:08.920 --> 03:15.130
+That's the main benefit of take the other thing about take is that the rest of the code does not execute
+
+03:15.220 --> 03:16.900
+until this take operates.
+
+03:16.900 --> 03:18.960
+So it's pretty much the same as take every.
+
+03:18.970 --> 03:22.690
+The only difference is that we would write out our function respectively.
+
+03:22.690 --> 03:32.060
+So if we wrote a console log here I am incremented Well we would not expect this code to ever log until
+
+03:32.150 --> 03:39.460
+our increment action is caught by our increment saga now in order for us to test this we have to bring
+
+03:39.460 --> 03:40.950
+this into our store.
+
+03:41.110 --> 03:49.990
+So we'll just import in our increment saga from our app saga and run it inside of our app middleware
+
+03:50.110 --> 04:00.040
+run and now if we open up our logger we'll see that when we hit add one we are firing our I am incremented
+
+04:01.100 --> 04:08.090
+because now we have actually triggered the action but one of the big differences between take and take
+
+04:08.180 --> 04:16.070
+every as we use in our clothing application will notice that whenever we click and fire off the increment
+
+04:16.100 --> 04:20.460
+action again we're not actually triggering.
+
+04:20.530 --> 04:29.840
+Ah I am incremented console logs anymore Well this is actually because take is following just the basic
+
+04:29.840 --> 04:34.370
+generator function that we learned about a few lessons ago.
+
+04:34.390 --> 04:40.690
+Do you remember when we learned our generator lesson that we were able to call next until we ran the
+
+04:40.720 --> 04:41.590
+yields.
+
+04:41.680 --> 04:43.240
+And then on the last.
+
+04:43.240 --> 04:49.510
+Next that we called we would get either no value if we don't return anything from our generator function
+
+04:49.580 --> 04:50.300
+right.
+
+04:50.560 --> 04:56.860
+But the completed property would say true and then we would never be able to restart our saga.
+
+04:56.860 --> 04:57.120
+Right.
+
+04:57.130 --> 04:58.330
+Which is the nature of Saga.
+
+04:58.360 --> 05:02.500
+You cannot go back into the saga and then start from top to bottom again.
+
+05:04.220 --> 05:12.900
+Well this is interesting because when we noticed would take every take every kicks off a new task right.
+
+05:13.010 --> 05:20.240
+Using the generator that we passed to it as its second argument for every increment action that comes
+
+05:20.300 --> 05:20.990
+in.
+
+05:20.990 --> 05:29.230
+So let's explore that a little further let's make a new function or another generator function called
+
+05:29.740 --> 05:30.560
+on increment.
+
+05:30.790 --> 05:40.260
+Let's just say that inside we yield a console log I am increment so instead of being take we used take
+
+05:40.320 --> 05:45.600
+every and then we fire on increment.
+
+05:45.620 --> 05:55.910
+Now what's happening here is that when ever we trigger this action under the hood redux saga is firing
+
+05:55.940 --> 06:02.490
+off a new task to run our on increment saga code.
+
+06:02.880 --> 06:10.550
+So every time I am incremented is being fired redux saga is actually regenerating that generator right.
+
+06:10.560 --> 06:15.070
+It's calling this on increment generator again and again and again and again.
+
+06:15.180 --> 06:17.850
+So it's not running through the same increment saga.
+
+06:17.910 --> 06:24.960
+Instead what it's doing is it's looping and listening for every increment call and then creating new
+
+06:25.140 --> 06:33.710
+iterations or new tasks that are equivalent to whatever generator function that we pass to it and that's
+
+06:33.710 --> 06:40.520
+the big benefit of using take every because now we're able to actually loop and reuse this increment
+
+06:40.520 --> 06:46.850
+code more than one time and listen to all actions that come from increment we can actually write this
+
+06:46.850 --> 06:52.050
+ourselves manually with take using a while loop.
+
+06:52.130 --> 06:59.790
+So if you are familiar with a while loop what a while loop does is it essentially executes the code
+
+06:59.820 --> 07:06.000
+inside of this block based on this conditional one the block is finished executing it goes back up and
+
+07:06.000 --> 07:10.320
+it checks the conditional again if the conditional is still true it reruns the block again.
+
+07:10.320 --> 07:21.070
+So if we force true will actually be able to run a yield on our take where we can say increment like
+
+07:21.070 --> 07:33.570
+this and then let's just import take as well let's copy that over and now we'll see that no matter how
+
+07:33.570 --> 07:41.190
+many times we fire off this action this code will work because our generator function never completes
+
+07:41.730 --> 07:48.630
+it will always go back into the while loop and get stuck because our conditional is true so it'll always
+
+07:48.630 --> 07:51.050
+say you'll take increment.
+
+07:51.060 --> 07:51.660
+It's true.
+
+07:51.690 --> 07:54.050
+OK I'm gonna console log I'm incremented.
+
+07:54.090 --> 07:55.470
+In fact we won't even need to yield it.
+
+07:56.070 --> 07:57.080
+But that's what'll happen.
+
+07:57.090 --> 08:03.540
+It'll say I am incremented and then it will redo the loop because our conditional is true and it will
+
+08:03.630 --> 08:10.080
+always be ready to take new increments every time an increment action comes in it console logs I am
+
+08:10.080 --> 08:13.800
+incremented it then restarts at the top of our while loop.
+
+08:14.040 --> 08:19.430
+This is pretty much a way of seeing what take every does for us.
+
+08:19.450 --> 08:26.950
+The only difference will take every is that take every also spawns these new sagas write these new task
+
+08:26.950 --> 08:35.150
+based sagas concurrently which means that it's non blocking which means that technically speaking if
+
+08:35.150 --> 08:37.940
+I were to put imagine a set time up here.
+
+08:38.180 --> 08:43.890
+In fact we can get an effect called delay from radar saga which is the HREOC saga way of doing so time
+
+08:43.890 --> 08:50.160
+outs if I were to yield delay and I pass it 5000 milliseconds like this.
+
+08:51.270 --> 08:55.710
+You'll see that when I click it the first time I get I'm incremented if I click it a second time the
+
+08:55.710 --> 09:01.770
+third time and the fourth time you see it's not working right because this code right now is being blocked
+
+09:01.770 --> 09:06.770
+by this delay this delay five thousand you can imagine like an asynchronous code.
+
+09:07.530 --> 09:15.510
+If we had some API request here instead what's happening is that we're whole function is frozen waiting
+
+09:15.510 --> 09:17.270
+for this delay to finish.
+
+09:17.490 --> 09:23.510
+If it was an API request it's waiting for that API request to come back now that five thousand seconds
+
+09:23.740 --> 09:28.130
+are five thousand milliseconds is passed though if we fire again we'll see that our code continues to
+
+09:28.130 --> 09:29.520
+work right.
+
+09:29.570 --> 09:36.890
+That's the main difference is that this code is blocking any future take increments coming in from being
+
+09:36.890 --> 09:42.480
+called whereas take every is creating new sub tasks.
+
+09:42.500 --> 09:49.910
+It's spawning new sagas for every increment action to come in which means that 3 increment actions are
+
+09:49.910 --> 09:59.590
+running on three new on increment sagas meaning that if our code goes back to using our take every instead
+
+10:02.630 --> 10:07.540
+so we'll say increment and we'll pass an hour on increment
+
+10:10.450 --> 10:19.240
+inside of here we had a delay of 5000.
+
+10:19.270 --> 10:26.680
+This does not stop every other action as you can see from getting the I am incremented code from running
+
+10:27.040 --> 10:35.000
+because again take every is spawning new sagas on every increment action coming in.
+
+10:35.210 --> 10:40.760
+Now I'm not going to say which way is the right way to do it because they're both just patterns you
+
+10:40.760 --> 10:44.780
+might want for example code to be blocking right.
+
+10:44.780 --> 10:48.560
+You might want to write it with that while loop using a regular take.
+
+10:48.800 --> 10:56.120
+If we want to de bounce requests write de bounce meaning that let's say we don't want them in 5000 milliseconds
+
+10:56.870 --> 11:00.680
+to be able to spawn and fire multiple sagas.
+
+11:00.690 --> 11:00.870
+Right.
+
+11:00.920 --> 11:06.200
+We don't want them to run multiple console logs or if we had more complex logic here we don't want them
+
+11:06.200 --> 11:13.400
+to run that multiple times back to back maybe we want to bounce those clicks maybe we want to wait for
+
+11:13.400 --> 11:20.900
+the first one to finish or maybe what we want to do is wait for the last one we want to cancel any of
+
+11:20.900 --> 11:22.940
+the previous sagas that were fired.
+
+11:23.330 --> 11:25.950
+So here's an interesting thing that we can do.
+
+11:26.090 --> 11:33.080
+Let's say for example we wait on this increment action to come in but instead what we do is we have
+
+11:33.140 --> 11:39.040
+a separate action that actually increments the reducer.
+
+11:39.110 --> 11:40.760
+So what do I mean by this.
+
+11:40.790 --> 11:43.520
+Well right now we're listening for increment to increment.
+
+11:43.520 --> 11:50.700
+What if we say increment from saga is the action that actually triggers this what we would then be able
+
+11:50.700 --> 12:01.180
+to do is take our put affect and after a delay of three thousand milliseconds we would then actually
+
+12:01.270 --> 12:12.260
+fire off our increment from saga and this would be the actual way for us to actually increment from
+
+12:12.260 --> 12:14.390
+soccer right there's always a three thousand second delay.
+
+12:14.390 --> 12:19.240
+You can imagine that this is some kind of asynchronous request.
+
+12:19.270 --> 12:23.470
+Now what happens if I click this three times after three seconds.
+
+12:23.470 --> 12:30.250
+We'll see that our increment from socket resolves as we would expect after the delay we end up firing
+
+12:30.400 --> 12:32.420
+our new increment from Saga action.
+
+12:32.470 --> 12:40.640
+The updates are reducer but what if what we wanted to do was that we only wanted the last one the last
+
+12:40.640 --> 12:46.070
+click within these three thousand milliseconds right before any of them resolved to be the actual one
+
+12:46.070 --> 12:49.140
+that does get resolved while we can use
+
+12:51.740 --> 12:56.380
+take effect that we're going to look at in this lesson called take latest.
+
+12:56.390 --> 13:03.290
+Now what happens is that no matter how many times I click this it will cancel all the previous ones
+
+13:03.830 --> 13:08.240
+and only trigger the latest one that was clicked.
+
+13:08.300 --> 13:15.650
+In fact you'll see that I am incremented is still getting logged because this first yield is synchronous.
+
+13:15.650 --> 13:22.040
+So each on increment that gets fired in our take latest is still immediately resolving it's still spawning
+
+13:22.130 --> 13:23.160
+a new saga.
+
+13:23.210 --> 13:31.120
+Every time we clicked but because our delay is 3000 seconds meaning that our function right our generator
+
+13:31.120 --> 13:35.270
+function here is stuck here for three thousand milliseconds.
+
+13:35.290 --> 13:40.690
+Remember when I said with yields were yielding control back to our saga middleware library so that it
+
+13:40.690 --> 13:45.960
+can cancel any of the ongoing saga if it wanted to.
+
+13:45.960 --> 13:52.620
+This is exactly what's happening when we do take latest even though these new spawn sagas whenever we
+
+13:52.620 --> 13:58.230
+clicked increment are being generated hence why we saw the I am incremented on every click.
+
+13:58.230 --> 14:05.340
+We only ended up resolving one increment from saga because whenever it hit the delay and those latest
+
+14:05.340 --> 14:12.610
+clicks were coming in HREOC saga was actually cancelling every previous spawn saga that was generated
+
+14:12.670 --> 14:15.530
+except for the latest one.
+
+14:15.660 --> 14:19.680
+That is the big deal with redux saga.
+
+14:19.680 --> 14:28.020
+This is pretty much the core of the architecture of how sagas are formulated and this hopefully explains
+
+14:28.020 --> 14:37.170
+to you how we can leverage redux saga to give us many different effects such as deep bouncing but also
+
+14:37.410 --> 14:43.860
+it allows us to understand how with sagas we can cancel them so that they don't take up more time but
+
+14:43.980 --> 14:52.310
+also how it allows us to run multiple tasks concurrently in our background.
+
+14:52.330 --> 14:54.450
+Now I'm hoping that this all makes sense.
+
+14:54.460 --> 15:01.420
+This is pretty much the basics of how sagas work now with this information.
+
+15:01.500 --> 15:07.230
+We're going to move on into the next lesson where we're going to make importing sagas into our store
+
+15:07.440 --> 15:08.890
+a little easier.
+
+15:08.970 --> 15:12.530
+But if you're confused please watch this video.
+
+15:12.570 --> 15:18.310
+The more you watch it the more you see the differences between take understanding generator functions.
+
+15:18.360 --> 15:24.660
+Understanding this idea of creating new sagas write the better you'll be able to understand what's actually
+
+15:24.660 --> 15:26.280
+happening with sagas.

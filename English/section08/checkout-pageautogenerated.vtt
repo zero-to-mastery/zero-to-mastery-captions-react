@@ -1,0 +1,262 @@
+WEBVTT
+
+00:00.330 --> 00:00.880
+OK.
+
+00:01.710 --> 00:08.690
+The next thing that we have to do is finish building our car dropdown so far our car dropped down.
+
+00:08.710 --> 00:15.670
+We're missing the empty message that goes here when the user has no card items as well as the actual
+
+00:15.670 --> 00:20.620
+linking of our go to checkout that takes us to our checkout page.
+
+00:20.620 --> 00:28.470
+So let's first handle this empty message so inside of our car dropdown component what we'll do is we
+
+00:28.470 --> 00:38.870
+will conditionally render a span or our cart items depending on whether or not the cart items array
+
+00:39.290 --> 00:47.990
+has a length that's greater than zero right so for us type corrosion of 0 will be false anyway.
+
+00:48.150 --> 00:49.970
+So if it's not false.
+
+00:50.110 --> 00:50.360
+Right.
+
+00:50.430 --> 00:55.230
+If there's a value greater than zero then we'll render our car items.
+
+00:55.230 --> 01:06.010
+If there isn't any items then we will render a span with the class name of empty message that says your
+
+01:06.010 --> 01:07.420
+cart is empty
+
+01:10.550 --> 01:12.060
+of cart items.
+
+01:12.060 --> 01:20.530
+Now maybe this is a good time to talk a little bit about type caution in JavaScript so we know that
+
+01:20.740 --> 01:27.620
+zero is something that will evaluate to false if I do zero equals false.
+
+01:27.740 --> 01:29.840
+We're using the loose equal sign.
+
+01:29.950 --> 01:33.340
+So there's two types of equivalence in JavaScript.
+
+01:33.340 --> 01:38.670
+There's the double equals and then there's the triple equals double equals just checks.
+
+01:38.680 --> 01:46.180
+If the values of the two things are the same and what it will also do is it will try and coerce the
+
+01:46.180 --> 01:49.680
+types on the left and the right side that we're comparing.
+
+01:49.720 --> 01:57.340
+So let's say for example the string of one and the number of one they'll try and coerce the value of
+
+01:57.340 --> 02:01.900
+the string over to a number and then they'll compare the values.
+
+02:01.900 --> 02:06.220
+So once the string of 1 becomes 1 while the values of one are the same.
+
+02:06.760 --> 02:13.810
+Whereas if we try and do a triple equals we'll find that it gives us false because with the triple equals
+
+02:13.920 --> 02:21.900
+that's a strict evaluation which is looking at both the type of what we're comparing and also the value.
+
+02:21.940 --> 02:27.460
+So because the type of our string of one is a string and then our type of our number is a number then
+
+02:27.460 --> 02:32.970
+we'll get false when we try and do it this way now inside of JavaScript.
+
+02:33.070 --> 02:38.860
+There are six type of things that are considered false values which means that if we were to put them
+
+02:38.890 --> 02:45.280
+in a conditional like an if statement or our ternary operator then it will return false.
+
+02:45.940 --> 02:51.190
+And those six things are zero false undefined.
+
+02:51.520 --> 03:01.340
+No not a number and an empty string these six things all await evaluate to false which is why when we
+
+03:01.340 --> 03:09.020
+set default values inside of our reducer we tend to set them to the empty version or the false version
+
+03:09.320 --> 03:10.860
+of what they'll be.
+
+03:10.880 --> 03:17.930
+So if they're going to be an object we set them by default to know if they're going to be a number.
+
+03:17.930 --> 03:19.240
+We'll set it to zero.
+
+03:19.340 --> 03:22.260
+If it's a string we'll set it to an empty string right.
+
+03:22.300 --> 03:27.980
+And if it's true or false if it's a boolean Well that doesn't really matter more so what state we want
+
+03:27.980 --> 03:32.820
+that value to be inside of our reducer when an initialize is.
+
+03:32.970 --> 03:39.410
+And the reason for this is so that we can conditionally render like the item itself or we can render
+
+03:39.500 --> 03:41.290
+an empty state.
+
+03:41.330 --> 03:42.180
+Right.
+
+03:42.260 --> 03:44.380
+And that's essentially what we're doing here.
+
+03:44.510 --> 03:51.020
+We're saying that if the car items length is equal to zero then render an empty message.
+
+03:51.020 --> 03:59.660
+If not then we will render out the actual car items and now let's just apply some of the styles that
+
+03:59.660 --> 04:04.130
+we need to our empty message inside of our car dropdown styles
+
+04:06.850 --> 04:17.440
+and what we'll just say is that empty message class will get the styling where the font size is 18 pixels
+
+04:18.860 --> 04:21.600
+and our margin is 50 pixels.
+
+04:21.880 --> 04:22.540
+Auto.
+
+04:22.700 --> 04:23.590
+There we go.
+
+04:23.900 --> 04:30.740
+Now our message is center OK now for our actual go to checkout button.
+
+04:30.870 --> 04:42.720
+Well first let's create the actual checkout page so let's go to our app J.S. closes other tabs and also
+
+04:42.750 --> 04:51.930
+make a new folder for our page called checkout closes folder and let's make a new folder called checkout
+
+04:52.860 --> 05:00.600
+inside we'll just make a basic checkout component after making our usual files.
+
+05:00.700 --> 05:13.080
+Checkout styles dot SAS and inside will import react from react import in our style sheet and usually
+
+05:13.080 --> 05:20.170
+as we always do we're just going to declare our checkout page and make it a basic functional component
+
+05:20.200 --> 05:23.650
+that just renders a div that says checkout page
+
+05:27.170 --> 05:27.570
+right.
+
+05:27.680 --> 05:32.210
+Just so that we know everything's working let's exploit this by default.
+
+05:35.540 --> 05:38.820
+And then inside our objects let's bring it in
+
+05:42.090 --> 05:48.570
+and we'll put it underneath all our other pages that we're importing just so that we know that all of
+
+05:48.570 --> 05:51.520
+our page components are together in the import statement.
+
+05:51.520 --> 05:52.140
+Right.
+
+05:52.200 --> 05:58.710
+We can even separate it a little bit so that we can see it a little better if we want to sort them by
+
+05:58.710 --> 06:08.270
+their respective sections and then we'll just add a new row here or the exact path goes to our checkout
+
+06:08.270 --> 06:10.200
+page when we hit checkout.
+
+06:11.150 --> 06:15.680
+Now the reason we're not doing it for shop is because eventually we'll actually do shop slash and then
+
+06:15.680 --> 06:23.830
+a category like hats jackets men's or women's but here we'll just add in our route point to our checkout
+
+06:23.830 --> 06:28.240
+page because we don't have anything after checkout like there's no slash checkout and then something
+
+06:28.240 --> 06:30.320
+else at least not yet.
+
+06:30.340 --> 06:38.580
+Now we can think of as far as our app goes And now let's just set up our card dropdown to have our history
+
+06:38.580 --> 06:51.360
+action to push it through what we'll need is we will need our with or hired a component from our ReACT
+
+06:51.450 --> 06:52.560
+router Dom
+
+06:55.340 --> 07:03.340
+and what we'll do is we're actually going to wrap the connected function inside of our with router.
+
+07:03.530 --> 07:12.140
+And the reason we can do this is because all of our higher order components if you remember return components
+
+07:12.650 --> 07:16.090
+but also take components as their arguments.
+
+07:16.130 --> 07:23.090
+So with router is just taking the component that got returned from our connect call as its component
+
+07:23.090 --> 07:32.790
+argument now the order in which we wrap them matters because with router will be what passes the match
+
+07:32.880 --> 07:41.120
+history and location objects that we first covered when we're looking at our with router component into
+
+07:41.130 --> 07:43.760
+the component that is being wrapped.
+
+07:43.830 --> 07:50.880
+So we want what comes out of the Connect component to receive those props because when you wrap components
+
+07:50.880 --> 07:56.490
+like this it actually evaluates from inside out.
+
+07:56.610 --> 08:05.050
+So we'll actually get our connected component first which will then pass in to our with router hired
+
+08:05.050 --> 08:05.990
+a component.
+
+08:06.150 --> 08:13.170
+And this way our actual component will have access to the props that we're looking for which in this
+
+08:13.170 --> 08:22.350
+case is history because what we want this on click to do is just fire the function that will take us
+
+08:22.350 --> 08:34.540
+to history push slash checkout and now if we save we see that it takes us to our checkout page okay.
+
+08:34.760 --> 08:35.590
+Now let's continue.

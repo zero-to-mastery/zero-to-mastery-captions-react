@@ -1,0 +1,232 @@
+WEBVTT
+
+00:00.300 --> 00:07.180
+Welcome back everyone in the last few lessons we've really optimized our front end reacted what we want
+
+00:07.180 --> 00:12.820
+to do now is actually put this live to Heroku and by doing so we'll actually notice that there's something
+
+00:12.820 --> 00:18.850
+particular about Heroku that makes it so we have to add another optimization but I'm always a fan of
+
+00:18.850 --> 00:20.970
+seeing the problem before showing you the solution.
+
+00:20.980 --> 00:22.800
+So let's see it first.
+
+00:22.990 --> 00:27.580
+We're going to do is go back to our terminal and update Heroku with our new code.
+
+00:27.610 --> 00:35.050
+SO WHAT WE'RE GONNA DO IS WE'RE GONNA SAY GET add dash a right get commit dash and adding performance
+
+00:35.440 --> 00:44.960
+optimizations to code base with react lazy suspense and memo.
+
+00:45.010 --> 00:52.990
+Now when you make this push you might have to reconnect your Heroku project if you've cloned and then
+
+00:53.080 --> 00:57.070
+use a project from one of the github links that I've sent you.
+
+00:57.190 --> 01:03.430
+This is important because your project with Heroku is actually not connected to the cloned account.
+
+01:03.460 --> 01:11.050
+So if that's the case please check the Heroku deployment video again to see how to link a Heroku project
+
+01:11.050 --> 01:16.380
+on your CLIA to your actual project profile.
+
+01:16.390 --> 01:25.940
+So with that in mind I'm just going to actually run it now with get push Heroku M. So this will push
+
+01:25.970 --> 01:29.650
+my code now and initialize a new build.
+
+01:29.710 --> 01:32.210
+Now as you remember this actually takes some time.
+
+01:32.210 --> 01:36.800
+So I'm just going to speed through this process until we hit actually a certain portion of the build
+
+01:36.800 --> 01:43.500
+that is gonna be interesting so now's a good time for us to jump in and actually take a look at this
+
+01:44.430 --> 01:46.260
+statement right here.
+
+01:46.320 --> 01:51.330
+So we'll see that what Heroku did here was run our ReACT built script.
+
+01:51.330 --> 01:56.460
+Building our actual project for the final deployed application.
+
+01:56.460 --> 02:02.610
+You'll see that these chunks are actually the chunks of our application that are being split into where
+
+02:02.610 --> 02:07.560
+we added our chunking code which was where we did our lazy loading.
+
+02:07.560 --> 02:13.500
+What's interesting to note is that this is the initial chunk which includes all of our libraries and
+
+02:13.500 --> 02:19.470
+dependencies those subsequent chunks are the chunks related to the actual applications that we broke
+
+02:19.470 --> 02:25.710
+into our laser loaded routes but you'll see that here it says file sizes after GS it.
+
+02:25.710 --> 02:27.490
+But what is Jesus.
+
+02:27.510 --> 02:32.150
+Jesus is actually a compression strategy that the back end servers do.
+
+02:32.280 --> 02:40.530
+So that when they pass it through HDTV s to from the server to our client it's in a smaller package
+
+02:40.560 --> 02:46.170
+where it gets unzipped in the actual client browser at that point.
+
+02:46.170 --> 02:52.650
+It will be the full size that the actual project is of each of these bundles but you'll see that these
+
+02:52.650 --> 02:58.140
+are the size of that we should be expecting to 20 kilobytes some point two for some point to one and
+
+02:58.140 --> 03:00.990
+then really small sizes afterwards.
+
+03:00.990 --> 03:11.740
+So once this is done let's reopen our project in our actual Heroku link and let's see how long it actually
+
+03:11.740 --> 03:18.880
+took so let's force a hard refresh go to our network tab.
+
+03:18.960 --> 03:26.160
+So here when we look at the actual chunks we'll see for some reason they're way way bigger than what
+
+03:26.160 --> 03:30.760
+we were told when our build script ran on our Heroku built.
+
+03:30.870 --> 03:35.590
+We see that the initial chunk that was supposed to be two hundred and twenty six kilobytes is seven
+
+03:35.590 --> 03:41.270
+hundred and seventy six kilobytes our main chunk is twenty seven point four kilobytes when I should've
+
+03:41.280 --> 03:46.530
+been seven kilobytes and then these which should have been more negligible one killed by or four hundred
+
+03:46.530 --> 03:49.670
+bytes even are still in kilobytes sizes.
+
+03:49.770 --> 03:52.490
+So why is that that these are bigger.
+
+03:52.500 --> 03:58.770
+Well it turns out that the reason for this is because Heroku does not offer Jeez tipping right out the
+
+03:58.770 --> 04:00.750
+gate in order for us to do it.
+
+04:00.780 --> 04:05.050
+We have to manually apply Jesus Bing to our Express server.
+
+04:05.100 --> 04:09.750
+So this is actually another benefit we have for writing our own back and express server which serves
+
+04:09.780 --> 04:16.600
+our client at any of the reps that we did it's actually very easy for us to do this in fact all we need
+
+04:16.600 --> 04:26.050
+to do is add in a library that express maintains themselves to provide jeez that being to Art Node server.
+
+04:26.050 --> 04:34.210
+So all we have to do here is we simply Jaan add compression the compression library is a library that
+
+04:34.210 --> 04:41.760
+allows us to compress and GS up all of the files and chunks that we end up sending out from our server.
+
+04:41.770 --> 04:48.340
+So now what we do in order to use it is inside of our code we go to our server just file and we create
+
+04:48.340 --> 04:57.370
+a new concept called compression which requires compression the new compression library that we just
+
+04:57.460 --> 05:05.320
+install and then what we do is inside of all this after use we're also going to say app use compression.
+
+05:05.650 --> 05:09.640
+And now if we save let's just re push this up again.
+
+05:10.560 --> 05:20.980
+So let's do get out again get commit adding compression library for GS bang on Heroku and then let's
+
+05:20.980 --> 05:27.400
+get push Heroku master one more time and again I'm gonna speed through the section because this is going
+
+05:27.400 --> 05:29.950
+to take the same amount of time as last time.
+
+05:30.250 --> 05:34.230
+So we've finished our build we've updated our Heroku.
+
+05:34.240 --> 05:41.670
+Let's go back to our Heroku account and let's do a hard refresh and then let's look back at our network
+
+05:41.670 --> 05:47.330
+tab and now we'll see that our chunks are definitely the sizes that they should be.
+
+05:47.930 --> 05:52.580
+So here we'll say our chunk jazz is now two hundred and twenty two kilobytes which matches what the
+
+05:52.580 --> 05:55.040
+build script was telling us it should be.
+
+05:55.040 --> 05:57.440
+And we see that our main chunk is seven kilobytes.
+
+05:58.010 --> 06:00.940
+So now our code is actually pretty optimized.
+
+06:00.950 --> 06:05.900
+It should be pretty fast because everything is pretty much the base size that it needs to be on the
+
+06:05.900 --> 06:07.150
+wire.
+
+06:07.160 --> 06:12.830
+The only thing might be the images are a little large but honestly because we're an e-commerce platform
+
+06:12.950 --> 06:17.690
+there are more complicated advanced techniques of optimizing these images.
+
+06:17.810 --> 06:21.050
+That is not really something that we as react developers need to do.
+
+06:21.050 --> 06:26.270
+This is generally something that could be done by a designer or somebody that is more familiar with
+
+06:26.330 --> 06:34.070
+actually optimizing images but with that in mind we have optimized our application quite significantly
+
+06:34.070 --> 06:41.960
+now and our size and speed should be much faster with our actual final deployed application.
+
+06:41.970 --> 06:49.140
+So again it was very easy to just add in Jesus being to our Express server for Heroku simply using the
+
+06:49.140 --> 06:50.070
+compression library.
+
+06:50.550 --> 06:58.050
+And with that we're going to move into one more almost paradigm when it comes to performance which is
+
+06:58.050 --> 06:59.610
+progressive web apps.
+
+06:59.610 --> 07:01.670
+So we'll talk about that in the next lesson.

@@ -1,0 +1,349 @@
+WEBVTT
+
+00:00.450 --> 00:02.010
+Welcome back everyone.
+
+00:02.010 --> 00:08.100
+In the last lesson we learned how to use graft fuel to pull in our markdown files and then use them
+
+00:08.220 --> 00:12.720
+and their data to populate out this list of our blogs.
+
+00:12.720 --> 00:18.050
+Now we're only displaying the excerpts so we're not actually explaining the body of our blogs.
+
+00:18.120 --> 00:21.120
+We're gonna do that in an individual blog page.
+
+00:21.120 --> 00:28.260
+And the way we're gonna do that is we're actually going to need to leverage this new concept where what
+
+00:28.260 --> 00:31.950
+we're gonna do is hijack the build step.
+
+00:31.950 --> 00:38.550
+Whenever we built out our Gatsby blog when we ran yarn develop for the first time we are going to come
+
+00:38.550 --> 00:44.570
+in here when it creates those nodes which represent the files that we've written in the first place.
+
+00:44.790 --> 00:51.950
+And we're going to grab the markdown and we're gonna build out each individual page at that moment in
+
+00:51.950 --> 00:53.040
+order for us to do this.
+
+00:53.060 --> 00:57.560
+We actually need to modify our node Gatsby file.
+
+00:57.560 --> 00:59.630
+So in here you'll see that there's this Gatsby.
+
+00:59.630 --> 01:07.940
+No J In this file this is code that will run theoretically on the Node server that represents the Gatsby
+
+01:07.940 --> 01:08.900
+framework.
+
+01:08.900 --> 01:10.620
+Now two things to note here.
+
+01:10.700 --> 01:15.680
+The first is that the code that we're going to write is not real code so it might not be something you
+
+01:15.680 --> 01:19.520
+recognize if you are only used to writing react.
+
+01:19.820 --> 01:24.560
+There's a little bit of back and note code here that we're writing but it's not completely node either
+
+01:24.560 --> 01:28.610
+because it has to do with the node API inside of Gatsby.
+
+01:28.610 --> 01:31.390
+So you can easily take a look at the documentation here.
+
+01:31.430 --> 01:37.760
+If you follow this link inside of your Gatsby No j s but let's just get started because once we actually
+
+01:37.760 --> 01:41.690
+write this code I'm certain you'll at least be able to follow along with what's happening because it
+
+01:41.750 --> 01:43.170
+is javascript.
+
+01:43.490 --> 01:51.410
+So let's just get rid of this and what we're gonna say is exports dot on create node so Gatsby is expecting
+
+01:51.410 --> 01:56.390
+that if you export this method on create node it is equal to a function and they're going to pass this
+
+01:56.390 --> 02:02.140
+function a bunch of properties one of them being the node itself when ever it's creating the node.
+
+02:02.180 --> 02:08.720
+Now as you remember when we did our graph q a query for our files each file had a node which was a representation
+
+02:08.780 --> 02:09.470
+of that file.
+
+02:10.010 --> 02:15.680
+So what we're going to do is we're just going to simply console dot log that node object.
+
+02:15.690 --> 02:21.670
+There's a property on there called internal which just represents data about the actual node itself.
+
+02:21.860 --> 02:23.470
+And we want the type.
+
+02:23.480 --> 02:33.650
+So now if we refresh our server what we're going to see is when it's building we see this list of all
+
+02:33.650 --> 02:36.500
+of these different things that we're logging out now.
+
+02:36.560 --> 02:39.000
+These are all the types of node that we have available.
+
+02:39.140 --> 02:44.630
+And the main ones that we want are the markdown remarks because as you remember the markdown files is
+
+02:44.630 --> 02:47.480
+what we want to use to build out our pages.
+
+02:47.510 --> 02:56.480
+So what we're gonna say is we're gonna say if the node dot internal dot type is equal to markdown remark
+
+03:00.450 --> 03:08.120
+then what we're gonna do is we are actually going to create this thing called a slug a slug inside of
+
+03:08.120 --> 03:16.790
+Gatsby is the U R L or the link that the browser is able to access from our application in order to
+
+03:16.790 --> 03:19.280
+navigate to the page required.
+
+03:19.310 --> 03:25.040
+Now we have to dynamically build out the slug and attach it to the node as a field because we want to
+
+03:25.130 --> 03:29.830
+access that field inside of our application so that whenever we try to root to it or linked to it.
+
+03:29.880 --> 03:32.270
+We're always passing to the correct path.
+
+03:32.480 --> 03:38.950
+So we want to build that path out dynamically we actually get access inside of this on create node function.
+
+03:38.950 --> 03:41.370
+This other property called actions.
+
+03:41.380 --> 03:44.190
+And these are actions that we will receive from Gatsby.
+
+03:44.440 --> 03:50.830
+The one that we want to pluck off is this action called Create node field create no field is exactly
+
+03:50.830 --> 03:51.430
+as it sounds.
+
+03:51.430 --> 03:57.910
+We want to add a new field to our node so we wanted to restructure this off of our actions and what
+
+03:57.910 --> 04:05.420
+we're going to do is build the field path to our node this field path is what we're going to be using
+
+04:05.420 --> 04:09.080
+inside of our application to navigate to this page.
+
+04:09.110 --> 04:15.140
+Now the only thing to keep in mind is that inside of Gatsby this thing is called a slug and a slug is
+
+04:15.140 --> 04:21.020
+essentially just some kind of file path or navigation path inside the application that allows us to
+
+04:21.020 --> 04:28.920
+route to it we actually get access to this function that we get from Gatsby's source file system Gatsby's
+
+04:29.000 --> 04:34.050
+source file system as you remember was this plugin that we used to actually get access to our files
+
+04:34.050 --> 04:35.520
+in the first place.
+
+04:35.580 --> 04:43.300
+So in order to bring it in we are going to d structure off create file path from this Gatsby source.
+
+04:50.140 --> 04:55.690
+They'll see here that I use back ticks now back ticks is actually what Gatsby prefers you to use when
+
+04:55.710 --> 04:57.130
+instantiating strings.
+
+04:57.160 --> 05:01.210
+In fact you should probably change our markdown remark over to using tactics as well.
+
+05:01.750 --> 05:07.420
+And this is simply due to the pretty configuration rules that are set with Gatsby when we loaded it
+
+05:07.420 --> 05:08.610
+by default.
+
+05:08.620 --> 05:14.770
+Now you can actually find these rules inside of this pretty r c file in your base root folder and prettier
+
+05:14.800 --> 05:19.930
+if you're not sure what that is is pretty much just the tool that allows you to consistently enforce
+
+05:19.960 --> 05:25.780
+certain typing and stylings regarding the way that you write code pretty is really great if you have
+
+05:25.780 --> 05:31.030
+an application with many developers that have different ways that they'd like to write things with prettier.
+
+05:31.120 --> 05:35.950
+Whenever you save or whenever you actually type anything you might get warnings telling you that you
+
+05:35.950 --> 05:37.360
+cannot do certain things.
+
+05:37.360 --> 05:45.430
+So for example if I ever try to make this a single string whenever I save pretty or force that to be
+
+05:45.460 --> 05:46.510
+double quotes.
+
+05:46.510 --> 05:49.860
+So if we switch over to using back text that's perfectly fine too.
+
+05:49.870 --> 05:54.280
+You'll actually find that when you look through your gas files any file that gets generated by Gatsby
+
+05:54.280 --> 05:58.990
+is using back ticks so it doesn't hurt doesn't actually impact performance in any way so let's just
+
+05:58.990 --> 06:05.170
+switch over tactics but now that we have our Cray file path function from Gatsby source file system
+
+06:05.680 --> 06:09.480
+what we want to do is we actually want to generate that new slug.
+
+06:09.790 --> 06:12.640
+Now the slug itself as I mentioned was the root.
+
+06:12.760 --> 06:18.040
+Now the route we're gonna use our create file path method and what might this create file path the method
+
+06:18.040 --> 06:21.410
+takes is a object as the argument.
+
+06:21.580 --> 06:27.610
+The first thing it takes is a node as the first property the node property essentially just points to
+
+06:27.610 --> 06:31.100
+the actual node that we're trying to convert into a file path.
+
+06:31.150 --> 06:37.510
+So as you saw with our pages while Gatsby does under the hood is it takes the name of the actual file
+
+06:37.600 --> 06:42.160
+and it turns it into the literal name of the ropes to that page as well.
+
+06:42.220 --> 06:48.030
+So if it's page Dash 2 as the file name the actual route to the URL is also Page 2.
+
+06:48.190 --> 06:50.110
+So we're going to pass it the node.
+
+06:50.110 --> 06:53.670
+We're also going to pass it the method that it needs to fetch the node.
+
+06:53.680 --> 06:58.840
+Now this is pretty much in the API docs and you just have to follow along what it does is you have to
+
+06:58.840 --> 07:04.000
+get this get node function that we also get from on create note and we're gonna pass that as the second
+
+07:04.000 --> 07:10.180
+argument yet node is just a function that allows you to pull the actual node object representation of
+
+07:10.210 --> 07:12.630
+a file or an edge.
+
+07:12.640 --> 07:17.340
+Now you remember when we looked at our actual graph Q We saw that we had nodes right.
+
+07:17.560 --> 07:22.570
+And then we have these edges get node is just a way to get this literal node object it just uses it
+
+07:22.600 --> 07:26.150
+under the hood to actually get the required node that it wants.
+
+07:26.290 --> 07:33.160
+Third Field is an optional field which is called base path and base path is something that you add when
+
+07:33.160 --> 07:35.710
+you want to add a base path to the URL.
+
+07:35.710 --> 07:37.260
+In our case there's no need for it.
+
+07:37.780 --> 07:43.510
+So we can just ignore that property and just pass this in as our slug.
+
+07:43.540 --> 07:46.630
+Now we're finally going to actually create the node feel on our node.
+
+07:46.720 --> 07:53.140
+So what we're going to do is just call it create node field and we're gonna pass this an object where
+
+07:53.170 --> 07:57.100
+the first property is the node pointing to the same node.
+
+07:57.250 --> 07:58.840
+We're also going to put the name.
+
+07:58.870 --> 08:03.860
+So this is the name of the property that we want to add and we want to add it called slug.
+
+08:04.000 --> 08:09.440
+And the value is going to be the slug itself that we just created using create file path.
+
+08:09.670 --> 08:15.910
+So with this when ever we actually end up creating all of our nodes we will end up appending onto that
+
+08:15.910 --> 08:19.920
+node a new slug property with the value of our strength.
+
+08:19.930 --> 08:26.590
+So now if we actually restart our server and we check out our graph queue once this is finished we'll
+
+08:26.590 --> 08:34.910
+be able to see it on all of our markdown notes that new field that we added so let's just let this finish
+
+08:34.910 --> 08:36.350
+building.
+
+08:36.360 --> 08:44.690
+OK now if we refresh you'll see on this node that there's this new thing called fields and in fields
+
+08:44.720 --> 08:47.330
+is slug which is our new property that we just added.
+
+08:47.570 --> 08:52.130
+So any field that you add to a node goes under this Field's property.
+
+08:52.130 --> 08:58.700
+And now if we refresh we'll see inside of our slug we have the actual route that we need to use to navigate
+
+08:58.700 --> 09:02.170
+to the actual root path that we declared.
+
+09:02.360 --> 09:07.670
+Now what we have to do is actually build the pages dynamically because now that we've set up our node
+
+09:07.940 --> 09:10.480
+we have to actually set up the actual page that we built.
+
+09:10.640 --> 09:12.170
+So we'll do that in the next lesson.

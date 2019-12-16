@@ -1,0 +1,454 @@
+WEBVTT
+
+00:01.430 --> 00:07.340
+Now that we've finished building our ReACT project monster's Rolodex we are actually going to start
+
+00:07.340 --> 00:13.610
+building our final project which is an fully fleshed out e-commerce platform.
+
+00:13.610 --> 00:20.150
+We're going to expand upon all of the topics that we covered today doing this monster's Rolodex but
+
+00:20.150 --> 00:28.070
+we're also going to use more patterns and more of the fundamental libraries in the react ecosystem that
+
+00:28.070 --> 00:32.550
+large companies are already using to build their web applications today.
+
+00:33.520 --> 00:37.140
+So let's take a look at what we're actually going to build.
+
+00:37.150 --> 00:40.140
+This is our final e-commerce project.
+
+00:40.240 --> 00:48.120
+We're gonna have navigation and routing that takes us to different pages of categories of items and
+
+00:48.120 --> 00:55.250
+from these items we're actually going to be able to add them to our cart and from our car.
+
+00:55.270 --> 01:02.860
+We're actually going to see these things directly update and from this car we're gonna be able to checkout
+
+01:03.610 --> 01:10.780
+increase or decrease these items again and see the live changes in both our checkout page and our car
+
+01:10.780 --> 01:19.870
+page remove items and actually integrate with a stripe API so that we can handle payments.
+
+01:19.930 --> 01:26.230
+Now this is actually going to be a test version of Stripe because we don't actually have items to ship
+
+01:26.260 --> 01:32.510
+and we don't actually want to process real payments because this is just a portfolio project.
+
+01:32.770 --> 01:38.950
+But the matter of switching it is simply a change in the actual stripe website.
+
+01:39.110 --> 01:46.240
+You're going to actually learn what it is to actually build using the stripe API and beyond that.
+
+01:46.260 --> 01:52.800
+We're also going to integrate with firebase to handle our authentication and our storage.
+
+01:52.800 --> 01:59.400
+So with firebase we're actually going to be able to authorize our users using Google so that we can
+
+01:59.400 --> 02:10.670
+sign in with our Google accounts and once we sign in we're also going to provide a sign feature and
+
+02:10.910 --> 02:13.910
+a sign up and sign in with email and password feature.
+
+02:14.000 --> 02:21.560
+So it's gonna be a really fleshed out fully complete e-commerce platform just like you would build for
+
+02:21.560 --> 02:26.950
+real e-commerce company now before we begin.
+
+02:26.990 --> 02:31.470
+There are a couple concepts that I want us to go over with react.
+
+02:31.490 --> 02:37.060
+So we have a better understanding of what it is that react is actually doing for us.
+
+02:37.940 --> 02:45.050
+So in order to begin we're gonna have to go to our original monster's Rolodex application and now we're
+
+02:45.050 --> 02:51.030
+going to look at our actual developer tools and we're gonna look at our dorm.
+
+02:51.260 --> 02:58.930
+So we know that our dorm is our representation of our actual application inside of our app component
+
+02:58.930 --> 03:00.010
+that we built.
+
+03:00.010 --> 03:01.550
+We have that H1.
+
+03:01.750 --> 03:04.890
+We have that input and we have this card list.
+
+03:05.020 --> 03:12.010
+These are all elements that are children of this app and are inside of our card list.
+
+03:12.010 --> 03:14.800
+Is those children these card containers right.
+
+03:15.430 --> 03:21.640
+If we were to actually look at this from a very basic representation we'll see that it actually looks
+
+03:21.640 --> 03:23.220
+like this tree right.
+
+03:23.230 --> 03:28.270
+This is our app that was that H1 title this was that search box.
+
+03:28.270 --> 03:35.610
+This is the card list and that card list has children which are these card component nodes.
+
+03:35.710 --> 03:40.090
+So this tree actually represents our actual dong.
+
+03:40.090 --> 03:49.810
+However in order for our actual DOM to update any of these elements it's actually extremely slow.
+
+03:49.810 --> 03:57.290
+So it takes the DOM a lot of energy to update any of these elements.
+
+03:57.340 --> 04:05.740
+Now what react does is it copies this actual DOM tree and it makes it in JavaScript just like we see
+
+04:05.770 --> 04:14.680
+when we write RJ ASX RJ OSX also is just JavaScript that returns what looks like these HCM Al elements
+
+04:15.280 --> 04:24.630
+so what react will do is it'll completely copy this actual DOM except this it will call the virtual
+
+04:24.630 --> 04:32.160
+dot and the virtual DOM is as I mentioned just a complete copy of this actual DOM but in JavaScript
+
+04:33.320 --> 04:43.010
+now in our application whenever we update any of the data that ends up being rendered in our components
+
+04:43.430 --> 04:50.420
+let's say our fifth monsters email or its display name changes well react doesn't actually want to re
+
+04:50.420 --> 04:57.070
+render the entire Dom it only wants to affect the thing that matters which is this note.
+
+04:57.790 --> 05:06.610
+So what we're going to see happen is react actually copies this virtual DOM again except this time it's
+
+05:06.610 --> 05:13.930
+going to apply the changes to the data that got updated so the monster number five it's going to change
+
+05:13.930 --> 05:19.990
+that the name it's gonna change the email appellate court to how however we actually changed it and
+
+05:19.990 --> 05:25.660
+then it's going to apply those changes to this virtual DOM and see what that element that got affected
+
+05:25.660 --> 05:26.080
+would be.
+
+05:26.200 --> 05:33.900
+So it would end up actually being this element so it'll actually make the change here and then what
+
+05:33.900 --> 05:37.900
+it will do is it will compare this new virtual DOM.
+
+05:37.950 --> 05:43.420
+So the old Dom and then it will see that this is actually different now.
+
+05:43.500 --> 05:43.890
+Right.
+
+05:43.920 --> 05:46.980
+This and this are different.
+
+05:46.980 --> 05:48.490
+So then it will know.
+
+05:48.510 --> 05:48.780
+OK.
+
+05:48.810 --> 05:59.020
+Let's actually apply the DOM changes to this element and when it does that it's actually way more performance
+
+05:59.350 --> 06:05.710
+because it doesn't have to mess around with the DRM unless it knows exactly what elements it needs to
+
+06:05.710 --> 06:06.590
+update.
+
+06:06.670 --> 06:14.440
+And that's why react so fast because of its ability to build out these virtual dorms and then compare
+
+06:14.440 --> 06:21.460
+and contrast against the real dorm to see what's changed and then make the appropriate updates to exactly
+
+06:21.490 --> 06:22.400
+the right note.
+
+06:23.510 --> 06:27.080
+Now can we actually see this in action.
+
+06:27.080 --> 06:28.930
+Well we definitely can.
+
+06:28.940 --> 06:35.330
+What we've got to do first is we've got to go back to our monsters application and we're going to make
+
+06:35.360 --> 06:37.830
+a couple of minor changes first.
+
+06:37.970 --> 06:44.300
+So in order to see this in action we're actually going to add a new field to our state our data and
+
+06:44.300 --> 06:51.840
+we're going to call it our title and what we're going to do is whenever that user search happens we're
+
+06:51.840 --> 07:00.650
+actually going to also have it so that our tidal updates with whatever it is that are user typed in
+
+07:02.670 --> 07:07.560
+so instead of filtering out our monsters what we're gonna do is we're just going to display the monsters
+
+07:07.650 --> 07:07.920
+right.
+
+07:07.920 --> 07:09.420
+We don't want that search feature for now.
+
+07:13.350 --> 07:21.030
+We're also going to add in this title field that we've just added to our state and instead of monsters
+
+07:21.030 --> 07:25.380
+Rolodex I want to show the title.
+
+07:25.480 --> 07:30.500
+So what happens now is that whenever we type we'll see this title right.
+
+07:30.520 --> 07:32.640
+We'll see our title update.
+
+07:32.840 --> 07:45.270
+Now if we enable inside of our additional rules let's just add actually our rendering what we'll see.
+
+07:46.670 --> 07:55.030
+If we enable paint is that this Web site will flash green in all the areas that are getting updated
+
+07:55.440 --> 07:59.080
+whenever dom elements are updating it will change it.
+
+07:59.080 --> 08:04.420
+So if we refresh we'll see the whole page fostering because it's mounting and rendering everything for
+
+08:04.420 --> 08:06.020
+the first time.
+
+08:06.080 --> 08:17.010
+Now let's say we actually start typing in this well when we type this we'll see that only this title
+
+08:17.100 --> 08:18.290
+is getting updated.
+
+08:18.390 --> 08:24.060
+Nothing else is getting re rendered because react knows that the only thing that needs to update is
+
+08:24.060 --> 08:25.110
+this title.
+
+08:25.110 --> 08:31.270
+This title node is the only component in our dorm that needs to be re rendered.
+
+08:31.350 --> 08:36.750
+It doesn't touch anything else and that's what is so great about reacts.
+
+08:36.780 --> 08:41.010
+Virtual DOM and it's efficiency when it comes to deciding what.
+
+08:41.010 --> 08:43.290
+In our dorm to re render.
+
+08:43.410 --> 08:48.290
+Now let's go back to our application and let's undo this right.
+
+08:48.300 --> 08:52.320
+So we get our app back to the state that it was before.
+
+08:52.410 --> 08:55.950
+So let's undo that let's remove this title field.
+
+08:58.100 --> 09:07.220
+Now we know that we have our monsters array on the state of our app and we passed that after we've modified
+
+09:07.220 --> 09:09.160
+it right after we create a new array.
+
+09:09.890 --> 09:17.740
+But based off of this data array using our search field to filter out the monsters that don't match
+
+09:17.770 --> 09:26.240
+and we pass that into the card list and then our card list component is the one that will then map out
+
+09:26.240 --> 09:31.070
+using the data that got passed into it the new cards.
+
+09:31.070 --> 09:31.580
+Right.
+
+09:31.580 --> 09:41.030
+So if we were to look at this thing again except let's just focus on our application.
+
+09:41.180 --> 09:46.080
+Right that monsters array sits at our app.
+
+09:46.250 --> 09:50.900
+It gets passed in the card list and then it generates these components.
+
+09:50.930 --> 09:51.760
+Right.
+
+09:51.800 --> 09:55.850
+And these end up being all of our actual components that we view.
+
+09:55.850 --> 10:04.610
+This is actually all of our views what react does when it's actually rendering out the application is
+
+10:04.610 --> 10:08.900
+that react is based off of this data that we saw.
+
+10:08.900 --> 10:09.650
+Right.
+
+10:09.740 --> 10:16.700
+The data from the state of our app component the monsters array gets passed to this cordless component
+
+10:16.730 --> 10:21.000
+which then renders out these components.
+
+10:21.320 --> 10:29.660
+These card components if for example whenever we type in our search field and we update and change that
+
+10:29.660 --> 10:31.410
+filtered monsters array.
+
+10:31.480 --> 10:31.950
+Right.
+
+10:32.000 --> 10:40.160
+That gets passed into our card list then react actually re renders this entire tree because it knows
+
+10:40.160 --> 10:42.430
+that the data at this point has changed.
+
+10:42.500 --> 10:48.680
+So if it's passing that data down to its children the children are what is going to need to be re rendered
+
+10:50.120 --> 10:59.210
+how ever if we can imagine that we moved the data of our monsters and our filtered monsters all of this
+
+10:59.300 --> 11:02.240
+into the actual cordless component instead.
+
+11:02.240 --> 11:08.570
+So if we took all this and we moved it into here so that the data actually sits at the card list level
+
+11:10.070 --> 11:16.900
+well what happens if we were to do that same thing if we were to modify that array at this level right
+
+11:16.940 --> 11:21.830
+instead of it's sitting here it's now here and then we modify that array.
+
+11:21.950 --> 11:25.760
+Well these children would still get re rendered.
+
+11:25.820 --> 11:26.480
+Right.
+
+11:26.480 --> 11:35.420
+React would re render any part of the tree below this note because the data that's used to generate
+
+11:35.450 --> 11:44.300
+these views actually sits here but anything above it the parent our app and then the siblings right.
+
+11:44.470 --> 11:53.680
+The search box and the title would not re render react has no reason to render anything above this node
+
+11:54.070 --> 12:00.040
+because the data only affects the children below this note.
+
+12:00.040 --> 12:04.570
+This concept is called Unit directional data flow.
+
+12:04.630 --> 12:13.990
+So in react that idea of building views from data is actually very key as to why react so predictable.
+
+12:13.990 --> 12:17.930
+So here is actually an quick image of what that looks like.
+
+12:18.100 --> 12:20.590
+That data is in our state right.
+
+12:20.590 --> 12:27.850
+Our monsters array our search field all these things react uses that data to build out the views as
+
+12:27.850 --> 12:33.760
+we saw in our card list example right where we mapped over that monster's data to build out these card
+
+12:33.790 --> 12:34.960
+components.
+
+12:35.380 --> 12:44.990
+And then if the user does anything or the application does something from the viewpoint right it'll
+
+12:44.990 --> 12:48.370
+trigger these actions that update the state.
+
+12:48.380 --> 12:53.780
+Now this action we can see it as something like when we type in that search field when we type in that
+
+12:53.780 --> 12:59.300
+search field that action is trying to update the state right.
+
+12:59.390 --> 13:05.390
+The data that we have it updates the search field and then that search field updates that filtered monsters
+
+13:05.390 --> 13:10.230
+array and then that again gets passed and used to generate the views.
+
+13:10.280 --> 13:18.290
+Now that data always flows in this direction it always goes from the state of our data to building out
+
+13:18.290 --> 13:23.810
+the views and then from the views there might be interactions that make actions that will update the
+
+13:23.810 --> 13:24.290
+data.
+
+13:24.290 --> 13:33.500
+Again this idea of unit directional data flow is what makes React code so predictable and less prone
+
+13:33.500 --> 13:43.870
+to errors because of this flow of data that always goes in this one direction we can anticipate if something
+
+13:43.870 --> 13:46.810
+doesn't match if our views don't match.
+
+13:46.840 --> 13:54.820
+We know that there's got to be only one place that's causing these issues to be to come from.
+
+13:54.820 --> 14:00.620
+That's why you need directional data flow and react is so awesome.
+
+14:01.490 --> 14:07.550
+Now I know this might still be confusing because it's so conceptual but I just want you to keep this
+
+14:07.550 --> 14:14.690
+in mind before we start building out our applications it'll all make sense I promise.
+
+14:14.700 --> 14:19.640
+Now let's get started on actually building out our e-commerce platform.

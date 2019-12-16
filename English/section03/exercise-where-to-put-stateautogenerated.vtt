@@ -1,0 +1,145 @@
+WEBVTT
+
+00:01.570 --> 00:02.860
+Hey it's Andre here.
+
+00:02.860 --> 00:09.050
+Some of you might be wondering why we don't add state to search box.
+
+00:09.070 --> 00:16.810
+I mean it looks like what we're doing is adding the on change over here giving it a function and this
+
+00:16.810 --> 00:24.970
+function goes up a level and letting our app just know that there was an event but search box.
+
+00:24.970 --> 00:29.320
+Shouldn't that have these search field state.
+
+00:29.350 --> 00:30.460
+Let's explore that.
+
+00:30.460 --> 00:32.760
+Now I want you to think about this.
+
+00:32.830 --> 00:37.880
+Why wouldn't we put state here positive video.
+
+00:37.880 --> 00:38.750
+Think about it.
+
+00:38.810 --> 00:40.990
+Let's find out why.
+
+00:41.000 --> 00:43.090
+Remember our third point over here.
+
+00:43.520 --> 00:45.800
+A good reactive upper decide.
+
+00:45.800 --> 00:49.220
+Decides what changes when state changes.
+
+00:49.220 --> 00:50.450
+Let's think about this.
+
+00:51.690 --> 00:59.400
+Now the reason we don't change the state in search box and instead we trigger whenever an event happens
+
+00:59.790 --> 01:07.830
+to handle change up here an app J.S. is because our other component card list needs to have that information
+
+01:07.980 --> 01:08.520
+right.
+
+01:08.520 --> 01:16.410
+Remember the way we filtered monsters was by using the search field state to filter based on the user
+
+01:16.410 --> 01:23.060
+input so the way to think about this is like so if we had our app over here and this is our app.
+
+01:23.110 --> 01:23.720
+Yes.
+
+01:23.810 --> 01:33.980
+And in here we have the search component and the card list component if the state was only here in the
+
+01:33.980 --> 01:35.290
+search box component.
+
+01:35.290 --> 01:39.290
+There's no way for the car list component to find out about it.
+
+01:39.330 --> 01:44.350
+Remember because of one way data flow data can only flow one way.
+
+01:44.500 --> 01:51.960
+So there's no way for let's say the search field state to move up and down to the car list component.
+
+01:52.750 --> 02:00.690
+So instead we want to place the state in a place where it gives us access to whatever needs it.
+
+02:00.790 --> 02:05.920
+In our case both card list and search box need that state.
+
+02:05.920 --> 02:07.270
+That search field state.
+
+02:07.360 --> 02:15.520
+So we move it up and the way we architect things and react is that when an event happens on a component
+
+02:16.400 --> 02:19.520
+let's say a user clicks or type something.
+
+02:19.720 --> 02:27.610
+Well that event triggers the react event system and says Hey something else happened create an event
+
+02:27.610 --> 02:37.270
+handler like handle input or handle change and it's going to go up and let the component that has that
+
+02:37.270 --> 02:43.240
+state know that hey something else happened you need to update state and how far up that goes.
+
+02:43.240 --> 02:49.540
+Let's say we had a component underneath this we notify the component that has the state as far up as
+
+02:49.540 --> 02:55.870
+we need to in order to pass down that information to the components that need that information.
+
+02:55.990 --> 02:58.480
+Now if you don't get this right away don't worry.
+
+02:58.510 --> 03:03.250
+This is something that comes with practice that we're going to explore throughout the course as we build
+
+03:03.250 --> 03:04.360
+more and more projects.
+
+03:04.390 --> 03:12.100
+But I want you to pay attention that you want to decide as a reactive helper what changes what events
+
+03:12.130 --> 03:14.350
+that the users take.
+
+03:14.380 --> 03:22.090
+How far up it goes to let the state know and you want to move the state in a high enough position so
+
+03:22.090 --> 03:26.770
+that we are still able to pass down that information to different nodes.
+
+03:26.770 --> 03:35.100
+But at the same time if we had let's say a state in here that the only people that care about it is
+
+03:35.220 --> 03:37.230
+these two components.
+
+03:37.230 --> 03:41.850
+Well if that's the case there's no point bringing up the state all the way up here.
+
+03:41.910 --> 03:47.250
+You want to place the state over here because all these components don't really care about any of this.
+
+03:47.280 --> 03:53.760
+Again this is a topic that will cover a lot more and structuring state is a very big topic and yet but
+
+03:53.760 --> 03:57.480
+I want you to start noticing these things let's keep going.

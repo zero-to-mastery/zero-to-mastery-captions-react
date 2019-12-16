@@ -1,0 +1,268 @@
+WEBVTT
+
+00:00.820 --> 00:02.020
+Hey it's Andre here.
+
+00:02.170 --> 00:07.690
+Before we move on I want to make sure that we understand some of the files and also what we did in the
+
+00:07.690 --> 00:13.570
+previous video with some conflicts that we had especially installing notes says what really happened
+
+00:13.570 --> 00:14.350
+there.
+
+00:14.560 --> 00:21.850
+First off when we start a project we always have a node modules folder that comes built in with create
+
+00:21.860 --> 00:22.800
+reactor.
+
+00:22.840 --> 00:30.670
+Now this node module folder is quite massive as you can see we have a ton of packages.
+
+00:30.670 --> 00:36.720
+These are all the libraries that create react app uses underneath the hood.
+
+00:36.950 --> 00:38.920
+Remember the react scripts.
+
+00:39.070 --> 00:46.690
+If we go all the way down to package Doug Jason you see that we have all these dependencies but all
+
+00:46.690 --> 00:56.140
+of them are using the script star J.S. like so now e who are uses yarn versus what I use which is NPM
+
+00:57.180 --> 01:02.730
+and you see over here that we have different versions instead of our yarn log file for example have
+
+01:02.730 --> 01:10.980
+the package log file so why you use is up to you the key thing to remember is that node modules contains
+
+01:11.220 --> 01:17.010
+not only all the libraries that we're going to install throughout the course but also libraries that
+
+01:17.400 --> 01:23.670
+create react app uses underneath the hood like the just package which allows us to do some testing.
+
+01:23.880 --> 01:28.300
+Now the thing is all these packages seems like a lot.
+
+01:28.470 --> 01:35.670
+And what Cory react app tries to do is to create an IDC like environment that is it allows us to do
+
+01:35.670 --> 01:37.940
+testing lending and all these things.
+
+01:38.100 --> 01:44.910
+And most of these packages are only used during development when we actually ship our code and we build
+
+01:45.030 --> 01:45.750
+our code.
+
+01:45.750 --> 01:51.900
+Most of these packages won't make it through only the code that is absolutely needed for the app and
+
+01:51.900 --> 01:55.220
+not for development are going to be included in this bill.
+
+01:55.230 --> 02:01.800
+So some people complain that you know modules folder is way too big but at the end of the day it's big
+
+02:01.800 --> 02:08.260
+because create react app tries to make our environment for developing apps pleasant.
+
+02:08.280 --> 02:16.500
+Now the issue that we saw with node sass happened because of this package just but let's talk about
+
+02:16.500 --> 02:22.230
+that a little bit more because as you develop apps as you work with react you're going to encounter
+
+02:22.260 --> 02:28.260
+this issues of dependency and dependency management between libraries is a big problem.
+
+02:28.270 --> 02:28.620
+So
+
+02:32.180 --> 02:41.390
+react since version 2.0 comes with SAS support which we saw all we had to do was install notes SAS using
+
+02:41.390 --> 02:42.530
+NPM or Yahoo.
+
+02:42.710 --> 02:49.060
+And we're able to use SAS files so that create react app takes our SAS files convert them into C Ss
+
+02:49.070 --> 02:50.570
+into that built folder.
+
+02:50.870 --> 02:58.100
+But what happened when we installed this the air that you saw with e Hwa is something that you'll encounter
+
+02:58.310 --> 02:59.230
+as you work with react.
+
+02:59.480 --> 03:06.630
+So I'm going to show you how to better understand the issue see the first thing I would do if I encounter
+
+03:06.630 --> 03:12.480
+a problem like that is I would google for it for example note SAS error with create racked up Babel
+
+03:12.540 --> 03:15.350
+just conflict which was what the error we got.
+
+03:15.600 --> 03:22.170
+And if I go to the second link here which says react scripts Babel just version conflict which sounds
+
+03:22.170 --> 03:27.150
+like the conflict that we're having and right over here as we expected.
+
+03:27.360 --> 03:32.670
+It's an open issue with create react out where react scripts Babel just version is complex.
+
+03:33.540 --> 03:38.880
+And as a developer you want to start getting good at finding these issues and going to get hybrid repositories
+
+03:38.910 --> 03:41.600
+and see if anybody else has had this issue with you.
+
+03:41.820 --> 03:48.700
+And it looks like this person had pretty much the same issue that we saw so the beauty is that you can
+
+03:48.700 --> 03:55.060
+actually read through this and understand why the issue is happening how you can fix it and what other
+
+03:55.060 --> 04:03.280
+people have done if you actually scroll all the way down you can see that this issue should be resolved
+
+04:03.950 --> 04:09.460
+when this is released so we click over here and we see that.
+
+04:09.580 --> 04:17.290
+Yep create react app just merged on May 7th which isn't that far off from when I'm recording this video.
+
+04:17.420 --> 04:20.210
+A fix for this so that this issue doesn't happen.
+
+04:20.210 --> 04:24.140
+So most likely by the time you're watching this video you won't encounter this.
+
+04:24.140 --> 04:30.350
+But I want you to start thinking in terms of if you encounter an issue most likely somebody else has
+
+04:30.350 --> 04:30.720
+had it.
+
+04:30.830 --> 04:38.030
+So Google it around and usually in a project like create react app you'll find open issues.
+
+04:38.120 --> 04:43.130
+You have three hundred and three issues open right now and eighty five pull requests.
+
+04:43.130 --> 04:45.230
+So you want to start getting good at that.
+
+04:45.230 --> 04:51.630
+Now another thing I want to talk about is this package lock file.
+
+04:51.840 --> 04:53.240
+If you're using your yarn.
+
+04:53.250 --> 04:55.580
+It'll be a yarn log file.
+
+04:55.680 --> 05:00.690
+This is used because our project most likely won't run on our computer.
+
+05:00.690 --> 05:01.850
+Most likely we're going to.
+
+05:01.860 --> 05:05.200
+Once we're done with the project we're going to send it off to a server somewhere.
+
+05:05.250 --> 05:11.820
+So that project runs on a different computer when a user opens the app on a browser.
+
+05:11.820 --> 05:13.330
+It runs on their computer.
+
+05:13.500 --> 05:21.790
+So our code although when we code along is in our own environment on our own laptop in real life.
+
+05:22.040 --> 05:25.860
+When people actually use your app they won't be using it from your computer.
+
+05:25.910 --> 05:26.180
+Right.
+
+05:26.450 --> 05:34.550
+So package lock files allow us to have consistent installs across machines so that all these dependencies
+
+05:34.970 --> 05:40.450
+have the exact version number that they need in order for everything to work.
+
+05:40.460 --> 05:42.350
+It's like everything is intertwined.
+
+05:42.350 --> 05:50.930
+This file is what we use or at least what create react app use so it knows exactly what dependencies
+
+05:50.960 --> 05:53.360
+and what thing works with what.
+
+05:53.450 --> 06:01.600
+Just like we have Babel just that was needed for both notes apps as well as for that create react app
+
+06:01.640 --> 06:04.630
+because both of them use it to test their code.
+
+06:04.730 --> 06:10.730
+Now in a couple of videos we'll actually see how EA who are solves this problem another way using something
+
+06:10.730 --> 06:13.600
+called the resolution property.
+
+06:13.610 --> 06:16.140
+And this is something that's only specific to yours.
+
+06:16.160 --> 06:20.060
+So if you have NPM that isn't available for you.
+
+06:20.150 --> 06:23.510
+But again that's just something that you most likely won't encounter.
+
+06:23.510 --> 06:30.450
+But we wanted to show you anyway remember you can always read more about these things at the Web sites
+
+06:30.630 --> 06:31.560
+documentation.
+
+06:31.560 --> 06:35.340
+You want to start getting really really good at debugging your own code.
+
+06:35.340 --> 06:41.510
+Finally the last file I want to talk about is this file that we just removed which was service worker.
+
+06:41.510 --> 06:49.370
+Now this comes pre-built with create reactor and it's mainly used for what we call progressive web apps.
+
+06:49.370 --> 06:51.880
+And we're going to talk about that later on in the course.
+
+06:51.950 --> 06:57.570
+Service worker file allows us to make our app what we call progressive again.
+
+06:57.620 --> 07:02.360
+For now we don't need to worry about this but I do want to let you know that we are going to come back
+
+07:02.360 --> 07:08.470
+to it and talk about what service worker is doing because it has some really neat features.
+
+07:08.520 --> 07:09.080
+All right.
+
+07:09.080 --> 07:09.920
+That's it for now.
+
+07:10.010 --> 07:10.940
+After the next video.

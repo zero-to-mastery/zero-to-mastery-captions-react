@@ -1,0 +1,448 @@
+WEBVTT
+
+00:00.560 --> 00:06.010
+OK now let's start moving our components into their own folders.
+
+00:06.080 --> 00:11.760
+So the first thing I'm gonna show you is actually our new folder structure.
+
+00:11.960 --> 00:18.020
+So we're actually going to have two folders one of four components which is going to hold all of our
+
+00:18.020 --> 00:22.850
+reusable components and one for our page components.
+
+00:22.880 --> 00:24.820
+So what's a page.
+
+00:24.860 --> 00:29.570
+Well when you think about our home page it's also a component but it's a component that we're probably
+
+00:29.570 --> 00:31.680
+not going to use more than once.
+
+00:31.700 --> 00:34.160
+So any page that we make.
+
+00:34.160 --> 00:38.830
+I'm going to make a new component folder for it inside of our pages.
+
+00:38.840 --> 00:47.270
+Separate it from our reusable components so let's begin with our home page component and we're gonna
+
+00:47.280 --> 00:55.760
+do component touch s x and we're gonna move our code here into our home page.
+
+00:57.030 --> 01:02.310
+And then we're also going to copy our styles and we're just going to move this into our home page as
+
+01:02.310 --> 01:02.570
+well
+
+01:05.750 --> 01:07.350
+now.
+
+01:07.570 --> 01:15.160
+We don't need this anymore and we have to update our app dot j ust to point to the new location of our
+
+01:15.160 --> 01:23.800
+home page component so it's two pages home page combat combat.
+
+01:23.990 --> 01:31.740
+If we save and if we make sure to save this as well if we go back to our app we should see everything
+
+01:31.740 --> 01:34.640
+is the same OK.
+
+01:34.860 --> 01:43.290
+Now let's start moving our directory and our menu item into their own components so let's first start
+
+01:43.290 --> 01:52.640
+with our menu item component so let's make a menu item folder in our components folder and then make
+
+01:52.640 --> 01:56.770
+a menu item dock component dodgy OSX.
+
+01:56.790 --> 01:59.870
+Now we're also going to need those menu item styles.
+
+01:59.940 --> 02:01.970
+So let's make a menu item.
+
+02:01.980 --> 02:11.070
+Dot styles dot SAS file as well let's copy over our menu item styles into our menu item styles that
+
+02:11.080 --> 02:21.570
+CSF and then in our US let's import react from react and far menu item.
+
+02:21.710 --> 02:27.200
+We're going to use a functional component because we don't really need our component to hold any state
+
+02:27.320 --> 02:28.160
+at least not for now.
+
+02:28.340 --> 02:38.390
+So let's start with a functional component so let's do menu item equals a function that returns to us
+
+02:38.510 --> 02:40.150
+what we had in our home page component.
+
+02:40.400 --> 02:43.100
+So let's just copy this over
+
+02:50.270 --> 02:58.430
+we probably want to be able to dynamically generate title by passing a title into our menu component.
+
+02:58.430 --> 03:00.170
+Right as a props.
+
+03:00.170 --> 03:09.590
+So instead of doing something like props title like this we might also need some other properties to
+
+03:09.590 --> 03:16.630
+be passed in if we look at our application we're gonna see that each one of these has a different image.
+
+03:16.670 --> 03:17.590
+Right.
+
+03:17.630 --> 03:28.100
+So what we can do is we can actually de structure the title off of our props for now and then we can
+
+03:28.550 --> 03:36.020
+just populate our component with that D structure value of title from our props.
+
+03:36.020 --> 03:42.350
+This is the exact same thing as writing props that title except we're pulling that title value off of
+
+03:42.350 --> 03:49.370
+our props and then setting it to this title value inside of our function so we can use it whenever we
+
+03:49.370 --> 03:49.700
+want.
+
+03:50.790 --> 04:02.770
+And then let's export out our menu item and now we have our menu items now let's make our directory
+
+04:02.770 --> 04:13.290
+component so let's make a directory folder and inside we will make our directory dot component dot Jess
+
+04:13.300 --> 04:22.850
+X and just like earlier we'll also need a style sheet for this directory DOS styles dot s so let's copy
+
+04:22.850 --> 04:28.520
+over our home page styles for our directory now because we've got the menu item we don't need this anymore
+
+04:29.530 --> 04:38.830
+so let's just get rid of it but let's copy over our directory menu code into our directory s and then
+
+04:40.410 --> 04:42.710
+let's import react from.
+
+04:42.780 --> 04:53.340
+React and this one will need to be a class component because we do need to store the state value of
+
+04:53.340 --> 04:58.860
+those menu items that we want to pass and create our menu items with.
+
+04:58.890 --> 04:59.510
+Right.
+
+04:59.550 --> 05:04.950
+So just like when we did our monster's Rolodex and we had that card list component.
+
+05:04.950 --> 05:12.380
+This one is going to have a directory with a state value of those menu items.
+
+05:12.420 --> 05:22.920
+So let's make a class of directory that extends Reactor Component and remember earlier the first time
+
+05:22.950 --> 05:27.450
+we were actually importing it as a regular import from react.
+
+05:27.480 --> 05:34.490
+But this component class actually also exists on the react namespace that we import from react.
+
+05:34.500 --> 05:38.010
+So we don't even need to do an additional import.
+
+05:38.010 --> 05:45.560
+We can just do react on component so inside of our directory class we need that constructor right.
+
+05:45.580 --> 05:52.410
+We always need our constructor and inside of our constructor we need to call super so that we pull in
+
+05:52.470 --> 05:56.220
+all the things we need from our ReACT component into our class.
+
+05:56.220 --> 06:04.690
+And then we're going to set our state value right now because we're populating menu items.
+
+06:04.920 --> 06:09.510
+Each of these menu items is kind of like a section right.
+
+06:09.570 --> 06:17.060
+So I'm actually just going to call it section and that's gonna be an array value that I have here for
+
+06:17.060 --> 06:27.010
+you in a different file and what it is is it's just an array of objects that have a title and an image
+
+06:27.010 --> 06:33.910
+euro and the image you are always going to point to an image that stored somewhere else online for these
+
+06:34.120 --> 06:46.620
+images so inside of our render we want to return what we had in our home page.
+
+06:46.770 --> 06:52.950
+So let's go back to our homepage and let's copy this directory menu because that's all we really need
+
+06:55.310 --> 07:02.620
+and now we want to map through our sections.
+
+07:02.620 --> 07:13.190
+Right and we want to pass these section objects into our menu item so that you can create the menu items.
+
+07:13.530 --> 07:22.440
+But let's also import our menu item component from our menu item component folder
+
+07:25.540 --> 07:30.960
+and now we know that we have to pass in a function to our map call.
+
+07:31.060 --> 07:32.110
+Right.
+
+07:32.170 --> 07:40.180
+So in our map call of our array we're gonna get a section and what we want to render is the menu item
+
+07:43.440 --> 07:47.090
+so there are many ways we can pass the props in right.
+
+07:47.100 --> 07:48.100
+We can just.
+
+07:48.150 --> 07:50.190
+We know that we want a title right.
+
+07:50.190 --> 07:58.050
+So if we wanted to pass the title we could easily just do section title but what we want to do is be
+
+07:58.050 --> 07:58.310
+cut.
+
+07:58.320 --> 08:00.050
+We know we need this value.
+
+08:00.060 --> 08:00.970
+This title value.
+
+08:00.990 --> 08:04.790
+We know we need the image URL and we want the ideas for our key as well.
+
+08:04.790 --> 08:13.360
+Right what we can do instead of doing this which we have a type section every time we can actually D
+
+08:13.360 --> 08:17.020
+structure all these values off of our section.
+
+08:17.020 --> 08:25.460
+So we're going to get the title we're gonna get the image URL and we're gonna get the idea and now we
+
+08:25.460 --> 08:26.480
+can just do this
+
+08:29.270 --> 08:41.080
+and now we have our ideas and our title going in to our menu item so let's make sure to export our Directory
+
+08:44.060 --> 08:44.540
+OK.
+
+08:44.580 --> 08:49.440
+And then we got to make sure also to bring our style sheet in.
+
+08:49.510 --> 08:51.850
+So I think I didn't do that for our menu item either.
+
+08:52.360 --> 09:03.020
+So let's do that as well for our menu item and then we got to go into our home page and replace our
+
+09:03.110 --> 09:10.680
+old code with our new components so let's go and import in our directory
+
+09:13.180 --> 09:14.010
+from
+
+09:16.740 --> 09:29.100
+our components folder our directory directory component and now we can replace all of this with just
+
+09:29.250 --> 09:31.050
+our directory
+
+09:34.810 --> 09:40.440
+and if we go back we should see that everything is the same awesome.
+
+09:40.710 --> 09:45.870
+OK now what about our images.
+
+09:45.920 --> 09:49.610
+Well you remember in our directory we had that image euro.
+
+09:49.640 --> 09:53.800
+So let's just pass that also into our menu item
+
+09:57.510 --> 10:05.170
+so we're gonna pass this image URL value into our menu item and then in our menu item component we are
+
+10:05.230 --> 10:07.820
+going to actually do something different.
+
+10:08.230 --> 10:18.410
+So react actually gives every one of these HDMI Mel markup elements another property called style and
+
+10:18.410 --> 10:28.010
+style takes an object that has prop values equal to C Ss values you want to apply to this element.
+
+10:28.010 --> 10:33.100
+So what we want to do is we want to set a background image right.
+
+10:33.290 --> 10:39.290
+And these CSF values instead of being the kabob case that we're used to seeing here right with the dashes
+
+10:39.770 --> 10:49.100
+is going to be in camel case and we want to set it equal to the image you are L that we just passed
+
+10:49.190 --> 10:52.280
+into this component from our directory.
+
+10:52.280 --> 10:57.170
+What we got do in order to make this work and see RSS which is we have to actually pass it as you are.
+
+10:57.230 --> 11:02.780
+L With the string interpolated value of image row.
+
+11:02.980 --> 11:12.910
+And this is really awesome because this allows us to dynamically make styles on our components which
+
+11:12.910 --> 11:18.610
+is super convenient because if we want it if this image were all changed right our CSF value changes
+
+11:18.610 --> 11:19.420
+as well.
+
+11:19.720 --> 11:21.550
+And that's really cool.
+
+11:21.550 --> 11:26.990
+So we just have to update another style in our actual style sheet regarding what this background image
+
+11:27.000 --> 11:28.100
+URL is going to be.
+
+11:28.120 --> 11:28.350
+Right.
+
+11:28.360 --> 11:35.020
+So we always want our image you are ls to have that background image be centered and covering the whole
+
+11:35.020 --> 11:36.010
+div.
+
+11:36.010 --> 11:41.700
+So let's go into our menu item and let's do background position.
+
+11:41.740 --> 11:42.000
+Right.
+
+11:42.010 --> 11:50.140
+We want it to always be center and then we want the background size to be cover.
+
+11:50.140 --> 11:53.560
+So we want our background image to cover the whole thing.
+
+11:53.590 --> 11:56.160
+And then the position should always be in the center.
+
+11:56.230 --> 12:04.300
+And now if we look we see that our component has our images but if we look at this this is a little
+
+12:04.300 --> 12:11.960
+bigger as well right than these ones so we know that these two need to be a larger size.
+
+12:12.530 --> 12:14.120
+So how do we do this.
+
+12:14.120 --> 12:21.320
+Well typically in normal CSX we could just add a class that would tell this component that it's larger
+
+12:21.320 --> 12:23.740
+so it should have size related to that.
+
+12:23.840 --> 12:26.720
+Well we can do that as well with react.
+
+12:26.720 --> 12:38.120
+So inside of our directory what we can do is we can actually pass in a size value which is equal to
+
+12:39.110 --> 12:39.700
+large.
+
+12:39.770 --> 12:40.940
+Right.
+
+12:41.120 --> 12:48.590
+And then we do that for our last two for our men's and our women's sections and then we can just pass
+
+12:48.590 --> 12:52.280
+that size value also into our component
+
+12:55.630 --> 13:06.700
+and now on our menu item component we can also dynamically add in our class name value right here.
+
+13:06.810 --> 13:07.480
+Right.
+
+13:07.680 --> 13:09.990
+Because we are getting this size value.
+
+13:10.050 --> 13:15.690
+If it's nothing it's not going to render anything but if it is present then we want to add it to our
+
+13:15.690 --> 13:16.250
+class name.
+
+13:16.920 --> 13:28.140
+So let's just string interpolate in that value with this sorry with size.
+
+13:28.150 --> 13:29.120
+All right.
+
+13:29.320 --> 13:40.950
+And then we also always wanted to have what we had earlier which was menu item and now if we look at
+
+13:41.070 --> 13:51.740
+our core menu item code we also gonna add in that style for it by doing Ampersand sign.
+
+13:51.770 --> 14:04.550
+So if our menu item also has dots large then we want to give it a larger height of 3 engine 80 pixels
+
+14:05.600 --> 14:12.800
+and now if we save and we go back we see that our images these ones are large but these ones stay the
+
+14:12.800 --> 14:13.250
+same.
+
+14:13.250 --> 14:13.710
+Right.
+
+14:13.730 --> 14:22.830
+They haven't changed so that's one of the great things we can do with building out are components is
+
+14:22.830 --> 14:30.630
+that we can use these properties and we can write JavaScript to give them a dynamically changing value
+
+14:30.660 --> 14:38.550
+so that it lends us a lot more flexibility when we're building and styling our components OK.
+
+14:38.700 --> 14:44.880
+Now in the next section we're going to style this menu item a little bit more with some of those transitions
+
+14:45.270 --> 14:48.060
+and some of these colors that we see in our final product.

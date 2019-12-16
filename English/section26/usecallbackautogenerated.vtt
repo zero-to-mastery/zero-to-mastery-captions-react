@@ -1,0 +1,331 @@
+WEBVTT
+
+00:00.480 --> 00:02.520
+Welcome back everyone.
+
+00:02.520 --> 00:07.410
+So in the last lesson we learn how to optimize our reactor components.
+
+00:07.530 --> 00:13.420
+But in the beginning of the lesson I mentioned that there is a chance that when you pass in a inline
+
+00:13.440 --> 00:20.910
+function to a component that because in JavaScript functions are also objects you are always instantiating
+
+00:21.000 --> 00:26.980
+a new function meaning that it could get around your memo wise component.
+
+00:27.000 --> 00:32.490
+Well in this lesson we are going to take a look at how we can actually memorize our functions so that
+
+00:32.490 --> 00:36.580
+we don't call them and re render them unnecessarily.
+
+00:36.600 --> 00:38.630
+If we do not have to.
+
+00:38.820 --> 00:40.140
+Now what do I mean by this.
+
+00:40.650 --> 00:47.490
+Well let's look at this test application where I've rewritten it so that it can demonstrate to us different
+
+00:47.490 --> 00:54.220
+ways that functions might behave and how we can optimize them so we have this Functional Component and
+
+00:54.280 --> 01:00.120
+inside of it we have defined using you state to different state values.
+
+01:00.120 --> 01:06.650
+There is a count one and a count two which are pretty much just integers that start off at 0 we use
+
+01:06.650 --> 01:13.520
+the account and set count to to define these increment functions that simply increase the count of our
+
+01:13.520 --> 01:16.870
+count one and count two values by one.
+
+01:16.970 --> 01:21.560
+That's all this function does then we have this function called log name.
+
+01:22.060 --> 01:31.540
+And this function is simply a console log that calls out my name Iva ignoring the section for now what
+
+01:31.540 --> 01:40.000
+we show then inside of our read turn of this function is just two buttons that increment the counts
+
+01:40.120 --> 01:47.050
+and then one button that increments or that calls the log name console log in my name.
+
+01:47.210 --> 01:53.600
+Now what I've done here to demonstrate this to you is I have instantiated this new javascript collection
+
+01:53.630 --> 01:55.400
+called a set.
+
+01:55.400 --> 02:02.780
+Now what asset is in Javascript is it is a collection object which is similar to an array.
+
+02:02.810 --> 02:10.340
+The only difference is that whenever you add anything to the set it only will add it to the list if
+
+02:10.490 --> 02:20.660
+it's unique meaning that if we add the same function or the same object into it and the reference already
+
+02:20.660 --> 02:29.320
+exists inside of this array then it won't add it which means that as long as we're adding new reference
+
+02:29.440 --> 02:33.310
+by memory objects then the set will increase.
+
+02:33.790 --> 02:41.840
+If we don't then we're just going to end up adding the same function but with a different place of memory.
+
+02:41.860 --> 02:46.990
+So as you remember with objects objects can look at the exact same as other objects in terms of its
+
+02:46.990 --> 02:55.420
+properties or in terms of its shape but if it's a new object that gets instantiated that it has a different
+
+02:55.480 --> 02:56.890
+reference in memory.
+
+02:56.890 --> 03:03.070
+So set is a way for us to actually keep track of whether or not we're generating new functions or if
+
+03:03.070 --> 03:06.340
+we're keeping the same function that has the same reference in memory.
+
+03:06.760 --> 03:12.750
+So what we do is that whenever our functional component renders all of this is going to get recalled.
+
+03:12.790 --> 03:18.350
+But what we're doing is we're adding in to this set our log name.
+
+03:18.490 --> 03:20.220
+And why am I doing this.
+
+03:20.230 --> 03:27.070
+Well technically speaking when ever we increase the count here we are calling sets they are a component
+
+03:27.130 --> 03:30.270
+which will cause it to render the moment a re renders.
+
+03:30.280 --> 03:35.690
+It's also going to re render our log name function when it renders our log name function.
+
+03:35.710 --> 03:43.930
+It's going to read add that function into this array or the set so that whenever we actually see that
+
+03:43.930 --> 03:51.700
+we increase and call that state that set is getting larger and it keeps passing new functions in because
+
+03:52.150 --> 03:56.920
+we're enlightening this function inside of our functional component.
+
+03:56.920 --> 04:02.680
+We are therefore generating this function new every single time on every single render.
+
+04:03.010 --> 04:08.500
+But this is a costly thing because this function does not need to be right regenerated.
+
+04:08.620 --> 04:10.800
+It doesn't need to render a new version.
+
+04:11.140 --> 04:16.840
+This function already is something that doesn't have any dependencies and it doesn't change right.
+
+04:16.840 --> 04:18.640
+There's no properties coming in.
+
+04:18.640 --> 04:25.970
+Why do we need to re instantiate this function well this is actually exactly what the use callback hook
+
+04:26.030 --> 04:35.760
+is for the use callback hook allows us to memorize a virgin of a function that we wrap in it and use
+
+04:35.760 --> 04:39.660
+that same function if it already exists.
+
+04:39.660 --> 04:44.860
+Now it takes two arguments The first argument is the function we want to memorize.
+
+04:45.000 --> 04:50.630
+The second argument is an array of dependencies just like our use affect hook.
+
+04:50.670 --> 04:57.780
+The only difference is that this array is mandatory with the use callback hook now because of course
+
+04:57.810 --> 04:59.940
+our function has zero dependencies.
+
+04:59.940 --> 05:06.060
+We can simply pass an empty array but there will be instances where we do need to pass in a dependency.
+
+05:06.060 --> 05:09.890
+And I'll show you in a little bit but let's save this now.
+
+05:09.930 --> 05:11.960
+And let's now double check.
+
+05:12.060 --> 05:18.600
+Now we'll see what happens is that my function still works but whenever i click income account and whenever
+
+05:18.600 --> 05:26.880
+my R3 renders we're not actually adding in a new function anymore because this function every time it
+
+05:26.880 --> 05:31.910
+gets called to add this value is using the mama Y's version of the function now.
+
+05:31.950 --> 05:38.610
+So the reference has not changed for this function and this is really good for us because now we're
+
+05:38.610 --> 05:42.560
+no longer costly in generating a new log name function.
+
+05:42.570 --> 05:50.580
+Whenever our app component renders so if we wanted to test this with the actual dependencies the person
+
+05:50.910 --> 05:56.550
+we can actually do it with these two functions here instead of adding log name what I'm gonna do is
+
+05:56.550 --> 06:06.920
+log increment 1 and also add increment to and then what I'm going to do is I am going to wrap these.
+
+06:07.010 --> 06:08.270
+Actually I'm not going to wrap them yet.
+
+06:08.690 --> 06:10.700
+Let's just see what happens wherever we click increment.
+
+06:11.270 --> 06:15.110
+So we see that we have two functions and when we instantiate because when our component renders for
+
+06:15.110 --> 06:21.590
+the first time they get added in but when I click increment count you'll see that I'm adding both the
+
+06:21.590 --> 06:25.780
+functions in because both functions are getting re rendered.
+
+06:25.820 --> 06:31.910
+And as we just learned this is the behavior to expect because we're not using our use callback cook
+
+06:32.780 --> 06:35.600
+but now if we wrap this in our use callback hook
+
+06:38.590 --> 06:44.560
+and we pass in an empty array we'll actually see that there will be a problem.
+
+06:47.980 --> 06:56.540
+So what is happening here if we start hitting our income account we see that it's not working right.
+
+06:57.420 --> 07:04.810
+While it does increment the first time on an issue ization it's not actually increasing the county more.
+
+07:04.830 --> 07:10.830
+Even though technically speaking our function is not getting added in.
+
+07:10.890 --> 07:14.540
+So these are our functions and they're not getting regenerated.
+
+07:14.580 --> 07:20.220
+The reason for this as you can see from this error or warning is because we're missing a dependency
+
+07:20.340 --> 07:28.090
+inside of our use callback here or use callback and knows that this function is dependent on count one
+
+07:28.360 --> 07:36.210
+which is some variable outside of this function scope this count one is actually what gets generated
+
+07:36.270 --> 07:40.260
+as the function's definition when we instantiate this function.
+
+07:40.260 --> 07:45.000
+Meaning that this function knows that whenever this function gets invoked it's saying I'm going to use
+
+07:45.000 --> 07:50.670
+the set count one function but I'm going to set it to whatever count one is currently when this function
+
+07:50.700 --> 07:54.230
+gets called or initialize for the first time.
+
+07:54.240 --> 07:56.880
+So if Kelvin was zero then this value is zero.
+
+07:57.390 --> 08:05.390
+So our function is led by a function that says I'm going to set count 1 2 0 plus 1 so after that instantiate
+
+08:05.610 --> 08:11.110
+and our component renders because our account 1 has been updated so a local state gets updated a component
+
+08:11.130 --> 08:17.610
+renders it's going to check and see when it's re initializing this function it's going to say oh wait
+
+08:17.640 --> 08:24.570
+there's no dependencies inside of this array for use callback which means that I should never have to
+
+08:24.570 --> 08:33.700
+read create this function because the dependency array only says the only time I want you to create
+
+08:33.760 --> 08:39.270
+a new array is if any of the values inside of this array changes.
+
+08:39.340 --> 08:46.330
+But now we're stuck with a function that always sets count one equal to the first time count one was
+
+08:46.330 --> 08:55.950
+instantiated which was when it was 0 so if I now instead pass in count 1 AS THE dependency then we'll
+
+08:55.950 --> 09:02.400
+see that are called works the way we want it to because now when I click increased count 1 we see that
+
+09:02.400 --> 09:09.720
+our value is increasing but we also see that I'm adding in the appropriate count one function that is
+
+09:09.720 --> 09:16.920
+new because when this value updates count one more set go into this array and it'll say oh I want to
+
+09:16.920 --> 09:23.240
+re instantiate this function but count 1 has it changed has the dependency count on changed while it
+
+09:23.240 --> 09:30.030
+has because we've incremented the value the last time we clicked this increment count one function meaning
+
+09:30.030 --> 09:35.850
+that I need to generate a new function but then when we go to increment count 2 it's going to say OK
+
+09:36.210 --> 09:41.970
+has the dependency in this function changed it hasn't because count 2 has stayed the same.
+
+09:41.970 --> 09:46.730
+Only count 1 has changed so that I don't need to create a new function here.
+
+09:46.860 --> 09:54.090
+Meaning that the function add fails because this original function from when we first instantiated our
+
+09:54.540 --> 10:04.290
+increment count 2 has not changed therefore it only adds the new set count 1 functions that get generated
+
+10:04.290 --> 10:12.870
+due to the changing value of count one when ever we increment this count so hopefully this makes some
+
+10:12.870 --> 10:20.130
+sense because this used callback is definitely useful inside of our functional components whenever we
+
+10:20.130 --> 10:27.780
+have to declare inline functions inside of this component definition because on every render we will
+
+10:27.840 --> 10:30.780
+end up instantiate the function multiple times.
+
+10:30.780 --> 10:37.710
+So this is just something that we have to keep in mind when building applications that are using classless
+
+10:37.710 --> 10:44.300
+components now in the next lesson we're going to talk about use memo which is very similar to use callback
+
+10:44.600 --> 10:46.790
+but use just ever so slightly differently.
+
+10:47.480 --> 10:49.450
+So I will see you in the next lesson.

@@ -1,0 +1,559 @@
+WEBVTT
+
+00:00.840 --> 00:07.620
+Now for us to begin we have to look at how we are currently doing our sign it as we know signing in
+
+00:07.680 --> 00:09.970
+is an asynchronous action.
+
+00:10.290 --> 00:17.520
+We want to switch ah sign and process and authentication process over to a more promise oriented method
+
+00:17.610 --> 00:23.850
+of checking our server fetching against our server and then updating our reducer accordingly.
+
+00:23.850 --> 00:28.970
+Now we want to do this in a promise oriented way and not this observable way that we've got it.
+
+00:28.980 --> 00:35.370
+Because a lot of applications are probably going to use a promise oriented way of doing authentication
+
+00:35.490 --> 00:37.550
+and sign in and sign up.
+
+00:37.560 --> 00:44.940
+So the best way that we can tackle this is we need to figure out what of those three methods of fetching
+
+00:45.030 --> 00:47.910
+and then succeeding and then failing.
+
+00:47.910 --> 00:55.240
+We need to do with our existing Simon Fuller so we know that right now in our sign and form we either
+
+00:55.240 --> 01:01.300
+trigger a sign in with Google or a sign and with email and password.
+
+01:01.300 --> 01:06.850
+So these are both different methods that we need to call so we can evaluate that we probably need to
+
+01:06.850 --> 01:12.480
+create two separate sign in success sign and start and sign and failure.
+
+01:12.520 --> 01:13.840
+Action types.
+
+01:13.840 --> 01:15.790
+So that's what we're gonna do first.
+
+01:15.970 --> 01:20.890
+If we see that there's overlap we can of course refactor after but the first thing that we need to do
+
+01:21.580 --> 01:27.070
+is we are going to make a Google sign in start
+
+01:32.380 --> 01:38.690
+our Google sign in success and our Google sign in failure
+
+01:41.510 --> 01:44.150
+then we need the same thing for our email sign and
+
+01:49.060 --> 01:52.690
+then we'll do the same thing so that we have our success
+
+01:56.490 --> 02:01.110
+and our failure.
+
+02:01.130 --> 02:05.830
+So now that we have our action types we need to create those actual actions.
+
+02:06.050 --> 02:09.670
+And each one will be a little different.
+
+02:09.690 --> 02:19.850
+So first we need are Google sign in start which is equal to a function that will just trigger the actual
+
+02:19.850 --> 02:20.390
+assign it.
+
+02:21.320 --> 02:26.680
+So here we're going to take user action type stock Google sign in start.
+
+02:27.290 --> 02:32.930
+We don't need a payload because all we're saying is we're telling the eventual saga we will write that
+
+02:32.930 --> 02:38.740
+will house our actual signing with Google trigger that we need to trigger our sign it
+
+02:42.600 --> 02:49.170
+now our success and our failure calls will be different because our success we're gonna need the actual
+
+02:49.170 --> 02:59.800
+current user at the end of it so here we're gonna do a Google sign in success which is equal to this
+
+03:00.580 --> 03:02.020
+function that will get a user
+
+03:04.670 --> 03:13.320
+that we will then set as our user action types Google sign in success
+
+03:17.130 --> 03:23.870
+and our payload is our user will then also finally need our Google sign in failure
+
+03:29.290 --> 03:31.630
+which will get our error if anything goes wrong.
+
+03:33.690 --> 03:35.430
+And we will say Google
+
+03:37.950 --> 03:45.080
+sign in failure or the payload goes to our error.
+
+03:45.210 --> 03:54.430
+Now we're gonna need the same actions except we're gonna need them to be email so here we can just set
+
+03:54.430 --> 04:05.510
+this to email except our type here needs to be capitalized.
+
+04:05.650 --> 04:12.490
+Now the big difference with our email sign and start is that we know that we have to pass in a password
+
+04:12.550 --> 04:18.430
+in an email when we look at our method because what we do is we pull it off of our state and then we
+
+04:18.430 --> 04:20.260
+pass it into here.
+
+04:20.260 --> 04:28.770
+So our email sign and we'll actually need to take an email and password value now we can pass it in
+
+04:28.830 --> 04:32.270
+as an object or we can pass it in as separate parameters.
+
+04:32.280 --> 04:39.780
+But the way that I would prefer us to do it is we just pass it in as the email and password and we're
+
+04:39.780 --> 04:46.260
+just gonna say that when this comes in we're gonna get email and password like so
+
+04:49.850 --> 04:51.620
+and then we'll just say our payload
+
+04:54.330 --> 05:00.290
+is that object success and error will be pretty much the exact same.
+
+05:00.290 --> 05:10.270
+And this will be our user actions now with this we of course one need to also modify our reduces.
+
+05:10.310 --> 05:17.870
+So what we'll do inside of our user reduces is we will anticipate what's going to happen right now that
+
+05:17.870 --> 05:22.650
+we're switching over to the sign and success on both our Google and email sign.
+
+05:24.280 --> 05:32.490
+So here we are going to say that whenever we get our success call we're just gonna say Google sign in
+
+05:32.550 --> 05:38.340
+success we're gonna get a payload which will be equal to the action that payload and we're going to
+
+05:38.340 --> 05:40.430
+set our current user to it.
+
+05:40.500 --> 05:44.350
+The same thing will happen with email sign and success.
+
+05:44.580 --> 05:51.090
+So we actually are able to stack these cases like this which essentially represents that if either of
+
+05:51.090 --> 05:54.410
+these actions are the case this will be what gets returned.
+
+05:54.450 --> 05:59.640
+So we don't have to write two separate case statements with their own exact identical returns theme
+
+06:01.270 --> 06:05.040
+and now we can actually do the same thing with our user action type stuff.
+
+06:05.050 --> 06:11.940
+Google sign in failure as well as our email sign and failure
+
+06:16.890 --> 06:26.310
+and here we'll have to store some error which will also by default be no and here what we can say is
+
+06:26.730 --> 06:34.780
+we can say that error goes to action dog payload and we're also going to spread whatever other state
+
+06:34.900 --> 06:38.950
+is in here inside of this now.
+
+06:39.010 --> 06:44.670
+Another thing that we might want to do is clear the air if our message ever succeeds.
+
+06:44.680 --> 06:49.290
+So here inside of our success we're also going to set Aaron back to null.
+
+06:49.360 --> 06:55.410
+If our action type succeeds right where we sign and successfully then we want to clear any errors.
+
+06:55.420 --> 07:00.730
+The reason we do this is because say we get an error and then retry the sign and well then we do want
+
+07:00.730 --> 07:01.920
+to set error to null.
+
+07:01.960 --> 07:05.940
+We want that value to be null again now.
+
+07:06.030 --> 07:14.400
+After this the next thing we need to do is we need to actually modify our application code so that it
+
+07:14.430 --> 07:21.260
+no longer leverages this so here we're just going to comment this out because in the midst of us changing
+
+07:21.410 --> 07:28.160
+our application over we know that the majority of our code that has to do with our user authentication
+
+07:28.700 --> 07:35.040
+actually lives inside of here so we don't want this to conflict with the new code that we're gonna write
+
+07:36.700 --> 07:44.450
+which is perfectly fine and now we're going to begin writing our sagas so in order for us to write our
+
+07:44.450 --> 07:47.840
+sagas we got to actually add a new user saga
+
+07:51.330 --> 07:53.510
+now inside of our user saga.
+
+07:53.530 --> 08:05.040
+We are going to import in our take the latest as well as the put from redux saga slash effects now.
+
+08:05.350 --> 08:08.420
+The first one we should handle is our Google sign.
+
+08:09.250 --> 08:14.620
+So in order for us to write our Google sign and we got to think about what we need we are just going
+
+08:14.620 --> 08:23.000
+to listen for Google sign and star and then we are going to trigger our actual sign from the saga so
+
+08:23.000 --> 08:34.210
+here we need to write our first function which is going to be called on Google sign in start.
+
+08:34.250 --> 08:38.330
+Now of course we need to take that action that we're going to listen for.
+
+08:38.480 --> 08:44.090
+So we're going to import in our user action now before we do.
+
+08:44.090 --> 08:46.640
+There is one slight tweak we need to make.
+
+08:46.850 --> 08:54.260
+We should change our export for user actions over to a default export because this will be the only
+
+08:54.260 --> 08:55.970
+thing we're exporting.
+
+08:55.970 --> 09:02.810
+And as a result we'll probably have to change our code that is importing in our user actions to also
+
+09:02.810 --> 09:05.360
+now treat it as a default export
+
+09:09.430 --> 09:15.430
+and they'll probably be just our actions folder or sorry our actions file and then are reduced or file
+
+09:16.890 --> 09:27.280
+and now we'll just import user action types from user types and now inside of our saga we're gonna yield
+
+09:28.210 --> 09:38.120
+to this take latest listener on our user action type Google sign in start and then what we're going
+
+09:38.120 --> 09:45.240
+to trigger is the code related to signing in with Google so we're gonna make a new generator function
+
+09:45.780 --> 09:53.800
+called sign in with Google and inside of here is going to be the code that we had before inside of our
+
+09:53.800 --> 09:57.510
+sign and component that trigger our Google sign.
+
+09:59.070 --> 10:05.660
+Now our Google site is a method on our firebase utilize that pretty much just triggers this call here.
+
+10:06.000 --> 10:11.350
+But we want to call the off sign in with pop up ourselves because we want the object.
+
+10:11.520 --> 10:16.590
+We're no longer relying on this listener to tell us whether or not the user has signed it.
+
+10:17.130 --> 10:23.040
+So we actually need to move this code outside of this function call that we've written and we'll show
+
+10:23.040 --> 10:24.540
+you how to do this.
+
+10:24.630 --> 10:27.540
+First we're going to rename our provider to Google provider
+
+10:32.330 --> 10:39.070
+and we're also going to export this provider out export right here and now what we'll do is we will
+
+10:39.160 --> 10:49.140
+import in our Google provider and our off object from our firebase utilize.
+
+10:49.260 --> 10:57.090
+Now what we need to do here is we also will need our create user profile document because we did it
+
+10:57.090 --> 10:57.540
+before.
+
+10:57.540 --> 11:01.600
+Inside of this call right here but now we're moving it into our saga.
+
+11:01.770 --> 11:06.330
+And I know it seems confusing a little bit about why we're pulling all this stuff in right.
+
+11:06.390 --> 11:09.990
+But if you fall along you'll definitely see where we're going with this
+
+11:13.430 --> 11:17.210
+now that we have what we need we actually need to do our signing.
+
+11:17.480 --> 11:26.300
+So what we'll do is we will wrap our attempt at our API call in a try block as you remember any code
+
+11:26.300 --> 11:29.180
+that we write with an API has a chance to fail.
+
+11:29.180 --> 11:35.830
+So we need to be sure that we can catch the error so inside of our try catch this will handle how we
+
+11:35.830 --> 11:38.470
+get our errors.
+
+11:38.560 --> 11:44.330
+The first thing we're gonna do is we know what we'll get back is a user ref.
+
+11:44.380 --> 11:45.000
+Right.
+
+11:45.010 --> 11:47.640
+So let's just make sure that we're getting the right thing first.
+
+11:48.610 --> 11:53.680
+So we're gonna say cost user F equals a yield off dot sign and with pop up
+
+11:57.930 --> 12:04.670
+which is the same method that we're running here and then we're just gonna pass in our Google provider.
+
+12:04.780 --> 12:12.250
+And the reason why we don't want to use this function right here is because we want to actually access
+
+12:12.430 --> 12:19.080
+the value that gets returned when the success happens with our side and with pop up we're gonna set
+
+12:19.080 --> 12:25.150
+it to this user ref and then we're going to console log out our user.
+
+12:25.210 --> 12:30.820
+Now the thing that we've got to do in order for this to work is we are going to also have to export
+
+12:30.910 --> 12:36.620
+out our main saga and then put it inside of our root saga so that our application listens for it.
+
+12:37.450 --> 12:43.750
+So we're gonna take that same pattern that we did with our root saga but make a user saga as well because
+
+12:43.750 --> 12:52.190
+we know we're going to need multiple sagas so we can import in all and call and we will export out a
+
+12:52.190 --> 13:03.230
+saga called User saga and this saga will pretty much just be us instantiating all of our other sagas
+
+13:03.260 --> 13:04.250
+that we need to call.
+
+13:04.250 --> 13:10.520
+So here we're gonna do our on Google sign and start and then we're gonna bring this into our root saga
+
+13:17.240 --> 13:27.850
+and here we're gonna do call user saga and now we have to also make sure that we are triggering on Google
+
+13:27.850 --> 13:35.860
+side and start whenever our button gets clicked so there might actually be inside of our signing component.
+
+13:35.860 --> 13:37.390
+A couple of things we gonna bring in.
+
+13:37.390 --> 13:42.310
+So first we actually have to bring in our new action that triggers Google sign and start
+
+13:45.930 --> 13:53.320
+from our user user actions and now what we have to do is we will have to connect this in a dispatch.
+
+13:53.350 --> 13:54.940
+So we'll need our connect as well
+
+13:59.090 --> 14:01.520
+we'll need our map dispatch to props
+
+14:06.600 --> 14:14.020
+which will set Google sign and to start to be a function that simply triggers our Google sign to start
+
+14:14.020 --> 14:17.640
+action and then we pass this into our connect
+
+14:22.530 --> 14:24.630
+so here nothing is that brand new.
+
+14:24.630 --> 14:27.710
+We're just modifying our code to now take this in.
+
+14:28.080 --> 14:36.190
+And then here we just want to make sure to D structure this off of our props and now use this instead
+
+14:36.190 --> 14:39.200
+of our off dot sign and with Google.
+
+14:39.280 --> 14:44.260
+Now one thing we do have to modify is this cotton but custom button on click.
+
+14:44.260 --> 14:48.940
+I made a mistake before where we didn't say that this type was a button.
+
+14:49.030 --> 14:54.070
+What ends up happening if you don't do that is that inside of sign and if we click sign in with Google
+
+14:54.670 --> 15:02.190
+this form will actually trigger an on submit just because this button is also part of the form element.
+
+15:02.340 --> 15:07.080
+It's just the nature of what we have to do with buttons even if we have a type summit here and this
+
+15:07.080 --> 15:09.120
+button does not have the type submit.
+
+15:09.120 --> 15:11.400
+This will unfortunately still trigger a sign.
+
+15:11.460 --> 15:12.330
+So I'll show you.
+
+15:12.330 --> 15:19.740
+If we click this we see that we just triggered our sign it but this is unfortunate because we don't
+
+15:19.740 --> 15:20.430
+want to do that.
+
+15:20.430 --> 15:23.370
+So what we have to do is we have to say type equals
+
+15:26.940 --> 15:32.700
+and by doing type equals button our button now no longer will actually trigger the submit for our form.
+
+15:32.700 --> 15:39.710
+So that's just a minor thing that we had to modify and I noticed when going over our project but now
+
+15:39.710 --> 15:46.550
+that we have our custom button back in and our Google sign and start we do see that one ends up happening
+
+15:46.640 --> 15:50.340
+is we trigger our Google sign and start.
+
+15:50.490 --> 15:58.890
+So now inside of our saga we know that our Google sign and start needs to be passed in to our take latest
+
+16:01.310 --> 16:04.120
+so if we go back let's clear this.
+
+16:04.130 --> 16:11.540
+If we click Google sign and start we see that we trigger our dropdown we'll select our signing user
+
+16:12.110 --> 16:19.320
+and we should see what we get back which is this object that has these different properties right.
+
+16:19.340 --> 16:26.300
+Tell us what type of operation it was but the user is actually the user off object that we were using
+
+16:26.300 --> 16:29.640
+before to build out our profile.
+
+16:29.720 --> 16:35.620
+This is that same user off object that we were using and passing in inside of our app right here.
+
+16:35.780 --> 16:40.820
+This user off object that we were checking for and passing in is now what we're getting back.
+
+16:40.910 --> 16:47.000
+So we've got to make sure to pull off the user object from our user ref so we can just do structure
+
+16:47.000 --> 16:55.550
+like this and once we have this value we know that what we need to do is we got to get our Snapshot
+
+16:55.580 --> 16:59.270
+from this value that we now have.
+
+16:59.290 --> 17:07.960
+So what we can do is we can now make sure to set a constant user ref that will know what get back when
+
+17:07.960 --> 17:15.850
+we call as we remember using our call method create user profile document and then our new user.
+
+17:15.850 --> 17:23.300
+So as we remember this is pretty much the same as us running this function except it's in the format
+
+17:23.390 --> 17:24.740
+instead of an async await.
+
+17:24.740 --> 17:31.310
+Right now we're using our yield and our call that we get back from our read saga effects.
+
+17:31.340 --> 17:42.480
+Now we need our snapshot which we are going to get by calling yield user ref dog get and now we're going
+
+17:42.480 --> 17:47.550
+to actually issue out our success call our action.
+
+17:47.550 --> 17:57.540
+So we've got to import in our Google sign in success and our Google sign in failure from our user action
+
+18:00.100 --> 18:05.440
+and then we're just going to yield the plot of our Google sign and success.
+
+18:05.460 --> 18:11.080
+And as we remember we need to get the Snapchat I.D. and then spread in the rest of the data so we can
+
+18:11.080 --> 18:21.340
+do use our Snapshot I.D. and then spreading in the rest of our user snapshot dot data and then we'll
+
+18:21.340 --> 18:28.020
+also make sure to yield the plot of our error if we get an error who will sign it.
+
+18:28.020 --> 18:38.030
+Failure with the error and now hopefully ArcSight and with Google will work so we see that we trigger
+
+18:38.030 --> 18:46.720
+our Google sign to start when we click our button we select our user and then our site works we load
+
+18:46.720 --> 18:54.790
+our actual user in right we get our user ref we get the snapshot we pass that data we trigger our success
+
+18:55.090 --> 19:02.680
+and then our user reducer updates the current user with our payload that we're passing in as our actual
+
+19:02.680 --> 19:08.330
+final action now hopefully this makes sense.
+
+19:08.440 --> 19:13.080
+I know this is a longer lesson but this refactor is going to be pretty extensive.
+
+19:13.090 --> 19:18.100
+So it's good that we take some time to make sure we look at every step that we're going to take.
+
+19:18.100 --> 19:22.840
+Now if this didn't really make false sense we're going to do something very similar with email and we'll
+
+19:22.840 --> 19:25.560
+walk through all of this again in the next lesson.

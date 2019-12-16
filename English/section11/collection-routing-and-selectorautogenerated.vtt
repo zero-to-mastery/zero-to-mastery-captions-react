@@ -1,0 +1,220 @@
+WEBVTT
+
+00:01.990 --> 00:09.970
+So now what we're looking to do is to build our collection selector because we want to reach into our
+
+00:09.970 --> 00:20.020
+redux state of our collection items and get the right collection item based off of our Match dot paradigms
+
+00:20.410 --> 00:21.860
+collection ideas.
+
+00:22.150 --> 00:28.370
+So using that I.D. We want to be able to get the correct item.
+
+00:28.420 --> 00:39.560
+Now the caveat is that when we look at our collections array the I.D. our numbers whereas our collection
+
+00:39.560 --> 00:46.920
+I.D. that we get from our You are all parameter is a string there's two ways we can approach this.
+
+00:47.020 --> 00:55.420
+The first way is that we modify our items so that the data for I.D. is a string of the value versus
+
+00:55.480 --> 01:02.140
+a number but we're actually going to do that later in the next lesson in this lesson.
+
+01:02.180 --> 01:09.760
+What we're going to do is we're going to use what's called a collection I.D. map and I'll show you what
+
+01:09.760 --> 01:11.050
+that looks like.
+
+01:11.080 --> 01:18.430
+So inside of our shop selectors we're going to actually declare this contest which is equal to collection
+
+01:18.520 --> 01:27.310
+I.D. map which is just an object that maps the string value to the respective I.D. where the string
+
+01:27.310 --> 01:34.860
+value that we're getting from our You are all parameter will be the actual property.
+
+01:34.930 --> 01:42.530
+So we'll say that hat goes to the idea of one which is exactly what's happening here and then we'll
+
+01:42.530 --> 01:45.530
+do the same for every other one in the exact order up here.
+
+01:45.530 --> 01:55.690
+So sneakers jackets women's men so we'll say sneakers goes to two jackets goes to three women's goes
+
+01:55.690 --> 01:58.870
+to four and men's goes to five.
+
+01:58.900 --> 02:07.480
+So what we're doing is we're going to pass in that string and then use that string as the dynamic value
+
+02:07.480 --> 02:14.050
+of the property to get the correct I.D. and then we'll match it in our selector so let's write that
+
+02:14.050 --> 02:25.570
+selector so we're gonna say select cat what collection is equal to a function that takes the collection
+
+02:25.570 --> 02:37.140
+i.e. or we'll say collection you are all param and what this function will return is are create selector
+
+02:37.150 --> 02:40.540
+call that get select collections
+
+02:43.210 --> 02:49.700
+and then we'll have our collections and we'll say collections the find which you remember from our doff
+
+02:49.710 --> 02:56.800
+find tutorial based on this function we pass it it's going to run this function on each element from
+
+02:56.800 --> 03:02.890
+left to right in our array until it finds one where the function returns true and then give us back
+
+03:02.920 --> 03:06.380
+the element that return true based on the function call.
+
+03:06.700 --> 03:10.070
+So we'll say collection goes to collection.
+
+03:10.150 --> 03:14.260
+I.D. is equal to our collection I IMAP
+
+03:16.700 --> 03:19.850
+using R collection you are a print
+
+03:23.990 --> 03:32.580
+so nothing too crazy but some new concepts that we're looking at now that we have our selector let's
+
+03:32.580 --> 03:39.840
+actually bring this into our component so not our shop component but our collection component we'll
+
+03:39.840 --> 03:47.410
+need to import connect from react redux as well as our new selector
+
+03:56.830 --> 04:02.350
+now in order for us to do this in our map states are props properly.
+
+04:02.430 --> 04:07.840
+We have to use the second optional parameter in map states of props.
+
+04:07.860 --> 04:14.310
+The first parameter we know is the state which is our overall reduce state from the top right.
+
+04:14.610 --> 04:21.270
+The second argument is actually called own props which is the props of the component that we're wrapping
+
+04:21.330 --> 04:25.850
+in our Kinect which is really convenient for this exact purpose.
+
+04:25.950 --> 04:36.500
+So we're trying an object where the collection will go to our select collection and what we'll pass
+
+04:36.500 --> 04:47.170
+it is own props to match parameters Doc collection i.e. and then because this is returning our create
+
+04:47.170 --> 04:53.260
+selector call our create selector call pretty much returns as a function that takes the state and then
+
+04:53.260 --> 04:57.420
+runs it through the selector flow that we've gotten used to right.
+
+04:58.030 --> 05:04.510
+So this is where we'll pass state after we've invoked our select collection and then we'll pass this
+
+05:04.600 --> 05:05.680
+into our connect
+
+05:10.680 --> 05:20.180
+and now if we log the collection we should actually see it that we're getting the right one
+
+05:23.220 --> 05:26.360
+and we see that we do we get the correct hats.
+
+05:26.560 --> 05:29.450
+Object right.
+
+05:29.480 --> 05:34.640
+So let's just walk through this again because the most complicated steps are the two new concepts that
+
+05:34.640 --> 05:35.030
+we add.
+
+05:35.720 --> 05:44.050
+So because we're using an object and we're using this object because are you are Al parameter is a string
+
+05:44.170 --> 05:47.700
+whereas the idea we want to match is a number.
+
+05:47.890 --> 05:56.690
+So we write a map right which is just an object where the string value goes to the I.D. we then map
+
+05:56.750 --> 06:05.340
+over the collections by selecting it and passing into our new Select collection selector.
+
+06:05.340 --> 06:09.560
+The you are all parameters which is a string and will return.
+
+06:09.560 --> 06:16.890
+Create selector which is called a curried function which is just a function that returns another function.
+
+06:16.940 --> 06:22.190
+The other function in this case being what creates selector returns which as we know is pretty much
+
+06:22.190 --> 06:25.130
+the shape of this function.
+
+06:25.190 --> 06:31.400
+It takes the state and then it does a transformation on it so that we get back something else on that
+
+06:31.400 --> 06:32.700
+state object.
+
+06:32.840 --> 06:40.550
+And for us we're passing it through our selector chain so that we get our collections array and then
+
+06:40.550 --> 06:49.200
+we call dot fine on that array where we're matching the correct I.D. to our collection I.D. map using
+
+06:49.320 --> 06:56.270
+our string parameter value that we get from the euro and then in our collection component.
+
+06:56.280 --> 07:03.680
+Right we're using the new own props which is on our map states of props as the second parameter and
+
+07:03.680 --> 07:11.600
+that gives us all of the props that we're getting on our collection page component including our match
+
+07:11.630 --> 07:18.770
+object that we get from the root component that is passing our collection on our shop page
+
+07:22.870 --> 07:26.660
+because our collection page is mapped to this route.
+
+07:26.680 --> 07:32.410
+So RAF route if you remember passes in the match object which we will pull the Paramus value getting
+
+07:32.530 --> 07:39.910
+our collection and then because our select collection is a function that returns a function we pass
+
+07:39.910 --> 07:46.490
+the function that comes out of this function the state in order for us to wire everything together and
+
+07:46.490 --> 07:52.720
+now we have access to our collection so there's a lot of stuff that we just went through in order to
+
+07:52.720 --> 07:59.650
+get our collection object but now we're able to dynamically change what object we're getting based on
+
+07:59.650 --> 08:00.460
+what route we're on.
+
+08:00.970 --> 08:08.340
+So if I were to change this to jackets you'll see that we get our jacket's object instead.
+
+08:08.470 --> 08:10.540
+Now let's actually style our collection page.

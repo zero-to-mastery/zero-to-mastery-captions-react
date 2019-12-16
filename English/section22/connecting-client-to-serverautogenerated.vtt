@@ -1,0 +1,295 @@
+WEBVTT
+
+00:00.450 --> 00:01.500
+Welcome back everyone.
+
+00:02.130 --> 00:09.300
+So now that we've actually built out our payment route we need to write the code on our clients site
+
+00:09.300 --> 00:16.770
+striped button component to make a request using the token we get back to that new route that we made
+
+00:16.920 --> 00:23.840
+so that our route can be actually tested to see whether or not it's making that stripe call or not now
+
+00:24.350 --> 00:26.210
+inside of our root folder.
+
+00:26.210 --> 00:30.000
+We're going to run yarn dev so that we can actually start.
+
+00:30.020 --> 00:38.570
+Both are back in server as well as our client application then what we're gonna do is inside of our
+
+00:39.740 --> 00:48.550
+folder we're gonna see into our clients and I'm gonna have you add in a new library called axioms.
+
+00:48.590 --> 00:57.440
+Now we're already very familiar with using fetch the native fetch that we get from the Web i.e. the
+
+00:57.440 --> 01:06.230
+browser is a fetch that is really useful when we need to make a quick request to an API for something
+
+01:07.040 --> 01:13.880
+but it starts to get more cumbersome to use when we start to need to make more complex requests and
+
+01:14.000 --> 01:20.930
+access is a library that's very popular amongst many front end developers.
+
+01:20.990 --> 01:27.820
+So this is actually a really cool tool that I think is a great time for me to teach you because there
+
+01:27.860 --> 01:34.730
+is a high likelihood that you'll come across a use case where the project you join is using axes and
+
+01:34.730 --> 01:39.120
+axes actually makes it much easier for us to make post requests as well.
+
+01:39.140 --> 01:46.400
+So what you're going to do is just yarn at access inside of the client folder because as we now know
+
+01:46.460 --> 01:54.340
+we have two separate projects with two separate different dependency libraries inside of their packages.
+
+01:54.560 --> 02:00.200
+So the client holds all of the dependencies and code for our front end application and our root folder
+
+02:00.200 --> 02:03.590
+holds all the code for our back end application.
+
+02:03.590 --> 02:08.840
+So that's why you got to see this into the client and add axioms because the access is a library we
+
+02:08.840 --> 02:15.610
+want to leverage on the front end and once we've added access what you can do is just go back to your
+
+02:15.610 --> 02:23.230
+code and navigate to your stripe button component now inside of the stripe button component the code
+
+02:23.230 --> 02:24.820
+that we're going to modify.
+
+02:24.820 --> 02:31.930
+Is this on token function that we wrote the on token function is the function that we pass to this token
+
+02:31.930 --> 02:33.990
+property in our strike check out.
+
+02:34.030 --> 02:40.130
+And it does something with the token object once we get it back from our stripe checkout.
+
+02:40.180 --> 02:46.660
+Now what we're gonna do is we're actually going to make a request to our new payment route passing in
+
+02:46.720 --> 02:54.180
+the token because as we know this payment route is expecting the token the I.D. and the amount object.
+
+02:54.190 --> 03:00.520
+So using those two things is what we're gonna pass using axes now in order to make this post request
+
+03:00.970 --> 03:03.270
+with axes we've got to first bring it in.
+
+03:03.580 --> 03:11.220
+So we'll just import axioms from axioms and then what we're going to do instead of this console log
+
+03:11.340 --> 03:19.040
+is we're gonna say axioms and axioms is a function that receives an object that has all of the actual
+
+03:19.040 --> 03:24.710
+properties that we want to pass in order for access to know what kind of request we're trying to make
+
+03:25.460 --> 03:27.530
+and what it will give us back as a promise.
+
+03:27.590 --> 03:33.860
+But first with this object we're gonna say that the you or L that we're trying to go to is payment and
+
+03:33.860 --> 03:39.560
+access it will automatically know that we're probably trying to make a request to our own to slash payment
+
+03:39.620 --> 03:46.080
+route which is what we set up in our server yes so it's gonna use whatever you are our currently at
+
+03:46.320 --> 03:50.760
+and then a pen slash payment at the end of it and make this request to it.
+
+03:51.060 --> 03:53.210
+So that's why it's also really easy.
+
+03:53.250 --> 04:01.160
+We then pass a method property to let it know that it's a post method and then the data represents the
+
+04:01.280 --> 04:03.560
+actual data we're trying to pass through.
+
+04:03.800 --> 04:11.870
+Now the amount is going to go to the price for stripe that we have declared here and then the token
+
+04:11.960 --> 04:17.820
+is going to be the token so we're passing through the token object as the token.
+
+04:17.820 --> 04:23.160
+And that pretty much is all our request is it's just that you are all the method that is going to be
+
+04:23.250 --> 04:25.350
+and then the data we want to pass to it.
+
+04:25.530 --> 04:30.790
+And this now matches all of the things that we are expecting on our server rep.
+
+04:30.800 --> 04:38.220
+So now what we're gonna do is we are going to actually check what kind of response we get that so if
+
+04:38.220 --> 04:44.070
+it's successful we know that from our payment route we're going to send back a stripe response.
+
+04:44.070 --> 04:47.130
+And then if it's an error we're going to send back the stripe error.
+
+04:47.250 --> 04:50.410
+So we're going to handle each case accordingly.
+
+04:50.410 --> 05:05.460
+Now if it's successful then what we want to do is we want to alert the user that the payment was successful.
+
+05:05.480 --> 05:14.540
+Now what we want to do if it fails is we want to catch with an error and then what we want to say is
+
+05:14.630 --> 05:20.940
+we just want to log out that there was some payment error and this is more for us than for the actual
+
+05:20.940 --> 05:26.760
+user because if we're debugging the user doesn't really need to know what kind of error we got.
+
+05:26.820 --> 05:34.620
+But it's easier for us to bug with this console log and then what we do want to alert the actual user
+
+05:34.680 --> 05:42.880
+is that there was an issue with your payment please make sure you use the provided club credit card
+
+05:48.300 --> 05:54.000
+so the reason why we want to say this is because it's very likely the issue that they had was that they
+
+05:54.000 --> 05:57.420
+used a credit card that stripe didn't recognize.
+
+05:57.420 --> 06:02.480
+So what we want to make sure they use is that test credit card we have inside of our checkout page.
+
+06:02.490 --> 06:07.200
+So this just reminds them or it gives them a hint as to why their might have failed.
+
+06:07.200 --> 06:13.020
+Now one thing to note if you actually don't want to use axes and you want to use the native fetch it's
+
+06:13.020 --> 06:19.080
+very easy to do so you just have to follow the configuration options that are available inside of the
+
+06:19.080 --> 06:20.790
+fetch documentation.
+
+06:20.790 --> 06:26.970
+I will link that specific part of the documentation inside of our resources but I personally prefer
+
+06:26.970 --> 06:29.460
+to use access in most of my projects.
+
+06:29.460 --> 06:34.530
+So this is a good library and the actual documentation is also pretty easy to follow.
+
+06:34.530 --> 06:36.630
+I'm also going to link that in the resources as well.
+
+06:36.630 --> 06:43.500
+If you're more curious about access but passing through the actual data is the most important thing
+
+06:43.650 --> 06:49.260
+we want to pass the amount and we want to pass this token that we get back from the strike checkout.
+
+06:49.410 --> 06:56.640
+Now inside of our server code we are expecting that body to have the amount and the token which is what
+
+06:56.640 --> 07:03.500
+we use to pass to our stripe charge I actually have a small little typo here that in case you do as
+
+07:03.500 --> 07:07.260
+well make sure that the error has a capital E..
+
+07:07.280 --> 07:13.610
+So just a quick thing to note I actually just noticed that but with that we are now able to test whether
+
+07:13.610 --> 07:17.870
+or not our stripe checkout now fully works and makes a charge.
+
+07:17.870 --> 07:23.680
+So let's go back to our application and here inside of my checkout I actually have a bunch of items
+
+07:24.210 --> 07:26.980
+so now that I have all this stuff let's try and pay it.
+
+07:26.990 --> 07:31.210
+Now I'm just going to autocomplete this information.
+
+07:31.500 --> 07:40.890
+I am going to use that fake credit card that we have and then I'm going to hit the pay now and hopefully
+
+07:41.190 --> 07:47.600
+as long as we don't get an error we see that our payment was successful and if we go to our dashboard
+
+07:48.230 --> 07:56.110
+in fact we see that we just got this new charge today and instead of payments we'll see that instead
+
+07:56.110 --> 07:57.190
+of our succeeded.
+
+07:57.190 --> 08:00.750
+This was the recent charge that was just made.
+
+08:00.790 --> 08:06.580
+Now you'll notice that there was this other one I actually made another charge earlier today but just
+
+08:06.580 --> 08:07.700
+ignore this one.
+
+08:08.020 --> 08:11.650
+This is the successful one that was just made just now.
+
+08:11.710 --> 08:15.320
+So as we can see all of our code is working.
+
+08:15.520 --> 08:22.270
+So that's really really good because now we've actually completed the full stripe payment process and
+
+08:22.270 --> 08:28.570
+charge process using some back end server as well as rounded out what we need to do on our front end
+
+08:28.660 --> 08:31.090
+in order to fully complete this charge.
+
+08:31.780 --> 08:38.920
+So hopefully with this everything made sense if this was confusing I know it was a lot of new back and
+
+08:38.920 --> 08:46.990
+stuff that we had to learn about how to write but what this more practice will definitely help but really
+
+08:47.060 --> 08:51.220
+at least from a high level if you understand what it was that was happening that we were writing with
+
+08:51.220 --> 08:56.710
+the back end that's really good as well because a lot of the back end code you might just sometimes
+
+08:56.710 --> 09:02.410
+have to read in order to understand how you interface with an API like this as well as what it does
+
+09:02.470 --> 09:07.260
+when you're actually on a real full stack project.
+
+09:07.280 --> 09:15.380
+So now that we have a back end as well as a front end we need to push up on to Heroku in order for Heroku
+
+09:15.380 --> 09:21.100
+to now serve our application with both our back end and our front end code.
+
+09:21.110 --> 09:23.380
+So let's do that in the next lesson.

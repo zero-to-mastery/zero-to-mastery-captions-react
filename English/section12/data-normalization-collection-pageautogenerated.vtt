@@ -1,0 +1,232 @@
+WEBVTT
+
+00:01.580 --> 00:06.640
+So now let's actually start styling our collection page.
+
+00:06.700 --> 00:12.850
+The first thing we're going to need to do before we actually start changing the timeline here is make
+
+00:12.910 --> 00:21.740
+a small correction to the collection item styles so inside of our collection items styles we want to
+
+00:21.740 --> 00:30.210
+change this with value from 22 percent to 22 to view with and the main difference between percent and
+
+00:30.210 --> 00:39.580
+view width is that 22 percent as a width is actually just 22 percent of the containing divs with some
+
+00:39.590 --> 00:47.280
+of our containing divs with is 100 pixel well are with would be 22 pixels because it was 22 percent
+
+00:47.280 --> 00:54.540
+of that but using view with what this clarifies is that I want this component to be 22 percent of the
+
+00:54.810 --> 00:58.410
+width of the actual window.
+
+00:58.410 --> 01:06.270
+So for us if we were to decrease or increase the window size it would end up adapting as well because
+
+01:06.270 --> 01:14.020
+it always has to be 22 percent of the total window width so that's just the small change we have to
+
+01:14.020 --> 01:18.410
+make for collection item now inside of our collection component.
+
+01:18.520 --> 01:28.070
+What we want to do is we want to de structure off the title and the items property off of our collection
+
+01:28.850 --> 01:35.590
+and then we are going to render the title in place of the text of our collection page.
+
+01:35.610 --> 01:44.080
+We're also going to give the H to the class name of title next door when I make a div that will contain
+
+01:44.140 --> 01:51.910
+our collection items and we will say class name equals items and then we're going to map over our items
+
+01:52.000 --> 01:55.650
+array and render out the collection item
+
+01:59.310 --> 02:08.620
+giving it a key of the item dot I.D. as well as passing the item property our item element.
+
+02:08.680 --> 02:11.190
+Now we have to actually apply our styles as well.
+
+02:11.800 --> 02:18.730
+So if you check in your resources I of course have provided you with a sass page that has those styling.
+
+02:19.390 --> 02:30.840
+So just copy them over and place them into your collection styles does SAS file and now if we look we'll
+
+02:30.840 --> 02:37.660
+see that we have all of our elements.
+
+02:37.680 --> 02:43.320
+One thing we have to do is make it so that our directory will take us to the correct page that we're
+
+02:43.320 --> 02:49.410
+on so going back to our application inside of our directory reducer.
+
+02:49.640 --> 02:56.150
+We're just going to update our link you URLs to have shops slash and then the actual link we're trying
+
+02:56.150 --> 03:05.900
+to get to shop slash sneakers shop slash women's and shop slash men's.
+
+03:06.000 --> 03:17.910
+Now if we go back to our application we'll see that our directory takes us to the correct category page.
+
+03:17.960 --> 03:24.620
+Let's take this moment and think about something that I mentioned earlier that there are two ways that
+
+03:24.620 --> 03:32.930
+we could store this shop data inside of our reducer so the way that we currently have it is that we
+
+03:32.930 --> 03:44.460
+have it as an array and if we look at our shop selector what we do is we call dot fine on that array
+
+03:45.270 --> 03:52.630
+and we match the I.D. based off of the you are our parameter that we get from our you are L so off or
+
+03:52.640 --> 04:02.330
+on hats we get hats and we pass that into the selector which then we'll find the correct I.D. responding
+
+04:02.330 --> 04:11.370
+to the correct collection item the issue with doing dot find is that we know that when we call it off
+
+04:11.370 --> 04:19.470
+find out our array where are using and passing this function on every element in the array from left
+
+04:19.470 --> 04:23.430
+to right so in a worst case scenario.
+
+04:23.500 --> 04:30.470
+Let's say we had an array of a thousand items and the item we're looking for is the last one.
+
+04:30.560 --> 04:37.100
+Well it would take way longer for it to iterate through every of the first nine hundred and ninety nine
+
+04:37.220 --> 04:45.050
+elements before it finally finds the correct collection item we want and this is the flaw in storing
+
+04:45.080 --> 04:54.590
+data that we need to query individual elements for inside of an array instead what we can do is we can
+
+04:54.590 --> 04:57.420
+store it in an object instead.
+
+04:59.350 --> 05:05.380
+If we were to store it in an object you can see how it's similar to what we did here with our collection
+
+05:05.380 --> 05:13.590
+I.D. map where we find the actual property of our object by passing it and dynamically rendering the
+
+05:13.590 --> 05:20.280
+property using this collection you are all parameter except instead of getting the I.D. we would actually
+
+05:20.280 --> 05:29.820
+get the collection object itself this concept of storing lists of elements inside of an object instead
+
+05:29.820 --> 05:36.480
+of an array is called data normalization and it's quite simple.
+
+05:36.480 --> 05:43.300
+We can actually do it with this collection that we've currently got so let's go to our shop data DHS
+
+05:44.030 --> 05:54.320
+and instead of an array Let's convert it over to an object and what we'll do is we will set the key
+
+05:54.800 --> 05:56.630
+to the corresponding object.
+
+05:56.630 --> 06:02.950
+With that you are all parameter we're going to pass it and usually we want to also make sure that something
+
+06:03.070 --> 06:12.610
+on this piece of data is going to be inside of the object as it's going to be the key and we also want
+
+06:12.610 --> 06:18.110
+to make sure that the key that we do use exists in the object itself.
+
+06:18.160 --> 06:25.190
+Usually we would use an I.D. but in our case because our I.D. are numbers it's okay if we just use the
+
+06:25.190 --> 06:26.740
+title but lowercase.
+
+06:26.740 --> 06:27.240
+Right.
+
+06:27.250 --> 06:33.790
+So for us the title also happens to be the euro parameter that we're using.
+
+06:33.790 --> 06:42.410
+So we're going to pass hats to this object right as the key and then we're gonna do sneakers and then
+
+06:42.410 --> 06:53.510
+we're going to do jackets for jackets women's for women's and men's for men's.
+
+06:53.570 --> 07:01.340
+Now we actually have to also now update our selector but this is way simpler because all we're doing
+
+07:01.880 --> 07:10.370
+instead of doing a collection not find is collections at the collection you are parameter and we don't
+
+07:10.370 --> 07:18.080
+need this collection I.D. map anymore if we save this we look at our application we see that it still
+
+07:18.080 --> 07:21.890
+works if we go to our jackets
+
+07:25.910 --> 07:31.220
+it loads our jackets right because we're passing this you are a parameter into our selector and then
+
+07:31.220 --> 07:40.730
+our selector goes into this new collections object and just gets the corresponding value based on this
+
+07:40.730 --> 07:49.910
+property of jackets and this is actually the ideal way that we should be storing large arrays of elements
+
+07:49.940 --> 07:56.230
+where we need the individual element inside of our reducer.
+
+07:56.330 --> 08:03.140
+This is actually a pretty common thing that will encounter when talking about back ends and databases
+
+08:03.830 --> 08:09.800
+especially when we look at the firebase section but all you need to know about data normalization is
+
+08:09.800 --> 08:18.290
+that all it is is that you store lists of elements as objects instead of arrays.
+
+08:18.320 --> 08:26.180
+Now we do have these items as an array as well as these sections as an array and that is okay for our
+
+08:26.180 --> 08:34.310
+case because we probably are not going to need an individual element inside of these arrays.
+
+08:34.730 --> 08:44.360
+If for example we had an individual product page where maybe we wanted the specific item then we might
+
+08:44.420 --> 08:51.470
+do the same thing and convert these items that are existing inside of this array into an object instead.
+
+08:51.620 --> 08:57.110
+But because we don't need that for the purposes of this application we can safely keep them in arrays.
+
+08:57.140 --> 09:04.870
+It's not a big deal but now we've optimized this query search so that if this object of collections
+
+09:04.870 --> 09:14.490
+grows to say hundreds or thousands of items it's just as fast searching for the last one as it is searching
+
+09:14.490 --> 09:21.720
+for the first one because it just looks for the property on the object in order to get the corresponding
+
+09:21.720 --> 09:23.550
+collection object.
+
+09:23.550 --> 09:25.680
+Now let's move forward with our course.

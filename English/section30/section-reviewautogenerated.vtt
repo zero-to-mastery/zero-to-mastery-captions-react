@@ -1,0 +1,139 @@
+WEBVTT
+
+00:01.110 --> 00:03.110
+Hey it's Bruno here.
+
+00:03.150 --> 00:06.110
+This is fan tactic.
+
+00:06.150 --> 00:08.430
+I can't believe how many tests your rodent.
+
+00:08.450 --> 00:13.680
+Oh man I'm looking forward to not having as many bugs in our app really thankful for your work and you
+
+00:13.680 --> 00:18.100
+know I hope you understand that I really value your contribution to our team.
+
+00:18.150 --> 00:22.730
+Keiko Corp. thanks you all right.
+
+00:22.730 --> 00:26.390
+We finished a pretty tough section.
+
+00:26.390 --> 00:33.380
+I think testing is one of those things that can really stump people and can really frustrate you as
+
+00:33.380 --> 00:38.830
+well but we're no longer junior developers here when it comes to testing.
+
+00:39.110 --> 00:46.360
+We understand their purposes and their limitations we learned that there are three main types of tests
+
+00:47.080 --> 00:55.760
+which our unit tests integration tests automation tests and that out of all these three unit tests are
+
+00:56.090 --> 01:05.350
+the easiest to write and also the cheapest for companies to use as a tool for us to minimize bugs.
+
+01:06.860 --> 01:12.920
+And you usually want to run unit tests with integration tests completely separate in a separate process
+
+01:13.100 --> 01:18.120
+from something like automation test a topic that can get pretty complicated.
+
+01:18.130 --> 01:22.530
+But luckily for us there's a ton of libraries that we can use.
+
+01:22.570 --> 01:28.810
+We also learned all the tools that are available in the ecosystem for us to test at the end of the day
+
+01:28.810 --> 01:32.640
+though they're all very similar and they all try to accomplish the same thing.
+
+01:32.680 --> 01:41.740
+Simply test our code assert some statements run these tests maybe spy on some functions and then see
+
+01:41.740 --> 01:47.800
+the output make sure they're pass and make sure that we have a good code coverage but we also learned
+
+01:47.800 --> 01:53.600
+that having a perfect code coverage isn't necessarily what you want to do.
+
+01:53.680 --> 01:58.600
+You never want to just strive for a 100 percent code coverage because at the end of the day those are
+
+01:58.600 --> 01:59.950
+just numbers.
+
+01:59.980 --> 02:07.660
+Everything depends on your application and what your goals are so be careful with code coverage.
+
+02:07.660 --> 02:12.630
+It's really easy to get stuck in a hole where you're just writing tests that aren't good but you're
+
+02:12.640 --> 02:20.340
+just trying to get that 100 percent focused on the quality of the test vs. the quantity we learn how
+
+02:20.340 --> 02:24.120
+tests can be run in different environments.
+
+02:24.120 --> 02:30.870
+And we also learn that react has enzyme and snapshot testing to really help us out with component rendering
+
+02:31.800 --> 02:35.570
+they all made writing tests a lot simpler.
+
+02:35.580 --> 02:40.500
+Finally we have a better idea of the testing environment.
+
+02:40.500 --> 02:50.190
+Tests are simply a way for us to use in development to make sure that our code as it grows is maintainable
+
+02:50.730 --> 02:52.280
+and produces less bugs.
+
+02:52.320 --> 02:58.770
+As more people join the team and more people touch the code and the code lines increase using all the
+
+02:58.770 --> 03:06.290
+tools that we have at our disposal we're able to be smart about the tests that we write we're focusing
+
+03:06.290 --> 03:12.020
+on what is important to test what are the key features of our apps that we want to make sure we test
+
+03:12.080 --> 03:19.070
+properly and we want to make sure that these tests are not complicated.
+
+03:19.070 --> 03:25.820
+They're very nice and readable so if anybody comes onto the team they understand what the tests do.
+
+03:25.820 --> 03:35.210
+Remember if a test becomes complicated perhaps there's something in your actual code that could be fixed.
+
+03:36.340 --> 03:40.420
+Don't think of test as something that you do after you finish all your code.
+
+03:40.420 --> 03:46.090
+Some people actually enjoy doing them before you write your real code so that it gives you ideas of
+
+03:46.090 --> 03:49.850
+how to structure your code in a nice clean fashion.
+
+03:50.750 --> 03:52.030
+So think about this.
+
+03:53.170 --> 04:02.200
+Make tests that are of good quality not just quantity and write your code so that they're in nice simple
+
+04:02.590 --> 04:05.610
+testable units.
+
+04:05.670 --> 04:07.250
+Good job getting this far.
+
+04:07.560 --> 04:09.510
+I'll see you in the next section.
+
+04:09.510 --> 04:09.780
+Bye bye.

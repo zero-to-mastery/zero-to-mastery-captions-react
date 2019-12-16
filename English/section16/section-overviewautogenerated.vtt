@@ -1,0 +1,121 @@
+WEBVTT
+
+00:01.090 --> 00:02.070
+Welcome back.
+
+00:03.010 --> 00:12.700
+In this section of the course we are going to take a deeper dive into both firebase as well as advanced
+
+00:12.790 --> 00:14.950
+redux concepts.
+
+00:14.950 --> 00:21.940
+Now I've structured the next two sections in such a way where we do the firebase first where we add
+
+00:21.940 --> 00:30.370
+more firebase functionality and utility into our application before we tackle the advanced redux topics
+
+00:30.700 --> 00:39.070
+because we need the appropriate environment to see the kind of problems that these advanced redux solutions
+
+00:39.130 --> 00:40.690
+will solve.
+
+00:40.720 --> 00:48.880
+In particular what we're going to solve in redux will be handling a synchronous actions and asynchronous
+
+00:48.880 --> 00:53.550
+events using redux as you know right now.
+
+00:53.570 --> 00:59.200
+Most of our actions pretty much just update the reduced reduces in a very synchronous manner.
+
+00:59.210 --> 01:08.060
+There is no a synchronous activity in our redux action creators at all nor do we use it to handle anything
+
+01:08.120 --> 01:16.240
+a synchronous we call them in a very synchronous way but this will change especially inside larger scale
+
+01:16.270 --> 01:23.680
+applications where the common practice is to use redux to handle a synchronous activity inside of our
+
+01:23.710 --> 01:33.940
+application but before we actually do that we need to set up our application to utilize more of a database
+
+01:34.360 --> 01:36.720
+to get its items.
+
+01:36.760 --> 01:45.700
+Now of course right now we do use Firebase authentication to handle the storage of our user and we get
+
+01:45.700 --> 01:48.490
+it from a back end in a very asynchronous manner.
+
+01:48.880 --> 01:57.350
+But we can actually use it to also store our collection items that we use to get the shop items.
+
+01:57.370 --> 02:08.060
+Now if you remember right now we store it in our front end underneath the shop data J.S. file and this
+
+02:08.060 --> 02:16.340
+is fine for us because it has no real impact on our performance and it's really just a practice application
+
+02:16.460 --> 02:24.740
+where this is probably never going to update in a real world setting however this will sit on a database
+
+02:24.770 --> 02:32.980
+because there's a chance that multiple platforms will utilize this data so you can imagine if we had
+
+02:32.980 --> 02:39.670
+a mobile application as well as our web application that would both need to reference the shop items
+
+02:40.240 --> 02:44.690
+and those items would hallways have to be up to date on both platforms.
+
+02:44.920 --> 02:51.700
+So keeping it on a database makes sure that the information that we get guarding what items to display
+
+02:52.300 --> 02:55.920
+is always consistent and from one single source.
+
+02:56.020 --> 03:02.170
+Otherwise if we were to keep this data on the front end and on the mobile application for example it
+
+03:02.170 --> 03:08.950
+would be hard for us to guarantee that both data sets are the exact same because we would have to update
+
+03:08.950 --> 03:09.940
+it on our front end.
+
+03:10.390 --> 03:16.390
+Updated on our mobile whereas if we were to keep this all in one place in a database of some kind and
+
+03:16.390 --> 03:24.520
+then just fetch from it from our respective applications then we can be sure that such data is pure
+
+03:24.550 --> 03:25.650
+and exactly the same.
+
+03:27.430 --> 03:34.310
+Now in order for us to do this we will have to 1 put this information actually on our firebase fire
+
+03:34.300 --> 03:41.830
+store database but also set up our application in such a way that we would fetch from that database
+
+03:41.920 --> 03:49.790
+whenever the respective correct components need that data and that will be way more akin to what a final
+
+03:49.820 --> 03:51.930
+application actually looks like.
+
+03:51.950 --> 04:00.670
+But in order for us to do so we need to get better at understanding how to use fire bases firestorm.
+
+04:00.720 --> 04:09.570
+So what we'll do is we will take a quick refresher on how we've already used fire store and dive deeper
+
+04:09.630 --> 04:18.770
+into what we've already done as well as understand what the fire store library does for us so before
+
+04:18.770 --> 04:25.040
+we begin let's take a look at what kind of objects we can get back from fire store.

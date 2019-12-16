@@ -1,0 +1,346 @@
+WEBVTT
+
+00:00.630 --> 00:02.940
+Welcome back so.
+
+00:02.940 --> 00:10.710
+In the last lesson we took a look at how to use this query component that we got from reactor Paulo.
+
+00:10.930 --> 00:20.070
+We used it by passing in a literal query using the GQ Well function that we used in order for us to
+
+00:20.070 --> 00:29.130
+make a request to this query which will then give us back our data as well as a loading state an error
+
+00:29.130 --> 00:36.390
+state if anything happened there so that we can handle in this function what we want to actually render
+
+00:39.640 --> 00:40.650
+in this section.
+
+00:40.660 --> 00:47.740
+Let's actually use a different query that we've already seen before and let's query for our collection
+
+00:47.740 --> 00:51.500
+by the title based on our collection program.
+
+00:51.670 --> 00:59.950
+So as you remember we currently use a selector inside of our collection component to handle this inside
+
+00:59.950 --> 01:01.630
+of this collection component.
+
+01:01.780 --> 01:05.670
+We are doing it like so well.
+
+01:05.860 --> 01:12.280
+This is not going to work for us anymore because we don't use redux.
+
+01:12.280 --> 01:20.360
+So let's strip this out let's get rid of this connect and let's remove the actual dependencies themselves.
+
+01:21.830 --> 01:28.010
+Now this component is still going to just receive the collection and we're going to actually pass it
+
+01:28.010 --> 01:32.750
+to it from the collection container that we're going to build.
+
+01:32.750 --> 01:41.400
+So we're gonna say collection dot container dot JSF and inside of this container we are going to import
+
+01:41.460 --> 01:49.740
+in react from react because as we know we're writing a component we're going to import in that same
+
+01:49.740 --> 01:59.750
+query component from reactive Paula we're going to import in GQ will so nothing is new here.
+
+01:59.790 --> 02:04.830
+We're not importing anything definitely and then we're gonna import in the collection page itself
+
+02:08.230 --> 02:10.340
+and here we need the component.
+
+02:11.020 --> 02:18.190
+And we also need the spinner from spinner spinner component.
+
+02:18.330 --> 02:25.370
+Okay so we have all our imports now in order for us to make this query.
+
+02:25.410 --> 02:31.730
+We actually have to write it out a little differently most of it is going to be the same.
+
+02:31.730 --> 02:39.160
+The only difference is that we're going to take this out again get collection by.
+
+02:39.240 --> 02:43.130
+Well can't spell by title equals GQ well.
+
+02:44.050 --> 02:46.000
+And then our string interpolation.
+
+02:46.300 --> 02:47.260
+So nothing different.
+
+02:48.190 --> 02:54.160
+Here we're going to say query as we normally do except what we're going to pass into this query is this
+
+02:54.160 --> 02:54.720
+term.
+
+02:54.790 --> 03:04.590
+Yet collections by title we're gonna give it the brackets and here we're going to say dollar title which
+
+03:04.590 --> 03:06.900
+is a string.
+
+03:06.930 --> 03:15.660
+So what this means is that we're saying that we want to make a query request right using a query in
+
+03:15.780 --> 03:22.580
+our server that we're used to seeing so we want to make this query.
+
+03:22.580 --> 03:25.610
+And here we define the shape of what it expects.
+
+03:26.000 --> 03:32.610
+So we're going to say that what we're gonna get here is a object called Dollar title.
+
+03:32.700 --> 03:38.610
+And the reason we're going to do this is because out of this we're going to put our brackets and we're
+
+03:38.610 --> 03:46.320
+gonna say get collections by title here and here we're going to pass the title property with our dollar
+
+03:46.320 --> 03:47.940
+title value.
+
+03:48.090 --> 03:53.370
+So I'll explain to you why we have to do this because when we make this request we actually have to
+
+03:53.370 --> 03:58.810
+pass in to this query request when we actually write out a query component.
+
+03:59.070 --> 04:02.400
+This title variable that is now suddenly expected.
+
+04:03.810 --> 04:10.790
+So what we're saying is that this title value that we're gonna get is going to be a string.
+
+04:11.010 --> 04:16.590
+And what we want to set it to is the actual title that the query itself is expecting in the back and
+
+04:17.010 --> 04:19.340
+it's just the way that we have to write it.
+
+04:19.560 --> 04:23.500
+It seems verbose but this is just the way that graphical expects it.
+
+04:23.520 --> 04:28.680
+After that we can pretty much just say once we get back our object these are the data values that we
+
+04:28.680 --> 04:28.920
+want.
+
+04:29.640 --> 04:38.460
+So we want the I.D. We want the title and then we want our items I.D. name price and image row.
+
+04:38.610 --> 04:39.720
+So that's the same.
+
+04:39.780 --> 04:44.760
+The biggest difference is just that we when we define this query if we want it to be dynamic right in
+
+04:44.760 --> 04:49.980
+the sense that we want to pass a title through to it we've got a use and leverage this syntax where
+
+04:49.980 --> 04:57.420
+we almost seem to write it twice because we define the query we define what type it's expecting and
+
+04:57.420 --> 05:01.800
+then we define actually what we're going to have to make against it.
+
+05:01.800 --> 05:02.070
+Right.
+
+05:02.100 --> 05:06.960
+And then we define the variable that we're going to pass it in as if this seems confusing it'll make
+
+05:06.960 --> 05:13.680
+sense once you get this next section because we're gonna say concept collection page container is equal
+
+05:13.680 --> 05:20.650
+to us getting our match object because we're gonna replace this inside of our root component on our
+
+05:20.650 --> 05:21.390
+shop page.
+
+05:21.430 --> 05:25.410
+So we're gonna get our match history.
+
+05:25.630 --> 05:26.860
+We only want the match though.
+
+05:27.700 --> 05:36.560
+And here what we're gonna say is we want to render out the query and what we want to pass into the query
+
+05:36.920 --> 05:45.670
+is this create a key where the query goes to this collection by title query now in order to pass the
+
+05:45.670 --> 05:46.480
+variable in.
+
+05:46.480 --> 05:48.040
+We actually have to do it here.
+
+05:48.310 --> 05:57.100
+So here we're gonna say variable Zar equals and then it's going to be an object where the name of the
+
+05:57.100 --> 05:58.620
+variable that we want to pass in.
+
+05:58.630 --> 06:02.740
+So we want to pass the title variable in is going to be the actual value.
+
+06:02.740 --> 06:06.170
+So here we're going to say match dot param stock collection.
+
+06:06.400 --> 06:06.840
+Right.
+
+06:06.880 --> 06:16.650
+Which is what we were using for our parameter and now inside of the function that we get back we are
+
+06:16.650 --> 06:25.650
+gonna d structure off the loading and the data and off the data now that we know we want our get collections
+
+06:25.890 --> 06:26.520
+by title.
+
+06:26.520 --> 06:32.880
+So as you we remember when the data comes back to us the actual object is going to be the name of the
+
+06:32.880 --> 06:33.670
+query itself.
+
+06:33.750 --> 06:43.030
+And we knew that this name was this name so once we have our object what we're going to render is we're
+
+06:43.030 --> 06:46.180
+going to say if loading then return the spinner
+
+06:48.980 --> 06:58.020
+otherwise return our collection page so if you want here you can actually use a ternary operator instead
+
+06:58.020 --> 07:06.190
+of this f statement so collection here is going to go to our Get collections by title which might look
+
+07:06.190 --> 07:12.760
+a little confusing but that's just the property name on data that our actual collection object is nested
+
+07:12.760 --> 07:18.110
+under so once we've done that let's just go over what we did.
+
+07:18.210 --> 07:27.270
+This variables key is the way that we pass in variables that are dynamic queries are expecting we have
+
+07:27.270 --> 07:34.600
+to pass them in with the value matching the actual value that we want to pass into the query.
+
+07:34.650 --> 07:38.700
+You've got to remember the first thing that you define will be the actual name of the query that you're
+
+07:38.700 --> 07:45.550
+making against so once we have that we export this out as our default
+
+07:49.820 --> 07:55.730
+and then we're gonna go to our shop page component and just replace our collection page the same way
+
+07:55.730 --> 08:02.190
+we did earlier with our collections overview and we're going to set default as collection.
+
+08:02.190 --> 08:13.330
+Page and if we save this go back to our application go to our hearts page we'll see that it works.
+
+08:13.350 --> 08:18.540
+This is now fetching against our database for our 1 specific collection.
+
+08:18.540 --> 08:29.330
+We used our new get collections by title in order to get the actual item and it's almost as if we are
+
+08:29.330 --> 08:34.560
+selecting against our backend right in order to make this query.
+
+08:34.610 --> 08:40.430
+So you'll kind of feel like what we're writing is functions in order to fetch data from our backend.
+
+08:40.460 --> 08:43.520
+And that's one of the cool things about using Apollo and graphic.
+
+08:43.580 --> 08:50.750
+Well is that it almost just feels like we're treating our database as something that's part of our front
+
+08:50.750 --> 08:52.210
+end application.
+
+08:52.250 --> 08:58.190
+It doesn't feel as much like we're using promises that much anymore because so much of the promises
+
+08:58.250 --> 09:00.620
+is hidden away by Apollo.
+
+09:00.680 --> 09:04.790
+So that's one of the really nice things about working with it is that you don't have to spend so much
+
+09:04.790 --> 09:08.870
+time thinking about what promises am I going to resolve right.
+
+09:08.890 --> 09:10.930
+Do I need an async await here.
+
+09:10.940 --> 09:14.750
+It pretty much all gets extrapolated away for us.
+
+09:15.020 --> 09:23.240
+So now that we've seen how to fetch data from a backend we can actually also leverage Apollo for more
+
+09:23.240 --> 09:28.930
+than that so you might be thinking well this is great and all right for things that we fetched from
+
+09:28.930 --> 09:29.610
+a back in.
+
+09:29.620 --> 09:31.930
+But what about our front end.
+
+09:32.110 --> 09:33.940
+What about data that we store in front of.
+
+09:33.940 --> 09:40.180
+Do we still have to pass it around and fetch it every time using these queries.
+
+09:40.180 --> 09:43.180
+And what about data like our cart.
+
+09:43.180 --> 09:47.970
+We can't make requests against our back end in order to store cart.
+
+09:47.980 --> 09:48.580
+Right.
+
+09:48.580 --> 09:50.590
+We still might have to use redux.
+
+09:51.250 --> 09:52.970
+Well that's actually not the case.
+
+09:52.990 --> 09:59.020
+Apollo has pretty much brought that into the front end as well and they have their own solution that
+
+09:59.080 --> 10:06.310
+lines up with how we're making our queries so that it's a unified way of making requests against a back
+
+10:06.310 --> 10:11.010
+end server as it is against making a request for local data.
+
+10:11.170 --> 10:14.140
+And I'll show you how we can do that in the next lesson.

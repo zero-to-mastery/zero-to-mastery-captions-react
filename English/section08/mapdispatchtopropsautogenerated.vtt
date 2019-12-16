@@ -1,0 +1,274 @@
+WEBVTT
+
+00:00.940 --> 00:09.280
+So now that we've modified our header component to be receiving the current user value from our reducer
+
+00:10.210 --> 00:19.150
+we now have to actually update our app component so that it's able to update the reducer value with
+
+00:19.150 --> 00:20.200
+the new set.
+
+00:20.200 --> 00:22.020
+Current user action that we made.
+
+00:22.990 --> 00:31.660
+So how do we do that while what we're going to do is we're gonna have to modify our app component with
+
+00:31.660 --> 00:32.770
+Kinect as well
+
+00:36.060 --> 00:43.120
+so we're going to import Kinect from react redux and just like we did earlier with our header component
+
+00:43.780 --> 00:53.540
+we're going to connect our app to the outcome of our initial connect call using the second argument
+
+00:53.600 --> 01:02.660
+of Kinect which is map dispatch the props now the first argument is map states props but our app doesn't
+
+01:02.660 --> 01:10.340
+actually need current user anymore because outside of passing it into our header it only sets it but
+
+01:10.340 --> 01:15.880
+it doesn't do anything with the current user value in its component itself.
+
+01:15.920 --> 01:22.370
+So what we can do is pass in null as the first argument because we don't need any state so props from
+
+01:22.460 --> 01:24.490
+our reducer.
+
+01:24.510 --> 01:32.580
+The second argument will be our map dispatch the props which is a function that gets this dispatch property
+
+01:33.590 --> 01:41.870
+and then similarly will return an object where the proper name will be whatever prop we want to pass
+
+01:41.930 --> 01:49.720
+in that dispatches the new action that we're trying to pass which is set current user so let's import
+
+01:49.750 --> 01:55.470
+inset current user because we need that action so we're going to import
+
+01:58.970 --> 02:09.920
+redux user user actions set current user.
+
+02:10.110 --> 02:19.050
+Now what we'll end up returning inside of our map dispatch will be set current user but it goes to a
+
+02:19.050 --> 02:26.210
+function that gets the user object and then calls dispatch and what dispatches is.
+
+02:26.250 --> 02:34.710
+It is a way for redux to know that whatever you're passing me whatever object you're passing me is going
+
+02:34.710 --> 02:41.760
+to be an action object that I'm going to pass to every producer so our user action is a function that
+
+02:41.760 --> 02:46.080
+gets the user but returns an action object.
+
+02:46.080 --> 02:53.760
+So we are going to call our action but we're gonna pass that user in so that what we're doing is we're
+
+02:53.760 --> 03:02.020
+invoking set current user with the user that will then be used as the payload But this return is the
+
+03:02.020 --> 03:02.520
+object.
+
+03:02.590 --> 03:12.510
+So we're just dispatching the object and now we're gonna pass map dispatch the props as the second argument
+
+03:12.510 --> 03:21.680
+of connect and now we'll have this value offset current user so we don't need this constructor anymore
+
+03:23.560 --> 03:31.600
+and instead what we're gonna do is we are going to replace this set state code with our set current
+
+03:31.600 --> 03:42.160
+user action code so what we'll say is we will say this stop props set current user with the value
+
+03:45.380 --> 03:50.970
+and now we're going to still pass in that object with our Snapshot whenever our snapshot comes in.
+
+03:51.080 --> 03:56.240
+But we want to set the current user value to it now because we're also going to do it here.
+
+03:56.240 --> 03:59.150
+Let's actually D structure this off of our props
+
+04:01.860 --> 04:05.980
+set current user equals this prompts
+
+04:09.400 --> 04:17.290
+and then instead of now using props we can just call set current user and similarly do the same thing
+
+04:17.470 --> 04:24.030
+here but we don't need to pass it an object with current user we just need what the object we want to
+
+04:24.030 --> 04:25.300
+update it with.
+
+04:25.500 --> 04:32.850
+And now if we save whenever our user snapshot updates we are setting the user reduce or value with our
+
+04:32.850 --> 04:39.400
+new object and we can actually see this in our application because of our null.
+
+04:40.050 --> 04:41.620
+What is this is that state.
+
+04:41.700 --> 04:42.360
+Oh.
+
+04:42.840 --> 04:46.850
+So our header doesn't actually need current user anymore.
+
+04:47.010 --> 04:51.250
+So we're accidentally passing that instill.
+
+04:51.270 --> 04:57.770
+So now if we look we'll see this in our console log.
+
+04:57.810 --> 05:05.520
+So what these are are actually messages that we're getting from redux logger that library we were included
+
+05:05.520 --> 05:14.850
+when we yarn installed react and reacts redux what the logger tells us is the state of our redux after
+
+05:15.000 --> 05:16.480
+any action is fired.
+
+05:17.250 --> 05:25.170
+So each one is actually these three sections the first section is the state before the action was fired
+
+05:25.770 --> 05:33.660
+the second one is the action itself and then the third one is the state after the action has modified
+
+05:33.750 --> 05:35.610
+any of our reduces.
+
+05:35.730 --> 05:42.510
+So if we look the first time our reducer was in the state where our user was equal to current user of
+
+05:42.510 --> 05:43.130
+No.
+
+05:43.140 --> 05:46.240
+This was the initial state of our user reducer.
+
+05:46.380 --> 05:53.490
+This was our action where we had a payload of Ah you remember our user off object.
+
+05:53.490 --> 05:53.700
+Right.
+
+05:53.700 --> 06:00.870
+The big object that we get back from our Firebase and then the type is set current user and then the
+
+06:00.870 --> 06:07.440
+next state will of course now have our current user value be equal to that payload value just as we
+
+06:07.440 --> 06:09.480
+know that this is what redux is doing.
+
+06:09.480 --> 06:09.820
+Right.
+
+06:09.830 --> 06:19.170
+The reducer code now if we look at this next one this is after we get the snapshot after the snapshot
+
+06:19.200 --> 06:25.370
+modifies our user auth object to now be are database User object.
+
+06:25.980 --> 06:27.780
+So we'll see as before right.
+
+06:27.840 --> 06:35.010
+Our current user is equal to that big object and then if fires again because our on snapshot code is
+
+06:35.010 --> 06:43.540
+now firing set current user and what we'll get is our object that we are storing in our database display
+
+06:43.540 --> 06:44.280
+name Mike.
+
+06:44.410 --> 06:45.310
+Email Mike.
+
+06:45.340 --> 06:46.280
+Right.
+
+06:46.330 --> 06:55.600
+And then here we'll see that our reducer is now up to date with our new modified database object.
+
+06:55.600 --> 07:01.120
+And if we look at our header we actually see that it says Sign out again because now we're actually
+
+07:01.120 --> 07:09.430
+triggering our reducer to store the current user value that we are passing in with our map states props
+
+07:09.790 --> 07:11.770
+into our header.
+
+07:11.800 --> 07:14.430
+So this is that flow we were talking about.
+
+07:14.590 --> 07:21.930
+This is how we're able to bring in all of our state props into our components right.
+
+07:21.940 --> 07:28.510
+But now they're separated because now our header is no longer dependent on app passing it in but our
+
+07:28.510 --> 07:35.470
+app still updates our user reduce or value so our header is able to get the latest current user property
+
+07:37.080 --> 07:44.670
+this separation is a wonderful thing because now our components are truly components there are isolated
+
+07:44.820 --> 07:51.430
+individual and only know what context they need to be aware of.
+
+07:51.540 --> 07:55.410
+Now if we hit sign out we will see.
+
+07:55.620 --> 07:55.960
+Right.
+
+07:56.010 --> 08:00.780
+We are setting current user again but this time with our null value because we've signed out.
+
+08:00.840 --> 08:01.900
+Right.
+
+08:01.920 --> 08:11.360
+And then if we sign in with our email and password we'll see that we fire another action again but this
+
+08:11.360 --> 08:15.590
+time we are now with our user again.
+
+08:16.280 --> 08:20.430
+So that's the flow of redux.
+
+08:20.510 --> 08:26.450
+Now we're going to do this pattern many times because practice makes perfect and we're learning a lot
+
+08:26.450 --> 08:34.130
+of stuff in this lesson but this will be incredibly useful to us in the next following sections of building
+
+08:34.130 --> 08:36.360
+our application.
+
+08:36.390 --> 08:38.940
+Now let's just commit our code and move on.
+
+08:39.840 --> 08:45.430
+So let's go back and see what we add in so we know we had our redux.
+
+08:45.430 --> 09:00.340
+So we'll say added redux and implemented user reducer and user actions to header and app components
+
+09:02.260 --> 09:08.320
+and now we'll get push and let's keep building our application.

@@ -1,0 +1,304 @@
+WEBVTT
+
+00:00.930 --> 00:05.800
+So hopefully everyone got a chance to finish the exercise.
+
+00:05.940 --> 00:07.310
+Now if you didn't.
+
+00:07.440 --> 00:09.110
+That's perfectly fine as well.
+
+00:09.120 --> 00:16.140
+You can always attempt this again at some other point context API is going to be around because it is
+
+00:16.140 --> 00:23.460
+part of the core react features and it looks like in some ways the team is definitely going to try and
+
+00:23.460 --> 00:30.390
+flush it out after getting a bit of feedback from the community about how it's being used.
+
+00:30.630 --> 00:37.860
+Now we are just going to finish up with this exercise by removing redux from our application just so
+
+00:37.860 --> 00:42.590
+that we can see what it's like to not have redux as well.
+
+00:43.460 --> 00:49.670
+And even then the redux portion of our application consists of such a small part now that it's very
+
+00:49.700 --> 00:56.510
+easy to pull out after that I'm going to share with you some of my final parting thoughts about context
+
+00:56.540 --> 01:04.010
+API versus redux for handling local state and the pros and cons of both because they do kind of both
+
+01:04.010 --> 01:10.400
+solve the same problem and it's rare that you'll want to use an application that has two ways of storing
+
+01:10.400 --> 01:18.170
+a local state because this kind of removes the idea of a single direction of data flow and one single
+
+01:18.170 --> 01:18.980
+source of truth.
+
+01:19.640 --> 01:21.550
+So I'll talk about that more a little later.
+
+01:21.560 --> 01:28.950
+Let's first just get rid of redux in our application now inside of our index us the main place that
+
+01:28.950 --> 01:34.770
+actually is utilizing redux is inside of this provider component.
+
+01:34.770 --> 01:43.110
+So if we get rid of this component we're technically removing any instance of redux from our components.
+
+01:43.110 --> 01:51.830
+Now if we get rid of this persistent persist gate we don't need these anymore either because this persists
+
+01:51.830 --> 01:54.540
+or is for our redux.
+
+01:54.600 --> 02:01.740
+Now you might have noticed that now whenever our page refreshes we're no longer able to actually keep
+
+02:01.740 --> 02:03.210
+track of our state.
+
+02:03.390 --> 02:09.720
+Therefore all the items that we added to our cart disappear while this is expected because we were leveraging
+
+02:09.720 --> 02:13.280
+redux persist in order to store in local storage.
+
+02:13.290 --> 02:19.950
+Now of course you can probably implement a similar solution manually using our context API but it's
+
+02:19.950 --> 02:23.010
+definitely more verbose and you have to write the service yourself.
+
+02:23.760 --> 02:30.030
+So that's another one of the positives of redux is that the community has fleshed out pretty good solutions
+
+02:30.030 --> 02:36.890
+for solving a lot of these problems that are really battle tested that we kind of just pulled it but
+
+02:37.520 --> 02:46.720
+now that we've removed redux from our index Shea ass we can simply delete our redux folder and now the
+
+02:46.780 --> 02:52.780
+application will pretty much work the exact same because redux has now been removed.
+
+02:53.050 --> 02:57.420
+Our application and our code nothing leverages that anymore and we can do a quick search.
+
+02:57.430 --> 03:03.610
+If we look for Connect we don't see any search fields with connect here and now if we go back to our
+
+03:03.610 --> 03:07.820
+application we'll actually see that everything still works the same.
+
+03:08.050 --> 03:13.360
+We no longer of course have our logger either right but this is not really a problem because everything
+
+03:13.360 --> 03:22.050
+is working we're able to add our cart and we are able to check out our total and we can see it we can
+
+03:22.050 --> 03:29.040
+toggle this and then we can delete these things all using our new context API.
+
+03:29.120 --> 03:36.410
+Now if you're having issues with this exercise right of course always remember that I have this completed
+
+03:36.410 --> 03:42.800
+version for you as well inside of our rack context complete I'll provide the link for you in your resources
+
+03:42.920 --> 03:47.690
+you can always just close this down and compare it to your solution when you're trying to solve this
+
+03:49.360 --> 03:53.280
+but context API is really easy in that sense right.
+
+03:53.320 --> 04:01.870
+It's definitely way less verbose to write than redux and that's probably the biggest benefit that context
+
+04:01.870 --> 04:03.220
+API provides.
+
+04:03.220 --> 04:11.470
+It's a really lightweight solution when it comes to local storage management versus something like redux
+
+04:11.470 --> 04:16.420
+which is very opinionated in how it needs to be set up now.
+
+04:16.550 --> 04:26.300
+The kind of context API is that what we trade for in terms of getting this efficiency and ease of use
+
+04:27.320 --> 04:35.380
+we trade the flexibility of the redux ecosystem so we lose sagas we lose thanks.
+
+04:35.510 --> 04:41.130
+We lose being able to handle asynchronous actions inside of our redux middleware.
+
+04:42.300 --> 04:48.550
+And what else we lose is the compose ability of our components.
+
+04:48.900 --> 04:57.120
+Because before we were using our higher order component connect to connect our components to the respective
+
+04:57.810 --> 05:04.440
+selectors and the map states of props as well as the map dispatch the props that gave us the ability
+
+05:04.620 --> 05:09.260
+to trigger different things in our components which made them way more reusable.
+
+05:09.360 --> 05:16.260
+For example we were able to trigger different things and use our header component possibly multiple
+
+05:16.260 --> 05:23.930
+times before because we were passing those values in through our map states props that map states props
+
+05:24.200 --> 05:29.330
+would select from different slices of our reduced rate of our overall store.
+
+05:29.660 --> 05:36.830
+And that was how we were able to possibly just switch out the selectors and reuse this one header component
+
+05:37.280 --> 05:39.680
+and the header could be reused in multiple places.
+
+05:40.730 --> 05:48.830
+The problem with context API is that we've now tightly coupled what our component needs.
+
+05:48.830 --> 05:54.560
+So for example our header component now is not reusable anymore because our header component is tightly
+
+05:54.560 --> 06:02.420
+coupled to using both the hidden as well as the current user properties inside of the component itself.
+
+06:02.990 --> 06:11.420
+So that's the one big thing about context API is that it's very tightly coupling our components with
+
+06:11.420 --> 06:14.470
+the specific contexts that it needs.
+
+06:14.510 --> 06:20.300
+You can't just swap out the context some way and even if you do bypassing the minutes it's the wrong
+
+06:20.300 --> 06:21.680
+way of writing your code right.
+
+06:21.680 --> 06:28.570
+If you were to say pass in the context as possibly a prompts and then just swapping it out inside of
+
+06:28.570 --> 06:31.130
+a used context places that's not a good pattern.
+
+06:31.130 --> 06:33.800
+Definitely don't do that.
+
+06:33.830 --> 06:39.050
+The other thing we have to keep in mind as well is that in order for us to properly fully leverage this
+
+06:39.050 --> 06:45.130
+pattern we have to write this new provider wrapping pattern that I showed you in the last few lessons.
+
+06:45.440 --> 06:54.380
+If we needed the entire application to have access to whatever context but this gets also really verbose
+
+06:54.380 --> 07:00.440
+as our application grows because we've got to wrap more and more providers in order for our applications
+
+07:00.440 --> 07:06.050
+have access to all the things that it needs whereas with redux it's just one provider and then it separates
+
+07:06.170 --> 07:11.750
+out all of the stores right into their own individual reduces that we built separately which gives us
+
+07:11.750 --> 07:16.890
+better separation and easier to read index digest file.
+
+07:16.990 --> 07:20.440
+So what is the context.
+
+07:20.440 --> 07:22.060
+That's a pun right there.
+
+07:22.060 --> 07:26.740
+What's the best use case for redux versus context API.
+
+07:26.740 --> 07:33.160
+Well when you're application you know is going to be large you probably want to use redux because the
+
+07:33.160 --> 07:40.810
+ecosystem is fleshed out and it gives you so much more power and flexibility including all of the asynchronous
+
+07:40.810 --> 07:47.070
+event handling and the ability to reuse your components in a much better way.
+
+07:47.080 --> 07:55.090
+So in that case with a larger scale application that has a lot of complexity and features and reusable
+
+07:55.090 --> 07:59.080
+components that when you look at it you know you're going to reuse a lot of the components you're going
+
+07:59.080 --> 08:02.030
+to write definitely go with redux.
+
+08:02.580 --> 08:10.960
+If instead you're building say it like a portfolio project or a portfolio itself or a landing page something
+
+08:10.960 --> 08:17.440
+that doesn't have that much reuse ability and is a pretty small project maybe even small to medium sized
+
+08:17.860 --> 08:20.860
+context API is great because you don't have to bring in redux.
+
+08:20.890 --> 08:26.080
+You don't have to write all these new files and folder structures for redux and you can pretty much
+
+08:26.080 --> 08:33.960
+just start using it right away so that's my thoughts on context of course context will grow right because
+
+08:33.960 --> 08:35.640
+it is still a pretty new feature.
+
+08:35.640 --> 08:41.430
+As of this course's release there's a very high likelihood that the react team will continue pushing
+
+08:41.430 --> 08:48.290
+context and modifying it so that it becomes more in line with how the developer community as a whole
+
+08:48.320 --> 08:50.010
+needs to leverage it.
+
+08:50.070 --> 08:51.390
+So keep an eye out on it.
+
+08:52.260 --> 08:56.480
+You can use it definitely in your smaller projects and your personal projects.
+
+08:56.490 --> 08:58.920
+If you want to but they're all tools.
+
+08:58.920 --> 09:00.670
+That's the main thing to keep in mind.
+
+09:00.750 --> 09:02.780
+Redux context API.
+
+09:02.880 --> 09:08.140
+They're both tools that solve problems and they both have their pros and cons and tradeoffs.
+
+09:08.250 --> 09:11.590
+You just have to know when to use what.
+
+09:11.630 --> 09:19.470
+So with that in mind I hope you go forth and build some stuff with context use context.
+
+09:19.470 --> 09:25.400
+Read watch these videos practice what these exercises that I've given you and I'll see you in the next
+
+09:25.400 --> 09:25.930
+lesson.

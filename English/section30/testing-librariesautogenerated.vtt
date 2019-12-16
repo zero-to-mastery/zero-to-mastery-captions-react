@@ -1,0 +1,484 @@
+WEBVTT
+
+00:01.920 --> 00:03.080
+Welcome back.
+
+00:03.090 --> 00:09.160
+In this video let's talk about all the tools we can use to actually run our tests.
+
+00:09.180 --> 00:17.790
+Remember our tests are just JavaScript So we could just write simple JavaScript files with maybe if
+
+00:17.790 --> 00:25.910
+statements that says you know if the sum function as these two numbers together then return success.
+
+00:25.920 --> 00:28.390
+Otherwise return test fail.
+
+00:28.410 --> 00:30.890
+So we could do that but that's tedious.
+
+00:30.900 --> 00:39.940
+And as developers we want to use existing tools to make our experience or our speed of development faster.
+
+00:39.950 --> 00:41.390
+So this is going to get overwhelming.
+
+00:41.390 --> 00:44.360
+But let's look at testing tools.
+
+00:44.430 --> 00:51.660
+I tried to organize for you a way to think about tests and the testing environment and the web development
+
+00:51.660 --> 00:52.250
+land.
+
+00:52.380 --> 00:53.800
+So I'm going to explain this.
+
+00:53.910 --> 00:59.790
+And if this is a little complicated at first don't worry we're going to come back to this and go over
+
+00:59.790 --> 01:00.930
+this at the end of the section.
+
+01:00.940 --> 01:08.050
+It's all going to make sense so the very first thing we need in a testing tool is something called a
+
+01:08.080 --> 01:09.410
+testing library.
+
+01:09.520 --> 01:11.320
+Pretty self-explanatory.
+
+01:11.320 --> 01:18.880
+This is the scaffolding giving us the ability to use some function calls and some new methods for us
+
+01:18.880 --> 01:22.000
+to actually write our tests against.
+
+01:22.000 --> 01:29.210
+Think of this as scaffolding or building the structure around our test probably the top three libraries
+
+01:29.210 --> 01:31.360
+for that is Jasmine.
+
+01:31.480 --> 01:32.980
+There is just.
+
+01:33.070 --> 01:40.260
+And then there's something called mocha and like I said these are just npm install libraries so they're
+
+01:40.270 --> 01:46.300
+available on NPM and you can add them to built your scaffolding.
+
+01:46.380 --> 01:53.950
+The next thing that you need right over here is something called an assertion library and in here we
+
+01:53.950 --> 01:58.310
+have again Jasmine that comes with its own assertion library.
+
+01:58.420 --> 02:04.990
+We have just once again that comes with its own assertion library and then Chai here that usually gets
+
+02:04.990 --> 02:13.800
+paired with MOCA in order to have an assertion library and assertion library for provides functions
+
+02:14.610 --> 02:16.290
+that are assertion functions.
+
+02:16.290 --> 02:17.670
+I know that's confusing.
+
+02:17.670 --> 02:25.470
+It's essentially a tool to allow you to test that the variables contain the expected value.
+
+02:25.590 --> 02:33.610
+Now that still sounds confusing so let me show you round the chai assertion library here and you can
+
+02:33.610 --> 02:38.930
+see over here that they use something called BDD or behavioral driven development.
+
+02:39.760 --> 02:49.170
+And by installing this library we can use all these words and they just look like basic English what
+
+02:49.170 --> 02:57.840
+an assertion library does is says expect that this object that just contains a equals one and then it
+
+02:57.840 --> 03:02.310
+chains all these words together to test our assumption.
+
+03:02.670 --> 03:11.610
+So let's say expect that this object to not have property b it reads like English right.
+
+03:11.640 --> 03:15.730
+It's simply test condition one against condition two.
+
+03:15.750 --> 03:23.240
+So this is going to return false because you're right this object won't have property B and they have
+
+03:23.270 --> 03:25.820
+a lot of things that we can add
+
+03:28.930 --> 03:36.670
+we see that another one is expect this object to have all keys a and b it kind of reads like English
+
+03:36.880 --> 03:41.870
+and this makes our tests really easy to read and understand.
+
+03:42.000 --> 03:49.470
+The next thing we need for our tests is something called a test runner and a test runner is something
+
+03:49.470 --> 03:52.320
+that allows us to run our tests.
+
+03:52.470 --> 03:59.880
+Remember if we go back to our app we had to do NPM run
+
+04:03.190 --> 04:06.360
+and this runs our test.
+
+04:07.570 --> 04:12.910
+Let's press a to run all the tests and something is magically running all these tests.
+
+04:12.910 --> 04:18.250
+That's what a test runner does going back to our slide again.
+
+04:18.270 --> 04:25.560
+We now see that Jasmine and just include a test runner and their library and then MOCA also has its
+
+04:25.560 --> 04:26.560
+own test runner.
+
+04:26.700 --> 04:30.320
+And then I've added another one over here which is called Karma dog.
+
+04:30.350 --> 04:31.360
+Yes.
+
+04:31.440 --> 04:38.760
+And this allows you to run tests in the browser.
+
+04:38.900 --> 04:41.140
+What does that mean well.
+
+04:41.170 --> 04:45.270
+A test runner can run tests in different environment.
+
+04:45.280 --> 04:46.670
+Let's have a look.
+
+04:46.910 --> 04:54.990
+You see usually our javascript works with the DOM to make our web app what it is.
+
+04:56.160 --> 05:03.740
+But when we're running tests and and this is what karma does allows you to run your tests on the browser
+
+05:05.140 --> 05:09.880
+but why wouldn't we just always run our tests on the browser.
+
+05:09.880 --> 05:12.640
+Well that is because it takes a lot of time.
+
+05:12.730 --> 05:20.140
+We have to run every single test through the browser using the browser API is ideally where we run test.
+
+05:20.200 --> 05:27.250
+It's super super quick because most tests are set up so that if a developer hits save on their terminal
+
+05:27.490 --> 05:28.710
+it's going to run to the test.
+
+05:29.020 --> 05:33.670
+If every time they needed to start up the browser and run through everything.
+
+05:33.670 --> 05:36.420
+Well that would be really really slow.
+
+05:36.460 --> 05:44.290
+So other options exist such as puppeteer by Google which is what we call a headless browser.
+
+05:44.380 --> 05:52.660
+It's a node library which provides a high level API to control the headless version of their browser.
+
+05:52.660 --> 05:59.560
+So think of it as a stripped down browser that makes your tests a little bit faster but it can also
+
+05:59.560 --> 06:08.620
+be configured to do things such as generate screenshots PDX of pages it can automate form submissions.
+
+06:08.620 --> 06:10.700
+You can do UI testing with it.
+
+06:10.930 --> 06:13.430
+You can monitor keyboard input.
+
+06:13.480 --> 06:15.630
+You can do a lot of cool things with it.
+
+06:15.820 --> 06:22.390
+And then finally we have something called J.S. Dom and j ust Dom as the name suggests is an in JavaScript
+
+06:22.450 --> 06:24.440
+implementation of the dumb.
+
+06:24.460 --> 06:29.840
+So it's not the real Dom but a fake javascript version of it.
+
+06:29.960 --> 06:37.980
+I remember the DOM as that tree like structure that shows the nodes on our webpage and that's what makes
+
+06:37.980 --> 06:45.840
+up our UI so JS Dom implements this in javascript so we can have a dom like API to work without actually
+
+06:45.840 --> 06:56.220
+needing the browser if we go back to our test and let's run this again I'm going to run NPM run test
+
+06:56.700 --> 07:04.060
+you'll see over here that we scripts test dash dash and it went by quickly by you saw that we are using
+
+07:04.060 --> 07:11.410
+Jace Dom they're so that our test run really really quick.
+
+07:11.410 --> 07:16.200
+All right so that's a test runner.
+
+07:16.250 --> 07:24.500
+Next we have something called Mock spies and Stubbs and in here again Jasmine and just come with their
+
+07:24.500 --> 07:32.220
+own version and then if you're using something like mocha just like you had to add an assertion library
+
+07:32.580 --> 07:35.460
+you'll have to add something called sign on.
+
+07:35.580 --> 07:39.720
+Yes there are obviously other libraries but this is the most popular.
+
+07:39.870 --> 07:45.000
+Now what's all this mock spies and stub business.
+
+07:45.290 --> 07:53.180
+Well spies provide for us information about functions how many times they were called and what cases
+
+07:53.180 --> 08:01.460
+and by whom stubbing replaces selected functions with a function to ensure that the expected behavior
+
+08:02.420 --> 08:11.380
+happens and then MOX is kind of like faking a function or a behavior to test different parts of a process.
+
+08:11.390 --> 08:14.610
+So this might be really really good for integration tests.
+
+08:14.870 --> 08:21.800
+Now I know that can get a little bit confusing so let's take a look at sign on sign on over here.
+
+08:21.800 --> 08:30.790
+If you go to their documentation let's click on stubs free scroll down we see that what is a stub doing.
+
+08:30.890 --> 08:36.250
+We're simply using the library sign on dot stub which is a function.
+
+08:36.290 --> 08:45.050
+Now we can use it in a way where this function can be called with arguments 42 and make a return one
+
+08:45.740 --> 08:57.170
+so that when we run callback 42 it returns one and when we do callback dot with args it throws an error.
+
+08:57.220 --> 09:03.220
+Again this is something that we'll go over later in the videos but you see here that stub is we can
+
+09:03.220 --> 09:13.250
+fake functions and make them do what they expect for example sign on can be used to fake a server during
+
+09:13.250 --> 09:14.010
+our tests.
+
+09:14.030 --> 09:20.120
+We don't necessarily want to send requests to the server every time we're running tests but ideally
+
+09:20.120 --> 09:26.780
+if a function is using a server we can fake it with a stub so that the function is still runs and we
+
+09:26.780 --> 09:30.720
+can just test that one piece of code.
+
+09:30.740 --> 09:35.290
+Like I said this is really hard to explain without a little bit of a demo.
+
+09:35.300 --> 09:36.910
+But don't worry we're gonna get there.
+
+09:37.880 --> 09:43.210
+And then the final piece of the puzzle we've talked about scaffolding about assertion libraries.
+
+09:43.220 --> 09:45.130
+We talked about test runners.
+
+09:45.260 --> 09:48.820
+We talked about these stubs mocks and spice.
+
+09:48.830 --> 09:55.640
+Finally we have something called code coverage and code coverage is provided by libraries like Istanbul
+
+09:55.880 --> 10:04.250
+just has code coverage already included but has actually Istanbul running underneath the hood and let
+
+10:04.250 --> 10:13.530
+me show you what a code coverage might look like luckily for us we can just do NPM test dash dash dash
+
+10:13.530 --> 10:18.380
+dash coverage and don't worry we'll talk about how we can do this in our apps.
+
+10:18.600 --> 10:27.530
+But if I run this you see the gist Dom here I get an output file of the coverage and you see over here
+
+10:27.530 --> 10:35.540
+that I have my robo friend's app and I have some green some red some yellows and this is a test coverage
+
+10:35.930 --> 10:42.230
+that shows me what percentage of the statements the branches the functions are covered with tests you
+
+10:42.230 --> 10:48.650
+see here that I've written some tests for the constant thud J.S. file some actions that J.S. file and
+
+10:48.650 --> 10:54.560
+also for some of our components some of our card list components and now we have 100 percent coverage
+
+10:54.560 --> 11:02.170
+for those but then we also have things like the header digest file that is missing some test and it
+
+11:02.170 --> 11:09.290
+live and shows us which lines we're missing testing and that is Istanbul underneath the hood giving
+
+11:09.290 --> 11:18.530
+us a report of where we're missing test now although these are a lot of libraries they all have the
+
+11:18.530 --> 11:23.930
+same goal in mind and they all actually are written in very similar fashion.
+
+11:24.680 --> 11:30.200
+So once you know one it is really really easy to pick up another one.
+
+11:30.200 --> 11:32.060
+Don't get overwhelmed by this.
+
+11:32.060 --> 11:36.350
+Just like with anything there's a lot of tools for the job but we'll come back to this.
+
+11:36.350 --> 11:41.960
+So it all makes sense in the end and just keep in mind that the syntax is are very similar so you'll
+
+11:41.960 --> 11:42.560
+be just fine.
+
+11:43.630 --> 11:49.520
+And I also want to let you know that probably the most popular Jasmine used to be very popular but it
+
+11:49.520 --> 11:52.230
+has now been overtaken by two things.
+
+11:52.310 --> 11:58.310
+One is just as you can see just is nice because it has everything in one place.
+
+11:58.310 --> 12:04.880
+You can just install this library and have all these little features that you need in a testing framework.
+
+12:04.880 --> 12:14.170
+Another popular one is mocha combined with Chai and sign up and this is again probably the most popular
+
+12:14.170 --> 12:21.220
+setup but that's also because just as a lot newer most of these libraries follow the idea of behavioral
+
+12:21.220 --> 12:27.910
+driven development which is we describe what a function does and say what behavior we expect out of
+
+12:27.910 --> 12:28.330
+them.
+
+12:28.330 --> 12:31.430
+You remember the chai assertion right.
+
+12:31.660 --> 12:40.920
+If object has this properties we expect it to have this property a all right.
+
+12:40.990 --> 12:48.220
+Does your had heard yet luckily for us if it wasn't for create react up we would have to npm install
+
+12:48.490 --> 12:55.390
+all of these again set them up and add them to our NPM scripts to run all these tests and test coverages
+
+12:56.920 --> 13:04.550
+but as you can see with create react app we have everything out of the box again.
+
+13:04.570 --> 13:09.850
+The best minds in the community are working on maintaining create react app to always keep it up to
+
+13:09.850 --> 13:13.310
+date as all of these libraries update as well.
+
+13:14.360 --> 13:18.410
+Don't worry though I'll show you in the upcoming videos how to actually set this up yourself as well
+
+13:19.770 --> 13:29.200
+one other note in our tests over here create react app uses just and that's because just was created
+
+13:29.200 --> 13:36.580
+by Facebook and if you remember react was also developed by Facebook which is kind of nice because they
+
+13:36.580 --> 13:43.240
+use it in their own production environment and these tools are used together to work really really nicely
+
+13:45.210 --> 13:52.470
+and by the way there's other testing libraries we have a VA that does parallel loves them really really
+
+13:52.470 --> 13:57.180
+well which means they run tests runs tests really really fast and then you have something like tape
+
+13:57.180 --> 14:03.390
+that is really low level simple light library but as I said before don't get overrun.
+
+14:03.570 --> 14:10.290
+In short if you get anything from this video is that if you just want to get started and looking for
+
+14:10.290 --> 14:17.640
+a fast framework that can handle everything and has everything in one well just use just if you want
+
+14:17.670 --> 14:27.260
+a very flexible extendable configuration where you can plug in some things then use moka moka is a little
+
+14:27.260 --> 14:34.130
+harder to setup because of all these things that we need to add on but it's more flexible and like I
+
+14:34.130 --> 14:41.570
+said open two extensions one last note in our test we're going to use two things that are sort of unique
+
+14:41.750 --> 14:43.220
+to react.
+
+14:43.220 --> 14:48.980
+One is something called the snapshot testing that comes with just which allows us to do some really
+
+14:48.980 --> 14:55.910
+cool things that I'm going to show you later on and then another library called enzyme which was created
+
+14:55.910 --> 15:01.520
+by Air B and B and helps us write tests better for reactor components.
+
+15:01.520 --> 15:07.810
+Don't worry I'm not just showing you these things because I think they're cool and trendy these are
+
+15:07.930 --> 15:13.290
+implemented and most react projects that you're encounter and it's pretty much become the standard in
+
+15:13.300 --> 15:16.000
+the react ecosystem to use these libraries.
+
+15:16.000 --> 15:21.350
+So we're gonna use them to at the end of the day though we can agree on one thing.
+
+15:21.580 --> 15:26.290
+All these libraries have really cool logos you in the next one.
+
+15:26.290 --> 15:26.630
+Bye bye.

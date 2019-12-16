@@ -1,0 +1,76 @@
+WEBVTT
+
+00:01.140 --> 00:02.560
+Welcome back.
+
+00:02.580 --> 00:04.560
+I wanted to take a second here before you.
+
+00:04.560 --> 00:11.790
+We keep going with testing our robo friends app to just go over what we've learned from our slides and
+
+00:11.790 --> 00:18.490
+how it all makes sense now we learned that now we have just that we can install that provides for us
+
+00:18.700 --> 00:26.590
+a test framework something that we can run tests in and this just also comes with an assertion library
+
+00:27.010 --> 00:36.340
+where we can use expect dot to be equal or to have or all these things that we can do that we saw in
+
+00:36.340 --> 00:43.990
+our cheat sheet to assert something to make sure that this equals this and then we also saw that just
+
+00:43.990 --> 00:50.910
+comes with a test runner something that we're able to run the test in and you saw that in my terminal.
+
+00:50.980 --> 00:58.120
+I always have those tests running and checking and making sure that things are always passing.
+
+00:58.120 --> 01:07.350
+We also saw that we have marking functions that we can use we saw that in our example where we built
+
+01:07.980 --> 01:14.760
+our Star Wars API where we got all those people that we could mock the fetch function and make sure
+
+01:14.760 --> 01:21.250
+that it was called again something that comes with just sign on is another popular one that it works
+
+01:21.250 --> 01:23.680
+very very similar that you're going to see as well.
+
+01:24.130 --> 01:31.930
+And then finally we saw that we can do code coverage by running NPM test dash dash dash dash coverage
+
+01:32.470 --> 01:36.910
+and it gives us a coverage of where we have tests and where we don't.
+
+01:36.910 --> 01:38.840
+So that we can improve our app.
+
+01:38.980 --> 01:42.970
+I told you this is going to make sense and we're not even done yet.
+
+01:43.000 --> 01:53.230
+We saw that we can test our app programmatically but if we need any time to use some DOM API we have
+
+01:53.230 --> 01:59.890
+those three options we can use the actual Don we can use something like puppeteer for a headless browser
+
+02:00.190 --> 02:08.350
+or something like J.S. Dom which if we're using the Mount rendering an enzyme we can set up as well.
+
+02:08.530 --> 02:09.320
+Again.
+
+02:09.400 --> 02:17.320
+This setup is fairly simple and you can check it out on the enzyme documentation Oh yeah and we also
+
+02:17.320 --> 02:23.270
+learned that in react we can use enzyme and snapshot testing to make our tests super super easy.
+
+02:23.290 --> 02:30.360
+Again another reason that I love using just especially with react projects that was a quick break back
+
+02:30.360 --> 02:33.860
+to coding we go in the next video see you on that one by.

@@ -1,0 +1,370 @@
+WEBVTT
+
+00:01.620 --> 00:10.320
+In this lesson we are going to explore a alternative and so much more popular method of handling side
+
+00:10.320 --> 00:12.750
+effects in redux.
+
+00:12.750 --> 00:21.560
+Using a library called redux saga but before we do we're gonna take a deeper dive into what it is these
+
+00:21.860 --> 00:25.730
+asynchronous libraries actually do.
+
+00:25.730 --> 00:34.190
+So we've already explored are redux thunk where we can pass a function that allows us to dispatch inside
+
+00:34.190 --> 00:40.180
+of it and then redux will handle actually firing these multiple actions that we write.
+
+00:40.430 --> 00:48.530
+But what's actually happening is that inside of our redux we have this thunk library that we apply as
+
+00:48.530 --> 00:56.000
+a middleware and this thunk is what allows the reader's store to dispatch functions instead of just
+
+00:56.570 --> 01:03.450
+actions or action objects as we're used to seeing.
+
+01:03.570 --> 01:05.820
+How does this actually work.
+
+01:05.820 --> 01:09.700
+Well when we go back to our diagram of redux.
+
+01:09.780 --> 01:17.680
+Just a quick refresher we have our root reducer which represents our application state and it's composed
+
+01:17.680 --> 01:19.390
+of all these other reducer.
+
+01:19.870 --> 01:29.030
+We pull stay off of this and pass them into our respective components as props using selectors these
+
+01:29.030 --> 01:37.580
+components then fire actions and these actions will then update the corresponding reducer so this flow
+
+01:37.580 --> 01:42.270
+was already incredibly familiar with because we've written it a couple of times now.
+
+01:42.340 --> 01:46.920
+So now hopefully this flow makes a lot more sense when we look at it.
+
+01:47.170 --> 01:52.870
+But what do libraries like redux thunk middleware actually do well.
+
+01:52.880 --> 02:00.710
+If we go over to this image this is a bit of a more simplified flow except it includes now these middleware.
+
+02:02.190 --> 02:04.390
+As well as our sagas.
+
+02:04.620 --> 02:06.990
+But for now just ignore this portion of it.
+
+02:08.210 --> 02:14.960
+As we see we have components that dispatch actions and what happens to these actions before they actually
+
+02:14.960 --> 02:19.420
+make it to the reducer is they hit these middleware.
+
+02:19.850 --> 02:26.690
+And these window wares include our thanks they include our sagas and they also include redux longer
+
+02:27.440 --> 02:36.280
+now as we remember in our code base in our store J.S. what we do is we actually apply the logger into
+
+02:36.280 --> 02:38.950
+our middleware as array and then we apply the middleware.
+
+02:38.950 --> 02:43.090
+Same with our thunk and same with read saga when we bring it in.
+
+02:43.090 --> 02:45.380
+We're gonna have to put it into these middleware.
+
+02:45.460 --> 02:53.340
+In order for our store when it's an initiated to apply it into its middleware but what's actually happening
+
+02:53.940 --> 03:00.330
+is that before an action gets passed to the producers for it to update these middleware as well take
+
+03:00.330 --> 03:07.440
+it and possibly perform some modification or do something whatever we want to write with middleware
+
+03:07.470 --> 03:09.650
+or whatever these libraries do.
+
+03:09.660 --> 03:16.320
+The main idea is that middleware catches the action before it hits the reducer.
+
+03:16.360 --> 03:23.560
+In fact it's possible for middleware to catch actions and then throw them away so that they never actually
+
+03:23.560 --> 03:26.920
+reach our producers completely possible.
+
+03:26.920 --> 03:32.920
+What logger does is it simply catches the actions and it logs out data using console log and then it
+
+03:32.920 --> 03:38.380
+shows the format of what our state was before the action and after the action.
+
+03:38.380 --> 03:44.050
+And that's all logger does it's able to just catch actions before it hits our producers and then log
+
+03:44.050 --> 03:44.530
+it out.
+
+03:46.410 --> 03:53.910
+Now folks are pretty much just a piece of middleware that allows actions to come in as functions.
+
+03:53.910 --> 04:00.480
+And then if its a function the thunk will just invoke the function because we have dispatch in the function
+
+04:01.580 --> 04:08.060
+funk we'll just pass those new dispatch actions into the reduced hours as we did in our thumb function
+
+04:08.370 --> 04:08.930
+right.
+
+04:09.020 --> 04:14.990
+We passed this function that has to dispatch calls right first our photo collection start and then after
+
+04:14.990 --> 04:19.120
+our collection rough dog get resolves we dispatch another action.
+
+04:19.220 --> 04:25.100
+Well when we pass this action into our middleware right because the action comes in as a as a function
+
+04:25.790 --> 04:28.800
+well thunk will take it and say oh this is a function.
+
+04:28.820 --> 04:30.030
+This isn't an object.
+
+04:30.050 --> 04:32.750
+This isn't an object of the type in a payload.
+
+04:32.750 --> 04:37.520
+What I'm going to do with this function is I'm going to invoke it the moment I invoke it whenever I
+
+04:37.520 --> 04:42.030
+get a dispatch inside of this action function.
+
+04:42.040 --> 04:48.200
+I'm then going to dispatch the actual action that comes out of each dispatch call whenever it happens.
+
+04:49.090 --> 04:50.320
+So the thumb comes in.
+
+04:50.320 --> 04:50.770
+Right.
+
+04:50.770 --> 04:52.420
+Our function comes in.
+
+04:52.420 --> 04:58.490
+It sees the first dispatch and it passes that action in and then it calls the get to our fire store.
+
+04:58.510 --> 04:59.710
+It comes back with the data.
+
+04:59.740 --> 05:01.260
+After a certain amount of time.
+
+05:01.270 --> 05:01.860
+Right.
+
+05:01.900 --> 05:09.580
+And then it calls the second dispatch and then it dispatches that new get collections success call into
+
+05:09.610 --> 05:10.720
+our reducer.
+
+05:10.720 --> 05:16.550
+So that's all the fundamental where does but sagas sagas are different.
+
+05:16.660 --> 05:22.630
+We're going to explore the code of how sagas work because it's definitely new concepts.
+
+05:22.630 --> 05:27.730
+But conceptually I just want you to think about one thing what saga so that we understand why we write
+
+05:27.730 --> 05:35.410
+the code the way we do now the way you can look at a saga is like it's a function that conditionally
+
+05:35.560 --> 05:45.670
+runs and the condition that it depends on when it runs is based on whether or not a specific action
+
+05:45.880 --> 05:50.710
+is coming into the saga middleware.
+
+05:50.730 --> 05:58.830
+So imagine a function that is listening for our fetch collections start action unless that action fires
+
+05:59.040 --> 06:07.660
+that saga does not execute i.e. that function does not execute the main idea with sagas is that there
+
+06:07.660 --> 06:15.910
+can be multiple sagas listening for multiple different actions or the same action but they're just pieces
+
+06:15.910 --> 06:23.590
+of code that do not run until they hear the action that they're listening for when they do they can
+
+06:23.590 --> 06:31.900
+do all kinds of logic so they can trigger other actions which go back into our middleware and continue
+
+06:31.900 --> 06:33.030
+into our producers.
+
+06:33.160 --> 06:42.020
+So other sagas can also be listening for actions that come out of sagas or they can render any kind
+
+06:42.020 --> 06:44.240
+of additional API logic right.
+
+06:44.240 --> 06:50.300
+They can go to the back and fetch some data use that data and dispatch actions to update reduced hours.
+
+06:50.900 --> 07:00.110
+But the main idea with sagas is that they handled this idea of side effects and I know that sounds like
+
+07:00.110 --> 07:08.730
+a fancy term but we've actually written a lot of side effects already all side effects are are either
+
+07:08.820 --> 07:17.550
+API calls to a back end rights or some kind of asynchronous code or something that triggers an impure
+
+07:17.580 --> 07:18.270
+reaction.
+
+07:18.990 --> 07:23.250
+So what is that term impure.
+
+07:23.420 --> 07:27.350
+Well let's open up the console and we can actually explore this concept.
+
+07:28.360 --> 07:35.840
+Inside of react we write these things that we've all written numerous times called functions and we
+
+07:35.840 --> 07:43.880
+can have a function called add numbers which is equal to a function that gets to values.
+
+07:44.300 --> 07:52.440
+And all it does is it returns the value of adding them together if I call this function add numbers
+
+07:52.440 --> 08:01.820
+with the numbers 3 and 3 and unforced all right I will always get seven no matter how many times I call
+
+08:01.820 --> 08:14.130
+this function my value will never change because my function is pure when my function is pure no matter
+
+08:14.220 --> 08:24.220
+what no matter how many times I call my function as long as the parameters are the exact same I will
+
+08:24.310 --> 08:30.230
+always get the exact same output in order for a function to be impure.
+
+08:30.430 --> 08:38.020
+It means that if I were to call the function with the same arguments I could end up with a different
+
+08:38.950 --> 08:39.940
+outcome.
+
+08:39.940 --> 08:42.280
+Now how does that happen.
+
+08:42.280 --> 08:46.680
+Well let's imagine that we have some variable called num right.
+
+08:46.690 --> 08:50.140
+In fact let's use a let let num equals 5.
+
+08:51.250 --> 09:01.480
+If I make a new one called add new numbers right as my function that still takes a and b but instead
+
+09:01.480 --> 09:14.740
+what it returns is num plus a plus b Well theoretically the first time I call this with 3 and 4 I'm
+
+09:14.730 --> 09:16.630
+going to get twelve.
+
+09:16.730 --> 09:22.100
+The only problem is that we can now suddenly change the NUM value to 8.
+
+09:22.160 --> 09:25.750
+And now if I call 3 or 4 I get a different value.
+
+09:27.150 --> 09:35.940
+My function is not aware nor is it the one that sets some variable of num that it's dependent on to
+
+09:35.940 --> 09:43.430
+calculate its output because the NUM exists in the scope outside of my function.
+
+09:43.560 --> 09:50.160
+My function has access to it and it depends on it to calculate the value it will return but it doesn't
+
+09:50.160 --> 09:51.310
+control it.
+
+09:51.480 --> 09:53.750
+And for that reason this function is impure.
+
+09:53.760 --> 09:57.060
+It has an external dependency.
+
+09:57.060 --> 10:06.930
+My function is impure because it does not always return the exact same output regardless of me constantly
+
+10:06.930 --> 10:09.240
+passing it the same input.
+
+10:09.900 --> 10:14.940
+But this is pretty much what sagas are designed to handle in our code.
+
+10:15.850 --> 10:23.620
+Anything that requires us to make API requests or possibly handle something that might be impure.
+
+10:23.620 --> 10:32.530
+The idea is that you move it out in two sagas any asynchronous activity that happens inside of our application
+
+10:33.070 --> 10:41.290
+that is not related to our component state but rather possibly related to the application as a whole
+
+10:41.560 --> 10:46.340
+or some part of the application should be moved into a saga.
+
+10:46.390 --> 10:55.270
+And that's also why it makes sagas both more complicated but also extremely powerful because we now
+
+10:55.270 --> 11:03.670
+move some of the features and the way that we've architected our application in to these sagas to handle
+
+11:04.120 --> 11:12.490
+it gives redux a much larger responsibility in our application be on just storing what our state is
+
+11:13.090 --> 11:21.610
+it delegates to it more responsibilities related to things that could be impure or related to more and
+
+11:21.610 --> 11:25.480
+more of our asynchronous activity.
+
+11:25.480 --> 11:33.970
+Now I know it's very theoretical but once we convert our redux thunk code over to sagas and use sagas
+
+11:33.970 --> 11:43.390
+to handle asynchronous and impure functionality inside of our application you'll see why sagas are so
+
+11:43.390 --> 11:46.680
+powerful now in the next lesson.
+
+11:46.720 --> 11:54.220
+I'm not going to write any saga code yet we actually have to explore the underlying technology of what
+
+11:54.220 --> 11:55.970
+sagas are built on.
+
+11:56.230 --> 11:59.160
+So we'll dive into that in the next lesson.

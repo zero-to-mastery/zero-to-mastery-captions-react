@@ -1,0 +1,439 @@
+WEBVTT
+
+00:01.030 --> 00:02.710
+Welcome back everyone.
+
+00:02.710 --> 00:08.350
+I know some of you have been curious about all these things about web pack and Babel that we occasionally
+
+00:08.350 --> 00:10.680
+mentioned throughout this course.
+
+00:10.840 --> 00:17.680
+If you remember from one of the initial lessons that we taught the big thing about create react app
+
+00:17.770 --> 00:23.560
+is that it hides away all of the babble and all of the web pack configurations that you would normally
+
+00:23.560 --> 00:24.960
+have to figure out.
+
+00:25.000 --> 00:31.300
+It's one of the big advantages of create react out because web pack and babble have a lot of possible
+
+00:31.300 --> 00:34.170
+configurations that you have to do.
+
+00:34.190 --> 00:40.120
+However if you just wanted to get started with a react application having to learn those two new technologies
+
+00:40.180 --> 00:41.790
+is a big overhead.
+
+00:41.860 --> 00:48.340
+But now that we've gotten really good at react and using create react app I think it's about time that
+
+00:48.430 --> 00:50.830
+I show you Web pack and babble.
+
+00:50.980 --> 00:56.470
+I'm gonna show you how we can actually set up our ReACT application to run Web Park and babble in a
+
+00:56.470 --> 00:58.990
+very easy and efficient way.
+
+00:58.990 --> 01:04.330
+I'm going to show you with as little code as possible so that you can understand what is happening with
+
+01:04.380 --> 01:07.130
+Westpac as well as babble.
+
+01:07.220 --> 01:08.620
+Both are actually quite simple.
+
+01:08.630 --> 01:13.040
+And with the newest versions they've really reduced the amount of configuration that you have to do
+
+01:13.040 --> 01:14.390
+for either.
+
+01:14.390 --> 01:19.720
+So in this lesson we're really really going to look at the bare bones of what we need to setup.
+
+01:19.730 --> 01:23.620
+So we truly and deeply understand the concepts.
+
+01:23.630 --> 01:27.560
+So with Westpac what you can do is actually go to this link.
+
+01:27.560 --> 01:34.280
+I'm going to provide you inside of your resources and it's going to take you to this repo this repo
+
+01:34.280 --> 01:42.600
+I have is just the most fundamental bare bones react implementation before any web pack has been included.
+
+01:42.800 --> 01:48.830
+So simply fork this project so that you get a copy of it and then once it's finished forking simply
+
+01:48.980 --> 01:49.990
+clone it down.
+
+01:50.030 --> 01:55.610
+So you're gonna click your own and you're going to click clone and make sure to use H2 G.P.S. if you
+
+01:55.610 --> 02:00.660
+are not set up your assets H if you have set up as H then you go with SSA H.
+
+02:00.680 --> 02:02.620
+Otherwise use HDTV yes.
+
+02:03.020 --> 02:08.660
+So just copy this key and what we're going to do is go to our terminal and we are just going to clone
+
+02:08.660 --> 02:16.780
+it down now I'm going to call mine Westpac project because of course I made this project so I have the
+
+02:16.780 --> 02:17.630
+same name already.
+
+02:17.650 --> 02:25.840
+But let's just clone down whatever name you want I'm gonna call my Westpac project and seeds into it.
+
+02:25.870 --> 02:31.200
+Now let's take a look at what we have currently and what we're going to look at is just inside our resource
+
+02:31.200 --> 02:32.140
+folder.
+
+02:32.370 --> 02:36.930
+So so far it's a very simple application.
+
+02:37.170 --> 02:45.930
+It has an app ASX and all we import inside app just X is react our style sheet and then all we have
+
+02:45.930 --> 02:53.900
+defined is this app div with a card div and inside as an H1 that says our is working.
+
+02:54.000 --> 02:57.900
+The most simple app component that you can imagine.
+
+02:57.990 --> 03:02.800
+So what I do is export this out by default and bring it into index yes.
+
+03:02.910 --> 03:10.230
+So as you're used to by now this index that J J.S. file is where we're going to enter from our application.
+
+03:10.230 --> 03:17.430
+So in here I also import react and react Om I import our app component that I just made and then I render
+
+03:17.430 --> 03:22.660
+the app and I replace the elements with the idea of root.
+
+03:22.920 --> 03:26.960
+We can find that inside of this index that HDMI I'll file that in the body.
+
+03:26.970 --> 03:29.480
+There's just this simple div with an idea of root.
+
+03:29.550 --> 03:34.420
+This is as simple of a setup as possible but we have a react component.
+
+03:34.560 --> 03:41.790
+We have some styles and we want to output a optimised build with all of this converted into a version
+
+03:42.120 --> 03:44.820
+of JavaScript that our brows can understand.
+
+03:44.820 --> 03:50.250
+So we understand all this about react already we know about web pack we know about babble what they
+
+03:50.250 --> 03:57.970
+do mostly is that babble allows us to convert files into other files that our browser can understand.
+
+03:58.020 --> 03:59.490
+That's web PAC's purpose.
+
+03:59.490 --> 04:06.510
+So this J.S. X code we've written this J.S. code even the H2 amount and the CSX all of this is currently
+
+04:06.510 --> 04:13.590
+in a format where we're importing it in in a style that older browsers can understand this import style
+
+04:13.650 --> 04:19.070
+comes with iOS 6 and iOS 6 doesn't work for some browsers because they only support iOS 5.
+
+04:19.170 --> 04:24.930
+So this is what web Park's main goal is is that web pack wants to help us convert all of this code into
+
+04:24.930 --> 04:27.300
+versions that browsers can understand.
+
+04:28.080 --> 04:31.710
+So let's actually explore this in order for us to use web pack.
+
+04:31.710 --> 04:33.980
+We have to bring it into our application.
+
+04:34.230 --> 04:38.650
+So I'm using yarn you can use NPM if you prefer NPM.
+
+04:38.730 --> 04:44.850
+One thing to note with NPM is that every time we install a project you have to make sure that whatever
+
+04:44.850 --> 04:50.400
+we install at the end you append dash dash save dash Dev because these are developer dependencies and
+
+04:50.400 --> 04:53.400
+not regular dependencies with ya and you don't have to do this.
+
+04:53.460 --> 04:56.320
+This is just the thing to keep note to get started.
+
+04:56.350 --> 04:58.480
+We need to add two packages.
+
+04:58.480 --> 05:00.090
+The first is web pack.
+
+05:00.100 --> 05:02.630
+The second is web pack CLIA.
+
+05:03.370 --> 05:10.670
+So it's got to be you can't ad so these two packages allow us to begin using web pack inside of our
+
+05:10.670 --> 05:15.310
+application in order to use web pack.
+
+05:15.310 --> 05:18.370
+There's two things that we got to add to our actual application.
+
+05:18.370 --> 05:26.570
+The first is a file inside of our root folder called Web pack Doc config Dutch us when we run a web
+
+05:26.570 --> 05:31.200
+pack what pack will automatically know to look for this file and in order for us to actually run what
+
+05:31.200 --> 05:39.710
+pack we have to add a new script inside of our scripts object here in our package that Jason so what
+
+05:39.710 --> 05:49.180
+will add is this build script and this build script is just going to run Webb pack dash dash mode production.
+
+05:49.180 --> 05:55.600
+So this is saying that I want to run Westpac use the configure Asian Doc J.S. file and then I want spit
+
+05:55.600 --> 05:57.100
+out a production built.
+
+05:57.100 --> 06:02.110
+So this is similar to pretty much what we see create react app does when we run our build script in
+
+06:02.110 --> 06:06.560
+our project before it was just hiding all of this away for us.
+
+06:06.580 --> 06:12.700
+The thing is that inside of our Web config what we're going to do is we have to remember that here we
+
+06:12.760 --> 06:14.470
+don't have 6 syntax.
+
+06:14.500 --> 06:16.980
+We have to use the old yes five syntax.
+
+06:17.110 --> 06:23.200
+So in order for us to export out anything we have to say module exports equals this object because what
+
+06:23.200 --> 06:28.200
+we're trying to export out of this file is this object of configuration options.
+
+06:28.320 --> 06:33.060
+We're going to say module and we're going to define this thing called rules.
+
+06:33.150 --> 06:40.710
+So inside of Westpac it's got many modules that you can run the first one is rules.
+
+06:40.710 --> 06:49.110
+Rules is a way to define Westpac what it needs to do based on certain file types that it encounters.
+
+06:49.110 --> 06:50.780
+Now what do I mean by this.
+
+06:50.790 --> 06:59.380
+Well as we know we are writing just tax code or yes 6 J S code Westpac doesn't need to convert CSX code
+
+06:59.410 --> 07:06.750
+over into jazz code because with CSX code if it's using SAS or for using some other version of a CSX
+
+07:06.760 --> 07:10.540
+library that does not come by default with most browsers.
+
+07:10.540 --> 07:16.540
+We need a different set of rules than our javascript rules because we need a different set of loaders
+
+07:17.000 --> 07:18.410
+than javascript loaders.
+
+07:18.490 --> 07:22.240
+And this actually brings us to the concept of loaders but we'll talk about it once we start writing
+
+07:22.360 --> 07:24.310
+out the rules object.
+
+07:24.310 --> 07:30.310
+So what we're gonna say is we are going to say that this test string is what we want to match against.
+
+07:30.340 --> 07:33.820
+So what type of file extensions we want to match against.
+
+07:33.880 --> 07:39.290
+Now here you're going to actually have to write a little bit a regex and it's actually not so hard.
+
+07:39.370 --> 07:46.310
+I'm going to give you a regex builder but we're going to say that inside of these slash marks that we
+
+07:46.310 --> 07:56.060
+want to look up any files that end with the dot and then we're gonna say J S or J ASX and then you add
+
+07:56.060 --> 08:00.050
+the dollar sign to empty or to end the actual test.
+
+08:00.050 --> 08:05.420
+So this is just saying I want you to find me any files with the extension dodgy or dodgy.
+
+08:05.540 --> 08:08.800
+That's all it is after this.
+
+08:08.900 --> 08:16.610
+We want to exclude our node modules because we don't want to run or build any of our node module coat
+
+08:17.510 --> 08:21.590
+the packages that we download already optimized they don't need to run through any of these loaders
+
+08:21.650 --> 08:27.280
+they're already converted ahead of time or they should be at least a good library is and then what we're
+
+08:27.280 --> 08:32.590
+going to say is this use property so they use property tells what pack.
+
+08:32.600 --> 08:39.770
+What Loder needs to run and the loader is going to be the helper that actually converts this code into
+
+08:39.830 --> 08:46.160
+the actual version so you can kind of see Westpac as the coordinator and the loaders as the actual packages
+
+08:46.160 --> 08:47.720
+that trans pile.
+
+08:47.720 --> 08:51.080
+This code down into the version that we want it to be.
+
+08:51.080 --> 08:58.340
+And here is where we're going to use babble because babble is the library that helps transpire javascript
+
+08:58.370 --> 09:01.640
+and ASX down into older versions of javascript.
+
+09:02.330 --> 09:09.040
+So we're going to include in a couple other libraries related to babble so we'll go back to our terminal
+
+09:09.700 --> 09:16.020
+and what we're going to do is we are going to say yawn ad at babble core.
+
+09:16.300 --> 09:22.100
+So we want the core babble library we want at babble slash preset end.
+
+09:22.320 --> 09:26.020
+And this library the preset end comes with transpiring.
+
+09:26.080 --> 09:27.720
+Yes 6 down to yes 5.
+
+09:27.730 --> 09:29.510
+That's all that library does.
+
+09:29.530 --> 09:33.460
+We also want babble slash preset react.
+
+09:33.460 --> 09:39.280
+Now of course babble can convert everything it can convert view it can convert angular it can convert
+
+09:39.430 --> 09:44.800
+Aurora they can convert all kinds of different javascript libraries down you just have to pick the specific
+
+09:44.800 --> 09:45.220
+ones you want.
+
+09:45.220 --> 09:47.740
+That's why it's all app babble slash.
+
+09:47.740 --> 09:51.040
+And then the name of the smaller library one include.
+
+09:51.160 --> 09:53.370
+We also need to include the babble Loder.
+
+09:53.710 --> 10:01.630
+So these ones were for our actual babble configuration the babble loader is just so that we have the
+
+10:01.630 --> 10:07.920
+babble loader for Westpac and once we have this we can go back to our application and now what we're
+
+10:07.920 --> 10:16.120
+going to add in is inside of here we're gonna say at the loader we want to use the babble loader.
+
+10:16.290 --> 10:23.110
+Now what babble loader knows to do is look inside of our root directory for a file called Babble R C
+
+10:23.580 --> 10:31.140
+so the babble c file is going to be the file that tells babble what it needs to transpire down to.
+
+10:31.340 --> 10:38.490
+And here we're just simply going to create an object where the presets is the property that points to
+
+10:38.490 --> 10:43.080
+an array and inside of this array we're going to include those two presets we included the first one
+
+10:43.080 --> 10:48.060
+was preset env which as I explained converts yes six down to yes five.
+
+10:48.450 --> 10:55.710
+And we're also going to include babble preset react so this compiles react down into iOS 5 or another
+
+10:55.710 --> 11:02.080
+version of JavaScript HBO Now that our browser understands so if you've ever been curious why is it
+
+11:02.080 --> 11:06.960
+that you can put dodgy s or dodgy X in our code always works well under the hood.
+
+11:06.970 --> 11:13.010
+This is what's happening create react is doing the exact same thing it's just taking all of our dodgy
+
+11:13.010 --> 11:17.720
+s and dodgy OS X Files and running it through the babble loader anyways that's why even though you're
+
+11:17.720 --> 11:22.290
+writing g x x code and appending your files Doc J s your code still works.
+
+11:22.460 --> 11:28.720
+This is the loader that's doing that for you so hopefully with this we now understand what it is that
+
+11:28.720 --> 11:38.620
+babble dit babble is very simple it is a loader inside of Westpac that converts JavaScript files into
+
+11:38.620 --> 11:44.620
+old JavaScript files it uses certain types of presets that you pass to it and of course there's other
+
+11:44.620 --> 11:49.810
+configuration options you can add if you want to be more explicit you can find those in the documentation
+
+11:49.810 --> 11:55.330
+that I'm gonna link in the resources but this is the base that we need in order to convert our application
+
+11:55.330 --> 12:01.530
+down so what this hopefully we at least understand what babble does with JavaScript now we can't test
+
+12:01.530 --> 12:06.630
+this until the very end once we set up some other things which we'll do in the next lesson but conceptually
+
+12:06.810 --> 12:10.470
+this is all web hack and babble do so let's move on with the next lesson.

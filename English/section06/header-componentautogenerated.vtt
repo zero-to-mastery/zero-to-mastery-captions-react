@@ -1,0 +1,265 @@
+WEBVTT
+
+00:00.450 --> 00:07.820
+OK now that we have a menu item and our shop page what we're going to build is our header.
+
+00:07.860 --> 00:14.400
+We need an easier way to navigate between our pages and we want to build this component in such a way
+
+00:14.400 --> 00:19.780
+so that it's always present no matter what page we navigate to.
+
+00:19.830 --> 00:25.050
+Now we want to do it in such a way that we don't have to put header on every single page component that
+
+00:25.050 --> 00:25.630
+we have.
+
+00:25.800 --> 00:29.100
+But that's really easy with react ruder Dom.
+
+00:29.620 --> 00:33.640
+Now before I show you that let's just build the header component.
+
+00:33.690 --> 00:42.040
+Now let's go back to our application and let's create a header component in our header component.
+
+00:42.040 --> 00:45.560
+We are going to have the usual suspects.
+
+00:45.580 --> 00:56.560
+We need a header component Dutch ASX and a header styles dot SAS and in our header component we're going
+
+00:56.560 --> 01:03.660
+to import react from react and we're going to import our style sheet in
+
+01:08.950 --> 01:17.710
+our header component is going to be a functional component and it's going to have a div that contains
+
+01:17.770 --> 01:25.410
+our header code and this code is going to resemble pretty much exactly what we see.
+
+01:25.410 --> 01:28.470
+So it's just going to be an outer container.
+
+01:28.470 --> 01:37.230
+This group of option links that we have over here that will be contained in that group option link container
+
+01:37.920 --> 01:39.680
+and then a logo.
+
+01:39.680 --> 01:50.570
+So what we're going to add here is a class name of header and then we are going to create our logo.
+
+01:50.780 --> 01:54.010
+So our logo will link to the home page.
+
+01:54.020 --> 02:03.140
+When you click it and the way we do that is we import in link from react.
+
+02:03.160 --> 02:03.840
+Writer Dom
+
+02:06.840 --> 02:14.250
+and now we will just put link with the two pointing to our home page about
+
+02:17.170 --> 02:28.260
+and we do want to use our actual icon but I've provided that for us in the format of an SPG and SPG
+
+02:28.270 --> 02:34.910
+icons are essentially scalable vector graphics which are really small really performance.
+
+02:35.110 --> 02:40.120
+But look the same no matter how large or how small that image is expanded.
+
+02:40.120 --> 02:45.410
+And that's really great and I have that for us right here.
+
+02:45.560 --> 02:53.680
+So you can just copy it from the file that I have provided in this lesson.
+
+02:53.700 --> 03:00.100
+Now what we're gonna do is we're gonna make a new folder in our source called assets and in it we are
+
+03:00.100 --> 03:08.490
+just going to paste OK and you'll see a bunch of code that actually represents the Crown SPG but in
+
+03:08.490 --> 03:17.270
+our header we're just going to import this into our component and we're going to import from assets
+
+03:17.830 --> 03:19.500
+slash crown as Fiji.
+
+03:19.760 --> 03:27.070
+And what we're gonna write is react component as logo because it's not a J.S. exe file.
+
+03:27.070 --> 03:28.560
+We don't actually set the import.
+
+03:28.570 --> 03:33.000
+We're just importing in this SPG as this react component keyword.
+
+03:33.030 --> 03:43.450
+But we're setting it to the logo keyword and by doing this we are now able to place it right here and
+
+03:43.450 --> 03:53.450
+we can also give it the class name logo and our class name for our link will be logo container because
+
+03:53.450 --> 04:02.200
+we want that container to have some style on it as well now our options will be held in their own individual
+
+04:02.860 --> 04:17.000
+options container and they will also be links and they will point to our shop and have the class name
+
+04:19.130 --> 04:22.850
+and inside this first one will be our shop.
+
+04:24.030 --> 04:27.660
+And then our second one will be contact
+
+04:30.420 --> 04:37.010
+and then we just export it out and we just bring this into our app J.S.
+
+04:41.420 --> 04:43.460
+once we import this in
+
+04:46.080 --> 04:54.210
+opponents header header component all we have to do is just place this header outside of the switch
+
+04:55.310 --> 04:59.730
+and the routes that contain all of our page components.
+
+05:00.200 --> 05:08.870
+Because by doing this our header is always present and rendered despite whatever rack router Dom switch
+
+05:08.870 --> 05:13.540
+component and root components decide to render onto the page.
+
+05:13.790 --> 05:23.090
+And this is really great because if we had say pop ups or overlays or footers that we were always wanting
+
+05:23.090 --> 05:30.620
+to display in our application or at least be on the page regardless of what path the user is on we would
+
+05:30.620 --> 05:31.870
+just do it like this.
+
+05:31.940 --> 05:37.400
+And this is really really awesome because this makes our app very intuitive.
+
+05:37.400 --> 05:38.500
+It looks very composed.
+
+05:39.650 --> 05:47.120
+Because we know all of our pages exist here and our header exists outside of this switch OK.
+
+05:47.320 --> 05:51.680
+Now if we go to our application we'll see that we have what looks like the header.
+
+05:51.690 --> 05:53.070
+Just no styling it.
+
+05:53.410 --> 05:56.310
+So let's write the styles.
+
+05:56.410 --> 05:59.400
+Now I do have them actually written already.
+
+06:02.800 --> 06:09.410
+Our header which is the containing div has a width of one hundred percent and a height of 70 pixels.
+
+06:09.520 --> 06:16.810
+We set a display flex so that when we put justified content space between the children inside of this
+
+06:16.810 --> 06:17.290
+parent.
+
+06:17.890 --> 06:24.730
+So our logo container and the options will be pushed apart as far as possible with any remaining space
+
+06:24.760 --> 06:27.550
+that they don't themselves don't take up.
+
+06:27.550 --> 06:33.460
+As far as the width is concerned so there's a margin bottom that pushes our pages twenty five pixels
+
+06:33.550 --> 06:41.380
+down from anything below the header and then our logo container just has a width of 70 pixels whereas
+
+06:41.470 --> 06:50.630
+our options has a width of 50 percent so it always takes a 50 percent of whatever with the header is
+
+06:51.590 --> 06:58.590
+and they align everything centred and they're always on the Flex and so justify content flex end means
+
+06:58.590 --> 07:05.030
+that we want to always set them so that they are on the most right side of the component so they're
+
+07:05.040 --> 07:12.390
+on the end of the actual flex box and then our options have some minor padding so that they are not
+
+07:12.390 --> 07:14.340
+so grouped together.
+
+07:14.580 --> 07:23.130
+And now if we look at our code we see that are Crown takes us to the home our shop takes us the shop
+
+07:23.820 --> 07:28.370
+and we have a very basic version of our header setup.
+
+07:28.620 --> 07:32.120
+We haven't out of the contact page yet but we will do that at the very end.
+
+07:32.340 --> 07:40.200
+What we should do though is we should modify our link tags that we use as our options to not have this
+
+07:40.500 --> 07:46.110
+underline or this purple colour that comes with an A tag.
+
+07:46.110 --> 07:52.650
+Now even though it's a link component if we inspect it we see that what gets rendered Is this a tag
+
+07:52.840 --> 07:53.120
+right.
+
+07:53.160 --> 08:01.110
+This native a tag so we know that reaction ruder Dom actually modifies the a tag and then gives it the
+
+08:01.110 --> 08:05.540
+functionality inside of itself to do the behaviour.
+
+08:05.550 --> 08:14.380
+So in order to do that we have to actually modify our access and we can do this right here by sending
+
+08:14.380 --> 08:17.900
+text decoration to none and the colour to black.
+
+08:18.100 --> 08:28.450
+We could just target selectively the link itself inside of our header component by targeting say anything
+
+08:28.450 --> 08:37.030
+with a class name of option but we want it so that none of our aid tags actually have this text declaration
+
+08:37.090 --> 08:40.830
+because we will probably never use a native a tag.
+
+08:40.960 --> 08:45.600
+So if we save we will see that it is now updated.
+
+08:46.330 --> 08:53.950
+OK now the last thing we need to do is just commit our code before we finish styling our header because
+
+08:54.040 --> 08:59.980
+in the next section we will be including our sign in page and our sign and button.
+
+09:00.910 --> 09:04.360
+So let's go back to our terminal.
+
+09:04.520 --> 09:18.230
+Let's see what we have so we'll just add our code adding header component and links to home the shop
+
+09:18.230 --> 09:24.790
+page and and then we'll just give origin master OK.
+
+09:24.930 --> 09:26.340
+Now let's build that sign in.

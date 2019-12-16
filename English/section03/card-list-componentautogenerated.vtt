@@ -1,0 +1,307 @@
+WEBVTT
+
+00:00.420 --> 00:07.620
+OK so now we're going to start converting our current application to look more like the final application
+
+00:08.460 --> 00:09.750
+before we do that.
+
+00:09.810 --> 00:14.810
+We've got to take a look at this idea of components.
+
+00:14.880 --> 00:21.920
+So right now we do know that are only component is the app component.
+
+00:21.960 --> 00:22.250
+Right.
+
+00:22.260 --> 00:28.570
+We've only written this one single class based component which is our app.
+
+00:29.400 --> 00:37.830
+However in react what we want to do is we want to be able to break our code into smaller reusable pieces
+
+00:38.400 --> 00:42.630
+that are only focused on one responsibility.
+
+00:42.630 --> 00:43.190
+Right.
+
+00:43.200 --> 00:49.950
+So when we look at this we see that this card seems to be its own component.
+
+00:50.100 --> 00:57.120
+This search bar is its own component and in a way because this card is itself it doesn't really care
+
+00:57.150 --> 00:59.730
+about the other cards around it.
+
+00:59.730 --> 01:06.000
+So there's got to be something that seems to be containing every single card on our page.
+
+01:06.570 --> 01:08.790
+And that is going to be another component.
+
+01:08.790 --> 01:16.410
+Now when we build that outside wrapping component we're going to actually take a deeper look into what
+
+01:16.410 --> 01:19.150
+components are in react.
+
+01:19.350 --> 01:30.830
+So let's first make a components folder and inside we will make a card list folder and in that card
+
+01:30.830 --> 01:36.610
+list folder we're going to make a card list dot component dot JSF.
+
+01:36.890 --> 01:42.380
+Now you don't need this stock component part but I like to add it just so that I can tell right away
+
+01:42.440 --> 01:44.810
+what kind of file that is.
+
+01:44.810 --> 01:55.410
+So this is our component file and we need to import react from react and we're going to export out this
+
+01:55.410 --> 01:57.160
+card list right.
+
+01:57.180 --> 01:59.700
+And it's going to be a functional component.
+
+01:59.700 --> 02:04.450
+And what we want to display for now is just a containing div.
+
+02:04.500 --> 02:12.390
+Now one of the big things about components is that they take in something called Props and props is
+
+02:12.390 --> 02:17.300
+going to be the parameter that we get from our functional component.
+
+02:17.310 --> 02:18.510
+Right.
+
+02:18.540 --> 02:25.140
+So right now let's just log this out and see what this looks like because it's important for us to know
+
+02:25.170 --> 02:33.030
+what props actually are and inside of this div I'm just going to put how low for now and let's console
+
+02:33.300 --> 02:34.500
+logout props.
+
+02:34.530 --> 02:35.690
+Right.
+
+02:35.760 --> 02:41.670
+So now we know that we're logging it out when we put it on our actual application and we're going to
+
+02:41.760 --> 02:47.140
+import it into our app file import card list
+
+02:50.670 --> 02:55.960
+components card list card let's component.
+
+02:55.990 --> 03:00.550
+Now let's just put this above here for now and let's not put anything into it.
+
+03:00.550 --> 03:06.560
+Now you remember earlier when I said that there are these this props parameter.
+
+03:06.580 --> 03:07.120
+Right.
+
+03:07.150 --> 03:12.970
+This is actually going to be any parameter that we pass into card list.
+
+03:12.970 --> 03:20.530
+So if here we say there is a prop called name and we pass in e law.
+
+03:20.710 --> 03:21.040
+Right.
+
+03:21.700 --> 03:25.260
+Then what will actually log out when we look at our app.
+
+03:25.570 --> 03:27.860
+Is this card list that says name.
+
+03:27.910 --> 03:28.270
+Right.
+
+03:28.270 --> 03:32.590
+And then it says Iva so right there is our card list component.
+
+03:33.160 --> 03:35.820
+And right here you see that we're actually locking it out.
+
+03:35.830 --> 03:37.370
+We're logging out E.
+
+03:37.690 --> 03:38.310
+Right.
+
+03:38.320 --> 03:44.140
+So that prop is going to be an object of any properties that you write onto this component where it
+
+03:44.140 --> 03:46.790
+gets used now.
+
+03:46.800 --> 03:52.980
+Generally speaking of course we want the props that we're actually going to pass in to match the parameters
+
+03:52.980 --> 03:55.770
+that we're actually gonna use instead of our component.
+
+03:55.860 --> 04:05.290
+But one of the main properties that exists on this props object is one called children it will always
+
+04:05.290 --> 04:08.410
+be there but it if there's no children it'll be null.
+
+04:08.410 --> 04:18.600
+So what are children children are actually what you pass in between the brackets of our component that
+
+04:18.600 --> 04:19.740
+gets called.
+
+04:19.740 --> 04:26.540
+So if in here I say e are then the children prop will be this yeehaw.
+
+04:26.820 --> 04:27.260
+Right.
+
+04:27.300 --> 04:35.180
+Actually I'm even going to make it an H want just so that I can show that it's anything in between these
+
+04:35.780 --> 04:36.290
+tags.
+
+04:37.040 --> 04:44.780
+So now if we instead render a prop stop children gotta remember to use the squiggly brackets because
+
+04:44.960 --> 04:49.720
+that tells that we're going to use javascript and now we see Iowa.
+
+04:50.480 --> 04:57.480
+And this is an H1 as well so that's one of the big things about props and components.
+
+04:57.540 --> 05:03.120
+We actually have access to props as well on our app component on the this keyword.
+
+05:03.120 --> 05:07.720
+It gets attached to our actual class as a property called Props.
+
+05:07.770 --> 05:13.470
+So if we want to access it we would use this stop props but because we're not using it yet there's no
+
+05:13.470 --> 05:14.370
+reason to do so.
+
+05:14.490 --> 05:18.120
+But in a later lesson we'll actually see what that will look like.
+
+05:18.120 --> 05:20.720
+But for now let's just focus on our card list.
+
+05:20.910 --> 05:23.130
+So we're adding in these prompts.
+
+05:23.220 --> 05:23.520
+Right.
+
+05:23.520 --> 05:29.790
+We're passing the children in because we do want that and then we're going to actually do some of the
+
+05:29.790 --> 05:33.330
+styling to make it look more like this.
+
+05:33.390 --> 05:38.720
+So we noticed that this is in kind of like a four column grid.
+
+05:38.760 --> 05:44.280
+Well I actually have some of the CSX written already for us that you guys can get from the file but
+
+05:44.340 --> 05:49.680
+I'm just going to include it and I don't want to focus too much on the CSX because it might be a little
+
+05:49.680 --> 05:53.730
+bit too much to think about when we're trying to learn react right now.
+
+05:54.560 --> 05:56.840
+But there is one thing I want to highlight.
+
+05:56.840 --> 05:59.280
+So first let's make a card list.
+
+05:59.280 --> 06:03.680
+Dot style's dot CSX and let's add that it.
+
+06:03.880 --> 06:09.050
+So all I'm saying really really quickly is that I'm ad I'm using the new CSX grid right.
+
+06:09.100 --> 06:11.650
+I'm setting the display to grid.
+
+06:11.720 --> 06:21.320
+I am saying that I want the grid to make everything fit within four of these columns each one being
+
+06:21.320 --> 06:29.180
+the size of one fraction which is essentially an equal part of the overall size of what the width of
+
+06:29.180 --> 06:31.340
+this cordless will be.
+
+06:31.340 --> 06:36.020
+So there's just four equal columns and then between each column there will be 20 pixels.
+
+06:36.050 --> 06:38.120
+So let's use it and see what it looks like.
+
+06:38.180 --> 06:39.180
+So it's import that in
+
+06:44.460 --> 06:51.480
+and then let's put it on so let's get rid of this for now and let's put it on.
+
+06:51.690 --> 06:57.610
+So our class name will be card if we save it.
+
+06:57.900 --> 07:01.940
+We will see now that it was in here.
+
+07:01.960 --> 07:02.260
+Right.
+
+07:02.320 --> 07:03.820
+But we want everything in there as well.
+
+07:03.820 --> 07:04.060
+Right.
+
+07:04.090 --> 07:13.570
+So now instead of passing you all through I want to pass all of our monsters through right.
+
+07:13.570 --> 07:18.880
+So again this map is going to generate our list of those H ones the same way.
+
+07:18.880 --> 07:25.900
+But then it's going to put it as the children in between this div that we have as our card list component
+
+07:27.470 --> 07:34.440
+and now if we look we see that it's in an equal grid of four equal columns.
+
+07:34.550 --> 07:40.460
+So this is a really really fundamental thing about react is that we're just building components that
+
+07:40.520 --> 07:49.010
+only care about one thing and our card lists component only cares about displaying cards inside of it
+
+07:49.100 --> 07:51.800
+in some kind of configuration.
+
+07:51.800 --> 07:59.970
+Right now the next thing we're going to look at in the next lesson is taking that idea a step further
+
+08:00.060 --> 08:05.280
+and we're going to apply it to this card component next see in the next one.

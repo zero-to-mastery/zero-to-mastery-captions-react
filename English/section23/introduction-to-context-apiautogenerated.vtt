@@ -1,0 +1,172 @@
+WEBVTT
+
+00:01.090 --> 00:10.360
+We are already quite familiar now with redux redux saga the whole redux ecosystem and managing our local
+
+00:10.360 --> 00:20.030
+state leveraging is top level store however in this section we are going to take a look at the context
+
+00:20.030 --> 00:24.400
+API that was recently updated by the REACT team.
+
+00:24.500 --> 00:28.370
+Now the context API has actually been around for quite some time now.
+
+00:28.430 --> 00:35.180
+In fact the redux library actually leverages the context api in order to do what it does and you might
+
+00:35.180 --> 00:38.850
+have read or heard about the context API a lot recently.
+
+00:38.870 --> 00:46.960
+So in these following lessons we are going to take a look at what the context API does how to use it
+
+00:47.600 --> 00:54.520
+but more importantly when to use it for our application now.
+
+00:54.520 --> 01:02.190
+In order for us to understand the context API we have to revisit some of what it is that redux was solving.
+
+01:02.190 --> 01:06.060
+To also understand what the context API is solving.
+
+01:06.200 --> 01:07.670
+So what a high level.
+
+01:07.850 --> 01:15.680
+If you remember from our prop drilling diagram originally before we introduced redux and we were only
+
+01:15.680 --> 01:22.160
+leveraging components state inside of our classes or let's say we were using component state by leveraging
+
+01:22.250 --> 01:29.990
+our new used state hook if we wanted to pass say something like the current user that we fetched and
+
+01:30.170 --> 01:36.170
+authenticated on our app component we would have to pass it down through all of these components if
+
+01:36.170 --> 01:39.640
+say our card component was the one that needed it.
+
+01:39.670 --> 01:47.140
+Now of course this is bad as a practice because these components in between don't need to actually access
+
+01:47.170 --> 01:53.650
+this current user other than for passing it in as a prop and then passing it down until it reaches this
+
+01:53.650 --> 01:56.000
+nested component.
+
+01:56.050 --> 02:03.730
+So this is bad and that's why we created that new separate redux store at the top level right at the
+
+02:03.730 --> 02:11.650
+app level that any component was able to hook into and then pull off pieces of state while the context
+
+02:11.650 --> 02:19.270
+API does pretty much the exact same thing because it's trying to solve the exact same problem the context
+
+02:19.300 --> 02:28.780
+API essentially is a way for us to store different states and modify those states inside of some separate
+
+02:28.780 --> 02:37.180
+context object which we would then be able to hook into from components at any level which eliminates
+
+02:37.240 --> 02:39.420
+our prop drilling issue.
+
+02:39.440 --> 02:46.090
+Now this is going to be pretty much the same kind of solution that redux provides for us as well.
+
+02:46.100 --> 02:52.220
+The only difference is that here we're not bringing in that redux library or the reactor redux library
+
+02:52.220 --> 02:59.700
+for that matter we're only leveraging react in order to solve this prop drilling problem because the
+
+02:59.700 --> 03:07.860
+context API comes with react and I'll show you how we'll do it but in order for us to do this and check
+
+03:07.860 --> 03:16.290
+out the code for this we have to go back a couple commits to a different version of our application
+
+03:16.560 --> 03:23.880
+before we included all of the sagas and all of this features that we've recently integrated in.
+
+03:24.040 --> 03:30.230
+Now if you go to this length that I provide you in your resources you will see that I created a new
+
+03:30.230 --> 03:37.910
+project that rolls us back a little bit to where we were before we introduced sagas and some of the
+
+03:37.910 --> 03:39.540
+other features that we have.
+
+03:39.560 --> 03:46.820
+So what I want you to do is I want you to clone this into your root folder or whatever folder you want
+
+03:46.820 --> 03:47.390
+to hold.
+
+03:47.390 --> 03:53.780
+This new project so you're gonna clone that copy that link that you just got.
+
+03:53.780 --> 04:01.840
+Go back to your terminal kill your process hitting control see this will kill the old server that you
+
+04:01.840 --> 04:09.890
+had and then Cedi up one folder or you can go to any folder that you want and just run get clone and
+
+04:09.890 --> 04:17.590
+then paste in that link that we have so once we've cloned into it just see into react context lesson
+
+04:20.370 --> 04:29.710
+and make sure to run yarn so that you install all of the dependencies now open up the project so all
+
+04:29.710 --> 04:39.650
+our application is if you remember is when we first started moving everything into redux so we are still
+
+04:39.710 --> 04:49.100
+leveraging our app us to handle linking and connecting our user off from our fire store.
+
+04:49.130 --> 04:55.830
+Authentication so we're still using that on auth state changed here because if you remember we switched
+
+04:55.830 --> 05:03.950
+over to the promised style when we started using sagas so pretty much all we're doing is we're just
+
+05:03.950 --> 05:12.080
+firing that set current user reducer action and that's pretty much all we're doing.
+
+05:12.150 --> 05:19.050
+As far as our current user is concerned is that we are leveraging the base action reducer update system
+
+05:19.080 --> 05:25.590
+that we had before we handled any of our asynchronous events with thanks or sagas.
+
+05:25.590 --> 05:31.560
+So we're pretty much just rolled back to a version of our application before we started doing those
+
+05:31.560 --> 05:33.540
+advanced topics.
+
+05:33.550 --> 05:39.620
+Now we also are not fetching our collections from our fire store.
+
+05:39.820 --> 05:44.920
+We have them locally inside of our redux folder itself.
+
+05:44.920 --> 05:50.950
+If you remember right our shop data is here inside of this file which is also perfectly fine.
+
+05:50.950 --> 05:55.650
+This is all good for the demonstration and we'll do some asynchronous stuff with the context API.
+
+05:55.660 --> 06:04.640
+Anyways so what's your project has installed all of the necessary dependencies so you've just run ya
+
+06:05.210 --> 06:14.670
+just run your own start and we will start up our server and start leveraging the context API in the
+
+06:14.700 --> 06:21.780
+next lesson we will actually figure out how to write context API so I'll see you in that next lesson.

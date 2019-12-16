@@ -1,0 +1,469 @@
+WEBVTT
+
+00:01.000 --> 00:02.320
+Welcome back.
+
+00:02.320 --> 00:10.490
+In this video on a cover the topic of state and especially the idea of state updates being asynchronous.
+
+00:10.540 --> 00:11.140
+Let's have a look.
+
+00:12.640 --> 00:18.640
+I've just started a base create reactive project for us and the only thing I've done up until now is
+
+00:18.640 --> 00:23.430
+just up there is this from a function to a class component.
+
+00:23.460 --> 00:29.100
+Now what I want to do is just simply change this attack to a button and we'll do the same over here
+
+00:30.680 --> 00:32.720
+and we don't need any of this.
+
+00:33.770 --> 00:41.010
+All we need is while let's just say here update state so that we have an update state ban.
+
+00:41.530 --> 00:48.700
+And then finally we'll create some sort of state that will display here and let's just say that we want
+
+00:48.700 --> 00:54.120
+to create again using constructor I'm going to call super.
+
+00:54.120 --> 00:56.040
+As we always do.
+
+00:56.140 --> 01:01.450
+And then finally we'll say this state is going to equal and let's just say.
+
+01:01.450 --> 01:09.280
+Meaning of Life is going to be while 47.
+
+01:09.670 --> 01:16.540
+And make sure I have the proper syntax and all we're going to do is just display this state up here
+
+01:17.020 --> 01:20.160
+as this dot state.
+
+01:21.380 --> 01:23.560
+Dot meaning of life.
+
+01:23.630 --> 01:28.930
+So if we save this and we run our server we should have the meaning of light meaning of life.
+
+01:29.630 --> 01:35.270
+But we also want to update the state so again and this button will just create and this is something
+
+01:35.270 --> 01:37.290
+we've already seen before right.
+
+01:37.340 --> 01:39.680
+So this should become second nature to us by now.
+
+01:39.680 --> 01:47.240
+So we create a non click we'll say it's going to be this dot handle click and we're create this method
+
+01:47.270 --> 01:55.120
+on this component right here we'll say handle click we'll use an arrow function so that we don't have
+
+01:55.120 --> 01:57.070
+that issue with this keyword.
+
+01:57.890 --> 02:05.780
+And then in here we'll simply say this dot set state to update our meaning of life.
+
+02:05.780 --> 02:07.910
+Well let's just incremented by 1.
+
+02:07.910 --> 02:09.520
+So what I'm going to do is say.
+
+02:09.530 --> 02:18.570
+Meaning of Life is going to equal this dot state DOT meaning of life plus 1.
+
+02:18.740 --> 02:19.900
+That's it.
+
+02:19.910 --> 02:28.600
+So if I save this and go back and I click on update state I see that my state is updated every time
+
+02:28.630 --> 02:30.450
+I click.
+
+02:30.460 --> 02:40.430
+Now here's the thing as I've mentioned before the react library helps us manipulate the dumb but to
+
+02:40.430 --> 02:50.400
+be efficient and to be fast it usually batches multiple sets state calls because sometimes we can have
+
+02:50.400 --> 02:57.460
+in our app multiple set state calls so or multiple locations where we change the damn instead of calling
+
+02:57.460 --> 03:00.170
+set state every single time.
+
+03:00.310 --> 03:04.990
+It sometimes gets smart and says oh don't worry if there's a lot of states happening I'll bash them
+
+03:04.990 --> 03:13.680
+together and update them all into one single update for performance now in our case.
+
+03:13.680 --> 03:15.340
+This worked.
+
+03:15.660 --> 03:22.380
+But react actually does not guarantee that when we call this and we update state that this is going
+
+03:22.380 --> 03:25.520
+to work why is that.
+
+03:25.520 --> 03:31.900
+Well because this call offsets state is asynchronous and what does that mean.
+
+03:31.920 --> 03:40.660
+It means that when we click on the button this doesn't happen immediately when we call this sad state.
+
+03:40.660 --> 03:46.930
+We give control to the reactive library and we say hey you take care of this you know the best time
+
+03:46.930 --> 03:48.690
+to update the state for me.
+
+03:48.760 --> 03:54.980
+I don't care just do it for me and I'll keep doing something else so unlike a synchronous call that
+
+03:55.400 --> 04:02.330
+this happens immediately when we call it asynchronous it just happens sometime in the future and we
+
+04:02.330 --> 04:09.080
+actually saw this when you mentioned the fact that if we ever wanted to check the state let's say after
+
+04:09.080 --> 04:14.290
+we make this call let's say we do a console dialog this dot state DOT.
+
+04:14.420 --> 04:16.950
+Meaning of Life if we did this.
+
+04:17.120 --> 04:24.500
+We'll notice that this state of meaning of life won't get updated even though it's called after the
+
+04:24.500 --> 04:31.790
+set state again if I save and go back and open up the developer tools you'll see here that when I click
+
+04:31.790 --> 04:42.820
+this my state is 48 but it console logged 47 and it's always 1 behind and that is because this line
+
+04:42.910 --> 04:50.550
+runs we give control to react to update the state for us but it doesn't do it immediately does it asynchronously.
+
+04:50.740 --> 04:58.780
+And by the time we call this line the state had it hasn't been updated and we saw a way to get around
+
+04:58.780 --> 05:00.360
+this right.
+
+05:00.400 --> 05:07.180
+We can give a second parameter to our set state call which is our callback and the callback simply takes
+
+05:07.630 --> 05:15.290
+a function so it can just have a simple IRA function here that console logs for us.
+
+05:15.340 --> 05:26.370
+So if I move this here now and I save go back and I click you see that now everything is in sync Okay
+
+05:26.400 --> 05:27.830
+so that works.
+
+05:28.050 --> 05:29.250
+But here's the thing.
+
+05:29.550 --> 05:32.520
+This is actually that practice.
+
+05:32.520 --> 05:33.460
+Why is that.
+
+05:34.350 --> 05:38.430
+Well because our app is simple right now.
+
+05:38.430 --> 05:42.170
+This is working however because of the way.
+
+05:42.210 --> 05:47.340
+Set state batches work into a single update like I mentioned.
+
+05:47.340 --> 05:54.390
+If we had multiple set state calls it doesn't guarantee that when we increment meaning of life that
+
+05:54.390 --> 05:57.750
+this part meaning of life will be the latest version.
+
+05:58.260 --> 06:03.130
+Maybe another part of the app modifies meaningful life to be something else.
+
+06:03.270 --> 06:10.520
+So because there is no guarantee there's a rule and react that we have to follow and the rule is this.
+
+06:10.520 --> 06:17.020
+If in your set state call you ever use this dot state directly like this.
+
+06:17.030 --> 06:25.540
+So instead of meaning of life being something that while let's say dolphins where we don't use the state
+
+06:26.020 --> 06:33.340
+that's completely fine and we can just give it an object but if we ever want to use this dot state or
+
+06:33.460 --> 06:40.330
+this dot props in our updates to calculate something then we should do something instead of what we
+
+06:40.330 --> 06:42.570
+do here which is giving it an object.
+
+06:42.850 --> 06:48.730
+So let's just remove all of this or we can keep the callback function over here because this could just
+
+06:48.730 --> 06:49.960
+stay there.
+
+06:50.020 --> 06:58.270
+The important part is the first parameter this object instead of an object can also be a function and
+
+06:58.270 --> 07:01.150
+it's a function that receives two things.
+
+07:01.150 --> 07:05.450
+One is the state or to be more descriptive.
+
+07:05.470 --> 07:15.440
+The previous state and then the second parameter is the previous props so if I just wrap this in brackets
+
+07:15.590 --> 07:21.620
+since these are the parameters and we call this function and in here I do the exact same thing where
+
+07:21.620 --> 07:29.220
+we return an object so I'm adding the brackets here so that I don't have to just type in return so that
+
+07:29.220 --> 07:34.390
+we can actually return the object here if I do this I can say.
+
+07:34.390 --> 07:38.650
+Meaning of Life and say this dot state DOT.
+
+07:38.650 --> 07:41.240
+Meaning of Life plus 1.
+
+07:41.260 --> 07:44.640
+Just like that.
+
+07:44.740 --> 07:46.840
+Let's put this on a new line just so it's cleaner.
+
+07:46.840 --> 07:55.110
+So I'll remove the brackets here and I'll simply say return the object.
+
+07:55.200 --> 08:04.630
+Meaning of Life just like this so this whole function is our first parameter and our second parameter
+
+08:04.720 --> 08:15.360
+is right here so if I do this I now can use this previous state to guarantee that when I update this
+
+08:15.390 --> 08:18.300
+this is the latest previous state before the update.
+
+08:18.300 --> 08:23.660
+So this is just best practice that you have to remember anytime you want to update state and there's
+
+08:24.140 --> 08:28.250
+props or state that you need to use within the update.
+
+08:28.260 --> 08:33.090
+Then you should use the syntax of using a function instead of an object.
+
+08:33.120 --> 08:40.660
+So in here instead of calling this dot state directly I simply just say previous state.
+
+08:40.730 --> 08:48.310
+So if I save this and go back and I click update you see that everything is still working properly.
+
+08:48.340 --> 08:48.670
+Awesome
+
+08:51.570 --> 08:56.860
+now all about this previous props in order for us to play with this.
+
+08:56.880 --> 09:04.320
+We need to have some sort of props or properties on this app component but up until now we've only seen
+
+09:04.410 --> 09:09.340
+app b the parent or the biggest higher level component.
+
+09:09.360 --> 09:15.100
+It's the top of the tree but as I mentioned previously states can live anywhere.
+
+09:15.120 --> 09:18.060
+We don't need to have state and just one component.
+
+09:18.060 --> 09:21.570
+We can bring it down the tree to another node.
+
+09:21.570 --> 09:25.530
+We can mix and match and that's something we'll explore throughout the course.
+
+09:25.530 --> 09:30.210
+But let me show you how we can get props to the app component.
+
+09:30.270 --> 09:39.180
+We simply go to index J.S. where the app component is and lets say we'll add a increment attribute and
+
+09:39.180 --> 09:42.090
+this increment attribute will be well while we increment by.
+
+09:42.660 --> 09:50.030
+Now if I do hear one this is going to give me an error it's going to say well I'm trying to do J.S.
+
+09:50.050 --> 09:56.700
+sex and I have no idea what this means because remember we need to pass it some sort of a value in JavaScript
+
+09:56.760 --> 10:02.820
+which means wrapping it in brackets so this evaluates to a Jaffa script expression.
+
+10:02.820 --> 10:10.790
+If I save this I now have these props now let's say I wanted to use the props here.
+
+10:10.880 --> 10:17.930
+So now I'm going to get the increment prop so I'll just say this dot props dot
+
+10:21.350 --> 10:24.470
+if I see this all right.
+
+10:24.480 --> 10:32.250
+It seems to be working but let's check fi update state all right.
+
+10:32.270 --> 10:33.620
+This is working nicely.
+
+10:33.620 --> 10:41.400
+Perfect and again if I wanted to just use previous props I can just make sure that it's the latest and
+
+10:41.400 --> 10:43.830
+nothing has changed it by using previous props.
+
+10:43.920 --> 10:51.500
+If I save it once again everything is working great.
+
+10:51.610 --> 10:54.820
+Now one last thing.
+
+10:54.900 --> 11:04.360
+Usually it's good practice to put in here in the constructor and super to put in the props like this.
+
+11:04.440 --> 11:06.670
+Now what does this do.
+
+11:06.750 --> 11:14.000
+This allows you to actually use the props in the constructor.
+
+11:14.110 --> 11:25.240
+What do we mean if I do here this dot props I can now use this dot props inside of the constructor.
+
+11:25.240 --> 11:32.180
+So if you ever need to use this stop props inside of the constructor you need to pass this year.
+
+11:32.190 --> 11:40.500
+So for example if I just simply do this dot props equals props I save it and I remove the props from
+
+11:40.500 --> 11:41.230
+here.
+
+11:41.310 --> 11:48.850
+You'll notice that I'll get an error props is not defined because I can I use this stop props this way.
+
+11:48.930 --> 11:52.280
+Now there are occasions when that needs to happen.
+
+11:52.320 --> 11:58.410
+So it's always recommended that you just add props in case you ever need to do this stop props in here
+
+12:00.360 --> 12:06.780
+so let's say for example in our state calculation we want to say that meaning of life is going to equal
+
+12:07.260 --> 12:19.600
+47 plus this stop prop start increment so I'll originally be 48 if we safe here we have previous props
+
+12:19.600 --> 12:28.090
+here for the increment if I go back you see that it's now 48 as the default so that the next update
+
+12:28.090 --> 12:30.150
+will be forty nine.
+
+12:30.190 --> 12:34.420
+So this is why we passed props in the constructor and super.
+
+12:34.420 --> 12:40.360
+Now the final thing I want to show you is that create react app has something called the alternate class
+
+12:40.450 --> 12:41.340
+syntax.
+
+12:41.380 --> 12:47.260
+Now in regular javascript you can do this and there are proposals that are going to allow future versions
+
+12:47.260 --> 12:51.370
+of javascript to do this but you may see them in common react code basis.
+
+12:51.370 --> 12:57.850
+So I want to show you because some people don't like this constructor having so many lines of code.
+
+12:58.090 --> 13:02.050
+Sometimes a state is just a simple thing.
+
+13:02.060 --> 13:11.530
+So for example if we didn't have any of this increment and we just had the plus one here let's say no
+
+13:11.530 --> 13:12.030
+props.
+
+13:12.040 --> 13:23.920
+Well we can just remove all of this like so and just simply say that state is equal meaning of life
+
+13:24.370 --> 13:33.400
+which equals forty seven and that's it and if I do this it leaves out the constructor and initialize
+
+13:33.400 --> 13:37.070
+as the state as a class field declaration.
+
+13:37.070 --> 13:43.730
+Again this is something because of the Create we act up Andy Babel compiler that it has underneath but
+
+13:43.730 --> 13:49.790
+you are going to see this in some code bases where you just want to set state really easily but you
+
+13:49.790 --> 13:56.420
+won't have access to the props inside of here as we did with the constructor so that if I say this this
+
+13:56.510 --> 14:05.530
+should still work and it does keep in mind state updates are a synchronous and we want to be careful.
+
+14:05.580 --> 14:06.870
+The rule is this.
+
+14:06.930 --> 14:12.550
+Do you ever want to manipulate or use this state somehow after the update.
+
+14:12.720 --> 14:21.490
+Then add in a second parameter which will be a function where you can use that updated state maybe in
+
+14:21.490 --> 14:27.100
+your update and in your state update you have to use the state as part of that calculation or the props
+
+14:27.160 --> 14:32.140
+as part of the calculation then you should pass this function form to update the state.
+
+14:32.710 --> 14:39.550
+Otherwise you can just use the simple object notation that we've seen up until now if you get this concept
+
+14:39.640 --> 14:46.030
+this is going to take you very far in your career so hope that makes sense and I'll see you in the next
+
+14:46.030 --> 14:46.330
+video.

@@ -1,0 +1,133 @@
+WEBVTT
+
+00:02.070 --> 00:03.670
+Welcome back.
+
+00:03.670 --> 00:12.870
+React is simply a group of components that are rendered in a tree like structure.
+
+00:12.870 --> 00:20.490
+So this would be the app dodgy yes and each one of these components would have state for example the
+
+00:20.490 --> 00:23.400
+red dots over here.
+
+00:23.400 --> 00:29.840
+They have state so for example this app component will have a state of signed in AZ.
+
+00:30.120 --> 00:38.820
+And let's say the state is user in that case this user component might have a state of user Mitch or
+
+00:38.820 --> 00:47.580
+if signed in as is admin it might render the admin component and any anytime you see the blue dot.
+
+00:47.580 --> 00:48.780
+That means there was a change.
+
+00:48.780 --> 00:56.520
+So if there's a change here it can update something into this component and we render and we did this
+
+00:56.640 --> 01:06.580
+in react so again with a simple react app we can have nice views and maybe have different states and
+
+01:06.580 --> 01:13.710
+different components but eventually as our app gets bigger we end up with something like this where
+
+01:14.170 --> 01:20.080
+we have more and more components more and more state within that component.
+
+01:20.080 --> 01:27.160
+Or we can have one massive state at the very top here which also gets pretty hard and all these blue
+
+01:27.160 --> 01:36.140
+dots as they update they also have to update the state and then we render and this example over here
+
+01:36.140 --> 01:43.610
+is just a little diagram but you can see with all these arrows how confusing it's going to get and keeping
+
+01:43.610 --> 01:46.760
+track of all this state is really really hard.
+
+01:47.720 --> 01:55.000
+So we need some form of a state management and Redux solve this problem for us.
+
+01:55.240 --> 02:02.380
+How could we make this diagram simpler and make things easier to understand in our heads as developers
+
+02:03.010 --> 02:06.590
+redux came up with a novel concept.
+
+02:06.640 --> 02:13.380
+What if we just remove all the state so this dot state from all the components.
+
+02:13.390 --> 02:21.190
+What if we just have props so all these components just have props being passed down and now the state
+
+02:21.790 --> 02:32.230
+we keep it in a store and a store is simply just the state which is this dot state that react had but
+
+02:32.230 --> 02:36.140
+in one massive object just like you see here.
+
+02:36.280 --> 02:45.130
+So one single object that describes how our app should look and all we do is just pass down that state
+
+02:45.430 --> 02:55.110
+to whichever component needs it as props so our diagram from looking like this with just react can go
+
+02:55.110 --> 03:04.320
+to looking like this with redux where none of the components need to hold state anymore and we can have
+
+03:04.410 --> 03:12.600
+one massive object that describes our entire app and whichever component needs that prop can just be
+
+03:12.600 --> 03:13.430
+passed down to it.
+
+03:14.480 --> 03:21.680
+And any updates that happen go through the state the state game gets modified and then we pass down
+
+03:21.680 --> 03:30.190
+that information to the component this diagram might be confusing without actually coding anything and
+
+03:30.190 --> 03:31.120
+we'll come back to it.
+
+03:31.150 --> 03:39.490
+So this makes sense but even just visual you can see that this diagram looks a lot simpler than the
+
+03:39.490 --> 03:41.410
+diagram before it.
+
+03:41.410 --> 03:47.930
+We have a lot less arrows and everything just flows nicer so as we go through the videos you're gonna
+
+03:47.950 --> 03:51.070
+get more and more familiar with this idea of state management.
+
+03:51.070 --> 03:58.600
+But I want you to keep in mind that that is what redux is solving redux is a library that makes state
+
+03:58.600 --> 04:04.340
+management easier not only for react but for any tools that we use.
+
+04:04.390 --> 04:06.540
+It just happens to work really really well with.
+
+04:07.570 --> 04:15.040
+And redux actually got inspiration from database design from things such as events sourcing or CQ RSS
+
+04:15.370 --> 04:19.650
+which you can read up more on databases had the same problem.
+
+04:19.690 --> 04:27.700
+All these updates and all these changes happened but we needed a way to make sure that all these changes
+
+04:28.060 --> 04:30.910
+are organized in a nice cohesive way.
+
+04:32.270 --> 04:38.660
+All right let's get into the next video and get a little bit deeper with redux.
+
+04:38.960 --> 04:39.190
+By.

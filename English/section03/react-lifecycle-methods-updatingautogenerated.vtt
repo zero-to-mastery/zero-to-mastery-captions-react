@@ -1,0 +1,442 @@
+WEBVTT
+
+00:00.720 --> 00:10.110
+Now that we've taken a look at the mounting phase of our component after our component has been mounted
+
+00:10.230 --> 00:11.420
+onto the door.
+
+00:11.430 --> 00:21.770
+Any future updates either to the props to the state or US manually forcing an update on our component
+
+00:23.060 --> 00:29.360
+will cause our component to go into the updating phase.
+
+00:29.400 --> 00:31.920
+So what is the updating phase and what triggers updates.
+
+00:32.730 --> 00:42.300
+Well if for example inside of our app J.S. we're passing in the text value off of this dot state right
+
+00:42.480 --> 00:50.550
+into our lifecycle method which for us is this string where whenever we click the button we just append
+
+00:50.970 --> 00:52.370
+underscore hello to that string.
+
+00:52.380 --> 00:55.580
+We just make it longer and longer right which we can see right here.
+
+00:58.810 --> 01:06.100
+Every time we update and click this and update our state and this new state value gets passed into our
+
+01:06.180 --> 01:07.470
+lifecycle component.
+
+01:08.580 --> 01:15.090
+Our lifecycle component goes into the updating phase and it's like oh I got new props I should probably
+
+01:15.420 --> 01:21.480
+re render my component not remount though our component is already mounted.
+
+01:21.480 --> 01:24.660
+It doesn't need to go through mounting again.
+
+01:24.660 --> 01:29.910
+It doesn't need to be destroyed because react doesn't want to create new elements for doing that is
+
+01:29.910 --> 01:39.540
+actually very costly on the browser but selectively changing pieces of the HDD Himmel inside of our
+
+01:39.540 --> 01:45.960
+component is way easier because all it needs to change is this dot prompts that text it doesn't need
+
+01:45.960 --> 01:51.930
+to change the h three it doesn't need to change that did so reacts like oh OK I'm just going to update
+
+01:51.990 --> 01:59.340
+this stop props that text right or I'm not also going to run through those lifecycle methods that might
+
+01:59.340 --> 02:05.910
+be affected in this updating phase because the props have changed and maybe these lifecycle methods
+
+02:05.910 --> 02:09.490
+do use the props to do something right.
+
+02:09.500 --> 02:12.690
+That's all up to us and how we want to write our code.
+
+02:13.060 --> 02:14.490
+The promises changed.
+
+02:14.600 --> 02:19.940
+I'm going to start going through my update cycle the update cycle could also be triggered if this starts
+
+02:19.930 --> 02:25.400
+set state gets called inside of our component so we don't actually call set state inside of our life
+
+02:25.400 --> 02:31.040
+cycles class because we don't have state right which is fine but if we look at our app component we
+
+02:31.040 --> 02:35.280
+do have state and we do call sets date whenever we click either these button.
+
+02:35.870 --> 02:42.860
+So whenever we click one of these buttons react re renders this component as well it goes through the
+
+02:42.950 --> 02:51.110
+update phase of our app component as well because there might be things inside of our component that
+
+02:51.110 --> 02:56.150
+depends on the state to determine what they need to do including our render.
+
+02:56.360 --> 03:05.910
+If for example we were displaying this stored state DOT text inside of our component ourselves the component
+
+03:05.910 --> 03:13.530
+needs to decide OK I should probably re render because there's a chance that this component is rendering
+
+03:13.950 --> 03:16.030
+something on the state.
+
+03:16.200 --> 03:18.040
+So that's why it does it.
+
+03:18.120 --> 03:21.770
+It's like OK the components state has changed as well.
+
+03:21.870 --> 03:28.950
+Let's also run through our update phase for our component and then finally we can also force an update
+
+03:29.010 --> 03:32.790
+by calling this stuff force update inside of our component anywhere.
+
+03:32.790 --> 03:36.030
+This forces the component to update everything.
+
+03:36.030 --> 03:43.440
+It just forces to go through the update phase but inside of the Update phase it just goes through these
+
+03:43.710 --> 03:44.950
+following methods.
+
+03:45.030 --> 03:46.120
+So just like our mounts.
+
+03:46.290 --> 03:46.620
+Right.
+
+03:46.620 --> 03:51.310
+It also goes to the render again because new pops comes in or new state comes in.
+
+03:51.450 --> 03:58.980
+React has to go through its process of deciding oh what in my components changed and then it's going
+
+03:58.980 --> 04:00.300
+to update the Dom.
+
+04:00.300 --> 04:00.500
+Right.
+
+04:00.500 --> 04:05.100
+So it's going to update the DOM with the changes that are required in that component.
+
+04:05.100 --> 04:08.400
+Again we're not re mounting that component we're just making the change.
+
+04:08.400 --> 04:15.310
+That piece of the component where it's affected and then it calls component it updates similar to component
+
+04:15.310 --> 04:16.090
+at Mount.
+
+04:16.090 --> 04:24.580
+It's the lifecycle method that gets called after the updates have been made to the DOM and here we can
+
+04:24.580 --> 04:34.540
+see this when we click Update text right we see it calls render and then it calls our component it update.
+
+04:34.550 --> 04:37.610
+One thing I want is to look at is actually this lifecycle method.
+
+04:37.730 --> 04:39.130
+So I'm going to put it in here.
+
+04:39.170 --> 04:47.790
+It's should a component update should component update is a lifecycle method that determines whether
+
+04:47.790 --> 04:52.780
+or not this whole chain needs to happen.
+
+04:53.250 --> 05:03.300
+And it actually exists between these things that would trigger this updating phase that happen and the
+
+05:03.300 --> 05:09.300
+following lifecycle methods to get triggered should component update actually sits right here.
+
+05:09.900 --> 05:14.960
+And what it does is it gets the prompts and then the next state right.
+
+05:14.970 --> 05:21.560
+So it gets when prompts change they come in as a parameter or when state changes.
+
+05:21.570 --> 05:28.510
+It also comes in as a parameter and what happens is that based on the prompts the new prompts that are
+
+05:28.510 --> 05:35.020
+coming in or the new state after we've called said state we can determine whether or not we want to
+
+05:35.170 --> 05:41.940
+go through these other lifecycle methods including actually re rendering our component.
+
+05:42.060 --> 05:42.670
+Right.
+
+05:42.790 --> 05:46.610
+Because if we don't want to render a component we don't have to.
+
+05:46.900 --> 05:55.010
+And how we would do this is actually if we looked at our app J.S. So for example whenever said state
+
+05:55.010 --> 06:00.890
+gets called we know that what gets happened is our render call it gets called right in our component.
+
+06:00.890 --> 06:06.950
+So whenever we call set state we're actually re rendering this whole app just component which actually
+
+06:06.980 --> 06:16.090
+ends up re rendering the life cycles component even if we were not passing this text in this component
+
+06:16.480 --> 06:20.260
+because it's a child of our app G.S. gets re rendered.
+
+06:20.650 --> 06:24.930
+I can actually show you if I get rid of this prop so we're no longer passing the prop into our lifecycle
+
+06:25.000 --> 06:33.710
+method even though I click Update text you will see that our render method and then component it update
+
+06:33.710 --> 06:36.390
+is getting called from a life cycles component.
+
+06:36.470 --> 06:42.890
+This is because of how reacts no tree works react knows that inside of this component any of the children
+
+06:43.340 --> 06:50.900
+might need to be re rendered because it's just going to assume that everything in the render is affected
+
+06:51.170 --> 06:56.140
+possibly by the state changing or new props coming into this component.
+
+06:56.330 --> 06:56.630
+Right.
+
+06:57.260 --> 07:03.830
+So whenever a component gets updated re rendered all the children also get re rendered and this happens
+
+07:03.830 --> 07:04.320
+whenever.
+
+07:04.370 --> 07:12.370
+Again as we saw props change or set state gets called or force update gets called inside of the component.
+
+07:12.450 --> 07:19.280
+Now the reason this is important is because let's say we called set state on a property that are lifecycle
+
+07:19.290 --> 07:25.770
+method doesn't care about let's say for example we had a another state property.
+
+07:25.770 --> 07:27.050
+I don't know message right.
+
+07:27.420 --> 07:32.940
+And then this value we used somewhere else inside of this component we don't pass it into life cycles
+
+07:33.180 --> 07:36.330
+as a prop we just use it somewhere else.
+
+07:36.420 --> 07:42.510
+Well if set state gets called the updates its message we just saw that it's going to force our component
+
+07:42.750 --> 07:48.720
+to update right and our component if the state text hasn't changed.
+
+07:48.780 --> 07:51.820
+Why do we need to re render our life cycles component.
+
+07:52.060 --> 07:54.060
+That's a waste of processing power.
+
+07:54.090 --> 07:57.120
+It's a it's slowing down our browser.
+
+07:57.120 --> 08:05.910
+So what we could do here is it allows us to selectively hijack and not go through that re render right.
+
+08:05.920 --> 08:14.530
+We don't have to re render our component and here we can see we do that by what gets returned as a boolean
+
+08:14.530 --> 08:22.690
+value from should component update if we return true then our component will update it will continue
+
+08:22.690 --> 08:30.140
+will go through right the cycles and it will run through that component it update and here we actually
+
+08:30.140 --> 08:34.430
+see us logging the next prompts that we're getting right.
+
+08:34.490 --> 08:38.230
+So whenever we collect update text we see that the text is coming through.
+
+08:38.360 --> 08:38.570
+Right.
+
+08:38.570 --> 08:39.600
+That's the property.
+
+08:39.830 --> 08:41.930
+The new text property that we're getting.
+
+08:42.290 --> 08:49.820
+But if we return false what happens is that it doesn't even go through any of those lifecycle methods
+
+08:50.000 --> 08:56.070
+except for QA component update because when we return false we're saying I don't want my component to
+
+08:56.070 --> 08:56.640
+re render.
+
+08:56.640 --> 09:01.260
+And the reason we would do this is for example if we were to check the next props that we're getting
+
+09:02.010 --> 09:08.730
+if we see that the string value for our text has not changed then we don't care to update them.
+
+09:08.760 --> 09:10.100
+We don't need to.
+
+09:10.170 --> 09:12.140
+There's no reason for us to do that.
+
+09:12.270 --> 09:20.340
+And here we will see that if we click Update text we're getting this call our show component update.
+
+09:20.460 --> 09:28.170
+But because we're turning false it does not go through the next cycle methods that need to happen inside
+
+09:28.170 --> 09:31.460
+of our updating phase.
+
+09:31.510 --> 09:37.840
+And the reason we would do this as I mentioned is because maybe we don't want to re render because our
+
+09:37.840 --> 09:44.140
+text didn't change and we can actually force this to happen if inside of our button click instead of
+
+09:44.140 --> 09:47.930
+a pending hello we just keep the text as what it is.
+
+09:48.010 --> 09:54.700
+But because we're calling set state we're forcing the state to change and because we're forcing the
+
+09:54.700 --> 09:58.880
+state to change or forcing react to re render our component.
+
+09:58.950 --> 10:05.520
+So now inside of our lifecycle methods what we can do is here we can actually say we want to return
+
+10:05.610 --> 10:06.600
+instead of false.
+
+10:06.600 --> 10:12.690
+We want to return if next prompts dot text does not equal.
+
+10:12.690 --> 10:15.390
+This stop prompts dot text.
+
+10:16.020 --> 10:23.220
+So if the current text is the same as the next prompts text then don't re render because there's no
+
+10:23.220 --> 10:23.980
+point to write.
+
+10:24.000 --> 10:28.890
+We don't need to re render our component because our props have not changed.
+
+10:28.920 --> 10:36.050
+So now we'll see if we click up a text it doesn't update but if we go back and we say that.
+
+10:36.100 --> 10:36.410
+OK.
+
+10:36.430 --> 10:38.010
+Now the Texas changing.
+
+10:38.620 --> 10:41.250
+Well then our component will update accordingly.
+
+10:41.260 --> 10:49.690
+So this is mainly just for performance if the properties coming in are not different than the props
+
+10:49.690 --> 11:01.370
+that we already have then there's no reason to re render now understanding this update phase is so fundamental
+
+11:02.060 --> 11:09.530
+to us becoming better react developers because much of how code is structured and how the architecture
+
+11:09.530 --> 11:17.950
+for react is written is based around this update phase because this is fundamentally what the reactive
+
+11:17.950 --> 11:19.520
+library does for us.
+
+11:19.520 --> 11:21.290
+This is why we write components.
+
+11:21.290 --> 11:28.040
+This is why we break our code up the way it does because this update phase is how react makes our lives
+
+11:28.070 --> 11:35.180
+easier for us whenever it updates the DOM based on new properties coming in based on US calling set
+
+11:35.180 --> 11:38.580
+state or forcing updates inside of our components.
+
+11:38.580 --> 11:46.980
+This triggers a chain reaction of for example our app component updating also its children not only
+
+11:47.000 --> 11:50.870
+rendering itself but re rendering any child components it has.
+
+11:51.390 --> 11:55.350
+And then those child components also update but that's the thing.
+
+11:55.350 --> 12:03.490
+If we trigger big updates like this there may not be a need to even update these components if as we
+
+12:03.490 --> 12:09.970
+saw the props do not actually change if the prompts Don't change nothing about this component needs
+
+12:09.970 --> 12:19.340
+to update so leveraging the lifecycle methods will allow us to possibly improve the performance of our
+
+12:19.340 --> 12:26.510
+application but also give us a better idea of when we should do what with our components.
+
+12:26.510 --> 12:32.880
+Now of course we're going to practice more and more with writing our components billing react applications.
+
+12:33.650 --> 12:40.100
+But just thinking and keeping this in the back of your mind as we code will help you better understand
+
+12:40.400 --> 12:44.120
+why we structure the code the way that it is.
+
+12:44.360 --> 12:49.290
+This will all make more and more sense the more you code in react.
+
+12:49.310 --> 12:54.770
+Now I know this was a bit of a longer lesson but now that we understand with the update phase let's
+
+12:54.770 --> 12:57.770
+move on to the last phase the UN mounting phase.

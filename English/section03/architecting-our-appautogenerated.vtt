@@ -1,0 +1,196 @@
+WEBVTT
+
+00:03.230 --> 00:08.180
+Now before we get into the next video where we're going to build some of these components and actually
+
+00:08.180 --> 00:15.250
+start making our app I want to go over something you notice here that we're rendering this app which
+
+00:15.370 --> 00:22.970
+isn't HMO but our own custom component that is we're importing this app file which is app.
+
+00:23.800 --> 00:25.080
+And don't worry about this code.
+
+00:25.090 --> 00:30.250
+This is something that we're going to write later on but we see over here that we're returning under
+
+00:30.250 --> 00:32.870
+the render some HMO.
+
+00:33.250 --> 00:42.280
+Now the way you react works is that we can combine these HMO like elements such as Dev or H1 but also
+
+00:42.280 --> 00:46.830
+create our own custom ones like we will like search box or card list.
+
+00:47.570 --> 00:54.250
+And just like we saw on our developer tools with react these components we have capital letters and
+
+00:54.250 --> 00:58.390
+I've use some highlighting here so that it doesn't highlight them you can see the difference between
+
+00:58.780 --> 01:06.880
+a component that we built which starts with a capital letter and a component that comes pre-built and
+
+01:06.880 --> 01:10.990
+reacts which are like a schmo Dave or H1.
+
+01:11.080 --> 01:18.600
+These are lowercase and as you remember with the react component architecture all we're doing is just
+
+01:18.600 --> 01:27.680
+creating and combining these Lego blocks together and the syntax is either using the class syntax with
+
+01:27.980 --> 01:29.760
+a capital letter.
+
+01:29.780 --> 01:37.150
+So now we can use the app component or if we go to something like search box or car list let's do a
+
+01:37.150 --> 01:44.000
+search box again we won't have this here but we will build them over the next couple of videos you'll
+
+01:44.000 --> 01:52.270
+see that here I have a different way of building a component and this use this just an arrow function.
+
+01:52.270 --> 01:59.650
+So remember when we first did the create react app how we had function search box or in our case we
+
+01:59.650 --> 02:12.520
+had the app backed in here we returned some J OSX like H1 well this is the same thing except that we're
+
+02:12.520 --> 02:15.260
+using the arrow function way.
+
+02:15.460 --> 02:21.580
+So there's two ways like this of creating components the class component and functional component.
+
+02:21.670 --> 02:27.070
+Now that's something that we're gonna go get into a lot because it's an important concept and react
+
+02:27.340 --> 02:31.610
+and has some implications but we're getting ahead of ourselves.
+
+02:31.630 --> 02:39.040
+The key here is to realize that we have for now two ways of building components either just as functions
+
+02:39.340 --> 02:49.510
+like this again using capital naming system or using classes like this and both of these no matter what
+
+02:49.720 --> 02:58.440
+always returns some sort of J asks for us some sort of react elements now another thing I want to mention
+
+02:58.890 --> 03:05.640
+is the folder structure that we're going to build throughout our course and a good folder structure
+
+03:05.640 --> 03:12.150
+is really really important on any project as projects get bigger and bigger as we get more and more
+
+03:12.360 --> 03:13.760
+JavaScript files.
+
+03:13.830 --> 03:16.980
+Things are going to get complicated so we need to be organized.
+
+03:17.040 --> 03:24.060
+So we're gonna be structuring our app like a lot of professional reactive helpers ha so that we stay
+
+03:24.210 --> 03:33.000
+organized and what you'll notice here is that e war when creating components likes being very explicit.
+
+03:33.000 --> 03:43.740
+That is if a component in this component folder has J.S. X in it he actually ends the file with DOT
+
+03:43.830 --> 03:47.550
+J as sex and you see we have that little react icon.
+
+03:47.580 --> 03:53.610
+If I go down to the bottom over here you see that it's javascript react so J.S. X simply means it's
+
+03:53.610 --> 03:57.770
+javascript but with this J.S. X syntax.
+
+03:57.810 --> 04:02.060
+Now if I change this to a simple JavaScript file it's still going to work.
+
+04:02.130 --> 04:09.970
+It's why app does J.S. still works the way it does and this is actually just personal preference.
+
+04:09.970 --> 04:15.910
+This is how e while enjoys organizing his code because this right away I can look at it and say oh this
+
+04:15.910 --> 04:19.390
+is a react JavaScript or J x file.
+
+04:19.720 --> 04:25.510
+But at the end of the day remember create react app takes everything through Westpac and Babel will
+
+04:25.510 --> 04:29.640
+actually convert this J sex file into a javascript file.
+
+04:29.800 --> 04:33.460
+So whether you do J sex or jazz it doesn't really matter.
+
+04:33.460 --> 04:36.480
+Maybe your editor will help you with an icon but that's about it.
+
+04:37.580 --> 04:39.160
+It's just personal preference.
+
+04:39.210 --> 04:44.620
+It's all about structuring your application in a way that's easy to understand that makes sense.
+
+04:44.640 --> 04:47.220
+Even the naming convention here is important.
+
+04:47.220 --> 04:53.820
+Where again just by looking at the file even though it's in the components folder right away I know.
+
+04:53.900 --> 04:54.380
+Oh yeah.
+
+04:54.380 --> 04:58.750
+This is a component and this is the style for the component now.
+
+04:58.890 --> 05:04.470
+These styles these C assessed files that we're gonna be writing and trust me we're gonna be writing
+
+05:04.470 --> 05:10.980
+a lot of them at the end of the day what happens underneath the hood is that create react app combines
+
+05:11.070 --> 05:12.980
+everything altogether.
+
+05:13.080 --> 05:21.900
+And if you remember if we go back to our test folder when we run NPM run built and we go to the C file
+
+05:22.260 --> 05:27.050
+you see over here that we have a chunk of CSX with a dot map.
+
+05:27.050 --> 05:33.890
+This is a source map which just helps us debug our code and production but we have just one massive
+
+05:33.980 --> 05:42.920
+CSX file and that's what create react app does even though we'll have different C Ss files in our workspace
+
+05:42.960 --> 05:49.240
+in our source folder at the end of the day when we release to production all of these are going to get
+
+05:49.240 --> 05:55.230
+combined together and although we're still early in the course although we haven't really built all
+
+05:55.250 --> 06:00.540
+these components I want to start noticing these things as we build things.
+
+06:00.560 --> 06:06.560
+We're going to be thinking about how to stay organized instead of just having all the files in one directory
+
+06:06.680 --> 06:10.460
+instead of not having any organization right from the beginning of the project.
+
+06:10.460 --> 06:15.020
+We're starting to think about how we want to architect it and this is an important principle that we're
+
+06:15.020 --> 06:19.940
+going to take with us through all the rest of the course let's keep on.

@@ -1,0 +1,259 @@
+WEBVTT
+
+00:00.330 --> 00:02.140
+Welcome back everyone.
+
+00:02.160 --> 00:09.090
+In the last lesson we learned how to hook into this on create node method inside of our Gatsby no J.S.
+
+00:09.690 --> 00:15.390
+This method allowed us to hook into the build process when Gatsby would go through our files and build
+
+00:15.390 --> 00:21.960
+out the individual node representations of them and then we were specifically looking for nodes of the
+
+00:21.960 --> 00:24.480
+type of markdown remark.
+
+00:24.480 --> 00:30.840
+We then added this new node field on it equal to slug and the slug pointed to the new file path that
+
+00:30.840 --> 00:31.950
+we've made.
+
+00:31.950 --> 00:39.690
+So now that we've modified these markdown nodes we have the actual slug value that we can access inside
+
+00:39.750 --> 00:41.230
+of our application.
+
+00:41.340 --> 00:47.700
+And in this lesson we actually need to use that because we're going to build out the final pages that
+
+00:47.760 --> 00:54.690
+are markdowns represent inside of our website that point to the actual blog posts that we want the users
+
+00:54.690 --> 00:55.830
+to see.
+
+00:55.830 --> 01:03.170
+So just like we saw with our pages folder which had any files that we wanted to represent as the final
+
+01:03.170 --> 01:07.780
+page that our users could see we're going to do the same thing with our markdown files.
+
+01:09.230 --> 01:14.610
+So one thing that we have to know is that we have to use a another method inside of our Gatsby No j
+
+01:14.610 --> 01:21.430
+s I'm going to give you documentation to this API so that you can see any other methods you can access
+
+01:21.650 --> 01:26.020
+and you can also look up anything that we've already used before to get a better understanding of it.
+
+01:26.690 --> 01:35.080
+But the next one we're going to use is called create pages and create pages gets two arguments that
+
+01:35.080 --> 01:40.960
+we wanted to structure off the first one is just graphed you all which is pretty much the same way that
+
+01:40.960 --> 01:46.540
+we've made graph Q all queries before we can just now do so inside of our No j s and the other thing
+
+01:46.540 --> 01:50.170
+we get is actions.
+
+01:50.250 --> 01:57.540
+Now what we're going to pull off of these actions is the method create page create page is an action
+
+01:57.810 --> 02:06.060
+that allows us to actually build the pages inside of our application based on whatever properties we
+
+02:06.060 --> 02:09.900
+pass to it that will discover once we actually use it.
+
+02:09.920 --> 02:16.190
+So what we want to actually return from our create pages function right here though is we want to return
+
+02:16.340 --> 02:21.510
+a graph to a query that gives us back all of our markdown remarks.
+
+02:21.770 --> 02:29.200
+Then we're going to iterate over it and simply just call create page on each of those markdown notes.
+
+02:29.330 --> 02:34.170
+So in order for us to do this we have to use the graph Q all query that we got back.
+
+02:34.400 --> 02:40.010
+So to use it we're just going to say graph Q Well and then we're gonna pass it with these parentheses
+
+02:41.050 --> 02:47.860
+now if you're curious as to why inside of here we have to use these parentheses whereas inside of our
+
+02:47.860 --> 02:49.610
+front end react applications.
+
+02:49.630 --> 02:50.570
+We don't.
+
+02:50.680 --> 02:58.090
+This is because there's a new template syntax in iOS 6 that allows you to pass template literal strings
+
+02:58.870 --> 03:00.860
+like this in the front end.
+
+03:00.910 --> 03:06.310
+As long as you have access to iOS 6 which is pretty much equivalent to doing this there's really no
+
+03:06.310 --> 03:07.120
+difference.
+
+03:07.360 --> 03:11.680
+But because with no JSA we do not get iOS 6 features right out jump.
+
+03:11.680 --> 03:15.100
+We do not have access to writing it this way.
+
+03:15.190 --> 03:19.450
+So we have to pass these parentheses just if you're curious as to why here we have to do it.
+
+03:19.480 --> 03:23.350
+So that's just one thing you have to remember if you ever use the graph queue I'll query inside of your
+
+03:23.350 --> 03:24.550
+note jazz.
+
+03:24.550 --> 03:31.060
+Now there are setups that you can do with no jazz and express so that you do get to use that same syntax
+
+03:31.090 --> 03:33.430
+as you are familiar with in your front end.
+
+03:33.610 --> 03:39.130
+But in our case it's not necessary it's extra work that really just to avoid adding these parentheses
+
+03:39.550 --> 03:40.300
+is not worth it.
+
+03:41.770 --> 03:44.070
+But now that we have our graph you query it.
+
+03:44.080 --> 03:51.250
+We have to make the actual query for our all markdown remarks so we're going to do this inside of our
+
+03:51.250 --> 03:53.710
+graphical just so we can actually see this.
+
+03:53.860 --> 03:59.020
+So inside of your playground what you're gonna do is you are going to click all marked down remark.
+
+03:59.170 --> 04:01.120
+We want the edges.
+
+04:01.120 --> 04:03.000
+We want the note from these edges.
+
+04:03.040 --> 04:05.280
+We want the fields and off these fields we want the slug.
+
+04:05.320 --> 04:11.980
+If we fire off this request we see that this is going to be the object we get back we're going to need
+
+04:11.980 --> 04:18.820
+to pull off this edges array and iterate over this so that we can call create page using each of these
+
+04:18.820 --> 04:23.280
+node objects to build the actual page because this holds the data that we need.
+
+04:23.350 --> 04:26.240
+So let's just copy over our query object.
+
+04:26.260 --> 04:32.410
+We'll go back to our code and just paste this in now graph Q Well the method will simply return as a
+
+04:32.410 --> 04:36.100
+result inside of a promise.
+
+04:36.130 --> 04:43.870
+So once this resolves we just call dot then on it and we will get the result value and off of that result
+
+04:43.870 --> 04:45.640
+value it will be that shape that we saw.
+
+04:45.790 --> 04:52.700
+So we want to look at the data and off the data we want are all marked down remark and all our markdown
+
+04:52.710 --> 04:55.830
+remark we want the edges array.
+
+04:55.830 --> 05:01.860
+So we just want to loop over this array with for each and for every element inside we want to pluck
+
+05:01.860 --> 05:03.920
+off the note because that's all we need
+
+05:06.820 --> 05:14.200
+now with this node we are going to call create page and we're going to pass create page a object and
+
+05:14.200 --> 05:19.780
+this object is going to define the properties that this create page needs in order to actually build
+
+05:19.810 --> 05:21.310
+out the page that we're looking for.
+
+05:21.310 --> 05:27.820
+So the first thing it needs is the path the path will tell it in the final application what path actually
+
+05:27.880 --> 05:29.780
+leads to this page that I'm building.
+
+05:30.040 --> 05:32.710
+And this is where we're going to use our slug.
+
+05:32.710 --> 05:38.800
+So we're gonna say node fields that slug and here we're going to pass the actual component.
+
+05:38.800 --> 05:47.560
+Now the component is going to be the template that it uses in order to actually populate out the final
+
+05:47.650 --> 05:48.970
+blog post.
+
+05:48.970 --> 05:52.570
+So this is pretty much going to be a react component.
+
+05:52.570 --> 05:58.220
+And here we're going to make the new blog post template that we need to use for this context.
+
+05:58.300 --> 06:03.130
+So we do want to keep this component that we're going to build separate from our front end components
+
+06:03.160 --> 06:06.800
+because it will only be used inside of our Gatsby No j s file.
+
+06:07.090 --> 06:12.730
+So we'll make a new folder called templates and inside of here we're gonna make a new file called blog
+
+06:12.730 --> 06:15.190
+post doc J us.
+
+06:15.220 --> 06:20.800
+So normally you might be used to every react component that we write being dodgy ASX and this is totally
+
+06:20.800 --> 06:27.250
+valid too if you want to make it dodgy X but because every single react component that we have inside
+
+06:27.310 --> 06:35.380
+of our Gatsby folder is a dodgy s file for consistency sake we'll just use dot J.S. babble and knows
+
+06:35.380 --> 06:40.270
+that if you have react inside of your javascript it will convert it to regular javascript so it's not
+
+06:40.270 --> 06:42.520
+a big issue it'll still work.
+
+06:42.520 --> 06:49.960
+So here we're just going to say blog post dot J us now because this video is getting too long.
+
+06:50.060 --> 06:54.290
+Let's just break this up and continue this inside of our next lesson.

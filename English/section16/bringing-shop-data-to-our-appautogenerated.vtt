@@ -1,0 +1,541 @@
+WEBVTT
+
+00:00.800 --> 00:08.120
+In the last lesson we explored a visual representation of what we did in the previous lessons and what
+
+00:08.120 --> 00:15.350
+we need to do in the upcoming lessons but from a coding perspective there are certain things that we
+
+00:15.350 --> 00:22.870
+actually have to consider regarding our architecture before we actually start coding out our solution.
+
+00:22.880 --> 00:31.640
+So what we know is that we need to pull the data on our fire store collections collection into our application
+
+00:31.790 --> 00:33.290
+and then store it in our redux.
+
+00:33.320 --> 00:41.330
+So our application has access to it by using the selectors and pulling them from the appropriate reducer.
+
+00:41.330 --> 00:45.330
+Now there are actually two things we need to think about first.
+
+00:45.330 --> 00:51.590
+The first is that when looking at this data is this data complete.
+
+00:51.810 --> 00:59.130
+Does the data represent everything that I need in order to utilize it best for my application.
+
+00:59.140 --> 01:06.940
+Well you remember that when we stored our collections data inside a fire store we removed the root Name
+
+01:06.940 --> 01:14.650
+property and the reason we did that was because the data of the wrote name is not important to the back
+
+01:14.650 --> 01:19.510
+end because it's only relevant to the front.
+
+01:19.520 --> 01:27.620
+In other words it's only important to our desktop web application what the root name needs to be.
+
+01:27.620 --> 01:34.460
+If we had say a native mobile application that was also pulling in this collection data it doesn't need
+
+01:34.460 --> 01:36.080
+that data at all.
+
+01:36.080 --> 01:41.330
+In fact that's just simply cluttering up the memory allocation for our database.
+
+01:41.480 --> 01:48.380
+And it's also cluttering up the data that we're pulling in to other applications that are not our web
+
+01:48.650 --> 01:50.240
+application.
+
+01:50.240 --> 01:58.850
+So with that in mind we know that we need to add this root Name property back onto the data that we
+
+01:58.850 --> 02:01.050
+pull in from firestorm.
+
+02:01.220 --> 02:02.940
+So that's one thing.
+
+02:02.950 --> 02:10.030
+The other thing we need to think about is where inside of our applications components tree do we actually
+
+02:10.030 --> 02:16.480
+want to put the code that will fetch this data as well as store inside of our redux.
+
+02:16.480 --> 02:22.730
+The reason that we have to make this consideration is due to the nature of how the application is set
+
+02:22.730 --> 02:23.530
+up.
+
+02:23.740 --> 02:32.830
+Now if we go to this diagram let's imagine that this tree represents our components if you imagine the
+
+02:32.830 --> 02:34.630
+top level here is our app.
+
+02:35.230 --> 02:37.080
+Let's say this was our header.
+
+02:37.090 --> 02:38.790
+Let's say this was our shop page.
+
+02:38.800 --> 02:42.190
+This was our collections preview or our collections overview page.
+
+02:42.490 --> 02:47.330
+And let's say this is the collection page for the individual collections.
+
+02:47.500 --> 02:54.940
+We know that both these components actually need the data that we are pulling from our collections in
+
+02:55.000 --> 02:56.390
+our fire store.
+
+02:56.410 --> 03:01.930
+So I want you to actually pause the video and think where based on this tree do you think we should
+
+03:01.930 --> 03:04.230
+put the code to actually fetch that data.
+
+03:05.020 --> 03:13.980
+So positive video and think about the answer now hopefully you'd gave it some thought and if you guessed
+
+03:14.490 --> 03:18.420
+inside of this node then you are correct.
+
+03:18.420 --> 03:26.460
+The reason we want to put the code in the nearest ancestor to any place in our application that needs
+
+03:26.820 --> 03:33.660
+the actual data that we're fetching is because we want to only write the code that fetches that data.
+
+03:33.660 --> 03:42.120
+One time we don't want to write that code in both these places because if we do that we have to repeat
+
+03:42.150 --> 03:43.900
+our code more than once.
+
+03:44.040 --> 03:51.060
+Even if they're doing the exact same thing and by the nature and principle of writing code in a dry
+
+03:51.060 --> 03:53.580
+manner meaning don't repeat yourself.
+
+03:53.580 --> 04:02.330
+We want to put it inside of the nearest parent that will call the code to fetch that data from our fire
+
+04:02.330 --> 04:03.360
+store.
+
+04:03.420 --> 04:09.660
+So let's say for pure examples case we had a component here that needs the data and a component here
+
+04:09.660 --> 04:16.960
+that needs the data well the nearest parent for these is actually our top level app component.
+
+04:17.260 --> 04:23.450
+And for this reason this is where we would end up putting the code in order for these components to
+
+04:23.460 --> 04:31.240
+have access to that data because when we render the appropriate children we want to either have that
+
+04:31.240 --> 04:38.230
+data already loaded or in the process of being fetched and the way that react renders its components
+
+04:38.530 --> 04:41.710
+is always when you render this component.
+
+04:41.710 --> 04:49.210
+So let's say our collection page when you mount this you've actually mounted all of the parents as well
+
+04:49.630 --> 04:55.710
+and these parents are always going to render first before the child renders for this reason.
+
+04:55.710 --> 05:01.630
+This is how we can initialize the data that will fetch the data that these components that our children
+
+05:01.630 --> 05:02.950
+will need.
+
+05:02.950 --> 05:06.660
+Also it allows us to follow this dry principle.
+
+05:06.790 --> 05:09.470
+So that's the main thing that we need to do.
+
+05:10.130 --> 05:15.920
+So knowing this this node actually represents our shop component which is where we hold our collections
+
+05:15.950 --> 05:19.800
+overview as well as our collection page components.
+
+05:19.820 --> 05:28.630
+So let's start writing the code to convert that code over inside of our shop component itself.
+
+05:28.630 --> 05:36.160
+We need to leverage the component did mount lifecycle method in order to perform the actual fetch.
+
+05:36.310 --> 05:42.550
+Now that fetch code is going to look very similar to the code that we already wrote inside of our app
+
+05:42.560 --> 05:46.290
+Jess when we fetch the authenticated state of our user.
+
+05:46.870 --> 05:53.110
+And the reason we put this here inside of the top level app node was for the exact same reason our entire
+
+05:53.110 --> 05:55.540
+application might need the current user.
+
+05:55.540 --> 06:00.790
+So it makes the most sense to put it in the component that of course will render first at the highest
+
+06:00.790 --> 06:02.490
+level which is our app component.
+
+06:03.830 --> 06:09.860
+Now inside of our shop component the first thing we need to do is convert this functional component
+
+06:09.860 --> 06:13.460
+that is our shop page over to a class based component.
+
+06:13.580 --> 06:15.020
+So let's do that.
+
+06:15.050 --> 06:21.830
+So in order to do that we actually need to switch this concept to a class and then we need to say extends
+
+06:21.900 --> 06:24.840
+Reactor Component.
+
+06:25.000 --> 06:31.390
+We're gonna put these squiggly braces and then we're gonna cut this coda all we need to remember is
+
+06:31.390 --> 06:35.380
+that we're pulling the match off of the props in our functional component.
+
+06:35.380 --> 06:42.760
+So we'll get rid of this and we'll copy this bracketed code over what we're going to do now is inside
+
+06:42.760 --> 06:44.200
+of our render statement.
+
+06:44.320 --> 06:48.740
+We are going to return that code that we just had.
+
+06:48.850 --> 06:52.740
+We're also going to d structure the match off of our props.
+
+06:52.870 --> 06:57.930
+So we'll do that by saying match equals this stuff props.
+
+06:57.940 --> 07:00.290
+And now our component is converted.
+
+07:01.000 --> 07:05.890
+If you just remember the format of doing it like that it's very easy to convert from functional component
+
+07:06.010 --> 07:08.640
+over to a class component.
+
+07:08.700 --> 07:15.450
+So now that we have this we actually need to write our component did mount method before we do that.
+
+07:15.460 --> 07:24.790
+We got to think whenever we do this pattern we know that we are going to end up subscribing to some
+
+07:25.060 --> 07:25.710
+reference.
+
+07:25.720 --> 07:26.710
+Right.
+
+07:26.800 --> 07:32.410
+And before we do that we need to remember that we actually need to also unsubscribe from it whenever
+
+07:32.410 --> 07:34.360
+we unmet our component.
+
+07:34.420 --> 07:41.100
+Just like we did inside of our app I'll definitely touch upon this subscriber pattern a little more
+
+07:41.190 --> 07:45.840
+in a couple lessons from now because we're going to take a deeper dive into what this is doing.
+
+07:46.230 --> 07:51.930
+But for now you just need to know that that's the main thing we gotta remember to do is set this unsubscribe
+
+07:52.290 --> 07:54.930
+value inside of our class component.
+
+07:54.990 --> 08:03.740
+So what we're going to do is we are going to write this new unsubscribe from snapshot method.
+
+08:03.830 --> 08:11.870
+Now this snapshot is going to be the snapshot representation of our collections array that we're going
+
+08:11.870 --> 08:21.170
+to get from firestorm and we're going to fetch that inside of our component did mount method and the
+
+08:21.260 --> 08:22.610
+actual coach do that.
+
+08:22.610 --> 08:25.000
+We're going to leverage our fire story.
+
+08:25.550 --> 08:33.790
+So what we'll do is we will pull in our Firestarter library from our fire store utilize so we're going
+
+08:33.790 --> 08:42.170
+to write import fire store from Fire Base firebase utilize now that we have this.
+
+08:42.390 --> 08:48.000
+What we'll do inside of our component at Mount is we'll say cost collection ref
+
+08:50.830 --> 08:54.130
+equals fire store dock collection.
+
+08:54.430 --> 08:57.190
+And then the name of our collection which is collections
+
+09:00.160 --> 09:00.330
+now.
+
+09:00.340 --> 09:04.990
+As you remember that was the title of our collections collection inside a firestorm.
+
+09:05.470 --> 09:09.860
+So I know it's a little confusing naming wise but that's just sometimes how it goes.
+
+09:10.730 --> 09:16.370
+Now that we have it what we want to do is we want to get this data.
+
+09:16.550 --> 09:23.720
+So in order to get this data we're actually going to use a method on this new collection ref that we've
+
+09:23.720 --> 09:30.110
+already used before which is inside of our app J.S. if you remember with our user ref we checked on
+
+09:30.170 --> 09:30.820
+snapshot.
+
+09:31.370 --> 09:35.020
+So we're going to use that exact same method except with our collection.
+
+09:35.510 --> 09:43.430
+So we'll say collection ref dot on snapshot meaning that whenever the collection ref updates or whenever
+
+09:43.430 --> 09:49.580
+this code gets run for the first time this collection ref will send us the snapshot representing the
+
+09:49.580 --> 09:56.030
+code of our collections objects array at the time when this code renders.
+
+09:56.030 --> 10:03.620
+Now we know that inside of what we get back from on snapshot will be the snapshot object of our collection.
+
+10:03.620 --> 10:10.910
+But we also know that we want to perform some asynchronous requests because the data is on the actual
+
+10:11.240 --> 10:14.860
+objects inside of this query snapshot as we'll see.
+
+10:14.870 --> 10:20.900
+So what we'll do is we will write an async function and this function is going to get snapshot as the
+
+10:20.900 --> 10:21.980
+property.
+
+10:22.370 --> 10:27.980
+And then what we'll do is we'll simply console log out the snapshot to see what it is that we got back
+
+10:27.980 --> 10:35.430
+from firestorm and now if we look in our application we see that this is the query snapshot and inside
+
+10:35.430 --> 10:43.560
+of this snapshot object we see the docs which is a property that holds all of these five documents as
+
+10:43.560 --> 10:48.620
+the snapshot that we have if we actually want the value we'll have to call dot data on them.
+
+10:48.690 --> 10:56.170
+But we see that the idea lines up with what the actual objects ideas are inside of our back at database.
+
+10:56.430 --> 10:58.380
+So we know we're getting the right data.
+
+10:58.920 --> 11:05.010
+But now what we need to do is we need to actually transform this data into the right shape that we need
+
+11:05.550 --> 11:10.260
+as well as add any values that it doesn't have such as our wrote name.
+
+11:10.260 --> 11:15.840
+So how we'll do that is we will pass it into a function in our firebase utilize.
+
+11:16.020 --> 11:20.190
+Very similar to how we did it when we wrote this create user profile document code.
+
+11:21.030 --> 11:27.040
+So what we'll do is we'll open up our firebase utilize and we'll write this new function.
+
+11:27.050 --> 11:30.440
+Now this function is going to get the whole snapshot.
+
+11:30.440 --> 11:39.510
+And how we'll do that is we will set up this new concept called convert collections snapshot to map
+
+11:40.020 --> 11:46.280
+because we want to convert it to an object instead of the array that we know we're going to get back.
+
+11:46.290 --> 11:54.770
+So what we'll do is we will write this function so that it gets this snapshot object so this will actually
+
+11:54.770 --> 11:56.880
+be called the collections.
+
+11:56.930 --> 12:06.510
+So let's actually write this as a error function and then what we'll do is we will write out this actual
+
+12:06.510 --> 12:12.750
+transformation on the dark objects that we just looked at which was that array of query snapshot documents
+
+12:13.320 --> 12:22.080
+and we will make sure that we return from this modification the right object with not only the right
+
+12:22.170 --> 12:26.100
+properties but also our new rolling property.
+
+12:26.100 --> 12:34.860
+So what we'll do is we will say const transformed collection is going to equal collections done docs.
+
+12:35.060 --> 12:41.540
+So Doc docs is gonna give us our query snapshot array that we were looking at right here and what we'll
+
+12:41.540 --> 12:44.960
+do is we'll say dot map on this docs.
+
+12:45.080 --> 12:54.060
+Now in each one we're going to get the document object and what we'll do is we will pull off the title
+
+12:55.030 --> 13:01.600
+and the items which are the two properties that we want from the actual Doc data.
+
+13:01.690 --> 13:04.650
+So you remember we need to in order to get the data off the snapshot.
+
+13:04.660 --> 13:06.560
+We've got to call the data method.
+
+13:06.730 --> 13:14.560
+So once we pull off these properties what we need to return from this is an actual object right from
+
+13:14.560 --> 13:21.060
+this map function that represents the final object representing all the data we want for our front end.
+
+13:21.880 --> 13:28.030
+So we know that we want this name that we know we don't have on our back it and all we're going to do
+
+13:28.090 --> 13:31.710
+is we are going to call this javascript method call in code.
+
+13:31.720 --> 13:37.500
+You are I this method comes with every javascript render.
+
+13:37.500 --> 13:44.490
+And what you can do with it is pass it some string and it'll give you back a string where any characters
+
+13:44.490 --> 13:51.270
+that A you are l cannot actually handle or process such as certain symbols spaces or whatever that you
+
+13:51.270 --> 13:58.380
+actually never see in a you or l it will make sure to convert them into a virgin that the U R L can
+
+13:58.380 --> 13:59.730
+actually read.
+
+13:59.970 --> 14:06.040
+So we know we need to do this because our route name is a thing that we use in order to route by.
+
+14:06.090 --> 14:06.670
+You are out.
+
+14:07.200 --> 14:13.170
+So what we'll pass in is just the title because we know the title is going to be pretty much the same
+
+14:13.170 --> 14:15.480
+string that we want for our routing.
+
+14:15.540 --> 14:21.630
+So hats jackets sneakers whatever that title is we're gonna also use it for the root name but we also
+
+14:21.630 --> 14:29.890
+want to make sure that we lowercase it so once we've done that we also want our I.D..
+
+14:30.230 --> 14:36.980
+So the I.D. we actually don't get on the doc doc data we get from the actual document itself.
+
+14:36.980 --> 14:44.510
+So this is just going to be Doctor I.D. because the I.D. belongs on the doc snapshot object but we want
+
+14:44.510 --> 14:47.600
+it in the object that we end up storing in our redux.
+
+14:47.600 --> 14:53.220
+Once we have that we can simply pass in our title and items as we've D structure them.
+
+14:53.600 --> 14:58.220
+And now this is going to be the final shape of the object we want.
+
+14:58.220 --> 15:05.980
+So let's just make sure to actually console log our new transformed collection and then let's export
+
+15:05.980 --> 15:11.740
+this out and use it so that we can actually see if our code is working and we're getting the right object
+
+15:11.740 --> 15:12.760
+that we want in the end.
+
+15:13.390 --> 15:18.680
+So inside of our shop component we are also now going to import that new method we wrote.
+
+15:18.830 --> 15:26.040
+Now what we're going to do is we're just going to pass this into the snapshot so if we save this and
+
+15:26.060 --> 15:32.270
+we go back to our application we see that we get an array of our objects and there we go.
+
+15:32.270 --> 15:34.670
+It is in the shape that we actually want.
+
+15:34.700 --> 15:35.650
+We have our I.D..
+
+15:35.810 --> 15:36.710
+We have our items.
+
+15:36.770 --> 15:43.020
+We have a root name and we have our title so everything is working as we want it to.
+
+15:43.030 --> 15:48.190
+So now that we have our data in the right shape that we want and we've put in the right place in our
+
+15:48.190 --> 15:55.720
+component tree we need to convert this from an array to the final object map that we were talking about
+
+15:56.320 --> 16:01.210
+as we had originally had it inside of our front an application.
+
+16:01.210 --> 16:03.360
+So we'll do that in the next lesson.
+
+16:03.400 --> 16:04.690
+So I'll see you in that lesson.

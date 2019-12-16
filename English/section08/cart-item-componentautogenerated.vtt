@@ -1,0 +1,169 @@
+WEBVTT
+
+00:01.200 --> 00:05.820
+OK now let's create our cart item component.
+
+00:05.820 --> 00:12.990
+Now we know that the items that our cart item components will be getting will be the same item as the
+
+00:12.990 --> 00:21.220
+one that we display in our collection items because in our collection items we get an image url.
+
+00:21.430 --> 00:26.930
+We get the price we get the name and then we also now know we'll get a quantity.
+
+00:26.950 --> 00:32.910
+Because we'll be pulling that item off from our state.
+
+00:32.930 --> 00:41.640
+So what we're gonna do keeping in mind these properties is first we're going to make our component so
+
+00:41.640 --> 00:50.220
+we'll make a cart item component and create our usual files our cart item component digests X and our
+
+00:50.220 --> 01:03.420
+cart item styles does SOF and inside of our car item component we need our react from react and we'll
+
+01:03.420 --> 01:13.250
+also need our cart item styles and now what we're going to set as our car item will be a functional
+
+01:13.250 --> 01:20.330
+component where we'll d structure off those properties that we need from our item but we'll probably
+
+01:20.330 --> 01:29.110
+pass the whole item through so we're gonna get the item and off of it we want the image URL we want
+
+01:29.110 --> 01:32.330
+the price and we also want the name
+
+01:35.360 --> 01:48.330
+and what we'll do is we will return a div with the class name of cart item.
+
+01:48.390 --> 01:57.080
+We're also going to need an image where the source points to our image euro and for the old key we'll
+
+01:57.090 --> 02:09.830
+just say that it's an item and then inside of our div we can say this thing is our item details container
+
+02:10.430 --> 02:18.470
+because looking at the actual component on the left side is our image but on the right side is our details
+
+02:20.280 --> 02:27.860
+so here we're gonna have a span with the class name of name or we'll display the name
+
+02:31.030 --> 02:36.130
+and then we'll have the same thing except for price where we'll have the price
+
+02:42.320 --> 02:47.400
+with our dollar sign and now let's export this as the default
+
+02:51.280 --> 02:55.210
+and we'll also need our quantity which we know will also get
+
+02:58.550 --> 03:06.990
+the structure that off and we can just explicitly say quantity times this amount.
+
+03:07.020 --> 03:19.670
+So now if we look at our cart item styles I have also provided for you the styling here and now we just
+
+03:19.670 --> 03:28.940
+need to import the car item into our cart component cart dropdown so let's import in our new cart item
+
+03:33.190 --> 03:40.860
+and in our cart dropdown we need to display it inside of this div but we need access to those cart items.
+
+03:40.900 --> 03:46.750
+So what we're gonna do is we're going to pull them off using connect off of our retail store
+
+03:51.640 --> 03:55.540
+and what we will write is our maps date to props
+
+03:58.040 --> 04:10.510
+equals are function where we get state and what little return is carte items which will go to state
+
+04:12.090 --> 04:12.450
+actually.
+
+04:12.450 --> 04:14.490
+Let's just d structure it off state.
+
+04:14.490 --> 04:17.340
+So we need cart and then off cart.
+
+04:17.340 --> 04:24.520
+We need cart items and we can just have it horse cart items like this.
+
+04:25.530 --> 04:34.600
+What connect with our map stage props and now we'll d structure our cart items here.
+
+04:36.420 --> 04:46.180
+And inside of our car items we can map out our cart items.
+
+04:46.180 --> 04:49.840
+So cart items that map but the cart.
+
+04:49.840 --> 05:00.940
+Item and we will render our car item component where the key goes to our cart.
+
+05:01.020 --> 05:06.210
+Item I.D. and item is the cart.
+
+05:06.210 --> 05:06.440
+Item
+
+05:12.090 --> 05:14.450
+got to be careful that casing okay.
+
+05:16.020 --> 05:21.870
+And now if we look at our actual code we open up our component.
+
+05:22.760 --> 05:32.310
+And if we add our item there it is we're able to now add as many items as we want and we have them displayed
+
+05:32.310 --> 05:32.610
+here.
+
+05:34.320 --> 05:40.680
+So in a similar way once we make our checkout page it'll be pretty much the same thing.
+
+05:41.040 --> 05:47.670
+We add the items we'll pull them into the component and we'll display them this pattern.
+
+05:47.670 --> 05:55.130
+Now we've seen a couple of times now is hopefully very very easy to write.
+
+05:55.170 --> 06:00.720
+You can see that once you get used to writing the code in the reduced hours there's not much complexity
+
+06:00.720 --> 06:07.580
+when it comes to how to separate out your code that's kind of the amazing thing about redux is that
+
+06:07.670 --> 06:14.930
+it just follows our unit directional data flow pattern that we need and we need to think about when
+
+06:14.930 --> 06:17.060
+writing our real code.
+
+06:17.260 --> 06:25.000
+We have these actions that trigger state changes and then using that state we pull them into our components
+
+06:25.270 --> 06:33.110
+and then we display the respective elements that we need so we will do this a couple more times but
+
+06:33.110 --> 06:40.920
+hopefully by now you can see the benefit of what redux does for us and this pattern.
+
+06:41.100 --> 06:56.130
+OK so now that we have our card dropdown let's commit our code Stannis and get commit created cart item
+
+06:56.130 --> 07:00.900
+component and connected our cart dropdown
+
+07:04.760 --> 07:07.760
+cart items reducer
+
+07:12.050 --> 07:13.080
+awesome.
+
+07:13.130 --> 07:14.090
+Now let's continue.

@@ -1,0 +1,214 @@
+WEBVTT
+
+00:00.620 --> 00:03.110
+Hello everyone and welcome back.
+
+00:03.110 --> 00:08.660
+In this lesson we are going to take a quick look at the new performance tool that react released in
+
+00:08.660 --> 00:10.210
+sixteen point ten.
+
+00:10.340 --> 00:17.630
+The profiler API so this profile API is just a quick little component that allows us to check how much
+
+00:17.630 --> 00:21.760
+time it takes are components to render or mount.
+
+00:21.800 --> 00:27.350
+It's very similar to the dev tools profiler that we've used extensively already in this section of the
+
+00:27.350 --> 00:28.050
+course.
+
+00:28.160 --> 00:32.930
+But this is something new and I want to show everyone how to use it.
+
+00:32.960 --> 00:39.590
+So in this case you have to make sure that you are running at least react sixteen point ten and the
+
+00:39.590 --> 00:44.960
+easiest way to check which version you have running is to go into your terminal go into your project
+
+00:45.050 --> 00:48.270
+and go into your client profile folder.
+
+00:48.260 --> 00:54.500
+There's a chance that you are in your base folder and at this point of course you probably already have
+
+00:54.590 --> 00:57.380
+the backend node server folder setup.
+
+00:57.770 --> 01:01.460
+So as you remember our client folder is a child of that folder.
+
+01:01.490 --> 01:08.140
+So just go into that and this is where our front end react application and it's packages are hosted.
+
+01:08.210 --> 01:16.220
+So what we can do is simply use other NPM or yarn and use the list function to check against what version
+
+01:16.270 --> 01:17.610
+of react we have.
+
+01:18.200 --> 01:20.860
+So in my case I have sixteen point ten point two.
+
+01:21.050 --> 01:26.390
+If you don't have this just upgrade the version using the NPM or a yarn and upgrade it to the latest
+
+01:26.390 --> 01:30.020
+version or the version that you want that is at least sixteen point ten.
+
+01:30.020 --> 01:37.830
+So let's dive right into how we use it so inside of our code here we want to go to a component or page
+
+01:37.860 --> 01:39.390
+that we want to test.
+
+01:39.390 --> 01:45.520
+So in my case I want to test the home page because what I really want to test is the directory component.
+
+01:45.840 --> 01:52.170
+So to do so we just simply import in the profiler from react.
+
+01:52.170 --> 01:55.820
+And it is a new component that we can use to use it.
+
+01:55.830 --> 02:00.020
+We just want to wrap it around whichever component we're looking to test.
+
+02:00.020 --> 02:08.920
+So in my case I want to test the directory component so by doing this I am now wrapping around the directory
+
+02:08.950 --> 02:16.170
+and the profile will give me information about the time it takes to render this section of our DOM tree.
+
+02:16.240 --> 02:19.450
+Now the profile component is going to take two properties.
+
+02:19.450 --> 02:22.650
+The first is an I.D. which is a string.
+
+02:22.900 --> 02:29.530
+And this is just an identifier that we can use to distinguish which profiler is logging which data because
+
+02:29.530 --> 02:32.830
+you can actually have multiple profiles all around your application.
+
+02:32.830 --> 02:34.540
+You can nest them within each other.
+
+02:34.540 --> 02:39.760
+You've just given an I.D. so that when you log out this information you know which profiler is logging
+
+02:39.760 --> 02:41.340
+which information.
+
+02:41.350 --> 02:47.140
+So here I'm going to say that this is our directory and then the second property you're gonna pass it
+
+02:47.170 --> 02:49.390
+is an on render call.
+
+02:49.570 --> 02:55.570
+Now this is going to be a function and this function is going to receive numerous arguments not all
+
+02:55.570 --> 02:59.680
+of them are important but the first three are important.
+
+02:59.740 --> 03:03.810
+One key thing to remember here is that this is not an object so you cannot destructive them.
+
+03:03.820 --> 03:10.610
+You must either remember the order in which it's important or at the very least check the documentation.
+
+03:10.630 --> 03:14.950
+Now I'm only going to use the firstly because I think they are the most important but I will link you
+
+03:14.950 --> 03:19.580
+the documentation to this profiler so you can see what else you have access to.
+
+03:19.840 --> 03:26.170
+In this case the first three are I.D. phase and the actual duration
+
+03:29.830 --> 03:35.440
+what we're going to do is we're going to console log an object that has these three things that we're
+
+03:35.440 --> 03:39.230
+getting in our function.
+
+03:39.290 --> 03:46.490
+Now the idea of course is the string identifier that we passed in the phase is going to be either the
+
+03:46.490 --> 03:54.380
+Mount phase or a re render phase and then the actual duration is going to be the duration time it took
+
+03:54.380 --> 03:58.910
+to in milliseconds to actually render out our component.
+
+03:58.940 --> 04:04.070
+Now the phase as we know with our life cycles our component is either mounting or it's updating.
+
+04:04.070 --> 04:05.960
+So those are the only two phases you're going to see.
+
+04:05.990 --> 04:09.490
+So that's what I mean when I say re render it's just an update phase.
+
+04:10.130 --> 04:15.740
+So now that we save this we go back to our application and since I'm on my homepage you'll see that
+
+04:15.740 --> 04:22.850
+here an object got logged out and this is our object you'll see here the idea is that directory string
+
+04:23.450 --> 04:28.790
+the phase of course is the mount because our application refreshed when I saved and then it mounted
+
+04:28.790 --> 04:33.950
+our director component on and the actual duration here we see is 40 milliseconds.
+
+04:33.950 --> 04:36.820
+So this is the amount of time it actually took to do this.
+
+04:37.100 --> 04:42.370
+If I navigate away and I come back you'll see that it will be log again.
+
+04:42.380 --> 04:48.020
+But now even though we're still on our Mount phase our actual duration is shorter because there are
+
+04:48.020 --> 04:52.730
+certain optimizations within react that it's making even though it's re mounting.
+
+04:52.820 --> 04:56.690
+So even then though a difference of 30 milliseconds is very insignificant.
+
+04:56.690 --> 05:03.500
+This is only again important if you notice there are slow downs and you want to optimize the profiler
+
+05:03.500 --> 05:08.360
+is just another tool that you can use in your performance analysis tool belt.
+
+05:08.540 --> 05:13.490
+And now that you know how to use it you can use it in conjunction with of course the performance profile
+
+05:13.490 --> 05:18.490
+or dev tool that we've seen before in earlier lessons in this performance section.
+
+05:18.830 --> 05:21.040
+But this is just another tool.
+
+05:21.080 --> 05:22.860
+So with that try it out.
+
+05:23.090 --> 05:28.180
+Look at the documentation see what else is available to you inside of that on render callback.
+
+05:28.190 --> 05:35.150
+Play around with it and again optimize improve performance only where needed.
+
+05:35.150 --> 05:36.120
+Good luck everyone.
+
+05:36.260 --> 05:37.970
+And I will see you in the next lesson.

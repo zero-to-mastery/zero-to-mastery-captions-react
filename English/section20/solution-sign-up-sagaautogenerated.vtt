@@ -1,0 +1,373 @@
+WEBVTT
+
+00:00.750 --> 00:02.150
+Welcome back.
+
+00:02.310 --> 00:08.630
+So hopefully everybody got a chance to try and tackle moving this code into its own saga.
+
+00:08.880 --> 00:15.330
+If you are able to do it hopefully you're also able to sign our user in after they've successfully signed
+
+00:15.330 --> 00:16.260
+up.
+
+00:16.260 --> 00:17.910
+If not that's totally fine.
+
+00:17.910 --> 00:22.320
+We are going to build out this feature ourselves right now.
+
+00:22.320 --> 00:27.210
+So the first thing we need to do is we need to create the respective sign up.
+
+00:27.210 --> 00:29.380
+Success failure and start actions.
+
+00:30.480 --> 00:31.650
+So let's make those now.
+
+00:31.710 --> 00:32.700
+Sign up start
+
+00:36.600 --> 00:43.890
+goes to sign up start and then the same for the respective success and failure action types
+
+00:48.960 --> 00:58.640
+then we need to create our user actions so let's make our methods or our action creators will need our
+
+00:58.640 --> 01:08.430
+sign up start which will get a set of user credentials so we can just pass them in like this as a whole
+
+01:08.430 --> 01:11.020
+object that we will set as our payload.
+
+01:12.280 --> 01:18.850
+Now what these credentials will be when we look at our actual sign up component is we know we need the
+
+01:18.850 --> 01:22.530
+email and the password for our create user with email and password.
+
+01:22.690 --> 01:26.440
+But we're also going to need our display name after from this form.
+
+01:26.830 --> 01:30.610
+So we'll pass off three in as an object called user credentials
+
+01:33.700 --> 01:39.820
+so we know that our user action type is sign up start.
+
+01:40.520 --> 01:45.080
+And our payload will go to our user credentials.
+
+01:45.650 --> 01:56.390
+Now inside of our sign up success we know that once we get our sign up success from this off dot create
+
+01:56.420 --> 02:01.250
+user with email and password object that this is the object we want to succeed with.
+
+02:01.550 --> 02:07.610
+But afterwards in order for us to actually create it in our backend we do need to run our create user
+
+02:07.610 --> 02:14.030
+profile document using our new off object right that we get back as well as the additional information
+
+02:14.030 --> 02:15.440
+of their displaying it.
+
+02:15.650 --> 02:20.990
+So we want to pass both these properties in this being the additional data that our create user profile
+
+02:21.020 --> 02:22.330
+document function needs.
+
+02:22.340 --> 02:29.260
+If we look at Firebase utilize this additional data which gets spread into our asset but we also need
+
+02:29.260 --> 02:35.330
+the user so we're just gonna pass both of those into our sign up success call.
+
+02:35.360 --> 02:47.190
+So here we are going to pass in this object that has a user and an additional data property and here
+
+02:47.190 --> 02:50.370
+we're going to set type equals user action types.
+
+02:50.430 --> 02:52.170
+Sign up success
+
+02:55.270 --> 03:01.210
+and payload will go to an object with user and additional data.
+
+03:01.230 --> 03:06.240
+Now you might wondering why don't we just put this as some namespace that represents this object and
+
+03:06.240 --> 03:08.860
+just pass the whole object through.
+
+03:08.940 --> 03:12.840
+I think it's just a little bit more clear when you look at this action of what you're hoping to get
+
+03:12.840 --> 03:13.580
+back.
+
+03:13.650 --> 03:17.550
+I mean personally it's up it's a personal preference if you just pass an object that's perfectly fine
+
+03:17.550 --> 03:19.100
+as well.
+
+03:19.120 --> 03:32.340
+Finally we need our concert sign up failure which gets the error and fires off our type of user action
+
+03:32.370 --> 03:41.850
+types not sign up failure and payload goes to air
+
+03:45.050 --> 03:56.460
+and now we just got to open up our saga so here we're gonna make a new function called on sign up
+
+04:00.850 --> 04:11.470
+and it's going to take latest of our user action types does sign up start and then we're gonna call
+
+04:11.470 --> 04:14.380
+our sign up method which we need to write
+
+04:18.940 --> 04:25.570
+and here we're gonna get our user credentials which we're passing through as the actions payload so
+
+04:25.570 --> 04:31.810
+we've got to make sure to D structure off the payload and then what we'll need is the email the password
+
+04:32.080 --> 04:43.270
+and the display name so once we have these values what we're going to do is we are going to move over
+
+04:43.270 --> 04:46.750
+our tri code into this action.
+
+04:47.080 --> 04:53.210
+So the only thing we really need is actually this one it's just this first half
+
+04:56.180 --> 04:58.920
+and instead of a wait we've got a yield right.
+
+04:58.980 --> 05:10.790
+So we pluck off the user using this process and we also need to make sure that we catch any errors if
+
+05:10.790 --> 05:11.360
+we do.
+
+05:11.390 --> 05:15.070
+We're going to fire off our sign up failure methods.
+
+05:15.260 --> 05:17.570
+So let's import those in as well.
+
+05:17.570 --> 05:28.400
+Sign up success and sign up failure and now as we remember if we have an error we're gonna put our sign
+
+05:29.150 --> 05:31.700
+up failure method with the error
+
+05:34.540 --> 05:36.050
+but if we succeed.
+
+05:36.340 --> 05:39.270
+What we need to do is we need to yield.
+
+05:39.310 --> 05:45.990
+Actually I forgot to yield at this point as well as putting out our success.
+
+05:46.280 --> 05:53.440
+We're gonna pass an object where the user user off right goes to user.
+
+05:53.440 --> 05:54.870
+So let's just double check.
+
+05:55.090 --> 05:56.470
+Oh it's just the user goes to user
+
+05:59.630 --> 06:01.100
+and then additional data
+
+06:03.880 --> 06:12.340
+right here is going to be an object where a display name goes to display.
+
+06:12.380 --> 06:18.890
+So what we're doing is we're essentially just creating the user off with email and password.
+
+06:18.980 --> 06:22.150
+If this process succeeds then we get back the right object.
+
+06:22.340 --> 06:28.370
+We're then going to call sign up success with the user and our additional data as the payload inside
+
+06:28.370 --> 06:35.590
+of an object and now we just have to listen for our sign up success.
+
+06:35.590 --> 06:41.950
+So we're gonna have a new export function called on sign up success
+
+06:45.010 --> 06:58.270
+and this is gonna yield take latest user actions dot sign up success and here what we're gonna call
+
+06:59.380 --> 07:09.730
+is are signed in after sign up method and then we're gonna write this right here
+
+07:13.660 --> 07:18.670
+and what this will get is this payload with those two things that we just passed.
+
+07:18.680 --> 07:21.470
+So we want the user and we want the additional data
+
+07:24.240 --> 07:32.210
+and now what we're going to do is we're gonna pass these into the same sign in method that we had here.
+
+07:32.220 --> 07:33.060
+Right.
+
+07:33.060 --> 07:38.190
+Because the only thing that we don't have in order to get our snapshot is our user auth object.
+
+07:38.190 --> 07:40.920
+But as we see we actually have it.
+
+07:41.040 --> 07:46.560
+The difference is that in our create user profile document method if we look in our firebase utilize
+
+07:47.070 --> 07:51.690
+we do take this optional second parameter where we spread an additional data.
+
+07:51.690 --> 07:58.890
+So we are actually able to just pass that in like this as the second argument right here.
+
+07:58.990 --> 08:06.310
+And then of course we'll pass this third as the subsequent argument in our call call will pass every
+
+08:06.310 --> 08:13.090
+subsequent argument in the order that it comes in after our initial function into the function if it's
+
+08:13.090 --> 08:13.620
+undefined.
+
+08:13.630 --> 08:13.830
+Right.
+
+08:13.840 --> 08:18.040
+We'll just spread nothing in if there isn't a value it will actually be able to use it.
+
+08:18.820 --> 08:28.000
+So now we can just copy this and yield this inside of our function so we'll just make sure the pass
+
+08:28.060 --> 08:36.700
+user and the additional data and now if we save we're gonna make sure to listen to our two new methods
+
+08:37.920 --> 08:39.330
+which is our online upstart
+
+08:42.600 --> 08:50.030
+and our on sign up success and now we just have to modify our sign up component to fire our sign up
+
+08:50.030 --> 09:00.610
+start action so we can now get rid of this code in this try block here and this catch.
+
+09:00.830 --> 09:07.760
+We don't need these sets anymore because we're signing in our user after we sign them up we do want
+
+09:07.760 --> 09:15.070
+to keep our if Password password and then we do also want to make sure that we take this data.
+
+09:15.090 --> 09:20.770
+So now what we're gonna do is we just need to bring in the right action.
+
+09:20.820 --> 09:25.940
+This will be in our user slash user actions.
+
+09:26.250 --> 09:30.220
+And the one we want is our sign up start action.
+
+09:30.210 --> 09:31.740
+We'll also need our Kinect
+
+09:39.330 --> 09:43.080
+and let's just connect our map dispatch to props
+
+09:46.690 --> 09:56.080
+or sign up start goes to US dispatching where we are passing in our email password and our credentials.
+
+09:56.320 --> 09:59.320
+So we'll just pass in as an object called user credentials.
+
+10:04.320 --> 10:09.250
+And now we just have to make sure to pass it into our Kinect
+
+10:12.130 --> 10:16.840
+and now inside of where we do our handles submit.
+
+10:17.240 --> 10:20.720
+We just have to make sure to D structure this off of our props
+
+10:26.950 --> 10:35.110
+and then we can just fire our sign up start with an object that has the display name the email and the
+
+10:35.110 --> 10:44.680
+password and now we just have to modify our reducer to also store our sign up failure
+
+10:49.560 --> 10:50.470
+and that's it.
+
+10:50.580 --> 10:59.640
+If we go back to our application if we sign out we hit our sign in and we create some user random user
+
+10:59.750 --> 11:04.940
+M.K. to M.K. to add g mail dot com right.
+
+11:05.220 --> 11:13.380
+Let's just use our random password if we sign up we see sign up success and we see our sign and success
+
+11:14.600 --> 11:20.610
+and now our user has signed it and we have the user also in our database.
+
+11:20.610 --> 11:24.300
+So we probably have a couple of new users now because we did this a couple of times but there is our
+
+11:24.300 --> 11:33.830
+user so this was how we moved our code over into all of these different sagas that are listening to
+
+11:33.830 --> 11:37.350
+each other and then potentially chaining other actions.
+
+11:37.460 --> 11:39.670
+So hopefully this saga lesson was good.
+
+11:39.740 --> 11:44.870
+Hopefully everything at least shows you not only how to write sagas and how to structure our code to
+
+11:44.870 --> 11:51.980
+support sagas but also what capabilities we can leverage now that we have these sagas that can listen
+
+11:51.980 --> 11:59.260
+for actions and trigger all kinds of functionality handling asynchronous actions impure actions etc..
+
+12:00.310 --> 12:06.030
+So with this our application has now fully been converted over to using saga code.
+
+12:06.060 --> 12:09.570
+Now of course the more practice you get with writing this the better.
+
+12:09.570 --> 12:17.910
+So I suggest that if possible you go back re watch these videos rebuild these sagas again hopefully
+
+12:18.000 --> 12:24.060
+this was a useful lesson for you guys to see what some guys are capable of because this is a very common
+
+12:24.060 --> 12:31.170
+library that gets used with asynchronous activity when it comes to react redux projects now let's commit
+
+12:31.180 --> 12:33.540
+our code and see what we have.
+
+12:33.880 --> 12:44.910
+So we have a lot of code here so we're gonna say created user and cart sagas for sign in sign up and
+
+12:44.910 --> 12:54.610
+sign in with Google Now let's push this up and let's move on with our course.

@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00.900 --> 00:06.230
+We will now notice that our select collection selector does not work anymore.
+
+00:06.240 --> 00:14.040
+The reason being that we've modified our collections inside of a reducer to now be an object whereas
+
+00:14.070 --> 00:15.530
+our select collections.
+
+00:15.570 --> 00:21.360
+And then the component using it in our collections overview still thinks that it's an array.
+
+00:21.360 --> 00:23.280
+Now what can we do about this.
+
+00:23.280 --> 00:32.270
+Well we can actually create a new selector that can convert our object into an array and how we do that
+
+00:33.020 --> 00:45.010
+is we will make a new selector called Select collections for preview and what we'll do is we'll create
+
+00:45.010 --> 00:45.700
+the selector
+
+00:49.320 --> 00:57.540
+and then we'll get our select collection because we do want the object and what we'll do with the collections
+
+00:57.660 --> 01:02.910
+object is we're actually going to call a method called object.
+
+01:03.040 --> 01:05.760
+Keith what object.
+
+01:05.780 --> 01:15.280
+Keys does is it gets us all of the keys of an object that we pass into it and gives it to us in an array
+
+01:15.280 --> 01:15.860
+format.
+
+01:16.540 --> 01:17.700
+So what does this look like.
+
+01:17.710 --> 01:19.060
+Well let's actually see it first.
+
+01:19.630 --> 01:24.280
+So we have our error because our collection thought map is not a function because it's trying to call
+
+01:24.280 --> 01:26.960
+dot map on our collections object right.
+
+01:26.980 --> 01:28.110
+Which you cannot do.
+
+01:28.960 --> 01:39.350
+So let's actually do this just to see first what object keys do if we make a new object test object
+
+01:40.800 --> 01:52.250
+where we get a property a goes to one B goes to two and C goes to three if we call object.
+
+01:52.270 --> 02:01.580
+Keith on our test object we'll get an array with the keys as the values inside of it.
+
+02:02.010 --> 02:05.570
+So however many properties there are is how many values we'll get.
+
+02:07.290 --> 02:14.090
+And what we'll do is we will get the keys off of our collections.
+
+02:14.080 --> 02:14.420
+Right.
+
+02:14.440 --> 02:24.620
+So now we'll have all of the values that the object has which are if we look at our state which is our
+
+02:24.620 --> 02:27.620
+hats jackets men's sneakers and women's.
+
+02:27.620 --> 02:30.480
+Because we want these objects in an array instead.
+
+02:30.500 --> 02:39.140
+So what we'll do is we'll top map over this array of keys that we have and what will return with the
+
+02:39.140 --> 02:46.920
+key is we will give our collections at that key value.
+
+02:47.020 --> 02:54.010
+So what we're saying is that we want to get all the keys and the map over that array of keys so we get
+
+02:54.220 --> 03:03.150
+the value of our collections object at that key which will give us an array of r items that we're trying
+
+03:03.150 --> 03:08.880
+to get which is pretty much the same way that we had it when we're trying to call our original select
+
+03:08.880 --> 03:15.870
+collections when it was an array so we'll pull this into our collections overview component replace
+
+03:15.870 --> 03:18.830
+select collections like so.
+
+03:18.950 --> 03:23.540
+And now if we say we'll see that our components still works the way that it does
+
+03:26.440 --> 03:33.460
+now currently the way that our component works is that our collections preview component is the one
+
+03:33.460 --> 03:36.610
+that filters the item down to four.
+
+03:36.610 --> 03:45.400
+We can theoretically also do this inside of our get preview collections which is here where we got to
+
+03:45.400 --> 03:48.080
+consider a trade on.
+
+03:48.140 --> 03:54.650
+So right now in our collections preview our collections preview is the component that independently
+
+03:54.650 --> 04:00.060
+decides what it should do with the items onto its past.
+
+04:00.650 --> 04:08.330
+Because we filter it down to four inside the collection preview component alternatively inside of our
+
+04:08.330 --> 04:14.960
+collection overview component we can make it so that our selector is the one that actually filters it
+
+04:14.960 --> 04:25.940
+down to four before it passes them in as the collections array and this is kind of where it becomes
+
+04:26.030 --> 04:29.890
+a matter of principle.
+
+04:29.910 --> 04:35.880
+So yes we are selecting the collections in our collections overview and then our collections overview
+
+04:35.880 --> 04:43.340
+is the one that decides the pass them and render them in the preview and personally I prefer it this
+
+04:43.340 --> 04:49.040
+way because our collection preview only wants to ever display for items.
+
+04:49.040 --> 04:49.370
+Right.
+
+04:50.120 --> 04:56.330
+So this is a case where the separation is that our collection preview is the one that's in charge of
+
+04:56.330 --> 05:03.080
+deciding what it should render and theoretically because we'll only ever render four items we want to
+
+05:03.080 --> 05:04.460
+do this here.
+
+05:04.490 --> 05:12.110
+Now let's say for example our collection preview suddenly was able to display more in a scrolling like
+
+05:12.110 --> 05:17.390
+feature where you can imagine if there were little arrows on the side we would render perhaps all of
+
+05:17.390 --> 05:25.590
+the items or up to eight and if you click the arrow it would cycle to the next set of items.
+
+05:25.610 --> 05:30.560
+Well if that were the case then we would definitely want all of the items inside of our collection preview
+
+05:32.100 --> 05:39.090
+so it becomes more clear that our collections preview is the one that should be in charge of deciding
+
+05:39.090 --> 05:46.940
+on how it should render the list of items now we could also write a selector on our collection preview
+
+05:47.780 --> 05:53.600
+so that instead of passing items directly into the collection preview we would pass it similar to how
+
+05:53.600 --> 05:55.400
+we did our select collection.
+
+05:55.400 --> 06:05.180
+The actual key that it needed in order to get that array of items but at the same time in order for
+
+06:05.180 --> 06:13.190
+us to do that we also need our collections overview then to get that map of keys to map over and pass
+
+06:13.190 --> 06:15.800
+them into still our collections preview.
+
+06:15.830 --> 06:19.180
+So it's like extra steps and some separations right.
+
+06:19.220 --> 06:24.680
+I'm not going to tell you which one is better but these are the tradeoffs that you've got to think about
+
+06:24.710 --> 06:27.880
+when composing out your components.
+
+06:27.880 --> 06:30.900
+We've got to think about how much separation do we want.
+
+06:31.100 --> 06:34.140
+How much of the future do we want to plan for right.
+
+06:34.160 --> 06:40.000
+And what's more likely and this is all going to be based off a case by case basis.
+
+06:40.070 --> 06:49.130
+When you're in a professional setting because when you evaluate this you'll be given designs or kind
+
+06:49.130 --> 06:54.220
+of like a basic product outline of what they want the application to have.
+
+06:54.410 --> 06:59.720
+And here is where you can kind of ask these questions if you're unsure because in some way this will
+
+06:59.720 --> 07:08.570
+kind of dictate how you set up your components and where we do what separation of what ideas and I know
+
+07:08.570 --> 07:14.150
+it's all very high level right now but I definitely think it's an important thing for us as developers
+
+07:14.450 --> 07:22.010
+to start thinking about as we code because when we think about these things and we encounter these kind
+
+07:22.010 --> 07:29.210
+of situations this is where the learnings will really sink in as to why we write code the way we do
+
+07:29.600 --> 07:36.810
+because it allows us to see and make these decisions based on real world situations right.
+
+07:36.950 --> 07:45.230
+Based on a real feature requirement we can figure out how we should architect our code depending on
+
+07:45.620 --> 07:51.350
+whether or not there will be a different feature whether or not that even the Web site for what we have
+
+07:51.350 --> 07:53.500
+right now is as an MVP.
+
+07:53.510 --> 07:56.870
+Will this change in the future and how will it change.
+
+07:56.960 --> 08:04.310
+We want to structure our applications so that we can reduce the amount of code that we need if something
+
+08:04.310 --> 08:05.410
+changes.
+
+08:05.480 --> 08:11.900
+We don't want to scramble across our application making all of these changes in order to update something
+
+08:11.900 --> 08:13.010
+small.
+
+08:13.010 --> 08:18.980
+Instead we want to keep the majority of our code in the right place concerning the right things so that
+
+08:18.980 --> 08:23.650
+mentally if something changes we know what to do.
+
+08:23.660 --> 08:28.380
+For example I'm very comfortable keeping the items inside of our collection preview right.
+
+08:28.430 --> 08:35.240
+The filter down to the floor because our collection preview is going to be solely in charge of what
+
+08:35.390 --> 08:39.060
+number of elements to display and how to display them.
+
+08:39.140 --> 08:44.570
+And if that were to change in the future I know that all I have to do is make the changes inside of
+
+08:44.570 --> 08:48.430
+my collection preview component.
+
+08:48.440 --> 08:52.490
+Now I know this is a little bit of a sidetrack but we're definitely going to start talking more and
+
+08:52.490 --> 08:58.340
+more about these kind of tradeoffs and decision making as well as how we evaluate what we're going to
+
+08:58.340 --> 09:01.270
+build from this point of the lesson onwards.
+
+09:01.490 --> 09:08.370
+Because now that we have a solid fundamental understanding of react and Redux as we practice this we
+
+09:08.370 --> 09:11.350
+really got to start thinking more about these kind of things.
+
+09:11.430 --> 09:19.440
+And this is will take us from being a beginner react developer to being a more intermediate one into
+
+09:19.470 --> 09:25.570
+being a more senior one so let's commit this code.
+
+09:25.720 --> 09:30.890
+Let's go to our terminal Let's check what we have and it looks like we added a lot of stuff.
+
+09:30.940 --> 09:44.570
+So we're gonna say moves are directory and shop data into its own reducer reducer and then created respective
+
+09:44.720 --> 09:58.490
+selectors and updated corresponding components with new products flow for directory slash shop.
+
+09:58.530 --> 10:01.550
+Well what did I forget to get at.
+
+10:01.790 --> 10:02.380
+Yes I did
+
+10:08.180 --> 10:09.380
+and continue with our lessons.

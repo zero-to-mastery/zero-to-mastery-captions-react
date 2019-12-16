@@ -1,0 +1,64 @@
+WEBVTT
+
+00:01.520 --> 00:09.710
+In this section we learned all about creating forms as well as being able to create user sessions and
+
+00:09.740 --> 00:15.820
+AUTHENTICATING USERS with signing in with email and password as well as signing it with Google.
+
+00:16.230 --> 00:21.420
+And we also had our sign up page where we're able to create a new user.
+
+00:21.490 --> 00:28.020
+Now if you noticed there were two places that we had to remember or store user information.
+
+00:28.180 --> 00:31.340
+The first one was firebase right.
+
+00:31.360 --> 00:37.660
+We needed to remember a user so that when they come back one day maybe tomorrow or maybe a year from
+
+00:37.660 --> 00:40.060
+now we have their information.
+
+00:40.060 --> 00:48.280
+So a backend database like we use them firebase is a way for us to remember that information of the
+
+00:48.280 --> 00:48.970
+user.
+
+00:48.970 --> 00:56.050
+So initially we stored that information there but once we have it in the back end we now need to get
+
+00:56.170 --> 01:03.740
+access to it on the front end because on the front end we also have to remember that information.
+
+01:03.760 --> 01:12.360
+So when a user signs up and they click sign up well we're going to store that information in our firebase
+
+01:13.560 --> 01:20.370
+however when a user comes back and let's say signs and with Google or signs up with email and password
+
+01:20.940 --> 01:26.420
+we check our far base data and say Hey does this user exist.
+
+01:26.520 --> 01:35.400
+And if they do or if they sign in with Google I want you to store that State of the user in our app.
+
+01:35.400 --> 01:43.590
+Remember that information in our app so that as the user starts to move through our e-commerce Web site
+
+01:44.130 --> 01:48.420
+we have that information so that they can check out they can update their card.
+
+01:48.540 --> 01:54.060
+So by the end of this section I hope you understand the importance of remembering a user where something
+
+01:54.120 --> 02:00.600
+like a backend end and then requesting that information from the back end so that you can store it as
+
+02:00.690 --> 02:10.300
+state on the front end and be able to use it to allow the user to have a proper shopping experience.
+
+02:10.340 --> 02:13.910
+We have a long way to go so let's keep going and I'll see you in the next section.

@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00.830 --> 00:01.600
+There we have it.
+
+00:01.610 --> 00:02.230
+We're done.
+
+00:02.240 --> 00:03.710
+We're masters of react now.
+
+00:03.700 --> 00:10.960
+We can go off into the world and become the best of reactive Alper ever well not really.
+
+00:11.000 --> 00:11.530
+Right.
+
+00:11.540 --> 00:15.330
+We just spent a few hours right now just learning the basics of react.
+
+00:15.920 --> 00:18.350
+But there is a lot more to learn.
+
+00:18.350 --> 00:21.930
+Well we've just done is just scratched the surface.
+
+00:22.010 --> 00:24.950
+What I want to do now is do something a little different.
+
+00:25.010 --> 00:32.060
+You see right now there's still a few things that we can learn what we would do normally in a course
+
+00:32.120 --> 00:37.680
+is just go one by one and keep working on this app and touch on these small projects.
+
+00:37.700 --> 00:40.140
+However that's not how real life works.
+
+00:40.160 --> 00:47.030
+What we want to do is actually start working on a real life project a big e-commerce project start from
+
+00:47.030 --> 00:53.180
+scratch and implement the things that we've learned up until now which are the react fundamentals but
+
+00:53.210 --> 01:00.200
+also learn about some of the advanced topics because instead of just going through concepts we want
+
+01:00.200 --> 01:02.460
+to mimic real life scenarios.
+
+01:02.540 --> 01:07.790
+That is you get thrown into a project that maybe you don't know 100 percent how to build and we're going
+
+01:07.790 --> 01:10.910
+to learn and encounter stumbling blocks along the way.
+
+01:10.910 --> 01:19.160
+And we're going to use react to learn new concepts but also actually build a real life enterprise project.
+
+01:19.160 --> 01:27.390
+If you feel like you haven't mastered react good you definitely haven't because this is just the beginning.
+
+01:27.410 --> 01:29.840
+This is when things get interesting.
+
+01:29.840 --> 01:35.320
+We're going to start building and we're going to start filling in the gaps that you may have now but
+
+01:35.320 --> 01:41.440
+at the same time we want to mimic this real life scenario where you are learning with a senior developer
+
+01:42.160 --> 01:49.250
+how to build a project how to architect a project but the key in this section is that we started to
+
+01:49.250 --> 01:52.440
+build our fundamentals when it comes to react concepts.
+
+01:52.520 --> 01:58.440
+These four fundamentals that by now we should have an understanding of.
+
+01:58.550 --> 02:03.020
+We learned about some of the key words so that when we mentioned it throughout the course you wouldn't
+
+02:03.020 --> 02:03.940
+be confused.
+
+02:03.950 --> 02:06.700
+These are things that we should be comfortable with now.
+
+02:06.980 --> 02:13.070
+But more importantly we developed the fundamentals so that moving forward we can start thinking about
+
+02:13.070 --> 02:14.070
+these three things.
+
+02:14.090 --> 02:18.620
+And I want you to write this down and remember it because it's going to keep coming up throughout the
+
+02:18.620 --> 02:19.510
+course.
+
+02:19.790 --> 02:25.970
+This idea of deciding on components deciding about the state and where it lists what happens when state
+
+02:25.970 --> 02:31.630
+changes because of user action these are all things that nobody is going to tell you.
+
+02:31.670 --> 02:38.480
+These are things that is dependent on each app that you built what the senior developers have had this
+
+02:38.480 --> 02:45.590
+ability to think for themself not just follow a tutorial but actually implement these things based on
+
+02:45.680 --> 02:48.980
+the knowledge and experience that they've gathered.
+
+02:49.520 --> 02:53.730
+And because we have the basics now we can gain that experience.
+
+02:53.860 --> 02:56.440
+Good job getting through this section.
+
+02:56.440 --> 02:59.040
+We have a lot more to cover a lot more coding to go.
+
+02:59.980 --> 03:01.520
+I'll see in the next one by.

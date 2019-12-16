@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00.270 --> 00:03.320
+This is our final e commerce project.
+
+00:03.390 --> 00:11.230
+We're gonna have navigation and routing that takes us to different pages of categories of items and
+
+00:11.230 --> 00:18.380
+from these items we're actually going to be able to add them to our cart and from our car.
+
+00:18.400 --> 00:26.000
+We're actually going to see these things directly update and from this car we're gonna be able to checkout
+
+00:26.750 --> 00:33.920
+increase or decrease these items again and see the live changes in both our checkout page and our car
+
+00:33.920 --> 00:42.990
+page remove items and actually integrate with a stripe API so that we can handle payments.
+
+00:43.060 --> 00:49.360
+Now this is actually going to be a test version of Stripe because we don't actually have items to ship
+
+00:49.390 --> 00:56.350
+and we don't actually want to process real payments because this is just a portfolio project but the
+
+00:56.350 --> 01:02.070
+matter of switching it is simply a change in the actual stripe website.
+
+01:02.220 --> 01:09.390
+You're going gonna actually learn what it is to actually build using the stripe API and beyond that.
+
+01:09.390 --> 01:15.930
+We're also going to integrate with firebase to handle our authentication and our storage.
+
+01:15.930 --> 01:22.530
+So with firebase we're actually going to be able to authorize our users using Google so that we can
+
+01:22.530 --> 01:33.780
+sign in with our Google accounts and once we sign in we're also going to provide a sign feature and
+
+01:34.050 --> 01:37.050
+a sign up and sign in with email and password feature.
+
+01:37.110 --> 01:44.670
+So it's gonna be a really fleshed out fully complete e-commerce platform just like you would build for
+
+01:44.670 --> 01:46.170
+real e-commerce company.

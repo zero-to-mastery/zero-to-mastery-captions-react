@@ -1,0 +1,202 @@
+WEBVTT
+
+00:01.430 --> 00:02.830
+Think of a progressive web app.
+
+00:02.840 --> 00:05.750
+More like a running list of things you can do.
+
+00:05.750 --> 00:07.960
+They in a static list.
+
+00:07.970 --> 00:14.000
+It's going to evolve over time but the idea is to make user experience as we know as close as possible
+
+00:14.060 --> 00:16.390
+to a native app.
+
+00:16.490 --> 00:19.310
+By the way maybe you don't trust me.
+
+00:19.310 --> 00:24.710
+Maybe you think that this progressive web app is just pure hype and on JS just teaching us something
+
+00:24.710 --> 00:26.710
+that won't exist in two years.
+
+00:26.720 --> 00:30.570
+Well companies like Twitter
+
+00:33.630 --> 00:40.890
+have adopted progressive web apps so much so that Twitter has moved all of their mobile web traffic
+
+00:41.190 --> 00:52.450
+to a react progressive web app Ali Baba dot com Yeah they use a progressive web app Lyft and Uber uses
+
+00:52.480 --> 00:59.170
+a progressive web app Lyft for example has a goal of making their progressive web app a 100 percent
+
+00:59.410 --> 01:08.170
+parody or have complete feature set that their mobile phone has their mobile app has to be the exact
+
+01:08.170 --> 01:17.130
+same as their web app and there's tons of companies that are adopting progressive web apps because it
+
+01:17.130 --> 01:18.840
+is so beneficial.
+
+01:18.870 --> 01:27.600
+Let me show you a few examples to really emphasize and make you understand what this P.W. yay is one
+
+01:27.600 --> 01:31.760
+of the great examples that I like is this pocket X dot org Web site.
+
+01:31.860 --> 01:37.680
+A very very simple Web site that shows you Pokémon information.
+
+01:37.680 --> 01:39.990
+Everybody loves that.
+
+01:40.180 --> 01:53.290
+Now this is a progressive web app Well how so if I go open up the developer tools and you see over here
+
+01:53.320 --> 02:00.950
+if I click on the icon that shows toggle device toolbar and I scroll down here
+
+02:03.950 --> 02:12.320
+will show me the mobile view of this app let me scroll down so we can see it fully and we see over here
+
+02:12.320 --> 02:15.260
+that it looks pretty good on mobile.
+
+02:15.260 --> 02:25.440
+I can even turn it around and we also have the menu that's working but the cool part about this is if
+
+02:25.440 --> 02:34.850
+I turn off my Wi-Fi which usually gives us that blank page with the dinosaur on Chrome saying we don't
+
+02:34.850 --> 02:38.500
+have an internet connection well check this out.
+
+02:38.530 --> 02:49.830
+This still works how cool is that if I had this on my phone even though I don't have an internet connection
+
+02:50.280 --> 02:55.690
+I'd be able to still check out all these poker machines.
+
+02:55.710 --> 03:02.680
+All right let's turn back the Wi-Fi and take a look at another Web site.
+
+03:02.680 --> 03:05.640
+And this is the Hacker News progressive web apps.
+
+03:07.180 --> 03:13.120
+And you can think of it as a playground where people try and rebuild the Hacker News Web site using
+
+03:13.150 --> 03:18.420
+a progressive web app and you can see here it gives us the lighthouse score.
+
+03:18.580 --> 03:26.680
+It gives us some important metrics like how fast are what page loads and you can even look at the code
+
+03:26.830 --> 03:30.660
+of people that have implemented this.
+
+03:30.730 --> 03:37.450
+Now let's click on The View app over here for one of the examples we see over here that we just have
+
+03:37.450 --> 03:45.570
+a simple Hacker News Web site the cool part about this and this is a thing that we'll talk about later
+
+03:45.570 --> 03:51.300
+on in the videos is if I open this tab and let's scroll this tab up.
+
+03:51.300 --> 03:51.630
+Now
+
+03:54.650 --> 04:05.350
+and we go to application scroll all the way up to what we call the manifest we see over here that there
+
+04:05.350 --> 04:12.670
+is a add to home screen button and this add to home screen button appears for mobile users.
+
+04:12.820 --> 04:19.150
+If I visited this site multiple times it's going to have a pop up and you might have seen it seen this
+
+04:19.150 --> 04:24.070
+while browsing the web as well that says Hey do you want to add this to your home screen.
+
+04:24.370 --> 04:33.570
+You see over here if I click that I get this little notification if I click on Add I can add the application
+
+04:33.630 --> 04:35.280
+will keep the name the same
+
+04:38.380 --> 04:50.540
+and now on my desktop and now on my desktop look at that I have pre act Hacker News app straight on
+
+04:50.540 --> 04:52.520
+this desktop.
+
+04:52.520 --> 04:56.270
+And it opens up right away.
+
+04:56.270 --> 05:04.200
+If I turned off the Wi-Fi and opened this up again we see that it still works.
+
+05:05.820 --> 05:12.390
+How cool is that and you still see the you are Albar because this is a browser but if we were on a mobile
+
+05:12.390 --> 05:16.250
+phone you actually wouldn't see this.
+
+05:16.420 --> 05:21.150
+Your Albar and it will feel completely like an app.
+
+05:21.150 --> 05:24.040
+Very very cool.
+
+05:24.240 --> 05:30.000
+You see here that we don't completely have full features because you still need Wi-Fi for some parts
+
+05:30.210 --> 05:31.110
+but that's OK.
+
+05:31.140 --> 05:31.410
+Right.
+
+05:31.400 --> 05:37.360
+Good because native apps work like that to.
+
+05:37.470 --> 05:38.090
+There you go.
+
+05:38.190 --> 05:41.640
+Starting to load now.
+
+05:41.690 --> 05:41.990
+All right.
+
+05:42.290 --> 05:48.800
+So I think that's enough examples to prove to you that maybe we should consider doing this whole progressive
+
+05:48.800 --> 05:53.680
+web app thing in the next few videos.
+
+05:53.840 --> 05:59.200
+I'm going to show you the three most important parts to build our own progressive web app.
+
+05:59.510 --> 06:06.500
+And we're going to talk about these three topics so that our robo friends app is going to be a progressive
+
+06:06.500 --> 06:08.760
+web app by the end of this section.
+
+06:09.080 --> 06:11.940
+And Bruno is going to love us for it.
+
+06:11.960 --> 06:13.720
+I'll see you in the next one.
+
+06:13.740 --> 06:14.070
+Bye bye.

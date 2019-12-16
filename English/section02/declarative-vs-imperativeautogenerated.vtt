@@ -1,0 +1,301 @@
+WEBVTT
+
+0
+00:00.960 --> 00:05.400
+Now the success of React comes down to four key things.
+
+1
+00:05.400 --> 00:09.820
+And these React concepts are we going to go over in the next four videos.
+
+2
+00:09.930 --> 00:15.420
+But in this one let's talk about the first one and the first one React says: hey don't touch the DOM
+
+3
+00:15.780 --> 00:17.040
+I'll do it.
+
+4
+00:17.040 --> 00:18.840
+What do I mean by this?
+
+5
+00:18.870 --> 00:28.600
+You see, many existing frameworks and libraries before React where directly manipulating this Dom on
+
+6
+00:28.600 --> 00:29.760
+every page.
+
+7
+00:29.890 --> 00:38.280
+First let's just go over what a Dom is. If you remember Dom is our Document Object Model.
+
+8
+00:38.280 --> 00:47.940
+It's what the browser uses to display a Web Site or a web app, and Javascript is simply manipulating
+
+9
+00:47.970 --> 00:48.560
+this Dom.
+
+10
+00:48.570 --> 00:50.360
+That's all javascript is doing.
+
+11
+00:50.370 --> 01:00.790
+For example if I right click over here and select Inspect and you'll see that here if I click on
+
+12
+01:00.790 --> 01:06.500
+un vote we'll get a little flash saying that hey javascript just updated this.
+
+13
+01:06.550 --> 01:15.030
+If I click again, again I get a little flash. The DOM is just the tree representation of the page.
+
+14
+01:15.230 --> 01:21.740
+We start all the way up from the HTML tag all the way down to the body through each individual elements
+
+15
+01:22.460 --> 01:30.950
+and Web sites were built using things like this all these ways that browsers allowed us to manipulate
+
+16
+01:31.070 --> 01:31.960
+the DOM.
+
+17
+01:32.030 --> 01:38.690
+They gave us the DOM API that we could access using something like innerHTML or get element by I.D.
+
+18
+01:38.840 --> 01:48.260
+get elements by tag name this API allowed us to traverse the DOM access any node we wanted to maybe
+
+19
+01:48.320 --> 01:51.850
+remove them add new nodes and before React.
+
+20
+01:51.860 --> 02:00.590
+This is what libraries did you either did this manually or you used jQuery or you use some sort of
+
+21
+02:00.590 --> 02:07.310
+a library that allows you to use this in a simple fashion you see this way of programming was called
+
+22
+02:07.340 --> 02:18.950
+imperative: that is in an imperative paradigm you directly change individual parts of your app in response
+
+23
+02:18.950 --> 02:29.390
+to various user events. so you had let's say your javascript file you'd say: hey if user is logged in.
+
+24
+02:29.420 --> 02:34.810
+Well then go change that little icon over here to the user's profile.
+
+25
+02:34.970 --> 02:38.750
+And now that the user is logged in, well, also show profile page.
+
+26
+02:38.840 --> 02:44.540
+OK so javascript goes changes the Dom and updates the profile page and then OK.
+
+27
+02:44.570 --> 02:46.370
+Now that we have we're also logged in.
+
+28
+02:46.370 --> 02:47.930
+We also need to display friends.
+
+29
+02:47.990 --> 02:48.240
+OK.
+
+30
+02:48.260 --> 02:50.880
+Let's do that as well modify the Dom and.
+
+31
+02:50.980 --> 02:51.240
+All right.
+
+32
+02:51.260 --> 02:52.070
+That's good we're good.
+
+33
+02:52.070 --> 02:56.250
+Oh by the way it's been five seconds and we need to display a chat over here.
+
+34
+02:56.300 --> 02:56.670
+OK.
+
+35
+02:56.690 --> 02:59.180
+I'm going to go and do that now.
+
+36
+02:59.180 --> 03:06.280
+This sounds intuitive but the problem with this imperative approach is that it becomes difficult to
+
+37
+03:06.280 --> 03:11.180
+see the relationships between events and all these edge cases.
+
+38
+03:11.200 --> 03:18.370
+Remember this diagram over here where we had AngularJS that all of a sudden had all these relationships
+
+39
+03:18.760 --> 03:25.340
+affecting each other and all these errors pointing to different things. Well, instead of this imperative
+
+40
+03:25.430 --> 03:33.500
+approach React came up with a novel concept a more declarative approach and this is what React says to
+
+41
+03:33.500 --> 03:34.180
+you.
+
+42
+03:34.400 --> 03:39.300
+Hey Dom manipulation is one of the biggest performance bottlenecks.
+
+43
+03:39.380 --> 03:42.530
+It takes a long time for Dom changes to happen.
+
+44
+03:42.530 --> 03:46.040
+The browser has to do two really intensive operations.
+
+45
+03:46.070 --> 03:47.490
+One is to repaint.
+
+46
+03:47.570 --> 03:55.370
+That is change an element and added onto a page and then refloat which is to recalculate the layout
+
+47
+03:55.580 --> 03:58.640
+of the page and move things around if need be.
+
+48
+03:58.640 --> 04:02.810
+So changing the Dom was a really expensive operation.
+
+49
+04:03.020 --> 04:04.760
+So React says: hey you know what.
+
+50
+04:05.000 --> 04:12.560
+Let me take care that I'll find the best way for me to change the Dom and just declare to me what your
+
+51
+04:12.830 --> 04:14.550
+app looks like.
+
+52
+04:14.570 --> 04:23.660
+So all we need to do is say hey this is a javascript object of how I want the app to look and React
+
+53
+04:23.690 --> 04:32.240
+is going to hold this javascript object this massive massive blueprint of how things should look.
+
+54
+04:32.330 --> 04:40.220
+And based on this blueprint that we give it React just says hey just tell me what the page should
+
+55
+04:40.220 --> 04:42.330
+look like and I'll take care of it.
+
+56
+04:42.380 --> 04:44.000
+I'll do everything for you.
+
+57
+04:44.090 --> 04:46.770
+I'll find the best way to use the DOM.
+
+58
+04:46.850 --> 04:48.440
+You're never going to touch the DOM.
+
+59
+04:48.440 --> 04:51.660
+Just tell me what the page should look like.
+
+60
+04:51.740 --> 05:00.200
+This declarative paradigm is called that because we declare that hey this is what the state or data
+
+61
+05:00.410 --> 05:01.880
+of our app should be like.
+
+62
+05:01.940 --> 05:04.150
+And based on this date.
+
+63
+05:04.400 --> 05:06.480
+Well then just make those changes.
+
+64
+05:06.530 --> 05:13.470
+So if a user is logged in then React already knows exactly what to update and what to do.
+
+65
+05:13.580 --> 05:20.840
+Now this idea of a declarative style meant that we didn't have to directly say do this and if this happens
+
+66
+05:20.870 --> 05:25.440
+then do that where we just say one by one exactly what should happen.
+
+67
+05:25.520 --> 05:34.210
+Instead we tell it this is the state of our app and React automatically just does it for us.
+
+68
+05:34.220 --> 05:40.310
+The difference is that all the different states are accounted for in one place.
+
+69
+05:40.310 --> 05:46.210
+That is one big javascript object that describes how our app should look.
+
+70
+05:46.310 --> 05:53.800
+And this resulted in less complexity better code quality and faster developer times.
+
+71
+05:53.870 --> 06:00.080
+So it created this whole idea of: hey you can build web interfaces without touching the Dom and this
+
+72
+06:00.080 --> 06:08.840
+is where the name React came from. The name React is simply saying hey based on whatever the state or
+
+73
+06:08.840 --> 06:15.200
+data of the app is that describes our app, I'm just going to React to it and change everything for you
+
+74
+06:15.230 --> 06:17.090
+so that you get the display that you want.

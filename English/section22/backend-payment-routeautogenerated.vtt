@@ -1,0 +1,334 @@
+WEBVTT
+
+00:00.510 --> 00:07.230
+OK so now that we understand what it is that we need to do let's actually start building this payment
+
+00:07.230 --> 00:09.600
+route on our Express server.
+
+00:09.780 --> 00:15.890
+So in Express it's actually very easy in order to build the actual route.
+
+00:16.170 --> 00:23.280
+The way that we do it is we use the app object that we have from express and what we say is we declare
+
+00:23.280 --> 00:25.680
+the type of route that we want it to be.
+
+00:25.680 --> 00:32.910
+So for us we know what we want to make is a post route because what we want the app to do is receive
+
+00:33.570 --> 00:40.730
+a actual request from our client side code to some route that we're going to call slash payment.
+
+00:40.990 --> 00:46.970
+So slash payment is the name of the route that we want to hit and then what we're going to do is we
+
+00:46.970 --> 00:54.150
+are going to pass this post method a function and this function is going to get both a request object
+
+00:54.300 --> 00:56.850
+and a response object.
+
+00:56.850 --> 01:04.830
+And what we're going to do with the actual request object is the request object will provide us the
+
+01:04.980 --> 01:08.280
+actual token that we need in order to make the charge.
+
+01:08.640 --> 01:14.880
+Now as you remember this token is something we get back from our stripe button on our front end using
+
+01:14.880 --> 01:20.550
+the stripe checkout whenever the user completes that checkout process using that modal they're going
+
+01:20.550 --> 01:25.770
+to get back a token that has an I.D. on it that represents all of the information that they just filled
+
+01:25.770 --> 01:33.120
+out as well as the actual credit card information and the cost and everything on it that we need in
+
+01:33.120 --> 01:40.130
+order to properly make a charge to stripe that token is the identifier that allows stripe to know who
+
+01:40.130 --> 01:43.810
+is making that request and where it's coming from.
+
+01:43.820 --> 01:50.600
+So what we're going to need to do is we're going to have to actually create the appropriate body object
+
+01:50.870 --> 01:56.750
+that we pass the stripe using values that we get from the token and that token of course as we know
+
+01:56.750 --> 02:01.460
+is going to come in through the requests that we make from our front end but we'll talk about that a
+
+02:01.460 --> 02:03.020
+little bit more later.
+
+02:03.020 --> 02:05.100
+Let's just first set up our back.
+
+02:05.870 --> 02:11.510
+So what we need to do for this body object is we need to pass it a source parameter.
+
+02:11.510 --> 02:14.510
+This of course is all the things that we need from stripe.
+
+02:14.510 --> 02:19.940
+So if you're curious about what are the things we can pass to stripe I will link the documentation about
+
+02:19.940 --> 02:25.770
+the actual stripe library that we're using but it's actually pretty simple in order to make this charge.
+
+02:26.030 --> 02:32.940
+The source is going to be the request dot body because the request object has a body parameter.
+
+02:32.960 --> 02:39.800
+And on that body is where it will hold all of the information that we're passing inside of our request
+
+02:39.800 --> 02:40.480
+to our back end.
+
+02:41.330 --> 02:44.810
+So request body dot token dot I.D..
+
+02:44.810 --> 02:49.050
+So on that token object will be an I.D. value that we need to pass.
+
+02:49.190 --> 02:52.260
+After that we also need the amount.
+
+02:52.400 --> 02:59.390
+So the amount value is going to be the total charge cost that we're trying to make and that we're also
+
+02:59.390 --> 03:00.850
+going to pass to the body.
+
+03:01.070 --> 03:05.180
+And we're just going to call it amount when we actually generate the request on our front end.
+
+03:06.500 --> 03:10.430
+Finally we need the currency and let's just default this to USD.
+
+03:10.430 --> 03:14.600
+You can use other currency strings that you can find on the straight back end API that they're willing
+
+03:14.600 --> 03:15.620
+to accept.
+
+03:15.620 --> 03:18.690
+But for our case USD is good enough for us.
+
+03:18.790 --> 03:26.170
+And with this body object we're now going to need to use it and pass it to our strength library.
+
+03:26.220 --> 03:32.880
+Now what we need to do is bring in our stripe library into this file and we want to do this after Line
+
+03:32.880 --> 03:39.900
+6 because in order to actually leverage this stripe library that we're trying to bring in we need access
+
+03:39.900 --> 03:44.640
+to that secret key that we stored in our DOT and file.
+
+03:44.640 --> 03:49.530
+Now you remember in our last lesson I asked you to add that stripe secret key value that you got back
+
+03:49.530 --> 03:55.320
+from your stripe dashboard and put it in the dot and because then we'll have access to it inside of
+
+03:55.320 --> 04:01.980
+process environment which allows us to actually hide that key from anybody that might look at it inside
+
+04:02.040 --> 04:03.650
+of our code base.
+
+04:03.660 --> 04:11.300
+So what we'll do is we'll actually say const stripe equals require stripe.
+
+04:11.330 --> 04:18.920
+Now what this gives us back is a function and the function expects a argument as the first parameter
+
+04:18.950 --> 04:25.190
+where that argument is the stripe secret key so we can actually pass that right into what we get back
+
+04:25.190 --> 04:30.960
+from our require like so we're essentially saying give me what that stripe library wants to give you.
+
+04:31.040 --> 04:37.520
+And then I want to immediately invoke it with that stripe secret key which we now have access to on
+
+04:37.520 --> 04:41.740
+our process stored environment dot stripe secret key.
+
+04:41.960 --> 04:48.500
+And the reason we have this is because of this line because we require dot end and then we called config.
+
+04:48.500 --> 04:56.480
+This automatically looks for a dot end file type inside of the root folder and it will add it to our
+
+04:56.480 --> 04:57.930
+process environment.
+
+04:57.950 --> 05:03.530
+So by doing so we now have access to the any variables that we declared inside of that dot and file
+
+05:03.560 --> 05:09.980
+giving us access to our stripe secret key and now from this function that we got back from stripe after
+
+05:09.980 --> 05:16.400
+we pass it this value it will give us back the stripe object that we can finally use to actually make
+
+05:16.400 --> 05:19.920
+charges now in order to make the charge.
+
+05:19.930 --> 05:27.430
+We go back to our route that we were writing and we say stripe dot charges dot create and what we pass
+
+05:27.430 --> 05:30.040
+to the create call is two arguments.
+
+05:30.070 --> 05:33.810
+The first is the body that we just made.
+
+05:34.570 --> 05:35.860
+This body object.
+
+05:36.130 --> 05:42.400
+And then what we're going to do is we are going to pass it a callback in the same format that we have
+
+05:42.400 --> 05:49.390
+here because that callback is going to represent the request and the response object that we get back
+
+05:49.390 --> 05:53.800
+from this stripe API request that we're making to make a charge.
+
+05:54.520 --> 06:02.680
+Now the thing is that what we want to do is we want to inform our client side application how successful
+
+06:03.040 --> 06:05.620
+the actual request they're making is.
+
+06:05.740 --> 06:11.440
+Now if you look at this function that we defined right here that we're essentially writing as the second
+
+06:11.440 --> 06:20.630
+argument to opt on post we got a request object and we have a response object the request object is
+
+06:20.630 --> 06:27.890
+the object that holds all of the details and information and data related to the request being made
+
+06:27.890 --> 06:28.560
+from the front.
+
+06:29.090 --> 06:35.120
+So as we know this had the body of the token and anything we were sending from our client side application
+
+06:35.150 --> 06:42.890
+to our back in now what we do with the response object is actually how we respond to this request.
+
+06:42.920 --> 06:47.470
+So this is how we send back stuff based on whatever requests that we've got.
+
+06:47.480 --> 06:54.440
+So what we're essentially trying to say is that inside of this payment route we have access to the request
+
+06:54.590 --> 07:00.380
+that we got from the client side app but also access to this response object that we need to use in
+
+07:00.380 --> 07:03.700
+order to send information back to the client side app.
+
+07:03.710 --> 07:09.260
+The only thing is that we want to send this response after we've made a payment charge to the stripe
+
+07:09.260 --> 07:15.770
+service because this payment we're attempting to make could succeed or fail due to the fact that it's
+
+07:15.770 --> 07:17.300
+an API call as well.
+
+07:17.660 --> 07:23.510
+So it's subject to the same success or failure calls that we've seen and become familiar with whenever
+
+07:23.510 --> 07:25.850
+we make an API call of any kind.
+
+07:26.690 --> 07:33.590
+So what this second argument in is getting is actually a function where the stripes service hands us
+
+07:33.590 --> 07:44.690
+back both an error if there is one or a response if it's successful and what we want to do is use the
+
+07:44.690 --> 07:51.590
+response object that we are getting from the request made from the client side application to this back
+
+07:51.590 --> 07:58.490
+in route to tell our actual client site application whether or not we got an error or whether or not
+
+07:58.490 --> 08:00.500
+we were successful.
+
+08:00.500 --> 08:08.600
+So what we'll write is if stripe error then what we want to do is say response dot status was five hundred
+
+08:08.660 --> 08:17.420
+because five hundred is a failure status quo and then we want to send with the error being the actual
+
+08:17.420 --> 08:27.000
+stripe error if there is no error that what we want to do is say that it's a status of two hundred and
+
+08:27.120 --> 08:33.750
+if the status is two hundred then we want to say that it's successful and what we want to pass to it
+
+08:33.780 --> 08:38.160
+is the stripe response and that's all it is.
+
+08:38.160 --> 08:45.510
+We're essentially just setting up this one route that when any request gets made to the payment route
+
+08:45.930 --> 08:51.660
+we're going to use the token and we're going to use the amount and we're going to make a strike charge
+
+08:52.440 --> 08:58.380
+and then depending on whether or not we get back an error we're going to then send our client side that
+
+08:58.380 --> 09:03.990
+made the request the fact that we got an error but if it's successful we're going to inform it that
+
+09:03.990 --> 09:09.830
+we got successful using the stripe response and this is our route.
+
+09:09.900 --> 09:16.970
+So I know it was a lot of new back in code but this is really it conceptually that's really all it is.
+
+09:17.040 --> 09:22.920
+You just have to figure out how to use this a library that you got alongside with how the code and the
+
+09:22.920 --> 09:29.640
+requests that are being made actually look based on the format that we're using when we write this note
+
+09:29.640 --> 09:29.900
+code.
+
+09:30.630 --> 09:36.990
+So hopefully this code made sense because this is all we're doing this one route is the whole point
+
+09:36.990 --> 09:43.410
+of why we're setting up this back end server because stripe requires us to hide our stripe secret key
+
+09:43.740 --> 09:50.340
+which we did with our DOT and library as well as hiding it inside of our process environment and then
+
+09:50.340 --> 09:53.880
+using this object we're able to make the charge.
+
+09:54.060 --> 10:00.420
+So now that we have our back end let's actually figure out how to write our front end button code so
+
+10:00.420 --> 10:06.360
+that we can actually send our token to this new route that we made and we're going to do that in the
+
+10:06.360 --> 10:07.040
+next lesson.

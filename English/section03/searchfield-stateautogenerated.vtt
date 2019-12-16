@@ -1,0 +1,292 @@
+WEBVTT
+
+00:00.390 --> 00:07.200
+Now that we have our card and card list components the next thing that we want to add in is our search
+
+00:07.200 --> 00:08.310
+feature.
+
+00:08.310 --> 00:17.040
+So if we go into our final application when we look at the search feature what we see is a text box
+
+00:17.430 --> 00:25.110
+that takes a user's typed inputs and filters out the cards based on what they type in.
+
+00:25.110 --> 00:34.650
+So if I type in L E it will filter out any monster whose name does not have l e in it.
+
+00:34.650 --> 00:37.180
+Now how do we build this.
+
+00:37.290 --> 00:45.830
+Well let's first go back to our application code and what we first need is the H the Alma element that
+
+00:45.830 --> 00:53.860
+will represent the text input and what we're gonna use is an input HMO element.
+
+00:53.880 --> 01:03.760
+Now these input HMO elements are pretty much just basic text inputs if we put type on it which is a
+
+01:03.860 --> 01:11.280
+HDMI property that all inputs have we can give it a different string and that string will help us get
+
+01:11.280 --> 01:16.660
+some features in the input that we might want for different types of inputs.
+
+01:16.680 --> 01:26.760
+For example if we use password whatever we type will become hidden and well the one we actually want
+
+01:26.960 --> 01:36.070
+will be search and what search gives us is the ability to put on this place holder which will essentially
+
+01:36.850 --> 01:44.340
+put a string there when we haven't typed anything into the search field.
+
+01:44.490 --> 01:48.630
+So now we'll say search monsters and that is the place holder.
+
+01:48.710 --> 01:48.960
+Right.
+
+01:48.990 --> 01:55.690
+But once we type we see that it gets hidden and then we can clear it away with that little X button
+
+01:57.500 --> 02:00.500
+so type search allows us to use that place holder.
+
+02:00.500 --> 02:09.620
+But now what we need to do is we actually need to be able to hijack or take control whenever the user
+
+02:09.650 --> 02:17.180
+types something into the input because we want to store that string on our state and by storing on our
+
+02:17.180 --> 02:23.030
+state we're able to use it in order to actually filter out our monsters.
+
+02:23.090 --> 02:29.590
+So let's first figure out how to store that on our state well the first thing we would do is actually
+
+02:29.680 --> 02:34.870
+add a field to our state that would represent what that stored value will be.
+
+02:34.870 --> 02:43.650
+So we'll call it search field and we'll make it start as an empty string next what we'll do is we actually
+
+02:43.650 --> 02:50.200
+have access to this method on our input called on change and what.
+
+02:50.200 --> 03:01.080
+On change does is it fires with this synthetic event which is essentially just a event in our browser.
+
+03:01.090 --> 03:02.030
+Right.
+
+03:02.110 --> 03:09.940
+When ever the input is changed so whenever the user types or removes anything but let's just take a
+
+03:09.940 --> 03:16.150
+look at what that looks like and what we passed on change is actually this function where e represents
+
+03:16.150 --> 03:18.540
+the synthetic event we're talking about right.
+
+03:18.550 --> 03:23.150
+And for now let's just console log e and we'll see what happens.
+
+03:23.170 --> 03:31.860
+Let's go to our browser and open up our terminal using right click and clicking inspect and then hitting
+
+03:31.860 --> 03:40.940
+the console now whenever we type anything into our input we will see our on change fire which was that
+
+03:40.940 --> 03:45.470
+function that we wrote that logs that synthetic event.
+
+03:45.690 --> 03:50.700
+We also see that it changes whenever we remove any of the characters.
+
+03:51.030 --> 03:59.880
+And this is because it's literally as the method says whenever the value in that input changes fire
+
+03:59.910 --> 04:08.300
+my on change event fire the on change with whatever function we pass to it and what we'll see on our
+
+04:08.300 --> 04:13.330
+synthetic event is that it's this huge object with all these things on it.
+
+04:13.910 --> 04:19.930
+And this is because it's a native event that the browser uses to do all kinds of different things.
+
+04:19.940 --> 04:20.320
+Right.
+
+04:20.330 --> 04:25.670
+It gives us a lot of control but we actually don't need to worry about more than like ninety nine percent
+
+04:25.670 --> 04:27.080
+of the stuff on here.
+
+04:27.080 --> 04:31.910
+The main thing that we do want to look at is this target value.
+
+04:31.910 --> 04:38.400
+There's a get and there's a set but that mainly means that we can either get the value of what target
+
+04:38.400 --> 04:44.700
+is or set the value but we don't want to set the value we just want to get the the actual target value
+
+04:45.030 --> 04:54.600
+and what it will give us back is the HDD him element and we can see if we log it so when I say that
+
+04:54.600 --> 05:01.140
+it gives us the HMO element it's because it's the HD him out element that fired the event.
+
+05:01.140 --> 05:07.320
+So if we now log it we see that that's our input and we can actually hover over it and it'll tell us
+
+05:07.320 --> 05:15.010
+where on the page that element is and there's our search element right so what we want off of this is
+
+05:15.100 --> 05:23.110
+actually the value and value is a property on the input that will give us literally the string value
+
+05:23.140 --> 05:24.690
+that it holds.
+
+05:24.690 --> 05:25.330
+Right.
+
+05:25.420 --> 05:27.150
+And see as we type it.
+
+05:27.610 --> 05:35.350
+We're getting that string value and that's how we're going to be able to store that on our state now.
+
+05:35.600 --> 05:37.400
+How do we store this.
+
+05:37.490 --> 05:44.750
+We can do this by calling set state here the same way that we did when we got our users went inside
+
+05:44.750 --> 05:47.360
+of our component did mountain method.
+
+05:47.400 --> 05:55.990
+So what we can do is call this dot set state and we can pass it that we want our search field value
+
+05:56.170 --> 06:00.560
+to be the E dot target dot value.
+
+06:01.040 --> 06:05.800
+Now if we wanted to see this actually persist right.
+
+06:05.810 --> 06:12.270
+If we want to make sure that our state was being updated normally what we would think to do is just
+
+06:12.270 --> 06:20.810
+console log after we call this dot set state so we would think that if we called console log this dot
+
+06:20.810 --> 06:25.150
+state that we would see our state update.
+
+06:25.190 --> 06:31.420
+Now let's actually test this out we see that as we type.
+
+06:31.420 --> 06:39.310
+It looks like our event is firing but our search field key is always one letter behind which means the
+
+06:39.310 --> 06:43.840
+first time we type D search field was actually not updated.
+
+06:43.840 --> 06:44.770
+Right.
+
+06:44.770 --> 06:46.510
+Why is this.
+
+06:46.510 --> 06:56.270
+Well this is actually because said state is in a synchronous function call so asynchronous versus synchronous
+
+06:56.690 --> 07:05.420
+is a big thing in JavaScript development especially in react synchronous action is something that we
+
+07:05.420 --> 07:08.570
+can expect to happen almost immediately.
+
+07:08.570 --> 07:14.680
+It's something that pretty much happens and JavaScript knows the amount of time it'll take so javascript
+
+07:14.680 --> 07:19.930
+will wait for that thing to finish before it continues.
+
+07:20.110 --> 07:21.100
+Right.
+
+07:21.100 --> 07:30.200
+Running the rest of the code afterwards an asynchronous action or event is something that actually takes
+
+07:30.620 --> 07:34.790
+an indefinite amount of time that JavaScript does not know.
+
+07:35.240 --> 07:43.580
+So what it does is it actually runs the rest of the code after and then when the asynchronous event
+
+07:43.580 --> 07:48.350
+finishes it then runs that finished event.
+
+07:48.350 --> 07:54.500
+Now I know this sounds confusing right now but I promise that we'll cover it later when it makes more
+
+07:54.500 --> 07:56.170
+sense to do so.
+
+07:56.270 --> 08:03.380
+Right now the main thing I want you to focus on is just that this set state is actually not happening
+
+08:03.620 --> 08:06.250
+immediately when we would expect it to.
+
+08:06.410 --> 08:11.840
+Which means that yes our state will be updated with this value that we've set here.
+
+08:12.020 --> 08:17.390
+But it's not going to happen in the immediate sense that we would expect it to.
+
+08:17.390 --> 08:25.710
+Instead what we would do in order to log our state there is actually a solution that react given us
+
+08:26.370 --> 08:32.140
+and it's going to be the second argument that we pass to set state.
+
+08:32.330 --> 08:37.930
+Now it's going to be a callback which runs after a set state is finished.
+
+08:37.930 --> 08:42.940
+So after set state has update our state it will run the function that we pass.
+
+08:42.940 --> 08:54.690
+And here we can log this dot state and here we'll see that when we type now we do see our newest latest
+
+08:54.690 --> 08:55.860
+value.
+
+08:56.010 --> 09:02.070
+So that's a thing to remember with said state if we wanted to see or do something with our state right
+
+09:02.130 --> 09:10.620
+after we set it then we have to do it inside of this second argument function that will get called right
+
+09:10.650 --> 09:14.610
+after said state OK.
+
+09:14.800 --> 09:21.400
+Now that we have our search field being stored let's actually filter out our monsters but let's return
+
+09:21.400 --> 09:25.370
+our code back and get rid of this part that we don't need.
+
+09:25.450 --> 09:35.630
+So let's remove that and then we don't need these brackets either because all we want to do
+
+09:38.630 --> 09:40.220
+is just call our set state value.

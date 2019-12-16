@@ -1,0 +1,508 @@
+WEBVTT
+
+00:00.360 --> 00:02.330
+Welcome back everyone.
+
+00:02.370 --> 00:07.780
+So in the last few lessons we've learned about making some performance optimizations.
+
+00:07.830 --> 00:14.130
+We learned how to use react lazy in order to lazy load our components into our application.
+
+00:14.130 --> 00:19.470
+We learned how to handle code splitting at the root level by using these lazy loaded components with
+
+00:19.470 --> 00:27.300
+react router and then wrapping them in react suspense so that we always had a fallback UI in case these
+
+00:27.300 --> 00:31.860
+components did not fully render or get retrieve from the back end server.
+
+00:31.860 --> 00:37.950
+By the time we needed them we also learned how to build our boundary components in order to provide
+
+00:37.950 --> 00:46.200
+yet another piece of fallback UI in case anything goes wrong inside of the child components of the airy
+
+00:46.200 --> 00:48.940
+boundary components that we created.
+
+00:48.960 --> 00:55.710
+So we've learned a lot already about improving the user experience of our application already and the
+
+00:55.710 --> 01:03.420
+main thing of performance to remember is that we only need to do these things in order to improve the
+
+01:03.480 --> 01:11.000
+end user experience optimizations for the sake of optimizations is really an empty goal in itself.
+
+01:11.070 --> 01:17.070
+So this harks back to what I mentioned in the first lesson of the section which is that you must measure
+
+01:17.100 --> 01:23.520
+and you must consider the tradeoffs when making optimizations and you only want to make performance
+
+01:23.520 --> 01:27.430
+improvements when you hit a problem now.
+
+01:27.440 --> 01:33.110
+In this section I'm going to actually teach you some react component level optimizations and I really
+
+01:33.110 --> 01:38.000
+want you to think about this because we're going to explore some examples as to why you don't want to
+
+01:38.000 --> 01:44.930
+get too eager or too aggressive with over optimizations you really want to take a step back and consider
+
+01:44.930 --> 01:50.780
+why you're making this optimization in the first place and you want to think about the overall context
+
+01:51.200 --> 01:53.620
+of what it is that you're improving.
+
+01:53.780 --> 01:57.340
+So let's get right to it now.
+
+01:57.340 --> 02:04.210
+What I want to do is actually go back to our life cycles method lesson and really rethink about this
+
+02:04.210 --> 02:12.640
+one specific life cycle method was what should component update if we go back to the code inside of
+
+02:12.640 --> 02:14.320
+our lifecycle component.
+
+02:14.320 --> 02:19.480
+If you remember there was this lifecycle method that we had access to on our class components called
+
+02:19.480 --> 02:26.530
+should component update which received the next prompts and the next date that was coming in to a component
+
+02:26.930 --> 02:33.280
+a class component to be particular specific where we would be able to compare the next prompts and the
+
+02:33.280 --> 02:39.400
+next state against the current prompts and the current state to decide whether or not we wanted to return
+
+02:39.580 --> 02:45.220
+true or false which would then dictate whether or not this component would re render.
+
+02:45.310 --> 02:53.620
+This was done in order to save us on unnecessary renders if the prompts were going to come in the same.
+
+02:53.620 --> 02:56.650
+Now why would this be important.
+
+02:56.650 --> 03:02.470
+Well this is literally a performance optimization because saving ourselves on re renders is most likely
+
+03:02.470 --> 03:08.350
+the biggest optimization we can generally do when it comes to the speed and performance of a component
+
+03:08.980 --> 03:14.950
+but US manually writing this is great if we need this level of granularity but there is an easier way
+
+03:14.950 --> 03:23.710
+for us to do this and the way we do it is to use two different types of new functions and classes that
+
+03:23.710 --> 03:33.140
+we get from react and replace our existing reactor components or our existing functional components.
+
+03:33.250 --> 03:35.550
+So I'll show you what those are.
+
+03:35.770 --> 03:43.120
+In this lesson now what I've done is I've created this person component just to demonstrate to us rendering
+
+03:43.120 --> 03:48.080
+cycle so we have this person that is a functional component.
+
+03:48.230 --> 03:55.010
+It takes a person object as a prop and it simply returns a div with the person name and the person age
+
+03:55.220 --> 04:03.800
+and it logs rendering whenever it gets rendered inside of our objects we have our app component we import
+
+04:03.800 --> 04:04.900
+in this person component.
+
+04:04.910 --> 04:11.430
+I just wrote and what we do is we have a count on the state and then we have inside of our components
+
+04:11.440 --> 04:18.220
+simply a button that whenever you click will increase the count but also we have the button count display
+
+04:19.070 --> 04:20.350
+now above this component.
+
+04:20.390 --> 04:26.000
+I'm going to put our new person component and what I'm going to do is I'm going to pass in the person
+
+04:26.450 --> 04:31.290
+property by passing an object inside of the render here manually.
+
+04:31.340 --> 04:33.580
+Where name goes to Jack.
+
+04:33.920 --> 04:43.690
+And age goes to twenty two now because I'm in line defining this object you will see something interesting
+
+04:43.690 --> 04:48.310
+when ever we actually end up rendering this component.
+
+04:48.310 --> 04:53.800
+Now I want you to take a second and think how many times do you think ah person component is going to
+
+04:53.800 --> 05:01.930
+end up calling rendering if what you guessed was more than once then you would be correct.
+
+05:01.940 --> 05:08.150
+So when our application mounted for the first time we mounted AR person component and rendering was
+
+05:08.150 --> 05:15.230
+long but you'll see that every time I increase this button count that component is actually getting
+
+05:15.230 --> 05:16.340
+re rendered.
+
+05:16.580 --> 05:24.050
+And the reason for this is because when ever set state gets called inside of our component our app component
+
+05:25.060 --> 05:33.920
+we end up re rendering everything which means that a new person is going past in to the person component.
+
+05:33.940 --> 05:40.360
+Now you might think if I move this object into the state what this actually mean that I saved myself
+
+05:40.420 --> 05:46.130
+on some renders Well this actually isn't going to work either.
+
+05:46.130 --> 05:53.470
+So if we d structure a person and we move it onto the state will notice that when we pass it in whenever
+
+05:53.470 --> 05:57.070
+we increase the count we're still re rendering.
+
+05:57.070 --> 06:03.460
+And the reason for this is because this component is a functional component and a functional component
+
+06:03.490 --> 06:10.910
+will always re render whenever the parent renders because the functional component simply does not know
+
+06:10.930 --> 06:18.030
+it's essentially being called and invoked every time on render to provide us with a new component.
+
+06:18.580 --> 06:20.140
+So that's one thing to remember.
+
+06:20.290 --> 06:26.230
+The next thing is that how would we actually save ourselves on these re renders.
+
+06:26.230 --> 06:32.440
+Well here's the way that we can check so the first thing what we want to do is see how much time it
+
+06:32.440 --> 06:40.300
+actually costs us to re render this person and what we can do is actually download in our ReACT dev
+
+06:40.300 --> 06:40.690
+tools.
+
+06:40.690 --> 06:47.800
+If you have not already so react dev tools as an extension that the web browser provides and here you'll
+
+06:47.800 --> 06:53.890
+see that we actually have it already installed on my chrome browser.
+
+06:53.920 --> 06:58.990
+If you don't have it just simply use the link that I've provided and then add it to your chrome once
+
+06:58.990 --> 07:05.590
+you've added it to your chrome browser you're able to access it by going to this react button inside
+
+07:05.590 --> 07:12.000
+of the top bar that lets you switch between different views inside of your dev tools now inside of here.
+
+07:12.000 --> 07:18.370
+We'll find that we have access to our application tree where we have the right name associated to our
+
+07:18.370 --> 07:24.430
+components instead of the actual rendered elements we see when we typically go to our elements.
+
+07:24.430 --> 07:32.920
+So if we had divs we would see them as divs if we had p tags whatever but inside of the react profile
+
+07:32.940 --> 07:38.040
+here we actually see the right name for the right components but instead of focusing on that we want
+
+07:38.040 --> 07:43.920
+to look at the profiler because the profiler will tell us how many times components were rendered and
+
+07:43.920 --> 07:48.810
+how much time it took for them to actually get placed on the page.
+
+07:48.810 --> 07:55.410
+So if I hit this record button and I start clicking my button it's tracking all of them and when I stop
+
+07:55.410 --> 07:58.990
+it you'll see here what looks like a timeline.
+
+07:59.220 --> 08:07.100
+Now this timeline actually represents what it is that these components took in order to render so let's
+
+08:07.100 --> 08:09.310
+look at our person component for example.
+
+08:09.530 --> 08:13.770
+So we know that our app component of course gotta be rendered but so did our person component.
+
+08:13.850 --> 08:17.690
+If we look at it we'll see up here in this bar.
+
+08:17.690 --> 08:23.460
+It actually shows us these elements every time you click it.
+
+08:23.460 --> 08:29.880
+It advances through that chain and it tells us how many renders actually happen here and the total number
+
+08:29.880 --> 08:30.670
+of renders.
+
+08:30.810 --> 08:35.940
+And every time it rendered what were the prompts that got passed into a person component.
+
+08:35.940 --> 08:42.510
+The interesting thing is if you hit this icon here it actually tells you the total amount of time each
+
+08:42.520 --> 08:43.480
+render took.
+
+08:43.980 --> 08:50.220
+So the initial mount of course took longer than the end up subsequent re renders because the initial
+
+08:50.220 --> 08:57.570
+mount as I mentioned mounting is the most expensive because it's a dom required change whereas re rendering
+
+08:57.570 --> 09:04.350
+simply changes the values inside of the actual note but it doesn't have to create a new Dom node whereas
+
+09:04.350 --> 09:12.510
+here you'll see that these are faster to render but we still had to spend half a millisecond every time
+
+09:12.780 --> 09:14.190
+we increase the button count.
+
+09:14.670 --> 09:21.090
+But despite that fact our props never changed so we actually are costing our application quite a bit
+
+09:21.150 --> 09:23.110
+on these renders.
+
+09:23.190 --> 09:25.520
+Now how do we actually improve this.
+
+09:25.590 --> 09:33.570
+Well this is where we can actually improve our person component by using react memo reactive memo is
+
+09:33.570 --> 09:39.250
+a way for us to memorize this component so that the component does not re render.
+
+09:39.270 --> 09:43.100
+If the props values do not change now what do I mean by this.
+
+09:44.080 --> 09:52.180
+Well just like with our shared component update lifecycle method on our actual class components react
+
+09:52.180 --> 09:56.260
+memo does the exact same thing as implementing a shallow comparison.
+
+09:56.290 --> 10:02.770
+That should component update does for our class component and in a similar way using racked up memo
+
+10:02.830 --> 10:10.150
+on our functional components allows our new component to check the old props against the new props to
+
+10:10.150 --> 10:12.620
+see if the value has changed.
+
+10:12.730 --> 10:20.260
+Now what this means is that in order for us to use it we wrap our component with react memo like a higher
+
+10:20.260 --> 10:24.190
+order component which will memorize the actual component.
+
+10:24.190 --> 10:27.490
+Very similar to re-elect when we memorize our selectors.
+
+10:27.490 --> 10:34.360
+The only difference is that it checks to make sure that the actual object values have not changed at
+
+10:34.360 --> 10:37.360
+the root level which is a shallow comparison.
+
+10:37.360 --> 10:40.120
+We'll talk more about the shell comparison a little later.
+
+10:40.120 --> 10:41.590
+Let's actually first see what happens.
+
+10:42.460 --> 10:49.300
+So now if we look at our app Jess we're still passing in our person from our state and now we'll see
+
+10:49.300 --> 10:54.660
+that whenever we actually increase that count we're not rendering anymore.
+
+10:54.940 --> 10:56.170
+In fact to prove it.
+
+10:56.200 --> 10:59.320
+We can go back to our ReACT profiler.
+
+10:59.650 --> 11:08.810
+We can refresh our page and now if we start profiling and I start increasing the count here we'll see
+
+11:08.870 --> 11:16.430
+that our person simply got rendered the one time and it never rendered any more times during the recorded
+
+11:16.430 --> 11:18.890
+time other than the initial amount.
+
+11:18.890 --> 11:23.400
+Now the initial mount occurred before we actually started our profiler.
+
+11:23.420 --> 11:28.090
+Therefore we don't see any of those renders because none of them exist.
+
+11:28.160 --> 11:34.490
+Our components simply mounted the first time to render and that was it so we can see how that actually
+
+11:34.490 --> 11:40.040
+helps us out because now we have improved the actual performance of our component.
+
+11:40.790 --> 11:44.090
+But the question is how much did it improve it by.
+
+11:44.120 --> 11:50.240
+Well in order for us to see that time we do need to actually profile the initial mount so we can do
+
+11:50.240 --> 11:53.190
+that by making a slight change to our code here.
+
+11:53.300 --> 12:02.960
+So I'll simply add a show person toggle value of initially false and make sure that we set show person
+
+12:02.960 --> 12:03.460
+here
+
+12:06.220 --> 12:14.780
+and dynamically decide whether or not to show this person component based on our state value of show
+
+12:14.780 --> 12:15.220
+person.
+
+12:16.190 --> 12:20.480
+And then I'm going to make a new button that says toggle
+
+12:23.980 --> 12:30.990
+and all it does is it sets the state where show person is equal to the opposite value.
+
+12:31.060 --> 12:32.140
+So nothing new here.
+
+12:32.140 --> 12:39.180
+I'm simply just toggling this value now what happens is that we don't initially see our person I'm going
+
+12:39.180 --> 12:45.240
+to start recording our profiler I'm going to toggle it on and then I'm going to click increased count.
+
+12:45.240 --> 12:54.240
+Stop it and now we'll see that we've actually got our initial render time which is one point five milliseconds.
+
+12:54.240 --> 12:59.210
+So that's how long it took for our component to mount our person component.
+
+12:59.250 --> 13:07.000
+Now however if I remove this react memo how much time do you think it actually takes to render the person
+
+13:07.060 --> 13:14.580
+the first time not the subsequent times but just the first time if we start profiling and again and
+
+13:14.630 --> 13:22.920
+we target a person and we stop we see that the initial mount was one point three milliseconds which
+
+13:22.920 --> 13:26.560
+is faster than when we used our ReACT memo.
+
+13:26.640 --> 13:35.880
+The reason for this is because the initial memorization of our component takes longer than just simply
+
+13:35.880 --> 13:37.970
+passing that component itself.
+
+13:37.980 --> 13:42.710
+So this is a thing you got to remember is that everything comes with a cost.
+
+13:42.840 --> 13:46.240
+Every optimization that we make does come with a cost.
+
+13:46.290 --> 13:53.110
+Even implementing should a component update because this means that our class component has a new life
+
+13:53.110 --> 13:57.880
+cycle method that has to run every time prompts or state changes.
+
+13:57.900 --> 14:05.240
+This is important because if you have components that don't take props then you there's no need to actually
+
+14:05.240 --> 14:06.200
+memorize them.
+
+14:06.350 --> 14:14.450
+In fact if you have components that don't modify state or don't need the lifecycle methods or rarely
+
+14:14.450 --> 14:16.440
+change their props at all.
+
+14:16.790 --> 14:18.940
+Then there is also no reason to memorize them.
+
+14:18.950 --> 14:24.860
+So this is a thing to remember you always want to be measuring to see whether or not your components
+
+14:24.860 --> 14:28.450
+are actually performing faster in the grand scheme of things.
+
+14:28.610 --> 14:32.990
+Because if we start memorizing all of our components without thinking about the context in which they
+
+14:32.990 --> 14:42.250
+are used we'll actually end up with a slower application as a whole so the alternative to using reactive
+
+14:42.260 --> 14:49.100
+memo for a class component is react up here component and this is essentially the same thing as implementing
+
+14:49.160 --> 14:55.070
+a should component update method where we're able to compare next props to props and next state to state
+
+14:55.220 --> 15:00.800
+it just simply does it for you under the hood so you don't have to implement it yourself.
+
+15:01.010 --> 15:05.870
+Very similar to our ReACT memo except of course react memo is for functional components because they
+
+15:05.870 --> 15:07.840
+don't have local state.
+
+15:08.000 --> 15:14.570
+So these are just things to keep in mind with these actual new versions of instantiating components
+
+15:14.570 --> 15:17.720
+that we can use to optimize our components.
+
+15:17.720 --> 15:23.710
+But again context is the most important thing in the next lesson we're going to talk about the shallow
+
+15:23.710 --> 15:28.630
+comparison and more considerations about how that might affect our application.
+
+15:28.900 --> 15:31.060
+So we'll talk about that in the next lesson.

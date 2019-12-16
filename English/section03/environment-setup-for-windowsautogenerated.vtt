@@ -1,0 +1,352 @@
+WEBVTT
+
+00:00.570 --> 00:04.260
+Hello everyone and welcome back in this video.
+
+00:04.270 --> 00:09.550
+I want to quickly show you how you can get your environment set up so that you can code along inside
+
+00:09.550 --> 00:10.630
+of this course.
+
+00:10.810 --> 00:18.680
+If you are on a Windows computer now in the windows computer there's a couple different terminal options
+
+00:18.680 --> 00:19.910
+you have.
+
+00:19.910 --> 00:26.460
+The main one that I think is very useful is the one that comes integrated with Visual Studio code.
+
+00:26.810 --> 00:33.650
+The benefit of this as well is that because I use Visual Studio code as my editor if you're unfamiliar
+
+00:33.650 --> 00:40.520
+with EDS you can easily use Visual Studio code and you'll be able to follow everything that I'm doing
+
+00:40.520 --> 00:47.210
+with my editor because we both would end up using the exact same editor so in order to use Visual Studio
+
+00:47.210 --> 00:53.370
+code I'm going to paste for you a link inside of your resources that you can use to get the dollar.
+
+00:53.960 --> 01:02.200
+So simply hit download for windows and wait for the download to complete once your visual studio code
+
+01:02.200 --> 01:03.670
+finishes downloading.
+
+01:03.670 --> 01:06.880
+Simply go to the folder that you set it in.
+
+01:06.880 --> 01:12.580
+So in my case it's in my downloads folder and just simply double click to install it.
+
+01:14.810 --> 01:18.630
+Now inside of here you're gonna be asked for a license agreement.
+
+01:18.800 --> 01:24.510
+So simply accept the agreement and then you'll have these boxes that you can check.
+
+01:24.560 --> 01:27.580
+Now I would probably check all the ones that are unchecked.
+
+01:27.590 --> 01:33.840
+But what this allows you to do is access Visual Studio code through different settings on your computer
+
+01:33.840 --> 01:39.660
+so you can use it to open up your projects simply hit next and then install
+
+01:44.430 --> 01:45.330
+once it's finished.
+
+01:45.360 --> 01:51.570
+We can simply launch Visual Studio code and then inside a Visual Studio code.
+
+01:51.570 --> 01:53.610
+You now have your editor.
+
+01:53.610 --> 01:59.430
+So in order for you to actually open up the terminal that I have here simply go up to the terminal tab
+
+01:59.790 --> 02:07.710
+and hit new terminal and this will now open up the terminal that you have by default set up inside of
+
+02:07.710 --> 02:08.960
+your Windows computer.
+
+02:09.210 --> 02:14.190
+If you have installed other shells you'll be able to select them from this dropdown.
+
+02:14.310 --> 02:20.460
+But in my case I only have power shell which is the default shell that comes with the computer.
+
+02:20.460 --> 02:28.800
+So what I'm going to do now is I am going to actually install a different one called Get Bash now with
+
+02:28.800 --> 02:29.780
+get bash.
+
+02:29.850 --> 02:35.970
+You are now able to access the underlying get projects and get folders that we will use throughout this
+
+02:35.970 --> 02:39.170
+course because we want to push to get hub.
+
+02:39.300 --> 02:46.940
+So use the link that I provided for you and simply hit Download Now this will download this the same
+
+02:46.940 --> 02:52.430
+way that we just downloaded Visual Studio code and just save it wherever you want to.
+
+02:52.490 --> 02:58.270
+Once it's finished downloading go to the folder where it's downloaded to and simply run it as well.
+
+03:02.480 --> 03:04.910
+Now this will ask you if you allow it to make changes.
+
+03:04.910 --> 03:05.570
+Now you want to hit.
+
+03:05.570 --> 03:12.470
+Yes because this will install get bash instead of power shell which comes with much easier to understand
+
+03:12.470 --> 03:19.590
+controls now here and I'll ask you if you wanted to allow you to install different things.
+
+03:19.810 --> 03:23.530
+And in my case I just want to add another icon on the desktop.
+
+03:23.530 --> 03:24.700
+So it's easy to launch
+
+03:29.970 --> 03:33.390
+and then by default it will ask you what editor you want to use.
+
+03:33.420 --> 03:39.180
+So usually vim is the one that most people are comfortable with or Visual Studio code which we just
+
+03:39.180 --> 03:39.910
+downloaded.
+
+03:39.960 --> 03:45.320
+If you want it to be the one that opens whenever you want to modify files and text files.
+
+03:45.750 --> 03:47.740
+But we'll explore that a little later.
+
+03:47.880 --> 03:54.860
+For now I'm just going to stick to them and hit next and then I want to run get from my command line
+
+03:56.750 --> 04:00.990
+and then I want to also use Open SSL in order to validate my get.
+
+04:01.130 --> 04:10.180
+You can just hit next for this and for here you can also use get bashes own minty terminal emulator.
+
+04:10.180 --> 04:12.110
+So this one is entirely up to you.
+
+04:12.130 --> 04:18.360
+I personally I'm going to use the get provided minty and then I'm just going to hit next again.
+
+04:18.370 --> 04:24.300
+Experimental is up to you whether or not you want to opt in or not to these new commands.
+
+04:24.430 --> 04:26.040
+It does not really matter.
+
+04:26.080 --> 04:33.070
+I'm not going to opt in and I'm just gonna wait for the install to finish now once everything's installed.
+
+04:33.070 --> 04:38.260
+Simply hit finish and then go back to your visual studio code and close it.
+
+04:38.800 --> 04:45.280
+So we need to actually access the new terminal because we have a new shell storage to do this.
+
+04:45.280 --> 04:48.120
+Just reopen Visual Studio code after you've closed it.
+
+04:51.050 --> 04:56.210
+And then inside of this dropdown what we're going to do is we are gonna hit select default shell
+
+04:59.030 --> 05:02.560
+and we are going to choose art get Bash.
+
+05:02.610 --> 05:08.130
+Now this will switch our main terminal whenever we add a new one or whenever we open our terminal to
+
+05:08.130 --> 05:15.120
+use our new get back shell and the way to do that is now you simply hit this plus icon which we'll see
+
+05:15.180 --> 05:20.760
+is now bash and then you just close your old power shell by switching back to it and hitting the garbage
+
+05:20.760 --> 05:21.420
+can.
+
+05:21.510 --> 05:25.180
+And now you have bash setup as your main terminal.
+
+05:25.230 --> 05:31.230
+Now if you see these colors when you switch to bash that means that you are running the minty emulator.
+
+05:31.260 --> 05:35.070
+If you remember in those settings when we were installing get bash.
+
+05:35.190 --> 05:38.130
+So this is actually a quality of life emulator.
+
+05:38.130 --> 05:43.440
+It just makes different things in the terminal prettier as well as easier to understand and reason about
+
+05:44.480 --> 05:50.030
+you can of course run other emulators if you want such a Z shell which is what I have when you watch
+
+05:50.030 --> 05:51.120
+my course.
+
+05:51.200 --> 05:54.170
+But in our case minty is fine for windows.
+
+05:54.170 --> 06:00.590
+Now what we need to install next is Node node is actually what's going to allow us to run javascript
+
+06:00.650 --> 06:02.610
+inside of our terminal.
+
+06:02.690 --> 06:10.040
+What we have to do is we have to go to this Web site of no J.S. and simply download the installer equivalent
+
+06:10.040 --> 06:17.760
+to whatever bit your Windows is so minus 64 I'm just going to download the 64 bit one.
+
+06:17.900 --> 06:24.620
+Once it's finished downloading open the folder and then just run the node installer now node is what
+
+06:24.620 --> 06:32.300
+we need in order for us to run our JavaScript as well as manage our javascript packages for all of the
+
+06:32.300 --> 06:36.690
+applications that we'll be building so simply hit next.
+
+06:36.860 --> 06:45.370
+Except the license and agreement install node and then hit next again and finally install.
+
+06:45.370 --> 06:52.120
+Now node also comes with NPM which is node package manager and we want to hit yes here as well.
+
+06:52.150 --> 06:59.870
+When it asks if it allows us to make changes to our device and no package manager is what allows us
+
+06:59.870 --> 07:06.830
+to manage different versions of node now the versions of node all come with different features and node
+
+07:06.920 --> 07:13.940
+is always being updated but we want to just use the latest version of node at the time of when you watch
+
+07:13.940 --> 07:14.950
+this video.
+
+07:15.050 --> 07:19.670
+And usually that's what this link will recommend you as well and I'll try and give you the latest LTE
+
+07:19.700 --> 07:28.600
+version so simply wait until our node is finished installing and once it's finished simply hit finish.
+
+07:28.600 --> 07:33.300
+Now we have to make sure that node and NPM are properly installed on our computer.
+
+07:33.790 --> 07:41.540
+So the way we do that is we just have to close our visual studio code and reopen it again because we
+
+07:41.540 --> 07:48.950
+need to see and load a new version of our terminal and once our terminal comes in we simply type in
+
+07:48.950 --> 07:53.460
+no dash B and we should see some number.
+
+07:53.460 --> 07:56.970
+So this will tell us the version of node that we currently have installed.
+
+07:57.210 --> 08:04.140
+If we hit NPM dash maybe we'll see the version of NPM we have install now that you have NPM and node
+
+08:04.140 --> 08:07.230
+you can actually run through this course.
+
+08:07.230 --> 08:11.520
+The only thing is that I use yarn as my package manager instead of NPM.
+
+08:12.180 --> 08:15.090
+Now yarn and NPM are pretty much the same thing.
+
+08:15.090 --> 08:21.780
+The only thing was that there was a period of time where NPM was kind of buggy and what Facebook did
+
+08:21.780 --> 08:27.930
+was they created yarn so that it was a more efficient package manager but NPM has since then caught
+
+08:27.930 --> 08:28.800
+up.
+
+08:28.800 --> 08:34.050
+Now you can easily Google all of the commands that you need that are the same replacements for what's
+
+08:34.050 --> 08:35.200
+used in yarn.
+
+08:35.310 --> 08:40.710
+If you wanted to just use NPM but if you want to use yarn I'm gonna show you how to download yarn.
+
+08:40.710 --> 08:47.880
+So simply copy the resource that I've given you inside of your resource folder that says yarn and then
+
+08:47.880 --> 08:49.590
+paste it into your browser.
+
+08:49.800 --> 08:55.350
+And once you're on this page make sure your operating system is windows and your version is stable.
+
+08:55.350 --> 08:58.350
+Then you just click download installer.
+
+08:58.350 --> 09:03.690
+Now you'll see here that it says that we can only do this after we've installed no Jess which we just
+
+09:03.690 --> 09:05.570
+did so with this.
+
+09:05.580 --> 09:13.350
+Once it's finished we simply go to where we've installed it and run the installer.
+
+09:13.470 --> 09:16.500
+We're going to accept the licence hit next.
+
+09:16.590 --> 09:21.440
+And then finally hit and stop.
+
+09:21.510 --> 09:25.160
+We want to allow it to make changes and we finish.
+
+09:25.410 --> 09:28.910
+And now we need to go back to our visual studio code.
+
+09:29.220 --> 09:35.310
+Close it again and rerun it because we need to make sure that we have the version of yarn installed
+
+09:35.310 --> 09:37.560
+or our computer.
+
+09:37.690 --> 09:42.440
+So what we can do inside of our terminal is just type yarn dash V.
+
+09:42.490 --> 09:48.030
+Once it's finished loading and we should see the version that we just installed.
+
+09:48.160 --> 09:51.990
+And with this your environment is now set up for the rest of the course.
+
+09:52.030 --> 09:53.710
+So I'll see you in the next lesson.

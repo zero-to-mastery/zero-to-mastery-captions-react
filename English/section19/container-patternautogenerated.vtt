@@ -1,0 +1,442 @@
+WEBVTT
+
+00:01.090 --> 00:10.930
+Now as we mentioned right now inside of our shop page component we are passing in these two properties
+
+00:11.140 --> 00:20.740
+where we get the loading states of our shop reducer in order to pass them into these components that
+
+00:20.740 --> 00:23.740
+we render inside of our routes.
+
+00:23.770 --> 00:30.970
+However we do nothing else with these props so it almost makes more sense for us to find a way to pass
+
+00:31.060 --> 00:38.940
+these values into our collections over a view with Spinner in their own isolated environment rather
+
+00:38.940 --> 00:43.980
+than pollute our shop page component because there's nothing that the shop page component can do with
+
+00:43.980 --> 00:49.410
+this other than pass them in to these values.
+
+00:49.440 --> 00:55.860
+The reason why this is redundant is because our shop page asks for all our components should be as dumb
+
+00:55.920 --> 00:56.870
+as possible.
+
+00:56.880 --> 01:01.650
+There is no reason for them to know about things that they don't need to know about.
+
+01:01.680 --> 01:07.710
+So for example our shop page doesn't care whether or not this component or this component is loading
+
+01:07.710 --> 01:13.200
+or not these components should be the ones in charge of determining whether or not they're being loaded
+
+01:14.630 --> 01:20.420
+or whether or not they should be rendering the spinner and how we're going to do that is we are going
+
+01:20.420 --> 01:28.070
+to leverage our higher order components again except we're going to use the concept of the container
+
+01:28.070 --> 01:29.160
+pattern.
+
+01:29.180 --> 01:32.090
+So let me show you what that looks like.
+
+01:32.120 --> 01:37.970
+So what we want to replace is both these components and the first thing we're gonna do is modify each
+
+01:37.970 --> 01:40.280
+one with our containers.
+
+01:40.280 --> 01:48.310
+So we are going to go to our collections overview and make a new file called collections overview container
+
+01:48.660 --> 01:58.340
+Dutch ASX now our container is pretty much going to be a component that gets wrapped in all of the higher
+
+01:58.340 --> 02:06.650
+order components that it needs in order to properly run the way that it expects itself to the same way
+
+02:06.650 --> 02:09.070
+that we've got a here in this slice.
+
+02:09.080 --> 02:16.500
+So instead of wrapping our map states up props around our shop page in order to pass that value into
+
+02:16.520 --> 02:22.100
+our collections overview with Spinner we're just gonna wrap that map states of props with this value
+
+02:22.220 --> 02:27.590
+around this component so that this collections overview with spinner which in turn is pretty much just
+
+02:27.590 --> 02:31.250
+our collections overview being wrapped by our with Spinner.
+
+02:31.250 --> 02:37.040
+So it's just two levels of wrapping that we're going to do inside of this container component.
+
+02:37.040 --> 02:38.270
+That's all it is.
+
+02:38.360 --> 02:41.370
+I know it sounds complicated but that's really all it is.
+
+02:41.450 --> 02:43.880
+And let me show you how that looks.
+
+02:43.910 --> 02:50.000
+So what we need to do is need to import all of the libraries that we need in order to wrap all the code
+
+02:50.000 --> 02:56.030
+that we have and what this will start with is actually our connect right.
+
+02:56.050 --> 03:03.500
+Because we know we need access to both those selectors and the state to determine whether or not this
+
+03:03.500 --> 03:06.640
+component should be loading.
+
+03:06.650 --> 03:12.720
+We also need to import create structured selector because we're going to write a map state to props
+
+03:15.840 --> 03:19.490
+and we're also going to import in all the selectors.
+
+03:20.100 --> 03:24.360
+So we need our select is collection fetching
+
+03:27.520 --> 03:29.320
+redux shop
+
+03:32.990 --> 03:33.800
+shops select
+
+03:37.400 --> 03:40.880
+and then we need to import our with Spinner a higher order component
+
+03:45.960 --> 03:50.370
+and then we need to import our actual collections overview component
+
+03:56.170 --> 04:03.340
+and now we just got to write the same map states props that we had in our shop where all we were pulling
+
+04:03.340 --> 04:12.060
+off from our state was the select is collection fetching.
+
+04:12.130 --> 04:19.490
+The only difference is that because we're going to pass this property into our width spinner right.
+
+04:19.510 --> 04:23.020
+Hired a component that wraps our collections overview.
+
+04:23.020 --> 04:27.900
+We got a set the property that we want to be named.
+
+04:27.910 --> 04:34.080
+The one that the width spinner is expecting that's all it is because here we can manually pass it in
+
+04:34.170 --> 04:37.140
+by writing it as a prop instead when we wrap it.
+
+04:37.140 --> 04:42.300
+We just want to make sure that the prop that goes in is under the right prop name that the width spinner
+
+04:42.480 --> 04:50.980
+hada component is expecting which is this loading and then all we need to do is we need to export out
+
+04:51.310 --> 04:59.110
+the actual value and the value will be this new thing called a collections overview container.
+
+04:59.170 --> 05:06.820
+This is simply equal to connect right where we pass it maps to props and then what we would do is typically
+
+05:06.820 --> 05:12.610
+as we've seen wrap it around collections overview but we know that what we want to do is we want to
+
+05:12.610 --> 05:18.760
+wrap this collections our review component inside of our with spinner which we can do by just wrapping
+
+05:18.760 --> 05:23.360
+it like this because functions will evaluate from the inside out.
+
+05:23.470 --> 05:28.750
+So what will happen is this with Spinner will first wrap around collections overview giving us back
+
+05:28.810 --> 05:35.170
+our collections overview with Spinner component which then we'll get past into our connect which will
+
+05:35.170 --> 05:43.140
+then give it is loading writing it this way is totally fine how ever.
+
+05:43.220 --> 05:46.190
+This seems a little bit harder to read right.
+
+05:46.190 --> 05:52.760
+It's a little harder for anyone to come in and see what's happening because of the fact that if we had
+
+05:52.760 --> 05:58.370
+more and more wrappers let's say one more higher to components it would be difficult to fathom what's
+
+05:58.370 --> 06:02.530
+happening in the way that this is just wrapping more and more components right.
+
+06:02.690 --> 06:09.230
+You can imagine if we had another with HFC here somewhere right that this would be too much.
+
+06:09.230 --> 06:14.630
+You can even see that if we wanted to wrap all of this with a with our width router hired a component
+
+06:14.630 --> 06:16.190
+that we get from HREOC redux.
+
+06:16.350 --> 06:21.440
+Well now this is really hard to read to determine what the actual order of everything is being rendered.
+
+06:21.440 --> 06:29.430
+What we can do is leverage a library or not a library sorry but another thing we can import from redux
+
+06:29.430 --> 06:38.830
+called compose and what compose lets us do as it lets us pass these in by just calling the function.
+
+06:38.900 --> 06:49.000
+So what we're gonna write instead is compose and then pass it are connect and then pass it with Spinner
+
+06:51.400 --> 06:53.660
+and then pass all of this.
+
+06:53.890 --> 07:00.330
+Our collections overview and what this is doing is it's essentially carrying all of our functions together
+
+07:00.720 --> 07:03.620
+compose evaluates from right to left.
+
+07:03.780 --> 07:08.640
+So what it will do is it evaluate with Spinner first by passing in the collections overview to that
+
+07:08.820 --> 07:13.030
+and then passing that to arc in the same way that we saw it earlier.
+
+07:13.110 --> 07:16.700
+This is completely equivalent to what we wrote earlier.
+
+07:17.100 --> 07:24.740
+To this it's the same thing so knowing that it's just easier for us to reason about and you might see
+
+07:24.770 --> 07:31.490
+compose be used from either the redux library or the rammed a library right which is another library
+
+07:31.700 --> 07:33.280
+that you might see in your projects.
+
+07:33.290 --> 07:40.130
+But that's all composed does is that it just allows us to evaluate multiple curried functions where
+
+07:40.280 --> 07:45.380
+the function returns another function that expects something to be passed to it and allows you to chain
+
+07:45.380 --> 07:55.900
+them all together like this and now we just got to export this as the default collection or Taner and
+
+07:55.900 --> 08:00.040
+then we can just import this into our shop component.
+
+08:00.040 --> 08:05.500
+So instead of now rendering this collections overview with Spinner we just render our collections or
+
+08:05.740 --> 08:18.990
+container from the dock container path and now we can switch back from a render to a component and remove
+
+08:19.770 --> 08:29.080
+any use of this selector because we don't need it in our shop page anymore because our container is
+
+08:29.080 --> 08:31.250
+handling all of that information.
+
+08:31.400 --> 08:41.500
+Now if we look we'll see that our application behaves the exact same so we know our code is working.
+
+08:41.580 --> 08:46.940
+So now what we can do is do the same thing for our collection page with Spinner.
+
+08:47.050 --> 08:48.270
+Right.
+
+08:48.270 --> 08:54.290
+The difference is now we've got to modify our collection page component here which is going to do the
+
+08:54.290 --> 09:01.040
+same thing we're gonna write our collection dock container dodgy OSX we're gonna import in
+
+09:05.380 --> 09:15.000
+from react redux we're gonna import in compose from redux and we're gonna import in create structured
+
+09:15.020 --> 09:24.580
+selector from reselling and then we're gonna import in our selector so we can actually take this from
+
+09:24.580 --> 09:24.970
+here
+
+09:29.190 --> 09:40.080
+our select is collections loaded we're also going to import in with Spinner from opponents spinner spinner
+
+09:40.180 --> 09:44.390
+our component as well as our collection page component
+
+09:48.640 --> 09:55.360
+and just as we did before we need our maps data prompts and we're gonna use our create structure selector
+
+09:56.960 --> 10:05.030
+but if you remember we need to inverse the value that we pass into our is loading so what we can actually
+
+10:05.030 --> 10:12.510
+do here is we can actually posit a function that will get the state and this will still memoirs our
+
+10:12.510 --> 10:21.030
+selector if we pass it are select is collection loaded passing in the state here and then we are going
+
+10:21.030 --> 10:26.380
+to make our container so our collection page container
+
+10:29.380 --> 10:38.320
+like the A which is equal to our compose call passing connect with our map states props passing in our
+
+10:38.320 --> 10:46.590
+width spinner and then finally passing our collection page and then exporting this as the default value
+
+10:46.710 --> 10:48.440
+of this component.
+
+10:49.710 --> 10:56.340
+So the only new thing that we did here was that we use the function instead of what we did inside of
+
+10:56.370 --> 11:00.320
+our previous container which was our collections overview right.
+
+11:00.450 --> 11:06.610
+Or any other map states of props or we use create structure selector.
+
+11:06.650 --> 11:12.230
+We passed it a function that stuff just passing the selector we just pass the function which gets the
+
+11:12.230 --> 11:18.060
+state as well as the own props right into our selector.
+
+11:18.180 --> 11:25.750
+And this will in turn create the selector for us and then we're just going to replace this with the
+
+11:25.750 --> 11:26.890
+container value
+
+11:30.310 --> 11:34.890
+going to get rid of this this.
+
+11:35.060 --> 11:42.610
+We're also not going to need this anymore and now all we need to do is pretty much just replace this
+
+11:42.620 --> 11:49.530
+the same way that we did earlier get rid of our map states props because we don't need that anymore
+
+11:50.320 --> 11:55.710
+so that's a null now if we save and get rid of this prop
+
+11:58.740 --> 12:06.520
+Well we see that we have an error cannot re property title of null oh so we have to switch this.
+
+12:07.090 --> 12:08.350
+That's always the whole point of that.
+
+12:08.560 --> 12:14.360
+So that we can reverse this value and now we see that our component works right.
+
+12:14.470 --> 12:21.250
+Our code relating to anything we need with our selectors is isolated into each respective container.
+
+12:21.730 --> 12:27.640
+And look how much smaller our shop pages it doesn't need to do anything other than just render the components
+
+12:27.670 --> 12:30.980
+on its routes and that's really all it should do.
+
+12:30.990 --> 12:38.070
+Its only function is to create and initialize the asynchronous request for fetching data and then passing
+
+12:38.070 --> 12:40.200
+components into its roots.
+
+12:40.380 --> 12:46.980
+And this is the ideal kind of setup using the container pattern for moving all of our code that we need
+
+12:47.070 --> 12:49.670
+into its own respective components.
+
+12:51.070 --> 12:56.550
+Now hopefully this was not too much of a challenge for everybody to follow but if it is that's perfectly
+
+12:56.550 --> 12:56.890
+fine.
+
+12:57.360 --> 13:04.110
+Honestly when I first worked on my own react redux project for the first time in my professional career
+
+13:04.500 --> 13:11.760
+it was a daunting task of doing this pattern so many times four months before I was able to fully understand
+
+13:12.120 --> 13:15.590
+all of the moving parts of react and Redux.
+
+13:15.660 --> 13:22.760
+If you guys don't get it all in one shot Don't worry it's a lot and it's really challenging.
+
+13:23.040 --> 13:28.170
+But this is going to be the most common pattern you're going to see at some point of your profession
+
+13:28.170 --> 13:28.820
+over react.
+
+13:28.830 --> 13:35.760
+Career now at this point of course more practice goes a long way to understanding all of these things
+
+13:35.760 --> 13:36.650
+that we've done.
+
+13:36.870 --> 13:43.350
+You can of course always just move any connect code that we have around a component such as our cart
+
+13:43.350 --> 13:47.770
+dropdown component into a container file because that's really all it is.
+
+13:47.790 --> 13:53.180
+We're just wrapping the base component with some higher to components that we put inside of a container
+
+13:53.190 --> 13:54.460
+file.
+
+13:54.550 --> 13:56.010
+You can do that for practice.
+
+13:56.080 --> 14:02.240
+You don't necessarily have to but this is a matter of just iteration right.
+
+14:02.230 --> 14:08.710
+The more and more we do this them better and better we'll understand why we do all this as well as what
+
+14:08.710 --> 14:12.060
+those steps are going to be and what files we need to make.
+
+14:12.070 --> 14:20.000
+It's just practice now in the next lesson we're going to talk about another common library that's used
+
+14:20.000 --> 14:22.950
+to handle asynchronous actions in redux.
+
+14:22.970 --> 14:28.670
+It's going to be very similar to redux thunk except with a bit more flexibility and I'll tell you all
+
+14:28.670 --> 14:30.470
+about that in the next lesson.

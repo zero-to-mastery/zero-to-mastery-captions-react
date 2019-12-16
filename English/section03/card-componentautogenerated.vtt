@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00.790 --> 00:10.280
+Now that we know what to do with our card list component we can actually take it a step further.
+
+00:10.330 --> 00:20.440
+So earlier we weren't just passing children in and rendering it between R outside div but we don't actually
+
+00:20.440 --> 00:27.460
+want to do that because right now our app component is actually the one that is currently responsible
+
+00:27.880 --> 00:34.600
+for mapping over that list of monsters and then creating those elements.
+
+00:34.600 --> 00:40.840
+But we actually want to give that responsibility to the card list component because the card list component
+
+00:41.080 --> 00:45.180
+should be the one responsible for listing the cards.
+
+00:45.280 --> 00:48.140
+So let's actually move this into it.
+
+00:48.550 --> 00:53.140
+So first what we're gonna do is we actually don't need this anymore.
+
+00:53.140 --> 00:54.900
+This is completely unnecessary.
+
+00:54.940 --> 01:06.980
+We're going to pass in the monsters as a prop from our app component and then we're going to move this
+
+01:07.430 --> 01:17.240
+into the card list so we know that we don't need the children anymore instead we're going to generate
+
+01:17.240 --> 01:18.600
+it ourselves.
+
+01:18.830 --> 01:27.710
+And it's not off state it's off of the prompts so if we do this everything should stay the same which
+
+01:27.710 --> 01:36.140
+it does which is awesome because now our app doesn't have to worry about creating those monster cards
+
+01:36.190 --> 01:41.480
+right the card list component is the one that's responsible for it which is great because that should
+
+01:41.480 --> 01:44.390
+be the responsibility of the card list component.
+
+01:44.570 --> 01:50.000
+But what the card lists component is not going to be responsible for is deciding how this component
+
+01:50.180 --> 01:51.410
+will look.
+
+01:51.410 --> 01:58.450
+So yes we could create our element and add those images all here right.
+
+01:58.520 --> 02:04.220
+But then we don't want to do that because we actually want our card list component to not have to think
+
+02:04.220 --> 02:04.660
+about that.
+
+02:04.670 --> 02:07.700
+It should only think about what it should add right.
+
+02:07.700 --> 02:09.110
+It should only think about rendering them.
+
+02:09.110 --> 02:11.810
+It should actually think about how to create them.
+
+02:11.840 --> 02:20.480
+So we're gonna make a new component to do that and that component is going to be a card component so
+
+02:20.510 --> 02:28.120
+let's make a card folder in our components folder and inside let's make a new card dock component.
+
+02:28.160 --> 02:35.180
+Jess X and we need to import react like we always do.
+
+02:37.240 --> 02:44.920
+And we're going to export this constant card which is going to be a new functional component that will
+
+02:44.920 --> 02:46.620
+return a div.
+
+02:47.020 --> 02:51.310
+And inside we're just going to make it the same thing that we had earlier.
+
+02:51.440 --> 02:51.880
+Right.
+
+02:53.090 --> 02:57.990
+Now this key actually is still going to go on our component.
+
+02:58.000 --> 03:06.220
+We're going to make sure to do that because we want react to still be aware that if any of these monsters
+
+03:06.280 --> 03:13.210
+update I only want you to update that one element that gets affected right now that we know that what
+
+03:13.210 --> 03:17.050
+we want to do is we no longer have access to the monster in the scope.
+
+03:17.080 --> 03:23.290
+So what we've got to do is we're gonna pass that monster the same way we passed monsters into the props
+
+03:23.350 --> 03:25.250
+from our app dot J.S. Right.
+
+03:25.270 --> 03:26.680
+We passed monsters in.
+
+03:26.740 --> 03:31.840
+We're going to do the same thing and we're gonna pass an individual monster into our card component
+
+03:34.370 --> 03:44.150
+so we're gonna do prop stop monster here And make sure to add its first import the card
+
+03:47.980 --> 04:02.550
+card component oh we actually don't need any of that and then we've got to pass a monster into our card
+
+04:02.550 --> 04:03.150
+component.
+
+04:03.150 --> 04:03.530
+Right.
+
+04:03.540 --> 04:10.140
+So we're passing monster into the card component and the card component gets it from the props and displays
+
+04:10.140 --> 04:10.720
+the name.
+
+04:10.950 --> 04:15.320
+And if we check it stays the same which is awesome.
+
+04:15.320 --> 04:16.840
+That's exactly what we're looking for.
+
+04:17.920 --> 04:25.380
+Now to add the styling to make it look closer to our actual application just like before I have the
+
+04:25.380 --> 04:27.880
+styles already written for you guys.
+
+04:28.020 --> 04:30.630
+We're just gonna do the same thing that we did last time.
+
+04:30.750 --> 04:41.870
+We're gonna make a new card DOD style CSX and then we're gonna use this card container class and the
+
+04:41.870 --> 04:44.450
+styling for it inside of our car.
+
+04:49.370 --> 04:51.030
+Well I forgot to import of course.
+
+04:51.030 --> 04:57.270
+Don't forget that we gotta import those thousand to our far.
+
+04:57.470 --> 05:02.640
+Now we see this card has all of these styling on it right.
+
+05:02.650 --> 05:03.640
+Just like before.
+
+05:03.640 --> 05:09.580
+It just doesn't have the image anymore but just like our final application it's trying to look much
+
+05:09.580 --> 05:12.670
+closer now.
+
+05:12.850 --> 05:14.090
+Where do we get the image.
+
+05:14.150 --> 05:19.820
+The image I actually get from this Web site called robo hash.
+
+05:19.820 --> 05:28.250
+And from robo hash it's very easy to get unique images of these funky looking monsters just based on
+
+05:28.340 --> 05:35.760
+a changing number that you pass to the URL which is really great for our purposes so we are going to
+
+05:35.760 --> 05:43.940
+add a new image right with an alt text of Monster and we're going to do our source which is robo hash
+
+05:44.580 --> 05:54.030
+except instead of this number we are going to add are props dot monster dot I.D. because the I.D. is
+
+05:54.120 --> 05:55.440
+a unique number.
+
+05:57.390 --> 06:01.260
+And then this is what's called a You are all parameter.
+
+06:01.290 --> 06:06.550
+So with this parameter I'm essentially saying to use this set of images and it's all on the Web site.
+
+06:06.570 --> 06:11.280
+You can see what other parameters you can add but another great one we can add a size.
+
+06:11.280 --> 06:19.930
+So if we add an amber sand we can say size equals and I want to do 180 by 1 80.
+
+06:19.950 --> 06:26.150
+Now if we save and we look at our image we see that it's there.
+
+06:26.300 --> 06:32.270
+We see we have these robo images and we have our names and now we're looking really close to our final
+
+06:32.270 --> 06:36.920
+application so let's just add the email as well.
+
+06:37.130 --> 06:47.170
+And instead of an H one let's use an H2 and then AP and let's just do props dot monster dot email
+
+06:50.150 --> 07:00.740
+and now when we look we see it looks exactly like what we have in our application awesome.
+
+07:00.790 --> 07:09.360
+So now in the next section what I'm going to add is the actual search bar and we're going to see how
+
+07:09.360 --> 07:12.870
+we can filter out and add more functionality to our components.

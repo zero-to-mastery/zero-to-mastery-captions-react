@@ -1,0 +1,388 @@
+WEBVTT
+
+00:02.540 --> 00:09.950
+So in order for us to start using stout components inside of our ReACT application what we need to do
+
+00:10.310 --> 00:18.390
+is first include the style components library inside of our application so we can just do that simply
+
+00:18.390 --> 00:22.200
+doing yarn ad styled dash components
+
+00:24.800 --> 00:32.330
+and once it installs we're going to talk about the naming structure as well as how we should structure
+
+00:32.420 --> 00:34.840
+are folders and files.
+
+00:34.910 --> 00:42.950
+Now that we're writing style components so let's start with a very basic component so that we can see
+
+00:43.310 --> 00:51.080
+what we need to do get familiar with the syntax before we move on to more complex components.
+
+00:51.190 --> 00:55.020
+And the first one I want to try is the home page component.
+
+00:55.170 --> 01:05.100
+So what we need to replace is this div with the class name home page with it's own home page stout component.
+
+01:05.670 --> 01:13.770
+So what we'll do is we'll make a new file called Home Page dot styles dot JSA X and we will import in
+
+01:13.950 --> 01:25.810
+style from Star components and we can name this div home page container and we'll use the same case
+
+01:26.680 --> 01:34.700
+of capitalizing because it is a component so we'll say home page container equals style dot div.
+
+01:34.780 --> 01:36.000
+As you remember right.
+
+01:36.010 --> 01:41.980
+Because we want to use a div where our call dot div to generate a new div and then we can literally
+
+01:41.980 --> 01:52.340
+just copy over the styles on our home page class selector and we can put them inside and then let's
+
+01:52.340 --> 02:04.090
+just export this out and now if we save and if we import in that component Home page book that's actually
+
+02:04.930 --> 02:10.870
+imported from home page lifestyles that J us and lets say home page container.
+
+02:11.170 --> 02:18.090
+We can now literally just replace this whole div with our home page container and then remove our style
+
+02:18.090 --> 02:26.720
+sheet and now if we look we see that our app is the exact same.
+
+02:26.860 --> 02:36.100
+In fact if we look inside and we look at our home page element we'll see that we have that unique string
+
+02:36.700 --> 02:46.610
+which is specific to our home page container component that we now just make so it's very simple and
+
+02:46.610 --> 02:47.830
+it's quite easy.
+
+02:48.050 --> 02:55.230
+And just like that is working now let's tackle a component that's a little bit more complicated.
+
+02:55.270 --> 02:57.430
+Let's tackle our header component
+
+03:00.350 --> 03:00.690
+now.
+
+03:00.720 --> 03:02.170
+Let's close that.
+
+03:02.460 --> 03:08.910
+Now if we look I had a component we'll see that there is the containing div that we need to make a header
+
+03:08.910 --> 03:17.520
+container right styled component for we need a logo container that will extend from link because we
+
+03:17.520 --> 03:24.590
+do need to leverage the link component from RAC writer Dom still and then we need actually the lower
+
+03:24.590 --> 03:25.810
+component and stay the same.
+
+03:25.850 --> 03:33.230
+We'll need this options container and we'll also need this options link but we'll also need the potential
+
+03:33.260 --> 03:40.780
+for our div with the class name option to also be a option link styling.
+
+03:40.790 --> 03:40.970
+Right.
+
+03:40.970 --> 03:46.070
+We need these styles to be shared between this link and this div.
+
+03:46.160 --> 03:56.080
+Now how do we do this well to start let's make our new header dot styles dot J.S. X while and then let's
+
+03:56.140 --> 04:00.520
+import in styled from styled components right.
+
+04:00.520 --> 04:09.400
+So let's tackle this one at a time we also want to can import in our link from RAC writer Dom because
+
+04:09.400 --> 04:15.220
+I'll show you how we can actually styled this link element using a stock component it's actually also
+
+04:15.220 --> 04:20.310
+very easy but the first thing that we want to do is just make the header container right.
+
+04:20.320 --> 04:29.770
+We just want to replace this header so we all say const header container equals styled
+
+04:33.060 --> 04:38.920
+and then let's just open up our header styles as well and copy this over
+
+04:42.410 --> 04:51.970
+so that's all the stuff that we need for our header container and then we also want our logo container
+
+04:53.980 --> 04:57.930
+so let's do our lower container as well.
+
+04:58.030 --> 05:03.750
+So we've got to export all these as well because we're going to import them later.
+
+05:03.860 --> 05:08.800
+We'll say low container which we know is now a link.
+
+05:08.800 --> 05:10.780
+So how do we use a link element.
+
+05:10.780 --> 05:17.920
+Well instead of calling dot and then the div we can do styled and then call it like a function and pass
+
+05:17.920 --> 05:20.170
+it the component that we wanted to wrap.
+
+05:20.230 --> 05:24.720
+And now we just continue with our string interpolation as we've been doing before.
+
+05:24.850 --> 05:30.040
+And now what we'll get is that is a style link component and it's just that easy.
+
+05:30.100 --> 05:37.630
+Just like that we've now extended style components into components which is what's super powerful about
+
+05:37.630 --> 05:40.480
+Star components and how easy it is to write.
+
+05:40.510 --> 05:47.700
+So for this one we just need our logo container code which is just this see us that's here and now our
+
+05:47.700 --> 05:50.660
+logo container is dot.
+
+05:50.870 --> 05:58.360
+Now the next thing we need is are options container which is this div right.
+
+05:58.370 --> 06:06.560
+So what we'll do here is we will say export concept options container which is equal to a style div
+
+06:08.180 --> 06:16.390
+and then let's just copy over options container code and we can just take this whole code right let's
+
+06:16.390 --> 06:17.460
+just take this one right here
+
+06:22.470 --> 06:24.750
+and then we have this option code.
+
+06:24.780 --> 06:34.020
+This option styling which is what gets applied to our option link and class name well because we want
+
+06:34.320 --> 06:36.510
+we don't want to duplicate our style.
+
+06:36.690 --> 06:38.910
+We want to write this more than once right.
+
+06:39.000 --> 06:44.400
+We want to be able to keep it in one place because our div and our link are going to share the classes
+
+06:45.670 --> 06:46.750
+or share the style sorry.
+
+06:46.840 --> 06:52.110
+Instead of using a class name we actually are able to leverage another thing that we get from store
+
+06:52.120 --> 07:02.170
+components called CSF and what this does it allows us to write a block of CSX that we can pass in and
+
+07:02.170 --> 07:08.620
+render as CSX inside of any of our stock components.
+
+07:08.620 --> 07:10.050
+And I'll show you how that looks.
+
+07:10.180 --> 07:17.120
+So we can say const option container styles and we just say CSX.
+
+07:17.130 --> 07:17.480
+Right.
+
+07:17.550 --> 07:18.600
+Because of that library.
+
+07:18.970 --> 07:25.220
+Well we just pulled in we apply these strings and now we just paste in the code that we want more than
+
+07:25.220 --> 07:25.580
+once.
+
+07:25.610 --> 07:34.760
+Which is this padding and cursor code and now if we wanted to replace these options we have two types
+
+07:34.760 --> 07:35.370
+of options.
+
+07:35.390 --> 07:38.660
+We have a little option link and an option div.
+
+07:38.720 --> 07:39.590
+Right.
+
+07:39.680 --> 07:50.320
+So we can literally say in our headers the export const option link right.
+
+07:50.470 --> 08:00.360
+And this will be a styled link and what we'll put in is just we'll use our string interpolation to render
+
+08:00.420 --> 08:08.700
+in this new options container styles code block of CSX that we wrote and we just do the same thing for
+
+08:08.730 --> 08:14.000
+our option diff and it's equal to a style div.
+
+08:14.260 --> 08:22.160
+And again we just interpolate in our option container style if you had a hard time following all we
+
+08:22.160 --> 08:32.510
+did was just instead of defining an h him a link or HDMI element for each of our elements we did the
+
+08:32.510 --> 08:39.590
+respective styled element and then if we wanted to use a custom component like say the length that we
+
+08:39.590 --> 08:48.220
+got from RAC rather Dom we can just call it into styled by passing it in and calling style like a function.
+
+08:48.250 --> 08:54.760
+Now if we want to share styles that might be duplicated all we have to do is import in this specific
+
+08:54.760 --> 08:56.180
+CSX keyword.
+
+08:56.350 --> 09:02.950
+And this allows us to now write CSX blocks that we can just include into our styles and we will get
+
+09:03.010 --> 09:12.700
+that CSX almost like a shared function so now that we have that let's import this all in and replace
+
+09:12.760 --> 09:14.200
+our respective code with it.
+
+09:18.660 --> 09:31.690
+So let's import in our head our container our logo container our options container our options
+
+09:34.430 --> 09:36.590
+give our option link
+
+09:39.380 --> 09:43.280
+and now we just replace the respective components
+
+09:46.160 --> 09:55.290
+so we'll just got to make sure to also get all the closing tags logo container during this class name
+
+09:55.290 --> 09:56.130
+property anymore.
+
+09:56.160 --> 09:58.280
+But remember to keep the two because it's still a link.
+
+09:58.290 --> 10:00.840
+So we need that functionality.
+
+10:00.990 --> 10:02.480
+We need our options container
+
+10:08.150 --> 10:10.700
+and then we need to replace our link with option link
+
+10:16.920 --> 10:19.590
+to replace this class name.
+
+10:19.690 --> 10:23.760
+In fact let's just delete this class name here as well.
+
+10:24.800 --> 10:32.020
+And then here instead of this div we need our option div also removing our class name.
+
+10:32.350 --> 10:34.710
+Don't accidentally remove the on click.
+
+10:34.950 --> 10:38.540
+And this final link will also be an option.
+
+10:38.640 --> 10:39.070
+Link
+
+10:43.730 --> 10:47.690
+now if we save I must have.
+
+10:47.780 --> 10:50.440
+Oh we have an unexpected div here.
+
+10:50.440 --> 10:52.440
+So this must be our options container
+
+10:55.280 --> 11:02.320
+got that one if we save we'll see our header is the exact same.
+
+11:02.670 --> 11:05.590
+So everything is working.
+
+11:05.630 --> 11:15.290
+That is how you pretty much style stock components so it's very simple and it's a lot of getting used
+
+11:15.290 --> 11:24.350
+to just the idea of converting all of your actual HDMI elements into their own style component but in
+
+11:24.350 --> 11:31.010
+a way now it makes a little bit more sense compared to this because before in order for us to see our
+
+11:31.100 --> 11:31.850
+options.
+
+11:31.880 --> 11:32.280
+Right.
+
+11:32.300 --> 11:32.830
+Which was right.
+
+11:32.840 --> 11:41.710
+That div we had to nest inside of our header to see what the options was but now instead it's easier
+
+11:41.740 --> 11:46.650
+because we are now able to just look at the options container.
+
+11:46.660 --> 11:48.320
+Oh this is an element right.
+
+11:48.340 --> 11:52.860
+We can just look at the styles related to this options container.
+
+11:52.990 --> 11:55.570
+We don't need to look at any other rules.
+
+11:55.570 --> 11:56.680
+Nothing in other rules.
+
+11:56.680 --> 11:57.620
+Right.
+
+11:57.700 --> 12:03.520
+We pretty much are now 100 percent sure that the code related to our options container is just in its
+
+12:03.640 --> 12:05.620
+own component.
+
+12:05.680 --> 12:12.280
+So this is really powerful and it's a great amount of leverage that we get as javascript developers
+
+12:12.460 --> 12:19.270
+and we'll continue converting some components over and we'll see more of where it's so useful in some
+
+12:19.270 --> 12:25.400
+of the perhaps more challenging components that we've had so I'm going to end this video because it's
+
+12:25.400 --> 12:30.230
+getting a little long but in the next video we'll continue converting our components over.

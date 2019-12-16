@@ -1,0 +1,280 @@
+WEBVTT
+
+00:00.150 --> 00:08.490
+So now that we have our car icon component and our cart dropdown component we have to figure out how
+
+00:08.490 --> 00:16.770
+to trigger our cart dropdown to hide and show based off clicking the cart icon.
+
+00:16.800 --> 00:24.300
+Now you might be wondering if we could just find that functionality into our head our component because
+
+00:24.300 --> 00:31.200
+both these components are here and using our local component state we could possibly add an on click
+
+00:31.200 --> 00:38.880
+handler here that updates a state value on our header that sets it to true or false.
+
+00:38.910 --> 00:43.930
+And then based off of that true false value we just hide or show this car dropdown.
+
+00:43.980 --> 00:51.600
+And that would be entirely valid if we were certain that the only way we wanted to hide or show our
+
+00:51.600 --> 00:54.940
+car dropdown was within our head our component.
+
+00:55.320 --> 00:57.300
+But because we are not sure of that.
+
+00:57.450 --> 01:04.020
+Perhaps we want to show or hide our car dropdown in another component.
+
+01:04.020 --> 01:11.580
+We want to move that functionality and that capability outside of the header component and inside of
+
+01:11.580 --> 01:14.420
+our global redux state.
+
+01:14.420 --> 01:16.130
+Now how do we do that.
+
+01:16.130 --> 01:23.090
+Well first let's create the redux files and they'll look very similar to our user files.
+
+01:23.090 --> 01:27.880
+So instead of user or call it cart we'll make a cart.
+
+01:27.920 --> 01:36.220
+Actions that J us a cart dot reducer dodgy us and a cart dot type stuff.
+
+01:36.230 --> 01:43.200
+J ust now starting with our reducer we know that we need an initial state
+
+01:46.950 --> 01:53.920
+where the hidden value is true because we want to hide our dropdown when they first comes to our Web
+
+01:53.920 --> 02:04.840
+site then we're going to have our cart reducer equal to a function where state is equal to our initial
+
+02:04.840 --> 02:05.400
+state.
+
+02:05.560 --> 02:07.060
+If no value comes in.
+
+02:07.060 --> 02:15.730
+So default value of initial state and then our action and using a switch statement on the action date
+
+02:15.790 --> 02:29.060
+type we will now selectively render with a case of let's say toggle cart hidden.
+
+02:29.240 --> 02:38.510
+The reason why we want to use a toggle versus a set is because our cart component will either be in
+
+02:38.510 --> 02:39.620
+a true or false state.
+
+02:39.650 --> 02:42.780
+So it's either hidden or not hidden right.
+
+02:42.860 --> 02:47.420
+And we know that we're mainly switching it back and forth between true and false.
+
+02:47.420 --> 02:56.000
+So instead of passing in a value for our actions our payload what we can actually do is we can say hidden
+
+02:56.120 --> 02:59.240
+is equal to state to hit it.
+
+02:59.900 --> 03:05.930
+So that exclamation mark is saying that whatever this boolean value is I want you to convert it to the
+
+03:06.050 --> 03:07.360
+opposite of it.
+
+03:07.400 --> 03:07.700
+Right.
+
+03:07.700 --> 03:15.520
+So if it's true or to be false if it's false I want it to be true and then by default we want to return
+
+03:15.790 --> 03:19.110
+just the state.
+
+03:19.150 --> 03:23.980
+Now this of course is a string but we want to make an action type for it.
+
+03:24.040 --> 03:28.120
+So let's go to our car dot actions and let's export default
+
+03:30.750 --> 03:39.270
+heart action types where toggle card hidden goes to the string toggle car hidden.
+
+03:39.270 --> 03:45.280
+And now we just need to import that from our car types
+
+03:48.510 --> 03:50.970
+and it will be cart action types
+
+03:55.260 --> 04:03.130
+toggle card hidden and we'll export out our reducer as the default.
+
+04:03.150 --> 04:05.190
+So now we have our code
+
+04:09.000 --> 04:23.180
+oh maybe I got to move this down here sometimes our lender yells at us now to make the actual oh wait
+
+04:23.510 --> 04:24.020
+i move it.
+
+04:24.140 --> 04:32.100
+Oh sorry I put this in the wrong file cart types my that wrong file that all that that's definitely
+
+04:32.100 --> 04:35.260
+confusing the file the file naming conventions.
+
+04:35.470 --> 04:39.180
+It's a thing that always used to throw me off when I was first learning read.
+
+04:39.170 --> 04:39.360
+OK.
+
+04:39.370 --> 04:43.790
+So definitely don't feel bad because we all make these mistakes.
+
+04:43.980 --> 04:48.560
+Now the cart action we actually need to make the action now.
+
+04:48.590 --> 05:00.450
+So let's import in our car action types from car types and what our value will be.
+
+05:00.670 --> 05:06.460
+We will set it as X export concert toggle cart.
+
+05:06.580 --> 05:09.930
+Hidden is equal to a function.
+
+05:10.230 --> 05:13.280
+And we're not going to pass a payload because we don't need one.
+
+05:13.330 --> 05:16.640
+We're just going to set type equal to cart action types.
+
+05:18.990 --> 05:27.530
+Dot toggle cart hit in payload is actually an optional property on our action object and inside of a
+
+05:27.530 --> 05:32.800
+reducer we're not actually using the payload inside of this respective case.
+
+05:32.810 --> 05:33.160
+Right.
+
+05:33.500 --> 05:35.960
+So there's no need for us to pass a payload.
+
+05:36.260 --> 05:40.980
+We just need to know that if it's of this type we're just going to switch it from whatever its previous
+
+05:40.980 --> 05:48.970
+state was to its opposite state and now inside of cart icon.
+
+05:49.290 --> 05:58.890
+Let's find that action here so let's import connect from react redux.
+
+05:59.030 --> 06:01.300
+Let's bring in our action type
+
+06:09.180 --> 06:10.090
+part action.
+
+06:12.870 --> 06:24.540
+Toggle car hit an and we need our map dispatch to props which gets a dispatch and we're gonna call it
+
+06:24.570 --> 06:34.050
+toggle cart hidden will just be a function that triggers the dispatch of toggle cart hit.
+
+06:35.750 --> 06:39.190
+And now we'll pass this into our connect function.
+
+06:41.900 --> 06:53.110
+Passing know as the default so now we'll be able to access toggle cart hit in here and we can just find
+
+06:53.110 --> 07:06.250
+it on click like so and now if we look we'll see that we fire the action now of course our state is
+
+07:06.280 --> 07:16.360
+updating oh we actually have to add our cart reducer to our route reducer so that's a step that we always
+
+07:16.360 --> 07:24.390
+got to remember so cart reducer from our cart cart producer.
+
+07:26.580 --> 07:34.110
+This is another common mistake that we make when we first start using redux as well as that we'll forget
+
+07:34.530 --> 07:39.530
+to port and add our cart to our cart reducer.
+
+07:39.540 --> 07:46.940
+So now if we look we'll see that our cart by default is hit and true if we click it we'll see that now
+
+07:46.940 --> 07:48.380
+it's false.
+
+07:48.380 --> 07:53.320
+So now we just have to hide and show this dropdown based off of that value.
+
+07:53.570 --> 08:02.380
+So let's go back to our header component and we'll impart in O where we have our maps data props.
+
+08:02.870 --> 08:08.090
+So what we need to do structure off of our state is also now the cart and then the hidden value.
+
+08:08.660 --> 08:16.040
+So I'm actually going to show you more advanced way to D structure as well so off of our state we want
+
+08:16.040 --> 08:20.040
+the user and off the user we want the current user.
+
+08:20.600 --> 08:26.210
+So this is the syntax you write when you want to d structure nested values.
+
+08:26.210 --> 08:26.540
+Right.
+
+08:26.540 --> 08:34.160
+So by going colon and then another D structure bracket we're saying I want you to give me this value
+
+08:34.240 --> 08:37.850
+off of the user which is being destructor off of the state.
+
+08:37.940 --> 08:47.660
+So similarly we will do that off of the cart and we want to hit in value and then instead of this we
+
+08:47.660 --> 09:02.920
+can now just do that and now pull the hidden value off and we can just selectively render this based
+
+09:03.010 --> 09:06.370
+off of a ternary operator.
+
+09:06.400 --> 09:13.450
+So if it's hidden if it is true then I want to render nothing but if it's not then render the cart dropdown
+
+09:13.450 --> 09:14.680
+component.
+
+09:14.680 --> 09:25.700
+And now if we look we can see that we can toggle our dropdown now before we add our add item feature
+
+09:25.700 --> 09:32.110
+to our cart and to our application let's commit our code.
+
+09:32.370 --> 09:47.590
+We know that what we are adding is our cart icon added cart icon and cart dropdown components to our
+
+09:47.710 --> 09:55.060
+application also implemented heart reducer
+
+09:58.060 --> 10:01.690
+and then let's push and continue with our had item.

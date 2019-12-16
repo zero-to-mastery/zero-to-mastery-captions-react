@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00.790 --> 00:01.480
+Welcome back.
+
+00:02.440 --> 00:05.330
+So I actually made a small error in our naming.
+
+00:05.350 --> 00:10.270
+This is actually not category we are supposed to call it collection.
+
+00:10.270 --> 00:16.210
+So let's actually make the correct modifications to our code so it's more aligned with what it should
+
+00:16.210 --> 00:16.450
+be.
+
+00:17.620 --> 00:23.840
+So this should be a collection and then we'll rename our category to collection
+
+00:28.830 --> 00:37.810
+and we should also change it in our import as well as on our actual route in our shop component.
+
+00:39.510 --> 00:41.010
+So let's call this collection.
+
+00:44.890 --> 00:51.120
+And what we'll export out should be a collection page.
+
+00:51.140 --> 00:57.930
+This should now be collection I.D. and this should say collection page.
+
+00:58.280 --> 01:00.100
+And this should say collection
+
+01:06.300 --> 01:13.060
+so a small mistake but easily remedied by changing all the names in the right places.
+
+01:13.130 --> 01:19.960
+And now we just gotta make sure to save and be importing the correct thing.
+
+01:19.970 --> 01:22.750
+So we've got to change it in our shop component too.
+
+01:22.760 --> 01:29.880
+So we need our collection page from our collection collection component
+
+01:36.600 --> 01:39.510
+just a small little error in our naming convention.
+
+01:39.510 --> 01:45.330
+But now if we go back we see that everything's still working okay.
+
+01:45.680 --> 01:47.660
+Let's go back to building our selector.

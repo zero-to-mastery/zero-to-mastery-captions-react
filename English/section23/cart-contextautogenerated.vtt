@@ -1,0 +1,424 @@
+WEBVTT
+
+00:01.580 --> 00:02.810
+Welcome back everyone.
+
+00:03.440 --> 00:11.210
+So in the last lesson we learned about using our provider as well as our consumer when it comes to using
+
+00:11.210 --> 00:12.670
+context.
+
+00:12.680 --> 00:20.480
+We also learned a little bit about leveraging local state in order to propagate changes into our context
+
+00:20.480 --> 00:21.160
+provider.
+
+00:21.170 --> 00:25.180
+So our consumers can get a dynamically changing value.
+
+00:25.370 --> 00:32.450
+However in the next two lesson we are going to start exploring some more complex versions on patterns
+
+00:32.450 --> 00:34.880
+of how to use context.
+
+00:35.060 --> 00:43.610
+In this one we're going to talk about how we can actually replace our toggle hidden inside of a higher
+
+00:43.610 --> 00:51.800
+level component while passing the actual function that toggles the context value itself in the children
+
+00:51.920 --> 00:53.660
+of that component.
+
+00:53.690 --> 00:59.010
+So we'll see what that looks like with this header component and the cart icon component.
+
+00:59.030 --> 01:07.280
+The reason why is because our cart icon component right now is what toggles the carts hidden value inside
+
+01:07.280 --> 01:08.180
+of our redux.
+
+01:08.180 --> 01:16.970
+So we want to replace and replicate this exact same process except using the context API and as a springboard
+
+01:17.030 --> 01:23.420
+we're going to take the concepts that we learned in today's lesson and apply them into a much larger
+
+01:23.420 --> 01:32.060
+higher order component style of building out a bigger provider in order to better understand other more
+
+01:32.060 --> 01:37.870
+complicated patterns we can use with context but let's start with something more basic.
+
+01:37.970 --> 01:46.220
+All we want to do in this lesson is have our hidden value moved into our cart context and that cart
+
+01:46.220 --> 01:55.290
+context we have the built so let's first build a cart context so inside of your source and contexts
+
+01:55.440 --> 01:59.980
+I want you to make a new folder called cart an inside of cart.
+
+02:00.000 --> 02:08.900
+You're going to make a new cart Doc contexts dot J.S. now the actual cart context is going to be the
+
+02:08.900 --> 02:12.830
+same thing that we've done so far with all of our other contexts.
+
+02:12.830 --> 02:19.530
+We are going to import create context from react and then what we're going to say is that cart.
+
+02:19.610 --> 02:29.300
+Context is equal to create context except now what we're going to instantiate as the default value is
+
+02:29.390 --> 02:38.450
+an object because we need to set both a value that we want the context to hold but also the function
+
+02:38.990 --> 02:41.540
+that will end up updating that value.
+
+02:42.080 --> 02:49.730
+So in our case we're trying to set a cart hidden value so we'll just call it hidden and by default it
+
+02:49.730 --> 02:57.770
+will be false or sorry actually by default it's true because the cart is hidden by default after we
+
+02:57.770 --> 03:02.450
+have this we need to actually create the function that will toggle the hit.
+
+03:02.840 --> 03:10.370
+But here we only want a default value for that toggle we don't actually want to write the function yet
+
+03:10.400 --> 03:16.370
+because the function is going to be defined inside of a components local state the same reason that
+
+03:16.370 --> 03:21.770
+we had to do it with our user context is the same reason why we have to do it with our cart context
+
+03:22.190 --> 03:27.710
+because the parent component we need to leverage it's local state changes in order for these changes
+
+03:27.710 --> 03:34.160
+to propagate into our context I'll talk about this more once we actually see it just so that everyone
+
+03:34.250 --> 03:40.160
+fully understands what it is that we're trying to do but here we're gonna say toggle hidden is equal
+
+03:40.160 --> 03:44.060
+to some anonymous function that does nothing.
+
+03:44.200 --> 03:49.720
+And the reason we want to do this is because the default value of a toggle hidden should be an empty
+
+03:49.720 --> 03:57.580
+function if we ever invoke this function from the context and there is no other function defined like
+
+03:57.580 --> 04:02.770
+there's no new function defined for toggle hidden we don't want an error to be thrown because if the
+
+04:02.770 --> 04:10.150
+default value of this is null you cannot invoke a null object so we're gonna put an empty function whenever
+
+04:10.150 --> 04:12.230
+we need to use a function.
+
+04:12.370 --> 04:19.500
+Now what we'll do is we will export this out as the default value and then we're going to pull this
+
+04:19.560 --> 04:27.070
+into our header component so inside of our header component simply import in that new context that we
+
+04:27.070 --> 04:27.340
+made.
+
+04:27.670 --> 04:28.990
+So our cart context
+
+04:33.260 --> 04:40.880
+and now that you have the cart context we're going to need to leverage our local state in order to actually
+
+04:40.880 --> 04:47.320
+propagate changes into that car context value the same way that we did it with our app.
+
+04:47.360 --> 04:52.530
+J.S. when we had to create a set state for current user.
+
+04:52.820 --> 05:02.580
+So what we'll do here is we will instantiate our values using the use state hook and what we want to
+
+05:02.580 --> 05:08.890
+do is we want to store that hidden value on our local state of our header component.
+
+05:09.000 --> 05:15.310
+And the reason why we want to do this is because the car icon is a child of this component.
+
+05:15.540 --> 05:21.960
+Therefore we need the state changes to be in the parent as you might have noticed at this point after
+
+05:22.020 --> 05:25.530
+all of these hierarchy component lessons we've done.
+
+05:25.530 --> 05:28.510
+Changes need to propagate from top down.
+
+05:28.560 --> 05:31.050
+So let me actually look at this diagram.
+
+05:31.080 --> 05:37.600
+So we have a better understanding of it let's say this is our header component and let's say this is
+
+05:37.600 --> 05:41.800
+our car icon component and this is our cart dropdown component.
+
+05:42.010 --> 05:50.230
+This cart dropdown relies on the hidden context value that we just set in order for it to either display
+
+05:50.410 --> 05:58.450
+or hide the display or hide occurs at this component level the header so the header is actually the
+
+05:58.450 --> 06:04.780
+component that needs to have access to the context provider because we need to put the value of whether
+
+06:04.780 --> 06:11.050
+or not it's hidden or not at some level where we can both access setting it from one of its children
+
+06:11.290 --> 06:17.380
+which is our cart icon but also the value that will end up being which is the hidden boolean value inside
+
+06:17.380 --> 06:18.310
+of this cart dropdown.
+
+06:19.150 --> 06:25.840
+So by putting it in the common ancestor we need to leverage this components local state changes whenever
+
+06:25.840 --> 06:34.240
+we call set state which will propagate and set the new value in both the consumer but also in the provider.
+
+06:34.240 --> 06:39.910
+Now if that sounds confusing just watch me code this out and then hopefully it'll make more sense because
+
+06:39.910 --> 06:45.640
+this part is definitely a little bit more confusing when you're looking at react for the first time.
+
+06:45.940 --> 06:53.560
+This context is really a much greater feature when you have a really solid understanding of how javascript
+
+06:53.620 --> 06:56.730
+actually renders and updates its components.
+
+06:56.770 --> 07:02.590
+So what we need to do here is we need to leverage local state and we're going to get both a hidden value
+
+07:02.650 --> 07:11.140
+and a toggle hidden value from you state and then setting the default value to whatever it was that
+
+07:11.140 --> 07:13.620
+our default value was in our cart context.
+
+07:13.630 --> 07:21.390
+So here we want to say that it's true now instead of toggle hidden actually this is set hidden and we
+
+07:21.390 --> 07:27.390
+are now no longer going to leverage passing it in through redux.
+
+07:27.480 --> 07:32.570
+So just remove this and we'll remove those redux bindings later.
+
+07:32.630 --> 07:37.880
+The reason why we need this set hidden value is because we're going to write our own toggle hidden value
+
+07:37.880 --> 07:47.050
+here and this is going to be a function that when called will call set hidden where we set the value
+
+07:47.050 --> 07:49.930
+to the opposite of the current hidden value.
+
+07:49.930 --> 07:55.300
+So as we know with you state we instantiate a new local state where the hidden property is equal to
+
+07:55.300 --> 08:01.810
+true and then we have access to this set hidden function that allows us to set this property.
+
+08:01.810 --> 08:06.910
+So what we'll do is we'll declare this new function which is an anonymous function that whenever it
+
+08:06.910 --> 08:13.960
+gets called will just simply set the hidden value to the opposite value of what it currently is.
+
+08:13.960 --> 08:21.760
+Very simple but this toggle a hidden function is what we're going to pass as the new toggle hidden value
+
+08:21.850 --> 08:24.550
+inside of this car context.
+
+08:24.550 --> 08:30.070
+And because we need access to that function inside of car icon which will be the component that ends
+
+08:30.070 --> 08:36.670
+up consuming our car context that we're instantiating we are going to wrap this cart icon component
+
+08:36.760 --> 08:39.400
+inside of our new context.
+
+08:39.400 --> 08:46.180
+Now you might be wondering doesn't the header component right here also need to leverage that hidden
+
+08:46.180 --> 08:52.450
+property on our car context because this hidden property is what it is we're trying to set in the first
+
+08:52.450 --> 08:52.840
+place.
+
+08:52.870 --> 08:57.660
+And this is where we actually leverage it in order to hide or show the card dropdown.
+
+08:58.450 --> 09:04.540
+Well you would be correct but instead of using the actual context value we need to remember that what
+
+09:04.540 --> 09:11.710
+we're doing is we are going to end up passing this local state hidden value into the context which will
+
+09:11.740 --> 09:14.890
+then be consumed inside of the application.
+
+09:14.890 --> 09:23.380
+So what we're really sharing is actually the local state value of toggle hidden and hidden inside of
+
+09:23.380 --> 09:25.890
+the header component around our application.
+
+09:26.050 --> 09:32.050
+And by doing so we're leveraging local state changes inside of the header component in order to propagate
+
+09:32.050 --> 09:38.420
+those changes into the context so that anyone that needs it is able to do so.
+
+09:38.530 --> 09:45.490
+That's the whole point with setting up a function that allows us to set context inside of this header
+
+09:45.490 --> 09:47.980
+component anywhere in the application.
+
+09:48.040 --> 09:54.910
+You can almost see it as if the context is just the vehicle that allows us to transfer both this toggle
+
+09:54.910 --> 10:02.440
+hidden function and this hidden value on our local state around any of the children inside of the header
+
+10:02.440 --> 10:03.340
+component.
+
+10:03.430 --> 10:09.910
+So no matter how many children nested deep any component is inside of our header as long as we wrap
+
+10:09.910 --> 10:16.690
+it with the appropriate car provider then we're able to access the context value where we're storing
+
+10:16.930 --> 10:22.510
+both the hidden value and the toggle hidden value in the local state of our header component.
+
+10:22.600 --> 10:25.990
+So if that's so confusing let's actually see it in action.
+
+10:26.050 --> 10:33.380
+So our car icon needs to access are toggle cart hit at so are going to do is we're going to wrap it
+
+10:33.410 --> 10:35.930
+with our cart context dot provider
+
+10:39.990 --> 10:48.030
+and the value key that we're gonna pass in is going to be an object where the value of hidden will go
+
+10:48.030 --> 10:55.020
+to hidden and the value of toggle hidden will go to our toggle hidden.
+
+10:55.120 --> 11:02.790
+So we're replacing these two values here with our local state values for hidden and toggle hidden and
+
+11:02.790 --> 11:09.930
+now inside of a card icon we can access this toggle hidden function that we defined here in order to
+
+11:09.930 --> 11:18.330
+set the hidden of local state inside of header and we do that by consuming our car icon component so
+
+11:18.330 --> 11:25.400
+what we'll say is we need the use context hook inside of card icon.
+
+11:25.480 --> 11:29.650
+And then we also need to import in our cart context
+
+11:33.860 --> 11:42.920
+and now we just convert this functional component to have a explicit return and we'll say const toggle
+
+11:42.920 --> 11:55.560
+hidden which is what we're de structuring off is going to be equal to use context of our cart context.
+
+11:55.570 --> 12:01.480
+Now let's get rid of this redux binding that we have here because we're not using redux anymore.
+
+12:01.600 --> 12:05.540
+We are now using our context API
+
+12:12.380 --> 12:14.450
+now inside of our cart icon.
+
+12:14.450 --> 12:19.610
+We are pulling in the toggle hidden value and the toggle hidden value of our car.
+
+12:19.610 --> 12:27.140
+Context is being set as the toggle hidden function of our header component because we passed that in
+
+12:27.230 --> 12:36.410
+along with our hidden value into our car context provider so if that makes sense you'll understand what
+
+12:36.410 --> 12:37.750
+it is that we really did here.
+
+12:37.760 --> 12:44.480
+Because what we're doing is we're just trying to pass access to this function inside of a context so
+
+12:44.480 --> 12:49.760
+we can use it anywhere in the application that's nested inside of this provider.
+
+12:49.760 --> 12:52.430
+So let's actually see whether or not it works.
+
+12:52.430 --> 12:57.890
+So now if we hit this we'll see that we're Toggling it and we're not firing that redux action anymore
+
+12:58.130 --> 13:06.740
+because now we're leveraging our context API and that new toggle hidden function that we wrote so hopefully
+
+13:07.490 --> 13:15.540
+that makes sense because we are going to extrapolate on this concept pretty deeply in order for us to
+
+13:15.540 --> 13:23.620
+pass around any of the toggle values into our application if we want to set values inside of our context.
+
+13:23.640 --> 13:26.940
+We're going to have to leverage a very similar pattern.
+
+13:26.940 --> 13:33.540
+We need a component at a very high parent level that has access to local state and then we're going
+
+13:33.540 --> 13:40.230
+to pass those functions and those local state values into the context which we can then share across
+
+13:40.230 --> 13:46.910
+the application so that those components can pull in those functions and those values and use them freely.
+
+13:47.010 --> 13:54.740
+That's the whole idea with this context pattern so with this let's actually move on to a more advanced
+
+13:54.740 --> 14:00.170
+context provider pattern if this is confusing we'll definitely take a deeper look at it in the next
+
+14:00.170 --> 14:00.920
+lesson as well.
+
+14:00.950 --> 14:04.340
+So don't worry so I'll see you in the next lesson.

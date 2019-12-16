@@ -1,0 +1,151 @@
+WEBVTT
+
+00:01.660 --> 00:09.070
+So now that we know how to write sagas we are going to take all of the ideas that we've just learned
+
+00:09.520 --> 00:17.980
+and make a pretty large refactor where we're going to move our user functionality out of our application
+
+00:18.130 --> 00:20.650
+and into sagas.
+
+00:20.650 --> 00:28.930
+Now what we're about to do is pretty extensive but it is most likely also going to be the patterns that
+
+00:28.930 --> 00:32.030
+you're going to see in a professional application.
+
+00:32.290 --> 00:40.790
+If you're ever on an application that uses redux saga in your react app now these patterns are going
+
+00:40.790 --> 00:44.250
+to pretty much be extrapolations of everything that we've learned.
+
+00:44.270 --> 00:51.170
+But we are going to flesh out some ideas as we do it and it is a pretty large refactor that we're about
+
+00:51.170 --> 00:52.460
+to endeavor on.
+
+00:52.520 --> 00:56.600
+So don't worry if you feel like it's overwhelming.
+
+00:56.600 --> 01:00.620
+It is a lot of code but we're gonna take it step by step.
+
+01:00.830 --> 01:06.680
+And this is one of those things where the more you practice the more you see it and the more experience
+
+01:06.680 --> 01:12.380
+you get from writing it this way you'll understand why we structure our code in song as the way that
+
+01:12.380 --> 01:19.530
+we're about to do now in order for us to do this we have to think about the goal in mind as well as
+
+01:19.530 --> 01:27.360
+how we originally have it in order to successfully refactor the code refactoring is a skill that a lot
+
+01:27.360 --> 01:34.140
+of developers need to work on as well as have in a successful career because what you need to do with
+
+01:34.140 --> 01:38.970
+a refactor is look at your code and see where it can be improved.
+
+01:40.160 --> 01:45.800
+This will help you think about making architecture decisions in the long run as well as improving old
+
+01:45.800 --> 01:46.090
+code.
+
+01:46.100 --> 01:53.000
+So it functions better because we all know that a lot of the times we build features with that feature
+
+01:53.000 --> 01:58.730
+in mind but then something new comes along that requires us to change what we just built in order to
+
+01:58.850 --> 02:06.700
+adjust for the new functionality so in order to practice that I'm going to guide you through our thinking
+
+02:06.700 --> 02:14.970
+process on how we should refactor are user authentication and sign in sign out processes.
+
+02:14.990 --> 02:24.570
+Now let's say for example we want to be able to whenever the user signs out clear our cart we want to
+
+02:24.570 --> 02:30.970
+reset our application in some way based on a user signing out beyond that.
+
+02:31.030 --> 02:38.500
+We also want to move the logic outside of our component at Mount in our app J.S. related to authenticating
+
+02:38.530 --> 02:44.740
+and authenticating our user now the way we're gonna do this.
+
+02:44.740 --> 02:50.720
+We're also going to approach it from a promise based style instead of this observer listener style that
+
+02:50.720 --> 02:53.170
+we have as we did with our collections.
+
+02:53.330 --> 02:58.610
+And the reason we want to do this is because there's a chance that the application you'll work on is
+
+02:58.610 --> 03:00.620
+going to be more promise based.
+
+03:00.770 --> 03:06.590
+And if that's the case sign in and sign out has a slightly unique flow that's different from how we
+
+03:06.590 --> 03:12.630
+did our collections so in order for us to do that we're also going to evaluate how we are currently
+
+03:12.630 --> 03:19.660
+doing sign in and sign up and the way that we have it is that we have in our sign in component this
+
+03:19.660 --> 03:26.620
+code that will handle the submit using the author library to sign in with email and password or we call
+
+03:26.650 --> 03:33.220
+our sign and with Google method which is a firebase utility that we wrote that also triggers off this
+
+03:33.490 --> 03:40.570
+own sign and with pop up process both of these things will update our off library on the back end.
+
+03:40.580 --> 03:46.940
+Right on our fire store and then author what triggered this update on our on Allstate State change was
+
+03:46.940 --> 03:53.360
+we listen to and then we kick off our process on updating our reducer with the snapshot that we get
+
+03:53.360 --> 03:54.070
+back.
+
+03:54.350 --> 04:00.380
+But we also set it to null whenever the user signs out and all we do is we check whether or not the
+
+04:00.380 --> 04:05.490
+user auth that's coming in is actually an object or no value if it's a null value.
+
+04:05.510 --> 04:07.440
+We know that the user signing out.
+
+04:07.520 --> 04:11.000
+And then we essentially just set the current user to No.
+
+04:11.110 --> 04:17.890
+Now this is perfectly fine inside of Firebase and fire store but if we wanted a greater degree of control
+
+04:17.920 --> 04:25.950
+over how we can manipulate our application based on a user signing in signing out we have to break this
+
+04:25.950 --> 04:29.590
+apart so that's what we're going to do.
+
+04:29.600 --> 04:35.120
+I just wanted to highlight all of the thinking processes that we need to have when looking at what we
+
+04:35.120 --> 04:39.710
+originally have right now before we begin our refactor.
+
+04:39.710 --> 04:44.360
+So let's start breaking this application down into redux sagas.

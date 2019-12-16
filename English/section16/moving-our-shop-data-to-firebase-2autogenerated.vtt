@@ -1,0 +1,226 @@
+WEBVTT
+
+00:00.640 --> 00:08.710
+Now in order for us to add are objects in as documents to our collection we're gonna do it very similar
+
+00:08.710 --> 00:13.180
+to how we did it inside of our create user profile document function.
+
+00:13.360 --> 00:18.990
+We're gonna create the Reference Document object and then we're gonna set it using dots.
+
+00:19.690 --> 00:27.300
+Now the thing about fire store is that we can only make one set call at a time.
+
+00:27.440 --> 00:34.580
+We can't actually say for example call collection rough dot set and then set an array of values in as
+
+00:34.580 --> 00:41.100
+the collections documents but that's OK we can just write code that will do that for us.
+
+00:41.140 --> 00:49.130
+But the thing to consider is that because each call is individual they fire one at a time.
+
+00:49.200 --> 00:57.330
+If our internet connection say stops halfway through our code only we'll have saved half those documents
+
+00:57.360 --> 01:00.950
+because the other half would not have made it to the server.
+
+01:00.960 --> 01:04.860
+Now this is bad because our code becomes unpredictable.
+
+01:04.860 --> 01:12.960
+We want to know that if we hit our function and all of our requests send all of them should set.
+
+01:12.960 --> 01:18.350
+If any of them fail we want the whole thing to fail because then we can anticipate that right.
+
+01:18.360 --> 01:21.080
+We know that our code is consistent.
+
+01:21.660 --> 01:28.020
+So in order to do that we have to do what's called a batch right and a batch right is essentially just
+
+01:28.020 --> 01:34.170
+a way to batch or group all our calls together into one big request.
+
+01:34.200 --> 01:36.000
+So here's how we're gonna do it.
+
+01:36.030 --> 01:42.810
+It's actually very easy with fire store because fire store gives us what's called a batch object and
+
+01:42.810 --> 01:49.860
+with this batch object we just add all of our for example sets into it and then we fired off whenever
+
+01:49.860 --> 01:53.810
+we're done adding all the calls we want to it.
+
+01:54.410 --> 02:05.130
+And what we'll do is we will loop over this objects to add array using R for each method and what this
+
+02:05.130 --> 02:09.000
+for each array method is is very similar to the math method.
+
+02:09.000 --> 02:16.380
+The only difference is that for each does not return us a new array the same way that dot map does which
+
+02:16.380 --> 02:23.300
+is great for us because we only want to call the function on each element and we'll get the object.
+
+02:23.450 --> 02:34.540
+Now what we'll do is we will create a new doc reference which is equal to our collection ref at DOT
+
+02:34.540 --> 02:36.130
+doc right.
+
+02:36.190 --> 02:42.340
+So what this means is that we want to get the document at an empty string.
+
+02:42.520 --> 02:47.800
+So what this will do is it's telling firebase give me a new document reference in this collection and
+
+02:47.800 --> 02:52.930
+randomly generate an idea for me so we'll actually see it if we console log this
+
+02:55.970 --> 03:04.760
+if we save this and we go back to our app we'll see that we logged five document reference objects and
+
+03:04.820 --> 03:12.780
+each one points to its own unique ideas because we're telling fire store that in this collection I want
+
+03:12.780 --> 03:18.610
+you to make me new document reference objects but create your own key.
+
+03:18.780 --> 03:23.500
+For example what we can pass is our object title value.
+
+03:23.670 --> 03:32.070
+And now if we save we will see that the I.D. inside of our document is our title on our object but we
+
+03:32.070 --> 03:34.490
+want this key to always be unique.
+
+03:34.500 --> 03:37.440
+So we're just let firestorm set it for us.
+
+03:37.440 --> 03:43.990
+And then what we need to do is we need to actually set the value using our new dock ref.
+
+03:44.010 --> 03:46.650
+The only thing is that we want a batch of at this point.
+
+03:46.650 --> 03:53.690
+So instead of calling new dock ref dos set we're gonna call batch dot set and what we'll pass it is
+
+03:53.690 --> 03:57.380
+the document reference and the value we want to set it to.
+
+03:57.380 --> 04:00.820
+So we want to set it to the object and that's all we're gonna do.
+
+04:00.830 --> 04:05.670
+We're just going to loop through this array and batch these calls together.
+
+04:06.050 --> 04:10.570
+And then what we do is we want to fire off our batch call.
+
+04:10.580 --> 04:18.430
+Now what we need to do to do that is call batch dock commit and document will fire off our batch request.
+
+04:18.590 --> 04:26.930
+But what it returns us back from calling to commit is a promise when commit succeeds it will come back
+
+04:26.990 --> 04:28.320
+and resolve a void.
+
+04:28.320 --> 04:36.230
+Value meaning and null value and that's useful for us because if we call this function somewhere we
+
+04:36.230 --> 04:40.740
+can chain off this function and then call dot then and do something.
+
+04:40.790 --> 04:43.900
+If this call succeeds or we can handle errors as well.
+
+04:44.780 --> 04:49.940
+So we need to return this from our call but we're gonna make this an async function because we're doing
+
+04:49.940 --> 04:51.630
+an a synchronous request.
+
+04:51.950 --> 04:57.740
+So we will return a wait batch commit now before we save this file.
+
+04:57.740 --> 05:05.180
+We do have to remember that this collection does hold values that we don't want in our database like
+
+05:05.180 --> 05:11.180
+the root name and the I.D. because we're asking firebase to generate them for us.
+
+05:11.210 --> 05:20.600
+So what we can do is we can actually say inside of our arpeggios instead of passing the full array what
+
+05:20.600 --> 05:31.310
+we'll pass in is a new array where we get the object and we are going to d structure off of it the title
+
+05:31.430 --> 05:32.420
+and the items.
+
+05:32.420 --> 05:39.920
+So just the properties we want and then we'll just return a new object where a title goes to title and
+
+05:40.010 --> 05:41.910
+items goes to items.
+
+05:41.960 --> 05:49.430
+So this collections array dot map will be returning us an array of just objects with the values that
+
+05:49.430 --> 05:59.570
+we want to keep in and if we save in both files if we go back to our firebase application we'll see
+
+05:59.570 --> 06:06.500
+that we have our new collections with the items inside and these items have exactly the fields that
+
+06:06.560 --> 06:07.510
+we're looking for.
+
+06:07.630 --> 06:10.820
+You have the title and they have the items.
+
+06:11.010 --> 06:16.890
+So now that we've stored our documents inside of our collections we can remove the code from our app
+
+06:16.900 --> 06:18.010
+J.S..
+
+06:18.330 --> 06:27.980
+So we need to get rid of all of this code that we had added into our app J.S. component did mount.
+
+06:27.990 --> 06:34.380
+Now the reason we want to do this is because as we mentioned we just wanted to programmatically add
+
+06:34.500 --> 06:43.080
+our code of our shot data into our fire store but after that's done there is no reason to keep that
+
+06:43.080 --> 06:45.950
+code inside of our component anymore.
+
+06:46.050 --> 06:51.690
+But the good news is that we do have this function that we can use to make new collections and documents
+
+06:51.750 --> 06:54.390
+whenever we want.
+
+06:54.390 --> 07:02.310
+So now what we've got to do is we need to pull our data from this collection into our application and
+
+07:02.310 --> 07:09.020
+then store it inside of a producer instead of just setting it as the initial value in our shop producer
+
+07:09.030 --> 07:09.910
+right now.
+
+07:10.020 --> 07:11.700
+So let's see how we can do that.

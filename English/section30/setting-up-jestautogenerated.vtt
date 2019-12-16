@@ -1,0 +1,394 @@
+WEBVTT
+
+00:01.010 --> 00:07.160
+Now I know that create react app already comes with just and other testing tools pre installed.
+
+00:07.160 --> 00:13.190
+But I think it's important for us to understand how it works so that we can also build something like
+
+00:13.190 --> 00:14.870
+create react app ourselves.
+
+00:14.870 --> 00:21.780
+So I'm going to start from scratch and set up a few testing examples for you now.
+
+00:21.790 --> 00:24.720
+Just here has great documentation.
+
+00:24.820 --> 00:31.900
+Once again with any library you go through their guide and they provide a lot of info as the library
+
+00:31.900 --> 00:34.980
+changes you can see that it's version twenty two point four now.
+
+00:35.110 --> 00:40.360
+Things might get updated but their principal concepts won't change.
+
+00:40.360 --> 00:47.040
+So let's get started by installing just or first of all let's create a project folder.
+
+00:47.350 --> 00:54.940
+I'm going to create a project folder called test and we'll just go into that folder and run our usual
+
+00:55.060 --> 00:59.680
+NPM in it Dash y to create an NPM package.
+
+01:00.160 --> 01:08.160
+And we also want to create a script dot J.S. file and let's open that up.
+
+01:08.290 --> 01:10.150
+And our favorite text editor
+
+01:18.200 --> 01:19.780
+looking nice and pretty.
+
+01:19.820 --> 01:20.840
+Perfect.
+
+01:20.840 --> 01:29.480
+Now let's look at package dot Jason and obviously the first step we want to do is run npm install just
+
+01:33.590 --> 01:35.420
+and actually let me cancel this.
+
+01:35.420 --> 01:39.790
+Remember that just is for development purposes.
+
+01:39.920 --> 01:45.330
+We don't really need it as a dependency for our app.
+
+01:45.380 --> 01:48.830
+So usually when you install just you want to do npm install
+
+01:52.790 --> 01:58.760
+dash dash save death apps.
+
+01:58.940 --> 02:00.400
+Let's try that again.
+
+02:00.400 --> 02:09.180
+Just remember that with the newer version of NPM when you do npm install jest it assumes the dash dash
+
+02:09.240 --> 02:13.240
+save as a dev or as a dependency.
+
+02:13.290 --> 02:15.750
+So that's why I didn't do the dash dash safe here.
+
+02:15.750 --> 02:28.150
+Now while this is loading let's go into our scripts and change this to the test command and all we need
+
+02:28.150 --> 02:36.660
+to do here is run just once it's installed.
+
+02:36.730 --> 02:38.820
+Not sure what happened here it looks like a bit of a narrow.
+
+02:38.830 --> 02:42.650
+Let's just close this out and run it again.
+
+02:42.760 --> 02:48.110
+Now while that's loading let's go into our scripts file and think about what exercise we might want
+
+02:48.110 --> 02:49.840
+to incorporate.
+
+02:49.840 --> 02:57.870
+And I think having us incorporate a simple google search functionality might be a fun little exercise.
+
+02:57.910 --> 02:59.920
+So let's do that.
+
+02:59.920 --> 03:06.170
+It looks like everything was added salacious had clear make this a little bit smaller.
+
+03:06.390 --> 03:12.630
+And again if we go to package star Jason we see that it's part of the dev dependencies not the dependencies
+
+03:12.660 --> 03:20.990
+but def because we did it because we did the dash dash dot save or dash saved def and the script that
+
+03:20.990 --> 03:25.630
+J.S. file lets say that we're Google and we have a variable.
+
+03:25.850 --> 03:29.990
+This is gonna be a simplified version of their search algorithm.
+
+03:29.990 --> 03:33.580
+But the principles are going to be the same.
+
+03:33.650 --> 03:42.350
+So let's say that the Google database has an array of all the Web sites that they've indexed.
+
+03:42.350 --> 03:48.710
+Let's say the first one is cats dot com obviously is the internet after all.
+
+03:48.710 --> 03:56.710
+We also have soup recipes dot com everybody loves soup.
+
+03:56.710 --> 04:05.190
+We have flowers dot com and let's just add one more we'll say that we also have animals dot com pretty
+
+04:05.190 --> 04:11.550
+basic web sites and these are all the Web site that Google can search for you obviously in real life.
+
+04:11.550 --> 04:13.410
+This list might be a little bit bigger
+
+04:16.260 --> 04:16.770
+right.
+
+04:16.800 --> 04:20.640
+So there is our Google database and you know what.
+
+04:20.640 --> 04:32.080
+While we're at it let's just add a few more cat pictures dot com and maybe my favorite
+
+04:38.210 --> 04:38.750
+all right.
+
+04:38.820 --> 04:46.290
+And I've added these last two because maybe if somebody searches for cats in the Google Chrome browser
+
+04:46.680 --> 04:51.140
+well we might want to show them these three links again.
+
+04:51.150 --> 04:52.580
+Let's create a function.
+
+04:52.800 --> 04:56.430
+And this will just be the Google search function
+
+04:59.230 --> 05:04.450
+and this function will take the search
+
+05:08.350 --> 05:10.240
+that the user provides.
+
+05:10.240 --> 05:12.130
+So whatever they're searching for.
+
+05:12.430 --> 05:15.400
+And from there it does a few things.
+
+05:15.400 --> 05:21.000
+First that we want to say it's gonna be a very simple algorithm.
+
+05:21.010 --> 05:24.270
+Obviously this can be this is way more complicated on Google.
+
+05:24.280 --> 05:30.280
+But the idea is we search something and if there is some sort of a match we want to return it.
+
+05:30.400 --> 05:41.040
+Let's just say that the Google database is going to get filtered and using the filter function will
+
+05:41.040 --> 05:49.580
+say that each item in the database is a Web site that is going to get filtered and all we need to do
+
+05:49.580 --> 05:53.240
+is return the Web site
+
+05:55.990 --> 05:59.210
+that includes.
+
+05:59.230 --> 06:10.080
+So this is let's say cats dot com if it includes whatever the search input was.
+
+06:10.300 --> 06:20.240
+Like I said very very nice and basic Google search algorithm and we also want to return these matches
+
+06:20.240 --> 06:23.700
+to the user because while that's what Google does.
+
+06:23.870 --> 06:31.610
+But let's say that we want to make sure because hypothetically this database can get really really big.
+
+06:31.670 --> 06:39.260
+We want to only return the top three results so we can just say lets me make sure I spell that right
+
+06:39.260 --> 06:40.000
+first.
+
+06:40.160 --> 06:49.290
+We want to say if this dot length is greater than three if we have more than three matches then we'll
+
+06:49.290 --> 07:00.760
+just say matches dot slice and just return the first three results otherwise just return the regular
+
+07:00.760 --> 07:07.100
+matches make this smaller so we can see.
+
+07:07.110 --> 07:10.680
+All right let's test this out and see if it actually works.
+
+07:10.680 --> 07:20.360
+I'm going to Rhonda Google search function and let's say that the search input that I'm going to put
+
+07:20.360 --> 07:23.680
+in will be soup
+
+07:26.950 --> 07:28.550
+and let's just console dialogue.
+
+07:28.570 --> 07:35.280
+This to make sure that whatever the output is while we log it into our terminal let me safe.
+
+07:35.350 --> 07:42.120
+And again with node we can just run this node script dot J.S.
+
+07:44.960 --> 07:45.590
+all right.
+
+07:45.590 --> 07:46.060
+Look at that.
+
+07:46.280 --> 07:48.230
+I have soup recipes.
+
+07:48.230 --> 07:50.420
+If this changes to cats
+
+07:54.800 --> 07:56.240
+I get cast off com.
+
+07:56.270 --> 08:02.580
+And my favorite cat stock com but not cat pictures dot com because it doesn't match cats.
+
+08:02.660 --> 08:07.800
+If we add a nother Web site here let's call if my favorite cats too.
+
+08:09.160 --> 08:11.230
+And I only search for Cat
+
+08:14.390 --> 08:18.400
+and make sure I add a comma always forget the comma.
+
+08:18.410 --> 08:23.960
+Let me clear this and try that again.
+
+08:24.080 --> 08:24.450
+All right.
+
+08:24.470 --> 08:31.180
+I only get 1 2 and 3 results because we're doing this little slice.
+
+08:31.310 --> 08:34.220
+We're only returning the top 3 results.
+
+08:34.220 --> 08:34.880
+Awesome.
+
+08:34.940 --> 08:38.150
+We've just implemented Google on a simpler scale.
+
+08:38.150 --> 08:42.930
+But mind you this is pretty much how Google works.
+
+08:42.960 --> 08:43.210
+All right.
+
+08:43.220 --> 08:44.860
+So that was fun.
+
+08:44.930 --> 08:48.050
+But how can we test this.
+
+08:48.050 --> 08:54.890
+Let's say we were Google and we want to make sure that this Google search function works properly because
+
+08:54.890 --> 08:57.400
+it's an important function for our app.
+
+08:57.620 --> 09:03.610
+Since we have just installed let's run NPM test and see what happens.
+
+09:05.490 --> 09:11.120
+NPM test.
+
+09:11.310 --> 09:17.490
+It just says no tests found because we haven't run any tests.
+
+09:17.850 --> 09:25.710
+But you can see over here that just automatically looks for anything that has either a folder that has
+
+09:25.710 --> 09:32.670
+the underscore under score tests and anything inside of it or it's going to look at any file that has
+
+09:32.670 --> 09:36.750
+the spec or the test dot J.S. syntax.
+
+09:36.750 --> 09:46.260
+By that logic I can just create a new file script dot test dodgy J.S. or I can put spec in here which
+
+09:46.260 --> 09:50.850
+is also common and I hit enter and if I run this again
+
+09:57.070 --> 09:58.810
+I get a fail.
+
+09:58.810 --> 10:04.340
+It says your test suite must contain at least one test.
+
+10:04.390 --> 10:06.150
+All right let's clear this.
+
+10:06.220 --> 10:12.030
+So how can you write a test for our Google search and we'll get to that in the next video.
+
+10:12.060 --> 10:15.060
+But just to make sure that our test passes.
+
+10:15.130 --> 10:19.570
+I'll just show you one quick way that we can write unit tests and just.
+
+10:19.780 --> 10:26.280
+And that is we have now an IT function in the first parameter of the IT function.
+
+10:26.320 --> 10:28.020
+And again this comes with adjust.
+
+10:28.120 --> 10:33.730
+But if you download other testing libraries pretty much all of them have this function as well.
+
+10:33.730 --> 10:37.280
+Like I said all these libraries have a very similar syntax.
+
+10:37.330 --> 10:43.170
+So if you know one you can transition into the other quite easily with a few minor changes.
+
+10:43.540 --> 10:49.570
+So the first parameter in here is some sort of a string that will appear here so let's just say this
+
+10:49.660 --> 11:00.020
+is a test and then the second parameter is a function which is the test that needs to run in our case.
+
+11:00.020 --> 11:10.620
+We don't really have anything but let's save this and run NPM test Whoa look at that we have our very
+
+11:10.620 --> 11:12.800
+first test.
+
+11:13.010 --> 11:14.120
+That was pretty easy right.
+
+11:14.150 --> 11:22.820
+All we did was npm install just and we already have this new IT function and we can run tests and we
+
+11:22.820 --> 11:27.050
+see that this is a test passed in one millisecond.
+
+11:27.050 --> 11:28.550
+That's a pretty fast test.
+
+11:28.580 --> 11:31.220
+Everything is green and nice.
+
+11:31.220 --> 11:37.370
+Kind of feels good gives you a nice boost of dopamine all right in the next video.
+
+11:37.370 --> 11:41.480
+We're actually gonna start writing some tests for our Google search.
+
+11:41.480 --> 11:42.260
+I'll see in the next one.

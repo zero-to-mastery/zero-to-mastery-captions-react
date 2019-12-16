@@ -1,0 +1,454 @@
+WEBVTT
+
+00:00.960 --> 00:02.450
+Welcome back.
+
+00:02.460 --> 00:10.910
+We've learned a little bit about testing but how about testing our ReACT component or our ReACT app.
+
+00:10.950 --> 00:18.570
+Our robo friends app if we take a look at our folder over here I have the robo France P.W. yay.
+
+00:18.590 --> 00:27.440
+Because it's now a progressive web app and based on what we've learned we might go to the actions folder
+
+00:27.890 --> 00:29.420
+Constance folder.
+
+00:29.420 --> 00:33.970
+Maybe there reduces file not folder I guess.
+
+00:34.220 --> 00:41.600
+And because these are just simple functions we might know how to test them.
+
+00:41.900 --> 00:50.810
+But the one thing we haven't really discussed is how do we test these functions that her React Components.
+
+00:50.810 --> 00:54.200
+I mean how do we actually do that.
+
+00:54.290 --> 01:00.690
+And there are ways that we can figure out to test this with the methods that we've learned so far.
+
+01:01.450 --> 01:10.890
+But there is a great library that simplifies things for us and that is enzyme and this is a library
+
+01:10.950 --> 01:19.700
+by Air B and B that is pretty standard and the react community if you want to test your components then
+
+01:19.850 --> 01:29.300
+you're most likely going to use enzyme an enzyme is again a tool that allows us to say hey in our tests
+
+01:29.360 --> 01:35.990
+just render this car component and enzyme is going to give us a ton of methods for us to test.
+
+01:36.050 --> 01:38.770
+Hey did the div get rendered.
+
+01:38.870 --> 01:47.310
+Did the image get render did the name and email get rendered so in this video.
+
+01:47.550 --> 01:52.880
+Let's install enzyme and have a look at what it offers us.
+
+01:53.020 --> 01:58.780
+Now they have great documentation here and you can see that based on our ReACT version they have different
+
+01:58.780 --> 02:05.240
+things that we need to install and since we're using react that is higher than 16.
+
+02:05.290 --> 02:07.180
+If we take a look at package that Jason
+
+02:10.520 --> 02:17.360
+we see that we're using react sixteen point two you might be using a higher version of react but most
+
+02:17.360 --> 02:23.880
+likely you're gonna be using a version that is higher than this in that case they give us pretty good
+
+02:23.880 --> 02:27.090
+information of what to do and what we need to install.
+
+02:27.210 --> 02:33.310
+So we need to install the enzyme library as well as this enzyme adaptor reacts 16.
+
+02:33.330 --> 02:41.880
+So just a special adapter that we need for this newer version of React scan to go ahead and copy this
+
+02:42.450 --> 02:55.380
+and you see that we're doing dash dash save Dev because it's a death dependency.
+
+02:55.500 --> 02:56.520
+All right.
+
+02:56.520 --> 03:03.210
+We have enzyme installed with the enzyme adapter.
+
+03:03.270 --> 03:09.450
+Now if you go through their documentation we need to do a quick setup for us to be able to actually
+
+03:09.450 --> 03:14.900
+use enzyme and again this is because we're using a newer version of react.
+
+03:15.260 --> 03:21.770
+And I want you to keep in mind that this isn't actually difficult when you see me have these special
+
+03:21.770 --> 03:25.540
+cases of libraries and we need to do some sort of a setup.
+
+03:25.580 --> 03:30.850
+Most of the time all these libraries have documentation for you to get started.
+
+03:30.890 --> 03:35.780
+I mean their goal is for people to use them as much as possible so they're gonna make it easy for you
+
+03:35.780 --> 03:44.190
+to understand and setup with enzyme what we need to do is create something called a setup tests digest
+
+03:44.300 --> 03:57.180
+to set this up so in our source folder we can just say new file we'll call it setup tests dot J.S. and
+
+03:57.190 --> 04:08.820
+within here we're going to import something called configure from enzyme and again all of this can be
+
+04:08.820 --> 04:10.110
+found in their documentation.
+
+04:10.110 --> 04:12.160
+So don't get intimidated by this.
+
+04:12.270 --> 04:18.090
+I had no idea how to do this until I actually read their documentation just on their introduction page.
+
+04:18.090 --> 04:20.020
+I'll show you how to do this.
+
+04:20.160 --> 04:29.120
+And then finally we also want to import something called an adapter and if I can spell that's how you
+
+04:29.120 --> 04:32.360
+spell adapter from the enzyme
+
+04:34.590 --> 04:39.090
+adapter react 16 library that we also installed
+
+04:42.380 --> 04:45.610
+and then finally we just need one single line here.
+
+04:45.830 --> 04:57.210
+And that is to say configure the adapter to have a new adapter if you really want to know what this
+
+04:57.210 --> 04:57.690
+does.
+
+04:57.690 --> 05:05.430
+You can go through their code on github but just by looking at the name we would say that is just configuring
+
+05:05.640 --> 05:07.350
+our test right.
+
+05:07.350 --> 05:09.250
+So that's set up.
+
+05:09.300 --> 05:10.310
+What can we do.
+
+05:10.320 --> 05:13.220
+How can we actually test our components.
+
+05:13.230 --> 05:23.950
+Now with enzyme well enzyme gives us mainly just three things that we can use.
+
+05:24.030 --> 05:25.300
+Let me show you what they're.
+
+05:25.620 --> 05:28.040
+One is something called shallow.
+
+05:28.080 --> 05:28.980
+The other one.
+
+05:28.980 --> 05:38.850
+Something called Mount and then the third a render and these are functions that we can use from the
+
+05:39.210 --> 05:41.440
+enzyme and library that we just used.
+
+05:41.640 --> 05:47.930
+And from these three we're able to do something really really interesting with our components.
+
+05:47.940 --> 05:55.980
+You see in an ideal world to do a test we can render this whole thing and make sure that it returns
+
+05:55.980 --> 05:57.120
+to what we expected.
+
+05:57.120 --> 06:04.320
+Like I said before to make sure that we're returning a div perhaps with these types of class names that
+
+06:04.320 --> 06:12.260
+we're also returning another div inside of it with name and email so just like a Dom we need to figure
+
+06:12.260 --> 06:14.500
+out if it renders exactly what it needs.
+
+06:14.690 --> 06:23.090
+And just by looking at the names it looks like enzyme provides for us a way to render mount and shallow.
+
+06:23.090 --> 06:24.740
+This component.
+
+06:24.740 --> 06:30.420
+So what did these all mean and I'm going to give you a heads up.
+
+06:30.740 --> 06:37.160
+Most likely 90 percent of the time you want to use shallow and shallow is what we're gonna be using
+
+06:37.280 --> 06:38.200
+in this course.
+
+06:38.240 --> 06:43.370
+There are some cases that you might want to use mount and render but just keep in mind that with enzyme
+
+06:43.700 --> 06:48.890
+we're pretty much just using this which makes it very very nice and simple.
+
+06:48.890 --> 06:54.060
+The very first thing the one that we're using most what does shallow do.
+
+06:54.080 --> 07:00.320
+Well first off let's create a test file here because well we're not going to import enzyme in our actual
+
+07:00.320 --> 07:01.350
+component.
+
+07:01.490 --> 07:09.830
+So within the components file I'm just going to say new file card dot test dot J.S. And now let's import
+
+07:11.650 --> 07:12.480
+enzyme here
+
+07:16.050 --> 07:19.080
+as well as importing and our actual component.
+
+07:19.090 --> 07:22.300
+So again we're gonna import card from the
+
+07:25.610 --> 07:26.520
+card that J is for
+
+07:29.450 --> 07:33.620
+and now let's just for fun see what happens if I do shallow
+
+07:36.480 --> 07:44.330
+card or the card component and let's just console log this
+
+07:49.710 --> 07:52.260
+now how do we actually run this test.
+
+07:52.320 --> 08:00.210
+Well if we go to our package that Jason we haven't installed just but remember because we're using create
+
+08:00.210 --> 08:08.670
+react up this comes built in in the react scripts it has all this stuff set up for us so we can simply
+
+08:08.670 --> 08:10.470
+run NPM test
+
+08:16.140 --> 08:20.800
+and we get a bit of an error here with say that React is not defined.
+
+08:21.020 --> 08:24.650
+That's because remember we're using J a sexier.
+
+08:24.740 --> 08:34.430
+So we need a way to reach ASX and if you remember with any component we always import react from the
+
+08:34.490 --> 08:35.210
+react package
+
+08:38.160 --> 08:38.500
+all right.
+
+08:38.500 --> 08:44.710
+And it says that our test suite must contain at least one test because we're not really testing anything.
+
+08:44.800 --> 08:51.510
+But at the bottom here we see that we have a shallow wrapper of length one.
+
+08:51.550 --> 08:54.400
+So what does shallow do.
+
+08:54.400 --> 09:03.400
+Simply by running this syntax we're saying hey shallow render this card component and shallow rendering
+
+09:03.850 --> 09:11.650
+is useful because it just renders the card component if the card component for some reason let's say
+
+09:11.650 --> 09:13.860
+had a another component inside of it.
+
+09:13.900 --> 09:17.570
+That is the hello component.
+
+09:17.600 --> 09:26.450
+Well it's not going to render that as well is just going to shallowly render just this component and
+
+09:26.540 --> 09:34.010
+it's useful because it constrains yourself to testing one component at a time one unit as you might
+
+09:34.010 --> 09:41.780
+remember a unit test is something that just tests one unit at a time one small piece at a time.
+
+09:41.780 --> 09:50.030
+And this ensures that your tests aren't indirectly asserting on a behavior of a child component like
+
+09:50.210 --> 09:56.250
+the halo component so that's why I'm a big fan of the shallow rendering an enzyme.
+
+09:56.310 --> 10:04.720
+Ideally you just want to test one thing at a time without affecting all the child components and this
+
+10:04.720 --> 10:07.830
+keeps it keeps your tests nice and clean.
+
+10:07.860 --> 10:16.800
+Now the cool thing with shallow is that we get a ton of methods that we can now use on this card component
+
+10:18.300 --> 10:19.080
+for example.
+
+10:19.170 --> 10:27.780
+Now because we render this we can use our good old friend expect to say expect
+
+10:30.470 --> 10:40.490
+the shallow rendered car component and then we can say to equal to equal one and we'll just give it
+
+10:40.520 --> 10:43.330
+a length property here.
+
+10:43.430 --> 10:50.500
+And again we want to wrap this in our IT block expect to render
+
+10:53.900 --> 10:54.770
+card component
+
+11:01.670 --> 11:07.150
+and now we can just put this inside let's save.
+
+11:07.330 --> 11:08.350
+And there you go.
+
+11:08.350 --> 11:12.880
+We have one test passing and this shows that.
+
+11:12.880 --> 11:13.120
+All right.
+
+11:13.120 --> 11:18.860
+The car component when we render it it's going to actually render something to equal one.
+
+11:18.880 --> 11:22.150
+I mean it's a silly test but that's nice.
+
+11:22.150 --> 11:28.710
+We were able to just render nice and simple car component.
+
+11:28.820 --> 11:33.250
+Let me remove the hello from here now.
+
+11:33.260 --> 11:34.960
+What about these other two.
+
+11:35.480 --> 11:40.700
+These other two things we're not going to go into too much because they have this specific use cases
+
+11:40.730 --> 11:42.250
+like I said most of the time.
+
+11:42.260 --> 11:50.570
+You want to use shallow and keep your tests nice and simple and contained but Mount does what's called
+
+11:50.570 --> 11:58.280
+a full Dom rendering it's ideal for use cases where you have components that maybe interact with the
+
+11:58.280 --> 11:59.830
+DOM API.
+
+11:59.900 --> 12:09.830
+So for some reason maybe the car component uses dot query selector all or any of the Dom APIs that we
+
+12:09.830 --> 12:17.750
+usually see or maybe the car component has some sort of a lifecycle method a react to lifecycle method
+
+12:17.780 --> 12:21.660
+that you want to test such as component did mount.
+
+12:21.660 --> 12:30.760
+Now one know with the Mount is that it requires a full Dom API to actually work and be available for
+
+12:30.760 --> 12:33.030
+us for the Mount to happen.
+
+12:34.710 --> 12:42.140
+And this means that it has to run an environment that at least looks like the browser environment.
+
+12:42.420 --> 12:49.500
+And if you remember from our previous talk you might not always want to run your tests inside of a browser
+
+12:49.530 --> 12:51.720
+because while it takes a bit of time.
+
+12:52.140 --> 12:58.050
+So if you don't want to run your tests inside of her browser you might use something like a headless
+
+12:58.050 --> 13:05.010
+browser or a J.S. Dom and it's recommended that with J as Dom is used with Mount.
+
+13:05.010 --> 13:05.970
+Keep that in mind.
+
+13:06.040 --> 13:14.880
+Mount unlike shallow rendering does a full render and actually mounts the component on a dump just like
+
+13:14.980 --> 13:20.870
+reactor's which means that test can affect each other if they're all using the same dump.
+
+13:21.600 --> 13:28.890
+But like I said it's very rare that you want to use mount because it can get complicated and you want
+
+13:28.890 --> 13:33.930
+to keep your tests as clean and contained as possible.
+
+13:33.930 --> 13:42.720
+Finally the last one is the render and the render function as the name suggests is used to render react
+
+13:42.720 --> 13:52.770
+components but unlike to a real dump it's rendered to a static a Shamil so render return something very
+
+13:52.770 --> 13:57.020
+similar to what's shallow and mount does.
+
+13:57.030 --> 14:04.260
+However the differences that render uses a library called Cheerio underneath the hood think of it as
+
+14:04.260 --> 14:11.850
+an end between shallow and mount it doesn't actually need a full DOM API but it does render any of its
+
+14:11.870 --> 14:14.400
+code any of the card children underneath it.
+
+14:14.400 --> 14:16.510
+If you need to test those.
+
+14:16.650 --> 14:17.120
+All right.
+
+14:17.160 --> 14:23.580
+So we have enzymes set up and we can test some of our components but there's still a little bit more
+
+14:23.580 --> 14:25.500
+work we need to do for that one.
+
+14:26.100 --> 14:28.010
+I'll see in the next one by.

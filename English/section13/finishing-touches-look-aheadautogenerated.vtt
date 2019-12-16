@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00.730 --> 00:08.860
+All right guys with this we pretty much have the majority of the application finished as far as features
+
+00:08.860 --> 00:09.830
+go.
+
+00:09.970 --> 00:18.280
+So this is a big milestone because at this point you can technically upload this project on hosting
+
+00:18.520 --> 00:22.450
+which we will cover in one of these advanced lessons.
+
+00:22.450 --> 00:29.800
+But I just want to take some time to really congratulate you on finishing your first react project.
+
+00:29.800 --> 00:35.890
+Your first big react project now of course there are definitely more optimizations we can make which
+
+00:35.890 --> 00:45.760
+we will cover in the upcoming sections but this is a huge milestone moment in your react learning so
+
+00:46.630 --> 00:54.580
+at this point I would like to make one or two more optimizations before discussing what the upcoming
+
+00:54.640 --> 01:03.410
+lesson structure will be like what we can do is we can make it so that we have our fab Akon as well
+
+01:03.410 --> 01:08.600
+as our title inside of our tab so that we match what the final project has.
+
+01:09.350 --> 01:18.260
+And in order to do this it's quite easy with create react at all we have to do is go back to our application
+
+01:19.450 --> 01:27.740
+and in our code we'll just go to our index HD him out and down here and title you can change it to whatever
+
+01:27.740 --> 01:28.600
+you want.
+
+01:28.610 --> 01:37.850
+So I'm just gonna name mine the name of the project and then for the actual Fava Co.
+
+01:38.360 --> 01:44.780
+It's actually being loaded by this link which we got generated when we initialize our create react project.
+
+01:44.780 --> 01:50.960
+Now the great thing about this is that it's naturally going to just figure out how to route to fab contact
+
+01:51.020 --> 01:58.160
+Iko which for us is this react icon but we can just replace it with our own icon.
+
+01:58.430 --> 02:00.530
+And I have it provided for you as well.
+
+02:01.220 --> 02:05.400
+So once you check your resources you'll find a new fab coda Iko.
+
+02:06.290 --> 02:14.060
+And then you can just replace the existing one that you have and once we've replaced it if we go back
+
+02:14.060 --> 02:24.190
+to our application if we refresh we'll see that we have our new fab icon and our actual title change.
+
+02:24.350 --> 02:35.470
+So let's commit our coat and what we can say is get add dash a get commit dash M updating stripe integration
+
+02:36.560 --> 02:43.260
+and updating our five Akon.
+
+02:43.420 --> 02:46.090
+So now we can just get push this up
+
+02:49.180 --> 02:57.670
+OK now I want to take a little bit of time to explain the format of what we're going to learn in the
+
+02:57.730 --> 03:02.410
+upcoming lessons and sections so up until this point.
+
+03:02.450 --> 03:10.580
+As I mentioned earlier we've pretty much built a solid foundation of understanding the flows and patterns
+
+03:10.580 --> 03:12.250
+of writing react and Redux code.
+
+03:12.890 --> 03:20.990
+But the ecosystem has other things in it that are either optimizations and improvements upon the patterns
+
+03:20.990 --> 03:27.790
+we already know or their other quality of life improvements that we will explore.
+
+03:27.830 --> 03:36.410
+So these things include things like putting our CSX in J.S. which is a concept we will cover effective
+
+03:36.410 --> 03:41.060
+immediately after we put our website up which is going to be the next lesson.
+
+03:41.450 --> 03:46.760
+So the next lesson we're going to actually host our Web site live on Heroku.
+
+03:46.760 --> 03:54.260
+But right after that we'll be the advanced optimizations we'll learn things like how to tackle graft
+
+03:54.260 --> 04:01.460
+Q out and integrating graphed Q all into our ReACT application using Apollo.
+
+04:01.470 --> 04:08.250
+We're also going to cover more advanced redux concepts and then using those concepts we'll be looking
+
+04:08.310 --> 04:17.880
+at a new alternative that was provided for us in the newest version of react which is hooks and hooks
+
+04:17.940 --> 04:28.020
+are going to be a very interesting optimization because they almost reduce the need for us to use redux
+
+04:28.130 --> 04:30.490
+but they are very similar.
+
+04:30.630 --> 04:37.110
+So the concepts that we've learned with redux and the practice we've had is still going to be valuable
+
+04:37.140 --> 04:44.370
+because conceptually they're pretty much the same things except now it's more integrated into the react
+
+04:45.090 --> 04:53.050
+library itself but many companies still use redux because they've already built their applications for
+
+04:53.050 --> 04:55.930
+the last two and a half years in redux.
+
+04:55.930 --> 05:03.760
+But it's good to know where we can optimize using hooks as well as what problems we can replace redux
+
+05:03.760 --> 05:10.990
+with using the new hooks and context API so we'll cover all of these in more advanced sections.
+
+05:10.990 --> 05:19.390
+We'll also look at more advanced things we can do with firebase as well as finishing the backend section
+
+05:20.050 --> 05:22.390
+of our stripe integration.
+
+05:22.600 --> 05:31.630
+And in that section we're actually going to tie in finishing the charge that we get after we fill out
+
+05:31.630 --> 05:37.160
+the credit card information in our stripe button integration that we just finished.
+
+05:37.210 --> 05:43.600
+So there's a lot of things that we're going to cover in the upcoming sections but now is just a good
+
+05:43.600 --> 05:50.020
+time for us to just pat ourselves on the back because we've done so much and the application from a
+
+05:50.020 --> 05:53.510
+feature perspective is pretty much good to go.
+
+05:53.650 --> 06:00.460
+The next upcoming things are not necessarily just theoretical but they're mainly optimizations to build
+
+06:00.460 --> 06:05.210
+upon all the concepts that we've already learned.
+
+06:05.300 --> 06:11.040
+Now the next immediate lesson we're going to have is hosting our app on Heroku.
+
+06:11.330 --> 06:12.320
+So let's do that.

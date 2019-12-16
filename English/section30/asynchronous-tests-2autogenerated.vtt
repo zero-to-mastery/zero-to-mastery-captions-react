@@ -1,0 +1,406 @@
+WEBVTT
+
+00:01.330 --> 00:02.220
+Welcome back.
+
+00:02.230 --> 00:07.690
+Let's start writing some tests that are for asynchronous code.
+
+00:07.840 --> 00:20.780
+If we go back to our script to dot test yes we can start off our first test by saying it calls sloppy
+
+00:21.120 --> 00:24.610
+Star Wars API to get people
+
+00:27.310 --> 00:31.810
+and again same syntax as we've seen before in our first test.
+
+00:31.810 --> 00:33.830
+What can we do.
+
+00:33.840 --> 00:49.130
+Well we can say swapping dot get people we'll give it the fetch API or the fetch function and then do
+
+00:49.130 --> 00:57.090
+dot then and like I said you could pass down you are else here and we could do something called mocking
+
+00:57.090 --> 00:58.600
+which we'll talk about later.
+
+00:58.620 --> 01:06.020
+For now we're just sticking with this method but let's see what we can test.
+
+01:06.040 --> 01:09.780
+We have the API that we're calling again.
+
+01:09.790 --> 01:14.020
+It's going to return us a ton of data.
+
+01:14.020 --> 01:15.960
+So again we do the dot then.
+
+01:16.000 --> 01:25.800
+Just simple javascript and this dog then is going to return us some data remember it's going to return
+
+01:26.490 --> 01:28.450
+our data.
+
+01:28.800 --> 01:37.050
+Or it's going to return our count and results so in here inside of the dog then block we can do our
+
+01:37.050 --> 01:42.380
+assertions expect data dot count
+
+01:46.290 --> 01:47.190
+to equal
+
+01:50.180 --> 01:58.020
+87 because remember if we go back to the Web site the account is eighty seven.
+
+01:58.120 --> 02:02.820
+So hopefully data account matches eighty seven.
+
+02:03.000 --> 02:04.600
+Let's see if that's the case.
+
+02:04.740 --> 02:09.600
+I'm going to save and go back to running our tests.
+
+02:09.600 --> 02:12.450
+Let me clear this and run NPM test
+
+02:17.080 --> 02:21.560
+and we'll need to press A to run all tests all right.
+
+02:21.570 --> 02:28.080
+So that worked that wasn't too hard we didn't do anything too too crazy.
+
+02:28.100 --> 02:30.600
+What if we add a nother test.
+
+02:30.690 --> 02:39.320
+I'm going to add another test here and it's going to say it's called swap B to get people with a promise.
+
+02:39.360 --> 02:50.510
+Now this time around we'll use get people promise let's save all right.
+
+02:50.520 --> 02:53.840
+Is that actually working.
+
+02:53.850 --> 03:01.420
+It looks to be working I mean we get the tests six of them that half past but remember what I said we
+
+03:01.420 --> 03:09.370
+always want to make sure that we fail our tests and check that the tests actually are checking what
+
+03:09.370 --> 03:11.310
+we're what we want to check.
+
+03:11.410 --> 03:25.980
+One tool that we can use with just is something called expect dot assertions and assertions are remember
+
+03:25.980 --> 03:27.450
+assertion library.
+
+03:27.450 --> 03:31.310
+Are these things these are assertions.
+
+03:31.640 --> 03:40.340
+So using the expect dot assertions we can say within this it block we expect one assertion.
+
+03:40.460 --> 03:45.170
+If we had to then we should say we expect to.
+
+03:45.380 --> 03:51.710
+And this is a good way to test that these things are actually running especially with a synchronous
+
+03:51.710 --> 03:52.670
+code.
+
+03:52.670 --> 03:54.170
+Let me do one here.
+
+03:54.320 --> 03:55.130
+I'm going to save
+
+03:57.770 --> 04:10.080
+whoa what just happened are expect dot assertions one failed there were zero assertion calls.
+
+04:10.080 --> 04:19.540
+So something's happening here where this test is passing but this is never being called and this is
+
+04:19.540 --> 04:27.540
+a little gotcha with asynchronous tests you see when this happens during tests.
+
+04:27.550 --> 04:34.450
+It's really really hard to debug because it's easy to not check that they work properly.
+
+04:34.450 --> 04:43.590
+The problem is that the tests are actually completing as soon as the get people gets called.
+
+04:43.790 --> 04:47.580
+And remember a promise returns a pending state.
+
+04:47.580 --> 04:54.730
+So this is going to get returned before we actually receive the data how do we get around this.
+
+04:54.880 --> 04:56.200
+How can we tell the test.
+
+04:56.440 --> 05:02.770
+Hey don't just pass this test because nothing happened and we just returned a promise with a pending
+
+05:02.770 --> 05:03.450
+state.
+
+05:03.670 --> 05:11.260
+Wait until this is actually done and then keep going there's a few ways to do this.
+
+05:11.370 --> 05:17.770
+The first way to do it is to use a single argument called done.
+
+05:18.150 --> 05:28.440
+So instead of having an empty parameter here for the function we can have done that's that gets automatically
+
+05:28.440 --> 05:40.500
+passed to a test and this says hey just just wait until the done callback is called before you actually
+
+05:40.500 --> 05:42.400
+say this test is finished.
+
+05:42.630 --> 05:50.160
+And you usually put it right after the expect call so let's say this is now done.
+
+05:50.190 --> 05:51.300
+So let me save that
+
+05:54.810 --> 05:55.440
+rate.
+
+05:55.530 --> 05:56.430
+It passed.
+
+05:56.460 --> 06:01.900
+Now we're saying hey don't pass this test until this is done just to test.
+
+06:01.940 --> 06:10.730
+If I change this to zero this is failing because we have one assertion call awesome.
+
+06:10.820 --> 06:14.330
+Now this is one way of doing it.
+
+06:14.480 --> 06:23.330
+And the neat thing with this is that if for some reason this if this fiscal fails let's say that in
+
+06:23.330 --> 06:31.850
+the script to dot J.S. This is actually an incorrect U.R.L. parameter that we're sending maybe we misspelled
+
+06:31.850 --> 06:33.060
+people.
+
+06:33.260 --> 06:43.290
+If I save this you see that I get an air call soppy to get people and I get an error here so that the
+
+06:43.290 --> 06:46.770
+test waits until I'm actually done.
+
+06:46.800 --> 06:50.700
+Very nice.
+
+06:50.720 --> 06:51.980
+Now let's fix this.
+
+06:51.980 --> 06:59.000
+Bring this back to one and talk about the other way that you can do this and this is really easy.
+
+06:59.030 --> 07:04.820
+If your code uses promises like we have there is a simpler way that's probably less confusing for most
+
+07:04.820 --> 07:12.670
+people to handle asynchronous test and this is another thing that I really like about just we can simply
+
+07:12.730 --> 07:15.430
+instead of doing this just
+
+07:17.950 --> 07:22.810
+return the promise and justice.
+
+07:22.810 --> 07:29.020
+Smart enough to say oh because we're returning this I'm going to wait until this promise returns.
+
+07:29.200 --> 07:35.380
+And if the promise is rejected the test will automatically fail which is very nice.
+
+07:35.380 --> 07:39.760
+Again let's say this everything is passing.
+
+07:39.760 --> 07:44.460
+If I misspell the API you are El again.
+
+07:44.620 --> 07:55.250
+You see that the test automatically gets failed.
+
+07:55.390 --> 07:56.890
+Now this is a little tricky.
+
+07:56.890 --> 08:02.260
+You have to always make sure that you return in the promise if you omit this return stemming statement
+
+08:02.320 --> 08:09.670
+as you we saw your test will complete before the promise actually gets resolved or rejected.
+
+08:09.670 --> 08:18.640
+So here's a tip when running a synchronous test always do this always do the expect assertions always
+
+08:18.640 --> 08:23.470
+test out that your assertions are being tested.
+
+08:24.040 --> 08:25.360
+So let's finish this off.
+
+08:25.510 --> 08:27.400
+Let's add a few more lines.
+
+08:27.550 --> 08:34.140
+We'll say that in here we're going to add two assertions.
+
+08:34.840 --> 08:44.620
+And again we want our return here and we'll add another assertion that says that we expect the data
+
+08:48.910 --> 08:52.310
+results to have a length
+
+08:56.830 --> 08:59.060
+and what can we use here.
+
+08:59.080 --> 09:05.770
+We want to check maybe that the results we get at least five people are that the length is greater than
+
+09:05.800 --> 09:14.570
+let's say five luckily for us there is a just cheat sheet and this just cheat sheet.
+
+09:14.590 --> 09:16.550
+Well try to say that fast five times.
+
+09:16.560 --> 09:23.310
+That's pretty hard actually has all these things that you can use for the test right in here.
+
+09:23.370 --> 09:25.380
+Super super useful.
+
+09:25.380 --> 09:31.950
+These are pretty much all you need to write the perfect tests and we see here that we have the to be
+
+09:31.950 --> 09:34.070
+greater then method.
+
+09:34.140 --> 09:35.230
+So let's use that.
+
+09:35.310 --> 09:40.110
+I'm going to say to be greater then.
+
+09:40.350 --> 09:45.180
+And again this is why I love just an most assertion libraries.
+
+09:45.180 --> 09:47.490
+They just make everything read nicely in English.
+
+09:47.550 --> 09:49.500
+So you understand exactly what's going on.
+
+09:49.860 --> 09:52.710
+So I'm going to say to be greater than five let's say
+
+09:56.800 --> 10:03.120
+all right we get a few errors so let's fix this test two assertions to be called but we only got one.
+
+10:03.120 --> 10:04.760
+Why is that.
+
+10:04.980 --> 10:11.830
+And I hit an error length of undefined and let's log out data to see what we're getting here so let's
+
+10:11.830 --> 10:16.080
+to console door log data dot results
+
+10:20.930 --> 10:23.060
+and I'm getting an undefined.
+
+10:23.090 --> 10:26.090
+So it looks like over here.
+
+10:26.240 --> 10:27.290
+Oh there you go.
+
+10:27.290 --> 10:31.380
+I've noticed Maya I misspelled results here.
+
+10:31.460 --> 10:32.990
+You're probably laughing at me right now.
+
+10:32.990 --> 10:35.990
+But this happens a lot more than you think.
+
+10:35.990 --> 10:36.910
+All right.
+
+10:37.100 --> 10:38.780
+So let's see that.
+
+10:39.530 --> 10:39.980
+All right.
+
+10:39.980 --> 10:40.490
+That's good.
+
+10:40.520 --> 10:41.720
+We're getting some response.
+
+10:41.720 --> 10:45.730
+Let's remove the console log hit save.
+
+10:45.980 --> 10:48.380
+And again this is another good reason to write test right.
+
+10:48.380 --> 10:55.200
+Because I wouldn't have caught that mistake until I've actually run the app so I see here that I just
+
+10:55.200 --> 11:04.660
+have a simple type error to be greater then again terrible at English.
+
+11:04.730 --> 11:06.110
+This is t T.H. and
+
+11:09.610 --> 11:10.240
+all right.
+
+11:10.260 --> 11:16.530
+Everything is passing and what you just witnessed is how tests usually work.
+
+11:16.530 --> 11:18.880
+They're constantly breaking they constantly breaking.
+
+11:18.970 --> 11:23.910
+And you try to get to this green state and when you get to this green state it's like hallelujah.
+
+11:23.910 --> 11:28.480
+This is so nice it feels so good to have everything green.
+
+11:28.710 --> 11:31.820
+And things are working awesome.
+
+11:31.840 --> 11:32.390
+All right.
+
+11:32.470 --> 11:34.450
+I think that's good for now.
+
+11:34.450 --> 11:38.460
+In the next video I want to talk to you a little bit about mocking.
+
+11:38.770 --> 11:39.700
+I'll see you on that one.
+
+11:40.140 --> 11:40.440
+Bye bye.

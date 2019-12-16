@@ -1,0 +1,91 @@
+WEBVTT
+
+00:00.970 --> 00:05.930
+Now before we do reduce let's do find.
+
+00:06.170 --> 00:09.400
+So what is fined.
+
+00:09.430 --> 00:12.600
+Well let's first get our array again.
+
+00:13.060 --> 00:22.900
+So we'll just copy over what we had from our last experiment and find is also exactly as it sounds.
+
+00:23.010 --> 00:33.490
+We're trying to find an element that correctly returns true based on the conditional that we have and
+
+00:33.700 --> 00:38.320
+the return of our function very similar to filter.
+
+00:38.320 --> 00:47.660
+So what we would say is my array doesn't find and we would get our element and let's say I wanted the
+
+00:47.720 --> 00:51.050
+element that is equal to five.
+
+00:51.950 --> 00:55.400
+Well here it would it would get us our element five.
+
+00:55.460 --> 00:55.780
+Right.
+
+00:55.790 --> 00:58.800
+Because if one goes in is it equals a five.
+
+00:58.800 --> 01:02.510
+No 3 No but 5 is true.
+
+01:02.510 --> 01:09.260
+And the moment that it's correct this method actually stops and it gives us back the first value in
+
+01:09.260 --> 01:16.600
+the array that return True from calling this function on each element.
+
+01:16.640 --> 01:26.600
+So it won't keep going so away we can actually see this is if we say my array find and we get our element
+
+01:27.920 --> 01:37.680
+and let's say we do as long as the element is greater than four so theoretically five seven and nine
+
+01:37.770 --> 01:45.510
+are all true but because it's applying it from left to right on each element the first element that
+
+01:45.510 --> 01:50.400
+This returns true it will return and it won't keep going.
+
+01:50.400 --> 01:58.760
+And we know that it will be five so dot find is a great way for us when world well let's say we have
+
+01:58.760 --> 02:00.800
+an array of objects.
+
+02:00.800 --> 02:01.300
+Right.
+
+02:01.370 --> 02:05.490
+And we want to find a specific object based on some condition.
+
+02:05.600 --> 02:06.500
+Right.
+
+02:06.590 --> 02:16.700
+You can imagine if we had let's say people array where we had an array of objects where the I.D. was
+
+02:16.700 --> 02:28.410
+one the I.D. of four and then the I.D. of seven.
+
+02:28.870 --> 02:39.370
+If we wanted to find people array right with the idea for one then we would say a person or person I.D.
+
+02:39.760 --> 02:49.150
+was equal to four and now this will give us our second item where it's our person with our idea for.
+
+02:49.180 --> 02:52.090
+So this is the great thing about find is that final.
+
+02:52.090 --> 02:58.990
+Give us the reference to whatever element it is that matches the condition that we pass in the function
+
+02:59.530 --> 03:05.590
+of our find and we will use this as well quite extensively in our coding.

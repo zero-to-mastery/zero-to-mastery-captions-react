@@ -1,0 +1,325 @@
+WEBVTT
+
+00:00.920 --> 00:01.790
+Welcome back guys.
+
+00:02.830 --> 00:08.050
+Now I'm very proud of everyone for getting this far.
+
+00:08.050 --> 00:15.590
+What you've written up till now is a lot of the fundamental react and Redux code.
+
+00:15.810 --> 00:20.670
+Much of the patterns that you're writing are pretty much the patterns.
+
+00:20.670 --> 00:26.760
+90 percent of what you will write when building an application there is 10 percent where things get
+
+00:26.760 --> 00:33.420
+more advanced and more complicated when it comes to perhaps building more complex features.
+
+00:33.420 --> 00:40.560
+But the approach of breaking it one at a time and then fitting it inside of the existing flow of how
+
+00:40.560 --> 00:48.120
+we've been writing our react and Redux code is going to be definitely the sticking point of why your
+
+00:48.120 --> 00:54.180
+career as a javascript developer especially with react will all pay off in the end.
+
+00:55.230 --> 01:03.090
+Now up until this point we've been building new features with our react and Redux flow.
+
+01:03.090 --> 01:09.600
+But there's a couple things that we can actually move over and I want to do right now because we want
+
+01:09.600 --> 01:16.500
+to practice this pattern that we've been writing when building all the things that we've built in the
+
+01:16.500 --> 01:20.730
+last few lessons in order for us to figure out what they are.
+
+01:21.030 --> 01:27.770
+Let's take a look back at our application so there's a couple places right now where we're storing on
+
+01:27.770 --> 01:35.700
+a component state the things that we can actually move into our redux in our home page.
+
+01:35.720 --> 01:44.280
+We have our directory if you remember on our home page component on our home page component inside of
+
+01:44.280 --> 01:51.220
+our directory we keep the sections that we display inside of the state.
+
+01:51.950 --> 01:58.580
+But this is actually something that perhaps we can move in to our store because there's a opportunity
+
+01:59.000 --> 02:04.370
+for us to possibly move these sections into more than one component.
+
+02:04.370 --> 02:11.950
+For example if right now what we're displaying does not maybe work in a mobile view right.
+
+02:11.960 --> 02:18.710
+If our application shrinks and we want to display our directory in a way that's more mobile friendly
+
+02:19.220 --> 02:25.280
+we can pretty much just pull in the same array and then create a component that displays it in a mobile
+
+02:25.280 --> 02:31.580
+friendly way another place where we can modify is actually our shop.
+
+02:31.750 --> 02:41.410
+Right now we're keeping all of the collection data inside of our shop state and we do store it inside
+
+02:41.410 --> 02:43.240
+of the shop data.
+
+02:43.240 --> 02:43.560
+Right.
+
+02:43.570 --> 02:54.250
+DOJ us but it is being technically held on the shop component inside of the state and we can move this
+
+02:54.250 --> 03:01.960
+out as well because eventually we do want that same data to populate our category pages when we build
+
+03:01.960 --> 03:03.140
+that.
+
+03:03.160 --> 03:12.090
+So for example inside of our collections preview right now we show the first four items in each category
+
+03:12.600 --> 03:17.160
+but in the actual category page itself we want to show all the items.
+
+03:17.160 --> 03:24.030
+So we want to be able to share that data inside of our redux state so everything will have access to
+
+03:24.030 --> 03:31.880
+it so let's start doing that and get a better practice of our ReACT read stuff.
+
+03:31.960 --> 03:38.530
+The first thing I want to move out is actually what's in our directory component and for us to do this.
+
+03:38.840 --> 03:47.140
+We can make a directory redux folder so let's close some of this stuff and inside of our redux we will
+
+03:47.140 --> 03:51.470
+make a new folder called directory.
+
+03:51.480 --> 03:58.840
+Now we don't have anything that actually updates these sections so we don't actually need any actions.
+
+03:58.950 --> 04:03.920
+We just want a place to store are directory literally at State.
+
+04:04.710 --> 04:16.050
+So we'll just make a reducer so we'll do directory reducer dot J.S. and for our reducer we are just
+
+04:16.050 --> 04:23.980
+going to set our initial state first and our national state will point to this directory information
+
+04:27.220 --> 04:31.070
+and it will pretty much be the default state.
+
+04:31.080 --> 04:39.330
+Now you might be wondering is there really a reason for us to move this outside of our directory class
+
+04:39.330 --> 04:46.940
+component if we're not going to update it or if we don't currently have another component that's going
+
+04:46.940 --> 04:54.620
+to pull it in Well this is actually where there's a lot of debate about whether or not it's worth it
+
+04:54.620 --> 05:02.400
+to keep one time use on modifiable data inside of a component.
+
+05:02.420 --> 05:09.590
+Some people say that it's a little bit of overkill to move this data where it's only being used in one
+
+05:09.590 --> 05:17.390
+place and not being updated into redux but there's actually a benefit to doing this that we will not
+
+05:17.390 --> 05:23.190
+explore until later on the course inside of our testing section.
+
+05:23.240 --> 05:26.530
+But one thing that we've largely not talked about is testing.
+
+05:26.660 --> 05:31.960
+And the reason why is because testing it's extremely important inside of web development.
+
+05:32.720 --> 05:40.040
+But it's really important to grasp the fundamentals before we start writing our tests because testing
+
+05:40.700 --> 05:47.000
+and learning about testing really makes sense once you grasp the fundamentals of what it is that you're
+
+05:47.000 --> 05:54.860
+writing because in a way testing is its own thing that builds upon the fundamental understanding that
+
+05:54.860 --> 05:56.420
+you already have.
+
+05:56.420 --> 06:06.320
+But to the original point moving our state outside of our component and into their own reduced hours
+
+06:06.410 --> 06:12.860
+actually makes it easier to test but we won't talk about that for now.
+
+06:12.950 --> 06:15.810
+I just want you to perhaps think about what's to come.
+
+06:16.010 --> 06:22.190
+But it also sets us up in a way so that in the future if we do need to use these sections again we already
+
+06:22.190 --> 06:23.800
+have the code set up for us.
+
+06:23.840 --> 06:25.790
+There's no harm in doing it.
+
+06:26.330 --> 06:31.580
+And it allows our directory component in some ways to be more reusable.
+
+06:31.770 --> 06:40.960
+So now that we have our directory reducer let's actually build a reduce code so I'll say concept directory
+
+06:41.020 --> 06:44.530
+reducer equals this
+
+06:47.590 --> 06:57.940
+that takes a state if we remember right which by default will be the initial state and then we're also
+
+06:57.940 --> 07:00.700
+going to have our action
+
+07:03.640 --> 07:11.020
+and what we'll say is a switch statement on action type but inside we'll just write our default which
+
+07:11.020 --> 07:14.040
+is to return state.
+
+07:14.110 --> 07:18.870
+This is perfectly fine if we have more actions that might modify the state.
+
+07:18.970 --> 07:25.240
+We'll bring them in after but for now this is good enough and we'll export out our directory reducer
+
+07:26.470 --> 07:29.830
+now inside of our root reducer.
+
+07:29.880 --> 07:33.120
+We gotta remember to bring in our new reducer.
+
+07:33.120 --> 07:45.140
+Our directory reducer from directory directory reducer and then let's point to the directory reducer
+
+07:45.350 --> 07:56.370
+under the directory key and now inside of our directory component we can just simply pull that component
+
+07:57.050 --> 08:04.260
+or sorry pull the connect and write our hired or connect component from react redux
+
+08:07.760 --> 08:11.150
+and here we will actually write our connect.
+
+08:11.870 --> 08:21.860
+So because we don't need this local state anymore we can just render a regular Functional Component
+
+08:22.970 --> 08:25.850
+because we don't need
+
+08:28.750 --> 08:29.560
+access to state.
+
+08:29.590 --> 08:36.230
+So there's no reason to use a class component so let's get rid of extra brackets here
+
+08:39.720 --> 08:42.150
+and then we'll make sure to pull the sections
+
+08:47.810 --> 08:58.480
+our props that we get in and then we'll write our map state to props where we can write our directory
+
+08:58.480 --> 08:58.960
+selector
+
+09:04.090 --> 09:06.470
+so we'll make a new directory.
+
+09:06.480 --> 09:19.210
+Dot selectors dot J.S. and here we're going to import create selector from re select we're gonna make
+
+09:19.210 --> 09:28.930
+our first selector which is our directory selector select directory equals a function that gets the
+
+09:28.930 --> 09:41.210
+state and just returns us state DOT directory and then we'll actually write our first selector which
+
+09:41.210 --> 09:53.570
+will be select directory section shall be equal to create selector taking in our select directory and
+
+09:53.570 --> 09:55.130
+then outputting directory
+
+09:58.110 --> 10:07.340
+directory dot section freight selector so let's bring that into our directory component
+
+10:10.200 --> 10:15.010
+it will be from our redux folder
+
+10:18.170 --> 10:20.610
+directory slash directory.
+
+10:20.630 --> 10:21.320
+Selectors
+
+10:23.970 --> 10:29.550
+and we want our select directory sections as well as our create structured selector
+
+10:32.370 --> 10:40.080
+reseller so it's definitely a lot of files and a lot of moving around and jumping between these files
+
+10:40.260 --> 10:43.970
+importing the right libraries and remembering all these things.
+
+10:44.160 --> 10:49.290
+It took me a long time to get fully comfortable with being able to just remember all the moving parts
+
+10:49.290 --> 11:00.680
+as well but again practice makes perfect so we will call create structured selector passing our sections
+
+11:01.290 --> 11:06.360
+or select directories section and then we will connect
+
+11:10.300 --> 11:23.810
+PA directory with our map stage props and now double imported okay.
+
+11:23.880 --> 11:32.260
+And now if we look we see that in our final application on our home page our code still works.
+
+11:32.400 --> 11:41.170
+We have our directory and we have our sections inside of our state so it's definitely a lot of files
+
+11:41.170 --> 11:41.790
+to remember.
+
+11:41.800 --> 11:43.680
+And even then we're not writing any actions.
+
+11:43.690 --> 11:49.840
+But even this is still good practice just to remember all of the parts of flowing through writing a
+
+11:49.840 --> 11:57.330
+new reducer attaching it to our state pulling it into our components practice makes perfect.
+
+11:57.510 --> 12:01.210
+The more practice we have the better it gets.
+
+12:01.210 --> 12:06.850
+So now let's do this for our shop before we build our category pages because we'll definitely need our
+
+12:06.850 --> 12:08.740
+shop in its own reducer.

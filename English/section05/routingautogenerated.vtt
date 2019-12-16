@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00.510 --> 00:10.520
+OK so what is routing Well right now we only have one home page component that pretty much comprises
+
+00:10.580 --> 00:19.750
+our entire app but what if we had multiple page components like an about page or a shop page or a checkout
+
+00:19.750 --> 00:24.770
+page that needed to be rendered depending on what you are.
+
+00:24.790 --> 00:26.750
+The user wasn't at.
+
+00:26.850 --> 00:31.700
+Well that is what routing seeks to solve and the routing library.
+
+00:31.700 --> 00:35.490
+We're gonna use is called react router Dom.
+
+00:35.720 --> 00:41.540
+Now there are other routing libraries out there for react but react router John is the most popular
+
+00:41.630 --> 00:47.960
+and most supported library for routing when it comes to building or application and react.
+
+00:48.080 --> 00:52.540
+It's easy to understand and it follows are component driven architecture.
+
+00:53.180 --> 00:56.300
+So let's actually try it out.
+
+00:56.300 --> 00:57.800
+So how do we use it.
+
+00:57.800 --> 01:05.870
+Well first we have to install rack rudder Dom and what I'm gonna do is I am going to kill our server
+
+01:06.890 --> 01:12.290
+and I'm going to yawn and react router John.
+
+01:12.350 --> 01:18.890
+Now there is a chance that our libraries for battle just will conflict again like it did when we first
+
+01:18.890 --> 01:20.560
+installed node SAS.
+
+01:20.570 --> 01:23.870
+And if it does I'm going to show you how we can fix that issue.
+
+01:25.030 --> 01:27.920
+So if you're running and start yes.
+
+01:27.930 --> 01:29.970
+So we see that that's an issue.
+
+01:29.970 --> 01:30.650
+OK.
+
+01:30.870 --> 01:32.180
+That's fine.
+
+01:32.190 --> 01:38.040
+The reason for this is because there are dependencies between the react scripts that's in our create
+
+01:38.040 --> 01:47.010
+react app for babble just that is different from the one that is being required from some other version
+
+01:47.280 --> 01:48.820
+of a library that we install.
+
+01:48.870 --> 01:49.720
+Right.
+
+01:49.800 --> 01:54.870
+But this is OK because it looks like the major versions are not in conflict.
+
+01:54.900 --> 01:57.870
+It's just this minor it's the seven versus the eight.
+
+01:57.870 --> 02:11.490
+So what we can do with yarn is inside of our package Jason we can add a resolution's prop. And we can
+
+02:11.490 --> 02:16.230
+tell it that we want Apple just to always be twenty four point seven point one no matter what.
+
+02:17.130 --> 02:26.040
+So now if we've re install all of our dependencies we'll see that we're forcing babble just to be twenty
+
+02:26.040 --> 02:35.100
+four point seven point one and now we should have no problem starting our application awesome.
+
+02:35.230 --> 02:35.930
+OK.
+
+02:36.400 --> 02:42.260
+So let's actually see how to use react router Dom.
+
+02:42.270 --> 02:52.270
+Well first we have to go to our next start Jess and we have to import in browser router from react router
+
+02:52.300 --> 03:01.980
+Dom and browser router is a component that we're actually going to wrap around our application and what
+
+03:01.980 --> 03:10.140
+this component does is it gives our application that's sitting between this component all of the functionality
+
+03:10.500 --> 03:21.740
+of routing that this library provides now in order for me to show you what react rather does I'm just
+
+03:21.740 --> 03:30.460
+going to write a bit of code first because it will make more sense if you see it so I'm going to import
+
+03:30.460 --> 03:41.130
+this component route from RAC runner Dom and then I'm just going to make a quick component that renders
+
+03:41.220 --> 03:51.620
+out a div with an H1 of hearts page and this is just going to represent another page alternate to our
+
+03:51.620 --> 03:52.540
+home page right now.
+
+03:52.550 --> 03:54.710
+Call a Hearts page.
+
+03:54.860 --> 04:05.440
+So how this root component works is that it's a component that takes a couple of arguments.
+
+04:05.530 --> 04:18.290
+The main ones that I want to focus on are exact path and component now component will be the component
+
+04:18.290 --> 04:20.750
+that we want to render right.
+
+04:20.750 --> 04:22.100
+We want the root to render.
+
+04:22.100 --> 04:24.800
+So for now let's just use home page.
+
+04:24.800 --> 04:33.100
+The path will be a string that's equal to the path itself from the current place and all.
+
+04:33.180 --> 04:35.300
+So because what the very base of our application.
+
+04:35.310 --> 04:35.540
+Right.
+
+04:35.550 --> 04:44.090
+The Your L is going to when we put slash the base you are L is just logos 3000 or like are you are L
+
+04:44.090 --> 04:48.780
+without any additional sub your URLs following are you url.
+
+04:48.880 --> 04:53.470
+So what this means is that when the U R L is at the base.
+
+04:53.470 --> 04:53.640
+Right.
+
+04:53.640 --> 05:00.030
+Just slash then I want to render the home page somewhat local host I just want to render the homepage
+
+05:00.970 --> 05:05.140
+exact is a true or false property.
+
+05:05.140 --> 05:05.890
+So we are the path.
+
+05:05.890 --> 05:07.720
+True or false.
+
+05:07.720 --> 05:15.040
+And if you just keep it as this with no equals then it's equal to true it means that this path must
+
+05:15.040 --> 05:20.020
+be exactly slash in order for this component to render our home page component render.
+
+05:20.620 --> 05:30.490
+If the root for example without exact let's say the U R L was local host three thousand slash hats.
+
+05:30.690 --> 05:31.390
+Right.
+
+05:31.510 --> 05:34.440
+Slash is technically still true.
+
+05:34.450 --> 05:39.280
+This part of the U R L right here is still true.
+
+05:39.280 --> 05:42.580
+So our home page will actually still render so.
+
+05:42.610 --> 05:43.990
+Let me show you how that would happen.
+
+05:45.400 --> 05:51.160
+So let's write another route where our path is hats and when it's hearths we want to render the hearts
+
+05:51.160 --> 06:00.270
+Page Well now if we go to our application if we navigate to hearts we'll see that we have our home page
+
+06:00.390 --> 06:02.890
+and then underneath we have our hearts page.
+
+06:03.060 --> 06:07.830
+So without the exact as long as the path matches right.
+
+06:07.860 --> 06:11.450
+As long as it's present then it will render the home page.
+
+06:11.460 --> 06:21.080
+But if we make sure that its exact then now it won't render the home page unless it's exactly this path
+
+06:21.500 --> 06:22.450
+of just the.
+
+06:28.160 --> 06:32.360
+These are pretty much the main things that we need out of our route component.
+
+06:32.360 --> 06:38.240
+There's a couple others for more nuanced examples that we might explore later in the application.
+
+06:38.270 --> 06:40.600
+But most of the time it's very easy.
+
+06:40.610 --> 06:50.300
+You can just go to the rack router Dom Quick Start documentation and you can see all of the API that
+
+06:50.300 --> 06:51.710
+you have access to.
+
+06:51.980 --> 06:56.930
+But this routing is the main one that we're gonna utilize.
+
+06:56.960 --> 07:00.770
+The other component I want to show is the switch component
+
+07:03.630 --> 07:06.210
+now to use the switch component.
+
+07:06.210 --> 07:10.410
+We wrap our route components within it
+
+07:13.230 --> 07:22.360
+now what it does is the moment that a route inside of it finds a match in the path.
+
+07:22.440 --> 07:26.220
+It does not render anything else but that route.
+
+07:26.220 --> 07:30.900
+So before when we went to our hats you are all right.
+
+07:30.900 --> 07:36.540
+If we remove the exact if we go to our hats you are all we know that we were matching the slash and
+
+07:36.540 --> 07:46.450
+the slash has but switch will match slash first and then it will not render anything else after it so
+
+07:46.450 --> 07:49.500
+if we look and we go to hats right.
+
+07:49.510 --> 07:53.120
+We'll see that we have our home page but there's no hats page.
+
+07:53.140 --> 07:56.050
+And the reason for this is because of switch.
+
+07:56.050 --> 07:59.730
+So the moment switch sees something match the path.
+
+07:59.740 --> 07:59.980
+Right.
+
+07:59.980 --> 08:04.960
+As long as a route gets rendered then it just renders that route it renders nothing else.
+
+08:04.960 --> 08:13.180
+Now if we put the exact back then we will of course render our hearts page because this home page with
+
+08:13.180 --> 08:16.300
+the exact path the forward slash never matched.
+
+08:16.300 --> 08:22.310
+At this you are all of slash hats and if we go back to our home page while we're going to render our
+
+08:22.310 --> 08:28.900
+home page so the switch is useful because it gives us more control over our code right.
+
+08:28.940 --> 08:34.700
+It allows us to kind of follow a pattern where we know that as long as one route matches then that's
+
+08:34.700 --> 08:37.430
+the only thing we're going to render and that's useful.
+
+08:37.430 --> 08:45.500
+If we don't want to accidentally render multiple components write it just a lot more control that we
+
+08:45.500 --> 08:46.610
+get from the library.
+
+08:47.090 --> 08:53.030
+But this switch and this route component there are the basic components that we're going to use to build
+
+08:53.030 --> 08:54.840
+out this application.
+
+08:55.220 --> 09:01.220
+And as we build of course we're going to pull in a little bit more and we're going to write some more
+
+09:01.220 --> 09:04.040
+complex code with RAC router dom.
+
+09:04.040 --> 09:09.740
+But conceptually this is what routing is in our project.

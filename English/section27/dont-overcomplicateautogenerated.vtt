@@ -1,0 +1,79 @@
+WEBVTT
+
+00:01.460 --> 00:03.220
+Hey it's Andre here.
+
+00:03.260 --> 00:10.180
+I want to talk about an important principle which is this idea of not over complicating things so far
+
+00:10.180 --> 00:10.770
+in the course.
+
+00:10.780 --> 00:17.700
+We learned a ton and there are so many more things so many libraries so many tools that we can use.
+
+00:18.250 --> 00:26.860
+And it's very very easy to start using perhaps the latest react features the latest coolest library
+
+00:27.100 --> 00:31.420
+keep adding all these tools and trying to make your code look impressive.
+
+00:33.100 --> 00:36.040
+But that comes at a cost.
+
+00:36.100 --> 00:41.950
+Remember when you're working on a team when you're working with others when you're working on big projects.
+
+00:41.950 --> 00:48.510
+How many lines of code you write isn't indicative of how good of a developer you are.
+
+00:48.520 --> 00:56.740
+I argue that the less code you write the better it is because every line of code means you need to test
+
+00:56.740 --> 00:57.700
+that code.
+
+00:57.700 --> 00:59.410
+It could be buggy code.
+
+00:59.410 --> 01:02.730
+It's a code that somebody has to read to maintain it.
+
+01:02.770 --> 01:08.860
+So you want to make sure that when you write code you're not doing things just to look impressive just
+
+01:08.860 --> 01:10.180
+to be clever.
+
+01:10.180 --> 01:14.440
+What you want to do is to keep things simple.
+
+01:14.510 --> 01:17.180
+Do you think that react hooks is confusing.
+
+01:17.180 --> 01:17.610
+Good.
+
+01:17.750 --> 01:19.100
+Then don't use them.
+
+01:19.100 --> 01:28.130
+Use class syntax because good code isn't about what's the latest and what's the trend trendiest good
+
+01:28.130 --> 01:33.220
+code is about writing really predictable clean understandable code.
+
+01:34.010 --> 01:36.420
+And senior developers understand this.
+
+01:36.650 --> 01:45.550
+The cleaner your code the simpler it is the better it's going to do in the long term so remember next
+
+01:45.550 --> 01:54.310
+time you want to implement graph Q Well of react to Router react hooks context API styled components
+
+01:54.820 --> 02:00.670
+just for your simple to do app that's when you need to stop and reconsider.
+
+02:00.670 --> 02:04.960
+Hey don't overcomplicate keep things simple.

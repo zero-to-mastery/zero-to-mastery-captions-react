@@ -1,0 +1,373 @@
+WEBVTT
+
+00:00.330 --> 00:02.610
+Hello everyone and welcome back.
+
+00:02.610 --> 00:08.340
+In the last lesson we learned from a high level what it is these security rules are trying to do in
+
+00:08.340 --> 00:09.240
+this lesson.
+
+00:09.240 --> 00:14.130
+We're actually going to tackle writing our first security rule and the first thing we're going to write
+
+00:14.190 --> 00:17.100
+for is the user's collection that we have.
+
+00:17.790 --> 00:25.020
+So let's just quickly take a quick step back and understand the moving parts inside of our user flow
+
+00:25.020 --> 00:32.160
+from the get go because we're going to actually retouch upon a lot of topics that we touched over before.
+
+00:32.340 --> 00:38.380
+But in the context of security rules let's just go back to our application for a quick second and look
+
+00:38.440 --> 00:41.550
+at our get snapshot from user auth method.
+
+00:41.590 --> 00:47.910
+This was inside of our saga and as we remember what happens whenever a user actually signs in.
+
+00:48.010 --> 00:55.330
+We get some user auth object that we then use to call our create user profile document method inside
+
+00:55.330 --> 01:04.210
+of our firebase utilize if we were to just quickly console log this user off object we will remember
+
+01:04.510 --> 01:12.970
+that what this user off object has is actually a little bit different from what it is that we're storing
+
+01:13.480 --> 01:21.010
+this object has all of these properties on it because this off object comes from the actual authentication
+
+01:21.010 --> 01:23.110
+section of our firebase.
+
+01:23.320 --> 01:28.690
+This authentication happens through our Google provider or through our email and password but in the
+
+01:28.690 --> 01:36.940
+case of our actual application we take this user off object and we use it to create a new user profile
+
+01:36.940 --> 01:46.660
+document we might pass in the email and we pass in the UI D which as you remember is the I.D. that automatically
+
+01:46.690 --> 01:51.550
+gets assigned to every authenticated user inside of our application.
+
+01:51.550 --> 01:58.450
+We use those properties to actually build out our user profile document which is inside of our database
+
+01:58.660 --> 02:04.740
+inside of our users collection and why this is important is because we're actually going to need this
+
+02:04.740 --> 02:08.480
+UI D as well inside of our security rules.
+
+02:08.520 --> 02:12.660
+And right now it might seem confusing but I promise you that it will make sense once we start writing
+
+02:12.660 --> 02:13.150
+it.
+
+02:13.470 --> 02:20.700
+Just remember that there is this off object which is different from the actual user document that we
+
+02:20.700 --> 02:22.120
+have stored.
+
+02:22.350 --> 02:26.760
+So let's actually explore how these two things come together inside of the security world that we're
+
+02:26.760 --> 02:33.350
+going to write for our users collection inside of our users collection.
+
+02:33.350 --> 02:39.980
+Let's first delete this part of our match statement and keep the service line as well as the first match
+
+02:39.980 --> 02:45.830
+database line and make a new match statement for our users Slash.
+
+02:45.920 --> 02:51.200
+And then here is going to be a wild card that we write inside of these parentheses.
+
+02:51.350 --> 02:57.710
+So this slash user's points to our users collection this slash and then the parentheses here we are
+
+02:57.710 --> 03:02.120
+actually saying we want to target all of the documents.
+
+03:02.270 --> 03:08.970
+The reason we do this is because we sometimes need access to the actual object that is being stored.
+
+03:09.020 --> 03:17.540
+For example if we wanted to make sure or do something with the name we can access the name or the email
+
+03:17.650 --> 03:26.630
+for example on this user object that we have stored we can actually access it by saying Here user dot
+
+03:26.630 --> 03:34.610
+data dot email or user dot data dot displaying this dot data property allows us to access the different
+
+03:34.970 --> 03:43.040
+attributes on this user document reference object in our case however we want the I.D. the I.D. In our
+
+03:43.040 --> 03:49.140
+case is not stored on the data it's actually what's used to reference the data object here.
+
+03:49.280 --> 03:52.430
+This is the I.D. but it's not actually a field on this object.
+
+03:52.820 --> 03:59.270
+So what we need to do in order to access it is leverage one of the available wildcards we have inside
+
+03:59.270 --> 04:00.410
+of security rules.
+
+04:00.530 --> 04:02.510
+So what are wildcards.
+
+04:02.810 --> 04:10.910
+Wild cards are kind of like these methods that firebase gives us access to inside of these security
+
+04:10.910 --> 04:14.030
+rules that allow us to fetch specific things.
+
+04:14.570 --> 04:21.860
+So in this case this user object here we saw how we could get different properties off of these specific
+
+04:21.860 --> 04:28.180
+document object model that we're using in this case we only want the I.D. so we can use the wild card
+
+04:28.700 --> 04:36.900
+I.D. like this which lets us access the identifier of this document reference object.
+
+04:36.970 --> 04:45.090
+If this was say collections you would do the same thing by saying collection I.D. just by writing the
+
+04:45.090 --> 04:49.680
+syntax firebase understands that what you want to access is the I.D. itself.
+
+04:50.550 --> 05:00.030
+So by doing this we now have access to the idea that we can use inside of our actual rule we've so far
+
+05:00.090 --> 05:03.090
+only seen us do hard allows like this.
+
+05:03.090 --> 05:10.650
+If I were to say allow read I'm saying that anyone can read all of the things related to our users collection
+
+05:11.040 --> 05:14.820
+but we actually in production don't want this.
+
+05:14.880 --> 05:20.100
+We only want the user to be able to read their own user object.
+
+05:20.100 --> 05:23.310
+We don't want them to be able to read other people's user objects.
+
+05:23.310 --> 05:28.240
+We also definitely don't want them to write an overwrite other people's user objects.
+
+05:28.290 --> 05:35.730
+So this allows us to actually do so and we do this through a conditional conditionals inside of Firestorm
+
+05:35.760 --> 05:40.050
+security rules look very summer to conditional inside of JavaScript.
+
+05:40.110 --> 05:44.430
+It's also an if statement the way that we write it though is a little different.
+
+05:44.430 --> 05:46.910
+First we're going to say is allow read.
+
+05:46.920 --> 05:56.160
+So what we want them to be allowed to do and then we put this colon after this colon will put if and
+
+05:56.160 --> 06:05.680
+then here is the actual condition itself so every single request that gets made to update to get to
+
+06:05.920 --> 06:07.790
+read to delete whatever.
+
+06:07.930 --> 06:17.010
+This all actually gets encapsulated inside of a keyword in the security rules called request this request
+
+06:17.020 --> 06:21.600
+keyword is essentially an object that represents the request coming in.
+
+06:21.610 --> 06:29.690
+So what we're saying is that we want to allow read if the request coming in has been authenticated if
+
+06:30.200 --> 06:35.900
+the request coming in to get a user document object is not authenticated we definitely don't want to
+
+06:35.900 --> 06:42.440
+give them the user object because then nobody inside of the application if they're on our web app or
+
+06:42.440 --> 06:47.380
+if they download our code and they're trying to access our user objects but they're not authenticated
+
+06:47.390 --> 06:50.480
+why would we ever want to give them any of our user data.
+
+06:50.480 --> 06:51.390
+We definitely would.
+
+06:51.620 --> 06:59.050
+So we want to say that if request off does not equal null remember here we're allowing read only if
+
+06:59.050 --> 07:02.030
+request is authenticated in the first place.
+
+07:02.200 --> 07:12.500
+So if the request off is not null then we also want to make sure that the user that is authenticated
+
+07:12.530 --> 07:18.110
+is only able to get their own user Document object inside of our database.
+
+07:18.890 --> 07:25.200
+So here we're saying we're allowing the read if the requests start off is not no.
+
+07:25.460 --> 07:29.570
+This off happens to be an object that has on it the UI.
+
+07:30.020 --> 07:35.930
+And this off object looks very similar to the one that we explored earlier in the course when I console
+
+07:35.930 --> 07:38.820
+logged it out from our saga.
+
+07:38.830 --> 07:46.600
+So what we're going to say here is that the requests are off you I.D. must also equal the user I.D.
+
+07:46.990 --> 07:52.200
+of the user object that they're trying to get in the first place.
+
+07:52.210 --> 07:57.390
+So what this rule is saying is that I'm allowing read if requests to authors not null.
+
+07:57.430 --> 08:04.990
+So they're authenticate in the first place and the UI d of the authenticated user matches the user Document
+
+08:05.080 --> 08:07.770
+Object that they're trying to get.
+
+08:07.770 --> 08:15.600
+So this is pretty much the only user rule that we want to write for allowing them to read in order for
+
+08:15.600 --> 08:21.910
+us to actually test this we don't have to publish this code yet we can test this using the simulator.
+
+08:21.990 --> 08:28.350
+The simulator allows us to actually run against our security rules here before we publish them because
+
+08:28.350 --> 08:33.440
+sometimes in production our code already depends on the existing rules of our database.
+
+08:33.450 --> 08:38.640
+We don't want to screw anything up and ruin the experience for users that are currently using our application.
+
+08:38.640 --> 08:42.300
+So we test them inside of this simulator.
+
+08:42.300 --> 08:49.050
+So you click this tab for simulator here and here you're able to simulate different types of requests.
+
+08:49.170 --> 08:53.100
+The one that we're testing of course is get because we're trying to test our read rule.
+
+08:53.100 --> 08:59.760
+So here we want to say that I want to test get against our user document and the document I'm trying
+
+08:59.760 --> 09:01.610
+to get is this one.
+
+09:01.620 --> 09:06.350
+So let's just copy this over and this is the idea of the user object.
+
+09:06.360 --> 09:12.270
+I'm trying to get now this authenticated have is turned off meaning that we're doing a UN authenticated
+
+09:12.270 --> 09:12.850
+request.
+
+09:12.870 --> 09:18.840
+So if we run this we'll see that the simulator read was denied because the request does not authenticate.
+
+09:18.840 --> 09:20.610
+So so far that's working.
+
+09:20.610 --> 09:27.690
+Next let's test if we actually authenticated and what we want to authenticate is let's say our custom
+
+09:27.690 --> 09:34.010
+authentication and we want to pass in the UI I.D. which is the one that we are ready.
+
+09:34.080 --> 09:42.120
+Just copy meaning that we're trying to access it with the UI I.D. matching the user I.D. If we run here
+
+09:42.540 --> 09:43.820
+we see that it's allowed.
+
+09:44.010 --> 09:50.310
+This is successful because our user I.D. matches the you I.D. that I just passed inside of this object
+
+09:50.310 --> 09:51.260
+here.
+
+09:51.270 --> 09:55.200
+Now let's say this was a little different let's cut this out so that it doesn't match.
+
+09:55.230 --> 09:58.310
+If we run again we'll see that it's the.
+
+09:58.320 --> 10:05.100
+So this means that our user rule is working only users that are requesting a user object that is their
+
+10:05.100 --> 10:05.520
+own.
+
+10:05.550 --> 10:11.220
+Meaning that you I.D. matches the user I.D. we'll be able to access their own user object.
+
+10:11.520 --> 10:15.660
+And with this we have written off our security rule it.
+
+10:15.690 --> 10:17.630
+It's a little bit weird syntax wise.
+
+10:17.640 --> 10:21.900
+I know it's to get used to and the simulator will take some playing around with to get fully familiar
+
+10:21.900 --> 10:27.690
+with all of its features but this is really all these security rules are based off of it's pretty much
+
+10:27.690 --> 10:32.970
+just these conditions based on certain keywords you have to get used to that are accessible inside of
+
+10:32.970 --> 10:33.920
+the security rules.
+
+10:33.990 --> 10:35.350
+That's really all it is.
+
+10:35.430 --> 10:37.980
+And we're going to definitely write more.
+
+10:37.980 --> 10:41.470
+This is just the first introduction to our very first security rule.
+
+10:41.490 --> 10:46.980
+But just like that we've just written our first one so let's keep going.
+
+10:47.030 --> 10:52.820
+And let's tackle the rules for creating as well as our collections collection.
+
+10:52.880 --> 10:54.740
+We'll do that in the subsequent lessons.
+
+10:54.890 --> 10:56.270
+So I'll see you in the next lesson.

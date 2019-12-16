@@ -1,0 +1,334 @@
+WEBVTT
+
+00:01.440 --> 00:02.830
+Welcome back.
+
+00:02.940 --> 00:10.410
+If you remember our talk about testing I mentioned that react has these two special features that you
+
+00:10.410 --> 00:13.440
+often see in their tests.
+
+00:13.440 --> 00:20.760
+One is the enzyme library which allows us to render our components in a test environment which we saw
+
+00:22.120 --> 00:30.820
+and then we can use whatever expect methods that we want from just to actually test whatever it is rendered.
+
+00:30.820 --> 00:38.320
+But there's also another thing called the snapshot testing and again this is another really good tool
+
+00:38.770 --> 00:44.740
+that comes with just that really really helps us test our React Components.
+
+00:44.770 --> 00:52.980
+So let's talk about that in this video if we go back to our app you might be asking yourself.
+
+00:53.100 --> 00:53.550
+All right.
+
+00:53.700 --> 01:01.980
+I can keep going with this car component and just use the regular just syntax to make sure that the
+
+01:01.980 --> 01:10.070
+car component has everything that I need including maybe an an image tag a def tag some names and emails.
+
+01:10.230 --> 01:12.430
+But here's the thing.
+
+01:12.810 --> 01:20.460
+We worked really really hard to keep these components what we call stateless components.
+
+01:20.590 --> 01:25.980
+They're not using the class syntax to extend react component.
+
+01:25.980 --> 01:27.450
+They don't have any state.
+
+01:27.510 --> 01:32.430
+They're just pure functions that we've created.
+
+01:32.430 --> 01:38.970
+So if we're actually writing test I bet we're going to repeat a lot of code here.
+
+01:39.040 --> 01:46.450
+We're always going to just be testing if this guy render if this god rendered and that's a lot of repeated
+
+01:46.540 --> 01:55.860
+work for a developer will just realize that this would be a lot of redundant wasted time.
+
+01:55.860 --> 02:04.770
+Wouldn't it be great if we can just take a snapshot of whatever this car component renders in any time
+
+02:05.220 --> 02:07.760
+while we're riding our car component.
+
+02:07.800 --> 02:09.420
+Anything changes.
+
+02:09.420 --> 02:12.880
+And the component doesn't look as we expected it to.
+
+02:13.020 --> 02:16.940
+As the snapshot that we took a picture of.
+
+02:17.600 --> 02:21.670
+Well if it looks any different then we failed the test.
+
+02:21.770 --> 02:24.560
+That's what snapshot testing is.
+
+02:24.560 --> 02:25.750
+And it's really easy.
+
+02:25.760 --> 02:28.680
+Let me demonstrate and you'll see how simple it is.
+
+02:28.730 --> 02:37.160
+Let's go back to our car test here instead of doing the length to equal one and many other tests that
+
+02:37.160 --> 02:37.880
+we can right here.
+
+02:37.910 --> 02:39.560
+Let's do something different here.
+
+02:39.590 --> 02:40.250
+I'm going to write.
+
+02:40.250 --> 02:45.230
+Expect we're going to shallow card and says we're not using render and mount here.
+
+02:45.230 --> 02:48.080
+Let's just remove that from our imports.
+
+02:48.080 --> 02:53.020
+Now we've rendered the card component in jest.
+
+02:53.060 --> 03:05.100
+We can use snapshot testing to say to match snapshot.
+
+03:05.190 --> 03:05.520
+That's it.
+
+03:06.150 --> 03:07.740
+So what does this do.
+
+03:07.740 --> 03:13.230
+Well let's save here and see what just happened.
+
+03:13.270 --> 03:21.270
+We have a snapshot summary that showed up that says one snapshot written in what in one test suite and
+
+03:21.280 --> 03:23.130
+we see that it passed.
+
+03:23.140 --> 03:24.580
+That's good.
+
+03:24.580 --> 03:32.940
+But one thing you may have noticed is that we now have a folder a snapshot folder that magically appear
+
+03:33.090 --> 03:35.540
+just by running this method.
+
+03:35.670 --> 03:44.520
+If I open this up I see that just took a snapshot and you can read out more about it here.
+
+03:44.630 --> 03:52.500
+But it looks like a text file a plain text file that has all these things.
+
+03:52.520 --> 04:02.560
+You see these shallow wrapper object here that has of length one it has the class name that we have
+
+04:02.560 --> 04:03.770
+in our div.
+
+04:03.940 --> 04:15.640
+If I keep scrolling down we see that we have a ton of information such as the type of div we also have
+
+04:15.640 --> 04:17.680
+a type of P a paragraph.
+
+04:17.680 --> 04:21.410
+Now what does this actually mean.
+
+04:21.430 --> 04:30.580
+This took a picture of this component when we shallow rendered it so that now I can keep saving let's
+
+04:30.580 --> 04:37.420
+say I'm working on my app working on the card component and I keep saving keep saving but I decide to
+
+04:37.420 --> 04:43.420
+remove this text center calculus class that it has.
+
+04:43.420 --> 04:46.830
+I'm going to change that and save that now.
+
+04:46.860 --> 04:48.830
+My tests fail.
+
+04:48.840 --> 04:58.630
+And it says one snapshot test failed because we've just changed what the snapshot expected.
+
+04:58.630 --> 05:01.750
+The card component to render.
+
+05:01.750 --> 05:02.940
+How cool is that.
+
+05:03.040 --> 05:09.310
+Magically detects any changes and if let's say a developer comes in and messes up our card component
+
+05:09.730 --> 05:13.290
+the test will immediately fail we see that.
+
+05:13.290 --> 05:20.610
+Expect to rent your car component is failing that's very very cool.
+
+05:20.610 --> 05:25.080
+And it even tells you where the changes have made.
+
+05:25.080 --> 05:32.030
+This is the same with let's say we're by mistake not rendering our p component our email of the robot
+
+05:33.140 --> 05:37.310
+if I save this we see that we're missing a few things
+
+05:41.680 --> 05:42.690
+very cool.
+
+05:42.760 --> 05:45.910
+Now let's go back to having the e-mail here.
+
+05:45.910 --> 05:46.510
+Let's save it.
+
+05:46.600 --> 05:46.860
+OK.
+
+05:46.870 --> 05:48.160
+Everything is passing.
+
+05:48.160 --> 05:49.780
+But let's say that.
+
+05:49.870 --> 05:53.650
+Well I actually do now want the text to be centered.
+
+05:53.650 --> 05:54.210
+I do.
+
+05:54.220 --> 05:55.230
+This was intentional.
+
+05:55.240 --> 05:59.350
+I did want to move the class name and make a change to it.
+
+05:59.840 --> 06:07.160
+Well with snapshot testing if I save this we see that we have press W to show more.
+
+06:07.240 --> 06:16.860
+I'm going to play precis WG And here we see that we have the option of pressing you to update the failing
+
+06:16.860 --> 06:18.110
+snapshots.
+
+06:18.240 --> 06:20.970
+If I press you here it's going to take another snapshot.
+
+06:20.970 --> 06:27.750
+And it's going to say yes I made this intentionally take another snapshot and use that as a reference.
+
+06:27.750 --> 06:30.340
+So I'm going to say you.
+
+06:30.620 --> 06:31.410
+And there you go.
+
+06:31.500 --> 06:40.210
+My snapshot is now updated and if I go back to the way I had it before it's not going to fail because
+
+06:40.240 --> 06:46.980
+it's expecting a different snapshot the snapshot was just updated in here.
+
+06:47.020 --> 06:51.020
+Now how simple is that.
+
+06:51.030 --> 06:52.650
+It's very very nice.
+
+06:52.730 --> 07:00.740
+And as a matter of fact because we've made this card component so simple is just a function a pure function
+
+07:00.770 --> 07:07.970
+that takes an input and always produces the same output by just using the snapshot testing.
+
+07:07.970 --> 07:10.790
+We don't really need to test anymore.
+
+07:10.790 --> 07:16.040
+We're testing exactly what it needs to do which is make sure that the car component renders whatever
+
+07:16.100 --> 07:17.670
+we tell it to render.
+
+07:18.170 --> 07:25.550
+And that's the beauty of snapshot testing and creating these small stateless components we can have
+
+07:25.640 --> 07:33.590
+really really nice tests that are one liners to just run a snapshot test and we've pretty much covered
+
+07:33.590 --> 07:36.910
+our bases for the car.
+
+07:36.960 --> 07:43.350
+Now one thing I haven't shown you and let me go back to updating our snapshot here.
+
+07:43.350 --> 07:48.520
+We want to press you is code coverage.
+
+07:48.670 --> 08:00.230
+How do we know that the map snapshot or the to match snapshot is actually fully testing the car component.
+
+08:00.230 --> 08:11.570
+Well I can run NPM test Dash Dash Space dash dash coverage and it's gonna show me a coverage report
+
+08:14.510 --> 08:20.640
+and let me make this a little bit bigger so we can see look at that.
+
+08:20.640 --> 08:30.240
+We have absolutely zero tests other than perhaps see setup test dodgy yes but that's because we're not
+
+08:30.240 --> 08:31.990
+doing anything in that file.
+
+08:32.070 --> 08:37.620
+So there's not much to test there but if we look at car component even though all the other components
+
+08:37.620 --> 08:47.340
+have just zero percent zero percent test coverage card component now has a 100 percent code coverage.
+
+08:47.440 --> 08:48.930
+How cool is that.
+
+08:49.000 --> 08:55.880
+One simple line and we've covered our bases with the card component again.
+
+08:56.160 --> 09:01.740
+I'm going to keep saying this throughout these videos but writing tests shouldn't be complicated tried
+
+09:01.740 --> 09:08.220
+to structure your application in a way that writing tests are really really simple and the way you do
+
+09:08.220 --> 09:15.480
+that is by writing these pure functions that keep things simple and you don't have these massive functions
+
+09:15.480 --> 09:22.660
+that do a ton of things that become harder and harder to test with more lines of code.
+
+09:22.670 --> 09:24.750
+All right that's it for now.
+
+09:24.870 --> 09:28.370
+Let's keep writing some more tests and the next video by.

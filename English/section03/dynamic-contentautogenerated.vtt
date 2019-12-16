@@ -1,0 +1,217 @@
+WEBVTT
+
+00:01.120 --> 00:10.330
+Now let's start making our application resemble more closely to our actual final monster's Rolodex application
+
+00:11.170 --> 00:15.950
+so we know that we need to display a list of monsters.
+
+00:16.180 --> 00:18.670
+So instead of this string Halloween.
+
+00:19.150 --> 00:27.550
+I'm gonna make a new property called Monsters and I'm going to make it an array of objects that have
+
+00:27.550 --> 00:28.350
+a name on it.
+
+00:29.230 --> 00:30.820
+That's a string value.
+
+00:30.910 --> 00:39.580
+So our first monster will be Frankenstein our second monster will be Dracula and our third monster will
+
+00:39.580 --> 00:42.280
+be a zombie.
+
+00:42.280 --> 00:53.020
+So here I want to render let's say just a bunch of H ones with the actual names of these monsters.
+
+00:53.030 --> 00:53.300
+Right.
+
+00:53.570 --> 00:57.760
+So how I would go about doing that is I'm going to get rid of this because we don't need this anymore
+
+00:58.910 --> 01:03.650
+and we write our curly braces because we've got to render some javascript right.
+
+01:03.740 --> 01:09.170
+So now between these curly braces we can really render any javascript that we want.
+
+01:09.230 --> 01:19.250
+So I am going to call this dot state DOT monsters dot map because map returns us the return of whatever
+
+01:19.250 --> 01:26.420
+function we pass to it iterated over every element in this array.
+
+01:26.450 --> 01:26.920
+Right.
+
+01:26.930 --> 01:35.010
+So when I say iterate what I mean is that this function that I write here whatever this returns it's
+
+01:35.010 --> 01:41.790
+going to return in the place of every element in this array.
+
+01:41.790 --> 01:51.030
+So I'm gonna call a map on this monster's array right and map takes a function where the first argument
+
+01:51.420 --> 01:57.840
+is going to be the actual element that this function is going to get called on.
+
+01:57.960 --> 01:58.200
+Right.
+
+01:58.230 --> 02:05.370
+So it's going to call the function we pass in on it on Frankenstein and then on Dracula and then on
+
+02:05.430 --> 02:06.100
+the zombie.
+
+02:06.130 --> 02:06.350
+Right.
+
+02:06.360 --> 02:08.820
+It's going to call it on each object.
+
+02:08.820 --> 02:13.850
+Now what that function returns will be what gets return out of this map.
+
+02:13.860 --> 02:15.740
+Usually it's a new array.
+
+02:15.750 --> 02:15.980
+Right.
+
+02:15.980 --> 02:22.420
+When you call a map but react is smart enough to know that if we end up rendering out a bunch of h t
+
+02:22.420 --> 02:27.720
+AML blocks right in an array then it will just display those elements.
+
+02:27.720 --> 02:29.870
+So let's take a look.
+
+02:29.880 --> 02:34.070
+So our first element right our first argument is monster.
+
+02:34.140 --> 02:37.590
+So I'm going to return a new H1
+
+02:41.460 --> 02:50.090
+H1 where I'm going to again call the curly braces because this is a new return block right of HDL.
+
+02:50.100 --> 02:50.970
+Just like here.
+
+02:50.970 --> 02:51.640
+Right.
+
+02:51.690 --> 02:53.090
+It's gonna need new curly braces.
+
+02:53.100 --> 02:55.420
+And inside I'm gonna call monster.
+
+02:55.570 --> 03:03.470
+Name now what we should see is the name of each of our monsters right.
+
+03:03.470 --> 03:05.090
+We see that now.
+
+03:05.480 --> 03:12.020
+If we open up our console we'll see this warning that says each child in a list should have a unique
+
+03:12.050 --> 03:13.040
+key prop.
+
+03:13.130 --> 03:19.040
+So it's asking us to add a unique key to every child that gets a turn out of this map.
+
+03:19.040 --> 03:19.690
+Right.
+
+03:19.700 --> 03:25.460
+We've got to provide something that is unique completely to this list of elements.
+
+03:25.460 --> 03:26.270
+Right.
+
+03:26.300 --> 03:33.530
+So let's just make a value of I.D. and just call it something like this.
+
+03:33.530 --> 03:33.950
+Right.
+
+03:33.970 --> 03:41.900
+And any random unique string will work.
+
+03:41.960 --> 03:55.630
+The reason why we want a unique key is because react needs to know what element it needs to update.
+
+03:55.630 --> 04:05.440
+If one of these elements in our array has a value that changes right now let's say for example the user
+
+04:05.440 --> 04:14.750
+does something and it changes the name of our first monster from Frankenstein to Banshee for example.
+
+04:14.750 --> 04:15.080
+Right.
+
+04:15.080 --> 04:19.880
+Like let's say it does it in the code somewhere like the same way that we saw when we called set state
+
+04:19.880 --> 04:20.620
+earlier.
+
+04:20.720 --> 04:30.470
+Well react is smart enough to know that it only needs to update that first H1 right to change it to
+
+04:30.500 --> 04:32.700
+that new the new property.
+
+04:32.780 --> 04:35.550
+It doesn't need to re render all of these.
+
+04:35.750 --> 04:43.060
+And the key helps react understand it helps it know which element is the one that's been updated.
+
+04:43.070 --> 04:45.440
+Right which HDMI is attached to.
+
+04:45.440 --> 04:47.450
+Which element.
+
+04:47.450 --> 04:51.140
+So that it knows that it doesn't have to render everything.
+
+04:51.290 --> 04:59.780
+You can see how if this list was way bigger it would be really performance heavy to re render all everything.
+
+04:59.780 --> 05:02.290
+And that's what makes react so great.
+
+05:02.300 --> 05:11.330
+It's that it's smart it knows that if only one element in a list of a thousand elements changes it only
+
+05:11.330 --> 05:18.050
+needs to re render the part of the HDMI all that matters not the whole thing.
+
+05:18.050 --> 05:24.590
+So now that we have our list we actually want to make this look closer to the final.
+
+05:24.980 --> 05:30.080
+So right now these are just place holders for us to understand a little bit more of what it's like to
+
+05:30.080 --> 05:31.750
+write react.
+
+05:31.910 --> 05:32.230
+Right.
+
+05:32.240 --> 05:35.420
+We're iterating over an array and creating new elements.
+
+05:35.540 --> 05:39.310
+But let's actually dive a little deeper into it.

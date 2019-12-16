@@ -1,0 +1,325 @@
+WEBVTT
+
+00:00.770 --> 00:06.180
+So we learned about the redux persist library in the last lesson.
+
+00:06.350 --> 00:12.200
+But now we are actually going to implement and use it inside of our application.
+
+00:12.290 --> 00:19.430
+So the first thing that we need to do is we need to bring the redux persist library into our application
+
+00:20.180 --> 00:24.360
+and we simply do it by saying yawn odd redux persist.
+
+00:26.430 --> 00:33.510
+Now critics persist is really cool because it lets us leverage either local storage or session storage
+
+00:33.810 --> 00:41.280
+very easily from the package we just installed and it's got a little bit of some setup and configuration
+
+00:41.280 --> 00:42.380
+that we have to do.
+
+00:42.450 --> 00:45.150
+But it's nothing too daunting.
+
+00:45.170 --> 00:54.750
+All we need to do is we need to go to our storage yes file and make some modifications so right now
+
+00:54.900 --> 00:57.030
+all we're exporting out is our store.
+
+00:57.030 --> 01:04.730
+And as you remember it is just a combination of our route reducer and our Middleware is now what we're
+
+01:04.730 --> 01:15.440
+going to do is we're also going to import in our new redux persist bringing in the persist store function
+
+01:15.680 --> 01:18.590
+from reflux persist.
+
+01:18.590 --> 01:28.040
+Now what this does is it allows our browser to actually cache our store now depending on certain configuration
+
+01:28.040 --> 01:35.220
+options that we're going to set but all you need to understand first inside of this store guess is that
+
+01:35.220 --> 01:42.860
+we're bringing in this persist store and what we're doing is we're exporting the store out but we're
+
+01:42.860 --> 01:50.640
+also going to export out this new thing called a persistent and all this thing does is it calls our
+
+01:50.640 --> 02:00.600
+persist store passing in our store so this persists or is essentially a persisted version of our store
+
+02:01.170 --> 02:09.630
+and using this and our store is how we will actually create our new provider that's wrapping our application.
+
+02:09.870 --> 02:16.740
+If that sounds confusing don't worry it'll make more sense once we actually write all the code but all
+
+02:16.740 --> 02:21.880
+we're doing here in our store is we're creating this new persisted version of our store right.
+
+02:21.870 --> 02:30.090
+Using this persistent object now that we have this as far as our export default goes we're just going
+
+02:30.090 --> 02:34.630
+to return an object right that gives both the store and the persist der
+
+02:37.570 --> 02:43.690
+now we'll actually have access to both of these things if we need it but we actually won't really use
+
+02:43.690 --> 02:49.870
+it but it's just good for us to write it in case we ever want it now that we have our store.
+
+02:49.880 --> 02:57.910
+J ust updated we need to actually update our route reducer inside of our route reducer.
+
+02:58.040 --> 03:06.320
+We're gonna import in persist reducer because we persist our store before but now we want to persist
+
+03:06.370 --> 03:13.020
+our reducer so we're gonna import persist reducer from redux persist.
+
+03:14.660 --> 03:23.320
+And we're going to also import in the type of storage we want if we say import storage from redux persists.
+
+03:24.510 --> 03:37.720
+Slash lib slash storage what we'll get here is the actual local storage object on our window browser.
+
+03:37.750 --> 03:40.000
+So this is essentially telling a X persist.
+
+03:40.000 --> 03:43.800
+I want to use local storage as my default storage.
+
+03:44.620 --> 03:52.790
+Alternatively you can also import session storage which is from a different package link.
+
+03:52.870 --> 03:57.940
+So these are just representative of the folders that we need to go into in order to get such in storage
+
+03:58.260 --> 04:02.730
+a camera off the top of my head what the actual session storage library is.
+
+04:02.830 --> 04:08.650
+But you can find it very easily inside of the redux persist stocks that I have linked in the resources
+
+04:09.430 --> 04:13.620
+but what we want to use is just the regular storage.
+
+04:13.680 --> 04:15.480
+So this is perfectly fine for us.
+
+04:16.830 --> 04:22.620
+And what we do with this is we have to define a new persist config.
+
+04:22.620 --> 04:30.210
+So this is pretty much just the Jason object that represents the possible configurations that we want
+
+04:30.900 --> 04:34.860
+for redux persist to use as I mentioned.
+
+04:34.890 --> 04:39.450
+It's just an object and we need to tell it the key.
+
+04:39.450 --> 04:46.050
+So our key is root essentially meaning at what point inside of our reducer object do we want to start
+
+04:46.050 --> 04:53.190
+storing everything and we want to start from the root then we want to pass storage in as storage.
+
+04:53.190 --> 04:57.780
+So this will say the storage key goes to whatever the storage object from redux persist we're trying
+
+04:57.780 --> 04:58.900
+to use this.
+
+04:59.130 --> 05:08.670
+And then finally we can pass in this whitelist property and this property is an array containing the
+
+05:08.670 --> 05:13.440
+string names of any of the reducer that we want to store.
+
+05:13.950 --> 05:16.820
+So here we have two user and cart.
+
+05:17.040 --> 05:21.390
+But of course our user is being handled by firebase authentication.
+
+05:21.450 --> 05:24.420
+So there's no reason for us to actually persist this.
+
+05:24.690 --> 05:26.910
+Instead all we want to persist is the cart.
+
+05:27.480 --> 05:32.330
+So we're just gonna pass in a string that says cart which lets redux persist.
+
+05:32.550 --> 05:40.860
+That the only thing we want to white list I E the only reducer that we actually want to persist is the
+
+05:40.860 --> 05:42.000
+cart.
+
+05:42.000 --> 05:48.900
+Now if in the future we added more and more reduces to our combined producer's call and we wanted to
+
+05:48.900 --> 05:57.450
+actually pass system as well we would just throw the new key in after our cart inside of this white
+
+05:57.560 --> 05:57.900
+array.
+
+05:58.410 --> 06:00.600
+So it's very simple just like that.
+
+06:00.630 --> 06:05.730
+Now I know there was a couple of configuration things we had to do which might seem a little odd but
+
+06:05.730 --> 06:10.500
+this is really just how we have to use it after this.
+
+06:10.530 --> 06:21.330
+What we need to do is we have to actually call this our route reducer because we have to wrap this inside
+
+06:21.390 --> 06:28.750
+of our new persist reduce our call what we were explaining before we're now setting as this route reducer
+
+06:29.480 --> 06:37.540
+and what we're going to export as the default instead is calling this persist reducer as a function
+
+06:38.380 --> 06:46.290
+passing in both our persist config as well as our route reducer so this will return back out of this
+
+06:46.290 --> 06:47.010
+function now.
+
+06:47.760 --> 06:54.660
+And what we're explaining by default as well this modified version of our route reducer with this persist
+
+06:54.660 --> 06:56.960
+config on top of it.
+
+06:57.060 --> 07:02.430
+So it's a modified version of our route reducer except now with persistence capabilities.
+
+07:02.430 --> 07:09.850
+Thanks to this persist reduce or function that we got from redux persist finally inside of our index
+
+07:09.850 --> 07:19.170
+J Yes we just need to now actually bring in the actual persist or that we need as well as the component
+
+07:19.200 --> 07:27.090
+that will leverage inside of our application that will give it the context of our new persisted reducer
+
+07:27.980 --> 07:37.760
+so what we need to do is import in this new component called persist gate from redux persist slash integration
+
+07:37.970 --> 07:42.040
+slash reactive of course redux persist.
+
+07:42.150 --> 07:45.230
+You might be wondering why is there a reactive integration.
+
+07:45.240 --> 07:50.400
+Well this is because you can actually use this with multiple different platforms to persist exists for
+
+07:50.400 --> 07:58.360
+any platform that might leverage redux including RAC native and electron those have their own separate
+
+07:58.360 --> 08:00.940
+files that we need to import different things for.
+
+08:00.940 --> 08:03.960
+This one is specific for us with react.
+
+08:04.210 --> 08:05.870
+So what the persist gate.
+
+08:06.040 --> 08:12.290
+We need to actually bring in our new pastor as well as the store.
+
+08:12.310 --> 08:19.940
+So from our redux store we just need to make sure that we're also bringing in our sister and then we're
+
+08:19.940 --> 08:32.320
+going to wrap our app inside of this persist gate where we now pass into the persist gate the processor
+
+08:32.380 --> 08:39.520
+that we wrote inside of our reading store the processor being the persistent version of our store
+
+08:42.480 --> 08:48.870
+we want to make sure to wrap our app in this persist gate because what we want to do is have our application
+
+08:48.930 --> 08:52.460
+always have access to the persistence flow itself.
+
+08:52.620 --> 08:59.520
+What this will do is it will allow the persist gate to actually one receive the store but also fire
+
+08:59.520 --> 09:05.310
+off actions that will rehydrate the state whenever our application refreshes.
+
+09:05.460 --> 09:13.060
+So he'll see when we go back to our application that you'll see that this is actually still there from
+
+09:13.070 --> 09:15.220
+whenever I added it earlier.
+
+09:15.260 --> 09:25.510
+So let's add more items in go to our checkout and now when I refresh you'll see that this is still there.
+
+09:25.520 --> 09:32.240
+And the reason why is because of these actions that are firing this first persist action coming from
+
+09:32.240 --> 09:37.230
+the persist library is checking whether or not anything exists.
+
+09:37.430 --> 09:43.370
+And then if it does it will fire off this new action that will say hey I want to rehydrate the state
+
+09:43.370 --> 09:50.230
+with whatever it is that we've stored inside of our preferred means of storage and here we'll see that
+
+09:50.230 --> 09:54.490
+before our cart was simply just the empty initial state we had.
+
+09:54.910 --> 10:02.410
+And after the rehydrate state our car is updated with the things that we wanted to update with.
+
+10:02.410 --> 10:09.250
+So this is really great for us because now we're finally able to actually maintain cart state of our
+
+10:09.250 --> 10:12.410
+car items across the session.
+
+10:12.520 --> 10:17.120
+So this is a great thing about redux persist and Redux as a whole.
+
+10:17.290 --> 10:23.950
+It lets us leverage local storage in order to gain access to this powerful feature of being able to
+
+10:23.950 --> 10:29.820
+persist our applications state across sessions and across tabs.
+
+10:29.890 --> 10:35.380
+So this is a great feature for us and it's really necessary in an e-commerce platform.
+
+10:35.380 --> 10:40.450
+And I know there was quite a bit of configuration here that we had to write but this is simply all we
+
+10:40.450 --> 10:42.740
+need to do just to use it.
+
+10:42.840 --> 10:49.170
+Now of course if you want to see what other configurations you can add for your own needs in the future
+
+10:49.170 --> 10:55.890
+when you join any team with an application that's using redux you can always look at the docs that I've
+
+10:55.890 --> 11:00.660
+linked in your resources so let's move on with our next lesson.

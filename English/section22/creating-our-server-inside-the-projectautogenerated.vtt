@@ -1,0 +1,370 @@
+WEBVTT
+
+00:01.140 --> 00:06.600
+Now what we're going to do is we are going to separate our front end code that we've been writing up
+
+00:06.600 --> 00:07.490
+until this point.
+
+00:07.560 --> 00:12.930
+So all of our front end application code into its own folder.
+
+00:13.100 --> 00:19.040
+And the reason we need to do this is because we have to have a separation between our back end and our
+
+00:19.040 --> 00:27.720
+front end so what we'll do is we will make a new folder inside of this directory called client using
+
+00:27.720 --> 00:29.490
+the m k d IRR command.
+
+00:30.030 --> 00:37.320
+So this is pretty much make directory and this will create a new folder for us called client.
+
+00:37.350 --> 00:42.820
+Now what you want to do is you want to move everything inside of our existing directory right.
+
+00:42.870 --> 00:49.210
+Using the end the command into this client folder.
+
+00:49.330 --> 00:54.820
+And when you do that you will see an error that says the rename attempts of client to dock clients last
+
+00:54.820 --> 00:56.390
+client is invalid.
+
+00:56.440 --> 00:58.280
+This is fine because you cannot move.
+
+00:58.300 --> 01:01.130
+Of course the client folder into the client folder.
+
+01:01.180 --> 01:01.420
+Right.
+
+01:01.450 --> 01:07.480
+You can't move folder into itself but if you hit less you'll see that everything is gone now from our
+
+01:07.480 --> 01:08.090
+root.
+
+01:08.110 --> 01:14.470
+And if you see into the client you'll see all of the files that we had before.
+
+01:14.480 --> 01:20.820
+So now all of our front end code is inside of this client folder which is what we want if you open up
+
+01:20.820 --> 01:27.600
+this folder though you will see that you have a hidden dot get folder and Dot getting your folder still
+
+01:27.600 --> 01:28.880
+in this root file.
+
+01:29.010 --> 01:36.480
+You want to keep those there because the DOT get pretty much holds the history of all of our commits
+
+01:36.570 --> 01:41.370
+and get anything related to our Get is inside of here and we want that.
+
+01:41.400 --> 01:47.460
+We want to keep the history that we've got so far the get ignore is pretty much what tells whenever
+
+01:47.460 --> 01:50.450
+we may get commands what not to push to get.
+
+01:50.520 --> 01:55.000
+So we will modify this a little later after we finished writing all of our back in code.
+
+01:55.170 --> 02:03.710
+But this is pretty much what we needed to do next what we have to do is we need to make a new package
+
+02:03.720 --> 02:10.920
+dock Jason File and the reason we need to do this is because our old package that Jason File is inside
+
+02:11.010 --> 02:18.000
+if you remember our client folder now and that's perfectly fine because that package that Jason dictates
+
+02:18.150 --> 02:26.220
+all of the rules and all of the packages and the node modules related to the client related to our front
+
+02:26.220 --> 02:34.590
+end are back in now is going to be a completely different set of dependencies and we are going to make
+
+02:34.800 --> 02:40.190
+a new package that Jason file so you can do that by saying touch package.
+
+02:40.320 --> 02:47.610
+Jason now you'll have a new package that Jason File and while we're here we might as well also touch
+
+02:47.640 --> 02:49.340
+a server DOJ as well.
+
+02:49.590 --> 02:55.480
+This server DOJ us file will represent pretty much the entry point for our server code.
+
+02:55.500 --> 03:01.590
+It's all gonna go in this file and let's just open this up and start modifying our packages.
+
+03:01.590 --> 03:08.630
+Jason now I have included for you the package that Jason Bass that we need so you can just get that
+
+03:08.630 --> 03:17.980
+from the resources and then copy it into your package that Jason and then you just pasted in so inside
+
+03:17.980 --> 03:23.160
+of package that she's on here I've named my project crown clothing server.
+
+03:23.250 --> 03:29.940
+You can name yours whatever you want but this just represents the back and server version 1.0 perfectly
+
+03:29.940 --> 03:31.790
+fine it's just the version of this package.
+
+03:32.340 --> 03:34.440
+And then here you'll see this script.
+
+03:34.470 --> 03:34.740
+Right.
+
+03:34.740 --> 03:38.880
+So here we have the new scripts that we will be running.
+
+03:38.980 --> 03:45.070
+Now when we run the client script we are going to see into our client folder and then we're gonna run
+
+03:45.070 --> 03:46.060
+your start there.
+
+03:46.060 --> 03:48.730
+So it's pretty much like you aren't running your own start before.
+
+03:48.820 --> 03:57.220
+In order for us to start up our funding application on local host three thousand this server command
+
+03:57.430 --> 03:59.520
+is going to run our server.
+
+03:59.550 --> 04:00.240
+Yes.
+
+04:00.310 --> 04:06.580
+So this is kind of like saying you start but we're saying we want to instead run node server jazz.
+
+04:06.640 --> 04:13.390
+Now what is node on Node 1 is a package we're going to include in our global and what it does is it
+
+04:13.450 --> 04:17.320
+allows us to wrap our server digest right.
+
+04:17.320 --> 04:23.500
+So wrap our node project around this new service called Node man that pretty much gives us live reloading
+
+04:24.340 --> 04:29.530
+which just means that if we modify our server such as file and we're running our server our server will
+
+04:29.560 --> 04:31.020
+automatically restart.
+
+04:31.210 --> 04:34.850
+It's just the hot reloading that we had with our create racked up.
+
+04:34.900 --> 04:40.600
+You remember whenever we modified files or components our application automatically restarted and we
+
+04:40.600 --> 04:42.130
+have the latest version.
+
+04:42.160 --> 04:49.550
+So what you're going to do is you're going to run NPM I dash G node mod and this will install node Mun
+
+04:49.670 --> 04:52.400
+into your global next.
+
+04:52.420 --> 04:55.960
+We have built and build does the same that we had before.
+
+04:55.990 --> 04:59.970
+What it does is it S.D. into the client and it runs our build script.
+
+05:00.190 --> 05:07.000
+The dev script is how we run both our server and client on one terminal.
+
+05:07.000 --> 05:13.330
+Typically what we would be do if we didn't use this package called concurrently is we would have to
+
+05:13.420 --> 05:22.380
+open up two terminals one terminal what C D into our client and then it would run and start here.
+
+05:22.410 --> 05:26.400
+And here we would run maybe like a yarn server.
+
+05:26.400 --> 05:31.160
+The problem with that is just that we have to open up more terminals than we need to.
+
+05:31.260 --> 05:36.900
+And if one crashes the other might still be running but we don't want that because we can't develop
+
+05:36.930 --> 05:37.930
+one without the other.
+
+05:37.950 --> 05:38.250
+Right.
+
+05:38.250 --> 05:45.030
+So we want to run this program called concurrently which is included as a dev dependency that allows
+
+05:45.120 --> 05:55.430
+us to run both on one terminal as well as it allows us to pass this kill others on fail which means
+
+05:55.430 --> 06:01.240
+that if one breaks the other one will also break so that's the main benefit of running concurrently
+
+06:02.260 --> 06:02.730
+start.
+
+06:02.740 --> 06:11.140
+We'll just call node server J.S. and we include this for Heroku Heroku will be running our start script.
+
+06:11.140 --> 06:13.530
+So that's why we can't provide Node 1 there.
+
+06:13.540 --> 06:14.050
+Right.
+
+06:14.080 --> 06:15.730
+And we don't need hot reloading.
+
+06:15.730 --> 06:19.000
+We only need hot ready loading for ARC development purposes.
+
+06:19.000 --> 06:26.180
+So there's no reason to include no demand for a dev dependency on our final production.
+
+06:26.920 --> 06:33.200
+So that's why we can simply just run node server J.S. and then we have this final script Heroku post
+
+06:33.200 --> 06:40.520
+build and this post build is a script that Heroku itself will run after it's finished building and what
+
+06:40.520 --> 06:42.500
+it does is it's going to go into our client.
+
+06:42.530 --> 06:52.040
+It's going to install all of our node module and then it's going to install any of our dev dependencies
+
+06:53.130 --> 06:58.290
+and then there's no shrink wrap is a flag that we were put in where we don't want to shrink wrap things
+
+06:59.390 --> 07:04.850
+and shrink wrapping just means that it locks down all of the Dependency versions which we just don't
+
+07:04.850 --> 07:13.950
+want that to do and then finally we just call our NPM run build which we know will build our clients
+
+07:13.950 --> 07:20.550
+build folder and we wanted to do that because we want to actually host out of our build folder and I'll
+
+07:20.550 --> 07:23.970
+show you how we're going to do that inside of our server.
+
+07:24.120 --> 07:26.530
+But let's just go over our dependencies.
+
+07:26.610 --> 07:33.120
+We have this body parser library that allows us to pretty much run this body parser middleware in our
+
+07:33.120 --> 07:35.990
+server that allows us to leverage certain things.
+
+07:36.000 --> 07:43.020
+The main thing that we want to leverage is that we want the requests that we get to convert their bodies
+
+07:43.020 --> 07:47.620
+into Jason so that we can actually read it easier.
+
+07:47.640 --> 07:52.150
+You remember we did this with fetch whenever we fetched anything we had to cut.
+
+07:52.230 --> 07:57.540
+Jason on it in order to convert it into Jason so we can read it in our javascript.
+
+07:57.540 --> 08:00.280
+This just makes it easier for us to do that.
+
+08:00.360 --> 08:05.710
+We're also running course which is a library that allows us to handle cross origin requests.
+
+08:05.820 --> 08:08.560
+We'll go over that when we actually use it.
+
+08:08.580 --> 08:16.190
+There's this dot end as well and this dot env allows us to actually store secret keys.
+
+08:16.380 --> 08:23.880
+So if you remember I was mentioning a stripe requires us to actually keep that secret key on our back
+
+08:23.880 --> 08:25.890
+and server while we're gonna put an end.
+
+08:26.280 --> 08:31.200
+This is how we actually keep those keys secret on our web server and I'll show you how we're gonna do
+
+08:31.200 --> 08:32.510
+that as well.
+
+08:32.520 --> 08:39.330
+EXPRESS Is the framework that we're running that pretty much makes it easier for us to write our note
+
+08:39.360 --> 08:46.830
+back and if I had to just teach you node it would end up being an extremely extremely long lesson because
+
+08:46.830 --> 08:54.350
+node is actually quite extensive to write by hand expressed is a framework that makes it all very easy.
+
+08:54.360 --> 09:01.110
+You can kind of see it as something akin to a front end framework like angular except for the back end
+
+09:01.920 --> 09:08.180
+and then the stripe is our stripe library that we use to actually make charges.
+
+09:08.210 --> 09:14.690
+So now that we have our package that Jason we have our server at that J.S. file that we just made we're
+
+09:14.690 --> 09:21.310
+going to also make sure to your oh what I didn't say so make sure the safe.
+
+09:22.730 --> 09:27.770
+And now if you run yarn This will include all of our files that we need
+
+09:30.630 --> 09:40.560
+and then what you need to do is you also need to add in this new key called engines right here.
+
+09:40.570 --> 09:46.500
+So what this will do is it will tell our project what version of node and NPM that we're running here.
+
+09:46.510 --> 09:53.860
+You're gonna write no dash B and copy over these numbers and you're just going to say inside of our
+
+09:53.860 --> 09:58.980
+engines node goes to the version ten point one five point three.
+
+09:58.990 --> 09:59.240
+Right.
+
+09:59.260 --> 10:05.160
+Or whatever your version of node you get is this is mine at the current moment and then you're gonna
+
+10:05.180 --> 10:12.680
+do the same thing for and p.m. You're gonna copy this number over and inside of here you're gonna point
+
+10:12.800 --> 10:20.960
+to this version of NPM and this is pretty much all we need to do inside of our package.
+
+10:20.970 --> 10:28.590
+Not Jason and now we have all of the code that we need to start writing our server.
+
+10:28.670 --> 10:29.580
+J.
+
+10:30.040 --> 10:32.220
+So let's get started with that in the next lesson.

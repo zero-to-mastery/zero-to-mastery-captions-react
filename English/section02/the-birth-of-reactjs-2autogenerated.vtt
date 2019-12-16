@@ -1,0 +1,298 @@
+WEBVTT
+
+00:01.710 --> 00:03.830
+Now react came out in 2013.
+
+00:03.840 --> 00:07.890
+But what do we have before then before we act.
+
+00:07.890 --> 00:15.040
+Well the front fronting landscape was very different initially back in the 90s and early 2000s.
+
+00:15.090 --> 00:23.160
+We just had basic HMO CSX and JavaScript H2 e-mail displayed the text on our web pages see assess the
+
+00:23.160 --> 00:28.430
+styles and JavaScript allows us to have some interactivity in a Web site.
+
+00:28.500 --> 00:35.200
+And initially it just started with simple forms where we sent from the back end to when we go to a you
+
+00:35.210 --> 00:37.410
+URL all these files.
+
+00:37.410 --> 00:47.130
+And when a user let's say submits a form we simply send that back to the server to store that information.
+
+00:47.130 --> 00:51.300
+Now if a user clicked on let's say a link in the page.
+
+00:51.420 --> 00:58.740
+Well once again we simply request the new Asia mail file and the new page from the server and that gets
+
+00:58.740 --> 01:03.960
+sent to the front end and that's how Web sites worked for many years.
+
+01:04.840 --> 01:06.670
+But there is a problem here.
+
+01:06.670 --> 01:14.890
+You see all these Web sites where run on different browsers and all these browsers were worked on by
+
+01:14.890 --> 01:16.690
+different group of developers.
+
+01:16.690 --> 01:21.820
+So each one of these browsers implemented while their browser differently.
+
+01:21.820 --> 01:28.600
+So what happened was as we wanted to use more and more JavaScript in our web pages we had to account
+
+01:28.600 --> 01:32.830
+for all these browsers that sometimes work differently from each other.
+
+01:32.830 --> 01:37.990
+And we had to accommodate javascript to work with these different browsers.
+
+01:37.990 --> 01:46.210
+Now eventually we had J query come out which allowed developers to easily interact with the DOM or the
+
+01:46.210 --> 01:49.990
+document object model across all these browsers.
+
+01:50.050 --> 01:57.550
+You see back in the day if we went to let's say hacker news over here clicked on views developer and
+
+01:57.550 --> 02:02.020
+then developer tools and we went to elements here.
+
+02:02.020 --> 02:06.190
+This is the DOM the dom that well is our page.
+
+02:06.280 --> 02:13.600
+It displays exactly how our page should look like and it's a tree like structure and JavaScript.
+
+02:13.610 --> 02:16.250
+All it does is modify this Dom.
+
+02:16.400 --> 02:25.310
+You can remove elements you can update the elements and although there's now more similarities and compatibility
+
+02:25.460 --> 02:28.950
+across different browsers back in the day we didn't have that.
+
+02:29.090 --> 02:39.110
+So J query may developers happy because it had a unified easy API that kind of looked like this instead
+
+02:39.110 --> 02:45.060
+of a developer trying to think about how to work with the DOM in each of the different browsers.
+
+02:45.150 --> 02:51.350
+The J query said hey we'll take care of that complexity for you just this is the syntax we'll use that
+
+02:51.350 --> 03:00.380
+works across all browsers and you can manipulate the front end or the DOM however you want so that was
+
+03:00.380 --> 03:08.480
+great but with this power developers started building bigger and bigger applications instead of just
+
+03:08.720 --> 03:09.900
+something small.
+
+03:09.950 --> 03:15.680
+We started getting these massive massive applications like Facebook where you got to log in.
+
+03:15.680 --> 03:22.370
+Look at the News Feed message friends and as websites turned into these full applications that people
+
+03:22.370 --> 03:28.170
+can interact with besides just requesting more and more pages like a blog.
+
+03:28.190 --> 03:35.150
+Well libraries like backbone J.S. came out because well our JavaScript files started getting bigger
+
+03:35.240 --> 03:42.740
+and bigger and bigger libraries like backbone J.S. allowed us to organize these JavaScript files and
+
+03:42.740 --> 03:50.720
+because it became easier and easier to work with the DOM we had the birth of a single page application.
+
+03:50.720 --> 03:58.310
+You see traditionally we just had a small files for each page and every time we moved to a different
+
+03:58.310 --> 04:04.550
+page we would request from the server while the asian mail file the CSF file and the javascript file
+
+04:04.790 --> 04:12.150
+which usually contain Jacqui for each time we clicked on a link but with more advancement like we had
+
+04:12.150 --> 04:18.330
+with J query backbone and something called Ajax we now had a different system.
+
+04:18.420 --> 04:24.310
+What generally happened now is we focused less on HMO and a lot more in JavaScript.
+
+04:24.420 --> 04:33.600
+You only load the application code once instead of us making new requests to the server where we returned
+
+04:33.630 --> 04:35.550
+a new document instead.
+
+04:35.550 --> 04:41.760
+Now our applications acted more like a desktop application where we stay on the same page the entire
+
+04:41.760 --> 04:51.210
+time and the javascript file simply changes or updates the HMO file or the DOM to display new things.
+
+04:51.210 --> 04:57.180
+So you were able to sign into an application and interact with that application without ever speaking
+
+04:57.180 --> 05:05.740
+to the server anymore and this way of writing applications or single page applications became really
+
+05:05.800 --> 05:06.890
+really popular.
+
+05:06.890 --> 05:15.810
+And in 2010 angular J.S. which was created by Google really became the standard way of building applications
+
+05:15.820 --> 05:24.860
+this way now unlike J angular allowed developers to build these large applications by forming these
+
+05:24.860 --> 05:33.380
+containers that well wrapped your project and because it was created by Google it had a lot of power
+
+05:33.500 --> 05:36.500
+because people said well this is the way that we should build things.
+
+05:36.500 --> 05:37.960
+Everything's organized.
+
+05:37.970 --> 05:47.240
+We have these large JavaScript files but we can organize them this way you had code now that now had
+
+05:47.300 --> 05:55.670
+better containers where you had things like controllers views and models and this idea of a Model View
+
+05:55.670 --> 06:02.540
+Controller where each part of the application or each JavaScript file was divided into different things
+
+06:02.540 --> 06:09.750
+that it did this idea of organizing our large code so they're easier to work with as teams get larger
+
+06:09.750 --> 06:15.820
+and larger really made angular J.S. popular but there was a problem.
+
+06:16.110 --> 06:21.010
+You see things started getting more and more complex because of this.
+
+06:21.180 --> 06:24.890
+As things get bigger and bigger more things have to happen.
+
+06:24.900 --> 06:32.250
+Users are clicking on this button which changes this area which in turn changes this area which now
+
+06:32.250 --> 06:35.090
+has to display this information.
+
+06:35.250 --> 06:41.490
+We have more and more complexity now and although frameworks like angular J.S. came out people started
+
+06:41.490 --> 06:47.430
+to notice it's getting harder and harder to find bugs in the code and understand how each part of the
+
+06:47.430 --> 06:49.590
+app was affecting the other.
+
+06:49.590 --> 06:56.160
+Meanwhile Facebook developers were finding it hard as well on their end to maintain their app especially
+
+06:56.160 --> 06:57.510
+their Facebook ads.
+
+06:58.170 --> 07:04.600
+You see the Facebook ads app got more and more features more and more people were added to the team.
+
+07:04.650 --> 07:11.730
+Now the growing number of lines of code the growing number of people working on the app their app became
+
+07:11.790 --> 07:17.970
+really really difficult to handle and each update would cost more and more issues where you had all
+
+07:17.970 --> 07:22.190
+these arrows relating to each other pointing to each other.
+
+07:22.290 --> 07:27.840
+And after a while the engineers of Facebook just couldn't keep up with the way that they had created
+
+07:27.840 --> 07:28.730
+this app.
+
+07:28.890 --> 07:35.160
+They needed to upgrade their code base and this isn't just special in the front end world.
+
+07:35.160 --> 07:36.710
+This is all of our programming.
+
+07:37.050 --> 07:39.360
+It's why we need good architecture.
+
+07:39.360 --> 07:47.280
+We need to think about how we organize our code how we manipulate data and how that data flows through
+
+07:47.460 --> 07:48.700
+our programs.
+
+07:48.750 --> 07:54.210
+So Facebook came up with a solution and that solution worked really really well for them.
+
+07:54.210 --> 08:04.020
+That in 2013 they released react to the developer community at J.S. conf 2013 and their solution was
+
+08:04.260 --> 08:06.080
+really really good.
+
+08:06.270 --> 08:12.880
+And it took off because react devolved a whole new way to build front end applications now.
+
+08:13.050 --> 08:20.370
+It also happened that in 2014 angular J.S. realized that the way that they've architected their framework
+
+08:20.430 --> 08:27.270
+just didn't allow good applications to be built anymore so they decided in 2014 that they're going to
+
+08:27.270 --> 08:28.970
+rewrite the entire library.
+
+08:29.070 --> 08:35.580
+Call it angular but because they wanted to do an entire rewrite a lot of people during that time moved
+
+08:35.580 --> 08:37.050
+to react.
+
+08:37.050 --> 08:43.410
+So combined with the fact that angular J.S. was getting a complete new rewrite Facebook was backing
+
+08:43.770 --> 08:51.640
+react and the great principles that react introduced made it what it is today.
+
+08:51.730 --> 08:58.060
+That is it became the most popular font and tooled with the most job demand across the world and being
+
+08:58.060 --> 09:07.780
+used by very large companies like Airbnb be uber Netflix Twitter Reddit Pinterest Wicks PayPal stripe
+
+09:07.870 --> 09:09.690
+Tumblr Walmart.
+
+09:10.030 --> 09:13.590
+However what made react so great.
+
+09:13.630 --> 09:20.560
+What were these principles that made it jump from something that Facebook used to something that developers
+
+09:20.680 --> 09:22.240
+all over the world use.
+
+09:22.270 --> 09:23.680
+Let's find out in the next video.

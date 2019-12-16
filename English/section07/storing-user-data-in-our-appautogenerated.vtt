@@ -1,0 +1,298 @@
+WEBVTT
+
+00:01.270 --> 00:09.310
+Now inside of our app Jesus we're calling that new create user profile document function that we just
+
+00:09.310 --> 00:20.740
+made what we want to do is we want to make sure that we also call our set state with current user with
+
+00:20.740 --> 00:23.430
+the actual object itself.
+
+00:23.460 --> 00:31.030
+So what we'll do here is we will modify our code to make sure that we understand what's actually happening.
+
+00:31.980 --> 00:37.140
+So first let's change the user to user off because now we know what we're getting back is a user off
+
+00:38.100 --> 00:44.060
+and we'll say if the user off object is not null meaning if it exists right.
+
+00:44.130 --> 00:46.960
+We remember that user auth could be no more signing out.
+
+00:47.440 --> 00:49.490
+And we don't want to set anything here.
+
+00:49.500 --> 00:49.830
+Right.
+
+00:49.950 --> 01:00.260
+If it's site if we're signing up we remember what we get back from our function is the user ref.
+
+01:00.570 --> 01:08.490
+We made sure that we were passing back the user rather rough object right right here at the end.
+
+01:08.620 --> 01:17.080
+We want it because we're going to use it to check if our database has updated.
+
+01:17.080 --> 01:25.250
+At that reference with any new data very similar to our on off state change we're kind of seeing if
+
+01:25.250 --> 01:33.710
+the snapshot has changed but chances are it won't have because we are not going to update the user ever
+
+01:33.710 --> 01:34.630
+inside of our code.
+
+01:35.270 --> 01:42.920
+But the pro of what this method will do which I'll show you in a second is that the moment it instantiate
+
+01:42.950 --> 01:50.060
+meaning that the moment our code runs it it will still send us a snapshot object representing the data
+
+01:50.270 --> 01:57.550
+that is currently stored in our database and that method is on snapshot calling on snapshot is very
+
+01:57.550 --> 02:04.570
+similar to calling on off state changed and what we get back is the snapshot object.
+
+02:05.040 --> 02:13.080
+And on the snapshot object is where we're going to get the data related to this user that we just possibly
+
+02:13.080 --> 02:14.020
+stored right.
+
+02:14.040 --> 02:20.850
+If it was a new authentication or the data related to the user that is already stored in our database
+
+02:23.530 --> 02:27.860
+let's talk about these snapshot objects a document snapshot.
+
+02:27.860 --> 02:31.690
+Object is one that of course we get from our document reference object.
+
+02:31.700 --> 02:31.940
+Right.
+
+02:31.940 --> 02:39.590
+Using the dot get method as we saw it allows us to check if the document exists as we know but it also
+
+02:39.620 --> 02:51.960
+allows us to get properties of that data using the DOT data method we actually do not get any data until
+
+02:51.990 --> 02:53.370
+we use the data method.
+
+02:53.400 --> 03:01.980
+So I'll show you if right now I simply console log my snapshot here we get our snapshot.
+
+03:02.020 --> 03:08.110
+You see that it has the exists it has the I.D. but it doesn't have any of the properties we have to
+
+03:08.110 --> 03:15.580
+call dot data in order to actually see what our data looks like and it'll come back to us as an object
+
+03:16.000 --> 03:18.900
+with those properties inside of our database.
+
+03:18.940 --> 03:19.210
+Right.
+
+03:19.210 --> 03:25.990
+So the display name emailed to create it out of course are the properties that we use to store in here.
+
+03:26.000 --> 03:32.580
+So this is the main thing that we need to use but we see that we don't have the I.D. Now.
+
+03:32.630 --> 03:39.350
+If you remember on the snapshot itself was the idea of where we currently are in our user ref right
+
+03:39.440 --> 03:43.420
+as well as the idea that represents the data of our snapshot right here.
+
+03:44.000 --> 03:52.660
+So we need to use these two things combined and call our set state of our current user right here and
+
+03:52.660 --> 03:59.340
+what we're going to do is we're just going to call set state here passing in an object with our current
+
+03:59.340 --> 04:05.740
+user value going to the idea of our Snapshot.
+
+04:06.940 --> 04:12.280
+I.D. and then we're gonna spread in snapshot dot data.
+
+04:12.450 --> 04:12.750
+Right.
+
+04:13.650 --> 04:16.550
+Because we get back the object representing the values.
+
+04:16.680 --> 04:21.210
+So we're just creating a new object that has both all of the properties of our snapshot that we want
+
+04:21.660 --> 04:29.600
+as well as the I.D. that we want and then just to make sure we're getting everything right.
+
+04:29.600 --> 04:30.910
+Let's just console log.
+
+04:30.950 --> 04:32.760
+This dot state right.
+
+04:32.810 --> 04:41.060
+Just to make sure that we're getting this through now outside of this function outside of this function
+
+04:41.060 --> 04:46.370
+call where we're checking whether or not the user off exists.
+
+04:46.440 --> 04:56.630
+We also want to make sure that our app is aware if the user auth is no meaning if the user signs out.
+
+04:56.640 --> 04:59.410
+We still want to set current user to nothing as well.
+
+05:00.240 --> 05:08.130
+So if the user off object comes back and it's known then what we want to do after this is called this
+
+05:08.130 --> 05:16.290
+dot set state where current user goes to our user on which we know is not right.
+
+05:16.320 --> 05:20.960
+So this is equivalent to saying current user to know.
+
+05:21.100 --> 05:28.110
+So now what will happen is if a user signs in right we'll check if they're actually signing in right.
+
+05:28.120 --> 05:29.600
+Because we'll see if there's a user.
+
+05:29.860 --> 05:38.170
+So if there is we will get back the user ref from our create user profile document method from the user
+
+05:38.200 --> 05:40.230
+auth object being passed in.
+
+05:40.570 --> 05:45.760
+If there was a document there we will simply just get back the user.
+
+05:46.360 --> 05:48.500
+If there is no document there.
+
+05:48.670 --> 05:58.180
+We will create a new object and document right in that place and we'll still get back the user ref and
+
+05:58.180 --> 05:59.980
+then we're gonna subscribe.
+
+05:59.980 --> 06:05.490
+Meaning we're going to listen to this user ref right for any changes to that data.
+
+06:05.680 --> 06:14.530
+But we'll also get back the first state of that data so then using that we are going to set the state
+
+06:14.590 --> 06:19.830
+of our local objects with the national I.D. and the snapshots data.
+
+06:20.170 --> 06:26.680
+And then if the user ever logs out we'll make sure to set the current user tunnel right setting it to
+
+06:26.710 --> 06:29.390
+the null that we'll get back from the off library.
+
+06:29.860 --> 06:33.360
+And now that we have all of this let's actually see what happens.
+
+06:33.880 --> 06:36.220
+We made a mistake with our console log.
+
+06:36.220 --> 06:45.430
+So if you remember our console log can't go after set state because set state is a synchronous meaning
+
+06:45.430 --> 06:51.670
+that there is a chance that when we call it sets date is not actually finished being called.
+
+06:51.970 --> 06:57.160
+The only way for us to make sure that said state is fully called and then we're able to see what the
+
+06:57.160 --> 07:06.060
+state of it is is we pass a second function right as a parameter in state as the second parameter where
+
+07:06.060 --> 07:12.600
+we do the actual logging and sets they will then call our function after state as fully propagated.
+
+07:12.600 --> 07:18.390
+So now we see that we're actually storing our current user and this is actually all of the data that
+
+07:18.390 --> 07:26.180
+we got from our database as well as the created that sign and the I.D. so hopefully this was not too
+
+07:26.180 --> 07:27.200
+overwhelming.
+
+07:27.200 --> 07:34.600
+I know that this is a lot of new code that we just covered and it's definitely a lot of code that we
+
+07:34.600 --> 07:35.800
+haven't seen before.
+
+07:35.950 --> 07:42.910
+All related to the firestorm firebase library we've also mixed and matched the off and the fire story
+
+07:42.910 --> 07:48.790
+library code together to create these new objects inside of our database and then bring them back in
+
+07:48.820 --> 07:49.690
+and then store them.
+
+07:49.690 --> 07:51.370
+There's a lot of back and forth.
+
+07:51.610 --> 07:59.490
+I know it's a lot of confusing code but also a confusing flow but I promise you the more you practice
+
+07:59.520 --> 08:05.640
+with both these RAF objects and these snapshot objects the better you'll understand the purpose of what
+
+08:05.730 --> 08:11.870
+each is for and this is actually pretty much the core of how we use the Firestone library.
+
+08:11.870 --> 08:13.770
+It's actually really simple.
+
+08:13.970 --> 08:20.610
+Once you've mastered and understood these concepts that we've just covered now let's get rid of this
+
+08:20.610 --> 08:25.580
+because we don't need this anymore and we'll work on our sign up next.
+
+08:25.590 --> 08:25.910
+Right.
+
+08:25.920 --> 08:28.620
+Which is more with our auth library.
+
+08:28.620 --> 08:36.630
+But now that we've done this flow inside of our objects if we add our sign up with email and password
+
+08:36.690 --> 08:42.630
+write this code is all still going to work the exact same because we've compartmentalized our actual
+
+08:42.630 --> 08:49.920
+storage and our actual set state separately from our authentication and that'll make more sense once
+
+08:49.920 --> 08:51.900
+we actually start writing the sign up.
+
+08:52.200 --> 09:00.450
+But definitely re watch these last few videos if you feel confused about firebase it's incredibly powerful
+
+09:00.870 --> 09:07.770
+and it does have a bit of a learning curve to get used to how to use it but it's very valuable because
+
+09:07.770 --> 09:15.750
+this is actually way way easier than any other way of spinning up our own back in server and authentication
+
+09:15.750 --> 09:19.050
+service so let's tackle sign up next.

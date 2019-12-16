@@ -1,0 +1,283 @@
+WEBVTT
+
+00:00.560 --> 00:03.530
+Welcome back in our last lesson.
+
+00:03.530 --> 00:06.540
+We just created our sign out saga.
+
+00:06.560 --> 00:12.950
+We also created our sign up methods so that we're able to properly catch and check whether or not our
+
+00:12.950 --> 00:19.540
+sign up is successful and then log an error if it is otherwise we put out this new method of sign up
+
+00:19.550 --> 00:21.170
+success.
+
+00:21.170 --> 00:28.730
+Now what we want to do in this lesson is we want to have our cart clear out anything that it's got inside
+
+00:28.820 --> 00:30.590
+of it's reducer.
+
+00:30.590 --> 00:38.380
+When the user signs out successfully and there's two main methods that we can do to actually execute
+
+00:38.380 --> 00:43.230
+this the first one is inside of our cart reducer.
+
+00:43.360 --> 00:51.010
+We can make a new case where we listen for user action types dot sign of success and then we clear out
+
+00:51.010 --> 00:58.430
+the car items here that's perfectly valid because we know our reducer is all get every single action
+
+00:58.460 --> 01:01.740
+that ever fires inside of our application.
+
+01:01.740 --> 01:07.020
+The thing however though is if we think about this functionality that we're trying to build is there
+
+01:07.020 --> 01:13.870
+ever a chance where we're going to want to reduce the ability to clear out our cart.
+
+01:13.900 --> 01:19.330
+Well it turns out that there actually might be we might want to at some point perhaps allow the user
+
+01:19.330 --> 01:25.540
+to click something inside of the cart itself that allows them to empty it out entirely essentially resetting
+
+01:25.540 --> 01:27.840
+the entire cart.
+
+01:27.880 --> 01:34.300
+Again this is just the functionality that seems like it's very useful to have inside of its own reusable
+
+01:34.300 --> 01:35.540
+function.
+
+01:35.680 --> 01:37.340
+So let's actually do it.
+
+01:37.450 --> 01:43.030
+And it's also good practice for us to just keep writing more sagas as well as updating our redux files
+
+01:43.210 --> 01:46.280
+to accommodate this new feature.
+
+01:46.290 --> 01:52.890
+Now what we're going to do is we are going to make a new cart type and a new cart action as well as
+
+01:52.890 --> 01:55.020
+a new cart saga.
+
+01:55.030 --> 02:04.310
+So first let's start with a type let's make a new type called Clear cart and what clear cart does is
+
+02:04.370 --> 02:07.420
+it will do exactly as it sets.
+
+02:07.700 --> 02:11.760
+We're going to create a new action called Clear cart
+
+02:14.610 --> 02:22.500
+and this will just create the action type of cart action types dot clear cart
+
+02:25.640 --> 02:30.440
+now that we have this we need to make sure that we dispatch clear cart from our saga.
+
+02:30.470 --> 02:30.700
+Right.
+
+02:30.710 --> 02:41.780
+When we hear that user action sign of success so let's make our new heart sagas folder.
+
+02:41.990 --> 02:48.350
+And as you remember because we're making a new saga file we're gonna have to bring this into our root
+
+02:48.350 --> 02:58.890
+sagas as well as creating a base sagas so here what we'll do is we will import in all call take latest
+
+03:00.190 --> 03:06.800
+and put because we know that we need all of these effects.
+
+03:06.920 --> 03:15.650
+Now what we're gonna do is we're first going to create our cart sagas route saga and this will essentially
+
+03:15.650 --> 03:22.550
+yield the all and then inside of that array will pass our subsequent calls.
+
+03:22.560 --> 03:32.260
+We also know that we need the user action types because this will be what we're listening for.
+
+03:32.640 --> 03:41.250
+We also need our clear cart action because this is what we're going to fire out of our saga so we're
+
+03:41.250 --> 03:50.300
+going to export of our new saga called on sign out success and here we're going to yield.
+
+03:50.300 --> 03:55.400
+Take the latest where we're listening for that user actions sign out
+
+04:00.550 --> 04:06.280
+and then what we're gonna do is we're going to create this new clear cart on sign out
+
+04:11.750 --> 04:20.680
+and in here all we do is we just yield us putting out our clear cart method and we'll pass this into
+
+04:20.680 --> 04:30.910
+our take latest and then we'll make sure to call it inside of our cart sagas on sign ups success.
+
+04:30.930 --> 04:36.330
+So now what we've done is we've created this listener for sign out success but we've also created this
+
+04:36.330 --> 04:41.940
+method that will pretty much do different things depending on when this action fires.
+
+04:41.940 --> 04:46.080
+So if we wanted to do other things let's say our cart reduced or got larger or there were more things
+
+04:46.080 --> 04:47.770
+we wanted to do with our cart.
+
+04:47.790 --> 04:52.880
+Based on this sign that success we're able to put them all inside of the saga.
+
+04:52.920 --> 05:01.040
+Right we're able to extrapolate out that logic and functionality into its own saga and now all we gotta
+
+05:01.050 --> 05:04.500
+do is add our cart sagas to our route saga
+
+05:10.790 --> 05:21.960
+cart sagas and we just gotta make sure to call it here and now if we save to go back to our application
+
+05:25.190 --> 05:37.710
+if we add some items to our cart sign in if we sign out now we see that oh we're firing our clear cart.
+
+05:37.860 --> 05:45.800
+Of course we didn't update our reducer so let's update our reduce our to listen for our new car action
+
+05:45.800 --> 05:58.070
+types not clear cart which returns us back our state except cart items is an empty array.
+
+05:58.130 --> 05:59.540
+Now if we sign in again
+
+06:03.210 --> 06:06.090
+and we hit our sign out we call our cart.
+
+06:06.950 --> 06:08.890
+So that's exactly what we're all hoping to do.
+
+06:10.280 --> 06:16.680
+And now you can see the pattern in which we can do different things across our application leveraging
+
+06:16.710 --> 06:19.620
+our new sign out success method.
+
+06:19.650 --> 06:25.320
+So this is the main idea with sagas is that we're able to just move out all of our functionality and
+
+06:25.380 --> 06:32.550
+also put us in the correct mindset of how we should structure our application so that we have different
+
+06:32.550 --> 06:38.640
+parts of our code listening for different things but then handling different ways that we interact with
+
+06:38.640 --> 06:45.570
+both our redux producers write our components and the big beauty is that now our components are pretty
+
+06:45.570 --> 06:51.190
+much free from much of the logic that used to be inside of them.
+
+06:52.240 --> 06:58.780
+Now all of that logic is in sagas and it's reusable our components are more presentational which is
+
+06:58.780 --> 07:04.450
+actually the ideal pattern when it comes to writing react components.
+
+07:04.470 --> 07:11.490
+Now one quick change that we can make is that we can modify our shop sagas to also have a base shop
+
+07:11.490 --> 07:16.650
+saga because we are now implementing that pattern everywhere.
+
+07:16.650 --> 07:19.080
+It's just the best practice to do so right.
+
+07:19.080 --> 07:28.880
+So let's just bring back in all as well and we'll export out a route shop sagas which is equal to our
+
+07:28.880 --> 07:37.940
+yield call of our fetch collections start and this is what we'll bring into our route saga
+
+07:41.320 --> 07:44.320
+and now hopefully everything stays the same.
+
+07:45.810 --> 07:50.640
+We refresh fetch collection start that collection success.
+
+07:50.640 --> 07:51.270
+Awesome.
+
+07:51.450 --> 07:55.490
+Everything still working now that we have our saga.
+
+07:55.740 --> 08:03.770
+Only logic left that we have to convert into sagas inside of our application is in our sign up component.
+
+08:03.770 --> 08:09.780
+So what I want you to do is actually do this yourself as an exercise at the end of this video.
+
+08:09.890 --> 08:13.720
+I want you to try and move this code into a saga yourself.
+
+08:13.730 --> 08:17.000
+Now there's a couple of caveats I'm going to help you with.
+
+08:17.000 --> 08:24.590
+The first is that I want you to move this sign up process itself into a saga using the redux file structure
+
+08:24.590 --> 08:25.950
+that we've already got.
+
+08:26.270 --> 08:31.940
+What I mean by that I just mean I want you to create a sign up start sign up success and sign up failure.
+
+08:31.940 --> 08:41.070
+Call but right now what we're doing with our application is that essentially a user is able to create
+
+08:41.070 --> 08:49.500
+an account by signing up here but we have no way of actually signing them up or giving them any indication
+
+08:49.620 --> 08:57.390
+that they were successful other than restarting actual form like clearing it out what I want you to
+
+08:57.390 --> 09:04.410
+do is that if there sign up is successful I want you to actually sign them in as well leveraging the
+
+09:04.410 --> 09:06.350
+code that we already have.
+
+09:06.480 --> 09:07.890
+So that's an extra challenge.
+
+09:07.890 --> 09:11.850
+You don't necessarily have to do it you can just get it to the state where it just gets rid of it and
+
+09:11.850 --> 09:16.830
+then we will tackle it in the next video but it won't be a good way for you to flex what you've already
+
+09:16.830 --> 09:21.000
+learned and then try some other things with the code base that we already have.
+
+09:21.030 --> 09:26.040
+I want you to have the confidence to play around in all of this code that we've written because you
+
+09:26.040 --> 09:32.350
+will have to modify a couple of things ever so slightly so definitely give it a try.
+
+09:32.710 --> 09:36.720
+And in the next lesson we will explore how to do this ourselves.

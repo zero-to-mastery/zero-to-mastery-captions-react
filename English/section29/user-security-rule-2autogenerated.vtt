@@ -1,0 +1,250 @@
+WEBVTT
+
+00:00.570 --> 00:02.720
+Hello everyone and welcome back.
+
+00:02.730 --> 00:09.080
+In the last lesson we wrote our first security rule and what we did was we wrote it on this read.
+
+00:09.270 --> 00:16.470
+But if you remember from the first lesson I mentioned that read actually breaks into both get and list
+
+00:17.270 --> 00:24.290
+get allows users to fetch specific user document reference objects individually.
+
+00:24.510 --> 00:28.360
+List allows users to get the entire collection.
+
+00:28.530 --> 00:35.310
+In our case we never want a user to be able to get all of the users we have stored in our database because
+
+00:35.310 --> 00:39.860
+no user ever should be able to access any of that sensitive information.
+
+00:39.870 --> 00:44.330
+So what we can do in this lesson is actually start getting more granular.
+
+00:44.490 --> 00:50.430
+So what we want to do is we want to changes allow Reid to allow get meaning that we only want users
+
+00:50.430 --> 00:56.400
+to get specific documents based on that same condition that we've already written.
+
+00:56.400 --> 01:00.570
+But let's just test this again in our simulator with our new rule.
+
+01:00.690 --> 01:06.750
+We keep the same and we make sure that our UI matches the actual I.D. of the user we're trying to fetch
+
+01:07.110 --> 01:12.090
+and we run our simulated get call and here we see that our read is the same.
+
+01:12.450 --> 01:13.410
+So this is perfectly fine.
+
+01:13.950 --> 01:20.280
+But with these more granular rules what we're going to actually explore is writing additional rules
+
+01:20.280 --> 01:23.040
+for the actual right method as well.
+
+01:23.040 --> 01:29.580
+So we saw that there was read and read breaks in to get an list but there's also right and right breaks
+
+01:29.610 --> 01:33.100
+in to create an update as well as delete.
+
+01:33.240 --> 01:37.780
+In our case we never want users to be able to delete any user objects and set up a database.
+
+01:37.780 --> 01:40.330
+So we're just not going to write a rule for that.
+
+01:40.470 --> 01:50.910
+Instead what we're going to do is we're gonna say allow create if the requested user actually is authenticate
+
+01:50.910 --> 01:51.980
+in the first place.
+
+01:51.990 --> 01:57.470
+So here we're gonna say request auth does not equal no.
+
+01:57.510 --> 02:03.510
+Now you might be wondering how are we able to actually create a user object if we're expecting them
+
+02:03.510 --> 02:05.940
+to have an object already.
+
+02:05.940 --> 02:12.060
+Well if you remember the authentication actually happens in the authentication tab the users that we're
+
+02:12.060 --> 02:14.610
+writing to exist inside of our database.
+
+02:14.620 --> 02:15.950
+They're actually two separate things.
+
+02:15.960 --> 02:23.370
+This off object is not controlled by us as far as it belonging on the request keyword goes.
+
+02:23.490 --> 02:29.670
+The request schema would have the authentication as long as the user has authenticated using the authentication
+
+02:29.670 --> 02:36.510
+library that we've been leveraging inside of our code base with that Google pop up or that email password
+
+02:36.510 --> 02:42.420
+sign and that all happens using the authentication library the authentication library allows the request
+
+02:42.420 --> 02:45.380
+to know whether or not they're authenticate in the first place.
+
+02:45.390 --> 02:51.450
+So this makes perfect sense because we only want a user to be able to create a user object.
+
+02:51.450 --> 03:00.040
+If in the first place that auth exists so here what we're saying is that we only want users to be able
+
+03:00.040 --> 03:04.190
+to create something if they've authenticated already.
+
+03:04.510 --> 03:08.700
+You can get even more granular by saying that if there is a UI.
+
+03:08.770 --> 03:17.430
+What you can expect there to be what we want to say is that only then are they allowed to actually write
+
+03:17.580 --> 03:27.500
+against some specific user I.D. path because here if you remember in our code base we actually write
+
+03:27.500 --> 03:30.080
+right against the path in the first place.
+
+03:30.080 --> 03:35.450
+We use the UI to represent the document references place inside of our database.
+
+03:35.630 --> 03:43.550
+If we look at the code for our firebase utilize and we look at our create user profile document we see
+
+03:43.550 --> 03:49.340
+that what we're doing is that as long as the user auth up object exists we are getting the user reference
+
+03:49.340 --> 03:52.640
+document object at user slash UI.
+
+03:53.420 --> 03:58.850
+So here even though the object doesn't exist yet in our database firebase is smart enough to know that
+
+03:58.850 --> 04:02.710
+we want to potentially make an object here.
+
+04:02.810 --> 04:08.380
+So our rule here is actually going to be the exact same as our rule above.
+
+04:08.690 --> 04:16.690
+And now if we want actually group these together we can say allow get or create using the same ruling.
+
+04:16.690 --> 04:25.610
+A user is only allowed to create an object if they've authenticated as well as that object that they're
+
+04:25.610 --> 04:30.590
+making is the one that belongs to their own authentication in the first place.
+
+04:30.710 --> 04:32.880
+And now we can actually test this out as well.
+
+04:33.740 --> 04:39.860
+So instead of simulating a get call I'm going to simulate a create call and I'm gonna create against
+
+04:39.860 --> 04:49.200
+some random string here if I'm not authenticated and I run this I should be denied because I'm not authenticated
+
+04:50.190 --> 04:58.050
+if I am authenticated but I'm trying to create an object for some place in the database where the I.D.
+
+04:58.050 --> 05:04.890
+doesn't match the idea of my authentication meaning that I'm authenticated sure but I'm trying to make
+
+05:04.890 --> 05:08.520
+50 different users I should not be able to do so.
+
+05:08.970 --> 05:14.880
+So here I'm still using that old UI that I had but here I'm trying to make it against some new place
+
+05:14.880 --> 05:16.530
+in the database.
+
+05:16.530 --> 05:20.750
+If I were to run this I should also fail.
+
+05:20.820 --> 05:25.950
+So this way just because a user authenticated doesn't mean they can suddenly spam and create multiple
+
+05:25.950 --> 05:28.350
+user objects in our database.
+
+05:28.350 --> 05:35.120
+However if the UI does match then if I run I should be allowed to.
+
+05:35.120 --> 05:41.870
+This makes sense if I'm trying to authenticate for the first time then is the only time when our application
+
+05:41.870 --> 05:47.300
+should be allowed to make a actual new user Document object inside of our database.
+
+05:48.330 --> 05:54.750
+Now what's great about this rule is that it's pretty applicable in many cases with user objects in the
+
+05:54.750 --> 05:56.070
+first place.
+
+05:56.070 --> 06:02.490
+If in the future a user wanted to update their profile in some way let's say we built a feature where
+
+06:02.550 --> 06:11.850
+we allowed users to update information on their user object we could do so by either adding some update
+
+06:11.850 --> 06:14.580
+fields here because this would pretty much be the same thing.
+
+06:14.580 --> 06:20.700
+We only want users to be able to update their own object and they can only update it if they're authenticated
+
+06:21.090 --> 06:26.030
+and the UI matches there user I.D. So by adding update this will work.
+
+06:26.460 --> 06:33.530
+Alternatively we can just group create an update together into right so just like that we've kind of
+
+06:33.530 --> 06:40.230
+gone around and combined two back into one as long as it suits the needs of what rules that we're writing.
+
+06:40.250 --> 06:45.620
+This really just shows the power and flexibility of Firebase and the security rules.
+
+06:45.620 --> 06:51.350
+It allows us to get more granular if we need to and it allows us to get very specific and more broad.
+
+06:51.380 --> 06:56.030
+If we wanted to as well we just have to keep in mind and really think about what it is that we're trying
+
+06:56.030 --> 06:57.490
+to do with these security rules.
+
+06:57.560 --> 06:59.630
+But that's really all that is to it.
+
+06:59.930 --> 07:06.110
+And with that we've written our users collection security rule and now that we've secured our users
+
+07:06.110 --> 07:11.780
+database what we've learned just now is going to be pretty much identical to the same things we're going
+
+07:11.780 --> 07:15.570
+to apply to any other database that we want to encrypt.
+
+07:15.680 --> 07:19.410
+So we're gonna do this with our collections database in the next lesson.
+
+07:19.610 --> 07:20.650
+So I'll see you in the next lesson.

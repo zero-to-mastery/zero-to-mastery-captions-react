@@ -1,0 +1,418 @@
+WEBVTT
+
+00:00.780 --> 00:02.260
+Welcome back.
+
+00:02.280 --> 00:09.120
+Now one thing you may have noticed if you're really paying attention is that these tests are fine for
+
+00:09.120 --> 00:17.460
+now because the swapping API is fairly fast and we're getting the data back fairly soon.
+
+00:17.460 --> 00:20.480
+But imagine if we had many of these tests.
+
+00:20.490 --> 00:28.480
+Imagine if we had API is that return lots of data that takes a long time to actually get to.
+
+00:28.670 --> 00:33.590
+You can imagine this growing bigger and bigger until it takes forever for our test to run.
+
+00:33.590 --> 00:41.030
+I mean it only took 2.5 5 7 seconds but with more and more tests worth more and more a synchronous test
+
+00:41.300 --> 00:46.800
+that we wait to actually get a data response it's going to take longer and longer.
+
+00:47.000 --> 00:53.510
+And if we're developers and working and saving our work constantly if we have to wait a couple of minutes
+
+00:53.510 --> 01:00.170
+for our tests every time that's really going to slow us down how can we improve this so that we're not
+
+01:00.410 --> 01:03.370
+always doing this festival.
+
+01:03.380 --> 01:12.830
+Well we can use something called MOX with a mock we can fake a function and just pretend to have it
+
+01:13.190 --> 01:23.630
+running so that we can use this mock to let us spy on the behavior of a function that is called indirectly
+
+01:23.660 --> 01:29.990
+by some other quote rather than just testing the output and waiting for the asynchronous code to complete
+
+01:31.480 --> 01:35.520
+and you can create MOX and just really really easily.
+
+01:35.620 --> 01:42.250
+So let's do that let's create a mock here to speed up our asynchronous test.
+
+01:42.410 --> 01:43.710
+The first thing we're gonna do.
+
+01:43.820 --> 01:45.940
+Let's create more space here.
+
+01:45.980 --> 01:48.710
+I'm going to again create a new test.
+
+01:48.710 --> 01:52.580
+We'll just call this get people
+
+01:55.420 --> 02:04.220
+returns count and results and in here we'll do the same thing.
+
+02:04.260 --> 02:07.100
+Second parameter is a function.
+
+02:07.120 --> 02:09.640
+Now we're going to create something interesting.
+
+02:09.720 --> 02:19.170
+We're going to mock this fetch because first of all note Fetch is a third party library and if we've
+
+02:19.170 --> 02:26.880
+really tested out the library code and we checked the get hub repo and they have tests we don't need
+
+02:26.880 --> 02:29.460
+to test that it works.
+
+02:29.460 --> 02:34.950
+We can assume that the fetch function works as intended.
+
+02:35.010 --> 02:42.470
+So let's just do a mock fetch and mock fetch.
+
+02:42.470 --> 02:44.180
+And this is going to be a variable.
+
+02:44.810 --> 02:46.090
+So let's just say cost.
+
+02:46.520 --> 02:50.070
+We can mark the fetch and the way we can do that ingest again.
+
+02:50.150 --> 02:55.250
+If you remember this is something that comes with just mark spies and stuffs.
+
+02:55.250 --> 02:58.780
+Otherwise if you're using something like Moka you'd use sign on.
+
+02:59.480 --> 03:10.390
+But with just that we can just do just dot Fen for function and we can do something called again.
+
+03:10.420 --> 03:12.580
+This is all in their documentation.
+
+03:12.640 --> 03:23.530
+We can do something called Mock return value and we can just return something as if this fetch function
+
+03:23.530 --> 03:23.970
+was called.
+
+03:24.340 --> 03:29.660
+So what does a fetch function usually return.
+
+03:29.660 --> 03:32.850
+Well we know that it returns a promise.
+
+03:33.110 --> 03:35.960
+And let's just for now say that it's always going to resolve.
+
+03:36.110 --> 03:38.620
+So that is a resolved promise.
+
+03:38.900 --> 03:40.640
+And inside of this resolve.
+
+03:41.060 --> 03:44.390
+Let me make this on a new line just so we can see it better.
+
+03:44.660 --> 03:46.870
+That's better in here.
+
+03:46.970 --> 03:49.550
+MAN Let's make this a little bit smaller.
+
+03:49.640 --> 04:01.600
+We want to resolve to an object that is Jason because if you remember we always have to do the dot then
+
+04:01.780 --> 04:04.410
+response dot Jason.
+
+04:04.630 --> 04:10.240
+So we can just mark this whole thing out we can say that Jason.
+
+04:10.290 --> 04:14.170
+So the object that we return is going to be a promise.
+
+04:14.190 --> 04:22.770
+So we're going to resolve a promise with the Jason method and this method again is a
+
+04:25.610 --> 04:26.880
+promise.
+
+04:26.900 --> 04:30.650
+So again promise and resolve and this promise.
+
+04:30.680 --> 04:32.750
+Again this part we're doing this.
+
+04:32.750 --> 04:47.560
+The died Jason and then we get the data so we can say that within the resolve we'll have count equals
+
+04:47.590 --> 05:01.130
+eighty seven and the results will be let's just create an array that says 0 1 2 3 4 5 let's say this
+
+05:01.130 --> 05:04.470
+and get a bit of a syntax error.
+
+05:04.480 --> 05:07.040
+Let's fix that.
+
+05:07.090 --> 05:11.260
+We have an unexpected token and I forgot to come over here
+
+05:14.290 --> 05:17.190
+classic commas they always get me.
+
+05:17.280 --> 05:17.650
+All right.
+
+05:17.650 --> 05:25.960
+So now we just mocked the fetch call instead of calling this get people promise and wait for the data
+
+05:25.990 --> 05:28.710
+and get the data that count data their results.
+
+05:28.750 --> 05:36.610
+We're actually just doing that automatically assuming that the API works so we can just test our other
+
+05:36.610 --> 05:42.490
+parts of the function again because this is still asynchronous.
+
+05:42.490 --> 05:54.420
+We're returning a promise remember we'll want to do a return sloppy dot get people now to get people
+
+05:54.420 --> 05:55.270
+promise.
+
+05:55.410 --> 06:05.320
+And in here we can instead of the fetch do the mock fetch We're mocking the function that is fetch and
+
+06:05.320 --> 06:14.770
+this is how when we test we can use dependency injection to make sure that we're testing different functionality
+
+06:14.800 --> 06:21.880
+and you might remember this from integration tests but without actually using up all these resources
+
+06:21.880 --> 06:29.450
+we're trying to be as smart as possible now we can't have the dot then and we're gonna see the data
+
+06:29.510 --> 06:31.310
+just like we did up above over here
+
+06:34.500 --> 06:44.280
+now we think here let's do a few tests we want to expect the mock fetch.
+
+06:44.280 --> 06:52.320
+That's right because we use just dot f then we now have an ability to listen in because it just this
+
+06:52.320 --> 06:58.180
+is also a spy we can spy on this and see what this function did inside of this function.
+
+06:58.200 --> 07:06.630
+So why didn't mark fetch do inside of get people promise I can say expect mock fetch dot mark again
+
+07:06.660 --> 07:16.290
+this is in the documentation to have a calls so how many times has this been called going to say land
+
+07:16.560 --> 07:24.920
+so the number of times it's been called to be one let's save
+
+07:28.310 --> 07:39.890
+and this is passing by remember with asynchronous tests we want to always do the expect dot assertions
+
+07:40.520 --> 07:42.290
+to make sure that they're being called.
+
+07:42.290 --> 07:47.330
+So in this case we only have one everything works.
+
+07:47.340 --> 07:48.720
+If I change this to zero
+
+07:52.710 --> 07:59.200
+that fails because we actually did call the mark fetch this function called the mock fetch once.
+
+07:59.200 --> 08:01.080
+Very cool.
+
+08:01.080 --> 08:04.650
+What else can we do well.
+
+08:04.650 --> 08:06.300
+Another thing we can do now.
+
+08:06.330 --> 08:18.540
+Let me just copy this we can expect Mark fetch have another method called to be called with and we can
+
+08:18.540 --> 08:23.130
+test to see what this was called with in our case it should be called.
+
+08:23.130 --> 08:25.740
+With this you url.
+
+08:25.920 --> 08:29.130
+So again let's put it in here.
+
+08:29.220 --> 08:30.150
+Let's test this out.
+
+08:30.510 --> 08:31.230
+I'm going to save
+
+08:35.320 --> 08:43.680
+Oh and I actually did make a mistake and we want to do expect again the mock fetch to have been called
+
+08:43.680 --> 08:53.590
+with the euro the safe O and remove the bracket.
+
+08:53.650 --> 08:54.060
+All right.
+
+08:54.290 --> 08:59.150
+It's actually passing by remember our assertions is now expecting two things.
+
+08:59.300 --> 09:00.170
+So I'm going to save
+
+09:04.240 --> 09:11.230
+you see how it took a little bit more time this time again because we're repeatedly calling this API.
+
+09:11.230 --> 09:16.420
+It's taking a little bit more time this time three point ninety eight one seconds but with the mark
+
+09:16.960 --> 09:20.440
+because we're returning we're doing promised on resolve right away.
+
+09:20.500 --> 09:28.180
+It's a lot faster and that's passing if for some reason I changed this too and I call we expected to
+
+09:28.180 --> 09:29.560
+call planets instead
+
+09:32.740 --> 09:41.700
+we see that it fails because we expect the get people to actually get the people not the planets very
+
+09:41.700 --> 09:42.930
+cool.
+
+09:42.930 --> 09:45.210
+All right let's do a few more.
+
+09:45.210 --> 09:46.290
+Well let's just add.
+
+09:46.290 --> 09:49.410
+Again copy and pasting in testing is not bad.
+
+09:49.440 --> 09:57.990
+Let's just copy and paste this and expect that things work the exact same as they did in the above with
+
+09:57.990 --> 09:58.730
+the regular fish.
+
+09:58.740 --> 10:03.100
+But this time with our mock so we can save go back
+
+10:05.860 --> 10:09.760
+and I have a test failing because now our assertion number is for
+
+10:13.730 --> 10:15.880
+Wahoo everything is passing.
+
+10:15.980 --> 10:23.080
+And if I change this count to eighty nine and I change this to eighty nine.
+
+10:23.160 --> 10:27.750
+But let's say to be greater than 10 it should fail
+
+10:30.290 --> 10:34.300
+because our results only have six items.
+
+10:34.520 --> 10:38.130
+There young but if I change this to greater than five
+
+10:42.550 --> 10:48.890
+our tests are passing very very cool.
+
+10:48.960 --> 10:57.190
+And there you have it other than learning a few methods such as to be greater than or to equal which
+
+10:57.400 --> 11:01.020
+you can always check in the documentation when you write a test.
+
+11:01.210 --> 11:03.640
+Everything is pretty simple right.
+
+11:03.640 --> 11:08.500
+Once you get the hang of it we have a synchronous tests that are very very easy.
+
+11:08.500 --> 11:14.960
+And we just have an expect assertion and then we have a synchronous test that we just have to remember
+
+11:14.960 --> 11:21.710
+to return and make sure that we have access to the promise whatever returns.
+
+11:22.430 --> 11:29.270
+And then we can also to avoid long running a synchronous code such as API calls or maybe even a database
+
+11:29.270 --> 11:34.850
+call to mock and mock functions also known as spies.
+
+11:34.850 --> 11:44.550
+And just because they let you spy on the behavior or the function is called by our test and it's going
+
+11:44.550 --> 11:51.930
+to spy on what is happening and you saw that get people promise actually runs this mock fish that we
+
+11:51.930 --> 11:59.910
+created and all you need is this syntax and here we just added extra things because we wanted a certain
+
+11:59.910 --> 12:00.500
+behavior.
+
+12:00.720 --> 12:09.370
+But even just doing this we could have seen that mock fetch would have been called with this U.R.L.
+
+12:11.950 --> 12:19.090
+just is an awesome awesome tool if you work with other libraries you'll see a lot of the similarities.
+
+12:19.090 --> 12:25.740
+Like I said Marks stubs and spice can also be seen and sign on especially if you work with mocha.
+
+12:25.780 --> 12:28.370
+But overall the principles are the same.
+
+12:28.660 --> 12:35.320
+And you can see that tests can be fun because we're just testing logic and nothing feels better than
+
+12:35.590 --> 12:37.620
+getting all these green passes.
+
+12:39.250 --> 12:39.640
+All right.
+
+12:40.240 --> 12:41.470
+That's it for now.
+
+12:41.470 --> 12:47.000
+I think it's time for us to get into some react testing and testing our robo friends app.
+
+12:47.110 --> 12:48.330
+I'll see in the next one.
+
+12:48.610 --> 12:48.790
+Bye.

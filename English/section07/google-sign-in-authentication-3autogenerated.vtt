@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00.750 --> 00:09.940
+OK so now we have Google authentication sign as well as our application listening to authentication
+
+00:09.940 --> 00:21.280
+state changes on our firebase back in what we need now is to actually figure out how to sign out of
+
+00:21.280 --> 00:26.900
+our off service now buyer base makes it very easy.
+
+00:27.000 --> 00:33.930
+Because on this off service we actually just call sign out and it will sign us out but let's figure
+
+00:33.930 --> 00:37.060
+out where to put it in our application.
+
+00:37.120 --> 00:45.470
+So right now if we look at the final application we actually see that there's a sign up button in the
+
+00:45.470 --> 00:54.640
+header when a user is signed in so let's implement that the first thing we have to do is make sure that
+
+00:54.640 --> 01:03.010
+our header is aware of when a user is signed in or signed out by giving it the app its current user
+
+01:03.010 --> 01:03.840
+state.
+
+01:03.850 --> 01:13.140
+So we're just going to pass it in as a prop. This dot state DOT current user so if it's null it will
+
+01:13.140 --> 01:20.550
+pass in null if it's an object such as our user object it will pass that in and then inside of our head
+
+01:20.600 --> 01:27.860
+component we want to first import that author library from our fire base utilize
+
+01:31.690 --> 01:38.950
+and then we want to d structure the current user property that we're passing into our header from our
+
+01:39.040 --> 01:49.890
+app and what we'll do is we'll use a ternary operator to conditionally render either a div if it's true
+
+01:50.610 --> 02:00.600
+or a link if it's false now because of the nature of the ternary operator if current user is an object
+
+02:00.720 --> 02:09.660
+it will evaluate to true therefore it will render a div if it is false such as if it was a null null
+
+02:09.780 --> 02:14.430
+evaluates to false and then it will render the link.
+
+02:14.430 --> 02:19.730
+So what we will pass in is a div with the class name option.
+
+02:19.740 --> 02:23.820
+So we want the same styling as our link but we want it div because we want the padding that comes with
+
+02:23.820 --> 02:30.360
+it so that our button is click is clickable it's bigger and then we're gonna put an on click a method
+
+02:30.900 --> 02:39.580
+that is a functional callback and an anonymous function that calls off dot sign out which is provided
+
+02:39.610 --> 02:49.720
+to us by the firebase auth library and then we're just going to say here sign out and in our link we're
+
+02:49.840 --> 02:59.030
+also going to have the class name of option except it's going to take us to slash sign in here we're
+
+02:59.030 --> 03:09.260
+just going to say sign in and now if we check our application normally there's a sign in but if we're
+
+03:09.260 --> 03:11.810
+signed in with our Google account
+
+03:17.410 --> 03:23.320
+instead it'll be a sign out button which if we click will sign us out but we don't have our cursor pointer
+
+03:23.320 --> 03:23.580
+on it.
+
+03:23.610 --> 03:31.080
+So let's just add that to our styling here inside of our option we'll put cursor pointer just to be
+
+03:31.080 --> 03:34.210
+sure OK.
+
+03:34.380 --> 03:43.430
+Now let's also style this button box so that it looks closer to what we had in the Google styling box
+
+03:44.240 --> 03:48.960
+as we see in our final application.
+
+03:49.000 --> 03:58.580
+Well let's go to our custom button component and what we'll do is conditionally render a class name
+
+03:58.760 --> 04:00.060
+based off of a prop.
+
+04:00.890 --> 04:09.440
+So we'll call the prop is Google sign in and then we will conditionally render using string interpolation
+
+04:11.820 --> 04:18.090
+the class name of Google sign in.
+
+04:18.090 --> 04:28.170
+Otherwise we'll render an empty string and then we will also always render custom button.
+
+04:28.190 --> 04:32.720
+Now we're able to do this because with react everything is javascript.
+
+04:32.720 --> 04:34.870
+So we have a lot of flexibility here.
+
+04:35.180 --> 04:44.540
+And using this we will now render this class of Google sign and if this property is true if not then
+
+04:44.660 --> 04:50.700
+there will be an empty string and custom button is also always rendered.
+
+04:50.710 --> 04:57.460
+Now let's go into our styles and let's add in the styling for Google sign.
+
+04:58.000 --> 05:01.240
+So we've got it add the ampersand.
+
+05:01.240 --> 05:09.640
+If we don't then we will notice that this SAS file will end up applying the styles to a child element
+
+05:09.700 --> 05:12.870
+with the class Google sign and of custom button.
+
+05:12.940 --> 05:15.360
+But we want them to both be on the same element.
+
+05:15.370 --> 05:23.980
+So what the ampersand it will say that because the ampersand is the same as saying custom button dot
+
+05:24.010 --> 05:33.210
+google sign and with no space in between so by doing that now we will say background color goes to a
+
+05:33.210 --> 05:46.630
+Google Blue which I have here it is hash for 2 8 5 4 and then we'll also say that there is a color of
+
+05:46.630 --> 05:53.770
+whites because we want white text and then on hover we're also going to change the background color
+
+05:54.640 --> 06:02.280
+to a darker shade of our Google blue 3 5 7 8 8 8.
+
+06:02.280 --> 06:07.920
+Now I have them in front of me so I definitely don't memorize hex colors in my spare time but we're
+
+06:07.920 --> 06:16.020
+also going to add a border of none to our star here and then in our sign in component we want to apply
+
+06:16.020 --> 06:26.310
+them so well say is Google sign in so this property will get past the value of true if we don't pass
+
+06:26.400 --> 06:33.810
+a value to it which we want because we want this to help us conditionally render that class that we
+
+06:33.810 --> 06:42.300
+just wrote on custom button and now if we look we'll see that we have our styling so let's start our
+
+06:42.300 --> 06:47.720
+sign and to look more similar and more aligned to our final application.
+
+06:47.910 --> 06:58.220
+So in our sign in component in our styles we're going to switch this over to three eighty pixels and
+
+06:58.220 --> 07:05.040
+then we're also going to wrap those buttons in a div call with the class name of button
+
+07:10.880 --> 07:14.560
+and then we will apply
+
+07:17.990 --> 07:30.830
+to this buttons class display flex and justify content space between now if we look our buttons are
+
+07:30.890 --> 07:35.450
+the same width as our sign and component but there's a little bit of extra padding here.
+
+07:35.540 --> 07:45.710
+The reason for this is because of the way that box sizing is set in all browsers box sizing value which
+
+07:45.710 --> 07:53.750
+is a CSX property that's set in all browsers is such a way that our margins padding and borders all
+
+07:53.750 --> 07:57.650
+actually affect the overall size of our components.
+
+07:57.860 --> 08:03.070
+If we were to inspect this we'll see that's what happens with our form input.
+
+08:03.210 --> 08:09.900
+You see how there is a little bit of an extra protrusion despite the fact that the orange ends before
+
+08:09.900 --> 08:17.820
+it while that's actually the padding value on our input that's modifying that if we got rid of this
+
+08:17.910 --> 08:20.850
+we'll see that our element is now in line.
+
+08:21.000 --> 08:26.570
+So how we change this is inside of our app dot CSX.
+
+08:26.580 --> 08:30.940
+We are going to say this universal selector.
+
+08:30.960 --> 08:32.500
+So for every element we want.
+
+08:32.500 --> 08:42.660
+Box sizing should be border box and now our elements are red line because the padding the margin and
+
+08:42.660 --> 08:45.870
+the border do not affect the element size.
+
+08:45.930 --> 08:55.570
+So let's commit our code so let's check what we have we added in our firebase so let's say integrated
+
+08:55.870 --> 09:08.580
+firebase into application created sign in page with sign in component and sign in with Google.
+
+09:10.030 --> 09:15.540
+And now let's just push this to master.
+
+09:15.610 --> 09:21.480
+So now what we want to add to our application is email and password sign in.
+
+09:21.730 --> 09:28.510
+But the only way to do that is we actually have to have email and password based users in our database
+
+09:28.750 --> 09:32.650
+so that firebase knows whether or not that that user is true.
+
+09:32.650 --> 09:34.690
+I get it actually exists.
+
+09:34.690 --> 09:40.640
+So in order to do that we have to take a deeper look at Firebase firestorm.
+
+09:40.660 --> 09:41.740
+So let's do that.

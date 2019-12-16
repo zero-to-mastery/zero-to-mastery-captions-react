@@ -1,0 +1,367 @@
+WEBVTT
+
+00:00.790 --> 00:07.660
+We just wrote our first reducer our user reducer and we got introduced to some new concepts and some
+
+00:07.660 --> 00:13.360
+new javascript features such as the switch statement and this default parameter value inside of our
+
+00:13.360 --> 00:20.920
+function but now that we have our reducer and we imported into our root reducer and used our combined
+
+00:20.920 --> 00:28.600
+reduces function from redux to create our actual route reduce our object we need to still create our
+
+00:28.600 --> 00:29.480
+store.
+
+00:29.830 --> 00:36.050
+Now in order to create the store we have to make a another file inside of redux called stored J.
+
+00:36.070 --> 00:36.920
+Yes.
+
+00:37.000 --> 00:44.610
+And this one is just gonna go into its own file and I'm gonna call a store j ust inside of storage yes
+
+00:44.910 --> 00:54.590
+we need to import in the create store function as well as the apply middleware function from redux.
+
+00:55.300 --> 01:03.520
+So if you remember from that image I showed you what we need to do is add middleware to our store so
+
+01:03.520 --> 01:10.280
+that whenever actions get fired or dispatched we can catch them and then display them.
+
+01:10.570 --> 01:17.560
+And the middle wears which is the peace in the middle between our actions firing and our root reducer
+
+01:17.980 --> 01:25.060
+are pretty much just functions that receive actions in and then do something with them and then pass
+
+01:25.060 --> 01:26.790
+them out into the root reducer.
+
+01:26.800 --> 01:28.160
+That's all it is.
+
+01:28.540 --> 01:34.690
+This redux lawyer library that I made you guys install is pretty much just that and all it does is it
+
+01:34.690 --> 01:39.710
+catches the action it console logs it out for us and then it moves it along.
+
+01:40.210 --> 01:48.120
+So all we need to do to bring that in is we just import logger from redux logger and this is a really
+
+01:48.120 --> 01:54.540
+handy middleware because once we finish writing all of this configuration and setup which is quite extensive
+
+01:54.630 --> 02:02.020
+I totally understand it will make it much easier for us to understand what it is that we did so once
+
+02:02.020 --> 02:11.800
+we have these required libraries we then import in our Ruby reducer from our reducer file and now we
+
+02:11.800 --> 02:13.660
+have to actually set up our middleware.
+
+02:14.200 --> 02:22.830
+So the middleware is that the store is expecting from redux is going to be an array and that array we
+
+02:22.830 --> 02:26.000
+can set ourselves as this thing called middleware.
+
+02:26.090 --> 02:26.470
+Right.
+
+02:26.490 --> 02:32.240
+We just set it as this contest and we make it an array and inside is our logger middleware.
+
+02:32.250 --> 02:36.690
+This is pretty much just that function that I was telling you about from redux logger and we're putting
+
+02:36.690 --> 02:41.730
+it inside of this array next in order for us to actually make our store.
+
+02:41.760 --> 02:49.000
+We're going to literally call it our store can't store equals create store and this is a function that
+
+02:49.000 --> 02:55.380
+gets both a root reducer and also the return value of apply.
+
+02:55.390 --> 03:03.450
+Middleware is an inside of the supply middle where we are going to spread in our middleware.
+
+03:03.990 --> 03:12.090
+So what this will do is this will spread in all of the methods or all of the values in this array into
+
+03:12.090 --> 03:14.800
+this function call as individual arguments.
+
+03:15.420 --> 03:20.880
+And this way if we ever needed to add more things to the middleware we can just add it to this array
+
+03:20.940 --> 03:22.480
+value that we have here.
+
+03:22.500 --> 03:26.040
+Now you'll actually see us do this later on in the lesson.
+
+03:26.070 --> 03:32.940
+But for now just understand that we're doing it in this syntax just because it's more scalable and you'll
+
+03:32.940 --> 03:34.880
+totally see that as we build it out.
+
+03:35.370 --> 03:37.780
+Otherwise we didn't actually have to sort this value.
+
+03:37.830 --> 03:44.010
+We could have just put them in manually like so this would perfectly work because we only have the one
+
+03:44.070 --> 03:49.920
+logger middleware and apply middleware it just takes an infinite number of different middleware so that
+
+03:49.920 --> 03:51.920
+we can just put them in like so.
+
+03:52.170 --> 03:56.850
+But instead we're just gonna do it this way because in the future we might want to modify this array
+
+03:56.880 --> 03:59.580
+based on certain conditions you'll totally see it.
+
+03:59.640 --> 04:00.300
+Don't worry.
+
+04:00.300 --> 04:02.190
+But this is just one thing to keep in mind.
+
+04:03.700 --> 04:09.580
+And with this we've written our store we're gonna export this out as the default value.
+
+04:09.580 --> 04:15.940
+And then with this new store object that we've instantiated with create store we're gonna bring this
+
+04:16.030 --> 04:21.000
+into our in next year and we're going to pass it into our provider.
+
+04:21.070 --> 04:26.270
+So I know it's been a while since we cover the provider in the last lesson but just there was a refresher.
+
+04:26.290 --> 04:34.510
+The provider is this component class that we get from reactor redux that once passed the store object.
+
+04:34.750 --> 04:41.530
+We'll be able to give that read store context to the rest of the application so we can dispatch actions
+
+04:41.530 --> 04:50.860
+to that store or we can actually pull values off of the store and into our components and it all comes
+
+04:50.860 --> 04:52.240
+from this provider.
+
+04:52.240 --> 05:00.400
+So our to do that we need to import in the store from our store dodgy us which is inside of our redux
+
+05:00.400 --> 05:04.140
+folder as the store.
+
+05:04.150 --> 05:12.920
+Now once we have this we are just going to pass it in as a value called store in provider like so and
+
+05:12.920 --> 05:14.710
+that's it.
+
+05:14.740 --> 05:16.420
+It's a lot of configuration guys.
+
+05:16.420 --> 05:21.670
+I definitely totally understand that it's way more configuration than you guys are probably used to
+
+05:21.670 --> 05:22.630
+seeing.
+
+05:22.870 --> 05:30.720
+But with this code written like this we now have access to redux inside of our application.
+
+05:30.720 --> 05:35.990
+We had to build out our store we had to configure a route reducer so we had some kind of value.
+
+05:36.030 --> 05:42.300
+So for us to actually display but now that we have this we can actually start implementing the right
+
+05:42.480 --> 05:49.770
+actions into our application so that redux can start storing the value of our user into our new user
+
+05:49.770 --> 05:55.970
+reducer and out of our app GST now in order for us to do that.
+
+05:56.120 --> 06:03.200
+We actually have to create the action that is going to trigger the correct case inside of our switch
+
+06:03.200 --> 06:04.130
+statement.
+
+06:04.250 --> 06:11.450
+Now as we know this set current user is what the action type we're expecting to be so that it sets the
+
+06:11.480 --> 06:18.980
+current user value inside of our user reduce our object as the payload of this action object.
+
+06:18.980 --> 06:25.310
+Now what we're going to do in order to make that is we are going to create these action creator functions
+
+06:25.760 --> 06:28.310
+and they sound way more complicated than they actually are.
+
+06:29.430 --> 06:34.060
+So what we're going to do to make them is we're going to put them inside of a file called user dot action
+
+06:34.080 --> 06:34.440
+structure.
+
+06:34.470 --> 06:35.390
+Yes.
+
+06:35.490 --> 06:39.800
+And they literally are just functions that return objects.
+
+06:39.870 --> 06:48.370
+The only thing is that each object is in the correct format that the action is expected to be.
+
+06:48.390 --> 06:55.170
+So for our set current user action created function it's going to be a function that takes one parameter
+
+06:55.350 --> 07:01.470
+the user object whatever that user object is it's either our user off right or our user snapshot object
+
+07:01.470 --> 07:04.910
+that we create inside of our firebase utilize.
+
+07:05.040 --> 07:08.970
+As you remember from our objects or it's not.
+
+07:08.970 --> 07:14.550
+So instead of calling this thoughts at state we are going to fire off an action that holds that value
+
+07:14.610 --> 07:16.320
+that we were setting state to before.
+
+07:16.380 --> 07:24.190
+And we're just going to call it are user then what this function returns is an object where the type
+
+07:25.290 --> 07:28.100
+is set current user.
+
+07:28.200 --> 07:31.950
+This is the exact same string that our reducer is expecting.
+
+07:32.040 --> 07:38.130
+So we've just got to remember that we got to make sure that we always align the action creators type
+
+07:38.490 --> 07:46.790
+with the reduced type expectation in order to create the appropriate effects in our reducer and what
+
+07:46.790 --> 07:50.540
+we're going to do with that user is we're going to set it as the payload.
+
+07:50.600 --> 07:55.620
+So as I mentioned this shape of an object is all a action is.
+
+07:55.640 --> 08:00.360
+It has a type which is equal to a string and then it has a payload.
+
+08:00.860 --> 08:06.310
+And because these strings should never change we want to use capital and snake case.
+
+08:06.320 --> 08:13.530
+So we want to use underscores wherever their spaces and with this we've created ARG user action.
+
+08:13.660 --> 08:20.520
+So we have the action that are components are going to leverage in order to actually update our reducer
+
+08:20.520 --> 08:23.250
+as with the appropriate values.
+
+08:23.250 --> 08:27.130
+Now I know this was a lot of configuration in these last two lessons.
+
+08:27.150 --> 08:29.390
+It was just a setting up so many things.
+
+08:29.460 --> 08:37.470
+And honestly it's a lot and it's very overwhelming redux is definitely one of the more challenging concepts
+
+08:37.530 --> 08:44.010
+in the react ecosystem because of this reason there's so much setup required just to get started with
+
+08:44.010 --> 08:44.900
+redux.
+
+08:45.110 --> 08:51.390
+And in each of the setup there's a concept we got to think about because redux is so opinionated about
+
+08:51.390 --> 08:52.880
+how to be used.
+
+08:53.160 --> 09:00.240
+And this is the tradeoff of using redux but I promise you it's extremely extremely valuable and super
+
+09:00.240 --> 09:01.440
+powerful.
+
+09:01.530 --> 09:08.580
+So in the following lessons we're going to see how we use this how we bring this into components how
+
+09:08.580 --> 09:10.090
+this all looks in the end.
+
+09:10.290 --> 09:15.150
+And I know you had to endure a lot of this configuration but hopefully at least conceptually it made
+
+09:15.150 --> 09:19.120
+sense about why we had to do this but we're going to use this a lot.
+
+09:19.140 --> 09:21.890
+We're going to repeat this pattern many many times.
+
+09:22.110 --> 09:27.260
+And once you watch those lessons please come back to these videos.
+
+09:27.300 --> 09:29.990
+Watch this again try and do it yourself.
+
+09:30.000 --> 09:35.640
+Try and set up this redux yourself using the redux documentation that I'm going to link inside of your
+
+09:35.640 --> 09:44.340
+resources and you'll hopefully understand why it's all happening but redux is definitely a very large
+
+09:44.340 --> 09:46.740
+picture kind of library.
+
+09:46.950 --> 09:52.260
+You have to see it all in action before all of these pieces slowly start to make sense and once it all
+
+09:52.260 --> 09:55.340
+clicks You're going to have that eureka moment.
+
+09:55.350 --> 10:01.920
+So with all of these concepts and all of this configuration that Andre and I have taught you guys hopefully
+
+10:02.280 --> 10:08.640
+this makes some sense if it doesn't I promise you by the end it will definitely make sense because we're
+
+10:08.640 --> 10:09.320
+going to use it a lot.
+
+10:10.490 --> 10:16.430
+So now that we've finished our setup we're going to bring this into our components so we can start leveraging
+
+10:16.730 --> 10:24.080
+not only the new user actually created but also this current user value inside of our producer and we're
+
+10:24.080 --> 10:25.400
+going to do that in the next lesson.

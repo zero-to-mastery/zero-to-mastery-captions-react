@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00.330 --> 00:02.450
+Welcome back everyone.
+
+00:02.460 --> 00:09.960
+Now I know in the last few lessons we brought a lot of new saga code and we had to refactor our code
+
+00:10.290 --> 00:17.280
+quite significantly and we were introduced to all of these new saga concepts such as take every take.
+
+00:17.280 --> 00:25.920
+Latest plot call writing the songs themselves yield statements try catch blocks there's just so so much
+
+00:25.920 --> 00:32.030
+code that we wrote that amongst the process of coding all of that out.
+
+00:32.370 --> 00:39.090
+I am worried that we might have gotten a little lost in what it is that we were trying to accomplish.
+
+00:39.090 --> 00:45.600
+So what I want to do in this lesson is just take some time and not look at any code at all and just
+
+00:45.660 --> 00:50.370
+understand conceptually what it is that we just wrote.
+
+00:50.430 --> 00:54.260
+Let's begin with our new feature collection sagas.
+
+00:54.390 --> 01:01.680
+Well looking back at that redux saga diagram that we had before I've slightly modified it a little more
+
+01:01.680 --> 01:08.340
+now so that it matches what we just wrote regarding our fact collection saga.
+
+01:08.340 --> 01:15.870
+So what we did was that we still had our components that dispatch the action of fetching our collections
+
+01:15.930 --> 01:20.830
+except now we're fetching a new fetch collections start action.
+
+01:21.030 --> 01:27.750
+So we broke out all of our asynchronous related fetching actions into stark success and failure actions
+
+01:28.410 --> 01:34.710
+and our component is the one that ends up firing the first action to start fetching those collections
+
+01:35.550 --> 01:37.810
+this action makes it to the middleware.
+
+01:37.850 --> 01:38.200
+Right.
+
+01:38.220 --> 01:45.600
+Our saga middleware which then dispatches it into all the sagas and we happen to have a saga that's
+
+01:45.600 --> 01:52.580
+listening for that that collection start which is our fetch collections start saga this saga listens
+
+01:52.590 --> 01:55.920
+for that action that we just dispatched from our component.
+
+01:56.190 --> 02:04.920
+And then it fires off its own function call yielding to another saga which was our fetch collections
+
+02:05.010 --> 02:06.360
+async saga.
+
+02:06.540 --> 02:15.180
+So the moment this saga heard this fetch collection start it then took that action and passed that action
+
+02:15.300 --> 02:22.500
+into what ever other saga we wanted to fire based on that action.
+
+02:22.550 --> 02:30.290
+Now how we caught and passed that action into the next saga was using any of those take methods.
+
+02:30.350 --> 02:37.190
+So when we used that take latest or take every method we were essentially doing just that this saga
+
+02:37.190 --> 02:43.580
+was saying I'm going to take every single fetch collection start action and then I'm going to do something
+
+02:43.580 --> 02:46.110
+with it whatever that something was.
+
+02:46.160 --> 02:56.290
+Is that next saga that we passed into that take latest or take every function call the moment that fetch
+
+02:56.290 --> 03:03.820
+collection async generator function got called this ended up doing the actual stuff that fetched our
+
+03:03.820 --> 03:07.650
+collections from our firestorm from this saga.
+
+03:07.650 --> 03:13.260
+Then depending on whether or not we were successful in getting that collection or not successful we
+
+03:13.260 --> 03:20.810
+would end up dispatching a new fetch collection success or fetch collections failure action and then
+
+03:20.810 --> 03:26.800
+that action goes back into the cycle middleware cycle middleware as passes them to all of our sagas
+
+03:27.110 --> 03:32.390
+but because we have no sagas that are listening for these actions it just passes those actions to the
+
+03:32.390 --> 03:36.460
+producers and our flow goes back to normal.
+
+03:36.470 --> 03:43.580
+So this saga middleware literally is like a step in between all the actions being dispatched before
+
+03:43.580 --> 03:48.800
+they make it to the reduced hours and then it performs some actions that are asynchronous in nature
+
+03:48.830 --> 03:56.150
+such as fetching collections from the fire store library that we have and then it will dispatch new
+
+03:56.150 --> 04:02.300
+actions of success or failure which finally make it to our producers that then update their reducer
+
+04:02.330 --> 04:09.140
+states with the values that we've got back from our fire store so if you think about it like that from
+
+04:09.140 --> 04:12.590
+an image standpoint it's actually much more simple.
+
+04:12.590 --> 04:17.210
+The code we wrote was much more extensive because we had to deal with that take latest and not take
+
+04:17.240 --> 04:19.520
+every as well as that put.
+
+04:19.640 --> 04:26.360
+But those are really just the means in which we were able to move on to the next step inside of this
+
+04:26.360 --> 04:27.470
+diagram.
+
+04:27.470 --> 04:34.700
+Take lightest and take every being what allows this saga that's actually catch this fetch collection
+
+04:34.700 --> 04:42.940
+start action that the saga passes to all of our sagas and then depending on what the success or failure
+
+04:42.970 --> 04:50.830
+of the actual fetch call from the firestorm was we put out new facts collection success or fact collection
+
+04:50.830 --> 04:57.650
+failure actions so put essentially the saga way of dispatching new actions.
+
+04:57.730 --> 05:01.550
+So this was what we were doing with our fetch collections saga.
+
+05:01.990 --> 05:09.240
+Now with our Simon sagas if we look at this other diagram we'll see that it's very similar.
+
+05:09.250 --> 05:16.800
+The only difference now is that we have two different stream paths for what sagas could have done.
+
+05:17.890 --> 05:24.360
+We still had a component that would dispatch new sign in actions either email silent start or Google
+
+05:24.360 --> 05:25.460
+sign and start.
+
+05:25.690 --> 05:32.050
+So those actions go into our saga middleware and our saga middleware it will pass all of those actions
+
+05:32.170 --> 05:34.150
+to all the sagas.
+
+05:34.300 --> 05:42.660
+Now we happen to have a on Google sign and start saga that is using take latest on Google sign and start.
+
+05:42.670 --> 05:47.170
+So the moment it hears that Google is on a start action it's like oh OK I'm going to take this and then
+
+05:47.230 --> 05:55.060
+I'm going to call my sign in with Google saga write that new generator function that we had this signing
+
+05:55.060 --> 06:01.660
+with Google generator function has all the code to sign in with Google and then what it will do depending
+
+06:01.660 --> 06:07.990
+on the success or failure is dispatch new sign and success or sign and failure actions which go back
+
+06:07.990 --> 06:15.010
+into the saga middleware saga middleware determines that none of the sagas need or are able to consume
+
+06:15.010 --> 06:15.660
+those actions.
+
+06:15.670 --> 06:22.320
+And then it passes those actions to the reducer if we had that email sign and start our email sign and
+
+06:22.320 --> 06:28.560
+start method hits our single middleware that goes into e-mail sign and start email sign and start is
+
+06:28.620 --> 06:38.190
+also using take latest to listen for the email sign and start action and then it will take that action
+
+06:38.340 --> 06:42.080
+and pass it into our sign and with email and password generator function.
+
+06:42.300 --> 06:47.190
+This function then as the coda sign with email and password just like our sign with Google except with
+
+06:47.190 --> 06:49.110
+sign and email and password instead.
+
+06:49.740 --> 06:54.170
+And then depending on the success or failure of that it will dispatch the exact same actions that sign
+
+06:54.160 --> 07:00.390
+on with Google did because our sign a success and sign and fail our actions are generic enough that
+
+07:00.390 --> 07:07.320
+are reducer as are simply able to update the exact same way based on what the sign was successful or
+
+07:07.320 --> 07:08.790
+sign and it was a failure.
+
+07:09.740 --> 07:15.830
+The only difference was the requirements inside of these two generator functions one needed to sign
+
+07:15.830 --> 07:19.640
+in with our Google and one year to sign in with email and password.
+
+07:19.640 --> 07:26.150
+As far as the actual actions were concerned they were exactly the same because what we got back from
+
+07:26.150 --> 07:33.680
+both the silence was going to be the exact same user object the data for our current user was the exact
+
+07:33.680 --> 07:33.980
+same.
+
+07:33.980 --> 07:39.130
+So our reducer only cares that the method sign and success gets fired.
+
+07:39.530 --> 07:43.240
+I get that object I store it inside of my reducer state.
+
+07:43.430 --> 07:50.090
+Now we're able to do this because our sign with Google method on our off library and our side and with
+
+07:50.120 --> 07:56.180
+email and password method on our auth library both return us the same thing when it comes to the errors
+
+07:56.210 --> 08:00.230
+if it fails but also the objects if it succeeds.
+
+08:00.740 --> 08:05.660
+If the sign is successful we get the same snapshot object of the user.
+
+08:05.690 --> 08:11.180
+So with that object we're able to simply dispatch the exact same sign and success method.
+
+08:11.180 --> 08:16.490
+We don't need to duplicate and make two different actions that end up doing the exact same thing in
+
+08:16.490 --> 08:25.200
+our reducer which is simply updating our current user value to that new value so with that in mind hopefully
+
+08:25.200 --> 08:26.700
+this makes sense.
+
+08:26.700 --> 08:33.010
+The only thing we're missing now from the old code we had before the refactor was session persistence.
+
+08:33.150 --> 08:41.010
+Because before what we did is we had our app component that when it mounted it would fire off and instantiate
+
+08:41.040 --> 08:47.910
+that auth dot on off the change method which would immediately let us know whether or not the user is
+
+08:47.910 --> 08:50.490
+still signed into a session.
+
+08:50.530 --> 08:56.950
+We don't have that code anymore because we've moved everything into sagas and the only time we ever
+
+08:56.950 --> 09:04.270
+dispatch the sign is star actions is based on whether or not a user has clicked either of the buttons
+
+09:04.270 --> 09:10.140
+that trigger these actions inside of the sign in component on Mounts.
+
+09:10.150 --> 09:15.220
+Now for application we have nothing checking against the auth library to see whether or not the user
+
+09:15.280 --> 09:18.000
+is still valid in the session.
+
+09:18.870 --> 09:24.810
+What we're going to do then in the next lesson is we are going to write new actions that will check
+
+09:24.870 --> 09:32.080
+against that auth library to see whether or not the user session is valid or not that code we're also
+
+09:32.080 --> 09:38.320
+going to put into an app mount so that the moment our application boots up for the first time we're
+
+09:38.320 --> 09:43.960
+going to check against the library to see if our user is still persistent.
+
+09:44.050 --> 09:50.490
+That is how we're going to pretty much break out all of the code into sagas from a conceptual level.
+
+09:50.650 --> 09:56.530
+So hopefully now equipped with the mental model in what it is that's happening when we write our sagas
+
+09:56.920 --> 10:01.510
+it'll make more sense with the new saga we're going to write in the next lesson.

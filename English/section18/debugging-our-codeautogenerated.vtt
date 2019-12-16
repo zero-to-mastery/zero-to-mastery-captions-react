@@ -1,0 +1,379 @@
+WEBVTT
+
+00:00.480 --> 00:02.820
+Welcome back now.
+
+00:02.830 --> 00:09.520
+In the last lesson we moved our fetch collection start async method into our component did mount.
+
+00:09.520 --> 00:16.150
+We also wrote this asynchronous redux thunk method in order to kick off multiple actions including updating
+
+00:16.150 --> 00:23.620
+our reducer to being able to handle the asynchronous nature and state of our shop related API requests
+
+00:23.920 --> 00:29.260
+related to our collections and getting said collections from firebase.
+
+00:29.260 --> 00:32.210
+Well one issue you might have noticed or if you haven't.
+
+00:32.320 --> 00:42.170
+I'm going to show you is that if you go to some collection page and you refresh you'll actually see
+
+00:42.170 --> 00:43.820
+that it breaks.
+
+00:43.880 --> 00:50.330
+The reason being that it cannot read property title of no meaning that the collection object is equal
+
+00:50.330 --> 00:53.410
+to null when it tries to de structure title off of it.
+
+00:54.550 --> 00:55.690
+Well why is this happening.
+
+00:56.700 --> 01:04.050
+Well we know that what we've done inside of our shop is we're passing in this collection page with Spinner
+
+01:04.620 --> 01:07.530
+and our spinner should be rendering a loading screen.
+
+01:07.530 --> 01:15.630
+If our collections is empty that's the only possible way for ARC selector to be giving us a null collection
+
+01:15.750 --> 01:22.540
+object and if we look at the actions we'll see that this is totally the case when our arrow longs the
+
+01:22.540 --> 01:29.620
+previous state that we can see get logged by our action and Redux logger is such that our shop is in
+
+01:29.620 --> 01:30.690
+its initial state.
+
+01:31.360 --> 01:38.260
+If we scroll down after we actually see that in our action doesn't even fire because our app breaks
+
+01:38.260 --> 01:39.280
+at that point.
+
+01:39.280 --> 01:41.280
+So why is this happening.
+
+01:41.350 --> 01:49.600
+Well as we know we put our async method inside of component did mount component didn't mount mount after
+
+01:49.600 --> 01:56.320
+the initial render call meaning that when our first render call gets called on our shop component is
+
+01:56.320 --> 02:04.450
+fetching collections is using the default fetching value which is false and passing false into our hired
+
+02:04.450 --> 02:11.260
+a component with Spinner will cause it not to render the spinner and instead render our wrapped component
+
+02:11.830 --> 02:14.180
+because is loading is false.
+
+02:14.350 --> 02:17.630
+This is totally expected behavior given how our code is.
+
+02:18.010 --> 02:25.600
+But the problem with this is that are our collection component when it initialize is and renders it
+
+02:25.600 --> 02:34.380
+expects there to be some collections in order for it to actually render any state well.
+
+02:34.450 --> 02:42.550
+This becomes a problem for us because we need to use a different selector rather than just checking
+
+02:42.550 --> 02:46.090
+whether or not our collections is being fetched.
+
+02:46.100 --> 02:54.120
+This is totally normal in many components where we can possibly wait before initializing a page where
+
+02:54.120 --> 02:57.270
+some value is definitely expected to be there.
+
+02:57.510 --> 03:00.310
+We can use art is loading as normal.
+
+03:00.600 --> 03:06.240
+We don't want to ever move any of our API requests into the lifecycle method that occurs before component
+
+03:06.240 --> 03:08.940
+did mount which is our constructor
+
+03:12.930 --> 03:15.740
+we don't want to move our method in here.
+
+03:15.900 --> 03:17.010
+That's a bad pattern.
+
+03:17.010 --> 03:18.050
+It's an anti pattern.
+
+03:18.060 --> 03:26.460
+The reason for this is because when ever a dispatch occurs inside of our application it triggers any
+
+03:26.460 --> 03:31.460
+connected component right to re render because it calls that state.
+
+03:31.460 --> 03:37.080
+In order for those connected components to get new values from the state we don't want this.
+
+03:37.080 --> 03:40.500
+This is a bad pattern.
+
+03:40.530 --> 03:45.360
+The reason why it's a bad pattern is because it causes all kinds of different render states to happen
+
+03:45.590 --> 03:45.930
+right.
+
+03:45.930 --> 03:48.320
+You just don't want to do this in the constructor.
+
+03:48.480 --> 03:54.450
+It's highly suggested we move all of our API requests inside of component that mapped the other method
+
+03:54.450 --> 04:05.680
+you might see in some applications to use is a method called unsafe component will mount this method
+
+04:05.710 --> 04:12.550
+is also a lifecycle method that we have access to but it is not a method that we should be using hence
+
+04:12.550 --> 04:14.010
+why it's flagged unsafe.
+
+04:14.380 --> 04:23.860
+Applications before react 16 were using this method to fire off a synchronous event handling because
+
+04:23.920 --> 04:28.670
+it's before the component mounts so it actually does get fired before our render statement.
+
+04:28.670 --> 04:32.810
+How to react determined that it's unsafe because of the newest version of react.
+
+04:32.860 --> 04:38.200
+All these unsafe methods actually fire multiple times due to the way that they're rendering now.
+
+04:38.470 --> 04:42.330
+So it's not a good idea to fire multiple API requests inside of here.
+
+04:42.340 --> 04:47.200
+In fact in general we should deprecate usage of this method which is fine for us.
+
+04:47.230 --> 04:53.830
+We'll just figure out how to use our existing best pattern which is to fire off our API requests inside
+
+04:53.830 --> 05:01.340
+of component did mount what we have to do instead is just make a new selector for this is loading value
+
+05:01.700 --> 05:07.520
+where instead of checking whether or not collections is fetching we need to check whether or not the
+
+05:07.520 --> 05:11.290
+collections value is actually loaded.
+
+05:11.380 --> 05:17.950
+So what we can do with that is we can write a new shop selector and we can just call it.
+
+05:17.990 --> 05:21.050
+Select is collections loaded
+
+05:23.920 --> 05:35.220
+and what this does is it essentially just determines and returns a boolean value of whether or not our
+
+05:35.220 --> 05:37.180
+collection is null or not.
+
+05:37.200 --> 05:43.950
+So what we'll do is we will say shop because we're just selecting our shop reducer and we'll say shop
+
+05:43.950 --> 05:45.190
+duck collections.
+
+05:45.340 --> 05:46.100
+Right.
+
+05:46.110 --> 05:50.820
+So that's what we want return but we want to convert it to a boolean value.
+
+05:50.820 --> 05:57.630
+We know that default value is null and any other object value is going to be valid.
+
+05:57.630 --> 06:05.330
+So I'm gonna show you a shorthand of converting a value to a truly or falsely boolean value it's actually
+
+06:05.330 --> 06:06.410
+using the double bang.
+
+06:06.410 --> 06:07.580
+If you've never seen this before.
+
+06:08.570 --> 06:16.130
+If you call a double bang on any false value such as zero you will get the actual boolean value.
+
+06:16.130 --> 06:23.520
+This also works for empty strings and anything else that evaluates to false including No.
+
+06:23.570 --> 06:29.270
+Now we know that if we do any kind of object including an empty object we'll get true.
+
+06:29.270 --> 06:32.060
+So if our collections is loaded we'll get true.
+
+06:32.090 --> 06:37.610
+Otherwise we'll get false which is what we want to return from the selector.
+
+06:37.610 --> 06:50.790
+So now if we pull this into our component we can add it to our map state to props value as is collection
+
+06:51.780 --> 06:52.190
+loaded
+
+06:56.290 --> 07:02.560
+and then we can pass now this into our collections page with Spinner as is loading value instead of
+
+07:02.560 --> 07:04.180
+our is fetching collections.
+
+07:04.330 --> 07:07.540
+So we'll continue D structuring off of props.
+
+07:07.540 --> 07:14.680
+One thing we have to remember is that the value will be inverted compared to what is loading is expecting.
+
+07:14.680 --> 07:17.110
+So if r is collection loaded as false.
+
+07:17.110 --> 07:17.510
+Right.
+
+07:17.530 --> 07:23.230
+So if our collection is not loaded then what we want to pass is that the is loading is true.
+
+07:23.230 --> 07:23.460
+Right.
+
+07:23.470 --> 07:25.430
+We want to tell our spinner to render.
+
+07:25.570 --> 07:28.430
+So we actually need to reverse this value.
+
+07:28.550 --> 07:33.930
+Now I know it seems kind of confusing because we've converted it in our selector and then we converted
+
+07:33.930 --> 07:34.530
+it here.
+
+07:34.550 --> 07:36.450
+But let's just think about this.
+
+07:36.760 --> 07:41.140
+Our selector checks to see if our collections is loaded.
+
+07:41.450 --> 07:45.960
+If there is no collections then there's the collections load it is false.
+
+07:46.010 --> 07:46.590
+Right.
+
+07:46.610 --> 07:48.670
+It's not true that our collection is loaded.
+
+07:48.860 --> 07:56.230
+So our select is collections loaded will be false if there's no collections so if is collections load
+
+07:56.240 --> 07:57.700
+it is false.
+
+07:57.700 --> 08:02.530
+If we pass false into is loading we're just going to render a wrapper because our collections page with
+
+08:02.530 --> 08:09.400
+Spinner only renders the spinner if is loading is true which means that if there is no collection we
+
+08:09.400 --> 08:14.590
+want to tell that it's true which is why we need to reverse the value here.
+
+08:14.590 --> 08:22.430
+So now if we save and we go to our application we'll see that it works as we expect it to.
+
+08:22.580 --> 08:28.370
+Just like that so it's a little bit of a complicated thing that we have to do here.
+
+08:28.520 --> 08:36.890
+But that's all it really comes down to is just that we need to make sure to do a new selector just based
+
+08:36.890 --> 08:40.180
+on the way that our application is setup.
+
+08:40.220 --> 08:45.920
+This just goes to show you that there is a multiple multiple ways that applications might be right you
+
+08:45.920 --> 08:52.610
+might walk into an application where there are certain circumstances that prevent you from utilizing
+
+08:52.700 --> 08:57.570
+your pattern the full optimal way you want to which is 100 percent fine.
+
+08:57.770 --> 09:03.200
+Ninety nine percent of projects are not going to be perfect you just have to think about the things
+
+09:03.200 --> 09:07.040
+that we've learned and where we've got to put our logic right.
+
+09:07.040 --> 09:12.640
+Think about one that makes the most sense to you inside of the right places right.
+
+09:12.650 --> 09:19.620
+As we know where to keep our logic and separate our concerns out into and add them they're accordingly
+
+09:20.070 --> 09:21.330
+that's perfectly fine.
+
+09:21.330 --> 09:26.940
+The more you code the more you will come across these situations where you need to come up with a solution
+
+09:27.420 --> 09:30.250
+that is good enough for you on the spot.
+
+09:30.540 --> 09:36.060
+And then from there is the only way you'll learn right because this right now causes no problems for
+
+09:36.060 --> 09:42.560
+us and this is actually a very valid way for us to determine whether or not our collections has been
+
+09:42.560 --> 09:47.940
+properly loaded in order for us to leverage our loading spinner state.
+
+09:47.980 --> 09:50.880
+I know it's been a mouthful and I know these lessons are complicated.
+
+09:50.890 --> 09:59.110
+I definitely definitely know but I promise you this is going to be a very very wonderful experience
+
+09:59.110 --> 10:06.400
+for you to practice with because only by pushing yourselves with these difficult problems are we going
+
+10:06.400 --> 10:15.550
+to see all the possible solutions we can take now in the next lesson we are going to focus on moving
+
+10:16.270 --> 10:23.990
+our selectors where we have currently with our map states of props into their own component because
+
+10:23.990 --> 10:29.570
+as we can see right now the only thing our shop page does with these selectors that we've pulled in
+
+10:29.960 --> 10:37.790
+is pass them into these components so it doesn't make sense to keep this logic on our shop app instead
+
+10:37.790 --> 10:43.490
+what we should do is move them into this component somehow and I'll show you how we can do that in the
+
+10:43.490 --> 10:44.030
+next lesson.

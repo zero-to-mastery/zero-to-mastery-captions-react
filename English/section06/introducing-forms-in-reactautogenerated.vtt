@@ -1,0 +1,238 @@
+WEBVTT
+
+00:01.000 --> 00:02.710
+Hey everyone It's Andre again.
+
+00:02.710 --> 00:06.250
+I just wanted to talk quickly about the upcoming videos you see.
+
+00:06.250 --> 00:13.360
+We're going to start working on our signing page and signing is something that is extremely common all
+
+00:13.360 --> 00:15.670
+across apps throughout your career.
+
+00:15.700 --> 00:20.250
+You're for sure going to have to need to create some sort of a sign for it.
+
+00:20.690 --> 00:28.900
+Now sign in is a combination of creating forms like this and also doing something called user authentication
+
+00:29.740 --> 00:37.050
+where we're able to register a user and also check if a user exists and let them sign it over the next
+
+00:37.050 --> 00:38.330
+couple videos.
+
+00:38.370 --> 00:43.230
+We're going to try and solve this very common problem and we're going to try and show the best way to
+
+00:43.230 --> 00:50.850
+do it with react as well as later on using some sort of back and storage using firebase to actually
+
+00:50.850 --> 00:54.970
+get this feature to work now over the next couple of videos.
+
+00:54.970 --> 01:00.880
+We're going to assume that you know basic HMO all forms if you don't I'll link to this resource so you
+
+01:00.880 --> 01:07.180
+can read up on it but we assume that EMR forms is something that you're quite familiar with and you're
+
+01:07.180 --> 01:10.530
+also familiar with things like event prevent default.
+
+01:10.810 --> 01:17.260
+And why you will see in the next couple of videos is a very common pattern that you'll use not just
+
+01:17.260 --> 01:20.680
+with this project but with future project as well.
+
+01:20.680 --> 01:26.410
+So when you see things like event prevent default and maybe you don't understand it again it's always
+
+01:26.410 --> 01:32.890
+good to make sure that you stop pause and maybe google around but for example prevent default is used
+
+01:32.890 --> 01:41.350
+to stop the default behavior of an HMO form and potentially hijack it or prevent something from happening.
+
+01:41.350 --> 01:42.850
+So we have more control.
+
+01:43.510 --> 01:48.130
+But the most important thing that we're going to talk about and something that you'll carry with you
+
+01:48.220 --> 01:55.630
+throughout your career is this as we're building this sign in and register functionality these three
+
+01:55.630 --> 01:58.320
+points are going to be really evident.
+
+01:58.390 --> 02:05.050
+And I want you to really pay attention on what we're going to do to make sure that we create these components
+
+02:05.230 --> 02:09.200
+and the functionality using these three principles.
+
+02:09.370 --> 02:17.220
+For example when it comes to deciding on components we'll see that we have forms that are quite similar.
+
+02:17.410 --> 02:23.200
+We have buttons that are quite similar instead of coding them each individually.
+
+02:23.200 --> 02:30.700
+We're going to have components that are flexible enough to be able to use just want one react component
+
+02:30.730 --> 02:34.540
+and style it or form it in different ways.
+
+02:34.540 --> 02:37.500
+Remember is all about reusable components.
+
+02:37.750 --> 02:42.730
+If we take a look at the code which you're going to write over the next couple of videos again you won't
+
+02:42.730 --> 02:48.350
+have this yet when we work on the sign in component.
+
+02:48.450 --> 02:55.020
+We're going to get to a point where we have this form input component that we're going to create ourselves
+
+02:55.080 --> 03:01.650
+a custom component so that we go from having a simple simple e-mail input component to something that
+
+03:01.650 --> 03:08.260
+is flexible that we can pass in different properties to customize to our liking.
+
+03:08.370 --> 03:12.820
+For example you register and a signing component.
+
+03:13.030 --> 03:19.480
+We also have a custom button where we can give it different customizations.
+
+03:19.480 --> 03:25.090
+In this case it's only the signing but this custom button can be used with our signing with Google as
+
+03:25.090 --> 03:26.040
+well as the sign up.
+
+03:26.050 --> 03:32.870
+Eventually so you're going to see how to decide on these components how to make them reusable across
+
+03:33.020 --> 03:39.200
+our different app but more importantly we're going to really figure out these two things deciding where
+
+03:39.200 --> 03:44.570
+the state should live and what changes when state changes.
+
+03:44.680 --> 03:47.310
+Again this is code that we're going to write together.
+
+03:47.530 --> 03:53.950
+But you'll notice that we have a handle submit method and a handle change method.
+
+03:53.950 --> 04:02.920
+The one method is going to happen whenever somebody is typing information in the input box where we
+
+04:02.920 --> 04:09.850
+update the state and a another one which is the handle submit which will handle when somebody clicks
+
+04:09.940 --> 04:17.600
+on one of these buttons so we're going to start with basic input to a simple syntax and basic button
+
+04:17.690 --> 04:24.980
+a simple syntax to creating these custom reusable components that are able to react to user changing
+
+04:25.160 --> 04:33.160
+the state of the application and the final thing I want to mention is this Where do you think the state
+
+04:33.490 --> 04:35.750
+for the form less.
+
+04:35.960 --> 04:38.710
+This is a very common problem with react.
+
+04:38.720 --> 04:47.240
+For example we have or we're going to have a sign in page as you can see here and this sign in page
+
+04:47.300 --> 04:51.800
+will be an entire component that contains these two forms.
+
+04:51.800 --> 04:56.150
+Now each of these forms will have its own component.
+
+04:56.300 --> 05:04.890
+One will be the sign component one the register component but here's my question if this was our sign
+
+05:04.890 --> 05:11.850
+in page and this was our signing and this is our register where should the state live.
+
+05:11.850 --> 05:18.910
+Where should the information that the user types in for example in here where should it live.
+
+05:18.920 --> 05:24.220
+Should it live in this component should it live in this component or should it live.
+
+05:24.230 --> 05:29.730
+And this entire page component paused the video and think about that.
+
+05:30.050 --> 05:32.000
+Ready for the answer.
+
+05:32.050 --> 05:39.580
+The easiest way to think about this is to lift up the state only up to the point that the components
+
+05:39.620 --> 05:48.660
+need it so when we create this component we're going to actually keep the state in its own individual
+
+05:48.660 --> 05:56.930
+component so sign in is going to have its own state and register is going to have its own state.
+
+05:56.940 --> 05:57.660
+Why is that.
+
+05:58.990 --> 06:02.850
+Well because these two things don't need to talk to each other.
+
+06:02.930 --> 06:11.020
+In doesn't really care what we enter in register and register doesn't care what's in the form of sign
+
+06:11.020 --> 06:12.130
+it.
+
+06:12.130 --> 06:21.910
+So if we lifted the state up and kept the state in the entire page every time we update this and the
+
+06:21.910 --> 06:27.650
+state changes both of these would get we rendered.
+
+06:27.660 --> 06:34.170
+So that means two extra calculations that react has to do to re render this and we render this if we
+
+06:34.170 --> 06:40.230
+kept state just in the sign because that's the only place that we care about those changes.
+
+06:40.230 --> 06:46.870
+Only this component is going to get really rendered when we type something in here or click some men
+
+06:47.490 --> 06:49.510
+instead of this over here.
+
+06:51.400 --> 06:54.670
+I want you to just notice this as we're building it.
+
+06:54.790 --> 07:00.880
+That e was going to make these decisions and try to keep state to the lowest possible level.
+
+07:00.880 --> 07:08.690
+Keeping the concern in place to whatever component needs it so that we're more efficient with your code.
+
+07:08.710 --> 07:13.560
+This is something that will come with practice but remember over the next couple of videos.
+
+07:13.600 --> 07:19.600
+Notice how e war is going to keep these three principles in mind and build out the components.
+
+07:20.660 --> 07:21.280
+Let's get started.

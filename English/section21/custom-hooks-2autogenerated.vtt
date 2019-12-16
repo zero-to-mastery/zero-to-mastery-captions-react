@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00.940 --> 00:07.360
+In the last lesson we wrote our custom use fetch hook but I want to take some time for us to deepen
+
+00:07.360 --> 00:13.900
+our understanding of why we wrote the use affects portion of this hook the way that we did as well as
+
+00:13.930 --> 00:22.090
+understanding when to use the use effect took most effectively based on our needs because of how we
+
+00:22.210 --> 00:25.650
+actually pass in the second argument.
+
+00:25.960 --> 00:32.800
+So some of you might remember from our use a fact lesson that whenever we wrote the use of Hook before
+
+00:32.800 --> 00:39.750
+we passed in an array of dependencies and whatever the dependency we put inside of that array would
+
+00:39.760 --> 00:43.090
+let us conditionally fire or use a fact hook.
+
+00:43.090 --> 00:50.860
+So for example inside of this use fetch hook example if the only time I wanted are actual fetch data
+
+00:51.010 --> 00:57.880
+inside of our use of took to be fired when ever the URL changed the You are all being the prompt being
+
+00:57.880 --> 01:05.860
+passed into this hook then I would write inside of this array that I pass as the second argument the
+
+01:05.950 --> 01:13.120
+actual You are all property meaning that I only want to fire use effect whenever the you are L prop
+
+01:13.780 --> 01:24.460
+has changed however if instead I wanted it to fire every time the use fetch hook gets called which includes
+
+01:24.460 --> 01:31.720
+when ever the user component or the post component that uses our custom hook re renders meaning that
+
+01:31.720 --> 01:39.160
+when ever react makes our post or our user component render for whatever reason then I want to fire
+
+01:39.160 --> 01:45.790
+the hook if I don't pass that second right that's exactly what will happen use effects we'll get called
+
+01:45.880 --> 01:52.960
+when ever use fetch gets called meaning that whenever this component re mounts use Fetch is getting
+
+01:52.960 --> 02:01.690
+recalled every single time and I want this because I don't know if the user object inside of this user
+
+02:01.690 --> 02:08.950
+component is always the most up to date piece of data regarding the user because for some reason as
+
+02:08.950 --> 02:15.550
+we know with our firebase live database are user might change so we want to make sure that we're always
+
+02:15.550 --> 02:22.210
+try our best to fetch the latest data related to our user that's actually what's really great about
+
+02:22.210 --> 02:29.260
+the use effect hook is that we have multiple ways to conditionally decide when we actually want to call
+
+02:29.260 --> 02:36.760
+it we can only call it on initialization if we pass an empty array meaning that we only want to fire
+
+02:36.760 --> 02:42.250
+this effect when any of the dependencies change inside of this array but there's no dependencies in
+
+02:42.250 --> 02:47.840
+our array so we really only far that use effect took the very first time it ever gets instantiated.
+
+02:48.730 --> 02:55.570
+Alternatively if we wanted to only update use effect when ever use effect got called then we pass know
+
+02:55.570 --> 03:02.830
+array so that use effect will always get triggered regardless of whatever dependencies change because
+
+03:02.830 --> 03:08.390
+we're saying I don't care what dependencies there are I just want you to always fire my use effect took
+
+03:08.410 --> 03:16.450
+when ever either the hook containing it so I use fetch hook gets called or inside of a component where
+
+03:16.450 --> 03:22.180
+it use effect is being used directly whenever that component renders I also want to just make sure I
+
+03:22.180 --> 03:29.300
+fire my hook so that's what's really good about use effects we can have all these different ways that
+
+03:29.300 --> 03:33.010
+we can use it you just have to think about your use case.
+
+03:33.110 --> 03:39.350
+So in our use case because we know that our data might not always be up to date we just want to make
+
+03:39.350 --> 03:45.980
+sure that we are always firing that use a fact hook that we wrote inside of use fetch whenever this
+
+03:45.980 --> 03:52.220
+component renders for whatever reason it is if the user I.D. changes or if even the parent that's using
+
+03:52.220 --> 03:58.730
+user so or app component we renders it or we render the user we're just going to fetch again that way
+
+03:58.730 --> 04:06.050
+we're always making sure that what we're getting is the most up to date version of our user even if
+
+04:06.050 --> 04:11.420
+the string that we're fetching from doesn't change so if perfecting the same user that's fine for us
+
+04:11.450 --> 04:17.960
+because we want to make sure that we always have live and up to date data we don't only want to change
+
+04:17.960 --> 04:24.890
+it when the user I.D. changes so that's why we didn't pass any array into the second argument of use
+
+04:24.890 --> 04:30.920
+effect for this reason so hopefully that clarifies any questions but it also helps you understand when
+
+04:30.920 --> 04:38.450
+to use use effect with an array of no dependencies with an array of dependencies and with no array at
+
+04:38.510 --> 04:39.850
+all.
+
+04:40.090 --> 04:42.210
+OK let's move on with her lesson.

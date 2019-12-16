@@ -1,0 +1,601 @@
+WEBVTT
+
+00:00.270 --> 00:01.740
+OK guys.
+
+00:01.740 --> 00:09.060
+So now that we have our Google sign in we have to actually figure out how to store this authenticated
+
+00:09.090 --> 00:17.520
+user into our database because right now the authenticated user that we're getting back from are off
+
+00:17.520 --> 00:22.710
+library is not actually something in our database.
+
+00:22.710 --> 00:33.570
+So when we actually sign in with our Google sign in what we get back is this user authentication object
+
+00:33.720 --> 00:39.030
+that has a lot of properties on it that we don't actually want.
+
+00:39.030 --> 00:44.130
+So there are so many properties on this because a lot of these are related to things that you might
+
+00:44.130 --> 00:49.530
+want to do with a Google off object from Google's own API.
+
+00:49.560 --> 00:55.800
+So this is supposed to integrate with many of their other services or what they offer in their Google
+
+00:55.800 --> 00:59.270
+sign into other platforms other libraries.
+
+00:59.430 --> 01:04.890
+It's all unrelated to what we need in our application.
+
+01:04.910 --> 01:11.880
+In fact the only things that we really need in our application is this display name.
+
+01:11.930 --> 01:17.640
+This email and possibly maybe a phone number.
+
+01:17.640 --> 01:17.940
+Right.
+
+01:17.940 --> 01:21.170
+But the most important thing is this UI.
+
+01:21.390 --> 01:29.370
+This you I.D. represents the dynamically generated I.D. string that Google made for us when we authenticated
+
+01:29.370 --> 01:31.690
+this user using the Google sign.
+
+01:32.310 --> 01:39.120
+In fact if we go into our authentication and we look at our user inside of our off tab whenever a user
+
+01:39.120 --> 01:46.670
+signs in to our application using the off library that we have regardless of if it's email sign and
+
+01:46.710 --> 01:51.470
+or Google sign in we will get this user right.
+
+01:51.600 --> 02:01.310
+And this user has this EU I.D. We have to take this user off object figure out the properties that we
+
+02:01.310 --> 02:12.200
+want from it and put it into our database particularly what we want to do is put it into our users collection.
+
+02:12.220 --> 02:20.770
+Now we're going to write some code that will allow us to do this as well as understanding what the firestorm
+
+02:20.800 --> 02:28.930
+library actually does for us because there's actually certain rules or certain things that we have to
+
+02:28.930 --> 02:33.430
+abide by in order to use and update the fire store database.
+
+02:33.550 --> 02:36.940
+And I'll explain them as we write out this function.
+
+02:36.940 --> 02:43.150
+So the function that we're trying to write is going to be one that allows us to take that user off object
+
+02:43.180 --> 02:49.790
+that we got back from our authentication library and then store inside of our database.
+
+02:49.810 --> 02:55.960
+So what we're going to call it is this function called create user profile document.
+
+02:55.990 --> 02:56.930
+Right.
+
+02:56.950 --> 03:02.920
+And this is going to be an asynchronous thing because we're making an API request right.
+
+03:02.920 --> 03:12.510
+That's an asynchronous action so we're gonna call async and what we're going to pass into it is of course
+
+03:12.600 --> 03:14.560
+our user off object right.
+
+03:14.610 --> 03:19.470
+That we get back from the author library that's that same object that we were logging right here.
+
+03:19.470 --> 03:27.500
+We're going to pass that in and then we're also going to pass and possibly any additional data that
+
+03:27.500 --> 03:28.910
+we might need.
+
+03:28.940 --> 03:35.780
+So this could be something that we're going to use later when we do are sign up but for now we're just
+
+03:35.780 --> 03:41.330
+going to say we also might want some additional data that will come in in the format of an object and
+
+03:41.330 --> 03:43.680
+I'll show you what we'll do with this additional data.
+
+03:43.970 --> 03:51.550
+Now as we saw when our user signs out we actually get back no from this library.
+
+03:51.550 --> 03:51.970
+Right.
+
+03:52.000 --> 03:55.620
+If our sign out right now we'll see that we log null.
+
+03:55.630 --> 04:05.290
+So we only want to perform this save to our database if we get back a user off object which means that
+
+04:05.290 --> 04:08.280
+they signed in not that they signed out.
+
+04:08.320 --> 04:15.970
+So our function has to make sure that we're checking if we're actually getting back a valid object.
+
+04:15.970 --> 04:21.310
+So inside of our code what we're gonna do is we're going to say if there is no user off.
+
+04:21.310 --> 04:22.270
+Right.
+
+04:22.420 --> 04:23.840
+Because this will evaluate.
+
+04:23.840 --> 04:24.500
+No.
+
+04:24.520 --> 04:25.060
+Right.
+
+04:25.060 --> 04:27.110
+And if it's null then it's false.
+
+04:27.250 --> 04:29.790
+And with the bang we're gonna say we want to reverse it.
+
+04:29.800 --> 04:31.990
+So if it's not false.
+
+04:31.990 --> 04:32.940
+Right.
+
+04:32.980 --> 04:39.010
+So I know the context is confusing but this is essentially a saying if the user auth object does not
+
+04:39.010 --> 04:41.940
+exist then we want to return from this function.
+
+04:42.010 --> 04:43.240
+We don't want to do anything else.
+
+04:43.270 --> 04:48.480
+We want to exit from this function if it does exist though.
+
+04:48.500 --> 04:55.730
+What we're going to do is we are going to query inside a fire store for the document to see if it already
+
+04:55.730 --> 04:57.280
+exists.
+
+04:57.320 --> 05:04.760
+Now in order for us to do this we have to understand what it is that we're going to get back now inside
+
+05:04.880 --> 05:05.600
+of here.
+
+05:05.600 --> 05:14.960
+I have a actual slide for us to understand the firestorm library gives us back one of two different
+
+05:14.960 --> 05:17.760
+types of potential objects.
+
+05:17.960 --> 05:22.980
+We either get back a query reference or a query snapshot.
+
+05:23.060 --> 05:26.300
+They're both different objects that do different things in firestorm.
+
+05:26.840 --> 05:35.330
+But let's talk about what a query is versus a query is simply us asking fire store for some document
+
+05:35.330 --> 05:42.280
+or collection if you remember from the last lesson where we talked about fire store we called Dot dock
+
+05:42.340 --> 05:49.360
+or dock collection and then pass that string to the location inside of the database right for either
+
+05:49.360 --> 05:51.520
+a collection or a document.
+
+05:51.790 --> 06:02.020
+That act of asking is what a query is and what we'll get back when we query is a query reference and
+
+06:02.020 --> 06:05.260
+it can either come in the format of a document or a collection.
+
+06:05.320 --> 06:12.650
+If we're querying for a document or collection respectively a firestorm will always return us these
+
+06:12.740 --> 06:18.320
+objects whether it be the reference or the snapshot which we'll talk about later firestorm will give
+
+06:18.320 --> 06:27.050
+us the object because using the object we can determine whether or not there is any data there.
+
+06:27.100 --> 06:36.340
+Now the reference is simply a object that represents that current place in the database that we're asking
+
+06:36.340 --> 06:37.300
+for.
+
+06:37.300 --> 06:42.400
+So let's actually try it out and we can call it either using dot Doc passing in the collections this
+
+06:42.400 --> 06:47.240
+way right or Doc collections and passing in the path to that collection.
+
+06:47.440 --> 06:54.820
+We explored that earlier in a previous lesson but let's try it out what we're going to do here is we
+
+06:54.820 --> 07:03.670
+are simply going to console dot log the fire store and then calling for the dock users slash and then
+
+07:03.850 --> 07:07.430
+a random user I.D. one that we definitely know doesn't exist right.
+
+07:07.450 --> 07:15.630
+Because our collection is empty anyways if we were to save this and pass this into our app J.S. Right
+
+07:15.660 --> 07:22.130
+we import it in and we use it whenever we get back and forth object.
+
+07:22.260 --> 07:27.480
+We know that this will be asynchronous because we're going to of course make a potential API request
+
+07:27.630 --> 07:36.190
+right to our fire store and then what we'll do is instead of setting the stage here we are going to
+
+07:36.190 --> 07:42.760
+console oh wait sir we're just gonna fire this using our user off object that we know that we're getting
+
+07:42.760 --> 07:46.580
+back from our off library if we were to save.
+
+07:47.240 --> 07:49.130
+We go back to our application.
+
+07:49.130 --> 07:53.030
+We see that we're getting back this document reference object.
+
+07:53.170 --> 08:00.210
+We also see that the random I.D. that we pass to it is here we see that we get the path that we also
+
+08:00.210 --> 08:00.720
+passed in.
+
+08:00.720 --> 08:00.990
+Right.
+
+08:00.990 --> 08:09.300
+So we know where the current location of this document reference is but we are always getting back this
+
+08:09.300 --> 08:13.530
+object even though it doesn't exist inside of our database.
+
+08:13.530 --> 08:15.390
+So why is that.
+
+08:15.390 --> 08:23.370
+Well the reason is because we actually use this reference object to tell fire store whether to save
+
+08:23.370 --> 08:32.140
+data to this place inside of our database or to get data from this location in the database.
+
+08:32.250 --> 08:36.350
+It does not have the actual data related to the document.
+
+08:36.360 --> 08:44.580
+Instead it gives us properties that tell us details about it like the I.D. and the path to this specific
+
+08:44.580 --> 08:51.700
+query reference as we already saw but what we're also able to see if this is a query reference right.
+
+08:51.720 --> 09:00.120
+Meaning it's a document reference is that the parent is a collection reference representing the collection
+
+09:00.150 --> 09:02.140
+that this document is in.
+
+09:02.160 --> 09:08.100
+So here we'll see in this collection reference that we have our idea of users and the path is just users
+
+09:09.950 --> 09:14.540
+now the difference between the document reference and the collection reference is that the document
+
+09:14.540 --> 09:23.840
+reference object we use to perform are crud methods on our firestorm KRudd being either creating retrieving
+
+09:24.140 --> 09:31.370
+updating or deleting the data in that place that location.
+
+09:31.420 --> 09:41.440
+Now when we actually retrieve the data right we're calling dot get it right and don't get is US pulling
+
+09:41.500 --> 09:50.360
+out a snapshot object of that place in the database and that snapshot object was that second type of
+
+09:50.360 --> 09:56.810
+object that I was telling you that fast or could give us back we'll actually use it and we'll be able
+
+09:56.810 --> 10:02.960
+to use that snapshot object in order for us to determine with our code whether or not there's any data
+
+10:03.080 --> 10:07.550
+in this current reference in our fire store.
+
+10:07.580 --> 10:09.530
+So I'll show you what that is as well.
+
+10:09.620 --> 10:13.930
+But again the snapshot object we get back from calling dot get.
+
+10:14.000 --> 10:14.300
+Right.
+
+10:14.330 --> 10:20.190
+So we either call it document rough dot get or we call collection rough talk at collection ref also
+
+10:20.190 --> 10:23.220
+gives us back a snapshot of the collection.
+
+10:23.400 --> 10:26.250
+But it's different from what we're going to use in our current code.
+
+10:26.760 --> 10:30.800
+But it's just good to know that this is something that you might possibly have to do.
+
+10:31.020 --> 10:34.890
+And of course from the document ref we're gonna get a document snapshot.
+
+10:34.980 --> 10:41.940
+So let's actually take a look at that so back in our code what we're going to do here is we are going
+
+10:41.940 --> 10:45.300
+to move this into a contest of some kind.
+
+10:45.300 --> 10:45.600
+Right.
+
+10:45.600 --> 10:54.060
+So const user ref equals forest or dot Doc getting that user and then I'm going to hear say how do we
+
+10:54.060 --> 10:55.000
+get the snapshot.
+
+10:55.980 --> 10:58.790
+Well it's going to be snapshot equals user ref.
+
+10:58.800 --> 10:59.150
+Right.
+
+10:59.160 --> 11:06.540
+So we have our user reference dot get now this is an async right.
+
+11:06.580 --> 11:11.500
+So we're gonna await this and then we're just going to log the snapshot.
+
+11:11.500 --> 11:15.160
+So we take a look at what it is that we're getting now.
+
+11:15.160 --> 11:23.260
+We see that this is our document snapshot object an on it is this property exists the exists property
+
+11:23.260 --> 11:32.150
+tells us whether or not there's any data there the I.D. tells us of course the idea of the same document
+
+11:33.460 --> 11:38.560
+metadata gives us certain information about things like when it was created right whether or not it's
+
+11:38.560 --> 11:41.200
+cached at whether or not there's pending rights.
+
+11:41.200 --> 11:45.380
+Meaning if there's anything that needs to be updated right to this snapshot.
+
+11:45.550 --> 11:50.410
+Don't worry about this for now but just know that this is something that you might want to use if you
+
+11:50.410 --> 11:54.650
+get really really deep with firestorm.
+
+11:54.790 --> 11:59.650
+And then of course we can also always reference back to the document reference object that we queried
+
+11:59.740 --> 12:04.090
+our Snapshot from now instead of using this fake one.
+
+12:04.120 --> 12:07.540
+What we want to use is the user off you I.D..
+
+12:07.540 --> 12:08.090
+Right.
+
+12:08.140 --> 12:14.020
+Because we now want to see whether or not the user off object that we get back from authentication library
+
+12:14.560 --> 12:17.720
+actually already exists in our database.
+
+12:17.740 --> 12:25.510
+So here we're able to say instead of using an actual string where you string interpolation I will say
+
+12:25.510 --> 12:36.620
+users at our user off dot UI de we will get back the user reference at that location and then we'll
+
+12:36.620 --> 12:42.550
+get a snapshot and using that snapshot we're going to figure out whether or not there's data there.
+
+12:42.620 --> 12:42.940
+Right.
+
+12:42.950 --> 12:50.250
+Whether or not we've already stored this user object that we've authenticated and here we'll see that
+
+12:50.250 --> 12:51.900
+the exists is false of course.
+
+12:51.900 --> 12:52.280
+Right.
+
+12:52.290 --> 12:58.290
+But the idea is now that I did that we were getting back from our off library.
+
+12:58.330 --> 13:02.380
+So what we're going to say is we're going to check inside of our code.
+
+13:02.380 --> 13:02.800
+Right.
+
+13:02.800 --> 13:15.120
+Using that snapshot exists property so if it doesn't exist we want to actually create a piece of data
+
+13:15.150 --> 13:23.380
+there and we're going to create it using argues a ref because if you remember from our slide in order
+
+13:23.380 --> 13:30.490
+for us to create we have to use the document reference object not the snapshot the snapshot simply represents
+
+13:30.490 --> 13:31.580
+the data.
+
+13:31.870 --> 13:38.750
+Any methods of creating getting updating or deleting that data.
+
+13:39.070 --> 13:44.690
+We have to use the document reference all object for so here.
+
+13:44.760 --> 13:51.630
+What we're going to do before we create it is we need to see what properties we actually want to store.
+
+13:51.690 --> 13:51.990
+Right.
+
+13:51.990 --> 13:58.730
+What are the data that we want to use in order to create this actual document.
+
+13:58.750 --> 14:06.770
+So what we want is the display name and the email from our user off.
+
+14:06.810 --> 14:07.240
+Right.
+
+14:07.290 --> 14:10.590
+As we remember from that giant object that we first logged.
+
+14:10.590 --> 14:11.900
+We want the display name.
+
+14:11.910 --> 14:20.450
+We want the email and we also want to make sure that we know inside of our database when we made that
+
+14:20.690 --> 14:21.890
+document.
+
+14:21.890 --> 14:27.800
+So by calling new date we're creating a new javascript date object that tells us the current date at
+
+14:27.800 --> 14:35.300
+the current time when this was invoked and what we're going to do is we're going to wrap this inside
+
+14:35.360 --> 14:43.510
+of a try catch block because what we're going to do is an asynchronous request to our database to actually
+
+14:43.510 --> 14:45.430
+store this data now.
+
+14:45.550 --> 14:52.420
+So what we're going to do is we're going to await our user ref calling dot set dots that being the create
+
+14:52.420 --> 14:54.900
+method and we're gonna make an object.
+
+14:54.910 --> 15:00.970
+Right we're going to pass on an object where we have the display name we have the email we have the
+
+15:00.970 --> 15:06.820
+created app and we're also spreading in any other additional data that we might want.
+
+15:06.820 --> 15:11.830
+So as you remember I mentioned earlier we're going to pass this additional data into this function as
+
+15:11.920 --> 15:15.930
+an object if this has any issues.
+
+15:15.940 --> 15:19.600
+We're going to console log error creating user.
+
+15:19.690 --> 15:20.210
+Right.
+
+15:20.230 --> 15:22.870
+And when then we're going to log out the error message as well
+
+15:25.840 --> 15:32.590
+and if this snapshot doesn't exist now we'll create eight data in that place.
+
+15:32.650 --> 15:38.760
+That's all this code is doing or checking if there's any data in that place.
+
+15:38.760 --> 15:44.890
+If there isn't create a new user using the data from our user auth object.
+
+15:44.970 --> 15:52.620
+Now what this function will also do is always return us back our user ref because there's a chance that
+
+15:52.620 --> 15:56.860
+we want to use this user reference object to do other things right.
+
+15:56.880 --> 16:03.030
+This code simply creates the snapshot it creates the data but we might still want the user reference
+
+16:03.060 --> 16:05.460
+in our code for something.
+
+16:05.460 --> 16:08.020
+So that's why we're going to return it from this user ref.
+
+16:08.190 --> 16:15.810
+And now when we called create user profile document write our app initialized You see we didn't log.
+
+16:15.810 --> 16:17.970
+So we probably created something in our data.
+
+16:17.970 --> 16:28.130
+We said we'll be check there is our user in our database our current user is now being stored and if
+
+16:28.130 --> 16:37.510
+we refresh as we know our functional far every time because off is always persisting despite that we've
+
+16:37.540 --> 16:39.400
+only still got the one user.
+
+16:39.400 --> 16:46.870
+We're not making multiple copies because our code again checks if the snapshot at this place exists
+
+16:46.870 --> 16:48.050
+or not.
+
+16:48.070 --> 16:49.560
+So that's what our code is doing.
+
+16:49.750 --> 16:56.470
+We're checking and went out we're making these new users inside of our database based on that user off
+
+16:56.620 --> 17:03.860
+object and now that we have these objects being stored in our database and being pulled into our application.
+
+17:04.120 --> 17:08.980
+Let's actually figure out how to store this data so that we can use it in our application.

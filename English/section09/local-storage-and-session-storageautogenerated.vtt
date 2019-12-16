@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.700 --> 00:09.300
+Right now in our application there is actually a bit of an issue if we ever refresh our application
+
+00:09.600 --> 00:16.440
+whether because we updated our code or let's say for example in a live setting if our user refreshes
+
+00:16.440 --> 00:24.030
+the page they'll actually lose everything they have in the store including their cart items so if we
+
+00:24.030 --> 00:33.450
+were to refresh our reducer gets reset completely which makes a lot of sense because our application
+
+00:33.450 --> 00:38.870
+is re instantiating and all of our initial states for all our reduced hours are being loaded.
+
+00:38.880 --> 00:41.810
+So it's like the app is in a brand new state.
+
+00:41.850 --> 00:49.470
+The only reason their user is being set is because our users authentication status is not being stored
+
+00:49.470 --> 00:53.900
+by the application it's being handled by firebase off.
+
+00:54.000 --> 01:03.280
+If you remember when we did that lesson so far based off gives us session persistence because it's aware
+
+01:03.550 --> 01:11.260
+of until when the user signs out it's not going to actually and the session where asked for everything
+
+01:11.350 --> 01:18.140
+else in our store we don't have any kind of storage of anything related in order to persist.
+
+01:18.250 --> 01:24.700
+The State of the carte items that we're adding across our application even on refresh or closing the
+
+01:24.700 --> 01:26.140
+window.
+
+01:26.280 --> 01:36.810
+Now we want to fix this because in most e-commerce Web sites it persists the user's cart in some way
+
+01:36.810 --> 01:45.690
+shape or form if not when the user closes and re opens the Web site at least if the user refreshes in
+
+01:45.690 --> 01:49.430
+the same session in the same tab.
+
+01:49.490 --> 01:57.840
+Now there's multiple ways that we can tackle this problem one way is using firebase where we would store
+
+01:57.870 --> 02:05.370
+our cart items and then they would belong to our user so that whenever the user signs in or whenever
+
+02:05.370 --> 02:12.690
+we're aware that a user off state has changed based on our app dot J S's user wrath on snapshot getting
+
+02:12.690 --> 02:20.890
+fired we can also pull in our cart which we would store in our database but we're going to do that actually
+
+02:20.890 --> 02:25.690
+later on in the course in a more advanced firebase lesson.
+
+02:25.690 --> 02:31.220
+But right now what if we just wanted to leverage what we had on the front end.
+
+02:31.360 --> 02:36.010
+What if we wanted to just store our cart items.
+
+02:36.010 --> 02:41.810
+Well if you're familiar with local storage it's actually possible.
+
+02:42.050 --> 02:49.340
+And the reason why it's possible is because our reducer state is pretty much just Jason objects.
+
+02:49.340 --> 02:56.340
+They're just large Jason objects which is easy to store and easy to update especially because our reduced
+
+02:56.340 --> 03:00.940
+hours are just functions that return objects dates right.
+
+03:00.950 --> 03:09.290
+So it's really easy you can imagine if in some way we could store the state of what the reducer is in
+
+03:09.920 --> 03:17.930
+and then when the app reloads we just pull it whatever we stored and then populate the reducer as such.
+
+03:17.930 --> 03:24.360
+Now there's a really easy library called redux persist that allows us to do exactly that and it wires
+
+03:24.380 --> 03:27.500
+in with redux so that we don't actually have to worry that much about it.
+
+03:27.710 --> 03:33.920
+But before we explore that I want to talk about local storage because that's what the underlying tool
+
+03:34.080 --> 03:42.800
+is being used by redux persist so let's actually spore local storage a little bit and it's pretty easy
+
+03:42.800 --> 03:49.890
+to actually start using so we actually have access to it on our window object.
+
+03:50.010 --> 03:57.240
+So on a window object we have access to both local storage and session storage which are both the almost
+
+03:57.360 --> 04:01.930
+exact same means of storing something on our browser.
+
+04:01.980 --> 04:07.040
+The only difference is that session storage persists throughout the session.
+
+04:07.050 --> 04:15.270
+So as long as our tab is open even if we refresh the page we'll still have access to what we've stored
+
+04:15.330 --> 04:16.890
+in session storage.
+
+04:16.890 --> 04:24.060
+Whereas if we close the page then we would lose whatever it is that we stored in session storage whereas
+
+04:24.240 --> 04:27.330
+local storage will persist until we clear it out.
+
+04:27.330 --> 04:33.830
+Meaning that if we close our window close our browser will always have access to it but let's actually
+
+04:33.830 --> 04:41.360
+explore how to use it now local storage has a get item and a set item.
+
+04:41.740 --> 04:47.710
+So one sets the item inside the storage so it stores it and then the get lets us pull it out of local
+
+04:47.710 --> 04:51.590
+storage and we store them under string keys right.
+
+04:51.850 --> 04:55.960
+So we give it a key and that's what I'll store it under and then I'll also be the same key that we use
+
+04:55.960 --> 04:56.910
+to access it.
+
+04:57.860 --> 05:06.140
+But we have to store Strings only so let's say for example that we had a object we want to store my
+
+05:06.260 --> 05:12.860
+object to store and it's just equal to some object with my name of equal on it.
+
+05:14.660 --> 05:19.430
+Now in order for me to store it I would say window to local storage dots set item.
+
+05:19.430 --> 05:19.740
+Right.
+
+05:19.760 --> 05:21.000
+And then I would give it the key.
+
+05:21.020 --> 05:23.710
+So let's say my item.
+
+05:23.920 --> 05:29.890
+Now what I want to do in order to actually store it is I have to convert this Jason object to a string
+
+05:30.420 --> 05:36.360
+and we can do that with the Jason object that we get from r javascript.
+
+05:36.370 --> 05:42.340
+So we always have access to this and this allows us to perform certain methods on our chase on objects
+
+05:42.790 --> 05:48.850
+such as this one called string of one which allows us to string ify our object and all it does is it
+
+05:48.850 --> 05:54.370
+wraps this object inside of a string and it converts all the keys also to strings.
+
+05:54.370 --> 05:54.540
+Right.
+
+05:54.550 --> 05:55.920
+Which is required for Jason.
+
+05:55.950 --> 06:04.180
+So we'll say Jason stratify my object to store and now we note our local store just stored it if we
+
+06:04.180 --> 06:09.230
+want to access it again we'll just call window local storage dock get item.
+
+06:09.280 --> 06:16.680
+I will say my item and there we see that's our object but stored as the string right.
+
+06:16.710 --> 06:19.480
+Because we string ify it and that's what it looks like.
+
+06:19.740 --> 06:28.150
+If we want to convert it back we can just set a new object to my retrieved object and let's say we just
+
+06:28.150 --> 06:33.390
+call it our window local storage dock get item.
+
+06:33.390 --> 06:33.860
+Right.
+
+06:33.870 --> 06:40.110
+So we want to get it under our key that we set it under and then.
+
+06:40.190 --> 06:43.570
+Now let's say we wanted to turn it into a string.
+
+06:43.610 --> 06:47.520
+While we would say Jason dot pass.
+
+06:47.570 --> 06:52.950
+Right which is a method on that same Jason object we're talking about let's say we do my retrieved object
+
+06:53.580 --> 06:58.660
+one now we get our object back so really handy right.
+
+06:58.680 --> 07:00.460
+Local storage is great for this.
+
+07:00.630 --> 07:10.120
+If I refresh I'll see that I still have access to local storage and now if I look there's the string
+
+07:10.840 --> 07:20.190
+we can just pass it again and now I've managed to persist this object across my application state it's
+
+07:20.200 --> 07:21.360
+persisted.
+
+07:21.680 --> 07:28.460
+So because all restoring our Jason objects wouldn't it be great if we could just store the state of
+
+07:28.460 --> 07:35.030
+our cart and then persist it and then whenever our application refreshes or opens up for the first time
+
+07:35.360 --> 07:41.910
+we pull it out of local storage and then update our reducer to show what we had stored well that's what
+
+07:41.910 --> 07:43.500
+the library redux persistence.
+
+07:44.220 --> 07:49.680
+But I wanted to show you what local storage was and such and storage secondaries is almost identical
+
+07:49.680 --> 07:55.530
+to local storage but again it just doesn't store across closing the tap.
+
+07:55.530 --> 08:00.210
+But I just want to show you what's happening under the hood with this library where it's a bringing
+
+08:00.510 --> 08:01.740
+of redux persist.

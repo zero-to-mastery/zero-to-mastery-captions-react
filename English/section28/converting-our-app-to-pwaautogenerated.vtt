@@ -1,0 +1,379 @@
+WEBVTT
+
+00:00.270 --> 00:02.280
+Welcome back everyone.
+
+00:02.280 --> 00:08.520
+In the last few lessons we watched Andre explain to us all of the key things required in order for our
+
+00:08.580 --> 00:12.800
+application to be considered a progressive web app.
+
+00:12.800 --> 00:16.770
+Now luckily for us our application is built with create react app.
+
+00:16.800 --> 00:22.470
+And as Andre explained it's incredibly easy because create react app has pretty much given us all of
+
+00:22.470 --> 00:27.990
+the tools required in order to adhere to those principles that make an application.
+
+00:28.000 --> 00:35.930
+AP W8 now in order for us to actually do this there's a couple things we have to first tweak about our
+
+00:35.930 --> 00:41.330
+application a little bit beyond what Andre explained the reason for this is because we're also running
+
+00:41.330 --> 00:43.850
+an express server but we'll get to that.
+
+00:44.060 --> 00:50.030
+The first thing that we do need to do inside of our index J.S. is bring back that service worker.
+
+00:50.030 --> 00:56.360
+What we're going to do is we're just going to say import and then we'll use that wildcard the star symbol
+
+00:56.450 --> 01:04.040
+to say everything I want to import everything as the content service worker from the service worker
+
+01:04.040 --> 01:05.680
+or file.
+
+01:05.820 --> 01:09.170
+So now that we have a service worker code we're just going to say service worker.
+
+01:09.240 --> 01:15.750
+Register at the bottom which will register the service worker inside of our application and that completely
+
+01:16.200 --> 01:20.760
+verifies the service worker requirement for P.W. A.
+
+01:20.770 --> 01:27.340
+The other thing to remember though is that because we're using an express server when ever a application
+
+01:27.340 --> 01:32.650
+tries to load the service worker it's going to be looking for a service worker dock J.S. file.
+
+01:32.680 --> 01:39.190
+So what we have to do in our server is that when ever and the app makes a GET request for service worker
+
+01:39.190 --> 01:43.180
+dock J.S. we will give them that service worker file.
+
+01:43.180 --> 01:47.900
+So inside of our server Jess we're going to do one thing.
+
+01:48.130 --> 01:55.630
+We're going to add inside of here a new app get call and we're gonna say if they're ever requesting
+
+01:55.630 --> 02:06.050
+service worker dot J.S. then with the request and the response as the function we are going to say that
+
+02:06.230 --> 02:13.500
+with the response we're gonna send the file path resolve our directory name
+
+02:16.670 --> 02:24.800
+combined with this dot dot meaning that we want to go up one because we were inside of our client we
+
+02:24.800 --> 02:29.310
+want to go to our build folder and then we want to pass it.
+
+02:29.320 --> 02:36.410
+The service worker dodgy far so that's all we're trying to do.
+
+02:36.410 --> 02:41.540
+We're just saying whenever an application requests our application to provide something from this route
+
+02:41.630 --> 02:46.610
+we're just going to go into our build folder get the servers work or just file and that's what we'll
+
+02:46.610 --> 02:47.790
+render and return.
+
+02:48.620 --> 02:53.630
+So that's all we need in order to add our service work into our application.
+
+02:53.630 --> 03:00.170
+The next thing that we have to do is we have to ensure that our applications manifest is up to date
+
+03:00.170 --> 03:02.520
+with the icons that are required.
+
+03:02.570 --> 03:08.660
+We also can change some of the names here because our application is going to actually render this name
+
+03:08.690 --> 03:15.860
+or the short name in a mobile browser when we try and open it after we've downloaded it into our mobile
+
+03:15.890 --> 03:19.100
+device as a progressive web application.
+
+03:19.220 --> 03:21.910
+So how we'll do that is we can just name this whatever we want.
+
+03:22.020 --> 03:24.200
+I'm going to call this one crown clothing
+
+03:26.870 --> 03:30.760
+with a capital C and the long name.
+
+03:30.920 --> 03:38.000
+Maybe I'll say something like Crown clothing by equal so luckily for us create react that generates
+
+03:38.030 --> 03:40.700
+us this five icon and it gives us the size that we need.
+
+03:40.730 --> 03:44.140
+And if you remember I did give you a favor Conda Iko.
+
+03:44.270 --> 03:49.830
+This fab Akon is good enough to replace all of these image sizes inside of our manifest.
+
+03:49.880 --> 03:51.250
+So this one is fine.
+
+03:51.320 --> 03:58.250
+The only other thing we need to add is two more P and Gs that are the sizes for the Android splash as
+
+03:58.250 --> 04:03.100
+well as a one ninety two by one ninety two version that Android also needs.
+
+04:03.110 --> 04:08.660
+So what we can do is just import them in from the resources folder because I will provide both of those
+
+04:08.660 --> 04:09.920
+for you.
+
+04:10.010 --> 04:16.670
+So simply just drag them into your public folder and what we'll do is create two new objects inside
+
+04:16.730 --> 04:19.330
+of our icons array.
+
+04:19.440 --> 04:25.470
+The first one is going to just point to the source exactly like the same format we see with our fan
+
+04:25.480 --> 04:37.670
+icon Iko above there was a crown 512 times 512 PSG which is the name of this file for sizes.
+
+04:37.670 --> 04:39.530
+We'll just say 512 by 512
+
+04:42.950 --> 04:49.400
+and for type we just gotta say it is image slash PSG.
+
+04:49.470 --> 04:57.400
+You can actually copy this text paste it in here and just change the instances of 512 to one ninety
+
+04:57.400 --> 05:01.600
+to and that's all we need for our manifest.
+
+05:01.770 --> 05:04.530
+We have the names and we updated the icons.
+
+05:04.560 --> 05:12.120
+The last thing we have to do is HTC CPS as you remember we're hosting on Heroku and Heroku by default
+
+05:12.150 --> 05:13.640
+does give us HD.
+
+05:14.430 --> 05:22.230
+The only thing to note is that we do need to redirect any H TTP request over to HECS meaning that if
+
+05:22.320 --> 05:29.490
+anybody requests our application using HDTV we should automatically redirect them over to TTP.
+
+05:29.670 --> 05:34.620
+Typically when you have a server you do do this on the hosting server.
+
+05:34.620 --> 05:37.550
+Now Heroku does not have this option for us.
+
+05:37.560 --> 05:42.900
+They have us do it inside of the application but they do provide us with some links about what the best
+
+05:43.290 --> 05:44.900
+libraries to use are.
+
+05:44.910 --> 05:47.740
+I'm going to provide you with the one that I think is best.
+
+05:48.000 --> 05:51.840
+The one that I like to use is called Express s s Alpha Phi.
+
+05:51.930 --> 05:53.150
+So that's what we're going to do.
+
+05:53.970 --> 05:59.890
+So in order to add it into our application what we're going to do is we are just going to install that.
+
+05:59.890 --> 06:06.150
+And so I'm going to use yarn and if you're using NPM of course just use NPM but I'll say yarn at Express
+
+06:06.330 --> 06:06.810
+Dash.
+
+06:06.810 --> 06:13.270
+S S L I F Y SS Alpha once this is finished installing.
+
+06:13.440 --> 06:20.270
+We're just going to go back into our server jazz and add this new line.
+
+06:20.300 --> 06:27.820
+So first what we're going to bring in is in force which is what we're going to call what we get back
+
+06:27.910 --> 06:33.290
+from Express SS Alpha in order for us to use it.
+
+06:33.290 --> 06:37.900
+We just simply call use where we do all of our use statements.
+
+06:37.940 --> 06:48.610
+So down here we can just say app don't use enforce that HDTV us and then we're also going to pass it
+
+06:48.610 --> 06:55.420
+this object that says trust proto header goes to true.
+
+06:55.470 --> 07:01.060
+The reason we need to do this is because with Heroku Heroku runs what's called a reverse proxy.
+
+07:01.170 --> 07:07.770
+Now a reverse proxy is something that allows us to forward unencrypted H TTP traffic to the Web site.
+
+07:08.130 --> 07:12.930
+So this is really difficult because inside of Heroku it's going to hide away the headers that originally
+
+07:12.930 --> 07:17.280
+would tell our application whether or not it's coming from an HTC P request.
+
+07:17.490 --> 07:21.790
+But luckily for us there is this proto header property that they append on it as well.
+
+07:22.260 --> 07:28.140
+So as you can actually read right here I'm actually realising that what I explained was inside of this
+
+07:28.140 --> 07:29.390
+block of text here.
+
+07:29.550 --> 07:31.420
+It's just something we've got to do with Heroku.
+
+07:31.440 --> 07:34.760
+So with that we're now able to enforce our HDTV.
+
+07:34.770 --> 07:35.390
+Yes.
+
+07:35.490 --> 07:42.950
+So these are all the changes we need so what we're going to do is just simply get at everything in get
+
+07:43.010 --> 07:54.420
+commit updating our code to be P.W. a compliant we'll say added service worker HD CPS as well as updated
+
+07:54.440 --> 07:55.070
+manifest
+
+07:58.030 --> 08:06.950
+and then we're just gonna run get push Heroku master and in case your application is out of sync with
+
+08:07.100 --> 08:11.960
+any of the get repos that you've got so far with your Heroku because maybe you closed down my project
+
+08:11.960 --> 08:16.550
+or something you can just force your existing Heroku application to switch over
+
+08:20.210 --> 08:20.520
+OK.
+
+08:20.530 --> 08:27.340
+Now that we finished building let's actually see our application so we're just gonna run Heroku open
+
+08:29.440 --> 08:34.430
+now your application may take a little longer because the dynamite need to be spun up but mine is already
+
+08:34.430 --> 08:35.530
+alive.
+
+08:35.680 --> 08:42.730
+So what we're going to do now is we are going to run an audit to make sure that our application is progressively
+
+08:43.540 --> 08:45.880
+compliant so did check this.
+
+08:45.880 --> 08:50.770
+Just go to your audits tab if you're in Chrome because by default lighthouse is actually brought into
+
+08:50.770 --> 08:54.880
+it and here you're going to select the desktop.
+
+08:55.220 --> 09:03.540
+Let's actually pop this out just because we want to look at everything so we want to choose desktop.
+
+09:03.630 --> 09:09.060
+We want to audit performance progressive web app and best practices accessibility and SEO is not important
+
+09:09.060 --> 09:14.910
+because that's not the focus of this course we're gonna set no throttling and clear storage is perfectly
+
+09:14.910 --> 09:15.150
+fine.
+
+09:15.930 --> 09:17.870
+So we're just going to run the audit itself.
+
+09:19.070 --> 09:20.480
+And this might take a couple of seconds
+
+09:24.890 --> 09:26.060
+and there we go.
+
+09:26.060 --> 09:29.300
+We got our scores so we'll see that we have a 100 per performance.
+
+09:29.300 --> 09:33.620
+We have ninety three four best practices and we are progressive web app compliant.
+
+09:34.100 --> 09:39.650
+So if we scroll down here we see that we have gotten a checkmark for every single one of our sections
+
+09:40.010 --> 09:42.600
+and we're now P.W. a optimize.
+
+09:42.740 --> 09:48.240
+You can actually check this application inside of your phone now.
+
+09:48.260 --> 09:54.020
+Unfortunately since the making of this course that adds a home page button is longer available inside
+
+09:54.020 --> 09:56.410
+of your chrome browser on your desktop.
+
+09:56.450 --> 10:03.620
+But if you have a mobile device simply go to the link that is your Heroku app or you can go to mine
+
+10:04.100 --> 10:08.510
+and you will get a little tab at the bottom that asks you to add it to your home page if you click that
+
+10:08.810 --> 10:14.000
+you'll add our application using our fab Akon to your home page and you can open it and browse it like
+
+10:14.060 --> 10:17.290
+you would a native application which is what's really really cool.
+
+10:18.110 --> 10:23.390
+So that's one great thing about create react app and the way that we've set up our project is that we're
+
+10:23.390 --> 10:29.810
+able to get progressive web application level compliant C so quickly and so easily hopefully you enjoyed
+
+10:29.810 --> 10:33.470
+this section on converting our application over to a P.W. a.
+
+10:33.710 --> 10:39.020
+Check it out on your mobile device because it's really cool to see for the first time with that.
+
+10:39.080 --> 10:41.300
+That ends our section on progressive web apps.
+
+10:41.480 --> 10:42.770
+And I'll see you in the next lesson.

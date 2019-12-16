@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.820 --> 00:08.950
+OK so now that we have understood what the documents snapshot object is let's look at the other type
+
+00:08.950 --> 00:15.160
+of snapshot we can get which is a query snapshot or a collection snapshot if you want to see it like
+
+00:15.160 --> 00:15.360
+that.
+
+00:16.990 --> 00:26.420
+So we get our query snapshot object from a collection reference object and it is very similar to the
+
+00:26.510 --> 00:29.060
+documents snapshot object that we just looked at.
+
+00:29.060 --> 00:34.670
+The only difference is that there's a couple other properties that reflect the fact that we're looking
+
+00:34.760 --> 00:37.350
+at a collection.
+
+00:37.410 --> 00:45.300
+Now let's actually log it out first so I've returned our firebase utilize back to what we had before
+
+00:45.390 --> 00:48.650
+where everything was working as we had it before.
+
+00:48.660 --> 00:55.050
+And what I'm going to do is I'm going to make a new collection reference equal to fire store dot collection
+
+00:55.410 --> 01:03.810
+at users so we know that users is our only existing collection if we were to check.
+
+01:03.900 --> 01:08.350
+We know that users is the only collection that we have.
+
+01:08.580 --> 01:12.910
+Now I'm also going to call the snapshot
+
+01:17.370 --> 01:19.710
+by calling collection ref.
+
+01:19.770 --> 01:24.350
+I get the same way that we did with our document reference.
+
+01:24.360 --> 01:26.020
+Right.
+
+01:26.080 --> 01:30.970
+So now if I save and actually log out the collection snapshot
+
+01:34.370 --> 01:42.010
+we can see what properties we have so if we scroll up here we see our collection snapshot object and
+
+01:42.100 --> 01:48.100
+on it we see that there is these new properties the main ones that we care about our docs empty and
+
+01:48.100 --> 01:49.820
+size.
+
+01:49.840 --> 01:59.440
+Now what docs tells us is it gives us back an array of the documents inside of our collection but their
+
+01:59.770 --> 02:01.870
+query documents snapshot objects.
+
+02:01.870 --> 02:09.400
+So their documents snapshot objects the ones that we just explored earlier the empty property is similar
+
+02:09.400 --> 02:15.380
+to the exists property except it tells us whether or not our query is empty or not.
+
+02:15.430 --> 02:17.550
+So it returns a boolean.
+
+02:17.950 --> 02:24.250
+And of course empty is false because we know that we have three different documents inside of our collection
+
+02:25.720 --> 02:32.110
+the last property we care about is size which just tells us how many objects are inside of our documents
+
+02:32.320 --> 02:41.740
+inside of this collection and using this collection snapshot we're able to for example get all of our
+
+02:41.830 --> 02:48.160
+collection items and then what we can do is on the dot docs method we can map over it get the data of
+
+02:48.220 --> 02:55.720
+each object using the snapshot dot data method that we saw in our last lesson in order to get a Jason
+
+02:55.780 --> 03:04.820
+object of all of our objects and what that would look like for example is if we did a collection snapshot.
+
+03:05.280 --> 03:07.060
+Docs dot map right.
+
+03:07.060 --> 03:09.520
+Doc Doc Dot data
+
+03:13.200 --> 03:26.230
+collection like so now if we save and we look what we will see is the array of each of our user objects.
+
+03:26.330 --> 03:31.970
+I know it's a little tricky because it's probably not the format that you're used to.
+
+03:31.970 --> 03:37.130
+If you've ever fetched data before from a back end but this is just the way that fire store wants us
+
+03:37.130 --> 03:43.100
+to do it with these types of objects that we get back using our collection snapshot object we can just
+
+03:43.100 --> 03:49.160
+call docs which gives us the array of snapshots of the documents we map over it and then we just make
+
+03:49.160 --> 03:56.210
+sure to call dot data on those documents snapshot objects to get the actual Jason representation of
+
+03:56.210 --> 04:01.400
+the values of those document but that's really all there is to it.
+
+04:01.540 --> 04:08.050
+We'll of course use these objects in different ways in order to update our data or set our data or get
+
+04:08.050 --> 04:08.770
+our data.
+
+04:08.890 --> 04:16.060
+But I just wanted for us to go over what these objects are and now hopefully this code that we wrote
+
+04:16.060 --> 04:24.790
+before in order for us to store our user in our back end makes more sense.
+
+04:24.850 --> 04:32.410
+The only thing to keep note of is that on these refs there's also this on snapshot method in particular
+
+04:32.470 --> 04:34.310
+on our user ref right.
+
+04:34.360 --> 04:38.730
+Which we get back from our create user profile document.
+
+04:38.730 --> 04:44.940
+We see that what we do is that the main thing that this create user profile document returns is a user
+
+04:44.940 --> 04:54.090
+ref and what we do with it is we check to see using a similar listener as our on auth state changed.
+
+04:54.090 --> 05:00.570
+We use this on snapshot listener so that whenever the snapshot changes right meaning that whenever the
+
+05:00.570 --> 05:07.410
+documents snapshot object updates whether because we set a new value or we updated the value or we deleted
+
+05:07.410 --> 05:15.670
+the value it will pass that snapshot into ah listener which we've attached to this on snapshot and our
+
+05:15.670 --> 05:21.940
+listeners just this function and what we do is we call our set current user action creator method.
+
+05:21.940 --> 05:31.060
+So our redux method to set the actual current user object in our reader's reducer and that's how we
+
+05:31.060 --> 05:39.040
+are able to store that user on our current user likes up and that's all it is.
+
+05:39.060 --> 05:44.670
+So I'm just going over what we wrote before right except a little bit more detail about the types of
+
+05:44.670 --> 05:50.430
+objects and the types of queries we can make against fire store because now we're going to use this
+
+05:50.820 --> 05:56.850
+in theory to move our shop items onto our fire store data.

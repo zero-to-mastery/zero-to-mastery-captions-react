@@ -1,0 +1,196 @@
+WEBVTT
+
+00:01.010 --> 00:08.640
+In this section we are going to talk about building in the stripe integration so if you're unfamiliar
+
+00:08.640 --> 00:17.760
+with stripe stripe is a platform that allows us to handle online payments which doing from scratch is
+
+00:17.850 --> 00:26.280
+actually an extremely lengthy ordeal an undertaking to do not just in terms of coding the elements on
+
+00:26.280 --> 00:34.950
+the front end but also the logistics of handling payments international payments payments online taking
+
+00:34.950 --> 00:41.970
+credit cards how to properly secure and store credit card information and then actually checking against
+
+00:41.970 --> 00:46.280
+the banks and then doing a proper e-commerce flow.
+
+00:46.380 --> 00:51.870
+It's all extremely extremely lengthy and difficult for us to do.
+
+00:52.050 --> 00:58.860
+But what stripe as a platform does is it actually hides that all and handles it all for us and it gives
+
+00:58.860 --> 01:05.840
+us a very easy interface to interact with and bring into our front and applications.
+
+01:05.890 --> 01:13.960
+Now what we're using is this striped button that allows us to fire off this element where we can fill
+
+01:13.960 --> 01:23.010
+in our information right and we can provide a test credit card which we have listed here which will
+
+01:23.010 --> 01:26.310
+then handle an artificial payment
+
+01:30.040 --> 01:30.700
+right.
+
+01:30.740 --> 01:37.370
+And it's essentially all of the elements required in order to properly do payment flow on our front
+
+01:37.370 --> 01:45.710
+end now in order to actually create charges however it requires a back end server which we're not going
+
+01:45.710 --> 01:50.950
+to do in this lesson we can cover it in an advance lesson near the end of the course.
+
+01:51.170 --> 01:57.290
+But for the purposes of our project we just want to demonstrate that we have this final flow considered
+
+01:57.620 --> 02:04.970
+as well as show our ability in integrating with a service like stripe so that we understand the requirements
+
+02:05.030 --> 02:12.970
+of what it's like now if we go to the stripe Web site we'll see that its introduction is that it's the
+
+02:12.970 --> 02:14.920
+new standard for online payments.
+
+02:15.160 --> 02:20.350
+It's the best software platform for running an Internet business and they handle billions of dollars
+
+02:20.770 --> 02:30.560
+every year in terms of actually processing payments so stripe is a massive tech company and they are
+
+02:30.620 --> 02:37.720
+massively successful now in order for us to actually use it we can take a look at some of the ways that
+
+02:37.720 --> 02:41.860
+it allows us to integrate into our applications.
+
+02:41.900 --> 02:48.380
+One of them being inside of their website on their developers tab nested in the documentation is this
+
+02:48.380 --> 02:50.780
+thing called elements.
+
+02:50.780 --> 02:56.870
+Now stripe actually provides us with a lot of the elements that we might need in order to properly use
+
+02:56.870 --> 02:58.340
+their service.
+
+02:58.370 --> 03:02.080
+So we've actually seen an element with their dropdown.
+
+03:02.120 --> 03:02.350
+Right.
+
+03:02.360 --> 03:04.520
+Because we don't code this ourselves.
+
+03:04.520 --> 03:06.740
+We pretty much just get even this button.
+
+03:06.920 --> 03:13.760
+And then this button will fire off this creation of this component which we just fill out.
+
+03:14.060 --> 03:19.100
+And then it formats everything correctly based on the information provided for us to actually make a
+
+03:19.100 --> 03:24.130
+charge on their service but just to walk through.
+
+03:24.130 --> 03:27.600
+In case you're curious about all these kinds of things you can do with stripe.
+
+03:27.670 --> 03:30.480
+They have multiple ways of handling payments.
+
+03:30.580 --> 03:35.170
+They have ways where you can handle payments while building out the form yourself because they'll give
+
+03:35.170 --> 03:37.000
+you the form elements that you'll need.
+
+03:37.000 --> 03:41.740
+This includes name and email fields with this bank.
+
+03:41.750 --> 03:47.650
+No field and then they have bank drop downs which will give you an ability to select which bank you
+
+03:47.650 --> 03:50.000
+want depending on what region you're in.
+
+03:50.140 --> 03:54.850
+And usually to use these there are just the elements and then you pass a certain configurations as properties
+
+03:56.620 --> 04:02.900
+but beyond that they also have these payment style forms that we can leverage.
+
+04:02.990 --> 04:07.910
+So this is actually a more comprehensive version of those form fields put together.
+
+04:08.270 --> 04:15.500
+You can even pull in this pay now field which allows you to leverage your browser's built in payment
+
+04:15.500 --> 04:22.850
+processing system so there's a lot of options that stripe provides for us to use however we want inside
+
+04:22.850 --> 04:24.170
+of our service.
+
+04:24.170 --> 04:27.890
+But the one that we want to use is going to be this dropdown.
+
+04:28.730 --> 04:31.130
+And we're only going to build the front end of it.
+
+04:31.160 --> 04:36.260
+So we're not actually going to handle the payment until a later lesson because it requires us to actually
+
+04:36.260 --> 04:41.480
+write some back in code some note or express code and even then I'm going to minimize the amount of
+
+04:41.480 --> 04:43.970
+code that we have to write just to handle the payment.
+
+04:43.970 --> 04:46.610
+But that lesson is not entirely necessary for react.
+
+04:46.640 --> 04:47.470
+That is more so.
+
+04:47.470 --> 04:53.660
+Just if you're interested in seeing what it's like to fully flush out the flow of handling a test payment
+
+04:53.840 --> 04:59.620
+inside of your stripe account I'm gonna show you how that looks at the very end of the course.
+
+05:00.350 --> 05:06.110
+But right now for us and for our project that we want to show to potential employers we just want to
+
+05:06.110 --> 05:12.890
+show our ability to integrate with the service far off this element and then show a flow in some kind.
+
+05:12.890 --> 05:19.980
+That makes sense of a user checking out and paying with this stripe integration now before we actually
+
+05:19.980 --> 05:21.230
+begin bringing it in.
+
+05:21.330 --> 05:27.930
+We just have to make a stripe account which is free and all you have to do is go to the sign on the
+
+05:27.990 --> 05:29.580
+website and then you sign up.
+
+05:29.580 --> 05:36.290
+If you don't have one if you do just log in and once you log in I will see you in the next lesson where
+
+05:36.290 --> 05:38.840
+we bring this into our application.

@@ -1,0 +1,466 @@
+WEBVTT
+
+00:00.480 --> 00:07.750
+So now that we have our sign on with Google let's actually make our sign in with email but we are first
+
+00:07.750 --> 00:14.470
+going to modify our sign in component so that it actually produces are signing with email start call
+
+00:14.530 --> 00:15.780
+instead of doing it itself.
+
+00:17.060 --> 00:22.520
+This is pretty much going to be the only place in the code base that we need to change as far as our
+
+00:22.520 --> 00:24.410
+sign and component goes.
+
+00:24.410 --> 00:32.040
+So what we're going to do is we are going to modify our code right here to remove this try block.
+
+00:32.060 --> 00:35.890
+We don't need this doing it anymore for us.
+
+00:35.930 --> 00:40.280
+We also don't need to call these libraries that we're bringing in from firebase utilize.
+
+00:40.490 --> 00:47.860
+So let's just get rid of them and what we do need to do is we need to import in our email sign and start
+
+00:47.860 --> 00:48.250
+method
+
+00:51.600 --> 00:54.660
+which we will also now attach to our dispatch
+
+00:58.270 --> 00:58.490
+now.
+
+00:58.520 --> 01:04.350
+Similarly here what we're going to get back is an email and a password and what we're going to dispatch
+
+01:04.440 --> 01:11.970
+out is this except we're going to pass it in as an object where the keys go to the values
+
+01:15.010 --> 01:23.680
+and now we're gonna use this inside of our handle submit so we need to remember to D structure off this
+
+01:23.740 --> 01:24.550
+from our prompts
+
+01:28.130 --> 01:38.180
+and then we just simply call our email sign and start where we pass in our email and password.
+
+01:38.200 --> 01:43.780
+Now you might be wondering why would we d structure this off of props if this is only the one place
+
+01:43.780 --> 01:44.780
+where we're going to use it.
+
+01:44.800 --> 01:46.260
+Would it not be easier just to call it.
+
+01:46.260 --> 01:49.170
+This stuff prompts that email aside and start.
+
+01:49.340 --> 01:53.360
+This is actually known as a better practice to just d structure off this way.
+
+01:53.360 --> 01:58.610
+It's a little bit more verbose but reading it is actually way easier because you know that once you
+
+01:58.610 --> 02:04.390
+d structure this value it helps if you don't see like this stop props everywhere.
+
+02:04.410 --> 02:09.570
+It's just the better pattern for us to consistently follow in case you are wondering why we always do
+
+02:09.570 --> 02:10.910
+structure.
+
+02:11.010 --> 02:17.020
+So now that we have our email sign and star we go back to our saga and then we're going to listen for
+
+02:17.020 --> 02:17.700
+it.
+
+02:17.830 --> 02:24.740
+So let's bring in our email sign and success because we're going to we know we're going to write these
+
+02:28.800 --> 02:32.090
+and now what we do is we make our new function
+
+02:35.290 --> 02:38.250
+on email sign in start.
+
+02:38.530 --> 02:47.750
+Just like our Google sign and start except this time we're listening for of course our email sign start
+
+02:49.710 --> 02:54.530
+and then we're gonna pass it a similar function as our sign with Google except it'll be our sign in
+
+02:54.530 --> 02:59.670
+with email.
+
+02:59.760 --> 03:04.500
+Now we know what we're going to get is our payload right but we're gonna get our whole action when we
+
+03:04.500 --> 03:08.400
+pass this function into our take latest call.
+
+03:08.550 --> 03:13.560
+We're gonna get the entire action that we're catching here with our take latest and all we want off
+
+03:13.560 --> 03:14.490
+of it is the payload.
+
+03:15.060 --> 03:20.520
+So we're going to d structure off the payload and then we want to d structure off that email and the
+
+03:20.520 --> 03:24.170
+password because that's all we want from our pallet.
+
+03:24.180 --> 03:30.020
+And we know that the payload is coming in as an object and now what we're going to do is we are going
+
+03:30.020 --> 03:37.510
+to put that on sign and that we had before inside of our sign and component into this saga.
+
+03:37.670 --> 03:44.750
+So in order for us to put this in the saga we need to first create our tribe block right where we're
+
+03:44.750 --> 03:50.920
+actually going to make the API request and this is going to catch the air exactly like we had earlier
+
+03:52.490 --> 04:03.620
+and here in fact we can just call our sign in email or email sign and failure with our air and then
+
+04:03.620 --> 04:10.550
+instead of a tribe block we are going to sign in and pluck off the user right.
+
+04:10.580 --> 04:11.470
+Just like we had here.
+
+04:11.480 --> 04:18.380
+Except we're using a different sign and method instead of using sign and with pop up we're using sign
+
+04:18.440 --> 04:24.310
+in with email and password.
+
+04:24.320 --> 04:31.070
+Now the lucky thing for us is that this off will give us back the same type of object that we got back
+
+04:31.070 --> 04:32.380
+from our sign and with pop up.
+
+04:32.540 --> 04:37.400
+So we know that we can just pluck that user off the same way that we did here and get our user off object
+
+04:37.430 --> 04:40.770
+that we need to trigger the rest of this call.
+
+04:40.840 --> 04:45.450
+In fact the rest of this call is going to be the exact same.
+
+04:45.470 --> 04:51.080
+The only difference is that the method that we fire is not Google sign and success but email sign and
+
+04:51.080 --> 04:54.400
+success.
+
+04:54.440 --> 05:00.590
+Now if we save what we can do is we can just pass this into our user sagas as well.
+
+05:06.320 --> 05:12.690
+And now inside of our signing component we just make sure that everything is wired and properly which
+
+05:12.690 --> 05:15.740
+it is and let's check out our site.
+
+05:16.590 --> 05:22.500
+So now if we click sign and with email we see we trigger EMR sign as star and we have a successful email
+
+05:22.640 --> 05:27.160
+signing and our user is also storing the correct user.
+
+05:27.210 --> 05:33.210
+So we've successfully migrated over our signing with email and our signing with Google into their own
+
+05:33.210 --> 05:34.760
+respective sagas.
+
+05:34.830 --> 05:41.310
+If we look at our saga we see that we're pretty much doing exactly what we had before except now we're
+
+05:41.310 --> 05:48.660
+handling them in their individual saga so hopefully this make more sense once we went over it again
+
+05:48.660 --> 05:53.990
+with sign and with email we write a listener that listens for the start call of our API call.
+
+05:54.330 --> 05:57.650
+We give it the respective object if it needs.
+
+05:57.650 --> 05:57.910
+Right.
+
+05:57.920 --> 06:02.760
+So our email of course we need an email and password in order to trigger are off inside of the saga
+
+06:03.330 --> 06:04.710
+whereas our Google did not.
+
+06:04.890 --> 06:09.660
+Our Google will simply call the off the sign with pop up using the Google provider right.
+
+06:09.750 --> 06:14.580
+Which will create the right pop up inside of our application.
+
+06:14.580 --> 06:21.330
+Once that succeeds and the user selects the right user we get back our user off object that has the
+
+06:21.330 --> 06:24.490
+actual user details on this user key.
+
+06:24.870 --> 06:30.570
+We take it and we call our create user profile document method that we have in our firebase utilize
+
+06:30.570 --> 06:32.580
+which gives us back our user ref.
+
+06:32.610 --> 06:39.900
+It will also generate the snapshot if we need one and then once we have this we get the snapshot using
+
+06:39.900 --> 06:48.250
+the user ref and then we just put out a success this success method will then update our user reducer
+
+06:48.310 --> 06:55.880
+using this object that we pass to it which is our current user object and that's essentially it.
+
+06:56.020 --> 07:01.330
+Now we can actually looking at this see that we can refactor this a little bit because it looks like
+
+07:01.330 --> 07:04.030
+that we have pretty much the exact same thing here.
+
+07:05.760 --> 07:12.570
+And here in fact the only difference is how we get the user object and the only difference is that here
+
+07:12.570 --> 07:15.100
+we use our Google sign.
+
+07:15.150 --> 07:17.670
+And here we use signing with email and password.
+
+07:17.670 --> 07:22.960
+So this is a chance for us to actually refactor our code to make it a little bit more concise.
+
+07:23.140 --> 07:34.130
+So what we can do is we can modify our user actions as well as our user action types so that instead
+
+07:34.130 --> 07:39.230
+of having separate success and failure calls they have the same success and failure.
+
+07:40.160 --> 07:48.830
+So here we'll just do a sign and success sign and failure which will represent both our email success
+
+07:48.890 --> 07:51.590
+and our Google success and the respective failure as well.
+
+07:52.870 --> 07:58.660
+We modify our actions so that instead we meet we know we need to keep our Google sign and start we know
+
+07:58.660 --> 08:08.130
+we need to keep our email sign and start we don't need this Google sign in success and this Google sign
+
+08:08.130 --> 08:12.810
+and failure nor do we need the email sign and success or email sign of failure because they are actually
+
+08:12.810 --> 08:16.630
+the exact same thing except just with different action types.
+
+08:18.440 --> 08:21.810
+And now we'll see that we have very similar code.
+
+08:21.830 --> 08:26.090
+We don't need our separate user anymore because we're not using that action anymore and we're also going
+
+08:26.090 --> 08:33.690
+to remove the reference to it inside of our app G.S. so here we'll get rid of that we'll get rid of
+
+08:33.690 --> 08:40.490
+our call to set current user inside of our component did mount we'll also get rid of our map dispatch
+
+08:40.500 --> 08:48.390
+the props because now our saga is handling setting our current user on success and then we also need
+
+08:48.390 --> 08:52.710
+to make sure that our action types are referencing the correct one.
+
+08:52.740 --> 08:54.570
+So no more Google sign and success.
+
+08:54.570 --> 09:02.300
+Now it's sign in success and now in our sagas we've got to update our code to leverage the correct actions
+
+09:02.300 --> 09:02.780
+as well.
+
+09:03.830 --> 09:07.680
+So instead of Google sign in we're gonna use our new sign and success.
+
+09:10.260 --> 09:12.180
+As well as our sign and failure.
+
+09:15.800 --> 09:17.250
+Now if we save our application
+
+09:19.700 --> 09:24.010
+hopefully we see that our silence and still works will trigger our Google sign in
+
+09:29.290 --> 09:31.620
+and we see that it succeeds.
+
+09:31.700 --> 09:35.350
+If we had our sign out right we actually are no longer listening.
+
+09:35.360 --> 09:42.540
+As you remember inside of our app J.S. for our off state to change so our sign out while it's still
+
+09:42.540 --> 09:44.720
+signing out in our firestorm back end.
+
+09:44.730 --> 09:50.100
+It's not actually telling us that it is because we're not leveraging this listener code anymore so our
+
+09:50.100 --> 09:52.750
+app has no way of knowing that we've signed up successfully.
+
+09:53.130 --> 09:56.190
+But on another note we no longer have persistence either.
+
+09:56.190 --> 10:05.280
+So if we refresh we'll see that we can sign in again so there we have both email and our Google sign
+
+10:05.280 --> 10:08.110
+and leveraging the same sign and success methods now.
+
+10:08.190 --> 10:14.860
+So we've managed to reduce our code down which is definitely a win in terms of refactoring.
+
+10:14.880 --> 10:20.670
+In fact if we look at our sagas we can even see that we are pretty much copying the exact same code
+
+10:20.670 --> 10:22.600
+here as we are here.
+
+10:22.620 --> 10:26.250
+So we can move this into its own generator function as well.
+
+10:26.490 --> 10:28.260
+So let's actually do that.
+
+10:28.260 --> 10:39.050
+Let's make a new generator function called get a snapshot from user off which is going to give us a
+
+10:39.050 --> 10:40.540
+user off object.
+
+10:41.860 --> 10:45.240
+And then we're going to pretty much just duplicate this code.
+
+10:47.870 --> 10:54.630
+Except we need the beginning of our tri and instead of passing and user we're gonna pass on our user
+
+10:54.630 --> 11:02.870
+off and we're just going to leverage this function here by calling yield with our user
+
+11:08.080 --> 11:14.080
+so just like we did with when we write reusable functions we just wrote a reusable generator function.
+
+11:14.310 --> 11:21.600
+We know that both points we get our user auth objects from our respective off sign and methods and then
+
+11:21.600 --> 11:22.780
+we pass it in.
+
+11:23.100 --> 11:28.220
+And this will now perform the actual yet as well as the sign and failure.
+
+11:28.230 --> 11:35.790
+Now we want to keep our own sign and failure catch blocks here as well because our sign and with pop
+
+11:35.790 --> 11:38.480
+up in our sign and with email may also fail.
+
+11:38.520 --> 11:44.250
+So we just gotta make sure that we also wrap anywhere where we have different API requests inside their
+
+11:44.250 --> 11:50.820
+own try catch block and it's fine because we know what the sign and failure can work on any of our failures
+
+11:50.940 --> 11:55.750
+or errors inside of the whole sign and process so we can use the same sign and failure method.
+
+11:55.800 --> 11:56.840
+It's no problem for us.
+
+11:58.410 --> 12:03.310
+And now that we have moved this into its own function we just got a double check to make sure that everything
+
+12:03.310 --> 12:07.870
+still works.
+
+12:07.990 --> 12:08.770
+Let's see
+
+12:12.990 --> 12:13.920
+sign success.
+
+12:14.130 --> 12:14.990
+Awesome.
+
+12:15.240 --> 12:19.920
+Refresh and we'll try our sign in with email.
+
+12:19.970 --> 12:21.130
+Also success.
+
+12:21.230 --> 12:22.310
+Amazing.
+
+12:22.340 --> 12:28.520
+So now we've managed to pretty much move the functionality of what we had before into this more commonly
+
+12:28.520 --> 12:32.230
+seen promise oriented fetch style of using sagas.
+
+12:32.540 --> 12:37.700
+So hopefully this made more sense now that we did a little bit of refactoring as well about what we
+
+12:37.700 --> 12:43.100
+can do with sagas and how sagas can be composed if it's confusing.
+
+12:43.220 --> 12:48.650
+Definitely don't worry I suggest you re watch these videos right sagas is by nature definitely more
+
+12:48.650 --> 12:54.560
+confusing and if you're following along incredible you're going to be able to really leverage this pattern
+
+12:54.830 --> 12:59.090
+in any professional react redux career that you end up following.
+
+13:00.470 --> 13:06.140
+Now in the next lesson what we're gonna do is we're going to recreate that persistence that we had before
+
+13:06.140 --> 13:07.760
+in our application.
+
+13:07.940 --> 13:13.310
+So instead before when we had this listener on our component did mount doing for it we're gonna functionally
+
+13:13.310 --> 13:18.680
+check against the auth library to see if our user session is still persisted.
+
+13:18.860 --> 13:20.890
+So we'll do that in the next lesson.

@@ -1,0 +1,151 @@
+WEBVTT
+
+00:00.610 --> 00:06.870
+So we've learned that react takes care of Dom changes for us using something called virtual Dawn.
+
+00:06.880 --> 00:09.750
+We learn that we build the Web sites with components.
+
+00:09.910 --> 00:16.180
+And this idea of you need directional data flow where data only flows one way so that it's easier to
+
+00:16.480 --> 00:18.370
+debug our code.
+
+00:18.370 --> 00:26.090
+Then the final thing that really made react stand out is this idea of hey I'm just the UI.
+
+00:26.230 --> 00:28.580
+The rest is up to you.
+
+00:28.720 --> 00:32.060
+What do you mean by this well.
+
+00:32.100 --> 00:40.930
+Remember how with angular it came with all these things built in that is angular J.S..
+
+00:41.110 --> 00:46.000
+It was a framework and a framework is kind of like a whole kitchen.
+
+00:46.000 --> 00:51.770
+It gives the developers all the tools necessary to build an application.
+
+00:51.790 --> 00:57.550
+So if you're a cook in a kitchen while you get the oven you get the nice you get the drawers you get
+
+00:57.550 --> 00:58.620
+the pots and pans.
+
+00:58.630 --> 01:01.230
+You have the stove you have everything for you.
+
+01:01.240 --> 01:07.140
+And this is how you cook or this is how you build a Web site.
+
+01:07.150 --> 01:10.060
+It's very opinionated.
+
+01:10.150 --> 01:17.620
+On the other hand react said Hey I only care about this whole idea of components and virtual DOM and
+
+01:17.620 --> 01:26.050
+I only am going to work with the view the user interface everything else that you need while you can
+
+01:26.050 --> 01:34.690
+just use other modules other libraries and mix and match and have whatever you want customized to your
+
+01:34.690 --> 01:35.510
+need.
+
+01:35.530 --> 01:39.990
+So it was a library a UI library which is not like a kitchen.
+
+01:40.000 --> 01:48.460
+It's more like let's say the stove they gave you the stove to cook your soup on but everything else
+
+01:48.580 --> 01:52.370
+like knife cutting board spoon.
+
+01:52.480 --> 01:54.400
+Well you can pick whichever one you want.
+
+01:54.520 --> 01:57.190
+It's up to you what you use to build that soup.
+
+01:57.220 --> 02:07.920
+All we give you is this oven and the key idea was that because it was so small you can learn once and
+
+02:07.920 --> 02:10.270
+write anywhere.
+
+02:10.320 --> 02:10.950
+What does that mean.
+
+02:11.430 --> 02:19.290
+Well react doesn't make assumptions about what technology stack you use all we give you is hey here
+
+02:19.320 --> 02:27.210
+is this idea of components of a blueprint that we can use a massive javascript object to make changes.
+
+02:27.300 --> 02:36.170
+And here's also a robot that will interact with the Dom and makes changes for you but because of this
+
+02:36.800 --> 02:43.880
+we actually are able because it only focuses with the UI we're actually able to move react to other
+
+02:43.880 --> 02:51.920
+places other than well let's say the Web for example we now can have different robots that interact
+
+02:51.920 --> 03:01.250
+with different views and all they need is this main react library or blueprint of how to well look at
+
+03:01.250 --> 03:05.540
+a javascript object and say hey change this UI.
+
+03:06.110 --> 03:13.370
+So now you could have things like react native and this little robot can look at this blueprint and
+
+03:13.370 --> 03:20.270
+say change the view in a Iow app an Android app.
+
+03:20.270 --> 03:27.210
+And although it might not know anything about the DOM it only needs to know about views in a mobile
+
+03:27.210 --> 03:28.010
+app.
+
+03:28.050 --> 03:36.990
+You also have things like react 360 which is VR apps and again using this blueprint of react I can use
+
+03:36.990 --> 03:42.640
+it for VR apps and this little robot or library can focus on VR.
+
+03:42.690 --> 03:49.050
+We also have things like electron and react desktop that allows us to build desktop applications and
+
+03:49.050 --> 03:55.530
+they interact with Windows and Mac OS and Linux operating systems.
+
+03:55.530 --> 04:02.900
+We even have things like react to blessed that work with the terminal and the command prompt and because
+
+04:02.900 --> 04:12.320
+of this react was able to use this concept and have developers that originally just wrote for Web sites
+
+04:12.710 --> 04:19.760
+on the browser to now use the same idea and the same principles and the same javascript code to build
+
+04:19.790 --> 04:25.700
+desktop applications to build VR applications to build mobile applications.
+
+04:25.700 --> 04:33.640
+And this idea of cross platform really took off with react and you'll notice when we start building
+
+04:33.640 --> 04:40.630
+our projects that we actually import to libraries and react the core react library which is this little
+
+04:40.630 --> 04:49.120
+robot and the react dorm library which is this specific robot that only knows how to interact with the
+
+04:49.120 --> 04:51.220
+dorm or the web browser.

@@ -1,0 +1,502 @@
+WEBVTT
+
+00:00.270 --> 00:02.130
+Welcome back everyone.
+
+00:02.160 --> 00:09.150
+So in the last lesson we learned about leveraging the local state values and local state functions that
+
+00:09.150 --> 00:17.880
+allow us to set those values inside of a context by passing them into the provider and matching our
+
+00:17.910 --> 00:26.130
+actual context value to have a very similar shape as to what it is that we expect to pass around inside
+
+00:26.130 --> 00:28.340
+of our application.
+
+00:28.350 --> 00:36.360
+So what we need to do now is look at a more complex pattern that allows us to actually provide everything
+
+00:36.540 --> 00:43.290
+we need regarding our cards that we use to handle with redux into our application.
+
+00:43.290 --> 00:50.190
+But with the context API and what's interesting is that this is actually going to greatly resemble the
+
+00:50.190 --> 00:58.680
+provider that we actually receive from react redux because react redux under the hood uses the context
+
+00:58.740 --> 01:06.870
+api in order to pass the store as well as everything linked to the actual redux implementation such
+
+01:06.870 --> 01:13.860
+as dispatch and maps data props everything connects because of this provider by leveraging the context
+
+01:13.890 --> 01:15.620
+API under the hood.
+
+01:15.840 --> 01:22.170
+So we are going to end up writing code that actually helps us demystify how it is that we had access
+
+01:22.170 --> 01:29.610
+to everything related to the redux store in our application when we wrapped our app inside of this provider
+
+01:29.610 --> 01:32.610
+that we got from react redux.
+
+01:32.640 --> 01:37.350
+So in order to for us to actually write this pattern what we have to do is actually manually write a
+
+01:37.350 --> 01:43.770
+provider component and that provider component is going to be the component that has the local state
+
+01:44.280 --> 01:51.240
+that leverages these actual values that we are going to pass into a context that we consume across our
+
+01:51.240 --> 01:57.600
+application and all of those values will be all of the reduce or values that we currently hold inside
+
+01:57.690 --> 01:59.990
+of our cart reducer.
+
+02:00.000 --> 02:06.180
+So here we're going to store card items and the hidden and we might even store the car items count and
+
+02:06.180 --> 02:12.470
+the card total all inside of this new context object.
+
+02:12.500 --> 02:15.300
+Now let's actually write the code.
+
+02:15.380 --> 02:22.280
+So what we're going to do is we are going to create a new folder inside of our source folder called
+
+02:22.280 --> 02:26.660
+provider's because we might write multiple providers.
+
+02:26.660 --> 02:32.540
+The first one that we want to write is carte so make a cart folder inside of this providers and make
+
+02:32.600 --> 02:36.550
+a cart dot provider dot ASX.
+
+02:36.620 --> 02:44.610
+Now it's J.S. X because it will be a component and once you've created the car provider we're also going
+
+02:44.610 --> 02:53.940
+to need to move the cart utilize file into this folder as well because we're going to now need to leverage
+
+02:54.180 --> 03:00.390
+the add item to cart and the remove item to cart functions inside of our new car provider because we're
+
+03:00.390 --> 03:03.710
+no longer using redux but more on that later.
+
+03:03.720 --> 03:10.600
+Just copy and paste that file into our new cart folder now inside of our cart provider.
+
+03:10.870 --> 03:13.030
+Let's import in everything we need.
+
+03:13.030 --> 03:18.790
+So we need to import in react because we're writing a functional component we need to import and create
+
+03:18.790 --> 03:19.830
+context.
+
+03:20.020 --> 03:22.370
+We need to import and use state.
+
+03:22.540 --> 03:25.380
+And we also need to import it and use affect.
+
+03:25.420 --> 03:33.290
+And I'll explain why we need these in a little bit so just import them for now from react and then let's
+
+03:33.290 --> 03:37.710
+also import in those utility functions that we have in our cart utilize.
+
+03:37.880 --> 03:49.110
+So we'll import an add item to cart and remove item from cart and these come from our cart utilize and
+
+03:49.110 --> 03:56.580
+the actual context that we need to instantiate now is going to end up replacing the cart context that
+
+03:56.580 --> 03:58.890
+we just made in the last lesson.
+
+03:58.890 --> 04:04.430
+So you can actually just copy this over because this will be the same gnome enclosure that we're using.
+
+04:04.500 --> 04:07.880
+So this cart context is going to represent the new one.
+
+04:08.010 --> 04:13.260
+The only difference is that it's going to actually need more values because we also need to store the
+
+04:13.260 --> 04:20.070
+cart items now so cart items is going to be an empty array and it's going to contain the items that
+
+04:20.070 --> 04:24.120
+we add to our cart as we've done throughout this course.
+
+04:24.120 --> 04:30.090
+Now we're going to add the actual functions that allow us to modify these cart items including add item
+
+04:30.390 --> 04:34.410
+which by default will be an empty function remove item
+
+04:37.010 --> 04:38.210
+clear item from cart
+
+04:42.780 --> 04:46.830
+as well as one more which is our cart items count.
+
+04:46.930 --> 04:52.510
+Now this car items count is going to be the actual count we see in our car icon for how many items we
+
+04:52.510 --> 04:58.630
+have we used to be able to set it with selectors but now we can't anymore but we'll explore how we actually
+
+04:58.630 --> 05:05.980
+do it with the context API and use effect now that we have our context we actually need to make the
+
+05:05.980 --> 05:14.290
+cart provide component that we're going to wrap around the actual application as we see that the react
+
+05:14.290 --> 05:19.900
+redux provider does inside of our index J Yes so we just want to write a component that is going to
+
+05:19.900 --> 05:22.130
+wrap the same way.
+
+05:22.270 --> 05:30.480
+Now what we're going to call it is cart provider and this is going to be equal to a functional component
+
+05:30.810 --> 05:36.480
+that of course has children because all the children are going to be all those components that we're
+
+05:36.480 --> 05:43.460
+wrapping which represent our entire application and what we're going to do is we are going to render
+
+05:44.790 --> 05:55.410
+our cart contact stop provider as the actual thing that is wrapping around all the children and as we
+
+05:55.410 --> 06:03.210
+know by doing this we now have access to all of our car context inside of our application because we
+
+06:03.210 --> 06:08.700
+wrap the entire application in the provider value of our car context.
+
+06:08.940 --> 06:16.080
+So now that we have this we need to start actually defining the functionality of these functions inside
+
+06:16.080 --> 06:24.130
+of our car context so we can actually pull out these functions that we had before because we're no longer
+
+06:24.130 --> 06:27.540
+leveraging the car context that we had in the last lesson.
+
+06:27.700 --> 06:33.880
+We're now leveraging our new car provider component to actually provide the local state and propagation
+
+06:33.970 --> 06:37.760
+of these values into this context.
+
+06:37.780 --> 06:43.090
+So with that we now have our toggle hit and hit in that we had before on header but now it's in our
+
+06:43.090 --> 06:46.030
+car provider component.
+
+06:46.110 --> 06:49.340
+We also want access to the car items.
+
+06:49.410 --> 06:54.030
+So let's just make a new state that holds car items and set card items
+
+06:56.850 --> 07:03.130
+using are you state where the default value is an empty array and then we're also going to do the same
+
+07:03.130 --> 07:07.910
+thing for card items count and set items count
+
+07:10.830 --> 07:15.810
+which is equal to you state or the default value is.
+
+07:15.850 --> 07:23.440
+So now that we have our state functions and values we can actually make our new AD item function so
+
+07:23.500 --> 07:31.420
+ad item is going to be us calling set carte items on the new array of all the car items that we want
+
+07:31.420 --> 07:32.810
+to update to.
+
+07:33.130 --> 07:41.290
+And as we know with our old cart reducer our cart utilize is what we leverage the ad items to cart gives
+
+07:41.290 --> 07:47.740
+us back a new array of the actual cart items array that we wanted to represent before inside of redux.
+
+07:47.740 --> 07:54.340
+So now we just want our cart provider and the car context to have the new value of that array.
+
+07:55.240 --> 08:01.060
+So we're going to say sets cart items meaning that we want to set this cart items value on our local
+
+08:01.060 --> 08:10.400
+state equal to what we get back from add item to cart passing in the item that we're trying to get as
+
+08:10.400 --> 08:17.080
+well as the existing items so this at item is actually going to be a function that gets the item that
+
+08:17.080 --> 08:21.960
+we're trying to add as the argument which we then pass into add item to cart.
+
+08:22.540 --> 08:28.930
+So add items to cart takes the existing cart items that we currently have and then add the item into
+
+08:28.930 --> 08:29.980
+it.
+
+08:29.990 --> 08:36.290
+So this is very similar to our redux code except now we're doing inside of context so now that we have
+
+08:36.380 --> 08:41.900
+these functions defined let's actually just test them out before we start moving on and adding all of
+
+08:41.900 --> 08:48.620
+the other functions that we're trying to define now inside of this context provider we want to pass
+
+08:48.620 --> 08:51.260
+them in to the value as an object.
+
+08:51.800 --> 08:56.680
+So we want to pass in hidden our toggle hidden function as well.
+
+08:56.960 --> 09:01.380
+We want to pass cart items which is equal to the local state of card items.
+
+09:01.600 --> 09:08.110
+We want to pass in our new add item which we just wrote here and let's just pass card items count as
+
+09:08.110 --> 09:16.000
+well because we've already defined it so now our car provider is a fully fleshed out component that
+
+09:16.000 --> 09:17.430
+we can use.
+
+09:17.500 --> 09:26.170
+So let's exploit this out as the default value and import it into our index J S so inside of index J
+
+09:26.170 --> 09:35.520
+S we just need to import this new car provider from providers slash cart slash car provider and then
+
+09:35.520 --> 09:38.910
+we're going to wrap our entire application in this new provider
+
+09:45.920 --> 09:48.620
+now that we have this new car provider.
+
+09:48.620 --> 09:51.290
+In fact we can even rapid above our redux.
+
+09:51.290 --> 09:52.900
+It doesn't really matter.
+
+09:53.000 --> 09:58.250
+It's entirely separate things because we're trying to move away from redux anyways.
+
+09:58.250 --> 09:59.810
+It doesn't matter the order.
+
+10:00.020 --> 10:05.970
+We might as well even just wrap ours just to show that we have the most access for everything.
+
+10:06.020 --> 10:11.350
+It's really insignificant but it's just a matter of where you want to put it.
+
+10:11.360 --> 10:18.810
+So I'm just going to put it at the very top level instead now that we have access to our cart context
+
+10:18.870 --> 10:23.510
+inside of our entire application by wrapping it with our car provider.
+
+10:23.700 --> 10:29.610
+We can start replacing our old head or component that was using the old car context from the last lesson
+
+10:30.000 --> 10:35.240
+with the new one that we made inside of our car provider.
+
+10:35.310 --> 10:43.950
+So let's just import in the same car context from providers slash cart slash car provider.
+
+10:43.950 --> 10:50.900
+But remember a car context is now not the default export but a regular export as we see.
+
+10:51.390 --> 10:57.030
+In fact we actually need to export this out as well is a good thing to check.
+
+10:57.060 --> 11:03.110
+So now that we're exporting our car context we're importing it in and we need to now pull the hidden
+
+11:03.120 --> 11:07.050
+value off of our car context.
+
+11:07.050 --> 11:13.050
+So we'll say use context using our new car context which gives us back the whole object of everything
+
+11:13.050 --> 11:18.600
+we're storing on the context we destruction off the hidden value which will end up being what we use
+
+11:18.660 --> 11:23.910
+inside to determine whether or not to hide or show our car dropdown.
+
+11:23.910 --> 11:29.730
+Now of course because we're not using this car context provider anymore we can get rid of this declaration
+
+11:29.730 --> 11:37.020
+we had before and now our car icons still has access to car contexts because we've wrapped the entire
+
+11:37.020 --> 11:40.520
+application in car context so let's update cart icon as well.
+
+11:43.140 --> 11:51.900
+So inside of car icon component we need to replace this context with our new provider context.
+
+11:52.140 --> 11:58.510
+And as we know it's not a default export but this actually should still work the exact same way.
+
+11:58.530 --> 12:07.210
+So with that code let's see if our code that works if we toggle we see that we're still toggling so
+
+12:07.510 --> 12:13.750
+awesome everything is still working let's actually see if we can use our cart items as well as the new
+
+12:13.840 --> 12:19.470
+add item function that we wrote in our context as well so the first thing we need to do is replace the
+
+12:19.470 --> 12:25.020
+actual dropdown value in our cart dropdown with our new cart items.
+
+12:25.050 --> 12:32.490
+So here we're going to import in the used context as well as the actual context that we're trying to
+
+12:32.490 --> 12:43.980
+use which is our cart context from our provider's slash cart slash cart provider.
+
+12:44.110 --> 12:48.250
+We're going to switch this over to our explicit return
+
+12:51.640 --> 12:59.040
+and we're also going to remove our use of cart items coming from our map states props because we don't
+
+12:59.040 --> 13:03.930
+need this anymore we're no longer using react and Redux.
+
+13:03.930 --> 13:10.240
+So let's just get rid of this make sure that we're not importing what we don't need
+
+13:13.410 --> 13:21.570
+and now as we know we'll deal structure off cart items from what we get back from calling use context
+
+13:22.320 --> 13:26.350
+from our car context.
+
+13:26.370 --> 13:32.350
+So now if we save we should see an empty cart dropped in if we refresh
+
+13:35.160 --> 13:36.850
+we see that our cart is empty.
+
+13:36.870 --> 13:37.630
+Awesome.
+
+13:37.650 --> 13:43.530
+So our car icon unfortunately is still using the actual car items count we had from our selector but
+
+13:43.530 --> 13:49.870
+we can fix that later what we need to do now is just make sure that when we add items in we're actually
+
+13:49.930 --> 13:53.530
+adding them with our new car context add item function that we wrote.
+
+13:54.460 --> 14:02.260
+So let's first replace collection item so in collection item we currently get an item from our map dispatch
+
+14:02.920 --> 14:07.530
+so we don't want to use this anymore so let's just get rid of this connect
+
+14:12.910 --> 14:20.550
+and we're going to leverage our context using used context and our new car context
+
+14:23.480 --> 14:31.890
+from provider's cart cart provider and lucky for us we've already got this defined so that we have the
+
+14:31.890 --> 14:41.720
+actual explicit return and we're just going to pull off the add item function from a use context of
+
+14:41.780 --> 14:42.800
+our cart content
+
+14:46.800 --> 14:54.210
+let's just remove where we were structuring before inside of our props and now we should actually see
+
+14:54.210 --> 15:00.750
+our ability to add cart items if we look we should have five items.
+
+15:00.750 --> 15:06.740
+So our code works exactly how it did before but now we've converted it over to using car icon.
+
+15:06.870 --> 15:08.940
+So let's just quickly go over what we did.
+
+15:08.940 --> 15:17.710
+Again what we did was created this new car provider component that has local state that allows us to
+
+15:17.800 --> 15:24.100
+update all of the values that we need to store inside of our car context so everything that we were
+
+15:24.100 --> 15:30.410
+storing before inside of a reducer we're now storing on the local state of a card provider component.
+
+15:30.850 --> 15:39.070
+This car provide a component we then wrap around all of our application and we provide around it the
+
+15:39.100 --> 15:45.910
+car context and the values that we're trying to store in our local state as well as the functions that
+
+15:45.910 --> 15:47.980
+will set those values.
+
+15:47.980 --> 15:56.740
+Now our entire application has access to the car context consumer allowing us to get any of those values
+
+15:56.770 --> 16:02.160
+and any of those functions that allow us to modify these values in the local state.
+
+16:02.200 --> 16:09.400
+And now as a result our application is able to access everything related to the cart that we are storing
+
+16:09.400 --> 16:18.310
+in a context but also mainly storing in the car provider's local state the car context here simply acts
+
+16:18.400 --> 16:27.190
+as a vehicle that allows us to pass these functions and these values around inside of our application
+
+16:27.220 --> 16:35.000
+because we're wrapping the entire application around the provider of our context value so I know it's
+
+16:35.000 --> 16:41.780
+a lot of terminology but honestly the more you look at it I'm sure it will make sense to you but now
+
+16:41.780 --> 16:47.000
+that we've done at item we can actually write a couple more so we get more practice and get an idea
+
+16:47.000 --> 16:48.430
+of what it is that we're doing.
+
+16:48.530 --> 16:52.430
+So let's add remove item and clear item in the next lesson.

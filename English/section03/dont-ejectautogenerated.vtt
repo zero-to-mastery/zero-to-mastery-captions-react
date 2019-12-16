@@ -1,0 +1,76 @@
+WEBVTT
+
+00:01.050 --> 00:02.270
+Hey welcome back.
+
+00:02.280 --> 00:04.130
+I just want to add a quick note here.
+
+00:04.200 --> 00:09.100
+I've actually ejected a create react app just to show you what happens.
+
+00:09.240 --> 00:14.750
+You'll see here that it gives me a folder called scripts and then a folder called config.
+
+00:15.230 --> 00:16.210
+And in here.
+
+00:16.230 --> 00:21.570
+Well this was everything that the create react app was hiding underneath the hood for us.
+
+00:21.720 --> 00:24.670
+You had things like just that was using for tests.
+
+00:24.750 --> 00:28.430
+We have our Web pack configuration and remember our module bundler.
+
+00:28.440 --> 00:35.900
+You can see over here how long and intense and complicated it looks but we also have all the scripts
+
+00:36.200 --> 00:43.330
+that were run for example when we ran NPM Ram build or NPM run start or test.
+
+00:43.610 --> 00:46.480
+You see over here that it's quite a lot of code.
+
+00:46.520 --> 00:53.450
+This is why I recommend not ejecting because no matter what no matter how much time you spend with react
+
+00:53.750 --> 01:00.560
+you were never going to compete with the developers that are working full time trying to make create
+
+01:00.560 --> 01:01.440
+react app.
+
+01:01.490 --> 01:08.540
+The best tool possible developers that are getting paid to make this tool as easy and as efficient for
+
+01:08.540 --> 01:09.350
+you.
+
+01:09.530 --> 01:14.980
+So I recommend that you never eject out of create react app unless you absolutely have to.
+
+01:15.170 --> 01:23.660
+Because by using create react app we automatically get the best system and project build out of the
+
+01:23.660 --> 01:24.210
+box.
+
+01:24.230 --> 01:30.500
+And anytime there are updates or the industry changes and there's new ways of doing things create react
+
+01:30.500 --> 01:38.560
+app is automatically well going to have new version that has those changes implemented by professionals.
+
+01:38.570 --> 01:44.120
+So again I wanted to show you that this is what's happening underneath the hood but ninety nine point
+
+01:44.120 --> 01:50.180
+nine percent of the time you don't really need to eject because you lose all the benefits as create
+
+01:50.180 --> 01:54.260
+react app gets more and more updates.
+
+01:54.440 --> 01:56.060
+I'll see in the next one by.

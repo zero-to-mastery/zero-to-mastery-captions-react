@@ -1,0 +1,409 @@
+WEBVTT
+
+00:01.180 --> 00:08.460
+Now before we begin I want to peel back the curtain a little bit on what it is that create react app
+
+00:08.470 --> 00:14.080
+was doing for us because create racked up sets up a lot for us and when we were writing our code it
+
+00:14.080 --> 00:20.110
+kind of seemed like there was a lot of magic happening but I'm going to show you what react and react
+
+00:20.110 --> 00:22.030
+on as libraries do.
+
+00:22.030 --> 00:27.330
+And I'm just going to use pure vanilla javascript and some HMO.
+
+00:27.460 --> 00:34.180
+It's actually incredibly easy and the first thing that I'm gonna do is I'm gonna make a new folder called
+
+00:34.220 --> 00:45.690
+Pure Ria and inside of pure react I am going to make a source folder and then inside of our source folder
+
+00:45.840 --> 00:51.850
+I'm going to make a index dot HCM Alpha and then we're going to open it up
+
+00:55.240 --> 00:58.120
+inside of our index start each time I'll file.
+
+00:58.120 --> 01:03.730
+I'm going to just generate our basic HDMI All right.
+
+01:03.850 --> 01:15.320
+Our basic eight base each demo and then I'm going to in the body add in that div that we first saw inside
+
+01:15.320 --> 01:20.300
+of our monster's Rolodex with the I.D. of root.
+
+01:20.340 --> 01:31.410
+Now if you remember what we do in our index stock J File is we replace that root div with the actual
+
+01:31.410 --> 01:33.450
+contents of our application.
+
+01:33.450 --> 01:34.740
+So that's what we need to do as well.
+
+01:34.740 --> 01:35.660
+We need that same thing.
+
+01:35.710 --> 01:35.970
+Right.
+
+01:36.510 --> 01:43.420
+And then we're going to include the two packages react and react on in order to do that.
+
+01:43.420 --> 01:49.540
+I'm just going to add a script tag where the source goes to the react project.
+
+01:49.540 --> 01:57.410
+So this is something called unpacking which lets us very easily bring in the react library just like
+
+01:57.410 --> 02:01.790
+that and then we're gonna do the same thing with react on
+
+02:05.830 --> 02:12.520
+and now our ReACT project has both these libraries.
+
+02:12.520 --> 02:16.690
+So why are there to write well react is kind of just the API.
+
+02:16.720 --> 02:17.080
+Right.
+
+02:17.110 --> 02:23.890
+But then the thing that actually renders out to the DOM is what react on is the reason for this is because
+
+02:24.220 --> 02:26.570
+react is a great kind of engine.
+
+02:26.650 --> 02:27.300
+Right.
+
+02:27.400 --> 02:30.820
+But you could have many different views that run on the same engine.
+
+02:31.360 --> 02:36.250
+So react on this for the web and you might have heard to react native react any of it is actually exactly
+
+02:36.250 --> 02:36.610
+what it is.
+
+02:36.610 --> 02:40.200
+It's for native Android and Iaw.
+
+02:40.270 --> 02:46.990
+So while it use it the same react engine it uses a different package other than react on to render its
+
+02:47.110 --> 02:50.620
+Android and Iow views.
+
+02:50.650 --> 02:55.360
+So that's why it's such a great package because you can even find ones like react 360 if you want to
+
+02:55.360 --> 02:58.340
+build 3D stuff right.
+
+02:58.420 --> 03:04.840
+Like virtual reality stuff but that's all we're doing we're just pulling in these two packages now to
+
+03:04.840 --> 03:12.310
+show that it actually removes what's inside of this root div when we actually render in our ReACT code.
+
+03:12.340 --> 03:16.040
+I'm just gonna put in here react rendered first.
+
+03:16.450 --> 03:23.480
+So let's open up our index that HDMI out in the browser and now we'll see that React is not rendered
+
+03:23.510 --> 03:29.090
+right because we haven't actually done that call where we replace the content inside of this div with
+
+03:29.090 --> 03:36.810
+our application and we haven't built the application yet but first if we open up our dev tools we can
+
+03:36.810 --> 03:43.260
+actually see now because we pulled in both those packages we have access to both react and react on.
+
+03:43.290 --> 03:45.000
+Right.
+
+03:45.000 --> 03:51.030
+These are the objects that the two packages provide into our global javascript namespace.
+
+03:51.030 --> 03:56.520
+Once we brought those packages in and this is pretty much the same thing that we do when we import in
+
+03:56.940 --> 04:02.890
+react and react on into our files it just gives us access to these two things.
+
+04:02.940 --> 04:10.500
+Right now I'm going to actually add my own script tag and inside we're going to start writing our own
+
+04:10.500 --> 04:14.440
+javascript to see what it is that these libraries do for us.
+
+04:14.460 --> 04:18.230
+So first I'm going to write a functional component called app.
+
+04:18.330 --> 04:25.080
+The same way we were writing them before except this time what I'm going to return is react jaw create
+
+04:25.170 --> 04:32.610
+elements now create element is a function on rack that builds out those elements that we saw when we
+
+04:32.760 --> 04:38.590
+wrote our return right inside of like let's say our Carla's component right.
+
+04:38.670 --> 04:45.120
+It just we returned from this function this HDMI markup will create element is actually what it's doing
+
+04:45.510 --> 04:48.320
+but instead of Jeff Sachs this is vanilla.
+
+04:48.330 --> 04:48.570
+Right.
+
+04:48.570 --> 04:53.870
+So what we've got to do is we write in here that we want to make a div.
+
+04:53.970 --> 04:54.390
+Right.
+
+04:54.420 --> 05:00.330
+You can put any other HCM l tag or whatever that you're looking for but I want to do so I can put div
+
+05:00.990 --> 05:07.340
+and then the second argument is an object of any attributes that I want to add to my do.
+
+05:07.380 --> 05:11.810
+So if I wanted to add a class or an I.D. right I would put them in here.
+
+05:11.850 --> 05:12.630
+Right.
+
+05:12.660 --> 05:19.620
+So like if I wanted to class right then I would put like you know card list the same way I did before.
+
+05:19.650 --> 05:19.950
+Right.
+
+05:20.220 --> 05:21.390
+But I don't want one.
+
+05:21.660 --> 05:23.310
+So I can keep it empty.
+
+05:23.310 --> 05:28.800
+And then the third and last argument is any children we want to nest inside of our div.
+
+05:28.800 --> 05:29.690
+Right.
+
+05:29.730 --> 05:34.520
+So I want to put in react jog create element again.
+
+05:34.560 --> 05:35.240
+Right.
+
+05:35.340 --> 05:37.960
+And I'm gonna put on an H1 again.
+
+05:38.070 --> 05:45.840
+I don't want any attributes and inside of our H1 I'm going to put the text react is rendered.
+
+05:45.850 --> 05:56.480
+Right and now we have our functional component and I'm gonna call react om da render.
+
+05:56.730 --> 05:58.930
+I'm going to put a react create element again.
+
+05:59.020 --> 06:02.660
+Right and I'm gonna put in our app.
+
+06:02.800 --> 06:07.300
+I'm not actually gonna give it these two because these are actually optional right.
+
+06:07.320 --> 06:10.890
+These last two arguments are completely optional.
+
+06:10.930 --> 06:12.910
+I don't want attributes I don't want children.
+
+06:13.090 --> 06:13.860
+Right.
+
+06:13.930 --> 06:19.130
+And then you remember with our render we got to target that element that we want.
+
+06:19.180 --> 06:31.200
+So get element by IP of route and just like that if we refresh react is rendered right.
+
+06:31.220 --> 06:33.990
+That's all we were doing here.
+
+06:34.690 --> 06:39.270
+Except with Jess X but now we're just doing it with vanilla javascript right.
+
+06:39.280 --> 06:40.360
+That's all it's doing.
+
+06:40.480 --> 06:41.710
+Dom dot render right.
+
+06:41.710 --> 06:44.230
+We're creating that our application.
+
+06:44.230 --> 06:45.090
+Right.
+
+06:45.160 --> 06:46.920
+And just like that we.
+
+06:47.080 --> 06:53.710
+That's all the react library does for us it just helps us create these HDMI elements using functions
+
+06:53.710 --> 06:54.280
+or classes.
+
+06:54.280 --> 06:58.720
+Right now let's actually take this a step further.
+
+06:58.720 --> 07:08.950
+Now let's say I wanted to make a contact person write and contact person is the same thing.
+
+07:08.950 --> 07:16.070
+It just react create element an inside is a div right.
+
+07:16.390 --> 07:22.240
+Attributes and instead what I want to render is an array.
+
+07:22.270 --> 07:27.520
+So if we want to multiple elements right we want a multiple children inside of this diff if we would
+
+07:27.520 --> 07:39.480
+just use an array and inside I would do react create element H1 and then to object and I'm gonna put
+
+07:40.090 --> 07:47.910
+E Hwa and then I'm gonna make another one except it's gonna be a p tag and it's gonna say developer
+
+07:49.780 --> 07:58.470
+and now instead of just rendering in our application that each one of our actors render right.
+
+07:58.770 --> 08:04.130
+I'm also going to render in multiple person
+
+08:07.300 --> 08:14.570
+I'm going to react create element person and I'm gonna do it three times.
+
+08:14.650 --> 08:17.450
+Now if we check our application we'll see.
+
+08:17.620 --> 08:18.110
+Right.
+
+08:18.190 --> 08:25.390
+We rendered our person component three times you are developer you are a developer you are a developer.
+
+08:25.510 --> 08:27.740
+Now we can't go to these valleys.
+
+08:27.760 --> 08:31.020
+But what if we wanted to do the same thing we did with our other components right.
+
+08:31.030 --> 08:32.740
+We wanted to use props.
+
+08:32.810 --> 08:38.260
+Well because it's just a functional component as we had before we can do exactly that can pass props
+
+08:38.260 --> 08:39.700
+into this right.
+
+08:39.730 --> 08:46.660
+And instead of you to do something like props that name right or props occupation and these are whatever
+
+08:46.660 --> 08:50.190
+it is that the attributes are that we want for this component to take.
+
+08:50.200 --> 08:51.040
+Right.
+
+08:51.090 --> 08:57.760
+So now if we wanted to actually add those then we would do our name inside of that second argument with
+
+08:57.760 --> 08:58.760
+that empty object right.
+
+08:58.780 --> 09:11.030
+We do are attributes of name of Yehuda and then occupation of developer and now we can do the same thing
+
+09:11.220 --> 09:16.290
+right for these other three and this one will be Andre
+
+09:18.730 --> 09:19.560
+instructor
+
+09:22.990 --> 09:34.070
+and let's say Ted and he is an actor right now if we look at our application we see we can pass in our
+
+09:34.070 --> 09:34.970
+props right.
+
+09:36.030 --> 09:41.090
+That's all we were doing when we were writing our functional components and our class components.
+
+09:41.130 --> 09:45.890
+It's just that with J.S. a we don't have to call react create element constantly.
+
+09:45.920 --> 09:46.450
+Right.
+
+09:46.530 --> 09:53.520
+It knows to read from that HDMI markup that we were writing and that's why J.S. sex is so good when
+
+09:53.520 --> 09:56.480
+we use it with react because this is kind of redundant right.
+
+09:56.520 --> 09:59.710
+It's just a quality of life improvement.
+
+09:59.770 --> 10:04.910
+Now you might be wondering how would we do it with are class components right.
+
+10:04.930 --> 10:06.130
+It's actually the exact same.
+
+10:06.130 --> 10:14.070
+So instead of an app I'm just going to put I'll just make a class app extends react component.
+
+10:14.120 --> 10:19.720
+Right because component is just the method that exists on react right.
+
+10:19.730 --> 10:25.040
+Sorry it's a class that exists I'll react that it exposes to us and then we have access that render
+
+10:25.040 --> 10:31.720
+again and in that render I'm just going to return what it is that we had here
+
+10:35.840 --> 10:43.410
+and now instead of app being a functional component we're still rendering are class component of that.
+
+10:43.970 --> 10:48.360
+And if we look we'll see their application stays the same.
+
+10:48.470 --> 10:50.010
+That's all it is.
+
+10:50.060 --> 10:51.080
+That's all.
+
+10:51.140 --> 10:59.150
+React does for us it helps us build out these views and that's why react and react om are such great
+
+10:59.150 --> 11:06.590
+libraries because it just helps us simply build out our views and manage figuring out what the right
+
+11:06.590 --> 11:08.510
+thing in our views is to update.

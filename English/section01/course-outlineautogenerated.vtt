@@ -1,0 +1,190 @@
+WEBVTT
+
+00:00.810 --> 00:02.230
+Hello.
+
+00:02.250 --> 00:04.560
+I'm very excited to start this course.
+
+00:04.560 --> 00:10.720
+But before we start everything we need to figure out where we're starting and where we're ending up.
+
+00:10.770 --> 00:13.920
+We want to have a clear path of success.
+
+00:13.920 --> 00:18.000
+This course is going to start off with some react basics.
+
+00:18.000 --> 00:23.790
+This is especially useful for those who have never written a single line of react or for those that
+
+00:23.880 --> 00:25.580
+need a bit of a refresher.
+
+00:25.890 --> 00:29.810
+In this section we're going to learn about why react exists.
+
+00:29.820 --> 00:34.300
+We're going to learn about the fundamental principles so that you can tell people.
+
+00:34.410 --> 00:37.290
+This is why react has become popular.
+
+00:37.320 --> 00:38.790
+These are the benefits.
+
+00:38.820 --> 00:44.370
+These are the pros and cons and we're also going to build a fun little project to get us comfortable
+
+00:44.370 --> 00:45.480
+with react.
+
+00:45.480 --> 00:50.440
+It's a big section but it's gonna be a lot of fun by the end of this section.
+
+00:50.580 --> 00:52.960
+You're going to know react basics.
+
+00:53.040 --> 00:58.680
+I mean that's what the section is called but this is the fun part using the basics that we've learned
+
+00:58.680 --> 01:03.730
+in this section we're going to right away start building our large e-commerce.
+
+01:03.930 --> 01:10.560
+We're going to introduce topics like react router and firebase to have different pages on our app and
+
+01:10.560 --> 01:12.890
+also do user assignments.
+
+01:12.900 --> 01:19.020
+We're also going to start adding redux into our application so that it's ready to scale.
+
+01:19.020 --> 01:25.980
+And then finally we're also going to add payments using the stripe API so that people can actually buy
+
+01:25.980 --> 01:27.930
+stuff from our store.
+
+01:27.930 --> 01:35.280
+And in this half of the course we're going to have a fully fledged e-commerce app where we store user
+
+01:35.280 --> 01:42.660
+information we use redux to store state react router to move between pages and stripe to actually make
+
+01:42.810 --> 01:44.100
+online purchases.
+
+01:44.100 --> 01:47.490
+And don't worry we're going to teach you these topics from scratch.
+
+01:47.700 --> 01:50.660
+And this is where most courses would stop.
+
+01:50.730 --> 01:56.860
+We'd have a nice app you'd learn the react basics and you'd feel comfortable working on a react project.
+
+01:57.060 --> 02:03.540
+But we take this a little bit further after we've gotten the fundamentals and we've built the main components
+
+02:03.720 --> 02:05.370
+of our application.
+
+02:05.370 --> 02:12.690
+We introduce you to advanced topics like CSX and J.S. we're going to convert our app to use a popular
+
+02:12.780 --> 02:21.900
+library called stout components and then we introduce redux saga a scalable way for us to handle asynchronous
+
+02:21.900 --> 02:23.400
+actions in our app.
+
+02:23.400 --> 02:26.170
+Then things get even more interesting.
+
+02:26.340 --> 02:32.160
+We actually start implementing hooks into our app and see how it compares with redux.
+
+02:32.160 --> 02:38.040
+We also use context API again comparing it how it's going to work with redux and hugs.
+
+02:38.040 --> 02:40.450
+And finally even add Graf.
+
+02:40.450 --> 02:48.920
+Q Well to manage at an even larger scale our state and by this point we have done a lot in our application.
+
+02:49.290 --> 02:51.120
+But we take it a little bit further.
+
+02:51.180 --> 02:57.990
+We start implementing firebase features in different ways even creating a stripe backend that you can
+
+02:57.990 --> 03:02.460
+use so that our app can actually process payments.
+
+03:02.460 --> 03:09.030
+We even talk about complex topics like design patterns including observable or higher components back
+
+03:09.810 --> 03:15.360
+and even touch on an important topic of performance how we can scale our applications and make them
+
+03:15.360 --> 03:16.200
+perform it.
+
+03:16.260 --> 03:22.590
+And finally the last two bonus sections where we actually learn about progressive web apps and implement
+
+03:22.860 --> 03:29.730
+our app as a progressive web app and then a nice section on testing where we use the just library to
+
+03:29.730 --> 03:37.110
+practice writing tests as you can see there's a lot in here and this won't be easy but we do promise
+
+03:37.110 --> 03:40.380
+you that we're going to make it fun along the way.
+
+03:40.380 --> 03:44.040
+And by the end of this course this all is going to make sense.
+
+03:44.100 --> 03:48.660
+These are going to be the skills that you will acquire throughout the course and by the end of it all
+
+03:48.960 --> 03:55.560
+you'd have had an app that implements all of these so that you can compare and contrast know when to
+
+03:55.560 --> 03:59.980
+use redux when to use context API when to use hooks or graph.
+
+03:59.980 --> 04:04.900
+Q Well you're going to be able to make smart decisions with any react project.
+
+04:05.010 --> 04:11.070
+We're going to take you from zero to mastery and along the way we might throw in a little joke or two
+
+04:11.160 --> 04:16.980
+to make it fun whether you're new to react or you've taken a few react courses by you still don't feel
+
+04:16.980 --> 04:18.600
+confident in your skills.
+
+04:18.600 --> 04:25.920
+This course is for everybody but the best part is this right here our online community we have over
+
+04:25.920 --> 04:32.740
+40000 developers chatting every day in our little community here where we help each other out.
+
+04:32.760 --> 04:39.510
+We work through problems together and we discuss the latest and greatest in the world of programming.
+
+04:39.720 --> 04:45.330
+And this is an optional resource for you to use so that you can have back and forth conversations with
+
+04:45.360 --> 04:51.510
+other students as well as myself an equal but you know what I can see you getting antsy and ready to
+
+04:51.510 --> 04:55.610
+start learning So enough talk let's learn let's get started.
+
+04:55.770 --> 04:56.570
+I'll see you in the next one.

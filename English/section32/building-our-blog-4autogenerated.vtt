@@ -1,0 +1,262 @@
+WEBVTT
+
+00:00.420 --> 00:02.910
+Now we're gonna build a pretty simple template.
+
+00:02.910 --> 00:07.200
+So what we first need to do is import react from react.
+
+00:07.370 --> 00:14.240
+And we're also going to import in graph Q Well from Gatsby because we need to make a request for the
+
+00:14.240 --> 00:15.890
+actual markdown.
+
+00:15.950 --> 00:20.150
+We're also going to import the layout from our components.
+
+00:20.150 --> 00:23.530
+Now if you're curious why this template is not in our components folder.
+
+00:23.660 --> 00:29.180
+The reason is because this template is not a component that we actually use in the application.
+
+00:29.180 --> 00:34.550
+Any application files we keep inside of our components but anything that we use to actually build out
+
+00:34.670 --> 00:39.730
+are blog posts or any other templates that we dynamically generate in our Gatsby note we're just going
+
+00:39.730 --> 00:47.730
+to put here instead what we're going to export as the default is going to be this new function where
+
+00:47.730 --> 00:55.890
+we get the data because we know what we're going to want to pluck off is the markdown the actual graph
+
+00:55.890 --> 01:01.150
+Q all that we need is going to be this query.
+
+01:01.210 --> 01:09.950
+Now what we want to query for is the individual markdown remark related to these slug that we get we're
+
+01:09.950 --> 01:18.220
+actually going to get that slug manually by passing in it as a parameter that our graph cool will use.
+
+01:18.260 --> 01:22.310
+So I'm gonna show you what the graph Q all looks like and then when we go back to our Gatsby no Jess
+
+01:22.370 --> 01:23.860
+you're gonna see how we pass that.
+
+01:24.530 --> 01:30.020
+So essentially we're gonna have our query and it's going to receive this parameter called slug that's
+
+01:30.020 --> 01:33.800
+gonna be a string and it's always going to be mandatory.
+
+01:33.830 --> 01:41.630
+Now what we're going to get back is a markdown remark where what we're looking for is we want to match
+
+01:41.690 --> 01:45.960
+this fields here to the slug value.
+
+01:45.960 --> 01:46.250
+Right.
+
+01:46.490 --> 01:50.680
+And we want it to be equal to the slug parameter that we pass in.
+
+01:50.690 --> 01:55.850
+So if you're unfamiliar with graph Q all this is the syntax of writing a query essentially we're specifying
+
+01:55.850 --> 02:02.990
+that I want you to match this field on our markdown remark where the slug is equivalent to this slug
+
+02:02.990 --> 02:04.970
+string that we pass in here.
+
+02:04.970 --> 02:11.770
+Now we can actually test to see if this query works first and we can do it inside of our graph QoL playground.
+
+02:11.870 --> 02:17.420
+So let's just get rid of our initial query for all markdown remarks and what we're going to request
+
+02:17.420 --> 02:20.400
+for is simply a markdown remark.
+
+02:20.750 --> 02:26.060
+And inside here we see that what we did was we checked for the fields we checked for the slug and we
+
+02:26.060 --> 02:28.480
+checked that it was equal to some string.
+
+02:28.490 --> 02:33.570
+So in this case the string that we're matching will be either ice cream or my first block.
+
+02:33.770 --> 02:41.830
+And now whenever this logs I also want to make sure that I get the I.D. And I want the fields as well.
+
+02:41.960 --> 02:43.960
+And I also want the slug here.
+
+02:44.000 --> 02:50.210
+So now if I do this I see that I'm fetching for exactly the markdown that matched the ice cream slug
+
+02:50.540 --> 02:54.740
+to this string which was our ice cream markdown.
+
+02:54.770 --> 02:56.230
+So that's really what we're doing here.
+
+02:56.990 --> 03:00.840
+So what we're doing is we are getting that markdown.
+
+03:01.310 --> 03:09.400
+And what we want to plug off of it is the H Timo we want the front matter and we want the title so with
+
+03:09.400 --> 03:17.200
+this we now have the data that we need and what we're going to do is we are going to set the post itself
+
+03:17.680 --> 03:21.970
+equal to data dot markdown remark.
+
+03:22.050 --> 03:30.590
+So now we have access to the markdown remark object and what we're going to return is our layout component
+
+03:32.420 --> 03:39.450
+wrapping around some div that holds inside of it in H2 or an H1.
+
+03:39.450 --> 03:40.590
+Let's do an H1 actually
+
+03:43.410 --> 03:47.070
+and as you can guess we're going to do post dot front matter
+
+03:51.170 --> 03:57.180
+and then for a div This is where we're actually going to populate the div with our H2 mail.
+
+03:57.380 --> 04:06.690
+So we're going to use a react method called dangerously set in our H to mail.
+
+04:06.740 --> 04:10.160
+This is the preferred way of actually setting this value.
+
+04:10.160 --> 04:14.720
+So I know it says dangerously set this is because in typical reactor you don't want to do this but in
+
+04:14.720 --> 04:18.430
+Gatsby this is perfectly fine because it's not dynamically generated.
+
+04:18.500 --> 04:25.460
+This is statically set so underscore underscore H2 AML is the value and we want post HDL.
+
+04:26.060 --> 04:28.370
+So we want to use the HDL value here.
+
+04:28.370 --> 04:34.720
+And what this will do is this will set all of the H small value inside of this div so with this we have
+
+04:34.720 --> 04:36.100
+our blog post template.
+
+04:36.130 --> 04:41.940
+So let's go back to our Gatsby no J.S. file and inside of our create pages that we were had before.
+
+04:41.940 --> 04:44.830
+We are going to now pass the component.
+
+04:44.830 --> 04:48.440
+Now this component is expecting a relative path.
+
+04:48.460 --> 04:58.680
+So we actually have to build it using the path variable that we get by default from the path library
+
+04:58.680 --> 05:06.720
+that comes with every single No just file so we're gonna pass in path and we're gonna say path dot resolve.
+
+05:06.740 --> 05:09.860
+And what we're going to say is dot slash source.
+
+05:09.860 --> 05:15.730
+So I want to go from the route down to the source folder into templates using our blog.
+
+05:16.490 --> 05:23.360
+Now in order for us to pass the actual slug value to this query we pass it through this context object
+
+05:23.860 --> 05:28.010
+and here we're gonna give the slug equal to our no def fields dot slug.
+
+05:28.010 --> 05:33.590
+So now this will know that when it runs create pages what it's going to do is it's going to create the
+
+05:33.590 --> 05:41.380
+page calling graph Q Well using every single markdown remark it's going to loop through every single
+
+05:41.380 --> 05:47.560
+markdown file that we have and it's going to manually create a new page for it using that new blog post
+
+05:47.560 --> 05:52.890
+template but now we have our new create pages method there's actually a typo here.
+
+05:52.910 --> 05:55.100
+This actually should be ass.
+
+05:55.400 --> 05:59.320
+In fact let's just double check our blog post to make sure that we're not doing anything wrong.
+
+05:59.330 --> 06:03.310
+Oh it looks like I actually used the wrong parentheses here.
+
+06:03.320 --> 06:08.710
+So let's just fix that as well when I make sure we're turning with round brackets.
+
+06:08.740 --> 06:09.820
+OK.
+
+06:10.030 --> 06:11.950
+So now let's restart our server
+
+06:15.520 --> 06:20.630
+so let's just wait for our server to finish building OK.
+
+06:20.760 --> 06:25.650
+So now that we're finished building let's actually see if our pages have generated.
+
+06:25.650 --> 06:30.610
+So let's go to local host a thousand and let's just navigate to our pages.
+
+06:30.750 --> 06:33.950
+So the first is ice cream and we see that we have it.
+
+06:34.730 --> 06:40.100
+And our second is my first Amy and here we see that this also works.
+
+06:40.430 --> 06:44.660
+So we now have our dynamic Bill pages using our markdowns.
+
+06:44.660 --> 06:49.410
+If we write any new markdowns to our pages not only is that going to add to our index but we're going
+
+06:49.410 --> 06:51.550
+to generate a new page for it.
+
+06:51.560 --> 06:57.920
+So this is awesome because now we've pretty much got a dynamically structured and building blog without
+
+06:57.920 --> 07:02.660
+us having to add any more code other than some styling if we want to or new features.
+
+07:02.810 --> 07:08.360
+But as far as it goes in terms of adding new blog posts this is pretty much done.
+
+07:08.420 --> 07:15.470
+One other thing that we're going to do is we actually probably should reverse the order of this listing
+
+07:15.890 --> 07:22.460
+because right now it's listing the earliest dates first versus listing the latest dates as the newest
+
+07:22.460 --> 07:23.360
+things.
+
+07:23.360 --> 07:25.370
+So we can do all this in the next lesson.

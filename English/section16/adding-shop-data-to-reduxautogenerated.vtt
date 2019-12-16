@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00.450 --> 00:07.050
+Now that we have are actual objects that we're getting from our back end in the shape that we need them
+
+00:07.050 --> 00:14.970
+to be for our front end with the root and the I.D. let's finally convert this into the actual object
+
+00:14.970 --> 00:19.440
+map that we need to store inside of our reducer.
+
+00:19.450 --> 00:25.300
+So what we're going to do is we are going to use the reduce function on our new transform collection
+
+00:25.300 --> 00:31.880
+array and what we want to reduce down to is that final object.
+
+00:31.880 --> 00:37.940
+So for the second parameter of our reduce we're just going to pass in the empty object as our initial
+
+00:38.480 --> 00:46.740
+accumulator then the function will get the accumulator as the first value and our collection object
+
+00:46.830 --> 00:49.620
+at the current iteration as the second.
+
+00:49.860 --> 00:54.530
+And then what we want to do is we want to call our accumulator.
+
+00:54.540 --> 01:02.720
+So our object up until that point and we want to set the property equal to our collections title except
+
+01:02.720 --> 01:03.870
+lower cased.
+
+01:03.960 --> 01:10.470
+So we've got to make sure to lowercase the value and then make that key that we've just set equal to
+
+01:10.470 --> 01:13.230
+our collection itself.
+
+01:13.270 --> 01:19.450
+We then have to make sure to return the accumulator so that it goes into the next iteration on our reduce.
+
+01:19.450 --> 01:25.030
+And then we've got to make sure to reduce the final object that comes out of our whole reduced statement
+
+01:25.780 --> 01:29.170
+out of this function.
+
+01:29.180 --> 01:32.770
+Now if that's confusing let's just go over it again.
+
+01:32.930 --> 01:39.600
+We passin in our initial object the initial object goes into the first new collection.
+
+01:39.620 --> 01:40.100
+Right.
+
+01:40.190 --> 01:46.640
+First element and it sets the first value equal to the title but in lowercase.
+
+01:46.670 --> 01:48.300
+So the first value is going to be hats.
+
+01:48.320 --> 01:48.840
+Right.
+
+01:48.860 --> 01:54.340
+So it'll be an empty object with a property of hearts that's equal to the heart's collection.
+
+01:54.560 --> 01:56.310
+And then it returns that object.
+
+01:56.420 --> 02:03.290
+And it goes into the second object if the second object is say jackets then it's going to set a new
+
+02:03.290 --> 02:08.030
+property called jackets and then equal the jackets collection.
+
+02:08.030 --> 02:13.970
+So now you have an object that has a hats property equal to the hats collection and a jacket's property
+
+02:13.970 --> 02:19.640
+equal to the jackets collection and then so on and so forth until we end up with an object where the
+
+02:19.640 --> 02:26.570
+titles of all five of the collection objects are the keys and then they equal their respective collection
+
+02:26.570 --> 02:27.380
+object.
+
+02:27.380 --> 02:33.250
+Now we'll see this just so that we can log it inside of where we're calling it in our shop component
+
+02:34.730 --> 02:40.580
+and we'll just set it to a constant called collections map and then we'll just make sure the console
+
+02:40.610 --> 02:45.030
+log this to see what it is that we ended up with.
+
+02:45.060 --> 02:52.080
+Now if I save we should see that this is our object shape right.
+
+02:52.120 --> 02:56.520
+This is almost identical to our shop data that we had stored on the front end.
+
+02:57.640 --> 03:03.010
+And now that we have this we just want to finally store this in our shop reducer because now the weather
+
+03:03.010 --> 03:04.020
+modification.
+
+03:04.030 --> 03:04.270
+Right.
+
+03:04.270 --> 03:07.460
+We just want to pass this and update our reducer.
+
+03:07.540 --> 03:09.160
+Now how do we do this.
+
+03:09.160 --> 03:15.640
+Well it's very simple we're just going to update our reducer and Redux code to now be able to fire actions
+
+03:15.640 --> 03:20.800
+that update the reducer so we'll make our usual shop dot type stuff.
+
+03:20.860 --> 03:27.840
+J ust as you remember because we need new actions now and then we're also going to make a shop of actions
+
+03:27.850 --> 03:31.860
+dot J.S. inside of shop dot types.
+
+03:31.880 --> 03:39.290
+We're just going to make a new concept called let's call it shop action types and it'll be equal to
+
+03:39.410 --> 03:49.220
+a object with the property update collections that goes to the string update collections and then we're
+
+03:49.220 --> 03:52.700
+just gonna export this as the default export shop.
+
+03:52.730 --> 04:02.660
+Action types and then we're gonna import this into our actions first action so let's import in shop
+
+04:02.750 --> 04:13.070
+action types from shop dot types and we're gonna make a new action export concept let's just call it
+
+04:13.190 --> 04:15.770
+update collections.
+
+04:16.070 --> 04:24.600
+And this is going to take a collections map right and what it will return is an object with the type
+
+04:24.600 --> 04:33.710
+of shop action type stock update collections where the payload goes to the collections map.
+
+04:33.800 --> 04:37.940
+We also have to update our producer to now anticipate that action.
+
+04:37.940 --> 04:41.060
+So let's import in our shop action types again
+
+04:44.020 --> 04:54.200
+and we're gonna add a new case statement of our default which returns us a new object with the state
+
+04:54.380 --> 05:05.660
+spread and accept the collections will go to our new payload and now we just have to bring our action
+
+05:06.140 --> 05:11.490
+that we're going to use into our component and put it right here.
+
+05:11.750 --> 05:18.200
+So we're going to have to make this component a connected component so we've got to import connect from
+
+05:18.200 --> 05:24.570
+reactor redux and then we're just going to do a concert math.
+
+05:24.850 --> 05:25.740
+To props
+
+05:28.330 --> 05:34.140
+which is going to be equal to a dispatch function
+
+05:37.530 --> 05:43.360
+and we're going to say update collections goes to something that gets a collections map.
+
+05:44.890 --> 05:51.230
+And calls dispatch on update collections passing in our collection
+
+05:56.280 --> 05:57.570
+update collections not the phone.
+
+05:57.600 --> 06:00.060
+Oh we got to import in our action as well.
+
+06:00.060 --> 06:01.190
+Can't forget to do that
+
+06:07.000 --> 06:11.170
+from our redux shop shop action
+
+06:15.090 --> 06:23.640
+update collections and now we just have to make sure the D structure this as well as pass in our map
+
+06:23.640 --> 06:25.710
+dispatch to our connect.
+
+06:25.720 --> 06:36.700
+So let's do connect no have dispatched the props wrapping our sharp edge and let's make sure the D structure
+
+06:36.790 --> 06:37.270
+off
+
+06:40.620 --> 06:45.640
+our update collections from this dot prompts
+
+06:49.900 --> 07:03.200
+and then we'll pass our collections math in and now if we save we should see inside of a reducer that
+
+07:03.200 --> 07:11.470
+we have our new collections with the ideas from our back it in the shape and format that we're looking
+
+07:11.470 --> 07:13.490
+for awesome.
+
+07:14.180 --> 07:22.550
+So we've transformed our array into the map and updated our shop redux files to be able to update and
+
+07:22.610 --> 07:26.590
+store this new collections map object.
+
+07:26.600 --> 07:33.080
+Now we're also going to have to make some other changes such as removing all of the default data from
+
+07:33.110 --> 07:39.080
+our shop producer because we now no longer need this anymore but that will come with a couple other
+
+07:39.350 --> 07:44.030
+architectural changes of our application that we will discuss in the next lesson.

@@ -1,0 +1,418 @@
+WEBVTT
+
+00:00.910 --> 00:07.830
+So in the last lesson we finally styled our collection item component to have our hover.
+
+00:07.870 --> 00:11.510
+Add to Cart button in this section.
+
+00:11.620 --> 00:19.270
+Let's actually wire up the appropriate redux actions and read redux code so that this adds a cart button.
+
+00:19.270 --> 00:26.550
+Actually start saving these items into our cart reducer so the first thing we need to do in order to
+
+00:26.550 --> 00:35.500
+do this is we have to add the actual property we're trying to set inside of our reducer so inside of
+
+00:35.500 --> 00:44.130
+our application if we go to our cart reducer here we want to add a new property called cart items and
+
+00:44.130 --> 00:51.270
+very similar to when we hand a local state inside of a state full component such as a class component.
+
+00:51.270 --> 00:57.910
+We can set it in a very similar way with an empty array as the default value.
+
+00:58.000 --> 01:04.840
+Now what we need to do is we need to actually start adding items into this array or clearing them out
+
+01:04.930 --> 01:11.850
+depending on the feature and in this case what we want to do is we want to add items to this car items
+
+01:11.850 --> 01:12.860
+array.
+
+01:13.020 --> 01:18.570
+So what we're going to have to do is we are going to have to add both the new actions and the new action
+
+01:18.570 --> 01:25.520
+types so that our reducer is are aware of what ad item action we're trying to make.
+
+01:25.520 --> 01:32.810
+So what we'll do is we will go to our cart types here and inside we are going to make a new ad item
+
+01:36.120 --> 01:39.750
+and we are going to use this first inside of a reducer.
+
+01:39.780 --> 01:43.970
+So what we need to think about is how we're going to do this.
+
+01:44.010 --> 01:50.520
+Now I know that I mentioned in our final application that when we add items it will increase a quantity
+
+01:50.550 --> 01:54.660
+instead of displaying them in a multiplicative way.
+
+01:54.780 --> 02:01.270
+But let's just start with that because we want to work from small features into their complexity first.
+
+02:01.380 --> 02:07.680
+So all we're going to do is we are just going to add the item into the array whenever the user clicks
+
+02:07.680 --> 02:08.100
+it.
+
+02:08.220 --> 02:13.500
+If there's duplicates that's fine they'll just show up in the array as duplicates and we'll handle grouping
+
+02:13.500 --> 02:15.340
+them later.
+
+02:15.350 --> 02:22.010
+So what we're going to do is we are going to new and add a new case right underneath our first case
+
+02:22.100 --> 02:30.740
+with toggle car hidden called cart action types using our new AD item and what we'll say is we want
+
+02:30.740 --> 02:36.560
+to return an object with all of the state right as it is we'll spread it through.
+
+02:36.800 --> 02:42.590
+But now we want our car items array to be our old car items.
+
+02:42.710 --> 02:46.050
+And then with the newest action that got fired right.
+
+02:46.100 --> 02:53.930
+That is trigger add item we want to deposit whatever the item it is in the payload of that action into
+
+02:53.960 --> 02:54.740
+this array.
+
+02:55.640 --> 03:04.140
+So we'll first spread in the existing cart items that are already on our state and then what we're gonna
+
+03:04.160 --> 03:11.790
+do is we're just going to add the action payload to the end of this array so if you're unfamiliar with
+
+03:11.790 --> 03:18.360
+this all we're doing is we're spreading in all of our array values and then any additional values we
+
+03:18.360 --> 03:25.620
+add at the end will automatically appear in the very end of this array following all of our spread values
+
+03:25.620 --> 03:34.330
+from our existing array so if this seems kind of confusing it's ok don't worry once we write the action
+
+03:34.450 --> 03:36.560
+it will totally make sense.
+
+03:36.580 --> 03:42.010
+So just look at this right now what we're doing is we're getting the item payload right we're assuming
+
+03:42.010 --> 03:48.400
+that the item coming in will be what will be the payload value on our action what we need to do now
+
+03:48.430 --> 03:55.030
+is we actually need to write the action so let's actually do that inside of car.
+
+03:55.050 --> 04:03.930
+Actions What we want to do is we want to make a new action called add item to cart actually let's just
+
+04:03.930 --> 04:12.010
+call it an item what it will be is a function that gets the item that we want to add to that array that
+
+04:12.010 --> 04:21.480
+we just made and what will return is this new action type object where the type is our car action type
+
+04:21.480 --> 04:29.340
+start add item which will tell our producer Hey I'm trying to add this item and the payload will be
+
+04:29.340 --> 04:30.820
+equal to the item.
+
+04:31.050 --> 04:38.040
+So as you remember actions can have a type value and a payload value the payload value can be anything
+
+04:38.040 --> 04:44.940
+we want it to be and in our case we want it to be the item we're trying to add into our cart items array
+
+04:46.030 --> 04:53.860
+so now that we have this payload right inside of our action definition let's actually bring this into
+
+04:53.950 --> 05:00.730
+our components so that we can actually use it so what we need to do is we actually need to go back to
+
+05:00.730 --> 05:08.440
+our collection item and now we want to import in all of the redux bindings that give us access the same
+
+05:08.440 --> 05:16.100
+way that we saw when we did our toggle button so we need to import in connect from reactive redux
+
+05:19.170 --> 05:24.270
+and then we need to import in that new ad item action that we made.
+
+05:24.270 --> 05:27.510
+So let's just bring that in an item from
+
+05:30.440 --> 05:41.110
+redux heart cart action so with our new AD item we know that we need to create our map dispatch the
+
+05:41.110 --> 05:41.650
+props
+
+05:44.540 --> 05:49.340
+because we need to dispatch this new ad item and I'll show you what we're gonna do with this one because
+
+05:49.340 --> 05:59.360
+now we need to take in this new item object as well so map dispatch to props will be this function that
+
+05:59.360 --> 06:00.320
+gets a dispatch
+
+06:02.930 --> 06:10.650
+and what we'll say is that whenever there's an item it will get an item in as the property right of
+
+06:10.650 --> 06:17.070
+this function that will represent the ad item prop that gets passed in and then we will dispatch our
+
+06:17.190 --> 06:29.420
+ad item action creator passing the item in so all we're doing here is we are simply creating this new
+
+06:29.420 --> 06:36.560
+function that's a prop call ad item that will go into our collection item as the ad item function that
+
+06:36.560 --> 06:37.910
+we need to leverage.
+
+06:38.360 --> 06:45.080
+And then what we do is whenever we actually dispatch or call this function this function will receive
+
+06:45.080 --> 06:49.040
+the item as the property pass it into our ad item.
+
+06:49.040 --> 06:55.880
+Action creator which gives us back that object where the type is equal to AD item and the payload is
+
+06:55.880 --> 07:02.520
+equal to the item they got passed in and then we will dispatch that new object into our store and it
+
+07:02.520 --> 07:10.230
+will go through our redux flow so here we just need to make sure right because we're not actually taking
+
+07:10.230 --> 07:17.130
+any map state to props that we pass null as the first value and then we pass our map dispatch to props
+
+07:17.250 --> 07:18.430
+as the second value.
+
+07:19.140 --> 07:26.190
+So now we'll have access to this ad item dispatch into our props which we want to make sure that we
+
+07:26.190 --> 07:33.580
+d structure off but now is the interesting part because we actually need access to the item that this
+
+07:33.580 --> 07:40.060
+collection item represents now in order for us to actually dispatch it into our new AD item function
+
+07:40.060 --> 07:41.260
+that we wrote.
+
+07:41.380 --> 07:45.110
+So we need to actually tweak our code a little bit.
+
+07:45.240 --> 07:50.820
+The first thing that we need to do is we need to see where we're using our collection item which is
+
+07:50.820 --> 07:52.590
+our collection preview.
+
+07:52.590 --> 07:56.610
+Normally what we do is we just spread in all of the props.
+
+07:56.670 --> 08:04.290
+As you remember right from the item itself other than the I.D. because we use it as the key that is
+
+08:04.290 --> 08:10.950
+the idea value and then we spread everything else in as a prop which we then D structure off of our
+
+08:10.950 --> 08:14.400
+props object and use inside of our collection.
+
+08:14.400 --> 08:22.100
+Item instead what we want to do is we just want to pass the whole item in as item.
+
+08:22.100 --> 08:32.290
+So instead of doing it like this we are going to say that what we want is the whole item and then for
+
+08:32.290 --> 08:40.520
+the key we're still going to call item to I.D. except now we're going to pass item as the item.
+
+08:40.540 --> 08:47.350
+So as you see all we did was just simply pass the whole item in Key is still item I.D. still using the
+
+08:47.350 --> 08:52.580
+I.D. but now in our collection item we have access to our item object.
+
+08:52.600 --> 08:54.530
+Now we still need to use these values.
+
+08:54.550 --> 09:01.880
+So let's cut these out and what we'll do is we will do a explicit return of our function.
+
+09:02.600 --> 09:08.030
+So before when we had these round brackets we're just going to use our squiggly brackets which implies
+
+09:08.030 --> 09:12.140
+that we are rendering multiple javascript out of this function.
+
+09:12.290 --> 09:14.980
+We will make sure to return our component from this.
+
+09:15.140 --> 09:22.010
+But what we'll do inside of our new squiggly brackets is we will say const D structure these properties
+
+09:22.010 --> 09:28.440
+that we were destruction before from the props except I want you to d structure them off the item.
+
+09:28.470 --> 09:35.190
+Now the reason we're doing this is because we want these values still because we use them inside of
+
+09:35.190 --> 09:38.610
+our component definition but we need access to the item itself.
+
+09:38.850 --> 09:41.520
+So this way we actually have access to the item now.
+
+09:41.730 --> 09:45.800
+So we see that we're not using the I.D. So let's just remove that from here.
+
+09:46.050 --> 09:56.080
+And then on our custom button we'll say on click is this function that will fire calling our add item
+
+09:56.140 --> 09:59.790
+passing the item in.
+
+09:59.980 --> 10:07.930
+I know we wrote a lot of code just now just to set up our redux but this is actually a very simple flow.
+
+10:07.930 --> 10:10.590
+Once you get used to all of the moving parts.
+
+10:10.840 --> 10:13.960
+So let's actually first see it before we review this.
+
+10:14.140 --> 10:19.890
+Now that we've written this let's go to our application and now we'll see that whenever we click our
+
+10:19.890 --> 10:25.170
+add item to cart we're firing our new ad item action.
+
+10:25.170 --> 10:32.280
+The payload is that item that we have and we'll see inside of our actual cart reducer that our cart
+
+10:32.310 --> 10:36.570
+is updating and now we're displaying these items.
+
+10:36.780 --> 10:43.620
+And while they might not be grouped together even under the same item we can see that our redux action
+
+10:43.620 --> 10:50.850
+is working and it's firing whenever we click every time we click we're getting our ad item action to
+
+10:50.850 --> 10:58.260
+dispatch and our cart is getting updated in its car items with the newest thing that was being added
+
+10:58.380 --> 11:06.470
+appended to the end of our cart items array so if we just go over this one more time what we did was
+
+11:06.500 --> 11:13.100
+we had to make sure that we added the new value which was our cart items that we were trying to track
+
+11:13.670 --> 11:22.580
+into our initial state of our reducer then we had to make a new action that was going to represent what
+
+11:22.580 --> 11:28.630
+we were trying to do to modify that new property which is our car items array.
+
+11:28.700 --> 11:35.870
+Next we define the actual action itself which is our ad item which is a function that gets the item
+
+11:36.170 --> 11:43.490
+and generates this new action with the action type of ad item that we just made passing the item in
+
+11:43.490 --> 11:52.930
+as the payload which are reducer then has to listen for with the new case for that new action type that
+
+11:52.930 --> 11:59.230
+we just made so that whenever the action comes in we make sure that what we're doing is we're returning
+
+11:59.230 --> 12:04.180
+the new state of our over all cart reducer.
+
+12:04.180 --> 12:12.930
+So it has whatever existing hidden value is there except the carte items array is a new array.
+
+12:13.060 --> 12:21.400
+We have to make sure it's a new array where we spread in the existing card items except we append the
+
+12:21.400 --> 12:26.800
+new item that we get as a payload in at the end of this array.
+
+12:26.840 --> 12:37.010
+Finally we have to make sure that we update our actual collection item so that it pulls in to its props
+
+12:37.310 --> 12:44.690
+using the new map dispatch to props where we make sure that when we define the actual add item prop
+
+12:44.690 --> 12:53.540
+itself it's a function that gets whatever we want to pass in as the payload in as the property we then
+
+12:53.540 --> 13:02.260
+return the dispatch action on us creating our actual action using our ad item.
+
+13:02.300 --> 13:05.780
+Action creator that we defined as you remember right here.
+
+13:06.650 --> 13:13.790
+So as we here this returns the object which represents our new ad item action type as well as the payload
+
+13:14.480 --> 13:18.130
+which it then finally dispatches.
+
+13:18.270 --> 13:21.530
+I know this is a lot of redux juggling.
+
+13:21.540 --> 13:25.110
+It's like we're jumping back and forth between all these redux files right.
+
+13:25.110 --> 13:30.280
+Just to do something like this and this is kind of the overhead that comes with the bricks.
+
+13:30.390 --> 13:37.170
+But at the same time we've now defined this function that we can use anywhere on any component that
+
+13:37.170 --> 13:44.790
+allows us to add these items into the same array that we're using in different places in our application
+
+13:44.790 --> 13:46.130
+as well.
+
+13:46.170 --> 13:48.220
+So it's kind of the right tradeoff.
+
+13:48.510 --> 13:55.980
+It increases in this complexity but it gives us these beautiful reusable functions and reusable state
+
+13:56.010 --> 13:59.730
+that we can now leverage across the application.
+
+13:59.730 --> 14:07.920
+So now that we have our ad item action that adds to this array let's actually start grouping them so
+
+14:07.920 --> 14:12.500
+that we don't get these duplicates inside of this array.
+
+14:12.600 --> 14:14.600
+So I'll see you in the next lesson.

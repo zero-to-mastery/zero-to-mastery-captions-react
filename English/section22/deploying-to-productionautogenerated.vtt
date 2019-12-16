@@ -1,0 +1,361 @@
+WEBVTT
+
+00:00.420 --> 00:02.250
+Welcome back everyone.
+
+00:02.250 --> 00:09.690
+So in the last few lessons we end up separating all of our code that was related to our front end into
+
+00:09.690 --> 00:15.520
+a client folder and we now have all of our back and code in the root folder.
+
+00:15.540 --> 00:21.870
+Now what we need to do is move all of this code up onto Heroku because now our application needs to
+
+00:21.870 --> 00:23.830
+run with this new backend.
+
+00:24.000 --> 00:29.520
+And we know that all of our code works in local development so we need to see if this will work on Heroku
+
+00:29.520 --> 00:30.510
+production.
+
+00:30.660 --> 00:38.240
+And it's actually really easy when we first moved all of our code into this new client folder.
+
+00:38.310 --> 00:45.420
+We actually left a dot get file and the DOT getting north if you remember now the dot get file holds
+
+00:45.420 --> 00:52.890
+the history of everything that's ever happened inside of this one root directory which means that any
+
+00:52.890 --> 00:57.600
+of the changes that we make is being tracked still inside of this get folder.
+
+00:57.600 --> 01:02.760
+So this is really good for us because that means that if we push to the same project there won't be
+
+01:02.760 --> 01:03.550
+any conflicts.
+
+01:03.570 --> 01:09.870
+And even if we need to I can show you guys how to make sure that you force a push to Heroku if you want
+
+01:09.870 --> 01:13.250
+Heroku to have all of your latest code.
+
+01:13.270 --> 01:21.280
+Now there is one caveat which is that if any of you have actually cloned this project ever since we
+
+01:21.280 --> 01:29.650
+worked on our first deployment to Heroku then you might have to re link your project to the old project
+
+01:29.680 --> 01:39.370
+you had on Heroku or you can also make a new Heroku project inside of Heroku if you want to and then
+
+01:39.370 --> 01:44.160
+push this code to that one but you will end up with two separate running Heroku apps.
+
+01:44.230 --> 01:45.540
+It's entirely up to you.
+
+01:45.580 --> 01:51.280
+All of these are just tools how you want to use them is entirely up to you but what I'm going to show
+
+01:51.280 --> 01:57.340
+you is how you can link this project to your existing Heroku project.
+
+01:57.580 --> 02:04.450
+If you've closed down any of the project links that I've given you throughout this course if you've
+
+02:04.450 --> 02:10.810
+done that the one thing that you have to make sure to do is make sure that if you want to add Heroku
+
+02:10.810 --> 02:17.170
+to this project you just got to know the name of the actual app that you deployed before.
+
+02:17.170 --> 02:22.670
+So if you run Heroku apps you'll see a list of the apps that you have.
+
+02:22.960 --> 02:26.080
+And this crown live is actually the one that I want.
+
+02:26.140 --> 02:33.100
+So just copy the name of this project or whatever the name of your last deployed project was and then
+
+02:33.100 --> 02:42.880
+you just run Heroku get remote dash a and then you paste in the name of your project and when you do
+
+02:42.880 --> 02:50.980
+this it will now link this project to that Heroku account because it'll give you access to a new remote
+
+02:51.490 --> 02:54.700
+inside of this get called Heroku.
+
+02:55.000 --> 03:01.510
+So if you type and get remote you'll see that there is Heroku along with Origin origin is going to be
+
+03:01.510 --> 03:06.670
+the name of the get file that your get hub account is linked to.
+
+03:06.700 --> 03:13.680
+So whatever the name of your get Hub Repository is is what Origin will be Heroku is now that hero could
+
+03:13.690 --> 03:14.250
+project.
+
+03:14.260 --> 03:21.130
+So if we do get push Heroku we're going to push to Heroku now the only other thing we need to really
+
+03:21.130 --> 03:29.020
+change is we have to actually get rid of the build pack that we were running before which was specifically
+
+03:29.020 --> 03:32.170
+when we were deploying a create react app application.
+
+03:32.170 --> 03:38.740
+But now what we're deploying is a express server and that express several will end up building and bundling
+
+03:39.130 --> 03:46.240
+our client code and doing the optimization there before actually sending that through whenever we hit
+
+03:46.270 --> 03:53.290
+one of our links that is not our payment route and you'll remember that we did this inside of our server
+
+03:53.290 --> 04:00.730
+jazz file right here where we say that whenever anyone tries to get at any other route what we want
+
+04:00.730 --> 04:08.310
+to do is we want to send them our ended client build project specifically our index that H2 so we need
+
+04:08.310 --> 04:11.610
+to actually now modify our build pack.
+
+04:11.610 --> 04:14.050
+In fact we need to actually remove the build back.
+
+04:14.070 --> 04:20.370
+So what you can do really easily is say Heroku build packs and this will list out any build packs we
+
+04:20.370 --> 04:22.710
+currently have on this project.
+
+04:22.710 --> 04:24.510
+So we have our Mars create react.
+
+04:25.030 --> 04:33.720
+So just copy that and then we're going to run Heroku build packs colon remove and then paste in the
+
+04:33.720 --> 04:37.200
+name of Mars create reactive.
+
+04:37.300 --> 04:43.210
+Now this will end up removing the build pack so we don't use it the next time we need to build our project
+
+04:43.750 --> 04:45.460
+and Heroku will build our project.
+
+04:45.460 --> 04:52.450
+Once we push up our newest code that we've written but we do have to also commit this new code that
+
+04:52.450 --> 04:54.220
+we've actually added.
+
+04:54.220 --> 04:57.220
+So there's gonna be a big commit that we need to make.
+
+04:57.220 --> 05:03.570
+So first I'm just going to clear this so that I can say get ad dash a.
+
+05:03.640 --> 05:12.170
+So this will add all the files that we need and then I'm going to say get commit dash M separating our
+
+05:12.170 --> 05:25.290
+CRM app into client folder added express server to help handle back end stripe payment and now we've
+
+05:25.380 --> 05:30.530
+added all of our code and then we're going to run get push Heroku
+
+05:33.030 --> 05:40.260
+master so this will push all of this code that we've got recently on our Heroku up onto the master branch.
+
+05:40.260 --> 05:45.150
+Now if you encounter some conflicts because your history is a little odd but you know that your code
+
+05:45.150 --> 05:52.230
+is working you can append a dash dash force flag and this will force this project to push this latest
+
+05:52.230 --> 05:54.850
+code up onto your Heroku.
+
+05:54.870 --> 06:00.690
+Now typically you don't want to do this in a big large scale production app because pushing to master
+
+06:00.750 --> 06:04.740
+and forcing a change on the Get history is a bad practice.
+
+06:04.740 --> 06:10.110
+But because this is our own personal project and because we have a long track and get history with all
+
+06:10.110 --> 06:15.280
+of the code that I've updated for you recently you can do this no problem.
+
+06:15.380 --> 06:21.440
+This is mostly a practice that you have to keep in mind not to do when you're actually working in a
+
+06:21.440 --> 06:27.410
+real professional setting but for the sake of your own personal projects because you're the only person
+
+06:27.410 --> 06:28.440
+working on this.
+
+06:28.460 --> 06:36.140
+It's not a big issue at all so then once you enter this will push and update all of our latest code
+
+06:36.260 --> 06:39.120
+up onto that Heroku production.
+
+06:39.130 --> 06:47.400
+Now the only new thing we also have to change is going to be thinking about our DOT and file our DOT
+
+06:47.500 --> 06:54.440
+m file is actually inside of our get ignore because we don't want to push up our secret keys onto any
+
+06:54.440 --> 06:55.610
+jet remotes right.
+
+06:55.610 --> 06:59.750
+Anyone with access to our kit remote can then see what our secret keys are.
+
+06:59.840 --> 07:01.690
+So we don't want to do that.
+
+07:01.700 --> 07:09.380
+What we do want to do though is let her Roku access the secret values that we have stored inside of
+
+07:09.380 --> 07:14.840
+the environment and the way we do that is actually with a Heroku config tool.
+
+07:14.840 --> 07:16.490
+So I'll show you how to do that.
+
+07:16.550 --> 07:22.370
+After our production code finishes building now that Heroku is finished building our project we need
+
+07:22.370 --> 07:24.240
+to set a config variable.
+
+07:24.380 --> 07:34.250
+So you're just going to say Heroku config colon set and then stripe secret key equals and then you're
+
+07:34.250 --> 07:38.610
+gonna paste in the secret key that you have inside of your environment variable.
+
+07:38.690 --> 07:44.780
+So make sure that you paste it in without the quotations because just like our DOT and Heroku doesn't
+
+07:44.780 --> 07:52.280
+need it to be a string then you're going to hit enter and that will now allow Heroku to actually use
+
+07:52.340 --> 07:53.870
+the secret key in your project.
+
+07:54.230 --> 07:58.130
+So I'm not going to paste mine in of course because I don't want anyone to see it because again it is
+
+07:58.130 --> 07:59.690
+a secret key.
+
+07:59.690 --> 08:10.550
+And now if we run a Heroku open we should have our project up with our latest new code so in order for
+
+08:10.550 --> 08:20.040
+us to test if everything's working let's just add some items into our cart go to our checkout and complete
+
+08:20.070 --> 08:22.350
+our payment flow.
+
+08:22.410 --> 08:24.340
+So this is an auto complete.
+
+08:24.690 --> 08:35.050
+And then I'm going to enter in our fake credit card and now if I hit pay now if I get the alert that
+
+08:35.050 --> 08:38.320
+everything was successful which we did.
+
+08:38.320 --> 08:41.170
+If we go to our dashboard and we refresh
+
+08:44.510 --> 08:48.730
+we should see our latest payment which we do.
+
+08:48.780 --> 08:55.950
+So now we have completed the full production version of our application with our stripe payment and
+
+08:55.950 --> 08:57.930
+charge back as well.
+
+08:57.930 --> 09:04.010
+So now your application is up to date with everything you need in order for strike to make a payment.
+
+09:04.020 --> 09:07.020
+So this is actually all you needed to do.
+
+09:07.020 --> 09:14.310
+The only thing is that if you actually want to have a real stripe charge where the actual credit card
+
+09:14.400 --> 09:19.620
+is a real credit card and everything works you do have to activate your account and then you can switch
+
+09:19.650 --> 09:22.240
+over from test mode into production mode.
+
+09:22.270 --> 09:26.400
+But the code doesn't change because everything is going to be the same.
+
+09:26.410 --> 09:31.060
+The only difference is that the actual strike dashboard right now does not allow us to do it because
+
+09:31.060 --> 09:32.530
+I have not activated this account.
+
+09:32.530 --> 09:37.510
+It's just a long survey to fill out letting stripe know what kind of business you're running and all
+
+09:37.510 --> 09:39.670
+the other legal issues related around it.
+
+09:40.030 --> 09:43.080
+But it's actually really easy in order for us to do this.
+
+09:43.310 --> 09:49.900
+Now if you already had the existing project linked to Heroku and you've been just using one exact same
+
+09:50.140 --> 09:56.260
+application up until now you didn't need to do that Heroku set apart.
+
+09:56.320 --> 10:02.740
+You could have just run everything up until the from the get commit and get add to what we just did
+
+10:02.740 --> 10:05.240
+now and everything will still work.
+
+10:05.290 --> 10:10.440
+So hopefully you've deployed your application up onto Heroku now and your code is up to date.
+
+10:11.200 --> 10:12.280
+And with that we're done.
+
+10:12.310 --> 10:18.400
+Our back end section we've updated all of our code to our latest back in server with our client side
+
+10:18.400 --> 10:19.720
+separation.
+
+10:19.750 --> 10:25.510
+So now you've got a better idea at the very least of how back ends and front ends interact from a full
+
+10:25.510 --> 10:30.070
+stack perspective but with that let's continue with our course.

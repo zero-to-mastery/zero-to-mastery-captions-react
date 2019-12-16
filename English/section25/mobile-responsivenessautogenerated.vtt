@@ -1,0 +1,364 @@
+WEBVTT
+
+00:01.260 --> 00:03.180
+Welcome back everybody.
+
+00:03.240 --> 00:10.560
+So in the last few sections I know we didn't work off of our main application because we were mostly
+
+00:10.620 --> 00:18.540
+implementing in different features that couldn't challenge the existing solutions of reactor redux inside
+
+00:18.600 --> 00:25.620
+of our main commerce platform by testing out context API and then switching over to graph fuel in Apollo
+
+00:25.620 --> 00:26.580
+client.
+
+00:26.580 --> 00:33.390
+So it's actually been a while since we've worked on our main application but now that we finished those
+
+00:33.390 --> 00:39.780
+tangential sections where we've really deeply explored other alternatives to the reactor redux architecture
+
+00:39.810 --> 00:47.820
+that we already currently have it's time we come back and start rounding out our application with the
+
+00:47.820 --> 00:52.730
+last 20 percent that gives our application that extra room.
+
+00:52.860 --> 00:56.380
+Now these things might not actually be any features at all.
+
+00:56.580 --> 01:03.570
+In fact in the upcoming sections we are going to round out your skill set as a web developer so that
+
+01:03.570 --> 01:10.560
+you understand that last kind of mysterious part of what it takes to build an application effectively
+
+01:11.130 --> 01:13.600
+and have it be performance.
+
+01:13.650 --> 01:20.640
+So one of the first things that I want to talk about is actually making our website mobile friendly.
+
+01:20.850 --> 01:24.140
+Now currently our Web site is not mobile friendly.
+
+01:24.210 --> 01:30.600
+It is a little bit responsive but it's not fully optimized for the mobile viewing experience.
+
+01:30.630 --> 01:39.210
+So what we're going to do is actually modify the CFS in our files to show that they are more aligned
+
+01:39.210 --> 01:42.450
+with how we would want it to look on a mobile browser.
+
+01:42.450 --> 01:46.230
+And I'm gonna show you that by using media queries.
+
+01:46.230 --> 01:51.330
+Now before we actually dive into the code of writing our media queries one of the main things we have
+
+01:51.330 --> 01:57.600
+to think about is actually how do we make sure that we can view our application inside of a mobile environment.
+
+01:57.900 --> 02:04.080
+If you're rolling chrome it's actually extremely easy to do so the Chrome browser allows us to just
+
+02:04.140 --> 02:11.980
+open up the dev tools and click this little tablet looking icon inside at the top of that toolbar which
+
+02:11.980 --> 02:14.190
+says toggle device toolbar.
+
+02:14.190 --> 02:22.290
+If you click this you'll actually see your mobile web view be your main view now where your browser
+
+02:22.290 --> 02:24.010
+was before.
+
+02:24.210 --> 02:30.990
+You can adjust the size of this and in the top number here you'll see the actual width and height of
+
+02:30.990 --> 02:31.980
+your new view.
+
+02:31.980 --> 02:35.150
+So this pretty much simulates a mobile view.
+
+02:35.220 --> 02:42.090
+So this is the main way that we are going to use it to see what it is that we are actually going to
+
+02:42.180 --> 02:50.810
+have as the mobile version of our web application now that we have this we are going to start leveraging
+
+02:50.810 --> 02:55.100
+these media queries to modify our code to be more mobile friendly.
+
+02:55.280 --> 03:01.980
+So let's go back to our application one of the first things that we need to do is actually change this
+
+03:01.980 --> 03:06.330
+final app dot CSX file over to style components.
+
+03:06.330 --> 03:09.620
+Now the way that we import of the style sheet is perfectly fine right.
+
+03:09.630 --> 03:16.170
+It's just one app dot CSA style sheet that doesn't necessarily have to change when we moved over to
+
+03:16.170 --> 03:20.320
+CSX and J.S. but for consistency sake we might as well do it.
+
+03:20.370 --> 03:26.600
+And it's really easy in order to implement global styles all we have to do is use this new function
+
+03:26.600 --> 03:28.530
+called creates global styles.
+
+03:28.790 --> 03:34.490
+So in order for us to do that we're going to make a new folder that will hold the component that represents
+
+03:34.610 --> 03:36.160
+our global styles.
+
+03:36.500 --> 03:39.120
+So we'll write this new file and we'll call it global.
+
+03:39.120 --> 03:49.820
+Dot styles dot J.S. now inside of here we are going to import in from the styled components library.
+
+03:50.140 --> 03:53.080
+This thing called create global style.
+
+03:53.170 --> 04:02.290
+So with this we can actually create this new concept called Global style which is equal to us using
+
+04:02.710 --> 04:09.700
+this Craig global stop and then we pass it r tilde version of our string right because we want string
+
+04:09.700 --> 04:16.510
+interpolation and now all we do is we just put all the styles that we had inside of our indexed SPSS
+
+04:17.080 --> 04:23.350
+inside of here if we really wanted to we could even do it with our index ISIS as well.
+
+04:23.540 --> 04:27.840
+But this is inside of our index Yes and it's not 100 percent necessary right.
+
+04:27.890 --> 04:35.030
+Let's just do it with our abducts the USS so once we placed the new stores inside of this global stop
+
+04:35.540 --> 04:41.670
+we'll make sure to export this out and all we need to do in order to bring it into our application is
+
+04:41.670 --> 04:45.590
+literally load it at the top level of our app.
+
+04:45.640 --> 04:53.410
+So what we'll do is we will go back to our app J.S. will remove this import that we had before and in
+
+04:53.410 --> 04:57.310
+its place we will import in our global styles.
+
+04:57.310 --> 05:06.940
+So let's actually move this header up here and say import global style from our new global styles file
+
+05:08.750 --> 05:15.890
+and now it's literally just a component that we can put above the header like so and this will apply
+
+05:15.920 --> 05:18.980
+those styles into our application.
+
+05:18.980 --> 05:24.320
+So if we go back to our application and we search our view back we'll see that our global style and
+
+05:24.320 --> 05:25.720
+our padding is still there.
+
+05:25.730 --> 05:32.390
+In fact if we inspect this we see we still have our party and our body still has the painting code that
+
+05:32.390 --> 05:34.070
+we had from our global star XI.
+
+05:34.850 --> 05:40.730
+So it's really convenient to do it this way because now we are pretty consistent with the way that we're
+
+05:40.730 --> 05:42.300
+writing our code.
+
+05:42.470 --> 05:46.330
+In fact now we can get rid of this app to see us as far because we don't need it anymore.
+
+05:46.490 --> 05:52.660
+And we can start leveraging these media queries so the first thing I want to do is I want to reduce
+
+05:52.660 --> 05:57.880
+the padding on this mobile view of our application.
+
+05:58.000 --> 05:58.810
+So how do I do that.
+
+05:59.620 --> 06:03.340
+Well I keep talking my media queries so I'm going to show you what it actually looks like when we write
+
+06:03.340 --> 06:04.240
+them.
+
+06:04.360 --> 06:10.670
+You put the media query inside of the CSF selector that you want to modify.
+
+06:11.230 --> 06:16.450
+So if we have style components we just make sure to put this media query inside of that style component
+
+06:16.480 --> 06:25.040
+as well and the way that a media query looks is it takes the format of this at media and here what we'll
+
+06:25.040 --> 06:32.470
+say is scream and and then inside of here we put certain properties that tell it.
+
+06:32.690 --> 06:40.380
+At what point do we want this style block to be applied.
+
+06:40.510 --> 06:45.360
+Now here you can set things like Min with Max with or just one or the other.
+
+06:45.390 --> 06:51.120
+And all this is saying is pretty much I only want you to render the C S S block here.
+
+06:51.120 --> 06:52.460
+That will put inside of here.
+
+06:52.500 --> 06:56.160
+So wherever here it is we'll say there's some CSF inside of here.
+
+06:56.160 --> 06:57.080
+Right.
+
+06:57.120 --> 07:03.150
+We only want this to render based on the rules that we write inside of these brackets.
+
+07:03.150 --> 07:12.140
+So in my case I'm gonna say max width is eight hundred pixel meaning that any thing below a hundred
+
+07:12.440 --> 07:16.190
+and below in terms of the width will get these styles.
+
+07:16.490 --> 07:21.550
+Anything above a hundred pixels will not get these things.
+
+07:21.650 --> 07:29.030
+So our body styles will be applied but then these media screen max width of eight hundred pixels this
+
+07:29.030 --> 07:35.480
+block of CSF that we're about to write is going to be applied as long as the window's width does not
+
+07:35.540 --> 07:43.080
+exceed eight hundred pixels so here I want to set the palette to 10 pixels all around instead of what
+
+07:43.080 --> 07:49.110
+we had before where our padding was 20 pixels top bottom 40 pixels on the left and right now if we save
+
+07:49.110 --> 07:53.220
+when we go back we see that our padding has shrunk.
+
+07:53.220 --> 08:01.750
+Now we only have a 10 pixel border padding around the body so that is our immediate query.
+
+08:01.790 --> 08:05.510
+Now I'll link a resource for you guys to see other media queries that you can write because there's
+
+08:05.510 --> 08:06.290
+so many.
+
+08:06.290 --> 08:06.530
+Right.
+
+08:06.530 --> 08:12.230
+This is literally just the pixel not that I chose to dictate because I find with iPhones there pixel
+
+08:12.260 --> 08:16.550
+count based on the new retinas is a little bit challenging.
+
+08:16.550 --> 08:21.700
+So that sometimes the amount of pixels that you think you might be might be a little higher.
+
+08:21.800 --> 08:25.880
+I find that most browsers do not have a with smaller than hundred pixels.
+
+08:26.150 --> 08:33.200
+And if it's a tablet it's perfectly fine if it responds the same way as we would see for a mobile device
+
+08:33.230 --> 08:36.690
+if it was inside of a portrait view.
+
+08:36.740 --> 08:43.280
+So I find a hundred pixels to be one that I'm comfortable with now of course you can dictate and set
+
+08:43.280 --> 08:45.070
+them to whatever else you want.
+
+08:45.200 --> 08:51.020
+Resources that I've linked for you have multiple breakpoints that are also always changing as the technology
+
+08:51.020 --> 08:54.560
+for phones gets better screen resolutions get larger.
+
+08:54.560 --> 09:01.010
+It's literally just completely dictated by whatever you and your team decide to do.
+
+09:01.010 --> 09:07.070
+I personally like this a hundred pixel rule for my max with for a project like this where mobile views
+
+09:07.070 --> 09:09.350
+are not big it's the most important thing to me.
+
+09:10.070 --> 09:14.660
+But I do want my screen to be responsive and I want my application to be responsive.
+
+09:15.020 --> 09:17.060
+And it's really just that simple.
+
+09:17.120 --> 09:23.010
+We have this media query for our mobile view of 800 pixels right or below.
+
+09:23.240 --> 09:28.010
+And then we just make sure to modify the padding or whatever other properties we want to set differently
+
+09:28.400 --> 09:29.920
+or also add now.
+
+09:29.950 --> 09:30.240
+Right.
+
+09:30.260 --> 09:35.560
+So that our screen responds the right way when it's in this mobile view.
+
+09:35.570 --> 09:42.350
+Now I'm going to go around and modify a couple more components in the next lesson but then I do want
+
+09:42.350 --> 09:47.420
+you guys to try it yourself and tinker around with it because this is a great chance for you to kind
+
+09:47.420 --> 09:50.500
+of see and play around with some of the CSF.
+
+09:50.930 --> 09:58.210
+So you can have it look a way that you want in the end it's really just a matter of taste with styling
+
+09:58.850 --> 10:03.800
+but I'm gonna show you what I'll do for some of these components that I think we'll end up looking nice
+
+10:04.580 --> 10:10.880
+so you can either proceed yourself with trying to convert some of these styles yourself first you can
+
+10:10.880 --> 10:12.700
+watch the next video and then do it.
+
+10:12.710 --> 10:18.800
+After that it's entirely up to you but this section is purely on making our Web site responsive.
+
+10:18.800 --> 10:21.370
+So with that I will see you in the next lesson.

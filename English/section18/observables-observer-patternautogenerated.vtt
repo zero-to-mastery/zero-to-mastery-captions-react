@@ -1,0 +1,466 @@
+WEBVTT
+
+00:00.210 --> 00:01.940
+Welcome back guys.
+
+00:02.040 --> 00:09.240
+In this lesson and some of the subsequent lessons coming up we are going to use more and more asynchronous
+
+00:09.240 --> 00:12.090
+events inside of a react code.
+
+00:12.180 --> 00:20.890
+And we're also going to tackle asynchronous event handling with redux in a pretty close upcoming lesson.
+
+00:20.970 --> 00:27.660
+But before we do that I want to take a deeper dive into some of the ways that we've been using some
+
+00:27.660 --> 00:34.830
+of the asynchronous event handling that we actually get back from firebase as well as clarify some of
+
+00:34.830 --> 00:37.770
+your understanding on promises.
+
+00:37.770 --> 00:45.540
+Now the reason for this is because inside of the future applications you build or the companies you
+
+00:45.570 --> 00:55.320
+join they may not use this live reload style of event handling that firebase has provided us using this
+
+00:55.410 --> 01:03.780
+on snapshot and on off state changed methods that we've gotten used to inside of our application.
+
+01:03.780 --> 01:10.890
+Now I will show you how you can do something similar to what most projects might have which is a more
+
+01:10.890 --> 01:16.500
+promise fetch oriented API using Firebase and our existing database.
+
+01:16.800 --> 01:25.590
+But first I just want us to take a look at understanding how it is that this live fire base style of
+
+01:25.590 --> 01:33.480
+passing us updates and snapshots and off state changes actually works because this pattern is actually
+
+01:33.480 --> 01:39.440
+a very common pattern inside of JavaScript world.
+
+01:39.470 --> 01:45.230
+Not only that it's actually a very common pattern in the general computer science programming world
+
+01:45.230 --> 01:50.780
+as a whole which is the idea of subscriptions.
+
+01:50.830 --> 01:56.020
+Now you might have heard of something called observable as you might have heard something called our
+
+01:56.020 --> 01:59.620
+X J S you might have even used those libraries before.
+
+01:59.620 --> 02:03.950
+If you've used angular at all ever then you've definitely come across it.
+
+02:04.150 --> 02:08.170
+But what it is is a pattern known as the observer pattern.
+
+02:08.650 --> 02:12.300
+So let's take a look at what that actually looks like.
+
+02:12.300 --> 02:23.210
+Now imagine if you will this stream of events right there's this arrow that represents a almost time
+
+02:23.270 --> 02:35.530
+linear progress of time and then each circle here represents some event inside of this timeline this
+
+02:35.950 --> 02:39.420
+stream of events is exactly as it is.
+
+02:39.520 --> 02:47.440
+It's a stream which means that there are subsequent concurrent back to back events that could occur
+
+02:47.530 --> 02:49.510
+in an asynchronous fashion.
+
+02:49.570 --> 02:51.220
+I know it sounds really complicated.
+
+02:51.220 --> 02:58.540
+We're using a lot of terminology here but in a really basic way you can just imagine that if there were
+
+02:58.660 --> 03:03.990
+multiple events that were happening they just happen in a specific order.
+
+03:04.060 --> 03:04.460
+Right.
+
+03:04.480 --> 03:06.730
+Based on when they actually occur.
+
+03:06.730 --> 03:13.330
+So if you were to imagine a stream of user clicks you can just see this as a user just clicked.
+
+03:13.360 --> 03:13.690
+Right.
+
+03:13.690 --> 03:18.730
+Two seconds later a user clicked again half a second later a user clicked maybe three seconds later
+
+03:18.760 --> 03:24.190
+a user clicked an indefinite no time doesn't matter they click again they click again and so on and
+
+03:24.190 --> 03:26.270
+so forth and so on and so forth.
+
+03:26.410 --> 03:36.800
+That's all a stream of data is it's just a continuous ongoing stream of events that are happening what
+
+03:36.800 --> 03:44.810
+an observable is is it some piece of code that wraps around this stream so that we're actually able
+
+03:44.810 --> 03:51.740
+to do something with the value of that piece of data at each event.
+
+03:51.740 --> 03:59.690
+So for example if you remember when we were doing are monsters Rolodex and we had an on click in order
+
+03:59.690 --> 04:02.090
+for us to bind something to a stream of data like that.
+
+04:02.090 --> 04:07.370
+You can kind of see that there had to be some code implemented in order for us to actually capture that
+
+04:07.370 --> 04:11.500
+event and you can see that on this data here.
+
+04:11.510 --> 04:16.740
+There might be some event data that we want to handle right with our code.
+
+04:16.910 --> 04:25.160
+So all an observer is is some piece of code that wraps around this stream of events the observer is
+
+04:25.160 --> 04:30.320
+a piece of code that essentially has three function calls on it.
+
+04:30.710 --> 04:40.520
+It has a next call which is literally just the code that you execute whenever a new event happens an
+
+04:40.640 --> 04:43.880
+error call is something that we do when an error occurs.
+
+04:43.910 --> 04:49.160
+So you can imagine if there was a stream of possible API calls right to a back and of some kind.
+
+04:49.160 --> 04:56.060
+Like what we have and let's say on the third event our internet goes down or the server crashes or something
+
+04:56.070 --> 04:56.320
+right.
+
+04:56.660 --> 04:57.960
+This will throw an error.
+
+04:58.010 --> 05:05.090
+We want to have some function that handles errors if that happens and then a complete call which is
+
+05:05.090 --> 05:11.530
+an optional call that will occur if for example the stream is finished.
+
+05:11.630 --> 05:15.310
+Now do streams finish.
+
+05:15.350 --> 05:16.920
+Yes they definitely can.
+
+05:16.940 --> 05:20.570
+A stream can definitely stop emitting data.
+
+05:20.960 --> 05:27.800
+Let's say for example we know that from our back end let's say we were getting five pieces of data in
+
+05:27.800 --> 05:31.640
+an unknown amount of time after we've gotten all five.
+
+05:31.670 --> 05:38.240
+We know that we don't need any more data so we can actually stop listening and shut down this stream
+
+05:38.270 --> 05:40.430
+because we don't need to keep it open anymore.
+
+05:40.490 --> 05:43.100
+We've got all five of our pieces of data that we needed.
+
+05:43.700 --> 05:48.800
+So because of that the observable is capable of stopping the stream at some point.
+
+05:48.800 --> 05:56.300
+And if we have any of these observers then they're complete calls will get called and how this happens
+
+05:56.720 --> 06:06.790
+is through what's called a subscription a subscription is essentially a way for us to tie our code write
+
+06:06.840 --> 06:07.670
+our Observer
+
+06:11.570 --> 06:15.630
+using what's called a listener.
+
+06:15.660 --> 06:23.860
+So our observer is listening to these values and we're subscribing to this observer's stream of events.
+
+06:23.890 --> 06:31.810
+So what we do here with our Observer is we're seeing Hey observable I'm gonna give you my function calls
+
+06:32.320 --> 06:33.930
+whenever a new event comes in.
+
+06:33.970 --> 06:36.290
+I want you to call the next on it.
+
+06:36.430 --> 06:37.920
+Whenever an error comes in.
+
+06:37.930 --> 06:44.270
+I want you to call the air whenever it completes I want you to call the complete and that's all it is.
+
+06:44.290 --> 06:49.900
+There's essentially just these three methods on a single observer that we've passed to this stream of
+
+06:49.900 --> 06:54.520
+data and then the stream of data which is the observable we'll know.
+
+06:54.530 --> 06:54.970
+OK.
+
+06:54.970 --> 06:59.610
+Whenever I get a new value inside of my stream I'm just gonna give that to the next function.
+
+06:59.620 --> 07:07.030
+I'm going to call it again what this is doing is exactly what we're doing with our off dot on off state
+
+07:07.030 --> 07:07.390
+changed.
+
+07:07.390 --> 07:14.340
+Call the function that we've passed to it is pretty much that next function call that we've got here
+
+07:14.510 --> 07:15.200
+right.
+
+07:15.330 --> 07:20.370
+And that off the on off state changed is the stream of events.
+
+07:20.400 --> 07:20.730
+Right.
+
+07:20.740 --> 07:29.940
+There's some indefinite stream of data on the off firebase library where it just doesn't end because
+
+07:29.940 --> 07:35.490
+users can keep logging in and logging out and logging in and logging it with different users.
+
+07:35.520 --> 07:35.720
+Right.
+
+07:35.720 --> 07:42.900
+And every time that happens firebase sends us and emits to us another piece in that stream which is
+
+07:42.900 --> 07:45.850
+that new user logged in or user logged out.
+
+07:45.860 --> 07:46.370
+Right.
+
+07:46.440 --> 07:51.510
+Whatever it is firebase is just sending it to us in a continuous stream.
+
+07:51.810 --> 07:59.160
+When we pass it this function we are essentially passing in a very basic observer.
+
+07:59.160 --> 08:02.900
+This function we've passed it is the next function.
+
+08:02.940 --> 08:10.850
+So whenever a value comes in we run our function that we pass to it the next function you could possibly
+
+08:10.850 --> 08:14.880
+pass that this call is actually the error call right.
+
+08:14.900 --> 08:20.450
+We can actually pass this error functions as the second argument and do something with the error if
+
+08:20.450 --> 08:21.520
+we want it to.
+
+08:21.530 --> 08:27.020
+That's just what's available to us on both the off state changed as well a snapshot.
+
+08:27.020 --> 08:35.440
+It's just different ways for us to handle our Observer pattern using the fire base library the complete
+
+08:35.440 --> 08:42.160
+call very rarely happens inside a firebase because firebase is a live database which means that updates
+
+08:42.160 --> 08:43.920
+can always happen.
+
+08:43.920 --> 08:50.050
+There is no point in which firebase is like Oh technically speaking users might stop signing in or signing
+
+08:50.050 --> 08:50.250
+out.
+
+08:50.590 --> 08:57.050
+Which is why there's no complete callback that we can pass this but this is pretty much all it is.
+
+08:57.100 --> 09:04.450
+The moment we pass it a function where a stance creating some listener right on this observable of off
+
+09:05.020 --> 09:07.500
+on all state changed.
+
+09:07.570 --> 09:10.920
+Now you might wonder why do we set this unsubscribe.
+
+09:10.930 --> 09:14.050
+Well technically speaking our subscription never ends.
+
+09:14.050 --> 09:14.280
+Right.
+
+09:14.290 --> 09:17.670
+Because this stream is always open.
+
+09:18.100 --> 09:24.520
+If we instantiated some listener here this listener exists now because it's always listening for events.
+
+09:24.670 --> 09:30.580
+If our component on Mounts we don't care about this listener as far as this component is concerned anymore
+
+09:31.330 --> 09:37.820
+but because the auth stream always exists inside of the auth library which is in our application now.
+
+09:37.840 --> 09:44.260
+Once we imported it then it's going to always hold on to this listener.
+
+09:44.260 --> 09:49.420
+What we have to do is we have to unsubscribe from it right.
+
+09:49.690 --> 09:55.420
+We need to say hey I need you to stop listening to it the moment my component on mounts the moment our
+
+09:55.420 --> 09:56.950
+component is off the DOM.
+
+09:57.070 --> 10:01.710
+This component doesn't exist anymore as far as our app is concerned so it doesn't need to listen anymore.
+
+10:01.740 --> 10:05.490
+Firestarter allows us to get back and unsubscribe.
+
+10:05.530 --> 10:13.150
+Function that the moment we call it it will eliminate that listener so you can kind of see it as whenever
+
+10:13.150 --> 10:16.280
+this gets instantiated it gives us back some reference.
+
+10:16.300 --> 10:21.330
+That's a function that can get called that points to this listener that we just instantiated right here
+
+10:22.390 --> 10:25.330
+the moment our component on mounts.
+
+10:25.330 --> 10:27.280
+We will unsubscribe from it.
+
+10:27.280 --> 10:29.390
+So we're saying oh get rid of that listener now.
+
+10:29.410 --> 10:31.060
+We don't need it anymore.
+
+10:31.180 --> 10:38.260
+So just unsubscribe and then once it does that it destroys the subscription and then the observable
+
+10:38.290 --> 10:44.890
+just continues like it always has an observable can also have any number of listeners.
+
+10:44.890 --> 10:51.410
+That means that we have multiple of these observers that all have different next function calls error
+
+10:51.410 --> 10:52.830
+function calls complete function calls.
+
+10:52.870 --> 10:53.680
+It doesn't matter.
+
+10:53.680 --> 10:59.190
+The observable just knows that there's going to be different listeners listening to it once it subscribes.
+
+10:59.260 --> 11:04.570
+The moment it subscribes the observer what gets a reference to this subscription and it will just call
+
+11:04.630 --> 11:09.820
+the next whenever it gets a new value call the air or whatever gets an error and code complete whenever
+
+11:09.820 --> 11:17.760
+a complete if at any point a cup piece of code tells the observable hey I want to unsubscribe from you.
+
+11:17.770 --> 11:21.880
+Then the observer just takes that reference and throws it out and it's like oh I don't need the subscription
+
+11:21.880 --> 11:22.560
+anymore right.
+
+11:22.630 --> 11:29.050
+I'm just going to continue emitting my events and firing these function calls on all of the other observers
+
+11:29.080 --> 11:31.530
+that are still listening to me.
+
+11:31.750 --> 11:33.090
+And that's really all it is.
+
+11:33.130 --> 11:39.310
+It sounds way more complicated than it does and I know even with my explanation it seems rather technical.
+
+11:39.340 --> 11:41.840
+But that's because of the way that we have to write the code.
+
+11:41.950 --> 11:49.360
+But that's all you got to see it as really is that it's just some stream of events that we pass some
+
+11:49.360 --> 11:54.080
+code to it and tell it what to do whenever one of these events occurs.
+
+11:54.190 --> 11:55.440
+That's really all it is.
+
+11:55.510 --> 11:58.490
+And then there's a chance that we just don't want to listen to it anymore.
+
+11:58.570 --> 11:58.810
+Right.
+
+11:58.810 --> 12:01.270
+So we just unsubscribe from it.
+
+12:01.270 --> 12:08.350
+Stop listening to that code hopefully that gives you a better understanding of this pattern of streams
+
+12:08.560 --> 12:13.840
+that exists when we use Firebase now because of this.
+
+12:13.840 --> 12:20.050
+If your application does not run either asks j ust which is a javascript library that implements the
+
+12:20.050 --> 12:25.840
+observable pattern in the side of our application or you're not using firebase.
+
+12:25.870 --> 12:31.630
+Chances are you're just using regular promises and in the next lesson I'm going to show you how we can
+
+12:31.630 --> 12:39.490
+write very similar code and modify our code based so that we use promises instead of just are observable.
+
+12:39.550 --> 12:40.000
+Listener.

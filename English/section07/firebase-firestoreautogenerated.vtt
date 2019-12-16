@@ -1,0 +1,331 @@
+WEBVTT
+
+00:01.330 --> 00:10.330
+Before we actually write any fire storm database code we have to understand a couple fundamental concepts
+
+00:10.690 --> 00:15.410
+about how fire stores database works.
+
+00:15.470 --> 00:22.050
+It will help us also understand what it is that we're actually going to do from a coding perspective.
+
+00:22.890 --> 00:29.790
+But before that in order for me to show you these concepts we actually have to go into the database.
+
+00:29.790 --> 00:38.910
+The first thing we want to do is click this database tab inside of the develop sidebar in here.
+
+00:38.920 --> 00:46.330
+We want to select create database and we'll get prompted with one of two options.
+
+00:46.480 --> 00:51.580
+Now the first one is called Locked mode and the second is test mode.
+
+00:51.580 --> 00:59.830
+And this is essentially the beginning security rules that are set up for our new cloud fire store database.
+
+00:59.830 --> 01:10.200
+When we create it locked mode essentially prevents any one from reading and writing to our storage test
+
+01:10.200 --> 01:11.010
+mode.
+
+01:11.010 --> 01:11.820
+Doesn't matter.
+
+01:11.820 --> 01:15.630
+It means that anybody can read and write to our database.
+
+01:15.630 --> 01:18.050
+Now what does that mean.
+
+01:18.060 --> 01:21.720
+Well this is one of those concepts on the right hand side here.
+
+01:21.750 --> 01:31.580
+You'll see what looks like an odd version of some javascript code and what this says is this is kind
+
+01:31.580 --> 01:37.900
+of like a rule that we can write inside of our cloud firestorm.
+
+01:38.030 --> 01:45.830
+That will either allow or deny different permissions of what people can do.
+
+01:45.920 --> 01:47.560
+What do I mean by this.
+
+01:47.600 --> 01:57.650
+Let's say you had a user that wanted to fetch all of the data related to the users like they wanted
+
+01:57.740 --> 02:06.330
+a list of all the users while if we were storing sensitive information on those users we would not want
+
+02:06.690 --> 02:10.960
+anyone to be able to do that let alone modify that data.
+
+02:10.980 --> 02:19.890
+So using this block of code here inside of our database we're able to have the flexibility to control
+
+02:20.250 --> 02:24.070
+what people are able to do and not able to do.
+
+02:24.090 --> 02:33.030
+It's essentially like we're setting restrictions on what rules we want to enforce so that our database
+
+02:33.060 --> 02:35.010
+is as secure as possible.
+
+02:36.600 --> 02:43.200
+So we to begin want to start in test mode and we'll end up writing some rules so that we'll get more
+
+02:43.200 --> 02:44.730
+secure as we go.
+
+02:44.730 --> 02:47.010
+But we just want to explore this for now.
+
+02:47.220 --> 02:56.510
+So let's enable it and it will end up creating our first database for us.
+
+02:56.660 --> 03:04.770
+Now once we're in here that rules tab is actually those things that I was talking about.
+
+03:04.850 --> 03:08.440
+This is where we'll see those rules.
+
+03:08.450 --> 03:10.430
+The first one on the right side.
+
+03:10.430 --> 03:14.280
+So here we can edit them but we'll figure out that later I promise.
+
+03:14.570 --> 03:17.780
+What we really want to see though is this data.
+
+03:17.780 --> 03:25.290
+So in a fire store this database is what's called a no sequel database.
+
+03:25.290 --> 03:34.320
+It's essentially a fancy way of saying that our database consists of one gigantic Jason object there
+
+03:34.320 --> 03:42.120
+are two types of data inside of our database and they're more conceptual.
+
+03:42.240 --> 03:48.980
+So the first one is called a collection a collection is exactly as it sounds.
+
+03:49.120 --> 03:59.110
+It's like a group of objects except those objects are the second type of data called documents.
+
+03:59.110 --> 04:08.080
+So you can almost see them as an array of things and each of those things can also have properties that
+
+04:08.170 --> 04:10.510
+point to other collections.
+
+04:10.510 --> 04:13.240
+So let's do an example.
+
+04:13.240 --> 04:19.570
+Let's say we add a collection called user's we'll click next.
+
+04:19.630 --> 04:26.290
+And now we suddenly have this path inside of our database slash users.
+
+04:26.290 --> 04:33.220
+And that is a collection and in this collection let's say we added a new document.
+
+04:33.220 --> 04:35.530
+In other words a new user.
+
+04:35.530 --> 04:44.890
+We can auto generate the IP because every object or document needs a unique identifier so that we know
+
+04:44.890 --> 04:56.370
+that in the users the document with this I.D. is that specific user and then let's say they had a display
+
+04:56.370 --> 05:00.260
+name of the value E.
+
+05:00.810 --> 05:11.280
+So if I save this now in my collection of users there is a document with the I.D. of what we just saw
+
+05:11.700 --> 05:13.210
+with the display name of Iowa.
+
+05:13.260 --> 05:18.900
+This thing you see on the right hand side is the document itself.
+
+05:18.900 --> 05:24.620
+And then inside of this document we can actually add a collection.
+
+05:24.660 --> 05:30.840
+So for example let's say our user also had carte items right.
+
+05:30.960 --> 05:36.030
+Like they pick some items and they added it to their cart but they haven't checked it out yet.
+
+05:37.510 --> 05:44.410
+And in there we'll also generate a new I.D. because the first card item they got was let's say the name
+
+05:44.410 --> 05:49.170
+of the item was blue hat.
+
+05:49.200 --> 05:58.770
+So now inside of our users collection for this user of yeehaw he has a property which is a collection
+
+05:58.770 --> 06:08.400
+of card items and in that collection of card items there is a document of the cart item blue hat.
+
+06:08.670 --> 06:13.980
+He could have multiple different card arms let's say he had another one Another one with a unique I.D.
+
+06:13.980 --> 06:14.910
+as well.
+
+06:15.270 --> 06:26.840
+And the name of that was leather jacket so here we see our car items collection on our user Yahoo.
+
+06:27.970 --> 06:31.230
+Has this two items inside of it.
+
+06:31.420 --> 06:38.320
+Two documents so that's essentially the main thing in our database.
+
+06:38.340 --> 06:46.590
+It just consists of collections and documents and then those documents might have their own collections
+
+06:46.710 --> 06:49.700
+and documents now.
+
+06:51.180 --> 06:56.000
+That's the idea behind how things are stored in our database.
+
+06:56.220 --> 07:05.630
+But the way that we would query for them is like so now we already know that we have firebase imported
+
+07:05.900 --> 07:13.190
+and then we have our fire store and we remember exporting out concert fire store equals firebase store
+
+07:13.220 --> 07:13.970
+fire store
+
+07:17.710 --> 07:23.260
+with this how we actually query those documents as we would literally say something like fire store
+
+07:23.640 --> 07:24.880
+dot collection.
+
+07:24.910 --> 07:25.170
+Right.
+
+07:25.180 --> 07:32.260
+Because we need we want that collection and then we're saying users what this will query for us is this
+
+07:32.260 --> 07:33.370
+collection.
+
+07:33.360 --> 07:33.720
+Right.
+
+07:33.730 --> 07:43.210
+It'll give us the identifier for this collection if we wanted to say go into that users and then find
+
+07:43.300 --> 07:44.480
+this document.
+
+07:44.590 --> 07:53.900
+We would say dot doc and then we would pass it the I.D. of that document that we're looking for i.e.
+
+07:54.040 --> 07:55.360
+that user.
+
+07:55.360 --> 07:57.220
+So we're saying fire store.
+
+07:57.220 --> 08:03.760
+Get me the collection called users and then get me the document with this I.D. and then from there we
+
+08:03.760 --> 08:09.610
+can even we can still keep chaining and say it of that user document that you just got me.
+
+08:09.640 --> 08:18.710
+I want his collection of card items and then you can from here also do Doc Doc right.
+
+08:18.720 --> 08:25.090
+And we can fetch that specific car item we want whether we want the blue hat or the leather jacket.
+
+08:25.110 --> 08:34.710
+We would just copy that I.D. what this is essentially saying is we're asking fire store to get us the
+
+08:34.710 --> 08:42.260
+collection of users and then from the collection we want the specific document with this I.D..
+
+08:42.360 --> 08:51.480
+So this specific user and then from that user we want it's property collection called Car items and
+
+08:51.480 --> 08:58.830
+from that car items we want the specific document with this I.D. by calling this chain firestorm will
+
+08:58.830 --> 09:09.630
+end up getting us the object reference to this specific item nested inside of that user's user car items
+
+09:10.080 --> 09:17.610
+and then that specific car item if we were to go back to our application now the other way we could
+
+09:17.610 --> 09:22.470
+query for this specific document is if we did it like this.
+
+09:22.470 --> 09:30.600
+So if we wanted this specific document we could also say fire store dot doc and then slash users slash
+
+09:32.530 --> 09:39.140
+this I.T. slash car items slash this I.T..
+
+09:39.320 --> 09:42.660
+So this is equivalent to writing this.
+
+09:42.970 --> 09:48.720
+And if we wanted this collection of car items it's exactly as you would imagine.
+
+09:48.750 --> 09:57.120
+Instead of saying dot Doc we would say dot collection and then we would paste the string up until this
+
+09:57.120 --> 09:57.480
+point
+
+10:00.370 --> 10:08.290
+so these are the two main methods of how we can get documents and collections from our database now
+
+10:08.290 --> 10:10.320
+that we know how to query for them.
+
+10:10.480 --> 10:16.610
+There will be ways and methods on these objects that we get that allow us to update them as well.
+
+10:16.660 --> 10:23.450
+But we'll see how to do that when we actually start implementing that code into our application what
+
+10:23.450 --> 10:30.920
+we're gonna do is we're going to store these authenticated users that we get back from our off library
+
+10:31.400 --> 10:38.310
+inside of our database because right now these users are not actually being stored in our database they're
+
+10:38.480 --> 10:46.610
+currently held inside of this authentication area and firebase is a where whenever a user signs in whether
+
+10:46.610 --> 10:51.140
+or not they've signed it before because it is storing those users.
+
+10:51.140 --> 10:54.440
+But we are not actually storing those users in our database.
+
+10:54.440 --> 11:02.600
+So there is no usage for us with those user objects in any relation to what we could do with them inside
+
+11:02.600 --> 11:03.850
+of our database.
+
+11:03.860 --> 11:05.440
+So let's see what we're gonna do.

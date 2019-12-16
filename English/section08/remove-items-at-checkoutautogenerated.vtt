@@ -1,0 +1,379 @@
+WEBVTT
+
+00:00.480 --> 00:09.800
+So now let's build in our quantity increase and decrease feature so looking at the final product what
+
+00:09.800 --> 00:17.390
+we want to be able to do is have these arrows that are able to increase the quantity of an item or decrease
+
+00:17.390 --> 00:24.620
+the item and we're able to do this because the right arrow fires are ad item action that we've already
+
+00:24.620 --> 00:25.600
+created before.
+
+00:25.940 --> 00:31.720
+But the also this new remove item action that's going to be very similar.
+
+00:31.780 --> 00:39.150
+Now alternatively one thing we have to consider when building these features is what is the full functionality.
+
+00:39.260 --> 00:47.520
+So one case might be what happens if we're on the last quantity and then we hit decrease again.
+
+00:47.710 --> 00:50.260
+Well we see that actually removes the item.
+
+00:50.260 --> 00:58.360
+So we have to consider that into the way that we build this feature because we want to be able to scope
+
+00:58.360 --> 01:02.880
+out everything that we need before we start building it.
+
+01:02.890 --> 01:09.130
+Now we know that we need to add in these arrows to our checkout item component and we also know that
+
+01:09.130 --> 01:17.190
+we need at the very least one more new cart action for remove item so let's start building this out.
+
+01:18.610 --> 01:26.270
+The first thing we have to do is add these arrows to our component so let's go into our code and let's
+
+01:26.270 --> 01:35.860
+modify our checkout item component so the first thing we have to do is add the arrows in and they're
+
+01:35.860 --> 01:43.690
+actually going to be using these Unicode eight windings just like the X that we have for a Remove button
+
+01:43.930 --> 01:50.920
+except we'll use a left word and a right word facing arrow and they're gonna be in divs with the class
+
+01:50.920 --> 01:55.720
+name of Arrow flips.
+
+01:55.740 --> 02:03.960
+Gotta make sure to keep them open let's copy this and paste this down and the windowing code that we're
+
+02:03.960 --> 02:14.170
+gonna use is going to start with Amber sand hashtag and it's 1 0 0 9 4 semicolon.
+
+02:14.760 --> 02:23.250
+So this one is our left word facing arrow and now the right word facing one is just one number increased
+
+02:23.670 --> 02:26.090
+so it's going to be Amber sand.
+
+02:26.080 --> 02:38.440
+Hashtag 1 0 0 9 5 semicolon and now if we save we also need to wrap our quantity in a span and this
+
+02:38.440 --> 02:43.250
+span will have the class name of value.
+
+02:43.430 --> 02:50.150
+And the reason we want to add these actual elements is so that we can apply better styling to it because
+
+02:50.150 --> 02:59.660
+right now if we look at our application we'll see that if we add an item that it's not styled yet it's
+
+02:59.660 --> 03:03.600
+vertically aligned which we don't want.
+
+03:03.600 --> 03:11.400
+So what we want to do inside of our style sheet for checkout item is change this quantity to have display
+
+03:11.400 --> 03:18.950
+flex which will put them in that horizontal side by side alignment based on how much space there is.
+
+03:20.240 --> 03:29.810
+Now inside of here we want our arrow class names to have a cursor of pointer so that the user can tell
+
+03:29.810 --> 03:39.820
+that it's a clickable element and then for our value we want to margin 0 10 pixels so zero on the top
+
+03:39.820 --> 03:49.210
+and bottom 10 pixels on the left and right and now if we check again we see that it looks how we want
+
+03:49.210 --> 03:52.360
+it to.
+
+03:52.480 --> 03:58.330
+Now let's actually find the functionality that we want to our left and right click.
+
+03:58.430 --> 04:03.570
+Now we know that our right click already is using the ad item action that we already have.
+
+04:03.620 --> 04:09.650
+So we don't need to build this one but the remove item one seems like it's kind of daunting because
+
+04:09.650 --> 04:14.880
+not only does it have to decrease the quantity but we also have to consider how to remove it.
+
+04:15.200 --> 04:19.610
+But we've already done that if you think about it with our remove action right.
+
+04:19.640 --> 04:21.310
+We've done something very similar.
+
+04:21.440 --> 04:27.680
+So our code much of it has already been something we've written before it's just the composition is
+
+04:27.680 --> 04:33.080
+gonna be a little different but it'll be interesting because it's going to combine all of these concepts
+
+04:33.080 --> 04:35.810
+that we've already been tackling and learning.
+
+04:36.620 --> 04:46.610
+So let's go into our cart types to add a new action stream type called remove item
+
+04:49.460 --> 04:57.310
+and then let's go to our action creators for our cart actions and let's make a new one called remove.
+
+04:57.320 --> 04:57.710
+Action
+
+05:00.590 --> 05:01.640
+remove item
+
+05:05.050 --> 05:13.040
+and it's going to be cart action types dot remove item and the payload will still be the item.
+
+05:13.100 --> 05:16.530
+Exactly like our add item.
+
+05:16.640 --> 05:26.360
+Now what we want to do is modify our producer so inside of our cart reducer we are going to make another
+
+05:26.360 --> 05:32.050
+case right underneath our add item for car action types.
+
+05:32.210 --> 05:40.690
+Remove item and we're going to return an object spread in the state because we want all the properties
+
+05:41.070 --> 05:46.720
+right that aren't changing but the ones that we do want to change is cart items and we're going to write
+
+05:46.720 --> 05:52.630
+a new utility function that will return us the array with the modified cart item with the decreased
+
+05:52.630 --> 05:56.860
+quantity or the removed item from our existing cart items.
+
+05:56.860 --> 06:03.030
+If it was the last one so let's go to our cart utilize and write this function.
+
+06:03.090 --> 06:04.850
+So let's think about what we need to do.
+
+06:05.070 --> 06:09.990
+We need to first figure out if there's an existing cart item already inside of our car.
+
+06:09.990 --> 06:13.850
+Items which we know there must be because we're decreasing it.
+
+06:13.860 --> 06:14.090
+Right.
+
+06:14.100 --> 06:20.200
+So we know there must already be one and then what we want to do need to check of the quantity is 1
+
+06:20.260 --> 06:21.720
+so that we can remove it.
+
+06:22.000 --> 06:24.320
+Otherwise decrease the quantity.
+
+06:24.370 --> 06:28.600
+So it sounds like there's a lot but it's actually quite similar to the code that we've already written
+
+06:30.770 --> 06:40.840
+so let's get started so we'll say remove item from cart is equal to this function so we know that we
+
+06:40.840 --> 06:47.200
+need the card items because we've got to check the existing cart items to see if our cart item to remove
+
+06:47.950 --> 06:48.850
+is inside of it.
+
+06:48.880 --> 06:49.110
+Right.
+
+06:49.120 --> 06:51.220
+We need that existing item.
+
+06:52.120 --> 06:54.820
+So this code here is going to be very similar.
+
+06:54.940 --> 07:01.690
+It's going to be cart item stuff find and we're gonna check just like our add item to cart if the cart
+
+07:01.690 --> 07:03.940
+item I.D. is equal to our cart.
+
+07:03.940 --> 07:13.510
+Item 2 removes I.D. Now if we have the existing card what we're gonna check is only if the quantity
+
+07:13.510 --> 07:14.350
+is equal to 1.
+
+07:14.440 --> 07:21.130
+So we're gonna say if the existing cart items quantity is equal to one then we want to filter it out
+
+07:21.310 --> 07:25.350
+just like we did when we ran our clear item code right.
+
+07:25.390 --> 07:29.300
+Just like this filter it's the exact same idea.
+
+07:29.520 --> 07:35.310
+We just want to remove it and we want to keep all the ones where the cart items I.D. don't match the
+
+07:35.310 --> 07:45.250
+one we're trying to remove because that's what filter needs to say return cart items to filter where
+
+07:45.430 --> 07:56.210
+the ones of the cart item the I.D. does not match our car item to remove that I.D. because we want to
+
+07:56.210 --> 07:57.170
+keep those ones right.
+
+07:57.200 --> 08:02.780
+So just like before filter keeps the values where the function returns true.
+
+08:02.780 --> 08:07.930
+So if the I.D. is not the one that we want to remove then we want to keep them.
+
+08:07.970 --> 08:08.830
+If it does.
+
+08:08.840 --> 08:09.050
+Right.
+
+08:09.080 --> 08:12.350
+If it is then I want to remove that cart.
+
+08:12.350 --> 08:15.470
+Item now.
+
+08:15.630 --> 08:21.750
+Alternatively if the quantity is not 1 and we know there is the existing cart item because there must
+
+08:21.750 --> 08:22.050
+be.
+
+08:22.050 --> 08:22.570
+Right.
+
+08:22.620 --> 08:26.520
+What we're going to return is we're going to say cart items
+
+08:30.120 --> 08:41.320
+and very similar to this function it's gonna be cart item where we are going to just say cart item dot
+
+08:41.440 --> 08:48.370
+I.D. is equal to cart item to remove dot I.D..
+
+08:48.570 --> 08:49.080
+Right.
+
+08:49.080 --> 08:56.490
+If it if it is the same one we want to decrease the quantity we're going to turn a new object spread
+
+08:56.490 --> 08:58.410
+in the cart items.
+
+08:58.410 --> 08:58.810
+Right.
+
+08:58.830 --> 09:04.320
+All the properties except we want the quantity to go to cart item quantity
+
+09:07.320 --> 09:08.040
+minus one
+
+09:11.450 --> 09:19.420
+otherwise what we want is to return just the cart item and that's all there is to it.
+
+09:20.440 --> 09:25.630
+If the existing items quantity at one remove it otherwise decrease the quantity.
+
+09:25.660 --> 09:33.300
+Right and keep every other cart item the exact same because they don't need to be modified and now that
+
+09:33.300 --> 09:37.920
+we have this code let's just bring this into our reducer
+
+09:41.030 --> 09:46.770
+and we can just do state dog cart items and action dog payload.
+
+09:48.480 --> 09:51.520
+And now we have a reducer setup.
+
+09:51.540 --> 09:53.250
+We have our action creator.
+
+09:53.250 --> 09:58.750
+Let's add this to our checkout item.
+
+09:58.870 --> 10:08.410
+Now let's just bring an ad item and remove item and modify our map dispatch to dispatch them at item
+
+10:09.980 --> 10:23.170
+goes to item dispatch ad item where the payload loops cannot type is our item and similarly remove item
+
+10:24.310 --> 10:30.600
+for dispatch or remove item where the item is our payload.
+
+10:30.610 --> 10:36.450
+Now let's D structure them in and bind them to the on click.
+
+10:37.000 --> 10:52.080
+So on our leftward facing arrow we want our removed item with our car item and then on our right worth
+
+10:52.080 --> 10:52.800
+facing Arab
+
+10:55.990 --> 11:11.310
+we want add item with our cart item and now if we add some items we'll see that we're able to increase
+
+11:11.730 --> 11:21.720
+on a click of the smaller era decrease and remove all our functionality as in and by combining everything
+
+11:21.720 --> 11:26.850
+we've learned up until this point we've built a pretty robust feature.
+
+11:26.920 --> 11:28.060
+So this is pretty cool.
+
+11:28.120 --> 11:34.690
+We've managed to actually do everything that we need for this item toggling and it's just building upon
+
+11:34.720 --> 11:39.100
+all the same code and ideas that we've already explored so far.
+
+11:39.100 --> 11:45.670
+It was just a matter of putting it together and mentally figuring out what we needed to do in order
+
+11:45.670 --> 11:53.740
+for our feature to not only decrease the quantity but also remove it from our cart items.
+
+11:53.740 --> 12:01.120
+If that was the last quantity while some of these features look kind of complex at first glance if we
+
+12:01.120 --> 12:05.830
+just tackle it one step at a time and think about what it is that we need to do.
+
+12:06.010 --> 12:09.420
+We're able to accomplish and build them pretty easily.
+
+12:10.270 --> 12:11.440
+Now let's commit our code
+
+12:14.330 --> 12:27.150
+and let's just say added an item and remove item functionality to checkout item component
+
+12:30.290 --> 12:32.610
+and get push.
+
+12:32.870 --> 12:34.430
+OK now let's continue.

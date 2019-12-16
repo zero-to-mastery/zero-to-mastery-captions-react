@@ -1,0 +1,97 @@
+WEBVTT
+
+00:01.740 --> 00:03.090
+Andre more slides.
+
+00:03.090 --> 00:06.460
+Can we just get to coding and I know what you're thinking.
+
+00:06.480 --> 00:12.810
+I know the easiest thing to do is for me to just go to my Sublime Text and start coding so you can follow
+
+00:12.810 --> 00:13.220
+along.
+
+00:13.650 --> 00:21.690
+But I really want this course to build the foundation because I can do all the coding in the world.
+
+00:21.870 --> 00:27.780
+But if you have these fundamentals and we talk about them first and as you code along with me or you
+
+00:27.780 --> 00:36.050
+do the exercises you truly understand them from the basics then you're going to retain a lot more information.
+
+00:36.090 --> 00:42.380
+So bear with me this is going to help you develop into a better developer.
+
+00:42.390 --> 00:45.510
+This is the last slide before we get into some coding.
+
+00:45.510 --> 00:52.970
+I just want to show you one last part and that is our unified picture of testing now that we've talked
+
+00:52.970 --> 00:57.320
+about everything we're gonna be writing tests for our robo friends app.
+
+00:57.470 --> 01:00.570
+And if you remember we have our main file app.
+
+01:00.590 --> 01:01.100
+Yes.
+
+01:01.910 --> 01:08.180
+And the way we're going to write tests for it and other subcomponents and maybe even reduced hours and
+
+01:08.510 --> 01:11.810
+other parts of the redux environment.
+
+01:11.810 --> 01:20.800
+Well we're simply gonna do the dot test dot J S which with our create react app setup is going to say
+
+01:20.800 --> 01:22.590
+that this is a test file.
+
+01:22.630 --> 01:24.150
+Let me run it through.
+
+01:24.160 --> 01:33.030
+Just keep in mind that tests are meant for development you're never gonna ship your test libraries or
+
+01:33.030 --> 01:39.890
+your test code into production most of the time you're saving these libraries with the flag.
+
+01:39.890 --> 01:47.450
+Dash dash save dev and NPM because they're only used for development in development as you're writing
+
+01:47.450 --> 01:54.680
+your tests eyes you're writing your code you have something like just running in the background that
+
+01:54.680 --> 02:03.290
+has the scaffolding the assertion library the test runner the spies Moxon stubs that we need to read
+
+02:03.290 --> 02:12.830
+the tests run the tests see which tests pass or fail and also I'll put a code coverage so that we can
+
+02:12.830 --> 02:19.760
+work on our project and when it's ready it passes all the tests it has all the nice tests that we need
+
+02:20.210 --> 02:29.420
+we can then send it to production without all this stuff that production doesn't need and remember that
+
+02:29.510 --> 02:36.740
+we're running these tests we can run them in the dorm we can run them in a headless browser or we can
+
+02:36.740 --> 02:43.520
+just run them in a j ust dorm which we are going to do we're gonna use just on because it's the fastest
+
+02:43.550 --> 02:47.030
+and the simplest to run our test.
+
+02:47.250 --> 02:50.320
+All right time to get to coding.
+
+02:50.550 --> 02:52.300
+It's going to be a lot of fun.
+
+02:52.380 --> 02:53.430
+I'll see you in the next video.

@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.550 --> 00:08.080
+Now that we have our search component we might actually want to be able to muse this component multiple
+
+00:08.080 --> 00:16.600
+times because if we look at the code for our input all it is is just an input that doesn't need any
+
+00:16.600 --> 00:21.850
+local state even though it seems like we're calling set state in our input.
+
+00:21.850 --> 00:29.770
+It's really just a function that we're passing from the context of our app component into the on change
+
+00:29.770 --> 00:32.090
+handler of our input.
+
+00:32.320 --> 00:37.870
+But this means that we can probably move this into its own component because maybe we want to have a
+
+00:37.870 --> 00:40.530
+reusable search component.
+
+00:40.540 --> 00:41.770
+Well how would we do this.
+
+00:42.610 --> 00:54.050
+Well let's just make a new component called search box and we'll create the usual file search box dot
+
+00:54.500 --> 00:57.590
+component dodgy OSX.
+
+00:57.650 --> 00:59.200
+Now some of you might have noticed.
+
+00:59.210 --> 01:06.290
+Why is it that some of our files have digests X and some have Doc J.S. Well you remember how I mentioned
+
+01:06.410 --> 01:14.000
+earlier that create react out hides away some of the configuration for web pack and babble.
+
+01:14.060 --> 01:22.580
+Well what babble does is it helps transpired down any of the modern javascript including JSF style files
+
+01:22.580 --> 01:28.430
+that we write into older versions of JavaScript in the public folder.
+
+01:28.430 --> 01:39.590
+When we finally run our build script inside of our scripts file now in this transform if we look at
+
+01:39.650 --> 01:45.680
+our DOT J.S. file for objects we actually says see that it says javascript babble down here.
+
+01:45.710 --> 01:49.050
+So even though we're writing Java sex code here.
+
+01:49.130 --> 01:49.420
+Right.
+
+01:49.430 --> 01:56.660
+Because we're rendering HD him out in our javascript babble knows that it should probably run this regardless
+
+01:56.840 --> 02:00.940
+through a J.S. sex transform even though it's not a dot.
+
+02:00.980 --> 02:07.860
+Yes exe file type we'll explore this much later in the course when we actually write our own Web pack
+
+02:07.920 --> 02:09.610
+and battle configurations.
+
+02:09.720 --> 02:15.860
+But right now just know that whether or not you write dot jazz or dot ASX in the context of create react
+
+02:15.870 --> 02:19.950
+out you can write jazz sex in both file types.
+
+02:20.100 --> 02:25.160
+But we want to write dodgy assets in ours because we want to be explicit.
+
+02:25.320 --> 02:31.650
+We want to know that if we're gonna write Jess X while this file type is Jess X we're also going to
+
+02:31.650 --> 02:33.960
+create our search box.
+
+02:33.990 --> 02:42.130
+Dot styles dot CSF and I've included the styles for you and you can find it in your resources so you
+
+02:42.130 --> 02:50.860
+just want to copy that file and paste it in and then you want to import it into our search box component.
+
+02:50.860 --> 02:53.410
+So let's first import react from react.
+
+02:54.900 --> 02:58.770
+And then let's import in our style sheet.
+
+02:58.980 --> 03:02.700
+Now we're going to use another functional component.
+
+03:02.780 --> 03:12.380
+Now let's go a little deeper about functional components so functional components unlike class components
+
+03:12.950 --> 03:19.960
+such as our app J S component they don't have access to state because they don't have access to constructor
+
+03:20.230 --> 03:26.650
+which is a class method on our component that we import from react that we extend our classroom.
+
+03:26.770 --> 03:29.950
+They also don't have access to lifecycle methods.
+
+03:30.140 --> 03:37.820
+They don't have internal state and lifecycle methods because we don't always need to use lifecycle methods
+
+03:38.270 --> 03:39.680
+or internal state.
+
+03:40.010 --> 03:48.570
+Sometimes all we want to do is render some HMO and that's what a functional component really is.
+
+03:48.800 --> 03:55.460
+Unlike a class component a functional component is just a component that gets some props and returns
+
+03:55.520 --> 04:03.950
+some HMO and will figure out as we build our apps and see more challenges when to use each.
+
+04:04.000 --> 04:10.930
+But for now the main thing to remember is that if you don't think you need internal state nor access
+
+04:10.930 --> 04:15.670
+to lifecycle methods then just use a functional component because it's easier to read.
+
+04:16.240 --> 04:19.490
+It's actually easier to test as we'll see later in the course.
+
+04:19.810 --> 04:24.950
+And it's in some ways smaller and easier to reason about.
+
+04:25.180 --> 04:33.450
+So we'll just copy over the input that we want inside of our search box component and we'll apply a
+
+04:33.450 --> 04:42.130
+class name of search to it because that's where our search box styles are applying those styles to.
+
+04:42.380 --> 04:45.790
+We'll keep this type because we know that it's going to be search.
+
+04:46.040 --> 04:51.950
+And then as far as place holder goes we might want this to be dynamic because maybe another place that
+
+04:51.950 --> 04:57.980
+wants to use search box doesn't want the place holder to say search monsters let's say they want to
+
+04:57.980 --> 05:05.420
+search people or anything else we want places to be a prop that gets passed in and as we learn with
+
+05:05.420 --> 05:13.430
+our door structure we can d structure that prop off of the props object because all the props come in
+
+05:13.490 --> 05:14.850
+as one big objects.
+
+05:15.260 --> 05:21.170
+So let's D structure it off and then pass it into our place holder and then on change can be another
+
+05:21.170 --> 05:27.590
+prop that gets passed in which is a function under the name of handle change and we'll do structure
+
+05:27.590 --> 05:28.620
+that went off as well.
+
+05:29.540 --> 05:39.620
+And then we will replace the value inside of our change right here now let's export our search box out
+
+05:40.940 --> 05:46.430
+and then inside of our objects we can import it in and start using it.
+
+05:47.240 --> 05:58.750
+So let's import in our search box from components search box search box component now in order to replace
+
+05:58.750 --> 06:05.900
+our input we are just going to copy over some of those properties.
+
+06:05.900 --> 06:11.940
+Now we know that type is already on our search box component so we don't need this we do need the place
+
+06:11.940 --> 06:18.670
+holder because we want to be a prop that we pass in and then instead of handle it on change we're gonna
+
+06:18.670 --> 06:22.030
+say handle change and then we'll pass in this function
+
+06:26.650 --> 06:32.200
+and now let's get rid of our input and if we go back to our application we'll see there's our search
+
+06:32.200 --> 06:39.690
+box and we've still got our functionality but now we've got a reusable component that we can use in
+
+06:39.690 --> 06:47.620
+multiple places and this is what's great about react is this component driven style of writing code
+
+06:48.370 --> 06:55.630
+our search box is just a presentational component that pretty much styles an input and then it takes
+
+06:55.660 --> 06:59.960
+any functionality that it might need in its handle change property.
+
+07:00.460 --> 07:07.660
+But now we have this reusable search box component and this is great because we can minimize the amount
+
+07:07.660 --> 07:10.120
+of repeat code that we have.
+
+07:10.120 --> 07:16.720
+We don't have to write an input and then style it inside of a local file because we can separate it
+
+07:16.840 --> 07:19.480
+into its own component.
+
+07:19.480 --> 07:25.300
+This will become much more apparent as we start building larger and larger applications where more of
+
+07:25.300 --> 07:27.250
+the code gets reused.
+
+07:27.250 --> 07:33.200
+Right now the benefits might not be so obvious but it's definitely the style that we want to code in
+
+07:33.490 --> 07:40.840
+and this is one of the huge advantages of React is writing these smaller and smaller reusable components
+
+07:42.400 --> 07:43.300
+OK.
+
+07:43.440 --> 07:44.310
+Now let's continue.

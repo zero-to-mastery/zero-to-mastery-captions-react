@@ -1,0 +1,112 @@
+WEBVTT
+
+00:00.940 --> 00:04.770
+Hello It's Andre again now.
+
+00:04.800 --> 00:11.570
+Did you notice what you did in the last video he's doing something that a lot of senior developers do
+
+00:12.080 --> 00:15.290
+and that is they think about their data flow.
+
+00:15.440 --> 00:17.680
+They don't just go ahead and start coding.
+
+00:17.690 --> 00:20.930
+And if it works the first time that's great they're done.
+
+00:21.050 --> 00:29.630
+No in their head or maybe on a piece of paper or in a diagram they're thinking about how data is moving.
+
+00:29.630 --> 00:37.550
+For example in our case from our a redux store into our components e war is deciding hey how much of
+
+00:37.550 --> 00:44.000
+that data do I want by using selectors and then deciding where should that data live.
+
+00:44.060 --> 00:46.100
+Where should I put that data.
+
+00:46.130 --> 00:49.160
+And as you saw there's different tradeoffs.
+
+00:49.270 --> 00:51.170
+There's often no right answer.
+
+00:51.170 --> 00:51.970
+No.
+
+00:51.970 --> 01:00.600
+1 rule while you want to do is to think about your application and why you think at the moment the client
+
+01:00.720 --> 01:04.000
+or yourself wants for the project.
+
+01:04.010 --> 01:12.310
+Remember this this is one of the most important things deciding the state and where it lives.
+
+01:12.310 --> 01:13.870
+It's a really hard problem.
+
+01:13.900 --> 01:17.350
+Good developers really think this through.
+
+01:17.440 --> 01:22.780
+They don't try and grab too much state and give it all to a component.
+
+01:22.840 --> 01:25.350
+They don't try to do everything in one component.
+
+01:25.420 --> 01:27.210
+They break things down.
+
+01:27.430 --> 01:34.570
+They keep things extensible but at the same time they decide what makes sense what components should
+
+01:34.570 --> 01:42.040
+be in charge of what should be a connected component to a redux store or should it be a simple presentational
+
+01:42.040 --> 01:46.950
+component that just renders something simple.
+
+01:46.960 --> 01:53.440
+Another thing that you noticed is that because EA who all understands what he's building he's not just
+
+01:53.650 --> 02:00.130
+copying and pasting code from others he understands every part of his app every part of the feature
+
+02:00.160 --> 02:08.350
+that he's working it so that when he notices that something perhaps is inefficient like possibly iterating
+
+02:08.560 --> 02:17.260
+through a large array he converts it or normalizes the data into an object or what we call a hash table
+
+02:17.500 --> 02:25.420
+so that it's more efficient really understanding your code how the program runs allows you to make these
+
+02:25.720 --> 02:35.440
+smart decisions thinking about data flow in your application is going to help us further in the course
+
+02:35.470 --> 02:42.490
+when we start talking about things like graph Q Well because at the end of the day what we do as developers
+
+02:42.910 --> 02:52.540
+is received data and present that data to a user to a customer and we let that customer manipulate that
+
+02:52.540 --> 02:53.080
+data.
+
+02:53.080 --> 03:02.390
+But we engineer that how it flows how it moves how it changes is our job so next time you're working
+
+03:02.390 --> 03:05.610
+on a feature or a product or even a component.
+
+03:05.870 --> 03:12.530
+Start thinking about that data flow how that component is going to affect that data flow what it's going
+
+03:12.530 --> 03:19.490
+to need what it's going to present and what it's going to change that's going to make you a better and
+
+03:19.490 --> 03:22.120
+better developer let's keep going.

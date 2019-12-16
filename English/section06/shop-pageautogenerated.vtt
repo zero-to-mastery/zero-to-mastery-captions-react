@@ -1,0 +1,355 @@
+WEBVTT
+
+00:00.610 --> 00:07.380
+Now I know we just built a Hearts page in order to show some of the routing that we can build.
+
+00:08.200 --> 00:16.510
+But the next thing we actually need to do according to our final application is build a shop page.
+
+00:16.510 --> 00:23.020
+Now on this shop page what we have are these previews of our collections.
+
+00:23.020 --> 00:29.970
+There are always four items in our preview and there is a link to the actual category page.
+
+00:30.100 --> 00:36.580
+So if we click it it will take us to the page that has all of the items listed and you'll notice that
+
+00:36.580 --> 00:43.150
+they actually use the exact same item component in the shop page.
+
+00:43.150 --> 00:50.860
+So what we're going to build is we're just going to set up a shop page and set up our collection previews
+
+00:51.340 --> 00:52.560
+on our shop page.
+
+00:52.570 --> 00:57.550
+So we're going to build a component for our shop page itself.
+
+00:57.550 --> 01:05.700
+We're going to build the component for our actual collection preview and then we're going to build our
+
+01:05.760 --> 01:11.300
+collection item component so let's get started.
+
+01:11.400 --> 01:17.350
+Now the first thing we need to do is build the actual shop page.
+
+01:17.640 --> 01:26.600
+So let's make a new shop page file and folder inside of our pages.
+
+01:26.600 --> 01:35.660
+So let's do shop dock component Jess X and because we need to store the data related to our actual collections
+
+01:35.840 --> 01:42.500
+on our shop page we're gonna make our shop page a class component.
+
+01:42.500 --> 01:49.430
+So we're gonna import react from react and we're gonna do class shop.
+
+01:49.460 --> 01:58.760
+Page extends Reactor Component and we know we need access to our state.
+
+01:58.930 --> 02:01.680
+So let's do a super props.
+
+02:01.900 --> 02:11.140
+And this starts state equals an object where our collections is going to be equal to an array that I
+
+02:11.140 --> 02:12.300
+have provided for us.
+
+02:12.310 --> 02:18.170
+That has the information related to these collection items.
+
+02:18.360 --> 02:27.420
+We will take that array and paste it into R.
+
+02:27.480 --> 02:35.120
+So now this does look pretty big especially because this is going to be our default state.
+
+02:35.160 --> 02:40.920
+So what I'm gonna do is move this into its own file because it's gonna be static and it's not going
+
+02:40.920 --> 02:47.520
+to change at least for now according to our application and it'll be easier for us to focus on the main
+
+02:47.520 --> 02:53.510
+thing that matters about our shop page which will be the component itself and its lifecycle methods.
+
+02:53.580 --> 03:08.160
+So let's make a new shop dot data dot JSA J.S. and we are just going to export shop data which is equal
+
+03:08.160 --> 03:20.320
+to that array and let's actually capitalize this shop data.
+
+03:20.480 --> 03:23.380
+Export default contest.
+
+03:23.420 --> 03:27.220
+Shop data I think we just gotta put at the bottom.
+
+03:27.290 --> 03:32.940
+So let's just declare our concept and then export default shop data.
+
+03:33.100 --> 03:33.550
+There we go.
+
+03:33.920 --> 03:45.060
+OK now let's import it in like this and let's import in shop data
+
+03:48.040 --> 03:57.870
+and now instead of this huge array we'll just point to our array like so and then in our render we are
+
+03:57.870 --> 04:08.040
+going to return a div for now that just says shop page and we'll just make sure that everything works
+
+04:08.040 --> 04:11.680
+first before we continue building our actual shop page.
+
+04:11.760 --> 04:22.180
+So let's export default are shop page and now inside of our objects we have to import our shot Page
+
+04:23.050 --> 04:32.150
+from pages slash shop slash shop component and we're not gonna style our pages yet.
+
+04:32.160 --> 04:33.360
+We're actually gonna do that later.
+
+04:33.360 --> 04:37.920
+Let's just set up the base structure of our actual application.
+
+04:38.070 --> 04:43.800
+Since I've had the page and hats we're just going to make sure we've got a shop and we're not going
+
+04:43.800 --> 04:50.750
+to use this house page anymore because we were just using it earlier to demonstrate linking and routing.
+
+04:50.760 --> 04:57.750
+Now we will have to modify our final data that we actually had before but for now let's just not worry
+
+04:57.750 --> 04:58.880
+about it.
+
+04:59.070 --> 05:02.570
+We just need our shop page to be connected.
+
+05:02.580 --> 05:10.060
+So let's see if it works and let's go back to our application and navigate to slash shop and we see
+
+05:10.060 --> 05:10.880
+our shop page.
+
+05:11.050 --> 05:12.440
+Awesome.
+
+05:12.460 --> 05:17.580
+Now what we need to build is this preview component next right.
+
+05:17.650 --> 05:20.050
+This preview collection component.
+
+05:20.050 --> 05:30.630
+So let's go into our components and let's add a preview collection component and inside of our preview
+
+05:30.630 --> 05:40.890
+collection component we need both the preview collection component itself as well as the styling related
+
+05:40.890 --> 05:41.190
+to it.
+
+05:43.740 --> 05:55.350
+Styles dot SAS and now inside we need to import react from react as well as the style sheet and then
+
+05:55.410 --> 06:07.140
+we need to actually declare a functional component for preview collection and what we want to return
+
+06:07.260 --> 06:10.260
+in our preview collection.
+
+06:10.260 --> 06:12.510
+Actually let's call it collection preview.
+
+06:12.510 --> 06:14.220
+I think that makes a little bit more sun
+
+06:18.600 --> 06:23.960
+and we've gotta remember to also update our imports
+
+06:27.010 --> 06:34.000
+and what we'll end up returning is a div that can with an outer div that contains our entire collection
+
+06:34.780 --> 06:36.850
+and inside there is a title
+
+06:40.170 --> 06:49.370
+as well as the actual items themselves so that those items will be held in a div and that will be our
+
+06:49.460 --> 07:04.180
+actual preview whereas this will just be the overall collection preview and our title we will have it
+
+07:04.240 --> 07:05.350
+as title
+
+07:08.300 --> 07:13.850
+and inside of our preview we will end up mapping over the items.
+
+07:13.970 --> 07:19.290
+So now that we have an idea of what it's going to look like we need to figure out what we're going to
+
+07:19.290 --> 07:20.240
+pass in.
+
+07:20.320 --> 07:21.740
+So we know we need the title.
+
+07:21.760 --> 07:30.140
+We know we know we want a title being passed in for our props and we know we want it always to be uppercase
+
+07:31.510 --> 07:39.910
+and then we know we want to map over an items array that we get in it always before but it will still
+
+07:39.910 --> 07:43.220
+be a map of some kind.
+
+07:43.400 --> 07:46.340
+So we are gonna do an item's dot map
+
+07:49.020 --> 07:51.870
+and we are going to map with the item
+
+07:54.320 --> 08:04.690
+and we are going to render for now just a div with the item dot name of the item.
+
+08:04.820 --> 08:06.680
+Got to remember those curly braces.
+
+08:06.700 --> 08:20.200
+Now I think in r actual shot Page component we our data has name Yes and it has an I.D. So let's use
+
+08:20.200 --> 08:24.700
+the I.D. inside of our collection preview as the key
+
+08:28.530 --> 08:29.440
+item died.
+
+08:29.940 --> 08:36.510
+So we'll just do this for now just so that we have an idea that everything's working so export default
+
+08:36.540 --> 08:48.330
+collection preview and we'll also need to import this into our shop page so let's import it in
+
+08:51.980 --> 09:04.510
+from our components collection preview collection preview and this will be collection preview from here.
+
+09:05.470 --> 09:12.670
+So now instead of a shop page we will want to render out the actual previews.
+
+09:12.670 --> 09:19.240
+So inside of our container div that is our actual home page or sorry.
+
+09:19.360 --> 09:20.410
+Actual shop page.
+
+09:20.620 --> 09:29.290
+Let's just give it that class name of shop page let's do a.
+
+09:29.320 --> 09:38.890
+This dot actually lets D structure our collections off first.
+
+09:38.900 --> 09:50.880
+So now we have to map over our collections with the collection and let's render out a collection preview
+
+09:51.030 --> 09:54.570
+where the key is the collection I.D..
+
+09:54.570 --> 10:00.830
+So if we look at the data we'll see on the actual items of our collections themselves.
+
+10:00.870 --> 10:03.510
+There is an I.D. and a title.
+
+10:03.510 --> 10:11.370
+Now we want access to this I.D. So let's actually structure this off and then we'll do the same thing
+
+10:11.370 --> 10:18.510
+we did last time where we do other collection props because we'll need them later.
+
+10:18.600 --> 10:24.010
+So for our key we're gonna pass the I.D. and then we're going to spread in other collection prompts.
+
+10:24.360 --> 10:35.220
+And what we will actually spread in is going to be the items the title and then the root name.
+
+10:35.220 --> 10:35.640
+We're not going to.
+
+10:35.670 --> 10:36.630
+This is not going to matter.
+
+10:36.630 --> 10:40.720
+We just mainly need the title and the items.
+
+10:40.770 --> 10:43.650
+Now I think we actually have title and items.
+
+10:43.690 --> 10:44.050
+Awesome.
+
+10:44.050 --> 10:53.680
+So now if we look at our application we should see that we are rendering out all of our information.
+
+10:53.880 --> 11:02.880
+Now we do need to modify this data so that it only displays for so we're gonna do that inside of this
+
+11:02.880 --> 11:04.660
+collection preview.
+
+11:04.770 --> 11:07.830
+So when the items come in we're just going to do a.
+
+11:07.860 --> 11:08.720
+Items.
+
+11:08.880 --> 11:12.030
+Let's do a filter.
+
+11:12.170 --> 11:25.480
+We're just going to do item and index and we just want to make sure that our index is less than 4 and
+
+11:25.570 --> 11:30.260
+if we save we should see there's only 4 items.
+
+11:30.930 --> 11:36.870
+So now the beautiful thing about writing our code functionally like this is that we can just modify
+
+11:36.870 --> 11:43.390
+our array past the new Array through right and we can change these array methods.
+
+11:43.410 --> 11:48.570
+Now the only thing to keep in mind here and this is something to keep in mind about react is that when
+
+11:48.720 --> 11:57.270
+ever this component gets rendered this function call this chain of modifications to our array gets called
+
+11:57.390 --> 12:02.070
+every time as long as this component has to re render.
+
+12:02.070 --> 12:05.160
+So this is going to be a performance concern.
+
+12:05.160 --> 12:11.370
+If this array ever gets really large or on slower computers but we will take a look at how to handle
+
+12:11.370 --> 12:18.360
+this a little bit later but definitely a thing to remember is that all of these anonymous function calls
+
+12:18.630 --> 12:24.900
+right inside of any component do get called again and re rendered brand new.
+
+12:24.900 --> 12:34.820
+When ever this component either gets rendered or re rendered now that we have all of this in in the
+
+12:34.820 --> 12:38.160
+next section we're actually going to style this stuff.

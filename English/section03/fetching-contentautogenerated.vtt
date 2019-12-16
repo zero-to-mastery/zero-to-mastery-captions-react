@@ -1,0 +1,208 @@
+WEBVTT
+
+00:00.420 --> 00:09.590
+So we just learned how to take an array on our state and turn it into elements that we can then see
+
+00:09.890 --> 00:14.100
+right now in a real world scenario.
+
+00:14.270 --> 00:20.710
+We're probably not going to hard code the information that we're going to have right.
+
+00:20.720 --> 00:27.230
+Normally we would probably get it from a back end of some kind some kind of server some kind of database
+
+00:28.200 --> 00:31.610
+so I'm gonna show you how that would actually work.
+
+00:31.650 --> 00:40.080
+Now luckily I have a pretty good resource where it will give us a sample of 10 users right without us
+
+00:40.080 --> 00:43.290
+having to actually build a back end server of some kind.
+
+00:43.800 --> 00:46.180
+And it's at this link.
+
+00:46.270 --> 00:53.790
+Well it will give us back is this array of these objects right that have these properties like I.D.
+
+00:53.820 --> 00:58.560
+and name and email on it that we will use for our application.
+
+00:58.560 --> 01:05.880
+So what we need to figure out is how do we get this app component to make a call to the back end and
+
+01:05.880 --> 01:13.770
+then put that data into our states so that our render function knows to use it.
+
+01:13.770 --> 01:15.780
+Right nodes can have access to it.
+
+01:15.780 --> 01:17.070
+So how do we do that.
+
+01:17.070 --> 01:17.560
+You see.
+
+01:17.640 --> 01:22.050
+You remember how we got the render method by extending into component.
+
+01:22.200 --> 01:28.360
+We also get a bunch of other methods that are called lifecycle.
+
+01:29.010 --> 01:30.930
+What are lifecycle methods.
+
+01:30.930 --> 01:38.130
+Well if we look at this here we see a list of all these methods and it's an overwhelming list but what
+
+01:38.130 --> 01:41.740
+lifecycle methods are is there.
+
+01:41.740 --> 01:52.380
+Essentially methods that get called at different stages of when this component gets rendered.
+
+01:52.380 --> 01:58.910
+Now I know that's kind of jargon right now but I'm going to explain it to you throughout this course.
+
+01:58.950 --> 02:03.560
+But the main one I want us to focus on is component did mount.
+
+02:03.630 --> 02:13.980
+Now what component did mount does is it's kind of like the name right when this component mounts mounting
+
+02:14.010 --> 02:18.960
+is essentially one react puts our component on the page right.
+
+02:18.960 --> 02:25.800
+It renders it onto the DOM for the first time when it does that it red it calls whatever block of code
+
+02:25.830 --> 02:27.150
+we write inside of here.
+
+02:27.240 --> 02:29.590
+That's all it does.
+
+02:29.610 --> 02:37.500
+So what we want to do is we want to use javascript native fetch right to fetch from that you or I'll
+
+02:38.100 --> 02:46.810
+make an API request to that you are all and what this fetch returns us is a promise.
+
+02:46.810 --> 02:47.130
+Right.
+
+02:47.920 --> 02:57.130
+But that promise gives us a response of the actual body of our response but we don't know what that
+
+02:57.130 --> 02:57.980
+looks like at first.
+
+02:57.980 --> 02:58.180
+Right.
+
+02:58.180 --> 03:03.110
+So let's just log it out and see so we see this response object right.
+
+03:03.110 --> 03:08.600
+It's got the body and it's got these headers it's got all these properties that we don't really care
+
+03:08.600 --> 03:09.950
+about we don't really need them.
+
+03:09.950 --> 03:10.580
+Right.
+
+03:10.610 --> 03:15.800
+The main thing we want is we want the body but we want it in a format that our javascript understands
+
+03:16.010 --> 03:18.220
+in the format of Jason right.
+
+03:18.260 --> 03:22.080
+So let's from here return response Don.
+
+03:22.160 --> 03:23.620
+Jason which is a method.
+
+03:23.840 --> 03:24.170
+Right.
+
+03:24.230 --> 03:34.100
+On this response object that will give us back that response in the Jason format which we want and then
+
+03:34.670 --> 03:41.750
+that will get returned to us as a new promise which we will now have as the body which will be this
+
+03:41.960 --> 03:48.620
+array so when we get that array let's just log in again so that we know what we're getting
+
+03:51.830 --> 03:58.050
+we see our array right in the format in the objects that we know and we can use.
+
+03:58.090 --> 04:05.210
+So what we want to do is now we want to call set state as we did before.
+
+04:05.710 --> 04:16.730
+But now we want to set our monsters to this array of these users right and we want our initial state
+
+04:16.760 --> 04:20.630
+to be an empty array because we don't need to hardcoded anymore.
+
+04:20.630 --> 04:20.890
+Right.
+
+04:20.900 --> 04:26.630
+We're just going to we're going to wait for our component to mount and then we're going to fetch all
+
+04:26.630 --> 04:34.830
+of our users and then we're going to update our state's monster property with this new array of users.
+
+04:34.850 --> 04:43.270
+And now when we check our application we see that we have all of our monsters or users.
+
+04:43.270 --> 04:43.540
+Right.
+
+04:43.580 --> 04:45.570
+And we're displaying alternate.
+
+04:45.690 --> 04:46.900
+Now we see this error here.
+
+04:46.920 --> 04:47.160
+Right.
+
+04:47.190 --> 04:48.150
+It's just a warning.
+
+04:48.150 --> 04:50.330
+And it's telling us that we're not using the logo anymore.
+
+04:50.340 --> 04:51.420
+So let's just get rid of it.
+
+04:51.990 --> 04:55.950
+That's the great thing about create racked up as well is it comes with lynching.
+
+04:55.950 --> 05:00.570
+We can be aware of writing and making our code clean.
+
+05:00.630 --> 05:08.130
+So now just to go over this again we're using this component did mount lifecycle method that we have
+
+05:08.280 --> 05:18.520
+access to because of our class component and we are fetching from this you are all we are taking a response
+
+05:18.550 --> 05:25.570
+and converting it into the Jason format that are JavaScript can understand and use and then we're going
+
+05:25.570 --> 05:34.420
+to take the users that we got back from it and set our monsters to that array of user and that's how
+
+05:34.420 --> 05:45.940
+we end up with this list of in the next section we're going to now convert this to look a little bit
+
+05:45.940 --> 05:47.110
+closer to this.

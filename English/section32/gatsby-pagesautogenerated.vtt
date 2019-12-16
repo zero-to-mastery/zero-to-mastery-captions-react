@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00.730 --> 00:02.480
+Hello and welcome back.
+
+00:02.500 --> 00:09.460
+So in the last lesson we served up our local host a thousand which is our Gatsby application and in
+
+00:09.460 --> 00:12.920
+it we saw that right away we have these two pages.
+
+00:13.030 --> 00:16.120
+This first page has this little astronaut picture on it.
+
+00:16.120 --> 00:23.230
+And the second page is just a welcome to page two that we can navigate back to PAGE ONE.
+
+00:23.250 --> 00:28.800
+Now this is really interesting because this actually allows us to highlight one of the key features
+
+00:28.800 --> 00:38.520
+in Gatsby which is that inside of this pages folder as long as you add a new file here Gatsby will automatically
+
+00:38.520 --> 00:41.610
+try to load and new page for you.
+
+00:41.610 --> 00:46.590
+Meaning that it will build a new page based on the title of the file that you write.
+
+00:47.460 --> 00:53.120
+And inside of this file index J.S. This is actually our astronaut page.
+
+00:53.400 --> 00:56.540
+And what it is is just importing a react.
+
+00:56.610 --> 01:01.040
+And it's a functional component that leverages this link.
+
+01:01.080 --> 01:06.180
+Now this link component that we get from Gatsby is pretty much a Gatsby version of the react router
+
+01:06.180 --> 01:10.470
+link meaning that navigation happens with this link component.
+
+01:10.550 --> 01:14.680
+We also import this layout image and SEO component.
+
+01:14.690 --> 01:21.000
+Now these are just components that come by default with Gatsby and they're actually quite simple the
+
+01:21.000 --> 01:28.610
+layout component essentially wraps around some bunch of HCM all elements or components and it provides
+
+01:28.610 --> 01:35.460
+some styling to it as well as it provides it some data that will look at a little later the image component
+
+01:35.520 --> 01:40.430
+allows us to do lazy loading with images and optimizing those images.
+
+01:40.470 --> 01:45.850
+It's just a Gatsby methodology that makes images more performance on the Web.
+
+01:46.050 --> 01:51.320
+And then the FCO component is meant exactly for search engine optimization.
+
+01:51.420 --> 01:59.010
+You can pass it a title a description a lang a meta or any of these other properties that you see right
+
+01:59.010 --> 02:00.080
+here.
+
+02:00.090 --> 02:05.770
+So what this does is it makes search engine crawlers more performance for our Web site so that we shop
+
+02:05.790 --> 02:10.900
+hire when people might be googling for things related to what we write inside of our block.
+
+02:10.920 --> 02:16.710
+Now we will use some of these components when we actually build out our blog posts.
+
+02:16.710 --> 02:20.460
+But for now let's go back to looking at our pages folder.
+
+02:20.580 --> 02:27.210
+So as I explained earlier if you add a new file Gatsby will generate a new route for you inside of your
+
+02:27.210 --> 02:31.520
+application based on the name of the file that you created.
+
+02:31.530 --> 02:34.210
+So let's actually just make a new file called Page 3.
+
+02:34.220 --> 02:39.280
+Dot J as you can name this whatever you want but I'm just gonna call it page three.
+
+02:39.420 --> 02:45.120
+I'm going to take this code from page 2 and just remove some things that we don't need and what I'm
+
+02:45.120 --> 02:57.370
+going to do is simply just generate an H1 rename to this to third page and then say hello from the third
+
+02:57.370 --> 02:57.820
+page
+
+03:01.490 --> 03:09.680
+now as long as we export something out that is a component as the default from this file Gatsby will
+
+03:09.680 --> 03:13.630
+know to use this component for that route.
+
+03:13.670 --> 03:14.660
+So let's test this out.
+
+03:14.720 --> 03:21.490
+If we go back to our application and navigate to our new Page Three we'll see that we have our helo
+
+03:21.490 --> 03:23.080
+from the third page.
+
+03:23.080 --> 03:25.150
+So this is what's really great about Gatsby.
+
+03:25.150 --> 03:33.010
+It's really easy to build new routes and new pages just by adding files to our pages folder and making
+
+03:33.010 --> 03:40.300
+sure we export as the default some component that allows Gatsby to use that as the page that it's trying
+
+03:40.300 --> 03:41.710
+to render.
+
+03:41.710 --> 03:49.500
+Now another great thing we actually get with our pages is access to this forum for now this for four
+
+03:49.530 --> 03:57.420
+page Gatsby will automatically know to use in live production if the user navigates to some page that
+
+03:57.420 --> 03:58.830
+doesn't exist.
+
+03:58.920 --> 04:06.360
+So inside of our development server if we go to say something like this we'll see that it takes us to
+
+04:06.360 --> 04:12.090
+a page that tells us actually all of the routes we have available to access.
+
+04:12.300 --> 04:16.890
+But in life production it will end up showing this for a four page.
+
+04:16.890 --> 04:23.130
+And this is one of the nice things about using Gatsby for a more opinionated framework like this.
+
+04:23.160 --> 04:30.720
+It has made a lot of these decisions for us in terms of how to handle routing how to set up pages because
+
+04:31.050 --> 04:37.890
+unlike a normal react application that just rolls with we act you have to include all of the different
+
+04:37.890 --> 04:44.070
+libraries that you want to include in order to handle routing in order to handle for fours as you'll
+
+04:44.070 --> 04:45.940
+see inside of our course.
+
+04:46.020 --> 04:48.490
+We have to make those decisions for ourselves.
+
+04:48.600 --> 04:55.350
+But with Gatsby you just have to learn how Gatsby does certain things and then follow along with the
+
+04:55.350 --> 04:58.330
+way that Gatsby has set up the project.
+
+04:58.350 --> 05:06.250
+So for us in this case it's just a matter of how do we handle the pages that we want to add to our application.
+
+05:06.330 --> 05:12.630
+So conceptually we just have to keep this in mind if we want to make new pages we add them into this
+
+05:12.630 --> 05:18.750
+page folder and the page root will be named whatever name we've given to our files.
+
+05:18.750 --> 05:26.400
+Now this does bring me to a very important caveat about Gatsby because Gatsby builds all of our static
+
+05:26.400 --> 05:27.880
+pages ahead of time.
+
+05:27.930 --> 05:33.730
+We do not dynamically compose them which means that the way that you're used to structuring your react
+
+05:33.730 --> 05:36.200
+code is going to be a little different.
+
+05:36.210 --> 05:42.780
+Now one thing that you might have noticed is that every one of our pages is wrapped inside of our layout
+
+05:42.810 --> 05:48.320
+component and the layout component we get with Gatsby with this start up project.
+
+05:48.360 --> 05:55.830
+Now the reason for this is because we need to actually render the header and the footer and any consistent
+
+05:55.830 --> 05:59.690
+styling between the pages every single time.
+
+05:59.700 --> 06:01.080
+Now why is it this way.
+
+06:01.710 --> 06:07.590
+Well if you remember in the last lesson we talked about Gatsby being a static site generator meaning
+
+06:07.590 --> 06:14.760
+that Gatsby needs to actually build those pages on the build step meaning that it generates every single
+
+06:14.760 --> 06:20.130
+pages complete h t email that the user needs on their browser in order to view the page.
+
+06:20.730 --> 06:27.270
+So if we want this header and footer on every single page that we have including our route including
+
+06:27.270 --> 06:33.330
+page two and including the new page three component that we built and any other further page we need
+
+06:33.330 --> 06:40.370
+to always provide it with all of the components and all of the styling for that page on that pages coat.
+
+06:40.590 --> 06:46.320
+This is different from a typical react application where you might have different levels of components
+
+06:46.590 --> 06:53.400
+that will house the routes that hold the subsequent nested components inside as you might see when you
+
+06:53.400 --> 07:00.540
+build something in react using a library like react writer Dom in react or Dom you might have a high
+
+07:00.540 --> 07:07.710
+level app component that has root components inside that will then lead to further nested trees of components
+
+07:08.010 --> 07:15.150
+meaning that you don't have to actually dynamically compose this code every single time and every single
+
+07:15.150 --> 07:15.770
+component.
+
+07:15.840 --> 07:22.170
+If you want to render a header again this is a caveat of statically generate a Web sites because statically
+
+07:22.170 --> 07:27.720
+generate a Web sites need to generate static HCM Mal for every single page.
+
+07:27.720 --> 07:32.450
+So how you want that page to look needs to have everything on it already.
+
+07:32.580 --> 07:37.650
+In order for it to generate that page so hopefully that makes sense because that's a big caveat.
+
+07:37.650 --> 07:43.560
+A built building are pages inside of Gatsby now with that in mind.
+
+07:43.580 --> 07:49.540
+One other thing about the layout is we'll see here that we are using a little bit of graph.
+
+07:49.570 --> 07:54.860
+Well now you might be familiar with everything here especially if you've taken the course as we've learned
+
+07:54.860 --> 08:01.460
+with graph Q all the difference here is that Gatsby has provided its own hook called use static query
+
+08:02.100 --> 08:07.910
+you start a query is a custom hook that Gatsby wrote that allows you to extract the value of whatever
+
+08:07.910 --> 08:14.720
+query you're making against the graph Q Well in order to pluck out the data now as you can see here
+
+08:14.990 --> 08:21.680
+what their query is querying is this thing called site with this object that calls for the metadata.
+
+08:21.800 --> 08:26.170
+Now this metadata is what we saw inside of our Gatsby config.
+
+08:26.180 --> 08:32.390
+This site metadata contains a title description an author by default which you can pull off using graph
+
+08:32.390 --> 08:39.090
+Q all and adding that query that we saw in the layout component and by doing so we're now able to pluck
+
+08:39.120 --> 08:44.700
+off that title that we've stored in our config and then render it inside of this layout component so
+
+08:44.700 --> 08:49.390
+that we don't have to fetch it inside of every single one of our page components.
+
+08:49.450 --> 08:56.460
+Now for example if we wanted to change the title if we go to our config object and we change the title
+
+08:56.460 --> 09:04.560
+here to Eve was blog we'll actually see that we get that update.
+
+09:04.580 --> 09:10.490
+So that's one of the great things as well is that if we wanted to keep something on our website that
+
+09:10.490 --> 09:16.460
+we needed to use consistently on all of our pages probably through our layout of some kind.
+
+09:16.460 --> 09:20.060
+We can easily just change it inside of the site metadata.
+
+09:20.060 --> 09:25.670
+Now we're definitely going to take a deeper look at the graph Q all section that comes with Gatsby and
+
+09:25.670 --> 09:27.410
+we're gonna do that in the next lesson.
+
+09:27.470 --> 09:28.840
+So I'll see you in the next lesson.

@@ -1,0 +1,460 @@
+WEBVTT
+
+00:00.560 --> 00:01.830
+Welcome back.
+
+00:01.880 --> 00:10.040
+Now in this section of our course we are going to take a deep look into Graff Kuo.
+
+00:10.210 --> 00:12.440
+Now I'm not going to lie to you.
+
+00:12.450 --> 00:18.910
+This graph you all section is going to be pretty complex and it's going to be pretty long.
+
+00:18.970 --> 00:25.280
+There is a lot that we have to cover about how to use graph Q all on our front end.
+
+00:25.600 --> 00:34.960
+But most importantly what graph QR is what problems it attempts to solve and how you as a front end
+
+00:34.960 --> 00:42.730
+developer need to look out for graph QoL in terms of what you can do in your career.
+
+00:42.730 --> 00:53.990
+To best understand what it brings to the development table now in order for us to understand what graph
+
+00:53.990 --> 00:59.370
+QR is we need to understand the problem that graph QR is trying to solve.
+
+00:59.570 --> 01:07.130
+And in order for us to understand this we need to first understand that what graph Q all is is actually
+
+01:07.130 --> 01:19.370
+something for the backend so graph QoL is actually a server language that wraps around an existing database
+
+01:19.580 --> 01:27.800
+or server that you can make requests against in a different way from the way that we have been up until
+
+01:27.800 --> 01:29.440
+this point.
+
+01:29.460 --> 01:36.940
+Now if that seems confusing for you Don't worry I'm about to explain what I mean but in order to do
+
+01:36.940 --> 01:47.550
+that we have to first look back at our backend diagram so if we look back at this diagram what this
+
+01:47.550 --> 01:57.200
+diagram represents is a typical rest back in server so a server will expose different end points that
+
+01:57.200 --> 02:05.840
+have different things that they can do when you on a front end application or client make some kind
+
+02:05.840 --> 02:06.890
+of request to it.
+
+02:07.760 --> 02:18.880
+So for example if we had this users end point that are back end exposed and we made a request to this
+
+02:18.920 --> 02:26.680
+end point so whatever the URL is of this back and server let's imagine it's something like ah application
+
+02:26.890 --> 02:27.700
+as the user name.
+
+02:28.030 --> 02:37.480
+So Crown clothing dot com slash API slash users I want to request from my application for all of the
+
+02:37.480 --> 02:44.740
+users from this end point while this endpoint would process whether or not I on my front an application
+
+02:44.800 --> 02:51.820
+I'm allowed to access all of these users like any of the data that I'm requesting and then if the code
+
+02:52.000 --> 02:59.090
+that somebody wrote on the back end authorizes us and says OK that's cool then it's going to send us
+
+02:59.090 --> 03:04.490
+back all of the data related to all the users that we requested.
+
+03:04.490 --> 03:10.730
+Now how that actually looks and code is not important for us because this back in server code is something
+
+03:10.730 --> 03:16.840
+that we don't need to code but this is going to be very similar to kind of like how we worked with the
+
+03:16.850 --> 03:24.050
+Jason place holders API as well as how we're working with fire store we're essentially making requests
+
+03:24.110 --> 03:33.490
+to specific endpoints that we have inside of our server in order to get some data now if we wanted data
+
+03:33.490 --> 03:42.820
+related to let's say for example all of the posts for a specific user if you were to imagine this application
+
+03:43.060 --> 03:50.640
+to be something that has posts and comments right maybe like a blog of some kind or a forum while our
+
+03:50.640 --> 03:56.430
+application would have to make a request to a different endpoint where we would maybe have to pass the
+
+03:56.430 --> 04:01.020
+user I.D. in as part of the data of our requests.
+
+04:01.020 --> 04:09.240
+To this end point for all of the posts for some specific user so we would send in that user I.D. to
+
+04:09.240 --> 04:15.810
+this you are all maybe we would just even pass the user I.D. as the URL parameter the way that we have
+
+04:15.810 --> 04:22.640
+done before with our collection page and then this again the back and server would determine whether
+
+04:22.640 --> 04:27.470
+or not we have the correct authorization to access this user's posts.
+
+04:27.470 --> 04:34.370
+And then if we do it would send those posts back to us finally let's say we wanted.
+
+04:34.410 --> 04:41.910
+Comments again there might be a different end point as well for that post based on the I.D. to get the
+
+04:41.910 --> 04:47.880
+comments and we would make the request the server would again have to re authenticate us and figure
+
+04:47.880 --> 04:50.130
+out if we are allowed to access those comments.
+
+04:50.280 --> 04:53.260
+And then if we are they'd send those comments back to us.
+
+04:54.200 --> 05:01.730
+So this is how most front end applications work with back end servers in any capacity if we wanted to
+
+05:01.730 --> 05:08.360
+make updates to the database like let's say we modified the post that we got and we wanted to change
+
+05:08.360 --> 05:14.510
+the title while again there would have to be maybe the same endpoint that was opened but we would send
+
+05:14.600 --> 05:22.100
+a different type of request to this back in in order to make an update or if we wanted to create a post
+
+05:22.190 --> 05:25.940
+similar exact same thing but a different request.
+
+05:25.940 --> 05:35.130
+Again now this paradigm of using these end points is what's called the rest paradigm which stands for
+
+05:35.130 --> 05:44.130
+representational state transfer and it follows the paradigm of you either making get requests post requests
+
+05:44.400 --> 05:51.750
+update requests or delete requests and it's exactly as they sound if you want to get some data you make
+
+05:51.840 --> 05:58.200
+a get request if you want to post some data meaning you want to create something new you make a post
+
+05:58.200 --> 06:03.450
+request if you want to update something you make an update request and then if you want to delete something
+
+06:03.450 --> 06:10.920
+you make a delete request so that's the main idea behind rest and how we on the front end interact with
+
+06:10.920 --> 06:18.530
+this rest back end server but imagine a scenario and you can kind of see where the problem arises when
+
+06:18.530 --> 06:26.890
+we look at this specific scenario where let's say from my web application the user navigates to the
+
+06:27.700 --> 06:35.480
+post I.D. slash comments section meaning that they want all of the comments related to some specific
+
+06:35.480 --> 06:42.550
+posts in order for us on our web application to get that specific thing we need to know the post I.D.
+
+06:43.160 --> 06:49.730
+and to get the post I.D. we might need to have gotten it from our posts first related to our user which
+
+06:49.730 --> 06:55.760
+we would have to get with a user I.D. in order to get our user I.D. we'd have to make a query to the
+
+06:55.760 --> 06:58.700
+users and point asking for our user data.
+
+06:59.570 --> 07:05.690
+So in order to get the comments we'd have to make three different requests to the back end in order
+
+07:05.690 --> 07:13.160
+to get the data we'd first get the users find our user get the user I.D. make a request to this new
+
+07:13.160 --> 07:19.190
+end point with that user I.D. to get the posts related to our user and then from our posts get the post
+
+07:19.190 --> 07:24.620
+I.D. for the post we want send it to this back in so that we can get the comments related to that post
+
+07:25.340 --> 07:31.430
+it's a very expensive solution and it seems like it's a lot of steps that we have to do just to get
+
+07:31.430 --> 07:34.720
+this kind of information.
+
+07:34.910 --> 07:43.060
+Now the other thing too is that we might get all of the data on these comments or on the posts that
+
+07:43.060 --> 07:48.910
+we don't need as we've seen with a lot of the data that we handle a lot of the times.
+
+07:48.940 --> 07:50.890
+The only thing we need is the I.D..
+
+07:51.250 --> 07:53.260
+Or maybe the title or the name.
+
+07:53.260 --> 07:53.590
+Right.
+
+07:53.590 --> 07:57.600
+We only need one or two properties on that data model.
+
+07:58.670 --> 08:05.330
+If instead you imagined these pieces of data have a lot of data on them let's say there's like 30 40
+
+08:05.330 --> 08:11.260
+50 pieces of data that it needs to serve for all kinds of different purposes.
+
+08:11.390 --> 08:17.180
+Well we're over faction data we're getting way too much data that we on the front end don't care about
+
+08:17.240 --> 08:22.800
+when all we really want is the I.D. or the name well.
+
+08:22.800 --> 08:28.020
+These two problems are actually the main things that graph QoL tries to solve.
+
+08:28.940 --> 08:31.160
+Let's look at what graph you all does instead.
+
+08:31.580 --> 08:36.350
+So in order to use graph Q all you actually convert your wrist back and server into a graph you all
+
+08:36.350 --> 08:43.020
+server now instead what happens right away just by looking at this image.
+
+08:43.040 --> 08:49.830
+What we see is that instead of having multiple different endpoints that we can hit from our server our
+
+08:49.830 --> 08:57.920
+graph your server just exposes one single endpoint usually called the slash graph Q all employee and
+
+08:57.920 --> 09:05.060
+from this end point our application makes all of its requests for all of its data whether to get data
+
+09:05.300 --> 09:15.370
+update data create data or delete data all to this one end point secondly what we need to do in order
+
+09:15.370 --> 09:24.410
+to make a request to this graph kewl End Point is we need to pass it either a query or a mutation.
+
+09:24.460 --> 09:30.820
+Now we'll talk about mutations later but the main difference is that a query is where we ask for data
+
+09:30.970 --> 09:38.020
+and a mutation is where we want to modify data but essentially they all take a similar shape and the
+
+09:38.020 --> 09:42.370
+shape looks very much like a Jason object.
+
+09:42.370 --> 09:45.490
+So let's look at this first example here.
+
+09:45.580 --> 09:53.000
+Let's say we wanted to get all of our posts from the graph endpoint point while we make a request and
+
+09:53.000 --> 10:01.240
+we would pass in this weird looking object and what this object says is that I want the posts which
+
+10:01.240 --> 10:09.280
+is the data model name that our server is aware of that knows that posts is related to the posts data
+
+10:09.460 --> 10:12.790
+in the database that it needs to access.
+
+10:12.800 --> 10:20.600
+So what happens is that we request for posts and then we pass it this object looking shape and inside
+
+10:20.630 --> 10:29.540
+we give it the properties that we want the server to give back to us of the posts data that we want.
+
+10:29.540 --> 10:36.500
+Meaning that what we would pass in if we only wanted I.D. title and content would just be those fields
+
+10:36.980 --> 10:42.560
+we would just pass the I.D. field the title field and the content field if that's all we wanted.
+
+10:43.640 --> 10:50.240
+If we didn't want the title field we just remove it from this object and we pass that and then the server
+
+10:50.510 --> 10:58.670
+if successful and authorizes us to receive this information will send us back an array of these posts
+
+10:58.790 --> 11:06.440
+where each of those posts data individually only have the I.D. and the content variables on them.
+
+11:07.730 --> 11:14.030
+So this right away allows us to fetch exactly the data that we want.
+
+11:14.060 --> 11:20.810
+Also what else this does is we don't have to be aware of all of the different endpoints that we need
+
+11:20.810 --> 11:26.530
+to be able to access in order to get any of the data that we need it.
+
+11:27.970 --> 11:34.060
+So if for example we suddenly had this new feature that was built on the back in an OR to fetch data
+
+11:34.060 --> 11:41.260
+related to say something like pages or say something like your friends well they would have to make
+
+11:41.260 --> 11:47.270
+a new endpoint for us maybe called friends and then we would have to make on our front end unawareness
+
+11:47.470 --> 11:53.050
+to that new end point and then make requests to it which means that in some ways maybe we have to add
+
+11:53.050 --> 11:59.200
+more things to our application on our front end just so that we are aware that this new endpoint exists
+
+11:59.200 --> 12:06.370
+for this new feature well with a graph Q all server that never has to happen because whatever the back
+
+12:06.370 --> 12:13.020
+end server changes we don't need to be aware that the new endpoint happened we just need to know from
+
+12:13.080 --> 12:19.870
+our application that the shape of this data looks a certain way and we can query for certain things.
+
+12:20.100 --> 12:26.270
+So then we would just make that request and our endpoint is always going to be this one graph Q endpoint
+
+12:27.660 --> 12:35.700
+alternatively if we wanted specific data like let's say one specific user based on an I.D. if we already
+
+12:35.700 --> 12:43.140
+were aware of the I.D. Well we just passed that idea in to the query itself as well asking for the user
+
+12:43.140 --> 12:49.080
+object telling it I want it by this I.D. and then again we could define the shape of the data that we
+
+12:49.080 --> 12:52.790
+want if we want to I.D. if we wanted the name right.
+
+12:52.860 --> 12:57.540
+If we want to whatever other properties like email address it doesn't matter.
+
+12:57.540 --> 13:08.070
+You would make the request inside of this object but now it gives a singular access still to that one.
+
+13:08.090 --> 13:16.130
+Now what happens if we want to say a specific post that belongs to our user I.D. but we also want the
+
+13:16.130 --> 13:23.120
+comments that might be related to that post one now on the back end they would essentially define that
+
+13:23.540 --> 13:31.070
+relationship between these comments objects and this post and you don't need to know too much about
+
+13:31.070 --> 13:33.180
+what that relationship code looks like.
+
+13:33.230 --> 13:39.920
+All you need to know is that what happens is that it allows us from our front end to requests for that
+
+13:39.920 --> 13:47.990
+specific post from the specific user I.D. and then from there we would be able to again say which properties
+
+13:48.050 --> 13:49.530
+of the post we want.
+
+13:49.550 --> 13:56.270
+Let's say we want the I.D. the name whatever but then we also want the comments related to this post.
+
+13:56.330 --> 14:02.430
+So we would say the comments which would be a property as we see with our collection items right.
+
+14:02.440 --> 14:07.310
+How we have the items that gives us the array of the items that belong to the collection.
+
+14:07.310 --> 14:09.010
+Well here we would say the same thing.
+
+14:09.020 --> 14:16.430
+I want the comments and then of those comments I want and then we can list what properties on those
+
+14:16.430 --> 14:17.720
+common data that we want.
+
+14:17.990 --> 14:21.930
+So I want the idea of the comment I want the contents of the can't comment.
+
+14:21.980 --> 14:23.140
+And that's it.
+
+14:23.210 --> 14:31.060
+And then this request would give us back all of those objects with the comments as well as a property
+
+14:31.060 --> 14:33.980
+of our post object data.
+
+14:33.990 --> 14:40.140
+So this is kind of a high level look at what is happening and what graphed Q all does differently from
+
+14:40.140 --> 14:41.570
+typical rest api.
+
+14:42.660 --> 14:47.940
+Now if you haven't worked too much with rest api some of this you might not fully empathize with as
+
+14:47.940 --> 14:54.060
+far as the problem goes but if you ever go onto an application that is quite large and working with
+
+14:54.150 --> 15:00.160
+a rest api to do a lot of its features you will encounter these issues that I've talked about.
+
+15:00.510 --> 15:06.900
+But of course these problems are not extremely significant that every application is going to start
+
+15:06.900 --> 15:12.750
+switching over to graph Kuo lots of applications are built and fully working and very successful using
+
+15:12.750 --> 15:19.090
+this traditional rest back and server paradigm and having front end applications query against new endpoints.
+
+15:19.110 --> 15:19.440
+Right.
+
+15:19.440 --> 15:26.100
+There's lots of services and processes and workflows that deal with how we on the front end work with
+
+15:26.100 --> 15:33.650
+this kind of API but graphed Q all is just a very interesting new look and approach to this kind of
+
+15:33.650 --> 15:35.190
+thing.
+
+15:35.260 --> 15:41.740
+Now that's a lot of concepts and there's a little bit more that you'll only really have to encounter
+
+15:41.860 --> 15:48.160
+as you get more advanced with working with graph Q all but from a high level that's the value proposition
+
+15:48.160 --> 15:55.160
+that it brings to the table now in the next lesson we're actually going to look at a live example of
+
+15:55.160 --> 16:01.370
+how we're going to make a request against the Rockefeller server for this data that we were talking
+
+16:01.370 --> 16:01.580
+about.

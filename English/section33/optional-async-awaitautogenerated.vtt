@@ -1,0 +1,319 @@
+WEBVTT
+
+00:00.300 --> 00:01.220
+OK.
+
+00:01.500 --> 00:02.960
+Async await.
+
+00:03.120 --> 00:09.450
+This is one of the most exciting features that developers have been waiting for.
+
+00:09.480 --> 00:20.320
+It is a way to write functions that contain promise oriented or asynchronous code that looks synchronous.
+
+00:20.340 --> 00:22.800
+So what do I mean by this.
+
+00:22.800 --> 00:31.950
+Well when we think back on our last lesson on promises and fetch we know that with our fetch call if
+
+00:31.950 --> 00:39.940
+we were to write it with the style of promises that we would fetch our users and then we would get the
+
+00:39.940 --> 00:46.290
+response we would call response that Jason which gives us back a promise which we then passed to our
+
+00:46.300 --> 00:58.740
+then which now finally has our array of users we would then cast our first user Constance with the first
+
+00:58.800 --> 01:02.450
+user object in our array we log it out.
+
+01:02.450 --> 01:09.490
+So we see what our first user looks like and then we return fetch to this link right.
+
+01:09.500 --> 01:17.210
+Which has posts except we set a year all parameter where the user I.D. is equal to our first user dot.
+
+01:17.930 --> 01:22.360
+So we want all of the posts related to our first user.
+
+01:22.670 --> 01:26.500
+And then we get back a response we convert to Jason again.
+
+01:26.540 --> 01:26.890
+Right.
+
+01:27.050 --> 01:30.770
+Which then we pass through into our next.
+
+01:30.770 --> 01:33.830
+Then and then we console log of the final posts.
+
+01:33.830 --> 01:42.140
+So it's a lot of things happening here and what this actually looks like for us if we copy this we go
+
+01:42.140 --> 01:42.920
+back to our browser
+
+01:45.840 --> 01:56.110
+and then we paste this in we see that what we get is our first user which gets logged and then we log
+
+01:56.170 --> 01:58.000
+our final posts.
+
+01:58.180 --> 01:58.420
+Right.
+
+01:58.420 --> 02:05.420
+So this is pretty much stuff that we're familiar with when it came down to writing our code.
+
+02:05.440 --> 02:14.500
+Now if we wanted to do this in async await the way that we would do it is we would cast a function called
+
+02:14.590 --> 02:16.770
+My async function.
+
+02:16.770 --> 02:17.640
+Right.
+
+02:17.770 --> 02:24.820
+And we make it an async function by writing the async keyword and then we essentially write a function
+
+02:25.270 --> 02:26.650
+anyway after.
+
+02:26.650 --> 02:27.320
+Right.
+
+02:27.340 --> 02:34.180
+So by saying async and then our function declaration javascript knows that we want to make an async
+
+02:34.180 --> 02:41.500
+function now by using this async keyword within our async functional where now suddenly o allowed to
+
+02:41.500 --> 02:43.820
+use the await keyword.
+
+02:44.040 --> 02:52.720
+And what a weight does is it pauses the functions execution until what is being awaited is completed
+
+02:52.810 --> 02:54.580
+and comes back with a value.
+
+02:54.580 --> 02:56.380
+So what do I mean by this.
+
+02:56.380 --> 03:03.370
+Well if we were to say a wait and then we want to fetch this value that we had above here any code down
+
+03:03.370 --> 03:08.990
+here would wait until this fetch comes back with a value.
+
+03:09.310 --> 03:15.400
+And the way that we would use that value is we're actually able to cast it to a constant because that's
+
+03:15.400 --> 03:16.870
+what a weight does for us.
+
+03:17.020 --> 03:24.310
+A weight takes that resolve promise value and then sets it to the concept that we declare it equal to.
+
+03:24.310 --> 03:34.480
+So if I say this is my users response right now I have that same response object cast to this cost user
+
+03:35.020 --> 03:40.890
+and any code following was waiting until this fetch completed.
+
+03:40.900 --> 03:48.220
+Now we do this again with our actual users but we have to wait for our users response to be converted
+
+03:48.220 --> 03:56.010
+to Jason because this is also an asynchronous method of converting it to Jason so this method returns
+
+03:56.010 --> 03:56.670
+as a promise.
+
+03:56.680 --> 03:56.910
+Right.
+
+03:56.920 --> 04:04.030
+Which resolves with the final Jason value of our users which we cast to our cost to users and now we
+
+04:04.030 --> 04:08.040
+can say cost first user equals users at zero.
+
+04:08.070 --> 04:08.800
+Right.
+
+04:08.800 --> 04:14.140
+Let's console log this first user as well actually let's just change it up and instead of our first
+
+04:14.140 --> 04:16.020
+user we'll say second user.
+
+04:16.060 --> 04:16.920
+Right.
+
+04:17.050 --> 04:28.650
+So we'll use our second user and then we want are posts response equals to our fetch.
+
+04:28.650 --> 04:35.390
+Right like so except we want to use our new second user
+
+04:38.890 --> 04:47.860
+by our fetch we want to wait for it and then we want our posts to be a weight of our posts.
+
+04:47.860 --> 04:48.950
+Response Dot.
+
+04:48.970 --> 04:57.240
+J song and now finally we console log our posts by doing this.
+
+04:57.270 --> 05:03.600
+This code reads more like synchronous code because we see oh there's just a variable declaration.
+
+05:03.600 --> 05:10.900
+It's just waiting for are asynchronous requests to complete and then they cast their values right.
+
+05:10.980 --> 05:15.420
+Resolve promise values to our concepts respectively.
+
+05:15.570 --> 05:22.420
+So as we see this actually looks a lot like normal synchronous code that we were right.
+
+05:22.530 --> 05:33.420
+Now let's see if this works so let's copy this and then let's just paste it in and let's call my async
+
+05:33.420 --> 05:34.060
+function.
+
+05:36.420 --> 05:42.930
+And we see there is our second user and there's our posts related to our second user.
+
+05:43.380 --> 05:47.640
+So this is what a single way allows us to do.
+
+05:47.700 --> 05:56.410
+So both methods are valid when it comes to tackling this kind of a synchronous problem specifically
+
+05:56.470 --> 06:05.050
+what we were trying to solve was that we had code that was dependent on an asynchronous code above it
+
+06:05.080 --> 06:09.990
+right to complete before it could actually run.
+
+06:10.060 --> 06:10.870
+What do I mean.
+
+06:11.350 --> 06:18.700
+Well we were not able to fetch our second user's posts without having a second user in the first place
+
+06:19.150 --> 06:24.650
+and getting our second user was dependent on fetching a list of users first.
+
+06:24.660 --> 06:25.370
+Right.
+
+06:25.390 --> 06:27.020
+This code is asynchronous.
+
+06:27.040 --> 06:29.950
+We did not know when that would complete.
+
+06:30.010 --> 06:36.230
+This could have taken half a second or could have taken 3 seconds depending on multiple factors.
+
+06:36.280 --> 06:44.680
+Now both are valid because this structure of promise chaining is just like a wait each then is waiting
+
+06:44.680 --> 06:50.030
+for the previous ones then callback to complete.
+
+06:50.140 --> 06:52.600
+So this return of this promise.
+
+06:52.600 --> 06:56.140
+This whole chain is waiting for this.
+
+06:56.140 --> 07:05.490
+Then block to complete and this fetch to complete resolve or reject but with async await we're able
+
+07:05.490 --> 07:11.700
+to write it in such a way that it resembles more of the synchronous code that we're used to writing
+
+07:12.300 --> 07:18.360
+because we're able to cast these constants right which are just equal to a weighted values of these
+
+07:18.360 --> 07:20.480
+function method calls.
+
+07:20.490 --> 07:24.220
+So in a way you can do both.
+
+07:24.220 --> 07:31.390
+It doesn't matter it's just which one is more readable which one is more reusable now.
+
+07:31.630 --> 07:37.740
+One thing I have not yet talked about with async away is error handling.
+
+07:37.950 --> 07:48.150
+We know with our promise chain that if we do a dot catch right here we are able to handle our errors.
+
+07:48.390 --> 07:55.640
+If an error occurs at any of these ends this catch will catch the error for all of them right.
+
+07:55.650 --> 07:59.460
+If any of these reject this catch we'll be there for it.
+
+07:59.520 --> 08:03.440
+How do we do that with an async await function.
+
+08:03.460 --> 08:11.860
+Well what we have to do is use a javascript try catch block and what that looks like is just this.
+
+08:11.860 --> 08:18.400
+We have a try keyword with a block of code and then there's a catch keyword with our error.
+
+08:18.400 --> 08:24.630
+And then the second block so we put the code that we want to like we want to run inside of our tribe
+
+08:24.630 --> 08:33.260
+block and then in the catch if any error occurs in this tribe block any promises reject any of the stuff
+
+08:33.260 --> 08:35.120
+with our fetch that fails right.
+
+08:35.480 --> 08:40.760
+Then this catch code will run and that error is what we'll get passed in here.
+
+08:40.760 --> 08:52.440
+So if we wanted to console log there was an error we are able to handle our errors this way.
+
+08:52.460 --> 09:00.820
+So if we were to try this and let's say we just mis type this string write.
+
+09:00.960 --> 09:02.730
+Now if I call my function
+
+09:05.330 --> 09:09.370
+we will see that our error got thrown.
+
+09:09.380 --> 09:13.400
+So while this code ran it's because up until this point this code was all valid.
+
+09:13.400 --> 09:20.970
+But the moment that this error occurred at this fetch it through the error it paused the execution.
+
+09:20.970 --> 09:23.030
+Right it doesn't keep going.
+
+09:23.030 --> 09:24.320
+And then it just throws.
+
+09:24.950 --> 09:28.080
+So this is how async await works.
+
+09:28.340 --> 09:34.370
+And just like that you now know the two ways of handling asynchronous events.

@@ -1,0 +1,274 @@
+WEBVTT
+
+00:00.590 --> 00:02.380
+Welcome back everyone.
+
+00:02.540 --> 00:06.860
+In this lesson we're going to talk about the use reduce or hook.
+
+00:06.860 --> 00:13.070
+Now we're not actually going to bring this hook into our live application because as you can tell from
+
+00:13.070 --> 00:20.120
+the name use reducer it's something that has to do with redux or a similar reducer like pattern that
+
+00:20.120 --> 00:27.110
+we've already gotten familiar with when it comes to redux use reducer lets us actually build out reduce
+
+00:27.110 --> 00:34.130
+our functions and leverage them estate management inside of our components the same way that you state
+
+00:34.130 --> 00:41.930
+does except it's going to follow a similar flow of data of firing actions and then those actions changing
+
+00:42.020 --> 00:44.420
+a reduce or object of some kind.
+
+00:44.420 --> 00:51.590
+The way that we've seen with redux except localized to a component now this use reduced hook is really
+
+00:51.590 --> 00:58.220
+great in places where you need more complex local state management and a great place to see this is
+
+00:58.220 --> 01:00.500
+actually our use effect example.
+
+01:01.160 --> 01:07.820
+So this example here that I've got is pretty much just our use effect example except the name is modified
+
+01:07.820 --> 01:15.920
+to use reducer and in this lesson we are going to switch this components use of you state over to the
+
+01:15.920 --> 01:24.830
+new use reduce our hook what we need to do is import use reducer from react and the use reduce hook.
+
+01:24.870 --> 01:31.620
+You'll notice when we write out this code is going to resemble very closely to the redux code that we're
+
+01:31.620 --> 01:33.290
+already used to writing.
+
+01:33.300 --> 01:40.080
+The only difference is that we have to use some of the Rehab Act Cooke style of writing out this code.
+
+01:40.860 --> 01:47.150
+So what we'll do is we will first understand what it is that use reducer gives us back.
+
+01:47.400 --> 01:50.370
+And it's very similar to our use statehood.
+
+01:50.490 --> 01:56.970
+We're gonna cut costs where we get back and d structure off the array values from the array we get back
+
+01:56.970 --> 02:03.840
+from user reducer and the two things we're going to structure off is the state as the first thing which
+
+02:03.840 --> 02:11.670
+means that this is the current state of our reducer as well as dispatch dispatch being the literal function
+
+02:11.670 --> 02:18.860
+that we get that allows us to pass actions to our reducer then in order for us to instantiate this reducer
+
+02:19.070 --> 02:25.610
+we pass it to things the first thing we pass it is the reducer itself the reducer being the function
+
+02:25.700 --> 02:31.790
+that gets both a state in an action and then using a switch statement returns us back some object that
+
+02:31.790 --> 02:33.380
+represents our state.
+
+02:33.500 --> 02:36.590
+This is pretty much every reducer that we've ever written in redux.
+
+02:36.590 --> 02:43.710
+It's the exact same thing and then the second argument being the actual initial state value.
+
+02:43.820 --> 02:50.400
+So if you're familiar with redux and reducer as we just have to pass initial state into our use reduce
+
+02:50.400 --> 02:55.920
+our call instead of setting it as the default state value when we write our reduced function.
+
+02:56.120 --> 02:58.160
+But let's actually see this.
+
+02:58.190 --> 03:03.710
+So the first thing we're going to do is initialize our initial state and we're going to set it equal
+
+03:03.710 --> 03:12.070
+to some object that is equal to our user being null and our search query being bred.
+
+03:12.080 --> 03:18.950
+So what we've done here is we've pretty much done the exact same initial state for our used state hooks.
+
+03:18.980 --> 03:20.300
+So now we can remove these
+
+03:23.340 --> 03:25.680
+and continue writing our reducer.
+
+03:25.770 --> 03:33.080
+Now the reducer itself is some function that gets the state and the action as the parameters and what
+
+03:33.080 --> 03:40.910
+we're going to do is write a switch statement checking the action type and then based on the case of
+
+03:40.910 --> 03:45.140
+what we get back we're going to do and return different objects.
+
+03:45.230 --> 03:48.020
+Pretty much just like every reducer we've written.
+
+03:48.440 --> 03:57.970
+So here we're going to say if it's set user we're going to return a new object where we spread in the
+
+03:57.970 --> 04:05.110
+state as we're always used to doing and then setting user equal to actioned up palette.
+
+04:05.340 --> 04:07.460
+So there's nothing new here.
+
+04:07.500 --> 04:09.300
+In fact case is gonna do the same thing.
+
+04:09.330 --> 04:18.320
+We're just going to say set search query is equal to the return of the object where we spread and state
+
+04:18.770 --> 04:21.620
+and update search query with action dog Halo
+
+04:25.590 --> 04:30.210
+finally as we're always know with the default return case.
+
+04:30.210 --> 04:32.790
+We just want to return state.
+
+04:32.790 --> 04:38.160
+So this reducer is pretty much the exact same reducer that you're used to writing.
+
+04:38.160 --> 04:40.660
+We also need to create our action creators.
+
+04:40.770 --> 04:48.630
+So our set user is going to take a user object and return us back an object or type goes to set user
+
+04:49.410 --> 04:55.260
+and the payload is the user similarly such search query.
+
+04:55.260 --> 05:04.140
+We'll be pretty much the exact same type of function where we get some query string and we return back
+
+05:04.140 --> 05:06.510
+an object or type is set search query
+
+05:09.770 --> 05:11.630
+and the payload is the query string
+
+05:15.040 --> 05:15.820
+so nothing new.
+
+05:16.630 --> 05:21.180
+Everything here is pretty much the exact same thing that you're used to seeing.
+
+05:22.120 --> 05:28.630
+Whenever we implemented our original redux producers now the only difference is how we end up using
+
+05:28.630 --> 05:29.610
+this.
+
+05:29.680 --> 05:36.560
+So here what we want to do is we want to pull off the values from our state that we want to use.
+
+05:36.580 --> 05:44.960
+So we're just going to d structure off the user and the search query from our state object next what
+
+05:44.960 --> 05:48.390
+we need to do is actually dispatch the appropriate actions.
+
+05:48.630 --> 05:56.510
+And because before we've named our actions the same as what we had it inside of our old use affect example.
+
+05:56.780 --> 06:02.210
+This is that user and this set search query is literally just using our action creator functions that
+
+06:02.210 --> 06:03.570
+we just wrote now.
+
+06:03.830 --> 06:09.830
+So we're passing in the object that we get back and we are creating this new action.
+
+06:09.830 --> 06:15.650
+So we just want to dispatch this action that we're creating from this function call into our reducer.
+
+06:15.740 --> 06:24.010
+So we simply just wrap that inside of our dispatch and just like that it's going to work exactly the
+
+06:24.010 --> 06:27.290
+same way as we had it before.
+
+06:27.300 --> 06:33.420
+The only difference is now we're using this reducer and as you might have noticed it looks pretty much
+
+06:33.420 --> 06:38.100
+the exact same as the reducer code we're used to writing with redux.
+
+06:38.100 --> 06:45.240
+So if we go back to our application now we see that when I type in Samantha it behaves the same way
+
+06:45.300 --> 06:51.810
+as it was before when we're using state except we've managed to move every code into a use reduce our
+
+06:51.810 --> 06:53.320
+hook.
+
+06:53.350 --> 07:00.220
+So this is pretty much all the use reducer hook is it's a native react way of implementing redux and
+
+07:00.220 --> 07:07.120
+sometimes it's actually very useful to use this when you need something a little bit more miniscule
+
+07:08.210 --> 07:14.630
+than a full redux implementation inside of your application but you think you need something more complex
+
+07:14.630 --> 07:17.270
+than simply just using you state.
+
+07:17.270 --> 07:23.930
+This is a great time to use use reducer because you have access to the state object inside of your reducer
+
+07:24.500 --> 07:32.000
+so that you can modify your state values however you want as you typically would with redux.
+
+07:32.000 --> 07:37.700
+So you get all of the redux functionality of course minus the asynchronous event handling except you
+
+07:37.700 --> 07:43.970
+can do it now with conjunction of your use of fact hooks you stay at hooks if you also want but generally
+
+07:43.970 --> 07:51.020
+speaking you only want to use a use reducer or you state separately but with this you'll notice that
+
+07:51.020 --> 07:56.780
+now the code looks way closer to what we wrote with our redux implementation.
+
+07:56.900 --> 07:59.970
+So this is actually the direction that react wants to move as well.
+
+07:59.990 --> 08:05.790
+It values the ducks library and its flow and the benefits that it brings.
+
+08:05.870 --> 08:11.540
+But it's trying to abstract away some of that complexity by allowing you to write this use reducer hook
+
+08:12.020 --> 08:17.570
+inside of your components you don't have to break up all these files and make all these action creators.
+
+08:17.570 --> 08:20.690
+But again there's pros and cons of both.
+
+08:20.780 --> 08:27.170
+So hopefully with this you understand the use reducer hook and now you're pretty well equipped to understand
+
+08:27.170 --> 08:32.090
+and use hooks inside of applications or projects that you join or start yourself.

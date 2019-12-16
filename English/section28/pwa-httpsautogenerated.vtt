@@ -1,0 +1,196 @@
+WEBVTT
+
+00:02.260 --> 00:03.470
+Welcome back.
+
+00:03.510 --> 00:10.000
+In this video we're going to talk about this first point HDB s and why we need it for progressive web
+
+00:10.000 --> 00:18.770
+apps now progressive web apps have a certain checklist you can check out on the progressive Web app
+
+00:18.890 --> 00:19.850
+checklist.
+
+00:19.850 --> 00:23.050
+And I know I know I said that there isn't a checklist.
+
+00:23.050 --> 00:26.680
+Think of it think of progressive web apps as a running list.
+
+00:26.840 --> 00:32.200
+But that's because these are probably going to get constantly updated and changed.
+
+00:32.330 --> 00:37.670
+Now this checklist as you go through it does look a little bit overwhelming.
+
+00:38.860 --> 00:44.950
+But we've been following good practices while building our apps just like we did with robo friends.
+
+00:45.520 --> 00:48.370
+And you've actually done most of these things.
+
+00:48.580 --> 00:58.800
+So that's why instead of showing you this we only really need to focus on three main things that a progressive
+
+00:58.890 --> 01:07.200
+web app needs to do now beside these there's a few features but the adoption for them such as push notifications
+
+01:07.470 --> 01:13.540
+haven't been that smooth or are still in the works.
+
+01:13.560 --> 01:19.770
+So for now we're going to focus on things that you can implement right now fully and be confident that
+
+01:19.770 --> 01:22.230
+they're going to work in your app.
+
+01:22.230 --> 01:32.970
+So HDTV S HD G.P.S. as you know since we mentioned it a little bit in the SSA section prevents bad actors
+
+01:33.180 --> 01:41.720
+from tampering with communications between our app and browser so that if we're sending let's say a
+
+01:41.720 --> 01:49.910
+user name and password to our server we can encrypt it so that that message that includes our password
+
+01:50.150 --> 01:59.450
+travels to the server in an encrypted fashion so that if Bob the evil third party hacker is trying to
+
+01:59.630 --> 02:06.230
+intercept the messages and read them even if he intercepts the message he won't understand it because
+
+02:06.260 --> 02:07.970
+it's encrypted.
+
+02:08.120 --> 02:11.890
+And again this is something that we talked about in my previous course.
+
+02:11.960 --> 02:22.330
+Now Google is really pushing for this HDP US encryption and if we go back to our Web sites we see that
+
+02:22.570 --> 02:29.610
+a G.P.S. we have this little nice lock icon with secure that's a good sign.
+
+02:29.660 --> 02:34.930
+Chrome has actually updated so that if you have any sort of forms on your Web site and they're not a
+
+02:34.930 --> 02:38.510
+CTP yes they'll show up here as not secure.
+
+02:39.110 --> 02:42.440
+Pretty much shaming Web sites for not using a yes.
+
+02:42.650 --> 02:48.990
+So anytime you're sending data from the client to the server you should be using 82 B.S..
+
+02:49.250 --> 02:55.430
+Now why do we need that though for progressive web apps and that is because progressive web apps use
+
+02:55.430 --> 03:03.380
+some features that we're going to talk about in other videos that require a GDP yes for security reasons
+
+03:04.040 --> 03:11.220
+although this is a requirement for progressive web app in general you should always serve your Web sites
+
+03:11.540 --> 03:19.150
+if there's any sort of communication with the server through HDD and if we go to our lighthouse report
+
+03:19.810 --> 03:25.930
+you see that when you scroll to progressive web app and we check out the nine past audits that we had
+
+03:26.350 --> 03:32.710
+we have users ACP yes as one of the requirements but how did that happen.
+
+03:32.710 --> 03:34.990
+How do we have HDP s already.
+
+03:34.990 --> 03:39.620
+And luckily for us we get this out of the box with get hub pages.
+
+03:39.700 --> 03:47.080
+You can see over here that this link that was generated is a GDP s so anytime you put a Web site on
+
+03:47.080 --> 03:52.600
+get how pages we automatically get this encryption which is fantastic.
+
+03:55.030 --> 03:59.190
+Not all Web sites can be hosted on GitHub pages.
+
+03:59.260 --> 04:06.790
+You probably want to have your own server your own domain name Well the easiest way to get a G.P.S.
+
+04:07.240 --> 04:14.030
+is probably through Let's Encrypt Let's Encrypt is a free.
+
+04:14.240 --> 04:19.970
+And it writes It says over here it's a free automated and open Certificate Authority.
+
+04:19.970 --> 04:22.720
+And they're fantastic to use.
+
+04:22.720 --> 04:29.300
+And a certificate authority is just this authority that says I'll give you a certificate to certify
+
+04:29.330 --> 04:36.710
+that yes you are indeed whoever you say you are whatever your domain name is and let's encrypt gives
+
+04:36.710 --> 04:39.230
+you free certificates.
+
+04:39.230 --> 04:43.190
+That is really really easy to setup and they have great documentation for you to use.
+
+04:43.970 --> 04:45.850
+I highly recommend the.
+
+04:46.020 --> 04:53.520
+You also have something like CloudFlare and Cluff there is a C.D. and or a content delivery network
+
+04:53.940 --> 04:57.660
+which we're going to talk about in later sections.
+
+04:57.660 --> 05:03.870
+But for now you can think of them as a server that you can put your files on and just like get hub pages
+
+05:03.870 --> 05:14.370
+that hosts your files on their servers CloudFlare hosts your site on their pages and automatically through
+
+05:14.370 --> 05:16.310
+them you get a sheet.
+
+05:16.330 --> 05:17.240
+Yes.
+
+05:17.440 --> 05:23.880
+And if you go to their pricing they're actually very very generous and there's a free plan for personal
+
+05:23.880 --> 05:27.660
+blog posts and any simple Web sites that you have.
+
+05:27.660 --> 05:33.180
+Again I highly recommend them and they actually do improve your performance of the Web site as well.
+
+05:33.180 --> 05:39.920
+Again something that we'll get into in the performance part 3 section going back to our Web site.
+
+05:39.940 --> 05:46.740
+This is something that we get out of the box our app is going to work with all the other features of
+
+05:46.740 --> 05:53.580
+progressive web app because it's on GitHub pages and we automatically get this issue to be s awesome
+
+05:54.000 --> 06:03.090
+and we can double checked over here with pre act how can use that yep indeed they are using a sheet
+
+06:03.090 --> 06:05.670
+G.P.S. as well.
+
+06:05.740 --> 06:06.160
+All right.
+
+06:06.210 --> 06:07.640
+That's it for now.
+
+06:07.680 --> 06:09.530
+I'll see in the next one by.

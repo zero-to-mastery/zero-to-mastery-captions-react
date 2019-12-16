@@ -1,0 +1,256 @@
+WEBVTT
+
+00:00.790 --> 00:11.300
+OK now before we actually start writing our redux code it's going to be a lot of code in a style that
+
+00:11.300 --> 00:20.080
+we might be unfamiliar with even getting started with just writing these producers might be a bit confusing.
+
+00:20.090 --> 00:27.830
+So I want to take this time just to show you what each piece will look like before we start writing
+
+00:27.830 --> 00:27.970
+it.
+
+00:27.980 --> 00:35.670
+So you don't feel overwhelmed with all this new code that we're suddenly writing now let's re explore
+
+00:35.730 --> 00:40.890
+our diagram and let's look at are reduces.
+
+00:40.950 --> 00:49.170
+So reducer is are a fundamental part of redux because they are essentially what our state is represented
+
+00:49.170 --> 00:49.410
+by.
+
+00:50.340 --> 00:57.840
+When I say reducer you can pretty much picture it as an object and the root reducer is the big object
+
+00:57.870 --> 01:00.920
+that holds all the smaller objects.
+
+01:00.930 --> 01:10.590
+So for example our home reducer is just a object that holds properties equal to the data that we want
+
+01:10.680 --> 01:13.140
+related to the home.
+
+01:13.170 --> 01:20.160
+Anything related to home right that we might want to separate in its own object will be in the home
+
+01:20.160 --> 01:23.490
+reducer anything related to the shop.
+
+01:23.510 --> 01:23.840
+Right.
+
+01:23.840 --> 01:28.440
+Maybe all the shop items are going to be in the shop producer.
+
+01:28.520 --> 01:34.940
+Anything related to the user such as the current user or the address or whatever we can imagine with
+
+01:34.940 --> 01:44.660
+the user we hold in the user reducer and they're all just objects and they all together compose the
+
+01:44.810 --> 01:52.010
+big object that is our root reducer and you can visualize it literally as just a big object with a property
+
+01:52.010 --> 01:58.730
+of home that goes to some object with those home data write home properties.
+
+01:58.730 --> 02:00.150
+Same thing with the shop.
+
+02:00.170 --> 02:05.690
+Same thing with the user and let's say the component wants just the user reducer.
+
+02:05.710 --> 02:13.480
+While we would just pass that slice right that object into our component as the property that that component
+
+02:13.480 --> 02:21.370
+needs let's say it is current user we can just go from the root reducer get this user object and even
+
+02:21.370 --> 02:26.470
+just get that property of current user and pass it into our component.
+
+02:26.470 --> 02:33.880
+Now let's say we wanted to update that user the same way that we were doing set stay inside of our app
+
+02:33.880 --> 02:35.770
+JF component.
+
+02:35.830 --> 02:42.250
+Well we do that with these things called actions and what actions are if we scroll down a little and
+
+02:42.250 --> 02:50.280
+look at this new diagram is literally also just an object it's an object that has a type on it with
+
+02:50.280 --> 02:56.050
+a string value and then it has a payload that could be what ever we want it to be whatever we want to
+
+02:56.140 --> 03:04.730
+update that value to we would just pass that as the payload so our components will fire these actions
+
+03:04.730 --> 03:11.390
+right with this net with a name on it that take this shape with a type and a payload that would then
+
+03:11.390 --> 03:21.100
+go into our reducer which would then check the type to see whether or not that type of action is applicable
+
+03:21.310 --> 03:28.180
+to that reducer because if we want to update the current user only the user reducer cares about that
+
+03:28.180 --> 03:33.630
+action the home reducer and the shop producer don't care about it.
+
+03:34.750 --> 03:39.090
+And the way that it works is that these reduced hours are going to check against the type.
+
+03:39.610 --> 03:43.830
+Right because that string we're just going to match and say oh it does my reducer.
+
+03:43.840 --> 03:46.290
+Care about this type of action if it does.
+
+03:46.300 --> 03:51.550
+I want you to update the whatever property it is in this case it's the current user property with the
+
+03:51.550 --> 03:54.190
+payload on that action.
+
+03:54.280 --> 04:01.570
+So these actions update our user reduces with the payload and then our user reducer passes that current
+
+04:01.570 --> 04:06.310
+user in as a prop to the component and then the component will render.
+
+04:06.310 --> 04:12.580
+However it needs to with the prop and it will continue to always follow this flow.
+
+04:12.610 --> 04:16.370
+Let's say the user logs out right from our app component.
+
+04:16.390 --> 04:21.040
+We would then fire that action again set current user would be the action.
+
+04:21.160 --> 04:26.620
+So the type would be set current user payload would be null this time because the user logged out.
+
+04:27.250 --> 04:33.970
+So then our user reduced what update current user with null and then pass that null current user property
+
+04:34.570 --> 04:40.150
+into our component so that a computer component can render null as current user or do whatever it wants
+
+04:40.150 --> 04:40.510
+with it.
+
+04:40.540 --> 04:48.030
+At that point our component cares about that property but our redux does not so if we want to look at
+
+04:48.040 --> 04:55.320
+or reduce our code the way that a reducer looks is every reducer is just a function.
+
+04:55.320 --> 05:01.650
+The function takes a state and then it takes an action the state is the previous state that it was in
+
+05:02.130 --> 05:05.960
+is the state before this new action is going to update it.
+
+05:06.060 --> 05:16.910
+So we can even see this as previous or current state and what we would do is with this function it's
+
+05:16.910 --> 05:23.570
+going to return an object it's gonna return an object and that object is going to be the new state of
+
+05:23.570 --> 05:26.920
+our user reducer it's going to be a new object.
+
+05:26.960 --> 05:33.510
+So what we do to determine that is we use what's called a switch statement and a switch statement is
+
+05:33.560 --> 05:36.750
+kind of like a really big IF statement.
+
+05:36.860 --> 05:38.960
+So we're checking the action type right.
+
+05:39.050 --> 05:42.600
+Which is that string value we saw here.
+
+05:42.740 --> 05:50.420
+We're gonna check the type if the case is that action type is set current user if that's what that string
+
+05:50.480 --> 05:59.630
+of value of type is then we're gonna return a new object where we are going to just spread in current
+
+05:59.630 --> 06:07.280
+state but make sure that the current user property is the payload and the reason we always return a
+
+06:07.280 --> 06:18.530
+new object is because we want our components to re render as we remember if we pass in the same old
+
+06:18.560 --> 06:22.750
+object except the property is is different.
+
+06:22.760 --> 06:28.550
+Our components might not re render the way we want them to because of the way that React Components
+
+06:28.580 --> 06:35.810
+work React Components only b render if their props are different and the only way that the props are
+
+06:35.810 --> 06:40.010
+different is if the object that it has is new.
+
+06:40.010 --> 06:47.060
+If we pass the same property i.e. the same object but with a different value like let's say we just
+
+06:47.060 --> 06:57.320
+passed in a modified version of current state where we instead did current state DOT current user equals
+
+06:57.410 --> 06:58.480
+action payload.
+
+06:58.520 --> 07:05.360
+If we did UPS action dot payload if we did this and this is what we return that object is not actually
+
+07:05.360 --> 07:09.010
+different and our component will not re update.
+
+07:09.050 --> 07:18.340
+Instead we have to always remember to render a new object right as what we pass if none of the action
+
+07:18.340 --> 07:23.670
+types match then we just want to return current state because we don't want to render anything because
+
+07:23.780 --> 07:28.060
+these this action does not affect our reducer or reducer it does not care.
+
+07:28.060 --> 07:33.850
+The reason for this is because our reduced hours are listening to every action and are reducer is only
+
+07:33.850 --> 07:40.850
+change if the type is relevant to it and we will do that with our code.
+
+07:41.050 --> 07:48.100
+So remember that every reducer is just a function that takes the state and then it takes an action and
+
+07:48.100 --> 07:53.980
+then based on the action it determines whether or not it needs to re render and then what it gives out
+
+07:54.040 --> 08:00.970
+is just going to be the object and in our case all it is is just a value of current user goes to whatever
+
+08:00.970 --> 08:08.530
+that payload was and this is going to be the type of code that we will write inside of our redux.
+
+08:08.530 --> 08:13.270
+I just wanted to show you guys this because as we start writing it there will be a lot of this stuff
+
+08:13.330 --> 08:16.900
+and I don't want you to be confused as we're building it.
+
+08:16.930 --> 08:18.790
+Okay let's start integrating.

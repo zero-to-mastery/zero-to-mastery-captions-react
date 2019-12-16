@@ -1,0 +1,292 @@
+WEBVTT
+
+00:00.760 --> 00:08.320
+Now that we have our sign in with Google button we actually have no way of knowing inside of our application
+
+00:08.440 --> 00:11.500
+whether or not our sign was successful with Google.
+
+00:11.500 --> 00:16.930
+But we can tell that our user was added to our Firebase and authenticated.
+
+00:16.930 --> 00:25.300
+When we go back to our firebase console in our authentication if we click this user's tab we'll see
+
+00:25.300 --> 00:26.660
+this list of users.
+
+00:26.680 --> 00:35.240
+And right there that user is the one that we just logged in with with our sign and with Google so we
+
+00:35.240 --> 00:39.550
+know that it's working and work getting authenticated.
+
+00:39.560 --> 00:45.980
+Now how do we actually add this into our application so that our application is aware that those changes
+
+00:45.980 --> 00:51.360
+are happening while firebase gives us a really easy way to do that.
+
+00:51.410 --> 00:57.280
+So let's go back to our application and let's go to our app J.S. inside of our app.
+
+00:57.280 --> 01:09.170
+Yes what we want to do is we want to first import in off from our firebase utilize so let's import off
+
+01:12.200 --> 01:15.150
+firebase dash firebase utilize.
+
+01:15.320 --> 01:23.180
+And what we want to write is we want to actually store the state of our user in our app right.
+
+01:23.210 --> 01:29.600
+So when a user logs in using whatever service we use whether it's Google sign in or email and password
+
+01:30.050 --> 01:36.170
+we want to store that on the App State so that we can pass it into components that need it because we
+
+01:36.170 --> 01:40.910
+want to access our current user object throughout our application.
+
+01:40.910 --> 01:47.840
+So what we'll do is we'll convert our app over to a class component so we can have access to state
+
+01:52.550 --> 01:56.180
+and we'll put this return inside of our render
+
+01:59.310 --> 02:08.900
+and now everything will work the same we'll just add our constructor call our super and call this dot
+
+02:08.900 --> 02:20.540
+state equals an object where current user is no to properly understand what firebase auth gives us we
+
+02:20.540 --> 02:24.730
+have to understand the concept of a subscription.
+
+02:24.770 --> 02:35.300
+So normally how we fetched data before is we inside of our component did mount method component did
+
+02:35.300 --> 02:41.760
+mount where used to firing a fetch to the back end to fetch data.
+
+02:42.070 --> 02:44.780
+But this is only a one off thing.
+
+02:44.950 --> 02:51.010
+Once the code calls fetch it won't call fetch again until a component did mount lifecycle method gets
+
+02:51.010 --> 02:59.800
+called again but we don't want to remount our app we just want to always know when firebase has realized
+
+03:00.130 --> 03:02.920
+that the authentication state has changed.
+
+03:02.920 --> 03:10.390
+So whenever somebody signs in when everybody somebody signs out we want to be aware of that change without
+
+03:10.390 --> 03:15.720
+having to manually fetch firebase actually gives us that really easily.
+
+03:15.760 --> 03:24.740
+So when we call off dot on off state changed this is a method.
+
+03:24.810 --> 03:35.390
+On the off library that we get from firebase right firebase off and then this off inside what it takes
+
+03:35.420 --> 03:42.860
+is a function where the parameter is what the user state is of the.
+
+03:42.860 --> 03:50.660
+Off on our firebase project and our callback inside we're going to call this dot set state where we're
+
+03:50.660 --> 03:57.550
+setting current user to that user object so let's log it out as well.
+
+03:57.550 --> 04:06.600
+Just to see what it looks like now when we go back to our application and we open up our console we
+
+04:06.600 --> 04:12.840
+actually see that this is our user the one that we just signed in with with Google.
+
+04:12.840 --> 04:19.050
+So because our application earlier when we selected sign with Google it's already stored that user and
+
+04:19.050 --> 04:24.150
+it knows that this application that's making that request has not yet signed out.
+
+04:24.150 --> 04:29.640
+So that's why we're still seeing the object even though our app refreshed when we saved our app that
+
+04:29.640 --> 04:35.520
+J asked just now firebase is still aware that this was the last user right that got signed in with.
+
+04:35.520 --> 04:42.200
+And this is a really cool feature that we get from firebase right out the box user authenticate authenticated
+
+04:42.190 --> 04:44.340
+session persistence.
+
+04:44.340 --> 04:50.040
+This is actually a setting that you can change in firebase which we will definitely explore in a later
+
+04:50.040 --> 04:50.670
+lesson.
+
+04:50.670 --> 04:56.910
+But right now I want to focus on the basics of Firebase because there's so much for us just to understand
+
+04:56.940 --> 05:05.590
+what firebase can do for us but this feature is awesome because if you think about it we don't actually
+
+05:05.590 --> 05:13.070
+want our user to have to resign in whenever we either refresh our page where we see we're still getting
+
+05:13.070 --> 05:16.140
+now our user or if we close the window right.
+
+05:16.160 --> 05:23.890
+Without ever signing out and then come back to our application and again we get that user object from
+
+05:23.890 --> 05:28.520
+firebase which is great for us because then we can decide what to do with it right.
+
+05:28.540 --> 05:31.130
+Because we know that our user is still the same.
+
+05:31.300 --> 05:37.900
+And firebase is aware because it keeps track of all the instances of the application that are open and
+
+05:37.900 --> 05:40.870
+communicating it with it so it knows that.
+
+05:40.870 --> 05:41.220
+OK.
+
+05:41.240 --> 05:45.680
+User came from this instance of the application before and they never signed out.
+
+05:45.790 --> 05:47.970
+So I'm just gonna assume that they're still signed in.
+
+05:48.220 --> 05:54.100
+And because of our subscriber here our subscriptions always listening to the off the authors like oh
+
+05:54.100 --> 06:00.460
+I'm going to send them that user authenticated object every time until they sign out.
+
+06:01.210 --> 06:08.590
+So this is a really great feature because this is essentially how we're able to get persistence of our
+
+06:08.590 --> 06:14.020
+user sessions without having to setup all this complicated stuff that it would normally require for
+
+06:14.080 --> 06:15.730
+us to get this.
+
+06:15.820 --> 06:22.420
+But let's look back at the actual user authenticated object that we're getting back from Firebase and
+
+06:22.510 --> 06:27.130
+on this we just want to ignore a lot of these values because we don't need them because it's a Google
+
+06:27.130 --> 06:34.380
+user object it has a lot of stuff but the main one we want to look at is display name and email.
+
+06:34.750 --> 06:38.540
+So we know this is that user that we just go.
+
+06:38.830 --> 06:47.050
+And the great thing about this is that now we have oh off so easily right out the gate all off essentially
+
+06:47.110 --> 06:53.580
+allows users to sign in with any other third party service that they might already have.
+
+06:53.800 --> 07:01.090
+And by doing this we've reduced the barrier of entry for allowing users to sign into our application
+
+07:01.870 --> 07:07.270
+because they don't have to actually go through an arduous sign up process or remember their email and
+
+07:07.270 --> 07:08.760
+password for our app.
+
+07:08.890 --> 07:15.700
+They can just use sign and with Google a lot sign and is actually a very tedious and difficult thing
+
+07:15.700 --> 07:17.510
+to set up from scratch.
+
+07:17.680 --> 07:25.510
+But by using firebase we got access to it with just a couple configurations and that's why firebase
+
+07:25.540 --> 07:28.080
+is such an incredible platform.
+
+07:28.240 --> 07:34.990
+Now the next thing we have to do is actually understand why this is an open subscription.
+
+07:34.990 --> 07:37.690
+So this opens subscription.
+
+07:37.690 --> 07:45.330
+It's an open messaging system between our application and our firebase at whenever any changes occur
+
+07:45.360 --> 07:50.640
+on firebase from any source related to this application.
+
+07:50.640 --> 07:56.580
+Firebase sends out that a message that says that the off status change the user has updated whether
+
+07:56.580 --> 08:03.280
+they've signed in through some service such as our Google sign or our email and password sign up or
+
+08:03.280 --> 08:09.400
+they've signed out and then they will give us this user and it will call it.
+
+08:09.400 --> 08:14.980
+So we don't actually have to manually fetch every time we want to check if that status changed.
+
+08:15.010 --> 08:23.650
+This connection is always open as long as our application component is mounted on our job but because
+
+08:23.650 --> 08:31.870
+it's an open subscription we also have to close subscriptions when this on mounts because we don't want
+
+08:31.960 --> 08:35.310
+any memory leaks in our javascript application.
+
+08:35.370 --> 08:45.300
+So how we do that is we would call a new method called unsubscribe from off which by default is equal
+
+08:45.300 --> 08:45.720
+to nil.
+
+08:45.720 --> 08:53.250
+So we're setting a property called unsubscribe from off on our class and then we're going to say this
+
+08:53.340 --> 09:03.190
+equals off dot on off state changed which gives us back a function that when we call closes the script
+
+09:03.190 --> 09:04.170
+subscription.
+
+09:04.170 --> 09:04.750
+Right.
+
+09:04.830 --> 09:09.350
+And we want to close it whenever our component on mounts.
+
+09:09.360 --> 09:14.480
+So in this new lifecycle method component will on Mount.
+
+09:14.700 --> 09:25.170
+We want to call this dot unsubscribe from off and that will close the subscription and this is pretty
+
+09:25.170 --> 09:34.520
+much how we handle our application being aware of any auth changes on firebase.
+
+09:34.560 --> 09:41.010
+I know it's very conceptual and if you understand that's awesome if you don't that's perfectly fine
+
+09:41.130 --> 09:43.260
+it will make sense the more you do it.

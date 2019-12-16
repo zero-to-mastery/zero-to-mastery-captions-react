@@ -1,0 +1,568 @@
+WEBVTT
+
+00:00.630 --> 00:03.740
+Welcome back everyone in this lesson.
+
+00:03.830 --> 00:11.780
+We are going to talk about how we can use the Apollo client to replace redux in terms of managing our
+
+00:11.780 --> 00:15.160
+local state inside of our application now.
+
+00:15.170 --> 00:20.210
+Up until this point we've only used Apollo to fetch data from our graph.
+
+00:20.220 --> 00:29.030
+You all server but it turns out that Apollo can actually also help us manage store query and mutate
+
+00:29.120 --> 00:36.290
+local data and it's going to follow pretty much the exact same format in terms of pulling it out and
+
+00:36.290 --> 00:41.170
+then setting values into the local state as we've been doing here.
+
+00:41.210 --> 00:49.250
+In terms of our queries to our graph you all back in now the reason that Apollo does this is because
+
+00:49.310 --> 00:50.990
+it wants consistency.
+
+00:51.170 --> 00:58.580
+And the reason why you don't want to mix redux and Apollo together is because you want all of your code
+
+00:58.580 --> 01:04.580
+to be unified in terms of that unit directional data flow and you want a single source of truth.
+
+01:05.330 --> 01:11.180
+So if for example we were using redux in certain parts of our application and Apollo and others well
+
+01:11.180 --> 01:16.670
+it would be awkward because what happens if we pass some data inside of our graph.
+
+01:16.670 --> 01:22.850
+Q All right query we fetch some collection items down let's say another component modifies it and it
+
+01:22.850 --> 01:29.990
+stores it in redux Well what's the point of that if that data is not the same in our back.
+
+01:30.510 --> 01:37.650
+So that's the main issue with using libraries like redux and Apollo together you mainly want to leverage
+
+01:37.800 --> 01:42.640
+using Apollo as your main source of local state management.
+
+01:42.870 --> 01:44.800
+And we can actually do it.
+
+01:44.940 --> 01:50.430
+It's a little bit weird because it's different from what we might be used to but I promise you that
+
+01:50.430 --> 01:55.100
+with practice it will definitely make sense now for us to do this.
+
+01:55.110 --> 02:01.770
+The first thing we're going to do is we have to instantiate some local value for our state.
+
+02:02.070 --> 02:06.300
+So pretty much like the initial value of our reducer is that we were used to setting up we've got to
+
+02:06.300 --> 02:09.030
+do something similar with our local.
+
+02:09.030 --> 02:14.670
+So how that works is we actually do it on the client and the client actually leverages the cache in
+
+02:14.670 --> 02:15.550
+order to do that.
+
+02:15.630 --> 02:24.440
+The cache is the local storage know how we do this is we can actually say client dot right data and
+
+02:24.450 --> 02:29.460
+we want to do that in the index just because when our app initiates and our client gets created for
+
+02:29.460 --> 02:37.320
+the first time we want to immediately write this data into our client and we want to instantiate this
+
+02:37.350 --> 02:45.060
+with some data as the property and then the value of data will be the object that has all the keys that
+
+02:45.060 --> 02:45.920
+we're trying to store.
+
+02:45.930 --> 02:53.350
+So for us because we want to replace the card dropdown hidden value we're just going to say hidden and
+
+02:53.360 --> 03:00.340
+we're going to set this by default to true if you want to be more explicit you can say this is card
+
+03:00.370 --> 03:03.330
+hidden actually let's do that maybe it's a little bit more explicit.
+
+03:03.340 --> 03:08.700
+So let's just a car hit it now that we have this card hidden true value.
+
+03:08.950 --> 03:15.320
+We actually need to figure out how we can make a mutation that lets us modify this.
+
+03:15.370 --> 03:16.900
+So we've seen queries.
+
+03:16.900 --> 03:22.150
+The other thing we have access to is mutations and mutations is pretty much as it sounds.
+
+03:22.210 --> 03:25.220
+It mutates some data.
+
+03:25.290 --> 03:30.990
+So what we're going to do in order to do that is we have to make a new folder that is going to hold
+
+03:30.990 --> 03:36.810
+the code that contains these mutations and we're going to put it inside of our source.
+
+03:37.050 --> 03:39.050
+And this new folder is gonna be called graft.
+
+03:39.150 --> 03:47.060
+Well now inside of this graft fuel folder we are going to make a new file called resolves Doc j ust
+
+03:48.450 --> 03:55.560
+and why it's called resolving this is because it is this object that we can pass to our client that
+
+03:55.560 --> 04:02.580
+lets it know what values to resolve depending on what mutations or what queries get called from the
+
+04:02.580 --> 04:05.120
+local client side.
+
+04:05.130 --> 04:07.430
+Now if that sounds confusing don't worry.
+
+04:07.470 --> 04:10.190
+Once we write it out it'll make more sense.
+
+04:10.230 --> 04:17.510
+The first thing we're gonna do is we're gonna import in the GQ all tag from Apollo boost and what we're
+
+04:17.510 --> 04:26.390
+gonna do now is we are going to actually define the type i.e. the schema that this local side is going
+
+04:26.390 --> 04:28.830
+to use and get access to.
+
+04:28.850 --> 04:35.600
+So as you remember when we looked at our schema inside of our actual playground These are the mutations
+
+04:35.600 --> 04:39.000
+and queries that were available to us from our back.
+
+04:39.230 --> 04:40.970
+Now of course there were no mutations here.
+
+04:40.970 --> 04:45.830
+There were only queries but this schema is actually defined the same way that we're going to define
+
+04:45.830 --> 04:47.030
+it here.
+
+04:47.030 --> 04:53.600
+And what we're going to say is we're going to export out some const called type DFS standing for type
+
+04:53.600 --> 05:02.090
+definitions and this is gonna be equal to our GQ tag where we're going to add any more values or types
+
+05:02.090 --> 05:05.060
+that we want the client to have access to.
+
+05:05.060 --> 05:09.510
+So of course what we're going to say is extend type mutation.
+
+05:09.980 --> 05:14.740
+Now extend means something different inside of graft.
+
+05:14.750 --> 05:21.530
+You know when we extend we're actually saying I want you to extend to the existing type of mutation
+
+05:21.560 --> 05:23.100
+that might exist in the back.
+
+05:23.750 --> 05:30.680
+So in the back in you server there is also this mutation that was written for any mutations that might
+
+05:30.740 --> 05:37.210
+we might have access to now because we haven't written any mutations as you can see in our scheme of
+
+05:37.210 --> 05:37.830
+our database.
+
+05:37.850 --> 05:40.600
+We're not going to extend into anything really.
+
+05:40.790 --> 05:45.440
+But if in the future we ever do amputations on the server we don't want to have to modify our code here.
+
+05:45.680 --> 05:49.790
+So by extending it Graf Q all knows that if there's nothing that's perfectly fine.
+
+05:49.790 --> 05:58.580
+Otherwise we're just going to add new mutations to what Apollo is aware that it can call now the one
+
+05:58.580 --> 06:04.150
+that we're going to add is the toggle hidden because what we want to do is want to toggle that hidden
+
+06:04.190 --> 06:09.980
+value now because this value will always be a boolean either true or false.
+
+06:10.070 --> 06:12.200
+That's what this mutation is going to return.
+
+06:12.860 --> 06:19.460
+So inside of this mutation definition we're gonna say that there's going to be this toggle cart hidden
+
+06:19.460 --> 06:27.200
+mutation that always returns of boolean and we signify that with the exclamation mark now as far as
+
+06:27.200 --> 06:35.810
+the actual resolve is concerned we are going to write it as this object and in this object we're actually
+
+06:35.810 --> 06:44.330
+going to define what our mutations and what are queries as well as what additional types we might have
+
+06:44.480 --> 06:50.210
+on our client side cache that Apollo has access to inside of this object.
+
+06:50.210 --> 06:54.310
+So the first thing we're going to define is the new mutations we have access to.
+
+06:54.350 --> 07:00.320
+So here what we're going to do is we're going to say capital mutation goes to this object where the
+
+07:00.320 --> 07:05.550
+key of the actual mutation is the mutation we're trying to write.
+
+07:05.570 --> 07:09.250
+So in our case it's toggle cart hit it.
+
+07:09.500 --> 07:12.410
+Now in case you're wondering why this one is capital and this one is not.
+
+07:12.730 --> 07:17.690
+It's because this one is a type definition and type definitions need to be capitalized or ideally they
+
+07:17.690 --> 07:18.230
+should be.
+
+07:18.230 --> 07:21.100
+They don't always have to be but they should be.
+
+07:21.170 --> 07:25.340
+This is the actual mutation definition inside of our javascript.
+
+07:25.370 --> 07:30.970
+So this one can be the regular camel case that we're used to now.
+
+07:30.970 --> 07:37.240
+Here what we're going to do is we are going to actually write out this function and this function that
+
+07:37.240 --> 07:40.590
+represents our mutation gets four arguments.
+
+07:40.600 --> 07:44.200
+Now I'm going to walk through what they are but let's actually write them out first so we see what they
+
+07:44.200 --> 07:45.110
+look like.
+
+07:45.220 --> 07:47.300
+The first one is route.
+
+07:47.530 --> 07:49.490
+The second one is args.
+
+07:49.750 --> 07:51.700
+The third one is context.
+
+07:51.700 --> 07:53.860
+And the fourth one is info.
+
+07:53.920 --> 07:58.370
+Now we use these underscores just because that's how they do it inside of the Apollo docs.
+
+07:58.540 --> 08:06.310
+But this root object represents the top level object that holds the actual type.
+
+08:06.310 --> 08:08.160
+What do I mean by this.
+
+08:08.170 --> 08:14.380
+Well if we look at our playground if we look at this item we know that this item has this collection
+
+08:14.380 --> 08:14.710
+key.
+
+08:15.190 --> 08:21.280
+And this means that this item belongs to this collection which is why we're able to query the items
+
+08:21.370 --> 08:27.370
+from calling the collection itself and on the collection it also has this items key that gives it an
+
+08:27.370 --> 08:34.650
+array of items implying that there's a relationship between these two types which is a back and concept.
+
+08:34.670 --> 08:41.690
+Now what this means is that from the item if we were to write a resolve or on an item property on our
+
+08:41.690 --> 08:45.240
+front end for example for a property that might not exist.
+
+08:45.290 --> 08:51.670
+Like imagine if say we had some other thing that we might want to resolve from our item.
+
+08:51.670 --> 08:51.970
+Right.
+
+08:51.980 --> 08:52.990
+We would write it like this.
+
+08:53.000 --> 08:57.860
+We're extending the item in our back end and let's say we have some additional property that we add
+
+08:57.860 --> 09:00.950
+on here called Parents I.D..
+
+09:00.950 --> 09:01.220
+Right.
+
+09:01.220 --> 09:05.870
+I don't know why but just imagine that inside of here if we were to write this resolved or we could
+
+09:05.870 --> 09:16.080
+actually write it like this and when we call this function where we call the property parent's I.D.
+
+09:16.680 --> 09:24.100
+this root object would represent the parent which for us is this collection because of this relationship.
+
+09:24.120 --> 09:25.670
+So that's all you really need to think about.
+
+09:25.670 --> 09:30.960
+If you were to ever use of the root now in our case we're actually never gonna use it so there's no
+
+09:30.960 --> 09:37.950
+real reason for us to dive too deep into it but just know that that's what this object represents for
+
+09:37.950 --> 09:39.650
+anything else at the top level.
+
+09:39.660 --> 09:45.270
+So in our case we're at the top level because our mutation is at the very highest level of our actual
+
+09:45.330 --> 09:47.780
+cash object.
+
+09:47.800 --> 09:52.570
+This is just gonna be an empty object so we're never gonna use it but we need it to just know what it
+
+09:52.570 --> 09:53.100
+is.
+
+09:54.330 --> 10:00.510
+The args object represents all of the arguments that we could possibly get access to inside of the mutation
+
+10:00.960 --> 10:07.620
+meaning that if we look at our collection container when we passed this title into this query of get
+
+10:07.620 --> 10:13.830
+collections by title this argument object would be equal to an object or title goes to that string.
+
+10:13.830 --> 10:21.120
+So arguments is pretty much the variables that get passed into r mutation or query.
+
+10:21.120 --> 10:23.800
+That's what this arguments object is.
+
+10:23.830 --> 10:30.760
+The third is the context and the context is the thing that the Apollo client has access to which includes
+
+10:30.760 --> 10:34.180
+the cache as well as the client itself.
+
+10:34.180 --> 10:40.770
+So for us if we need to make any rights to the client we can do that and do structure off of the context.
+
+10:40.780 --> 10:45.500
+Otherwise all we ever actually need is the cash object.
+
+10:45.680 --> 10:52.310
+The last one is the info objects and this one just has information about our query or our mutation but
+
+10:52.370 --> 10:54.680
+this one we're never really going to use.
+
+10:54.680 --> 11:01.820
+I'm get a link for you a link to the Apollo docs so you can get a better look and more thorough explanations
+
+11:01.880 --> 11:04.080
+and instances and examples right.
+
+11:04.100 --> 11:07.100
+If you want it in our case we don't need it.
+
+11:07.190 --> 11:12.170
+And honestly the reason why it's written this way is just because this is how this code is actually
+
+11:12.170 --> 11:17.300
+written in the back in an Apollo wanted to be consistent with how people write graph.
+
+11:17.340 --> 11:24.000
+Q Well servers in the back in so in our case all we really need to remember is that we need the args
+
+11:24.060 --> 11:26.140
+and the cache and these are easy to understand.
+
+11:26.970 --> 11:34.260
+So what we're gonna do is we actually first need to read from our cash the initial value or that cart
+
+11:34.260 --> 11:39.810
+hit in value that we are setting and changing because we need to flip that value every time the toggle
+
+11:39.810 --> 11:41.630
+cart hit and gets called.
+
+11:41.730 --> 11:46.300
+So it's gonna be the same way that we made queries inside of our other containers.
+
+11:46.320 --> 11:56.440
+We're going to define this contest gets cart hidden query which is equal to GQ Elle and us just simply
+
+11:56.440 --> 12:05.400
+fetching the cart hidden property and in order to specify to Apollo that this is on the client side.
+
+12:05.430 --> 12:07.880
+We use what's called a client directive.
+
+12:07.980 --> 12:15.240
+This at Symbol followed by the client he will let Apollo know that anything calling this query is looking
+
+12:15.240 --> 12:19.900
+for this car hidden value on the local cache not in our back.
+
+12:20.220 --> 12:23.150
+So that's what's really cool about this.
+
+12:23.200 --> 12:29.320
+So now in order for us to actually read from our cash we need to know that what we're getting back is
+
+12:29.320 --> 12:36.280
+the data object and in order to actually do the query we'll say cash out read query and recreate gets
+
+12:36.280 --> 12:43.690
+an object where the query is the actual query we're passing in if we want to pass a values like we did
+
+12:43.690 --> 12:46.810
+into this query this get collections by item.
+
+12:46.950 --> 12:52.500
+There's a variables property that comes in as well that we can pass it in like so right.
+
+12:52.540 --> 12:57.490
+Which would be the object where the variable represents the same way that we passed it in side of here
+
+13:01.140 --> 13:06.270
+so in our case we are just making this query forget the card hidden.
+
+13:06.330 --> 13:08.710
+This will come back to us as the data object.
+
+13:08.760 --> 13:14.700
+And of course the query itself can't hit hidden will be the property on the data object that has the
+
+13:14.730 --> 13:16.770
+Boolean value that we want.
+
+13:16.830 --> 13:20.910
+So we'll just structure that off right here and we'll say it's card hidden.
+
+13:20.910 --> 13:21.180
+Right.
+
+13:21.180 --> 13:28.590
+That's what it is and then what we want to do is we want to now update our cash with the reverse value.
+
+13:28.590 --> 13:34.530
+Once we've gotten the value in order to do that we say cashed out right query which is the opposite
+
+13:34.530 --> 13:36.030
+of re query.
+
+13:36.090 --> 13:40.310
+And what we want to write to is we want to say the query goes that same query.
+
+13:40.440 --> 13:44.940
+We're trying to get that same location in our database that we pulled from.
+
+13:45.240 --> 13:47.430
+And we want to update it with our data.
+
+13:48.710 --> 13:53.560
+Of that card hidden goes to the opposite value of our card hit in value.
+
+13:53.630 --> 13:58.670
+So we're refreshing the value you can see the syntax kind of like when we call set state and we pass
+
+13:58.730 --> 14:02.670
+in the property and the value that we want to set it to.
+
+14:02.810 --> 14:03.020
+Right.
+
+14:03.020 --> 14:03.890
+It's very similar.
+
+14:03.890 --> 14:09.860
+You pass it as an object where the key value is what you're trying to change on your cash.
+
+14:09.860 --> 14:15.890
+Finally what we'll do is we will return that new card hidden value that we have reversed.
+
+14:15.890 --> 14:23.150
+Like so so that anyone calling our toggle card hidden resolve or is going to also get back this opposite
+
+14:23.150 --> 14:26.320
+boolean value if they want to do something.
+
+14:26.320 --> 14:31.840
+So now we've defined our resolve our and we've defined our type does we have to bring this into our
+
+14:31.900 --> 14:42.020
+index us and put it on our client so let's import in our resolves and our typedef from our New Folder
+
+14:43.470 --> 14:51.960
+graph Q slash resolves and we're just gonna pass them in as themselves in this object.
+
+14:51.990 --> 15:02.220
+So let's say typed FS and resolves and now our client has access to these new mutations that we just
+
+15:02.220 --> 15:08.000
+wrote so I know the syntax is a little weird and that's going to take some getting used to but we'll
+
+15:08.000 --> 15:12.540
+honestly write enough of these mutations that you'll get used to this pattern.
+
+15:12.590 --> 15:15.690
+It's really just a pattern that Apollo expects.
+
+15:15.760 --> 15:21.280
+So now that we've written them let's actually use them inside of our application and through using them
+
+15:21.280 --> 15:24.290
+hopefully it'll become more clear as to what's happening.
+
+15:24.310 --> 15:29.830
+And as we write more because this is really just the case where the more we practice the better we'll
+
+15:29.830 --> 15:30.280
+get at it.
+
+15:31.000 --> 15:33.250
+So let's implement this in the next lesson.

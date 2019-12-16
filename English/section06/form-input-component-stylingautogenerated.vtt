@@ -1,0 +1,256 @@
+WEBVTT
+
+00:00.600 --> 00:06.600
+OK so in order to style this we're gonna take this section by section first.
+
+00:06.610 --> 00:13.650
+First we're going to style the input and then we'll sell that button and then the full component just
+
+00:13.650 --> 00:17.940
+so it ends up looking like our final sign.
+
+00:17.940 --> 00:24.000
+So what we have to do is we actually have to make a new form input component and it's going to perform
+
+00:24.000 --> 00:32.370
+the exact same way as a regular input but with our own styling on it including managing the label and
+
+00:32.370 --> 00:34.330
+that little micro interaction.
+
+00:34.530 --> 00:36.150
+When you click on it
+
+00:39.240 --> 00:40.890
+how do we do this.
+
+00:40.890 --> 00:47.410
+Well let's first make a new component called form input
+
+00:50.490 --> 00:59.610
+and we're gonna make our form input component Dutch ASX and a form input dot styles thought SAS as usual
+
+01:02.150 --> 01:10.280
+and inside of our form input it will be a functional component
+
+01:13.510 --> 01:15.940
+because we don't want any state on this component
+
+01:19.190 --> 01:29.870
+what it will take is it will take a handle change prop a label and then the rest of the props we're
+
+01:29.880 --> 01:35.170
+gonna do structure because we're gonna spread that into the input.
+
+01:35.180 --> 01:43.390
+Now the reason why we need this handle change is because we want to bubble up any on change that the
+
+01:43.390 --> 01:44.250
+input has.
+
+01:44.440 --> 01:51.040
+But we're going to wrap our whole component in a group because we want the label and the input to be
+
+01:51.040 --> 01:52.080
+together.
+
+01:52.090 --> 02:00.790
+So this is gonna be called a group and then there will always exist and input and the input will have
+
+02:00.790 --> 02:08.890
+the class name of form input on change will then bind our handle change.
+
+02:08.890 --> 02:16.070
+So right now this looks exactly like how we had it earlier inside of our sign and component we're still
+
+02:16.070 --> 02:24.420
+just finding whatever handle change gets passed in onto the change and then we're going to spread the
+
+02:24.570 --> 02:26.370
+other props here.
+
+02:26.370 --> 02:35.170
+So all these other props will end up being all of the props that we've passed in here including name
+
+02:35.260 --> 02:37.930
+type value required.
+
+02:37.930 --> 02:45.510
+Those are all going to get passed into our form input component as the other props.
+
+02:45.530 --> 02:47.530
+Now why do we need this label prop.
+
+02:48.110 --> 02:54.920
+Well what this label prop we are actually going to selectively render a label because we don't know
+
+02:55.550 --> 03:02.100
+if we actually need it or not if a user passes in a label.
+
+03:02.130 --> 03:02.370
+Right.
+
+03:02.470 --> 03:02.730
+Sorry.
+
+03:02.760 --> 03:07.380
+If a developer if we want to pass in a label property then we'll generate one.
+
+03:07.470 --> 03:09.270
+If we don't then there's no need for it.
+
+03:10.350 --> 03:19.430
+So we are going to create a label component otherwise we are going to render nothing and no is a great
+
+03:19.430 --> 03:21.510
+way for nothing to appear.
+
+03:21.770 --> 03:22.880
+So here.
+
+03:22.880 --> 03:32.890
+What we're going to render is our label with a class name of this value.
+
+03:32.890 --> 03:44.050
+So what we're gonna do is we are going to selectively render a string interpolated value where we take
+
+03:44.050 --> 03:58.700
+prop stop value length so if our value is in then we are going to apply this class of shrink otherwise
+
+03:59.870 --> 04:05.730
+it will be an empty string and we will always have form input label.
+
+04:06.040 --> 04:06.400
+Sorry.
+
+04:06.520 --> 04:07.110
+Other props.
+
+04:08.110 --> 04:15.730
+So this label will always have the class name form input label but we will also add this shrink property.
+
+04:15.730 --> 04:25.890
+When ever the user has typed anything in now this is mainly for certain browsers that will autocomplete
+
+04:26.020 --> 04:30.550
+when you get to that portion of the actual sign and page.
+
+04:30.880 --> 04:32.480
+I'm gonna show you what I mean.
+
+04:32.800 --> 04:37.860
+But we're also going to render the label text now.
+
+04:37.930 --> 04:47.270
+As usual I've provided the styling for us and I'm just gonna quickly take a look at what is here.
+
+04:47.380 --> 04:57.800
+So what we're saying is that this is a sparse variable wherever we call sub color is going to substituting
+
+04:57.910 --> 05:00.830
+that grey wherever we call main color.
+
+05:00.850 --> 05:07.480
+It's going to substitute in black and then this mix in shrink label is an easy way for us to include
+
+05:07.480 --> 05:12.090
+this whole block of CSX where everywhere we say at include.
+
+05:12.250 --> 05:14.590
+And then that shrink label that mix.
+
+05:15.550 --> 05:22.900
+So mix ins are kind of like reusable pieces of CSX that we can put inside of our source code and this
+
+05:22.900 --> 05:28.510
+way we don't have to repeat the same thing and if we want to change anything we could just modified
+
+05:28.510 --> 05:33.570
+here and wherever it's being referenced it all update now.
+
+05:33.830 --> 05:43.060
+The main thing to focus on that we've changed is that we want to focus whenever a user focuses which
+
+05:43.060 --> 05:51.730
+is whenever they select or whenever the browser is focused on that input then we want to target the
+
+05:51.730 --> 05:57.370
+form input label and we want to include shrink label.
+
+05:57.370 --> 05:57.610
+Right.
+
+05:57.610 --> 06:04.510
+So we want to move it up change the font size and change the color because right now our label actually
+
+06:04.510 --> 06:12.160
+sits inside of our component as you'll see here right.
+
+06:12.200 --> 06:16.550
+It just sits right above the actual input itself.
+
+06:17.300 --> 06:26.870
+So by doing this we are adding a transition right here of 300 milliseconds so that the moment these
+
+06:26.870 --> 06:33.350
+properties get updated there's a transition of the range of milliseconds to that change.
+
+06:33.350 --> 06:45.200
+And now if we save and we export our form input if we add it into our sign and component we will see
+
+06:45.710 --> 06:47.030
+our new component in our code
+
+06:49.970 --> 06:58.870
+form input from form input form a token.
+
+06:58.890 --> 07:08.780
+Now let's just replace this with this like so and now instead of an on change we are going to add in
+
+07:08.900 --> 07:16.950
+our handle change because that's the name that we decided to call our property.
+
+07:17.190 --> 07:32.590
+And now if we look at our code base we'll see that this is our new component.
+
+07:32.640 --> 07:35.460
+We also need to now add in our label.
+
+07:35.520 --> 07:45.730
+So here I'm gonna say email and then for this label I'm also going to say password reset again let's
+
+07:45.730 --> 07:47.470
+not update that password.
+
+07:47.650 --> 07:53.010
+We see our functionality awesome.
+
+07:53.160 --> 07:56.010
+So let's get rid of this label and this label
+
+07:59.210 --> 08:03.230
+and now our form input looks how it should
+
+08:06.600 --> 08:08.940
+so why is the width full.
+
+08:08.970 --> 08:13.110
+And it's because it always just expands the full width of our component.
+
+08:13.470 --> 08:25.040
+So for our sign and component we can actually also add some styling here so that the width is always
+
+08:25.130 --> 08:27.250
+30 view width.
+
+08:27.620 --> 08:35.000
+So it's always 30 percent of the total view width and now we have a better looking component that looks
+
+08:35.000 --> 08:36.770
+way more similar to our final
+
+08:39.430 --> 08:39.740
+Yeah.
+
+08:39.870 --> 08:40.680
+Let's start the button.

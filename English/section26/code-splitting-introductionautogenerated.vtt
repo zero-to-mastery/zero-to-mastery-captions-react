@@ -1,0 +1,529 @@
+WEBVTT
+
+00:00.620 --> 00:09.270
+Welcome back everyone so in this section we are going to take a deep look into performance with reactor
+
+00:09.290 --> 00:18.270
+applications performance is actually a very very common thing that every developer faces at some point
+
+00:18.360 --> 00:20.590
+after building an application.
+
+00:20.610 --> 00:25.190
+We spent all this time building all these features rewritten all this complicated code.
+
+00:25.200 --> 00:30.720
+We've brought in all these great libraries we've architecture our application in a beautiful and readable
+
+00:30.720 --> 00:33.310
+way our application is beautiful.
+
+00:33.360 --> 00:33.990
+It's live.
+
+00:33.990 --> 00:35.430
+It's good to go.
+
+00:35.430 --> 00:38.830
+And then suddenly you try and navigate and you notice a wow.
+
+00:38.840 --> 00:41.950
+This is actually really slow well.
+
+00:41.980 --> 00:43.860
+Why is that.
+
+00:43.900 --> 00:50.730
+Well one big thing to remember is that there's a difference between production and development.
+
+00:50.830 --> 00:56.860
+We've been so far developing off of our local host which means that all of our files is being hosted
+
+00:56.950 --> 01:01.630
+off of our own computers port port three thousand to be specific.
+
+01:01.630 --> 01:07.810
+It's very efficient for us to download all of our bundles and all of our files and our javascript over
+
+01:07.810 --> 01:13.930
+this because we're just developing locally right speed as really quick Internet connection doesn't really
+
+01:13.930 --> 01:14.850
+matter.
+
+01:15.190 --> 01:20.540
+But Internet connection becomes a big issue especially if we're building applications that must be hosted
+
+01:20.560 --> 01:28.340
+live especially in countries and places that might not have the fastest internet if that's the case
+
+01:28.580 --> 01:31.280
+when we actually look at our code in production.
+
+01:31.280 --> 01:35.690
+This is now being hosted over some live internet connection that you own.
+
+01:36.200 --> 01:37.980
+If you find your applications slower.
+
+01:38.000 --> 01:44.840
+Well this is actually normal because this is the nature of how code performs in production versus in
+
+01:44.840 --> 01:45.850
+development.
+
+01:45.950 --> 01:48.750
+If you have really fast internet you might not notice a difference.
+
+01:48.770 --> 01:53.750
+If anything it might actually be a little faster but that's just a thing to keep in mind when it comes
+
+01:53.750 --> 02:00.760
+to performance and why we need to think about performance now before we actually dive into writing anything
+
+02:00.790 --> 02:01.540
+on performance.
+
+02:01.540 --> 02:10.690
+There is one very very key topic I want you to remember as developers going into these new careers or
+
+02:10.690 --> 02:16.960
+if you already have a development career this one thing regarding performance you must hold dear do
+
+02:16.960 --> 02:25.710
+not optimize your code ahead of time don't write performance code and don't fall for all of the performance
+
+02:25.740 --> 02:30.190
+tips and tricks that people write without a reason to do so.
+
+02:30.300 --> 02:34.950
+You only want to optimize your code once there is a problem.
+
+02:35.010 --> 02:39.060
+You don't want to get too eager and start optimizing your code right away.
+
+02:39.060 --> 02:43.670
+And there's actually two big pitfalls as to why this is the case.
+
+02:43.710 --> 02:48.810
+The first is that if you start writing code that you read online that tells you makes your code a little
+
+02:48.810 --> 02:54.900
+faster you might not have even measured if your code was slow to begin with.
+
+02:55.050 --> 03:01.350
+You can only optimize code if you know that the code will be faster and the only way that you can tell
+
+03:01.350 --> 03:05.170
+if your code is faster is if you measure it in the first place.
+
+03:05.190 --> 03:10.420
+So if you don't measure or know how to measure performance don't optimize the code just yet.
+
+03:11.010 --> 03:16.140
+It's only when your application starts slow down and you notice that there's problems then you want
+
+03:16.140 --> 03:21.000
+to figure out how to measure it before you start looking at potential solutions as to why it's slowing
+
+03:21.000 --> 03:21.270
+down.
+
+03:21.720 --> 03:23.250
+So that's the first thing.
+
+03:23.250 --> 03:31.590
+The second thing is definitely to not over optimize because when you optimize code you don't actually
+
+03:31.590 --> 03:36.710
+know for example if optimizing the code actually makes it slower.
+
+03:36.810 --> 03:39.420
+So you might be like Hope that makes no sense.
+
+03:39.420 --> 03:43.680
+I thought this optimized code was supposed to make my code naturally more performed.
+
+03:44.040 --> 03:49.350
+How can it be that if you optimize this code it actually ends up being slower.
+
+03:49.560 --> 03:55.740
+Well you have to remember when it comes to writing code that everything has a cost.
+
+03:55.740 --> 04:01.380
+When you write any of the code to optimize your code you're doing something new you're adding something
+
+04:01.380 --> 04:08.250
+to your code base that reacts or the job script engine has to run in order for that optimization to
+
+04:08.250 --> 04:15.200
+occur we'll definitely explore that more as we actually come across more use cases in both our real
+
+04:15.200 --> 04:19.940
+code and our code in general regarding optimizations where I can show you an example of that.
+
+04:20.240 --> 04:25.550
+But that's why we actually hark back to our original point which is that you always want to measure
+
+04:25.550 --> 04:26.310
+your code.
+
+04:26.390 --> 04:31.610
+You want to measure code to see if the code you wrote to optimize it actually added more time to your
+
+04:31.610 --> 04:35.010
+total render versus reducing the time.
+
+04:35.060 --> 04:42.450
+So that's two main points I want you to think about now going into the optimization of our performance.
+
+04:42.450 --> 04:45.520
+There is one first thing we're going to do.
+
+04:45.690 --> 04:52.170
+The first thing we're going to do is we are going to explore the concept of chunks.
+
+04:52.170 --> 04:58.170
+Now the great thing about free it racked up is it gives us code splitting and chunking right out the
+
+04:58.170 --> 04:58.740
+gate.
+
+04:58.740 --> 05:04.820
+Now what is code splitting and chunking what I want to do is I want to open up the inspect.
+
+05:04.850 --> 05:05.090
+Right.
+
+05:05.090 --> 05:11.550
+I won't open up our dev tool right now instead of it being docked I've actually separate it into its
+
+05:11.610 --> 05:16.890
+own window because there is a lot that we want to see and we want all this real estate to look at everything
+
+05:16.950 --> 05:18.410
+that we're going to look at.
+
+05:18.540 --> 05:25.370
+This is going to be the place that we're going to measure all of our current applications performance.
+
+05:25.400 --> 05:30.440
+The first thing I want you to look at is this network tab inside of this network tab.
+
+05:30.590 --> 05:36.500
+You'll see that there is a lot of things that is coming down this list.
+
+05:36.500 --> 05:39.850
+Now before you actually look at what these things are.
+
+05:40.160 --> 05:44.660
+There's a chance that you might not have anything loaded and it's because you open this after you loaded
+
+05:44.660 --> 05:51.050
+your application and make sure that you're loading your Heroku application so one thing to know as well
+
+05:51.050 --> 05:55.970
+is that when you open your Heroku application for the first time after a long time of not opening it
+
+05:56.180 --> 06:01.370
+or if it's the first time you've opened it ever you might experience five second or ten second delay
+
+06:01.620 --> 06:03.780
+while boots up that dynamo.
+
+06:03.800 --> 06:06.860
+That is the server that's hosting our application.
+
+06:06.860 --> 06:08.420
+This is just the nature of Heroku.
+
+06:08.530 --> 06:12.920
+It has nothing actually to do with our own performance optimization and you don't really have to worry
+
+06:12.920 --> 06:18.290
+about people that are looking at your application if you find that it's slow from Heroku because if
+
+06:18.290 --> 06:23.630
+they know anything about Heroku which most developers do is that the free tier essentially takes some
+
+06:23.630 --> 06:26.220
+time to boot up now.
+
+06:26.230 --> 06:33.010
+One thing I want you to do is I want you to do a hard refresh if you're on a Mac book How refreshing
+
+06:33.040 --> 06:39.160
+is holding command shift and then hitting ah if you're on a windows or on Linux machine you hold the
+
+06:39.160 --> 06:45.070
+control key and then you hit the refresh button and that will do a hard refresh which means that instead
+
+06:45.070 --> 06:50.620
+of relying on the cache for all the files that are browser has already downloaded what it's going to
+
+06:50.620 --> 06:55.360
+do instead is it is going to read download every single asset on this page.
+
+06:56.050 --> 06:58.400
+So we'll talk more about that right now.
+
+06:58.510 --> 07:00.160
+What are these assets.
+
+07:00.160 --> 07:04.840
+Well if you open up your dev tools and you go to network you'll see that when our application booted
+
+07:04.840 --> 07:08.860
+up for the first time that we download all of these different things.
+
+07:09.010 --> 07:13.210
+What these things are is these are the files that represent our application.
+
+07:13.690 --> 07:20.140
+So this chunked out CSX is the CSX code that our application needs.
+
+07:20.140 --> 07:27.220
+So one thing that remember with our CSX and JSC is that while we wrote our code in J.S. when we actually
+
+07:27.220 --> 07:33.000
+built our code and then served it on to our server which is our Heroku backend.
+
+07:33.430 --> 07:39.520
+And then whenever anybody actually needs to access our Web site there is actually getting CSX they're
+
+07:39.520 --> 07:41.120
+not getting javascript.
+
+07:41.200 --> 07:44.530
+So that's one thing to remember with CSX and James.
+
+07:44.530 --> 07:49.750
+That's why you see this CSX chunk still even though you might be wondering why is it that we wrote stock
+
+07:49.750 --> 07:50.260
+components.
+
+07:50.290 --> 07:58.360
+And yet I see the CSX one CSX ingests always compiles out to CSX in the final built this chunk dodge
+
+07:58.370 --> 08:04.650
+ass here that you see represents all of our actual libraries that we're running.
+
+08:04.660 --> 08:10.840
+So this is react react on create react if anything that we were using to bill our front end application
+
+08:11.230 --> 08:14.210
+is all held inside of this chunk.
+
+08:14.440 --> 08:21.060
+This main chunk is going to be the chunk that represents our application as a whole.
+
+08:21.070 --> 08:23.290
+So this is all the react code that we wrote.
+
+08:23.290 --> 08:24.640
+This is all of our components.
+
+08:24.640 --> 08:25.900
+This is all of our sagas.
+
+08:25.900 --> 08:31.700
+This is all of the javascript that we wrote and then here you'll see these are the P and GS which is
+
+08:31.700 --> 08:34.880
+the images that this page requires.
+
+08:34.880 --> 08:38.810
+Now if a user comes to this page more than once.
+
+08:38.810 --> 08:42.770
+So let's say instead of doing a hard refresh they just do a regular refresh.
+
+08:43.700 --> 08:49.730
+Well now if we go back we'll see that it's actually relying on memory cache for a lot of these images
+
+08:49.790 --> 08:53.270
+as well as the fonts so these fonts were originally from Google.
+
+08:53.300 --> 08:57.460
+As you remember well now these fonts are also cached on the browser.
+
+08:57.500 --> 09:01.740
+So this speeds up the performance really quickly for repeat visits.
+
+09:01.790 --> 09:05.900
+You'll see that here the CSX is also in the disk cache.
+
+09:05.900 --> 09:11.540
+So that's the great thing about the CSX too is that it will also leverage this and you'll also notice
+
+09:11.570 --> 09:14.750
+that the J.S. files are smaller now.
+
+09:14.750 --> 09:21.320
+So instead if we were to do a hard refresh and then go back you'll see that earlier when we had these
+
+09:21.320 --> 09:24.180
+jazz files as 300 something bytes.
+
+09:24.200 --> 09:28.550
+Now they're in 7 96 kilobytes which is significantly larger.
+
+09:28.610 --> 09:34.730
+So this just goes to show you that anytime and user comes back to application it will always be faster
+
+09:34.810 --> 09:39.920
+than when they land for the first time and they have to download everything fresh before they cache
+
+09:39.920 --> 09:42.950
+it for repeat visits.
+
+09:42.950 --> 09:50.270
+Now looking at these chunks these chunks is the way that we have separated our code into these bundles
+
+09:50.360 --> 09:51.160
+of code.
+
+09:51.170 --> 09:56.000
+One thing to remember with this main chunk though is that right now we've actually downloaded all of
+
+09:56.000 --> 10:03.030
+the javascript code for our entire application this includes the shot page code the collections page
+
+10:03.030 --> 10:06.170
+code the checkout page code the sign and page code.
+
+10:06.420 --> 10:13.030
+All of that code is actually loaded on the browser right now but why is it that we need to actually
+
+10:13.030 --> 10:13.840
+download those.
+
+10:13.840 --> 10:20.440
+If the user has not even navigated to those pages they actually don't need to download that code.
+
+10:20.470 --> 10:24.880
+Would it not be great if what we could do is split that code up.
+
+10:24.940 --> 10:27.800
+Well let me show you this image imagine.
+
+10:27.800 --> 10:30.160
+This image is our application.
+
+10:30.380 --> 10:32.510
+So this is all of our component trees right.
+
+10:32.510 --> 10:33.650
+This is our app.
+
+10:33.650 --> 10:35.960
+This is maybe our sign and page.
+
+10:35.960 --> 10:38.720
+This is our collections page.
+
+10:38.720 --> 10:43.850
+And then imagine there were other nodes along the way that represent the other pages.
+
+10:43.940 --> 10:48.530
+Whatever when the user lands on our application.
+
+10:48.530 --> 10:50.600
+So they go to our home page for the first time.
+
+10:50.720 --> 10:53.480
+They only need the code up here.
+
+10:53.510 --> 10:58.990
+They don't actually need any of the code down here yet because they haven't gone to the page the javascript
+
+10:58.990 --> 11:06.980
+is never run what we want to do is we want to only give them the bare minimum requirements of the code
+
+11:07.010 --> 11:12.420
+that they need so that they don't have to download so much code right away.
+
+11:12.470 --> 11:17.840
+This might not be important if you have a really fast computer or if you have a really fast Internet
+
+11:17.840 --> 11:24.890
+connection but for those people running on slower devices such as mobile phones or if they're running
+
+11:24.890 --> 11:26.830
+on a really slow internet connection.
+
+11:26.960 --> 11:32.030
+Little bytes here and there is going to make it significantly slower and a worse experience.
+
+11:32.510 --> 11:40.170
+So what we want to do is we want to chunk up and bundle our code which is what's called Code splitting.
+
+11:40.310 --> 11:45.950
+What code splitting means is literally as we explained it when a user goes to the home page they're
+
+11:45.950 --> 11:48.850
+only going to get all the code related to loading the home page.
+
+11:48.860 --> 11:54.700
+This includes the library is the CSA whatever they need if they go to any subsequent other page let's
+
+11:54.700 --> 11:59.560
+say they now to the collection page then they're going to download the code here for the collection
+
+11:59.560 --> 12:04.260
+page and let's say maybe the collection page also naturally loads the collection overview.
+
+12:04.270 --> 12:10.330
+Well we also want to give them this code that we don't want to give them the code for the actual individual
+
+12:10.390 --> 12:14.520
+collections yet because they have not navigated to that page.
+
+12:14.520 --> 12:17.520
+There's no reason to give them the javascript code here yet.
+
+12:17.860 --> 12:23.720
+We only give it to them when they navigate to this page so that's one thing to remember at this point.
+
+12:23.730 --> 12:28.210
+If they never navigate to the side and page we're never gonna give them the silent bundle.
+
+12:28.260 --> 12:33.750
+So this is a great way to optimize our performance and the great thing is that this actually comes really
+
+12:33.750 --> 12:37.330
+quickly out the box set up for us with create react.
+
+12:37.710 --> 12:44.580
+We just have to modify our ReACT code a little bit in order to actually chunk up our application and
+
+12:44.580 --> 12:46.470
+I'm gonna show you how we're gonna do that.
+
+12:46.740 --> 12:53.730
+And the easiest way for us to test our optimization is to just make sure that when we look at this network
+
+12:53.730 --> 12:59.130
+tab we see what it is that we're getting in terms of these chunks.
+
+12:59.130 --> 13:03.210
+So right now we see that we only got our main chunk right which represents our application.
+
+13:03.420 --> 13:06.440
+And then this chunk J.S. here that represents all our libraries.
+
+13:06.780 --> 13:12.470
+So let's see if we can break these up because right now if you navigate to the shop page you'll actually
+
+13:12.470 --> 13:19.130
+see that all we're downloading is just the images but the chunks have not changed.
+
+13:19.130 --> 13:22.760
+We haven't dealt to any new chunks since then which is up to this point.
+
+13:23.540 --> 13:28.910
+So if that's the case what we want to do is to chunk up our application so I'll do that in the next
+
+13:28.910 --> 13:29.230
+lesson.

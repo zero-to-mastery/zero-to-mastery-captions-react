@@ -1,0 +1,394 @@
+WEBVTT
+
+00:00.970 --> 00:10.650
+Now we only want to use our use affect in our components that have lifecycle methods at least as far
+
+00:10.650 --> 00:12.090
+as our application is concerned.
+
+00:13.050 --> 00:19.350
+So the first one we know that we have is our component didn't mount in our app component and this is
+
+00:19.350 --> 00:25.500
+pretty good because we're actually only leveraging the one component did mount method inside of this
+
+00:25.500 --> 00:26.350
+classmate.
+
+00:26.440 --> 00:32.170
+It seems a little unnecessary to use a class component for just a simple component at mount.
+
+00:32.190 --> 00:38.060
+So what we can do is replace it with our use effective method.
+
+00:38.120 --> 00:42.680
+So first we convert our class right over to a functional component
+
+00:46.880 --> 00:50.500
+we just got to make sure as well that we d structure off all the right props
+
+00:55.460 --> 00:59.040
+and now we don't need this component did mount method anymore.
+
+00:59.240 --> 01:01.190
+We can use our use fact
+
+01:04.470 --> 01:06.450
+now before we actually write the effect.
+
+01:06.450 --> 01:11.950
+Let's just update our render as well so that we're not calling it.
+
+01:12.100 --> 01:14.740
+We also see that we pass in current user.
+
+01:14.740 --> 01:16.630
+So let's just definitely update that as well.
+
+01:18.910 --> 01:19.930
+2 D structure
+
+01:22.820 --> 01:32.360
+and as far as our effect goes we need to call check user session so here we can just invoke it but we
+
+01:32.360 --> 01:41.120
+only want it the first time when we actually pass it in so what we can do if we don't want it to fire
+
+01:41.120 --> 01:50.120
+whenever current user updates is we can pass in an empty array now the thing is that we'll see that
+
+01:50.120 --> 01:55.070
+we have this warning that says use effect has a missing dependency of check.
+
+01:55.070 --> 01:56.230
+User session.
+
+01:56.450 --> 02:02.580
+So we should either include it or remove it from this dependency array because of check user session
+
+02:02.600 --> 02:08.990
+changes too often our parent component that defines it will possibly re render this whole component
+
+02:10.270 --> 02:16.600
+so the idea is that if there was a parent to this component whenever Czech user session changes right
+
+02:16.630 --> 02:23.230
+when it gets rendered it's possible that we would essentially end up re rendering this component and
+
+02:23.230 --> 02:28.550
+firing off our effect more than we needed to here's the thing.
+
+02:28.550 --> 02:30.540
+Let's say we don't do this.
+
+02:30.710 --> 02:38.410
+Let's say we don't pass the array what will happen is that when our component mounts we see that we're
+
+02:38.410 --> 02:41.110
+still calling our check user session.
+
+02:41.110 --> 02:46.090
+We can't assign and success because of course our check user session will say that we're still logged
+
+02:46.090 --> 02:51.180
+in and then will resign in getting our persistence effect that we just set up in our saga.
+
+02:51.190 --> 02:58.120
+If you remember from a couple lessons ago but you'll see that we fire our check user session again and
+
+02:58.120 --> 03:01.900
+this of course is because our component re rendered because current user got updated.
+
+03:01.900 --> 03:08.750
+Right when we signed it so what we can do in order to alleviate this just because of the nature of how
+
+03:08.750 --> 03:16.250
+this component is being rendered is we can pass this check user session in into our dependency array
+
+03:16.780 --> 03:18.210
+which is perfectly fine.
+
+03:18.230 --> 03:24.740
+The reason we do this is because check use our session is a property function that is being passed in
+
+03:24.740 --> 03:28.000
+from our map dispatch the props.
+
+03:28.010 --> 03:36.720
+Now if this was say a property that we were passing in from a parent component we would actually do
+
+03:36.720 --> 03:40.110
+something different but we're going to tackle that in another lesson.
+
+03:40.110 --> 03:46.530
+Right now it's not relevant to this app because there's no component higher than our app component and
+
+03:46.530 --> 03:50.640
+check user session is being passed in from that dispatch to props.
+
+03:50.670 --> 03:55.890
+So of course we can do that and talk about that in another lesson because it is an important thing to
+
+03:56.220 --> 03:58.510
+talk about but right now this is equivalent.
+
+03:58.560 --> 03:58.770
+Right.
+
+03:58.770 --> 04:04.800
+This is this is working because we know check user session is not going to change this function technically
+
+04:05.070 --> 04:09.260
+doesn't need to update we can simply just pass it in.
+
+04:09.300 --> 04:14.600
+And now this behaves like a component did mount and we'll see that after signing success.
+
+04:14.610 --> 04:24.790
+We do not fire are check user another time so we also see that we have our header component no longer
+
+04:24.820 --> 04:28.000
+uses off so we can update that as well.
+
+04:28.120 --> 04:36.070
+So let's get rid of this off dependency and let's update any other components where we're using components
+
+04:36.070 --> 04:38.670
+at map with our new use effect method.
+
+04:38.680 --> 04:43.880
+So here we can see our shop page is very similar to what we have with our app component so here.
+
+04:43.890 --> 04:47.190
+Let's import in our use effect method
+
+04:51.700 --> 04:53.180
+and let's update this
+
+04:56.770 --> 04:58.490
+into a functional component.
+
+05:00.460 --> 05:04.090
+Let's make sure that we delete or render
+
+05:06.740 --> 05:15.770
+and here we see that we get our matched right which we do structure props as well as fetch collections
+
+05:15.790 --> 05:19.080
+start.
+
+05:19.180 --> 05:23.700
+So now we just simply call our use effect
+
+05:26.470 --> 05:30.350
+and we just call fetch collection start.
+
+05:30.370 --> 05:38.740
+This is actually a good time for us to talk about how use effect will get triggered right as well as
+
+05:38.740 --> 05:45.610
+re render cycles because that's one of the big caveats with the use effect is how it fires and when
+
+05:45.610 --> 05:53.840
+we want it to fire right because it might cause us some side effects that we don't want when we talk
+
+05:53.840 --> 05:56.920
+about rendering cycles in our components.
+
+05:57.140 --> 06:05.540
+We know that our shop page will only read render if either our props change or if we called that state
+
+06:05.570 --> 06:06.290
+inside.
+
+06:06.290 --> 06:17.200
+If we use the use state hook or if the parent of this component which is our adult J J.S. ends up calling
+
+06:17.290 --> 06:25.340
+its own re render and the only time we know that will happen is if current user updates.
+
+06:25.480 --> 06:33.550
+Now if we do not listen for that kind of change we will actually end up calling use affect twice.
+
+06:34.090 --> 06:41.730
+So let me show you what happens if we do not pass in our array if we're on our short page.
+
+06:41.950 --> 06:47.740
+We know that what happens is that when our component mounts for the first time it fires off the first
+
+06:48.130 --> 06:49.460
+fetch collection started.
+
+06:50.200 --> 06:55.660
+But let's say after our component mounts our app also fires check user session.
+
+06:55.790 --> 06:56.040
+Right.
+
+06:56.050 --> 06:59.710
+Which checks if there is an existing session for our user.
+
+06:59.710 --> 07:05.650
+If there is it signs in the cur a new user current user gets passed in and then we re render our app
+
+07:05.650 --> 07:12.430
+component this render will in turn trigger our shot Page component to also re render which will also
+
+07:12.430 --> 07:17.210
+now in turn trigger a use effect again causing us to call fetch collection start twice.
+
+07:17.350 --> 07:23.390
+So if we refresh we'll see we called fetch collections start and you see how we flicker it again after
+
+07:23.390 --> 07:24.780
+check user session.
+
+07:24.800 --> 07:31.250
+Well this is because we ended up calling sign and success which ends up calling fetch collections start
+
+07:31.310 --> 07:38.370
+again so that's what happens because our components mount right our shop page mounts for the first time
+
+07:38.520 --> 07:40.680
+as well as our app component.
+
+07:40.680 --> 07:51.470
+This triggers our use effect to call for fetch collections start the first time right here or check
+
+07:51.740 --> 07:59.390
+current user session gets fired which in turn will then trigger a check against our fire based store
+
+07:59.390 --> 08:05.630
+to see if there is a session at this point our fetch collections success which is our initial fetch
+
+08:05.630 --> 08:13.300
+collections start call comes back succeeds renders our page well then after our check user session comes
+
+08:13.300 --> 08:19.330
+back with a success saying there is a session which then triggers our sign and success saga.
+
+08:19.330 --> 08:26.590
+This will in turn re render our app component because current user has now different which reach triggers
+
+08:26.590 --> 08:33.550
+that render here re triggering a rendering of our shot page which in turn will re trigger our use effect
+
+08:34.300 --> 08:38.350
+because use effect will fire whenever we render is called
+
+08:41.700 --> 08:47.460
+as a result we'll see fetch collection start get fired again and then we see that double flicker effect
+
+08:47.490 --> 08:51.870
+right flickers once and then it flickers twice so we don't want this to happen.
+
+08:52.650 --> 09:00.120
+So what we can do is of course we can pass this empty array and here we can say only if such collections
+
+09:00.120 --> 09:02.070
+start change.
+
+09:02.190 --> 09:04.770
+So now we see we don't get that effect.
+
+09:04.980 --> 09:05.710
+Why is that.
+
+09:05.820 --> 09:10.160
+Well the reason for this is because normally we would just pass in an empty array.
+
+09:10.170 --> 09:14.380
+It does the same thing but we will get this warning.
+
+09:14.570 --> 09:21.920
+And the reason is because our function being passed in is a prop but we do know that this prompt will
+
+09:21.920 --> 09:25.980
+not change because we're getting it from our map dispatch the props.
+
+09:26.150 --> 09:32.180
+So if we know that this is not going to re render while then I mean we simply do it to avoid that warning
+
+09:32.180 --> 09:37.850
+message otherwise right we're just not going to far use affect more than one time.
+
+09:37.900 --> 09:46.750
+This is just the caveat with the fact that we're passing in methods from a dispatch from redux into
+
+09:46.750 --> 09:52.870
+our component and we're calling in our use effect right the use effect is not aware that this is not
+
+09:52.870 --> 09:55.510
+coming from our connect function.
+
+09:55.750 --> 09:59.670
+It simply thinks that it's we're getting a prop that we're calling inside of use effect.
+
+09:59.800 --> 10:05.020
+So we just gotta be aware that in case that function changes right use effect just wants us to know
+
+10:05.020 --> 10:11.240
+that this is a dependency it doesn't want us to have an old stale version of the prop and I know it
+
+10:11.240 --> 10:17.160
+sounds rather complicated but this will make more sense the more you actually encounter use effect.
+
+10:17.410 --> 10:17.650
+Right.
+
+10:17.660 --> 10:20.860
+It's just one of those caveats of use effect.
+
+10:21.690 --> 10:22.950
+But for our case right.
+
+10:22.950 --> 10:27.930
+We simply want to use it like a component did mount so we have no problem passing the collection start
+
+10:28.590 --> 10:37.650
+and now again we won't end up with that double render because we are no longer listening for use effect
+
+10:37.650 --> 10:39.900
+to trigger even if our render happens.
+
+10:39.960 --> 10:44.760
+So this doesn't stop our rerun or cycle on our shot Page from happening when current user updates app
+
+10:44.760 --> 10:45.350
+again.
+
+10:46.320 --> 10:48.900
+We're just simply saying we just don't want to fire use effect again.
+
+10:48.900 --> 10:55.530
+That's the only thing what we're doing with this second parameter so hopefully that made sense.
+
+10:55.530 --> 11:02.790
+I know it's complicated and I know use effect is a little bit weird like that but this is the main thing
+
+11:02.880 --> 11:08.810
+about use effect integrating it into an existing redux application that is using dispatch.
+
+11:08.970 --> 11:14.250
+We simply just have to make sure that we wrap our fetch collection start right inside of this array
+
+11:14.250 --> 11:20.610
+as the second parameter if we plan to call it inside of our use effect as a component amount.
+
+11:20.670 --> 11:26.940
+All in all a pretty easy change to switch over our application to using the use state and use effect
+
+11:26.940 --> 11:27.840
+hooks.
+
+11:27.840 --> 11:36.200
+Now there is one more way that we can use the use effect took to mimic our component will unmatched
+
+11:36.240 --> 11:43.230
+lifecycle method but we don't really need to do it inside of any of our components but in the next lesson
+
+11:43.350 --> 11:49.710
+I will show you how we can do it if we needed to leverage that lifecycle method as well so I'll see
+
+11:49.710 --> 11:50.880
+you in the next lesson.

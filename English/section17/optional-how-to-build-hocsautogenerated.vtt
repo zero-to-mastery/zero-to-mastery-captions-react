@@ -1,0 +1,508 @@
+WEBVTT
+
+00:00.450 --> 00:07.860
+Now before we continue let's get a really good understanding of the higher order component pattern and
+
+00:07.860 --> 00:09.980
+how they work.
+
+00:10.110 --> 00:17.970
+So the higher order component pattern is a very common pattern you see not only in react projects everywhere
+
+00:18.300 --> 00:21.850
+but in the react ecosystem as a whole.
+
+00:21.990 --> 00:29.820
+Lots of libraries essentially give you higher order components that allow you to provide your components
+
+00:30.270 --> 00:33.290
+the functionality that that library brings.
+
+00:33.300 --> 00:42.090
+So we saw that earlier with our with router hired a component and we'll see it a lot whenever we use
+
+00:42.090 --> 00:46.570
+redux because redux provides us with a connect hired component.
+
+00:46.680 --> 00:52.210
+By here we're going to explore what they do under the hood by writing our own.
+
+00:52.410 --> 00:54.270
+And it's very easy.
+
+00:54.270 --> 01:01.800
+So in order to understand it I've got this quick project here that you can download so that you can
+
+01:01.800 --> 01:11.460
+follow along and all it has right now is just a simple user profile component that gets a name and an
+
+01:11.490 --> 01:18.510
+email and then renders out an H1 and an H two of that name and email.
+
+01:18.540 --> 01:26.670
+Now as we know components are essentially just functions and classes that receive some props right like
+
+01:27.060 --> 01:34.020
+this name and this email property and then it returns us some markup in a similar manner a Haq or a
+
+01:34.020 --> 01:41.850
+component is just a function that gets a component and returns us a new enhanced component.
+
+01:41.970 --> 01:43.600
+So how do I mean by that.
+
+01:43.620 --> 01:49.320
+Well in order to understand this we kind of have to see why we need higher order components in the first
+
+01:49.320 --> 01:50.160
+place.
+
+01:50.370 --> 01:57.870
+And the best way to do that is if we weren't given a task to let's say expand our user profile component
+
+01:58.260 --> 02:02.600
+to also display some posts that belong to our user.
+
+02:02.680 --> 02:03.640
+So how do we do that.
+
+02:04.180 --> 02:07.230
+Well let's say we had to fetch some posts from back end.
+
+02:07.230 --> 02:07.500
+Right.
+
+02:07.500 --> 02:10.010
+Just like we did with our monsters rolodex.
+
+02:10.090 --> 02:17.020
+We're gonna use this Jason Place holder site and we're going to pull down the posts.
+
+02:17.020 --> 02:26.560
+So we are going to in our constructor for our component add a state.
+
+02:26.560 --> 02:27.160
+Right.
+
+02:27.310 --> 02:32.230
+Because we need to be able to display our posts.
+
+02:32.240 --> 02:39.830
+So this does state will be equal to an object with the posts that has an empty array and then in our
+
+02:39.830 --> 02:43.700
+component did mount lifecycle method.
+
+02:43.700 --> 02:49.530
+We are going to fetch this data from this.
+
+02:49.540 --> 03:02.950
+You are El and then we are going to make sure that our response is in Jason and now we're just going
+
+03:02.950 --> 03:16.540
+to store our data as our posts so let's do this dot set state where are posts is equal to data and now
+
+03:16.540 --> 03:26.100
+in order to log it we're just going to add this quickly into our component by mapping over this dot
+
+03:26.100 --> 03:41.650
+state DOT posts and we are going to map over that and render out simple div with a class name of post.
+
+03:41.860 --> 03:46.720
+So I have provided some very basic styles for us so that we can at least understand just what's going
+
+03:46.720 --> 03:47.240
+on.
+
+03:48.260 --> 04:02.110
+And inside is an H1 with our post dot title and a p tag that has our post body post up body and let's
+
+04:02.110 --> 04:12.450
+not forget our key is going to be post I.D. And now if we look in our application we'll see that we
+
+04:12.450 --> 04:18.020
+are rendering out these quick posts right now there's a lot of them.
+
+04:18.030 --> 04:23.270
+So let's say we had to we only want to display three because this is way too much information.
+
+04:23.370 --> 04:31.040
+We would just do a data dot splice or sorry dot slice from 0 to 3.
+
+04:31.230 --> 04:32.450
+So we would slice out.
+
+04:32.520 --> 04:34.390
+So these three awesome.
+
+04:35.090 --> 04:35.860
+OK.
+
+04:36.070 --> 04:43.480
+Now we have this component that fetches some data and then reduces the quantity of data that is being
+
+04:43.480 --> 04:44.000
+displayed.
+
+04:44.050 --> 04:45.100
+Right.
+
+04:45.220 --> 04:53.110
+But what happens let's say if we wanted to do another component that does almost the same thing except
+
+04:53.110 --> 04:55.590
+it displays a list of our users.
+
+04:55.660 --> 05:06.280
+So we'll make a user list component profile and we'll do user list component J sex import react from
+
+05:06.700 --> 05:21.250
+react and we'll do class User List extends react component and we'll do a very similar thing where we
+
+05:21.250 --> 05:35.500
+will render out a very similar component that has a div and inside this div has a class name of container
+
+05:35.560 --> 05:40.210
+which has some of the base styles but also this usually is class which just changes the background color
+
+05:40.810 --> 05:52.650
+and lets say we just had an H one that said users list and let's export this as the default user list.
+
+05:52.690 --> 06:02.070
+So now if we were to pull this into our app US opponents user list using its component and if we were
+
+06:02.070 --> 06:13.990
+to just render this above our user profile list we would see our user list component now while we want
+
+06:13.990 --> 06:19.560
+to do is we just want to display users in a similar format.
+
+06:19.570 --> 06:20.370
+Right.
+
+06:20.560 --> 06:28.390
+And in our user list we would do exactly the same thing that we had here except perhaps instead of posts
+
+06:29.320 --> 06:37.470
+it would be users and then instead of posts let's just say we're fetching from this users end point
+
+06:38.180 --> 06:47.010
+and then we just do this we set the users and now we map over this dot stage.
+
+06:47.010 --> 07:02.240
+Users and we want to return a similar thing where it's just got the H1 he is equal to user I.D. and
+
+07:02.240 --> 07:09.890
+we render user dot name and a H2 that says user dot email.
+
+07:10.020 --> 07:15.510
+Also make this post just that we get that styling right.
+
+07:15.520 --> 07:19.820
+OK so if we look at our components they're actually very similar.
+
+07:19.830 --> 07:20.350
+Right.
+
+07:20.370 --> 07:28.650
+They fetch from some data source you URL and then they just set the state so if we were to do this for
+
+07:29.220 --> 07:35.970
+let's say five different components we would be writing the same code essentially five different times
+
+07:36.510 --> 07:39.540
+like we already see that we had to write this code twice.
+
+07:39.600 --> 07:47.430
+So what a hybrid a component can do for us is we can actually wrap this functionality inside of a function
+
+07:48.060 --> 07:56.790
+and then when we pass the component it will return us a version of our component but modify to have
+
+07:56.790 --> 07:58.880
+this code in it.
+
+07:58.920 --> 08:11.730
+So how we would do that is we would make a new file called let's say with data dot J and all this does
+
+08:12.030 --> 08:19.980
+is it returns a function so let's do let's just act from react
+
+08:23.100 --> 08:31.120
+and we would declare a constant called with data which is you go to a function that takes a component
+
+08:32.700 --> 08:46.320
+and then it returns class called with data which extends react component and inside of our component
+
+08:46.560 --> 08:57.700
+we want to have this information we wanted to do this stuff that it was doing before and then inside
+
+08:57.760 --> 09:03.940
+of our component we want this you are all to change depending on what we pass to it.
+
+09:03.940 --> 09:04.240
+Right.
+
+09:05.020 --> 09:12.610
+So what we can do is we can have that as the second argument as a data source and then we would just
+
+09:12.880 --> 09:19.860
+change this over to data source and instead of posts because we don't know what it is we'll just put
+
+09:19.860 --> 09:31.420
+it as data and now in our render statement we are going to return it's gonna be called wrapped component
+
+09:31.450 --> 09:32.050
+actually.
+
+09:32.130 --> 09:32.480
+Right.
+
+09:32.500 --> 09:40.460
+Because the wrapped component is the component that is being wrapped in our with data component so we
+
+09:40.460 --> 09:48.230
+are going to return the wrapped component where data is gonna be a property that we're passing in from
+
+09:48.230 --> 09:49.040
+our state.
+
+09:49.070 --> 09:51.620
+Right this dot state DOT data.
+
+09:51.620 --> 09:59.650
+And then we're gonna give it any other props that might have been on our actual application.
+
+09:59.660 --> 10:03.680
+This thing is what are with data returns.
+
+10:03.680 --> 10:10.590
+It's gonna return with data and then we're going to export default with data.
+
+10:10.640 --> 10:12.470
+Now when we look at this.
+
+10:12.470 --> 10:18.740
+Right are with data as a function that takes any component and then some data source you URL and then
+
+10:18.740 --> 10:28.130
+it returns us a new component that has this on it that then gives us our data from that data source
+
+10:28.580 --> 10:34.460
+after it's been sliced right and fetched into our component as a data property.
+
+10:34.460 --> 10:43.970
+So now if we look at our user profile we don't even need that code anymore and how we would use this
+
+10:44.750 --> 10:47.550
+is instead of this dot data posts.
+
+10:47.600 --> 10:54.400
+We would do this dot data because we know we're gonna get our posts in from our data and now in fact
+
+10:54.430 --> 11:04.330
+I'm not even going to use a class component because now we can just use a functional component and it's
+
+11:04.330 --> 11:08.880
+going to get the properties of data name and email
+
+11:14.210 --> 11:26.760
+and let's just get rid of this so that we now know that what we're getting in is the data from our wrapped
+
+11:26.760 --> 11:27.140
+component.
+
+11:27.150 --> 11:40.950
+So how we would use it is we would import with data from our with data file and then we would wrap our
+
+11:40.950 --> 11:49.940
+user profile in that and we would still export our user profile component out of our file the same way
+
+11:49.980 --> 11:57.740
+except now it's gonna be what gets returned by passing our user profile into with data.
+
+11:58.070 --> 12:00.220
+And then I gotta remember to pass that you url.
+
+12:00.230 --> 12:04.880
+So let's just get that you are all again and this is our posts
+
+12:07.580 --> 12:13.700
+and now we'll see that our code is still working here.
+
+12:13.750 --> 12:23.320
+Right now if we were to do the exact same thing with our user list we would just import with data from
+
+12:25.210 --> 12:30.130
+with data and then we don't need this anymore either
+
+12:33.090 --> 12:39.960
+so we can also convert this over to a functional component
+
+12:45.540 --> 12:54.440
+and then we know that we are going to get this users as our data and now instead of users we're just
+
+12:54.440 --> 13:06.750
+going to map data and make sure to wrap our function with data and we just need to make sure to pass
+
+13:06.780 --> 13:17.970
+in the same you are L except with users instead of post and if we check we see that we got the same
+
+13:17.970 --> 13:24.240
+functionality except we are getting it without having to repeat our code.
+
+13:24.240 --> 13:30.040
+We are passing into our with data our component right.
+
+13:30.300 --> 13:39.200
+And then are with data is giving us back a enhanced component with some functionality.
+
+13:39.200 --> 13:43.430
+And then we're just passing along that data into our component.
+
+13:43.430 --> 13:45.950
+Now we can do this with all kinds of things.
+
+13:46.010 --> 13:55.190
+I'm only using this data style of fetching because that's an example of what kind of higher or component
+
+13:55.250 --> 14:03.240
+we can write but this kind of component structure is very versatile.
+
+14:03.240 --> 14:07.060
+We can write all kinds of higher order components that do different things for us.
+
+14:07.350 --> 14:16.980
+For example that with router higher or a component just passes in to our component access to those location
+
+14:16.980 --> 14:23.050
+match and history objects right that we saw whenever we use that with router hired or component.
+
+14:23.400 --> 14:27.540
+And just the similar are with data does exactly that.
+
+14:27.630 --> 14:32.760
+We can even go a step further and have it so that if there's no data.
+
+14:32.970 --> 14:33.210
+Right.
+
+14:33.210 --> 14:40.440
+Like other functionalities we can do is we can have it so that if this dot state DOT data dot length
+
+14:41.910 --> 14:59.450
+is less than 1 then I want to render the text loading otherwise I want to render an H1 that says loading.
+
+14:59.490 --> 15:07.720
+So now if we refresh we see that it says loading and how we can see it's a little quick let's just do
+
+15:07.810 --> 15:17.380
+this dot set time out for let's say one point five seconds and inside.
+
+15:17.380 --> 15:22.680
+What do the fetch here this does justice at time see.
+
+15:22.690 --> 15:30.730
+Both are loading and then when they're loaded right then it loads our component and we got that just
+
+15:30.730 --> 15:34.280
+by modifying our higher order component.
+
+15:34.360 --> 15:38.080
+So this is the main benefit of higher to components.
+
+15:38.080 --> 15:48.490
+It lets us pass in a component do something to it or modify and give it these enhanced features and
+
+15:48.490 --> 15:49.960
+then we can return it.
+
+15:49.960 --> 15:56.680
+And we're always passing are all our props right that we get with our with data into our wrapped component
+
+15:57.770 --> 16:01.770
+in case there are some props that we don't even use for our wrapped component.
+
+16:01.850 --> 16:07.460
+Another way you can see that this is being done is if instead of doing our data source in our function
+
+16:07.940 --> 16:10.190
+we want to pass it in as a prop.
+
+16:10.460 --> 16:18.080
+So what we could do is we could do this job prop stored data source if we wanted to pass it in as a
+
+16:18.080 --> 16:26.700
+prop instead so by doing that we actually are able to write our components like this.
+
+16:26.710 --> 16:34.390
+So our user profile and our user list component instead of passing into our with data here wherever
+
+16:34.390 --> 16:41.740
+we called it we would just pass that a prop so we would just do data source is equal to let's use this
+
+16:41.740 --> 16:42.690
+you are.
+
+16:42.940 --> 16:55.180
+So for user lists it'll be users and then for our user profile it'll be posts and if we look at our
+
+16:55.180 --> 17:04.680
+application it still works the exact same way except now are with data a higher order component is using
+
+17:04.740 --> 17:13.370
+this data source property in order to get the URL from where it fetches the data.
+
+17:13.500 --> 17:18.510
+The great thing about this pattern as well is that our wrap components still gets all of the props that
+
+17:18.510 --> 17:25.110
+it needs which is how our user profile component is still getting name and email because we are spreading
+
+17:25.230 --> 17:31.930
+all of the props that this with data component is receiving.
+
+17:31.950 --> 17:36.810
+So even though an app J.S. we are passing in a data source and an email name and email.
+
+17:36.900 --> 17:44.010
+And even though our component only uses the data source we pass all those other props that we don't
+
+17:44.010 --> 17:46.230
+want into our wrapped component.
+
+17:46.230 --> 17:51.690
+So this is a key step that we got to do in every single higher order component pattern that we write.
+
+17:52.290 --> 17:57.720
+But another thing we can do is that because we don't need to pass our data source property into our
+
+17:57.720 --> 18:06.090
+rap component we can actually strip it out and to do so we would just structure out our data source
+
+18:06.420 --> 18:17.190
+right and then spread everything else into and other props constant which we pull from this dot props
+
+18:19.060 --> 18:27.000
+and now instead of spreading in this dot props we spread in other props and now our apps still works
+
+18:27.450 --> 18:29.680
+except it's cleaner.
+
+18:29.730 --> 18:40.350
+So this pattern of higher order components is very key and it's simple now it's functionality like how
+
+18:40.350 --> 18:45.060
+we can use it to do what is definitely complex right.
+
+18:45.050 --> 18:53.520
+It takes practice looking at your code and thinking about what is worth pulling out into a higher order
+
+18:53.520 --> 19:02.750
+component but the concept is hopefully very simple as I'm hoping that I've shown it's just a function
+
+19:03.200 --> 19:13.860
+that takes a component and then returns a new component that has additional functionality on it that
+
+19:13.860 --> 19:17.880
+renders out our original component that we gave to it.

@@ -1,0 +1,214 @@
+WEBVTT
+
+00:00.480 --> 00:01.350
+Welcome back.
+
+00:02.150 --> 00:06.670
+In this lesson we are going to do a deeper dive into the use effects.
+
+00:07.430 --> 00:11.810
+Now we don't actually need to use some of the functionality that we're about to talk about but it's
+
+00:11.810 --> 00:19.570
+good for us to at the very least cover it so that we're aware now when we think about our use effective
+
+00:20.170 --> 00:26.890
+with use effect we actually can pass back a function from the function that we pass it.
+
+00:27.700 --> 00:29.250
+So what do I mean by this.
+
+00:29.260 --> 00:32.020
+Well let's say we were using our use effective.
+
+00:32.470 --> 00:41.300
+We did something and we are able to return a function from this function this function that we return
+
+00:41.390 --> 00:50.120
+is what's called a cleanup function and a cleanup function is what use effect calls when that component
+
+00:50.300 --> 00:51.350
+on mounts.
+
+00:51.350 --> 00:56.570
+So it's our way of replicating the lifecycle method component will on.
+
+00:56.570 --> 00:59.260
+Now why would we want something like this.
+
+00:59.330 --> 01:05.840
+Well before we implemented our sagas if you remember the way that we were using and subscribing to our
+
+01:05.840 --> 01:14.450
+fire store was we were using their subscription methods in order to provide listeners and get snapshots.
+
+01:14.480 --> 01:21.530
+So if you remember what we were doing we were pretty much bringing in the firestarter library into our
+
+01:21.530 --> 01:26.380
+component and pretend is the class component.
+
+01:26.380 --> 01:33.160
+What we had to do is we had to say unsubscribe from collections was equal to no right.
+
+01:33.190 --> 01:40.040
+Because we were setting some class method that we were storing the value of inside of our component.
+
+01:40.060 --> 01:47.170
+Did mount lifecycle method and we were saying this dot unsubscribe from collections was equal to fire
+
+01:47.170 --> 01:56.440
+store dog collection collections not on snapshot and then we would pass it the callback where we would
+
+01:56.440 --> 01:59.370
+get the snapshot and we would do something with it.
+
+01:59.530 --> 02:06.590
+After that we had to actually unsubscribe right inside of component will on Mount
+
+02:09.360 --> 02:14.300
+and this was our way of cleaning up from our listener right.
+
+02:14.300 --> 02:19.420
+This was the pattern we had to do using this observer pattern of listening to on snapshot.
+
+02:20.700 --> 02:27.720
+Well if we wanted to replicate this inside of a classless component using use effect that's the whole
+
+02:27.720 --> 02:30.000
+point of this return function.
+
+02:30.000 --> 02:32.120
+So I'll show you how we'll do it.
+
+02:32.130 --> 02:39.870
+So what we would do is let's say right here in our use effect we say I am subscribing just so that we
+
+02:39.870 --> 02:48.670
+can log it and see what happens we call fire story collection using our collections and then we say
+
+02:48.730 --> 02:59.130
+on snapshot we take the snapshot and we simply console log it that's all we do.
+
+03:00.420 --> 03:03.750
+In fact you really need the async because we're just console logging in this function.
+
+03:05.720 --> 03:09.940
+Now what we do is we set some cost unsubscribe
+
+03:12.420 --> 03:21.140
+can't spell today on sub scribe from collections is equal to this object.
+
+03:21.200 --> 03:26.600
+Because we still need to store the unsubscribe function we get back from on snapshot what we would do
+
+03:26.600 --> 03:30.020
+however is inside of our cleanup function.
+
+03:30.020 --> 03:33.450
+We could call the unsubscribe right here.
+
+03:33.620 --> 03:37.940
+In fact we'll also console log I am unsubscribed
+
+03:42.670 --> 03:50.440
+and now we only want to initialize this subscription on our mounting right after we've mounted so we
+
+03:50.440 --> 03:55.630
+of course pass the empty array to indicate that we only want to use this effect when it mounts but we
+
+03:55.630 --> 04:00.050
+also want to call this return function when our component mounts.
+
+04:00.070 --> 04:05.380
+So this will call regardless of whether or not we pass this function in if we pass it a clean up function
+
+04:05.890 --> 04:10.190
+use effect we'll call the cleanup function when the component amounts.
+
+04:10.210 --> 04:18.780
+So now if we go to a collection page right here we'll see we get our I am subscribing we subscribe to
+
+04:18.780 --> 04:21.270
+our collection and we get a snapshot.
+
+04:21.270 --> 04:27.750
+And if that collection ever changes while we're still listening to it and let's a new object comes in
+
+04:27.760 --> 04:33.720
+right or an object changes right we'll get a new snapshot and then we'll do our console log we'll fire
+
+04:33.720 --> 04:34.170
+again.
+
+04:34.890 --> 04:37.060
+So this is the subscription model.
+
+04:37.410 --> 04:43.380
+But let's say we on Mount this collection page component by going to the home page while we see that
+
+04:43.380 --> 04:44.760
+our cleanup function got fired.
+
+04:44.760 --> 04:51.970
+So I am unsubscribe and gets fired and are unsubscribe will also get called so that's the whole purpose
+
+04:51.970 --> 04:53.110
+of a cleanup function.
+
+04:53.290 --> 04:56.930
+The cleanup function is meant to mimic any component well on Mounts right.
+
+04:56.950 --> 05:04.300
+Which allows you to clean up your effect so that's pretty much the main thing about what you want to
+
+05:04.300 --> 05:06.270
+return from use effect.
+
+05:06.310 --> 05:12.400
+This is also why when we use that async function we passed it in the use effect gave us that warning
+
+05:12.400 --> 05:19.420
+that said we were not allowed to pass it anything other than a function that will represent a cleanup
+
+05:19.420 --> 05:20.470
+function.
+
+05:20.500 --> 05:25.870
+So that's pretty much why it's because the only thing that use effect expects a function to return to
+
+05:25.930 --> 05:32.830
+use effect is a function that it will call when the component mounts in the future whenever you need
+
+05:32.830 --> 05:38.920
+to possibly leverage the use effect hook inside of a component and you need to use component will on
+
+05:38.920 --> 05:46.940
+Mount one now you know how to do it using this cleanup function now we can remove this use effect from
+
+05:47.000 --> 05:49.640
+our component because we don't actually need it.
+
+05:49.640 --> 05:57.700
+Given how our application was built we added that code solely to explain the cleanup function but now
+
+05:58.270 --> 06:03.490
+our component is still leveraging hooks in those previous two lessons that we did where we converted
+
+06:03.760 --> 06:10.000
+using use effect and you state to replace our components and make them functional components.
+
+06:10.000 --> 06:13.560
+So now let's just make sure to commit Arco.
+
+06:14.080 --> 06:17.420
+So we'll see what we did.
+
+06:17.580 --> 06:30.090
+We know that we updated our application RF component sign in component and sign up component to use
+
+06:31.190 --> 06:33.900
+hooks we'll push that up
+
+06:37.150 --> 06:38.200
+and move on with our lessons.

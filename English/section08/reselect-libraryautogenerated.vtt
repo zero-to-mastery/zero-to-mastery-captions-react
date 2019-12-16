@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.530 --> 00:05.040
+The first thing we have to do is bring in the result like the library.
+
+00:05.150 --> 00:15.660
+So inside of our terminal let's add re select to our node modules now in order for us to use re select
+
+00:15.750 --> 00:18.990
+and write these selector code.
+
+00:19.080 --> 00:25.920
+We have to switch up our folder structure a little bit because we are going to move the code that we
+
+00:25.920 --> 00:33.330
+normally write inside of our map state to props into their own folder inside of the respective redux
+
+00:33.990 --> 00:35.130
+folder.
+
+00:35.130 --> 00:36.980
+That this will be related to.
+
+00:37.110 --> 00:44.280
+So for example this car item count might be a reusable selector in the sense that we might want an item
+
+00:44.280 --> 00:48.770
+count in multiple places of our application and error for us to do that.
+
+00:48.840 --> 00:57.010
+We would add it into a new file called cart dot selectors dot J.S..
+
+00:57.240 --> 01:04.380
+Now what we want to import from re select is this function called Create selector
+
+01:07.040 --> 01:15.230
+but before we use it there's actually a couple things that we need to think about so there's actually
+
+01:15.230 --> 01:22.670
+two types of selectors we can write the first type is called an input selector that doesn't use create
+
+01:22.670 --> 01:29.810
+selector and then the second type is called an output selector that does use input selectors and creates
+
+01:29.810 --> 01:32.390
+selector to build themselves.
+
+01:32.390 --> 01:38.630
+Now I'll show you both but let's start with the first one which is an input selector all an input selector
+
+01:38.660 --> 01:46.730
+is is it is a function that usually takes this naming structure of select let's say cart for example
+
+01:47.360 --> 01:55.330
+and what it does is it's a function that gets the whole state and just returns a slice of it one layer
+
+01:55.360 --> 01:56.190
+DB usually.
+
+01:56.200 --> 01:59.580
+So for us we just want the cart.
+
+01:59.680 --> 02:06.790
+So we're going to pull state dog cart because what it's going to get is the whole reducer state and
+
+02:06.790 --> 02:13.200
+we just want this piece of it using this input selector of select cart.
+
+02:13.340 --> 02:19.160
+Now the reason we need this input selector is because this next selector we're going to build is going
+
+02:19.160 --> 02:22.130
+to actually use create selector.
+
+02:22.130 --> 02:31.910
+So we're gonna say export concept select cart items which is a property on our cart and how it's going
+
+02:31.910 --> 02:39.910
+to look is it's going to be our create selector call and what it takes is actually two arguments.
+
+02:40.110 --> 02:45.810
+The first argument is a collection so an array of input selectors.
+
+02:46.260 --> 02:53.670
+So we're gonna say select cart and then the second argument is going to be a function that will return
+
+02:53.940 --> 02:57.120
+the value we want out of the selector.
+
+02:57.120 --> 03:04.830
+And what we're going to get in its parameters is actually each output of the input selectors in the
+
+03:04.830 --> 03:09.560
+array but in the order that those selectors were written.
+
+03:09.840 --> 03:15.720
+So for example if we had another selector say const select user equals state.
+
+03:15.770 --> 03:16.060
+Right.
+
+03:16.080 --> 03:18.330
+And we just take state DOT user.
+
+03:18.330 --> 03:26.070
+If we were to pass this in like so right the arguments that we would see would be cast and then user
+
+03:26.430 --> 03:31.900
+and then whatever we output will be the output of the selector but because we don't need the select
+
+03:31.920 --> 03:36.330
+user we're just going to use our select cart inputs selector.
+
+03:36.330 --> 03:44.850
+So our function takes this form or we get cart and what we'll return is cart dog cart items and because
+
+03:44.850 --> 03:53.080
+we use create selector to make this select cart item selector it's now a memoir selector.
+
+03:53.100 --> 03:54.720
+Now why is this important.
+
+03:54.720 --> 04:01.020
+Well let's actually make our car items count selector as well that we'll use in our cart icon.
+
+04:01.020 --> 04:01.980
+Let's copy this.
+
+04:01.980 --> 04:03.970
+Cart items reduce over.
+
+04:04.110 --> 04:13.920
+So let's make a new selector called Select cart items count and it'll be another create selector except
+
+04:13.920 --> 04:19.040
+what we're gonna pass in can also be are select cart items.
+
+04:19.040 --> 04:19.290
+Right.
+
+04:19.290 --> 04:27.300
+It doesn't have to be just starting from our input selectors but input selectors are just selectors
+
+04:27.300 --> 04:29.250
+that only return a piece of the state.
+
+04:29.250 --> 04:35.150
+It's very rare that we actually end up using such a large piece of state in our actual components.
+
+04:35.220 --> 04:41.600
+We always use these smaller more specific selectors that have some kind of transform them.
+
+04:41.670 --> 04:49.630
+So for example let's say our select car items count takes select cart items so that we get our car items
+
+04:49.630 --> 04:50.680
+here.
+
+04:50.680 --> 04:55.340
+And what will output is the reduced call on those card items.
+
+04:55.350 --> 05:00.090
+So this gives us back the total quantity of all the card items.
+
+05:00.110 --> 05:05.250
+Well let's pull that into our car icons component and see how it works.
+
+05:05.420 --> 05:20.030
+So we'll import in from redux cart cart selectors and now if we replace this code with our selector
+
+05:20.030 --> 05:28.760
+call but we stop the pass of the state right so let's pass Dayton and what's happening is that we're
+
+05:28.760 --> 05:35.510
+passing our whole reducer state into the selector which then goes OK I need to reference select card
+
+05:35.510 --> 05:37.440
+items which references select card.
+
+05:37.790 --> 05:39.770
+So it passes the state in here.
+
+05:39.950 --> 05:47.600
+It gets the car object which gets passed into this function which passes out the card items which are
+
+05:47.600 --> 05:53.720
+select card items count because it's relying on the selector passes the card items into this function
+
+05:53.990 --> 06:02.240
+which finally reduces over and gives us our actual final card items count which we then pass in as item
+
+06:02.240 --> 06:09.090
+count as a prop into our cart icon component Wow that's a lot of words.
+
+06:09.100 --> 06:16.420
+So now if we check our application we'll see that our code still works the exact same way but now we
+
+06:16.420 --> 06:20.620
+have a memorized selector for this value.
+
+06:21.940 --> 06:31.900
+OK now we can actually replace our other component that uses our card items with the selector.
+
+06:31.900 --> 06:40.140
+So the other item that we use that uses our new Select card item selector is our cart dropdown component
+
+06:41.830 --> 06:51.340
+and here we're just going to replace this card items with our selector and what we can do is import
+
+06:51.340 --> 06:51.880
+it in
+
+06:55.620 --> 07:07.740
+redux cart cart item selector so it'll be select cart items and now instead of restructuring we want
+
+07:07.740 --> 07:18.030
+the whole state so that we can pass it in like so and this will make sure that our cart dropdown component
+
+07:18.600 --> 07:26.190
+is not getting re rendered when ever the state changes that's unrelated to the card items.
+
+07:26.190 --> 07:35.850
+So if we sign out our cart items in our cart dropdown as well as our car items count is not changing
+
+07:36.480 --> 07:42.870
+and therefore our cart dropdown and our car icon component do not need to re render which helps save
+
+07:42.870 --> 07:49.440
+us on performance and we will write a whole lot more selectors as we've built this application.
+
+07:49.440 --> 07:55.850
+But now we have managed to help save some re renders off of our components.
+
+07:55.890 --> 08:12.820
+Now let's commit our code and say updating our application with re select replaced cart selectors with
+
+08:12.970 --> 08:22.300
+memorised selectors and let's push and proceed with our lessons.

@@ -1,0 +1,76 @@
+WEBVTT
+
+00:01.340 --> 00:01.900
+All right.
+
+00:02.000 --> 00:04.640
+It's time to get started with a new section.
+
+00:04.640 --> 00:11.840
+We've built our app now to have sign in and sign up functionality but things are starting to get a little
+
+00:11.840 --> 00:13.070
+bit complicated.
+
+00:14.230 --> 00:18.100
+You see react is a UI library.
+
+00:18.100 --> 00:23.430
+It's focusing on the UI as our apps get more and more complicated.
+
+00:23.440 --> 00:25.280
+Our state is going to grow.
+
+00:25.420 --> 00:27.920
+It's going to get more and more complicated.
+
+00:28.000 --> 00:36.240
+And in this section we're going to use a new library called redux to make our ReACT state more scalable.
+
+00:36.400 --> 00:42.950
+Now Redux is a pretty tough topic to understand especially if you haven't learned it before.
+
+00:43.060 --> 00:49.420
+But the key thing in this section as we progress through the videos which you may have to revisit a
+
+00:49.420 --> 00:53.420
+couple of times because there'll be some new terms that we haven't heard before.
+
+00:53.800 --> 01:02.590
+But the key takeaway of this section is to understand that our app as it grows becomes more and more
+
+01:02.590 --> 01:06.330
+hard to understand how the flow of data is.
+
+01:06.430 --> 01:12.340
+And at the end of the day programs are way for us to manage the flow of data.
+
+01:12.490 --> 01:20.870
+And if you remember are key to being a good react developer is to decide the state and where it lives.
+
+01:21.040 --> 01:23.900
+And this section is all about that.
+
+01:24.110 --> 01:33.380
+We're going to be using redux as a state management to really focus on this point so that our code becomes
+
+01:33.380 --> 01:41.780
+cleaner our app becomes easier to debug and you'll notice that although redux may be confusing to understand
+
+01:42.320 --> 01:49.070
+our app will become easier and easier to understand and how data flows because of redux.
+
+01:49.070 --> 01:50.540
+So stick with us.
+
+01:50.540 --> 01:56.030
+I know this is gonna be a tough section but state management is a big big topic.
+
+01:56.240 --> 02:03.410
+As a matter of fact in this course we're going to talk about things like context API and graph QoL which
+
+02:03.500 --> 02:07.910
+are different ways to manage state as well we have lots to get through.
+
+02:07.960 --> 02:08.740
+So let's get started.

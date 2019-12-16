@@ -1,0 +1,307 @@
+WEBVTT
+
+00:00.360 --> 00:03.180
+Hello everyone and welcome back.
+
+00:03.180 --> 00:12.550
+In this lesson we are going to take a look at security rules and encrypting our database inside a firestorm.
+
+00:12.560 --> 00:19.490
+Some of you might have noticed that earlier in the course we copied that configuration object from firebase
+
+00:19.640 --> 00:23.120
+that we used inside of our fan base utilize.
+
+00:23.180 --> 00:26.270
+And that code contained an API key.
+
+00:26.420 --> 00:33.260
+We pushed our code to get hub and perhaps in your mind you felt like something was wrong typically with
+
+00:33.380 --> 00:40.400
+any other API key that you've probably ever used before or will ever use require you to hide it away
+
+00:40.490 --> 00:46.670
+as a secret because you don't want to expose it publicly for other people to gain access with and then
+
+00:46.670 --> 00:52.000
+start messing with your services that the API key uses to rely on.
+
+00:52.040 --> 00:58.660
+This is technically correct for all of those cases but with firebase it's not the case because firebase
+
+00:58.660 --> 01:05.940
+is security is handled differently from the API key being put somewhere secret.
+
+01:06.050 --> 01:13.280
+The reason for this is because firebase has a very specific way that it wants you to encrypt your data.
+
+01:13.280 --> 01:16.890
+And we do that using firebase as security rules.
+
+01:17.120 --> 01:24.560
+The security rules is almost a language in itself and it has its own nuances that you kind of have to
+
+01:24.560 --> 01:25.240
+get used to.
+
+01:25.270 --> 01:29.510
+But it's relatively pretty easy to pick up once you start using it.
+
+01:29.570 --> 01:36.290
+And hopefully with these lessons what I'm trying to show you is how you can set up your rules without
+
+01:36.290 --> 01:42.380
+getting too in-depth but you can definitely get really granular if you want and you can go through the
+
+01:42.380 --> 01:47.780
+link that I provide you with all of the documentation regarding the actual things you can do with the
+
+01:47.780 --> 01:49.020
+security rules.
+
+01:49.340 --> 01:55.130
+In the case of this chapter we're just going to take a look at how to encrypt our data so we protect
+
+01:55.130 --> 02:01.660
+it in a reasonable way but also build a quick feature around the security rules.
+
+02:01.670 --> 02:07.430
+So we see how we can tie react and our current existing application and all the things that we've learned
+
+02:07.730 --> 02:14.200
+to these new firebase security rules that we're going to learn now the way that you actually access
+
+02:14.200 --> 02:20.740
+these security rules is by going to the database tab inside of your firebase console and then going
+
+02:20.740 --> 02:28.900
+to the rules tab inside of this rules tab you will see that this thing is broken into two parts on the
+
+02:28.900 --> 02:33.840
+right hand side is where the actual language of the security rules live.
+
+02:33.880 --> 02:35.640
+And we're just gonna ignore that for now.
+
+02:35.800 --> 02:44.170
+And on the left hand side you'll probably only see one date that points to when you probably first instantiate
+
+02:44.170 --> 02:46.290
+at your firebase console.
+
+02:46.360 --> 02:51.760
+I have multiple and all this thing tracks is when you've updated your rules last.
+
+02:52.150 --> 02:58.480
+In my case I've played around with it and update it a couple times because of course my database is
+
+02:58.480 --> 03:00.590
+live for a lot of students to use.
+
+03:00.640 --> 03:06.190
+So different students might accidentally write something to a database and ruin the experience for other
+
+03:06.190 --> 03:10.140
+students so I have to encrypt my data more securely than yours.
+
+03:10.240 --> 03:14.140
+Where are you right now you are just developing against it and you're probably the only person that's
+
+03:14.140 --> 03:17.650
+using it in this case regardless moving forward.
+
+03:17.650 --> 03:24.460
+This is a great thing to learn about when using firebase because the security rules is the primary way
+
+03:24.460 --> 03:31.510
+that gives you a lot of flexibility and power and control over your fire based database.
+
+03:31.510 --> 03:38.080
+So in yours if we focus on this right side now you might actually see that your says allow read and
+
+03:38.200 --> 03:45.270
+write whereas mine only says allowed read so before we actually dive into what that means.
+
+03:45.270 --> 03:51.870
+Let's first go line by line to understand what's happening here because firebase as language is kind
+
+03:51.870 --> 03:52.730
+of particular.
+
+03:52.740 --> 03:56.850
+So we have to learn about what the language is doing in this case.
+
+03:56.850 --> 04:01.860
+This first line here service cloud fire store is mandatory.
+
+04:01.950 --> 04:07.800
+All this says to Firebase is that the service we're writing these rules for is fire store which is the
+
+04:07.800 --> 04:10.230
+service of our database.
+
+04:10.260 --> 04:17.520
+Next the second line match databases with the database documents is also a mandatory line because this
+
+04:17.850 --> 04:23.160
+is going into all of the document objects inside of our entire database.
+
+04:23.160 --> 04:27.600
+This line represents that we want to write rules for our entire database.
+
+04:27.660 --> 04:36.540
+And these two lines are both mandatory inside of this block here is where we will actually write all
+
+04:36.540 --> 04:44.010
+of our rules so the way that the rules work is that they're always comprised of two parts.
+
+04:44.010 --> 04:51.780
+The first is a match statement and the match statement points to a route these routes are going to be
+
+04:51.840 --> 04:56.700
+built off of what specific routes we have in our database.
+
+04:56.700 --> 04:59.840
+And there the routes that you've already used a little bit.
+
+04:59.910 --> 05:05.580
+Whenever we were writing new documents or fetching collections inside of our firebase dot you telescope
+
+05:06.210 --> 05:11.440
+that same parking structure that we saw and we've already understood about firebase is the same parsing
+
+05:11.460 --> 05:17.370
+structure that it wants here although it's got a little bit more flexibility in terms of what we can
+
+05:17.370 --> 05:18.650
+do with it.
+
+05:18.690 --> 05:25.710
+For example here you'll see that this match statement goes slash document and then this two stars.
+
+05:25.830 --> 05:32.010
+This is essentially a wild card that says that I want to write this match for every single document
+
+05:32.070 --> 05:33.830
+inside of the database.
+
+05:33.900 --> 05:38.410
+And the reason for this is because the rules are generally very general when you first set it up.
+
+05:38.490 --> 05:45.070
+They don't want to impede you so they give you full allow write read and write permissions.
+
+05:45.090 --> 05:46.330
+I cannot spell.
+
+05:46.360 --> 05:53.820
+So what this is saying is that we are allowing anyone to read and write to every single document inside
+
+05:53.820 --> 05:54.480
+of our database.
+
+05:54.570 --> 05:57.040
+And this is perfectly fine when you first start developing.
+
+05:57.060 --> 06:04.320
+But once we put this into production and we actually start shopping our e-commerce platform around then
+
+06:04.320 --> 06:07.890
+we would want very specific and granular rules.
+
+06:07.890 --> 06:09.720
+So there's always a match statement.
+
+06:09.720 --> 06:11.860
+And then this gets to our second part.
+
+06:11.870 --> 06:17.700
+There's always an allow statement the allow statement is exactly as it sounds.
+
+06:17.940 --> 06:26.540
+It allows for specific things to be done to the documents inside of this route that we've just matched.
+
+06:26.640 --> 06:35.910
+In our case there are two big general catch all methods slash rules that you can see allow read and
+
+06:35.910 --> 06:36.390
+allow.
+
+06:36.390 --> 06:37.360
+Right.
+
+06:37.470 --> 06:41.070
+Allowing to read represents actually two different things.
+
+06:41.070 --> 06:48.300
+It allows us to be able to get collections as well as get specific documents if we want it to be more
+
+06:48.300 --> 06:49.210
+specific.
+
+06:49.230 --> 06:58.950
+We could actually break read into both get and list if we do allow get then we're saying that we allow
+
+06:59.670 --> 07:07.440
+anybody to access just specific documents so they can't actually fetch entire collections they can fetch
+
+07:07.450 --> 07:10.680
+specific document allow list is the opposite.
+
+07:10.680 --> 07:15.220
+It allows people to get the entire list but not get specific documents.
+
+07:15.420 --> 07:19.100
+So that's pretty much what Reid breaks down into right.
+
+07:19.100 --> 07:23.940
+On the other hand is pretty much broken into two main things that we're going to focus on.
+
+07:23.940 --> 07:27.840
+There's a couple more granular things that you can see inside of the documentation that I'm going to
+
+07:27.840 --> 07:29.830
+link in the resources folder.
+
+07:30.060 --> 07:39.490
+But in this case what allow right breaks into is create as well as update so in this case create is
+
+07:39.580 --> 07:44.920
+the ability to make new documents an update is the ability to update documents.
+
+07:44.920 --> 07:46.690
+That's pretty much all it is.
+
+07:46.690 --> 07:51.820
+So that's the thing to remember with all of these security rules we're going to write we're going to
+
+07:51.820 --> 07:59.440
+make a block that represents a match pointing to one specific collection and the documents inside.
+
+07:59.440 --> 08:05.770
+And then there are allow statements that we're going to write inside of this block that allow applications
+
+08:05.770 --> 08:11.260
+to do certain things that we want them to do on that specific collection.
+
+08:11.260 --> 08:19.630
+So for example if we want users to only be able to create users inside of our user collection but we
+
+08:19.630 --> 08:26.950
+don't want them to update or delete them then we don't allow for those rules and we'll explore more
+
+08:26.950 --> 08:28.900
+of how to actually do that in later lessons.
+
+08:28.900 --> 08:35.290
+This is more so just a general idea of what the structure of these match blocks and these allow statements
+
+08:35.320 --> 08:40.810
+are going to be so in the next lesson we're actually going to start writing some rules.
+
+08:40.920 --> 08:42.630
+So let's do that.
+
+08:42.630 --> 08:43.980
+I'll see you in the next lesson.

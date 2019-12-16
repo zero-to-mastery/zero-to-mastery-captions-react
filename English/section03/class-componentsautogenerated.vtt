@@ -1,0 +1,178 @@
+WEBVTT
+
+00:02.020 --> 00:09.880
+We know that we can write functions that return HMO but we can also write classes that return HMO.
+
+00:10.030 --> 00:18.310
+And the reason why we would want to use a class is because react has given us the ability to write classes
+
+00:18.310 --> 00:24.180
+that have a lot more functionality on them versus a function that returns some HMO.
+
+00:24.190 --> 00:26.140
+Now let me show you this.
+
+00:26.200 --> 00:38.300
+So in order to write a class we've got a first import component from react and instead of this function
+
+00:38.400 --> 00:48.150
+and I'm going to convert this into a class so class app extends this component that we get from reactive.
+
+00:48.680 --> 00:56.030
+And as a result we now have access to this render method inside of our app class and the render method
+
+00:56.210 --> 00:58.850
+returns any HDMI want.
+
+00:58.850 --> 01:06.270
+So let's return that HMO we had before inside of our function and we'll see that it's actually the same
+
+01:08.230 --> 01:09.090
+and to prove it.
+
+01:09.790 --> 01:11.230
+I'm gonna change this tag.
+
+01:11.230 --> 01:14.940
+This text here and we should see an update right.
+
+01:15.140 --> 01:17.280
+Hello Iowa.
+
+01:17.370 --> 01:24.910
+So this is great so it's pretty much the exact same at this point as are functional app that we had
+
+01:25.030 --> 01:26.410
+before right.
+
+01:26.410 --> 01:28.640
+Our function app that returned this block of H.
+
+01:29.500 --> 01:36.370
+But the reason why we would want to use this kind of thing is if we wanted say instead to display this
+
+01:36.370 --> 01:46.200
+static string of Hello You are what if I wanted something like let's say instead of an A tag we had
+
+01:46.200 --> 01:55.010
+a button and whenever you click this button it would change the text to something else.
+
+01:55.080 --> 01:55.290
+Right.
+
+01:55.290 --> 02:05.060
+We would change this hello you want to something else well the thing about that is that by using a class
+
+02:05.060 --> 02:13.820
+component we actually get access to this thing called state what state is is it some object right.
+
+02:13.970 --> 02:22.550
+A javascript object with properties that we can access at any point inside of our class.
+
+02:22.550 --> 02:30.680
+And the way we would do this is we would actually call the constructor keyword here and inside of a
+
+02:30.680 --> 02:33.600
+constructor we want to call super right.
+
+02:33.800 --> 02:38.330
+And what super does is it calls the constructor method on the component class.
+
+02:38.330 --> 02:42.370
+And what that does is it gives us access to this dot state right.
+
+02:42.530 --> 02:49.370
+This state property now exists on our class app and we can set it to something.
+
+02:49.370 --> 02:50.830
+So this is the default value.
+
+02:50.860 --> 02:51.880
+I want to set it to first.
+
+02:51.890 --> 02:56.200
+So let's say I want to set it to the string that we have right now.
+
+02:56.260 --> 02:56.540
+Right.
+
+02:56.660 --> 03:00.520
+I want to set some property on our state object too.
+
+03:00.590 --> 03:06.800
+Hello Iowa and then I want to render that instead of.
+
+03:06.990 --> 03:07.930
+Hello Iowa.
+
+03:07.920 --> 03:08.970
+The static string right.
+
+03:08.970 --> 03:10.320
+How would I do that.
+
+03:10.320 --> 03:17.570
+Well I would first use these curly braces which Jeff Sachs lets us do and it tells the HD and all that.
+
+03:17.570 --> 03:23.060
+Anything between these curly braces is going to be JavaScript So I want you to render javascript right.
+
+03:23.610 --> 03:30.660
+So we want to do this dot state DOT string and now between these p tags we watch you won't see anything
+
+03:30.660 --> 03:34.180
+change because it's the same string but just to.
+
+03:34.190 --> 03:35.490
+I want to say hello.
+
+03:35.500 --> 03:43.620
+E was saying right there we see that it's looking at the state looking at this property string and rendering
+
+03:43.620 --> 03:50.830
+that here instead so that's awesome because now I can do this in multiple places right.
+
+03:50.860 --> 03:58.560
+I can use this as many times as I want and I'm going to see multiple versions of it right so what if
+
+03:58.560 --> 04:06.570
+I wanted to change this value while the way I would do it is this class app that extends component this
+
+04:06.570 --> 04:14.460
+component also gives us this method called set state and what sets state does is it lets us modify this
+
+04:14.460 --> 04:19.380
+state object right on every single H html element.
+
+04:19.380 --> 04:28.170
+We now have access to this method this property called on click which takes a function that gets called
+
+04:28.710 --> 04:35.950
+when ever this element gets clicked so let's pass in this function and in this function we're gonna
+
+04:35.960 --> 04:45.510
+say this dot set state and what's that say takes is an object with all of the properties that you want
+
+04:45.510 --> 04:48.480
+to change on your state as well as the new values that they have.
+
+04:48.480 --> 04:56.180
+So I want to change the property string to Hello Andre.
+
+04:56.320 --> 05:00.700
+Now when I click this button it will see that it changed right.
+
+05:02.090 --> 05:07.970
+And that's really awesome because this gives us a lot of control over what we want our components to
+
+05:07.970 --> 05:09.470
+display.
+
+05:09.560 --> 05:16.760
+So this will be really really useful later when we don't know where we're going to get some of the information
+
+05:16.790 --> 05:23.710
+that we actually want to display inside of our HCM out but I'm going to show you in the next lesson
+
+05:24.280 --> 05:25.560
+why this is really useful.

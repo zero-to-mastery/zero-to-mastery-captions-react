@@ -1,0 +1,364 @@
+WEBVTT
+
+00:00.420 --> 00:01.560
+Welcome back.
+
+00:01.560 --> 00:09.390
+In this lesson we are going to talk about integrating our application so that whenever we fire our strike
+
+00:09.390 --> 00:14.490
+payment we actually will see it in our dashboard.
+
+00:14.490 --> 00:18.850
+Now if you remember from couple lessons ago actually it's been quite some time.
+
+00:18.900 --> 00:25.290
+When we built our stripe integration into our application all we were doing was leveraging the front
+
+00:25.290 --> 00:25.770
+end.
+
+00:25.890 --> 00:33.840
+But we were not actually adding anything into our actual backend because we needed to actually integrate
+
+00:33.900 --> 00:37.430
+with some kind of server to create the payments.
+
+00:37.620 --> 00:45.520
+After going through the checkout flow so in this section we are going to take a deep look into what
+
+00:45.520 --> 00:51.020
+it's like to actually complete a full stripe integration.
+
+00:51.040 --> 00:58.530
+Now you might be wondering why is it that we need a back end server and then what is a back in server.
+
+00:58.540 --> 01:03.080
+Well I'm gonna answer all those questions for you in this section of the course.
+
+01:03.250 --> 01:07.320
+And of course this will definitely cover some back end.
+
+01:07.390 --> 01:14.500
+Now I'm gonna try and not go too deep into it because backend is a lot of things that we have to talk
+
+01:14.500 --> 01:21.350
+about and quite frankly you don't need to know everything in order to do a react app occasion.
+
+01:21.490 --> 01:24.770
+In fact you don't really need to know that much back in at all to build react.
+
+01:24.790 --> 01:30.640
+But for the sake of the stripe integration I'm going to have to at least explain it so that it makes
+
+01:30.640 --> 01:37.850
+the most sense without going into a three hour lesson on writing node back in Cote.
+
+01:38.030 --> 01:42.170
+Now let's cover the first question about why stripe needs a back in service.
+
+01:42.650 --> 01:50.420
+Well you remember how when we went to our developers tab we were able to access either one of two keys
+
+01:51.140 --> 01:53.440
+inside of our API keys.
+
+01:53.510 --> 02:00.830
+There was the publishable key and then the secret key the publishable key is our way of telling our
+
+02:01.130 --> 02:08.900
+stripe libraries that we use on the front end which account is trying to make the payments so it's part
+
+02:08.900 --> 02:10.840
+of their authentication process.
+
+02:11.630 --> 02:20.150
+The secret key however is what they store secretly for us on our back and server and because it's hidden
+
+02:20.270 --> 02:23.900
+on our back and server as an environment variable.
+
+02:24.020 --> 02:32.570
+Other users are not able to intercept that key when we're making payments through our front end application.
+
+02:33.230 --> 02:41.570
+If people were to get access to your secret key they would be able to technically make payments on our
+
+02:41.570 --> 02:45.410
+behalf or take things out with this secret key.
+
+02:45.470 --> 02:52.910
+They can also steal or intercept peoples strike payments when they're in the middle of being sent to
+
+02:52.910 --> 02:54.340
+our back end.
+
+02:54.500 --> 03:00.950
+Either way the secret key you absolutely have to hide from anybody that might be able to access it on
+
+03:00.950 --> 03:01.940
+the front end.
+
+03:02.210 --> 03:08.110
+And the big issue is that there is nothing you can truly hide on the front end.
+
+03:08.270 --> 03:15.030
+You absolutely MUST KEEP ANYTHING related that you want to hide on the back end.
+
+03:15.260 --> 03:22.580
+And that's the main reason why stripe requires us to create our payments through a back end server because
+
+03:22.580 --> 03:27.740
+the backend server takes requests and sends it out but except for us.
+
+03:27.740 --> 03:32.010
+Most people are not able to actually access the backend.
+
+03:32.090 --> 03:40.250
+So we're going to actually take this secret key and we are going to hide it inside of our backend and
+
+03:40.250 --> 03:43.590
+I'll show you how we do that when we actually start writing our back.
+
+03:44.480 --> 03:47.540
+But that's the idea behind the secret key.
+
+03:47.570 --> 03:53.140
+Now let's actually talk about how writing our back end server is going to work.
+
+03:54.230 --> 04:02.770
+So we are going to write it in node but what is node well node is actually an environment that allows
+
+04:02.770 --> 04:11.830
+us to run javascript outside of the browser as we know we run and write HDMI LCROSS and JavaScript because
+
+04:11.860 --> 04:18.810
+those are the languages that our browsers are capable of passing Well it turns out that there is another
+
+04:18.810 --> 04:23.510
+environment that is able to run javascript code outside of the browser.
+
+04:23.610 --> 04:26.400
+And that is the node environment.
+
+04:26.430 --> 04:35.490
+So what we end up writing is actually node code which is javascript but it's orientated around the idea
+
+04:35.610 --> 04:44.000
+of writing back in code but in order for us to demystify this let's take a look at how the environment
+
+04:44.090 --> 04:51.650
+has changed ever since the introduction of single page applications because through single page applications
+
+04:51.650 --> 04:58.250
+we kind of disconnected ourselves a little bit more from understanding how web applications used to
+
+04:58.250 --> 05:02.900
+function before between the front end and the back end.
+
+05:02.900 --> 05:11.210
+So in this diagram I've demonstrated what an older version of web development looks like as well as
+
+05:11.210 --> 05:16.780
+how web pages might have worked before we had single page applications.
+
+05:16.780 --> 05:25.180
+Now imagine we had some back in server that was serving to us are code for the pages that we are trying
+
+05:25.180 --> 05:28.510
+to browse to inside of our web application.
+
+05:28.520 --> 05:35.950
+Now if you remember and have used web applications before in the early 2000s or in the 1990s you'll
+
+05:35.950 --> 05:42.130
+remember that pages loaded slowly and it almost looked like pages were always refreshing whenever you
+
+05:42.130 --> 05:44.920
+were navigating between the while.
+
+05:44.920 --> 05:51.560
+This is because this is actually what was exactly happening what we would do from our web application
+
+05:52.100 --> 05:58.940
+is we would make some kind of request to a endpoint very similar to the URLs that were used to routing
+
+05:58.940 --> 06:03.800
+to now a server would expose those to us and our client.
+
+06:03.820 --> 06:11.320
+So our web application would make a request to that end point say home for example and it would try
+
+06:11.320 --> 06:18.970
+and get some piece of data from that home page or that home route are back and server would then send
+
+06:18.970 --> 06:26.800
+back all of the aged s CSM javascript that was related to this home page and we would do this through
+
+06:26.800 --> 06:28.680
+the rest parameter.
+
+06:28.750 --> 06:36.730
+So what rest stands for is representational state transfer and it's pretty much the basis of how we
+
+06:36.790 --> 06:44.520
+are able to get post update and delete data from our client to our server.
+
+06:44.620 --> 06:52.510
+And the main point behind this is that we used to have to write our front end with anticipation that
+
+06:52.510 --> 06:59.890
+we were going to be fetching all of our pages related to our front end application from our back end
+
+06:59.920 --> 07:03.930
+with every single route that we're trying to hit.
+
+07:04.050 --> 07:10.980
+Now how react works now is that we simply hit one row maybe just the base row at the moment our client
+
+07:10.980 --> 07:19.680
+requests from our server write that I've landed on your application or web server we'll send over one
+
+07:19.770 --> 07:28.110
+big bundle of HD him I'll see SS and JavaScript and the the client will then process all of these pages
+
+07:28.800 --> 07:35.700
+inside the client which is what exactly the exact Library is doing it's leveraging javascript to build
+
+07:35.700 --> 07:45.240
+out the appropriate H Timo and C Ss files at each route it no longer needs to go to our server and request
+
+07:45.330 --> 07:52.770
+the data so the I'll see SS and J.S. files related to the pages that we're trying to hit.
+
+07:52.770 --> 07:59.630
+That's why we use tools like Rack router and we use tools like react react on right including our CSO
+
+07:59.630 --> 08:06.060
+as in J.S. libraries that we've now used we use all of these tools to leverage more and more of our
+
+08:06.060 --> 08:14.640
+front end client so our browsers javascript capabilities to build out all of these pages that we used
+
+08:14.640 --> 08:16.820
+to have to request for.
+
+08:16.830 --> 08:24.090
+The problem with this is that we still need the back end server to hold our data which is why we use
+
+08:24.090 --> 08:33.000
+tools like fire store and Google firebase to handle a lot of things that we cannot do on the front end
+
+08:33.420 --> 08:40.950
+because we either don't have the capability to store all that data or if we want to hide things because
+
+08:40.980 --> 08:47.190
+as I mentioned with our secret key there's a lot of environment variables that you do not want to expose
+
+08:47.190 --> 08:54.540
+on the front end because the front end can always always be attacked in between these requests.
+
+08:54.540 --> 08:59.370
+So with secret keys and things like that you want to keep on the back end server.
+
+08:59.370 --> 09:03.180
+Now we will talk about rest a little bit more a little later.
+
+09:03.510 --> 09:10.350
+But one big thing for us to keep in mind about building this back end is going to be the fact that while
+
+09:10.350 --> 09:15.200
+we do get all of our front end application this way that we've been doing before.
+
+09:15.510 --> 09:20.940
+We're still gonna make a request to our back and server and we're still going to get the bundle we might
+
+09:20.940 --> 09:28.830
+want to make requests so that our server does certain things and this is typically handled through some
+
+09:28.830 --> 09:31.390
+kind of API.
+
+09:31.440 --> 09:37.950
+Now what is an API while API stands for an application programming interface.
+
+09:38.190 --> 09:41.950
+And it sounds fancy but it's pretty much exactly what we're looking at.
+
+09:42.120 --> 09:43.680
+It is different.
+
+09:43.680 --> 09:51.300
+You are LS Right or end points that get exposed from the server that we are able to make requests to
+
+09:51.420 --> 09:53.970
+and we've actually done this numerous times already.
+
+09:54.000 --> 09:57.170
+We did this when we were playing with our Jason Place holder right.
+
+09:57.180 --> 10:03.390
+Whenever we made a fax request to a certain you URL that was what we were doing is we were hitting an
+
+10:03.450 --> 10:06.300
+API that had exposed that endpoint to us.
+
+10:06.300 --> 10:11.490
+They gave us specific data in a similar way.
+
+10:11.510 --> 10:20.000
+These back end API is are also able to expose an endpoint that instead gets a post request and a post
+
+10:20.000 --> 10:27.660
+request is us sending data over to that end point asking it to do something for us.
+
+10:27.710 --> 10:35.500
+So if we go over here we'll actually see a more likely kind of API that we'll see.
+
+10:35.530 --> 10:40.180
+You'll notice that it looks almost identical to what we were looking at before except the difference
+
+10:40.210 --> 10:45.820
+now is that maybe let's say we had some kind of blogging application with a blogging back and server
+
+10:46.940 --> 10:54.690
+when we want users data or if we wanted things related to users we make a get request to this user's
+
+10:54.690 --> 11:00.550
+end point and we get back some user data very similar to what we do with firestorm.
+
+11:00.580 --> 11:06.370
+We are making requests except instead of not going to an endpoint we use the library's tools that they
+
+11:06.370 --> 11:15.290
+provide for us to get our users similarly let's say we were requesting posts for from a user I.D. we
+
+11:15.290 --> 11:24.440
+would have to hit a different new endpoint pass in the user I.D. as a parameter and then this back end
+
+11:24.440 --> 11:30.100
+server would then give us back the Post data based on that user IP that we're requesting from this end
+
+11:30.100 --> 11:37.670
+point the same thing would work for a posts on comments on a specific post but the structure is pretty
+
+11:37.670 --> 11:44.540
+much just that we have the server that shows us these routes these end point routes that we make either
+
+11:44.540 --> 11:51.680
+get requests or post requests or update requests or delete requests to send some data or maybe no data
+
+11:51.680 --> 11:58.730
+at all and then the code on the back end server will determine what to do with each of those requests
+
+11:59.180 --> 12:09.160
+at that specific end point so that's pretty much all node does from a conceptual high level how we actually
+
+12:09.160 --> 12:15.850
+write that code we will see in the next lesson I just want you to keep in mind that this is the main
+
+12:15.850 --> 12:21.790
+thing that we're doing when it comes to building a backend as well as how the backend integrates with
+
+12:21.790 --> 12:22.500
+the front end.

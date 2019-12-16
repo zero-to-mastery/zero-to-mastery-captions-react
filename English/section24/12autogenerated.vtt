@@ -1,0 +1,271 @@
+WEBVTT
+
+00:00.760 --> 00:08.020
+So hopefully you guys got a chance to try out and implement all of the appropriate solutions for converting
+
+00:08.020 --> 00:13.920
+our application over to the Apollo clients local storage from react redux.
+
+00:13.940 --> 00:16.430
+Now if you manage to complete it.
+
+00:16.790 --> 00:17.480
+Excellent job.
+
+00:17.480 --> 00:23.300
+This is definitely an extremely extremely challenging topic because there's so much new stuff that we
+
+00:23.300 --> 00:28.820
+have to do with Apollo clients and there's a lot to wrap our heads around regarding resolve versus setting
+
+00:28.820 --> 00:29.670
+types.
+
+00:29.720 --> 00:32.980
+There's just so much with Apollo client if you didn't.
+
+00:33.010 --> 00:34.630
+That's also perfectly fine.
+
+00:34.660 --> 00:39.400
+Practice makes perfect the more you try the more you dig through those docs right the more you look
+
+00:39.400 --> 00:46.070
+at these solutions the better you'll come out with an idea of what it is that we have to do now.
+
+00:46.300 --> 00:51.620
+I'm really proud of you because you guys have done so so so much in this course already.
+
+00:51.730 --> 00:54.910
+You've worked the context API you've worked with react redux.
+
+00:54.910 --> 00:56.530
+You've worked with redux thanks.
+
+00:56.530 --> 00:58.160
+You've worked with redux saga.
+
+00:58.210 --> 01:01.070
+You've worked with the graph cool and Apollo client API.
+
+01:01.090 --> 01:02.590
+You've worked with firebase.
+
+01:02.590 --> 01:07.870
+This is actually way more than most react developers will ever even touch up until this point.
+
+01:08.050 --> 01:14.250
+You are pretty much as far as having touched features go and touched a lot of this react ecosystem goes.
+
+01:14.410 --> 01:19.770
+You've done pretty much more than almost 70 80 percent of most react developers out there.
+
+01:19.960 --> 01:25.210
+So I'm really really proud of and I want to take this moment to really congratulate you on making it
+
+01:25.210 --> 01:28.250
+this far now as a final note.
+
+01:28.280 --> 01:33.330
+There's a couple of things that I want to mention about Apollo client as well as graft.
+
+01:33.410 --> 01:35.870
+Well now it's really hot.
+
+01:35.870 --> 01:40.670
+It's a really really really hot topic in the react development world.
+
+01:40.670 --> 01:47.210
+In the back and world it's also really interesting because so much has happened with graph QoL that
+
+01:47.210 --> 01:50.760
+it's introducing this new way a new standard of doing things.
+
+01:50.810 --> 01:57.800
+And it seems in some way to be offering a lot in its value proposition those benefits that I showed
+
+01:57.800 --> 02:05.780
+you guys at the start of this section about how to fixes some of the issues with rest is a very valid
+
+02:05.780 --> 02:06.430
+solution.
+
+02:06.530 --> 02:10.790
+And it's got a very elegant theoretical value.
+
+02:10.790 --> 02:14.920
+The problem as you have seen is that it's quite extensive.
+
+02:14.960 --> 02:16.850
+It's actually pretty verbose.
+
+02:16.880 --> 02:23.840
+And the way that we have to do it is a little bit more strained and I'm not about to say that it's wrong.
+
+02:23.870 --> 02:30.500
+That's not to say that it's bad in any way either because react and redux is in itself a pretty steep
+
+02:30.500 --> 02:32.150
+learning curve as well.
+
+02:32.150 --> 02:40.280
+The big problem with Apollo I find is that it's hard to get that level of adoption because you have
+
+02:40.280 --> 02:47.900
+to get the whole team on board with it including your back end team so it's very possible that there's
+
+02:47.900 --> 02:53.960
+new companies that will come out that might start with a group of really senior developers in the back
+
+02:53.960 --> 02:58.910
+end and the front end that have gone through all this and see the advantages and want to implement it
+
+02:59.420 --> 03:00.530
+and take a stab at it.
+
+03:00.530 --> 03:06.360
+And it turns out really well the problem with this is that they're charting new territory.
+
+03:06.390 --> 03:12.030
+So that's the main tradeoff is the increasing complexity in setting it up especially on the back backend
+
+03:12.930 --> 03:17.040
+setting it up in the back and is a little bit more complicated than how it is in the front end here.
+
+03:17.040 --> 03:22.830
+So from a business perspective it's a cost that companies might not be willing to take a stab on with
+
+03:22.830 --> 03:29.090
+such new technology as a converse to that how it impacts you on the front end.
+
+03:29.180 --> 03:34.790
+Is that the Apollo client or any other front end client that consumes and helps manage caching this
+
+03:34.790 --> 03:36.620
+data that you're fetching from graft.
+
+03:36.680 --> 03:42.410
+Well is still also new technology and this comes a two main caveats.
+
+03:42.440 --> 03:48.770
+The first is that the community around these problems that you might encounter are going to be pretty
+
+03:48.770 --> 03:53.630
+new with react redux and with sagas.
+
+03:53.630 --> 04:00.110
+This has technology has been used so extensively and fleshed out so much that generally any player you
+
+04:00.110 --> 04:05.600
+encounter there's probably somebody who solved it numerous times or asked this question numerous times
+
+04:05.990 --> 04:08.200
+solve the problem in all kinds of ways.
+
+04:08.330 --> 04:14.390
+That is really easy for you to get unblocked because you simply go on line you might check stack overflow
+
+04:14.450 --> 04:20.840
+or you might check the actual get hub issues related to the react redux library and you'll find that
+
+04:20.930 --> 04:24.880
+the solution is right there and it's very well documented right.
+
+04:24.880 --> 04:31.240
+And it's really easy to implement and understand whereas with Apollo client it's still relatively new.
+
+04:31.250 --> 04:33.440
+That's not to say the community is not Alvin.
+
+04:33.950 --> 04:39.080
+But again it's literally a matter of the length of time and the amount of projects that have adopted
+
+04:39.080 --> 04:41.230
+this product to scale.
+
+04:41.240 --> 04:44.410
+So those are the first things to consider.
+
+04:44.420 --> 04:50.930
+The second is that this paradigm might change new features and new patterns might completely shift in
+
+04:50.930 --> 04:57.170
+the coming years as you've seen the Apollo team is trying to move away from this higher order component
+
+04:57.170 --> 05:04.100
+style of tackling what it is that we did earlier with the query and the mutation and if you looked at
+
+05:04.100 --> 05:09.590
+my solution actually with the checkout item container you'll see that I did it with multiple mutations
+
+05:09.590 --> 05:10.820
+here.
+
+05:10.880 --> 05:17.090
+So in a very similar way the Apollo team is trying to move away from this and use more of that stacking
+
+05:17.090 --> 05:20.270
+style that you saw of nesting components.
+
+05:20.420 --> 05:25.030
+Now these are pretty much just the caveats and my opinions on this.
+
+05:25.070 --> 05:30.800
+I definitely think that in one way it's good to keep an eye on Apollo but you should primarily still
+
+05:30.800 --> 05:37.850
+consider react redux to be your bread and butter because so many enterprise applications are using react
+
+05:37.910 --> 05:38.850
+redux.
+
+05:38.990 --> 05:42.200
+The increase in complexity is worth the tradeoff.
+
+05:42.200 --> 05:47.160
+The tradeoff for that increasing complexity is that your application is way more predictable.
+
+05:47.180 --> 05:47.560
+Right.
+
+05:47.570 --> 05:51.110
+You have amazing community support around redux.
+
+05:51.110 --> 05:58.320
+And honestly as applications scale the redux architecture really does scale very well.
+
+05:58.340 --> 06:04.160
+So this is pretty much another thing to consider is that the way that you architect out your folders
+
+06:04.190 --> 06:05.540
+you architect your application.
+
+06:05.540 --> 06:07.170
+You set up all of your files.
+
+06:07.190 --> 06:13.700
+You think about where things need to go that has been tried and tested and it's worked at really really
+
+06:13.700 --> 06:15.480
+large scale applications.
+
+06:15.530 --> 06:21.890
+That's not to say that these new technologies like Apollo and Graf Q all won't get there either but
+
+06:21.980 --> 06:28.190
+at the same time it's literally a matter of waiting it out and maybe seeing and keeping your eye on
+
+06:28.190 --> 06:32.040
+it so hopefully this was very useful to you this graph.
+
+06:32.050 --> 06:35.980
+Your lesson is definitely one of the more complicated sections that we have.
+
+06:36.070 --> 06:41.980
+But again I definitely think you've really leveled up if you've gotten this far with this course.
+
+06:41.980 --> 06:47.020
+So with this we're wrapping up our graph QoL lesson which I hope you got a lot out of.
+
+06:47.020 --> 06:53.740
+And we'll tackle some of the final things in wrapping up our course in the upcoming next few sections.

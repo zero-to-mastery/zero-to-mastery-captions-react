@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00.360 --> 00:07.910
+Before we begin I'd just like to point out something that will help you get the most out of this course.
+
+00:07.940 --> 00:15.350
+Personally I think the best way to learn is to code along as we build our e-commerce platform but I
+
+00:15.350 --> 00:21.260
+know there are some learners that just like to watch and listen and then maybe look at the code themselves
+
+00:21.260 --> 00:22.400
+later.
+
+00:22.400 --> 00:24.050
+That's perfectly fine.
+
+00:24.040 --> 00:30.340
+I've set up this course so that both these type of learners can get the most out of it if you go to
+
+00:30.340 --> 00:36.310
+my get hub and navigate to my get hub account.
+
+00:36.310 --> 00:45.100
+So you go get hub dot com slash is saying m e Hwa if you check the repositories you will see a bunch
+
+00:45.100 --> 00:54.400
+of them that say Lesson 1 lesson 2 lesson three all the way up to twenty seven now in each of these
+
+00:54.670 --> 01:02.290
+repositories is going to actually be the code that we finish writing at the end of every lesson related
+
+01:02.290 --> 01:11.920
+to building our e-commerce platform so if you get lost you can always just follow the link that I will
+
+01:11.920 --> 01:17.660
+provide in that lesson to one of these repos and get the code from there.
+
+01:17.740 --> 01:20.930
+I'm gonna show you very quickly how that would work.
+
+01:21.010 --> 01:28.000
+So let's say we finish Lesson 1 and we start talking about Lesson 2 and you want the code or let's say
+
+01:28.000 --> 01:31.250
+Lesson 3 and you want the code related to Lesson 3.
+
+01:31.270 --> 01:37.820
+You would go to the repo and you would hit this button clone or download from here.
+
+01:37.950 --> 01:42.180
+We go into our terminal and I'm gonna teach you a little bit of get here.
+
+01:42.180 --> 01:50.760
+So we go get clone and then we put down the link that we just copied and then we can put our own name
+
+01:50.760 --> 01:56.160
+of our folder for where we want this to be stored or we can just let get do it and it'll just name it
+
+01:56.190 --> 01:57.840
+whatever the name of the repo would.
+
+01:57.990 --> 01:59.720
+So it would be less than three.
+
+01:59.730 --> 02:10.710
+So let's just call it cloned repo so get well clone that project into this folder now called clone repo
+
+02:11.640 --> 02:22.950
+and inside will be all of the code related to what we just pulled down now if you wanted to continue
+
+02:22.950 --> 02:30.780
+from this package and you want to save your progress in your own repository what you have to do is actually
+
+02:30.780 --> 02:32.180
+change the remote.
+
+02:32.190 --> 02:37.830
+So if we if we type and get removed we'll see that there is actually an origin already here.
+
+02:37.830 --> 02:38.130
+Right.
+
+02:38.220 --> 02:45.530
+And this is pretty much just the name of another repo that this is attached to and that repo is my repo.
+
+02:45.540 --> 02:51.300
+The one that you just pulled this code from but because you cannot push to my repo because I don't want
+
+02:51.300 --> 02:56.370
+that code changing because I want all the students to be able to benefit from the code that is already
+
+02:56.370 --> 02:56.890
+there.
+
+02:57.720 --> 03:05.790
+What you're gonna do is you're gonna remove this remote so you're gonna type get remote remove and then
+
+03:05.850 --> 03:06.920
+origin.
+
+03:07.080 --> 03:07.770
+Right.
+
+03:07.830 --> 03:12.480
+And now you won't have an origin in your remote so you're gonna add your own.
+
+03:12.480 --> 03:18.990
+And first what you have to do is create a new repository and you can call yours whatever you want.
+
+03:19.050 --> 03:26.390
+Let's say you call it cloned repo just for an example when you create this repo.
+
+03:26.390 --> 03:37.730
+You can take this SSA key here and then you can do get remote add origin and then you would just put
+
+03:37.730 --> 03:46.040
+in your SS HQ that just copy it hit enter and now you can push to your repo.
+
+03:46.040 --> 03:49.130
+Anything on this code and you can also pull.
+
+03:49.210 --> 03:57.190
+So what this remote is is essentially it's just a pointer to some repository that is not on your local
+
+03:57.190 --> 03:57.900
+device.
+
+03:58.000 --> 03:58.680
+Right.
+
+03:58.780 --> 04:06.540
+And you want to call it origin because if you use any shorthand like G.G. push or pull in case you're
+
+04:06.540 --> 04:12.770
+using something like Z shell which adds that for you what it will do is it is essentially an alias forget
+
+04:12.810 --> 04:16.440
+push origin master or get pull origin master.
+
+04:16.440 --> 04:18.650
+So naming an origin is just easier for us.
+
+04:18.720 --> 04:25.920
+And now if you push you'll be able to push all the code that you just pulled in from my repo into your
+
+04:25.920 --> 04:26.710
+own repo.
+
+04:26.790 --> 04:32.410
+So if we refresh we should see our code and there at all is now.
+
+04:32.420 --> 04:39.710
+Always remember to also run yarn or npm install so that you download all of the packages related to
+
+04:39.710 --> 04:44.140
+your project and now that you know what to do.
+
+04:44.320 --> 04:47.470
+Let's get started with building our final application.

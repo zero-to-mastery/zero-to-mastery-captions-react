@@ -1,0 +1,151 @@
+WEBVTT
+
+00:00.610 --> 00:07.600
+Now I know one the last few lessons we wrote a lot of Firebase code that was really conceptual and also
+
+00:07.600 --> 00:09.210
+kind of nitty gritty.
+
+00:09.280 --> 00:16.000
+We had to use a lot of fire base functions and a lot of things that we ended up removing because we
+
+00:16.000 --> 00:23.380
+were just simply trying to dynamically update our collections using code rather than manually entering
+
+00:23.500 --> 00:26.780
+each of these into our firestorm.
+
+00:26.800 --> 00:32.560
+But along the way it was really valuable because we learned how to set values inside of our fire store
+
+00:32.650 --> 00:36.550
+as well as create new documents and create new collections.
+
+00:36.880 --> 00:40.010
+Exactly our collections collection now.
+
+00:40.080 --> 00:46.500
+In case anyone is still confused about what we did and what we're trying to do by moving this data into
+
+00:46.570 --> 00:52.650
+firestorm I actually have a quick little diagram that will show you what we did and what we need to
+
+00:52.650 --> 00:59.580
+do moving forward as well from a just conceptual level in this diagram here.
+
+00:59.700 --> 01:05.910
+What we have is this section that represents our fire store and then this section which represents our
+
+01:06.030 --> 01:13.160
+actual front in Crown clothing e-commerce application how we originally had it before and kind of how
+
+01:13.160 --> 01:14.210
+we actually still haven't.
+
+01:14.210 --> 01:17.950
+Now is that we have our application itself.
+
+01:18.170 --> 01:20.810
+We have a redux write an inside of our redux.
+
+01:20.810 --> 01:27.050
+We have our shop producer inside of our shop reducer and our fun application as a whole.
+
+01:27.050 --> 01:30.290
+We have our shop data stored as a file.
+
+01:30.290 --> 01:37.550
+We then pass that into our reducer when we instantiate it and we set that shop data as the initial value
+
+01:37.610 --> 01:40.930
+of the initial state in our last lesson.
+
+01:40.940 --> 01:46.460
+We moved our dynamic shop data into fire store and why is that dynamic.
+
+01:46.490 --> 01:54.500
+Well the data in our fire store database is ever changing because it can be changed by anyone who has
+
+01:54.560 --> 01:56.840
+administrative access.
+
+01:56.840 --> 02:03.500
+If they wanted to update our fire store they would be able to do so let's say for example the management
+
+02:03.500 --> 02:09.920
+team of our e-commerce platform wants to introduce a new spring collection or a new watch collection
+
+02:10.920 --> 02:17.430
+Well it would be really easy for them to just update data or upload new data into the database and then
+
+02:17.430 --> 02:20.600
+any application that needs that data can just pull from it.
+
+02:20.700 --> 02:27.930
+Right now what we're doing inside of our application is we are simply using the shop data file to store
+
+02:27.960 --> 02:34.530
+the data and then pulling it into our shop reducer by importing it and setting as the initial value.
+
+02:35.070 --> 02:40.620
+So this if let's say Management tells us they want new things we'd have to manually update the shop
+
+02:40.620 --> 02:46.620
+data file and this is ineffective because we want to be able to deploy our code and not have to worry
+
+02:47.310 --> 02:52.560
+especially because if you imagine there's multiple applications we have our web application we have
+
+02:52.560 --> 02:56.730
+a mobile application they all want to rely on the same data.
+
+02:56.910 --> 03:02.730
+If new collections come out we should not have to update it manually in two different places the two
+
+03:02.730 --> 03:08.260
+places being one our actual front an application and two in the mobile application.
+
+03:08.430 --> 03:11.360
+Instead what we did was move it into a firestorm.
+
+03:11.640 --> 03:18.390
+And now what we need to do is we need to use our front end application code and pull this data down
+
+03:18.390 --> 03:24.990
+from fire store and then add it to our readers shop reducer dynamically instead of instantiating it
+
+03:25.080 --> 03:28.000
+with this static shop data that we have right now.
+
+03:28.380 --> 03:35.520
+So we want to get rid of that and essentially just pull this data down in from fire store into our application
+
+03:36.620 --> 03:43.220
+and by doing that we're now able to listen for fire store changes whenever this data updates so that
+
+03:43.220 --> 03:46.910
+our application always have the newest data.
+
+03:47.000 --> 03:53.300
+We're still going to store this data inside of our shop producer but we just have to think about how
+
+03:53.300 --> 03:58.400
+we're going to do this and we'll talk about all of this in the next lesson.
+
+03:58.400 --> 04:03.260
+Right now though this is just a quick image that hopefully clears up what it is that we were trying
+
+04:03.260 --> 04:03.950
+to do.
+
+04:05.160 --> 04:11.610
+So in the next lesson we're going to do this portion where we now bring this data from fire store into
+
+04:11.610 --> 04:14.650
+our application and then store it into redux.
+
+04:14.940 --> 04:18.910
+And this is a very common pattern you're going to see in any application.
+
+04:19.110 --> 04:21.030
+So let's do that in the next lesson.

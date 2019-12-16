@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.540 --> 00:09.070
+Now let's finish styling our menu item component so what we need to add to make this component look
+
+00:09.070 --> 00:13.960
+like this component is a white background for our content.
+
+00:13.960 --> 00:22.150
+A hover effect that increases the size of the background image as well as a transition in the opacity
+
+00:22.270 --> 00:26.280
+of that content box whenever we hover over it.
+
+00:26.290 --> 00:28.330
+So how do we do that.
+
+00:28.330 --> 00:36.150
+Well first let's go to our menu item component and let's go to our styles in our content.
+
+00:36.210 --> 00:46.180
+We are going to add a background color of white and an opacity of zero point seven
+
+00:49.490 --> 00:56.420
+and now when we look at our app we see that we have that background.
+
+00:56.520 --> 01:06.010
+As for the font let's go to Google fonts and let's look for open Sands condense we're going to add that
+
+01:06.010 --> 01:14.180
+to our selection and then we'll copy this link that Google provides us.
+
+01:14.280 --> 01:21.540
+Then let's go into our index dot HMO and add it right here underneath are other links that were provided
+
+01:21.540 --> 01:27.550
+for us now inside of our app dot CSI us.
+
+01:27.700 --> 01:35.860
+Let's add a rule where our font family in our body so everything inside of our body tags we want to
+
+01:35.860 --> 01:41.690
+use open sand condense OK.
+
+01:41.800 --> 01:50.510
+Now if we look our application or sorry our content box is styled the way that it was before.
+
+01:50.510 --> 02:00.920
+So how do we capitalize the title while because we're writing javascript we can actually use any javascript
+
+02:00.920 --> 02:02.540
+method that exists on strings.
+
+02:02.570 --> 02:11.210
+So because we know our title of the string we can call to uppercase and this will uppercase our text
+
+02:13.190 --> 02:21.590
+and as far as our hover transition goes this is gonna be a bit of CSI us that I will explain but I don't
+
+02:21.590 --> 02:27.700
+want to go too in-depth about it but I'll definitely cover enough that everything should make sense.
+
+02:27.710 --> 02:38.270
+So what we're gonna do is we are actually going to add a new component first to our menu item component
+
+02:39.330 --> 02:44.910
+so our background image we want it whenever we hover over our menu item to increase.
+
+02:44.910 --> 02:45.640
+Right.
+
+02:45.690 --> 02:56.680
+So we're going to add this class name of background image onto this div and this div is going to get
+
+02:56.680 --> 03:02.460
+that style instead of our containing div.
+
+03:02.520 --> 03:10.120
+Now the reason for this is because we actually don't want this image when it scales to be bigger.
+
+03:10.230 --> 03:10.500
+Right.
+
+03:10.500 --> 03:16.080
+We just want to see the effect get bigger with in our div when we hover over it.
+
+03:17.040 --> 03:26.070
+So the issue here is that some of you might think why don't we just wrap this div around our content
+
+03:26.680 --> 03:31.010
+while the problem is if we increase the size of this div.
+
+03:31.350 --> 03:33.410
+We don't want this to also increase.
+
+03:33.420 --> 03:36.990
+We want the size of our content stay exactly the same.
+
+03:37.050 --> 03:44.960
+So if we do this and we go into our styles we're going to add that background image selector and we're
+
+03:44.960 --> 03:51.260
+gonna give it a width of one hundred percent a height of one hundred percent so that that image is always
+
+03:51.260 --> 03:54.350
+the size of our container.
+
+03:54.350 --> 03:54.690
+Right.
+
+03:54.730 --> 03:59.630
+Wouldn't matter what our menu item container size becomes whether it's large or whether it's regular.
+
+03:59.810 --> 04:08.910
+We wanted to always have and share the same time mentions so then we want to move those background properties
+
+04:09.030 --> 04:18.560
+off of our div and onto our background image and now if we look we'll see that it looks like our content
+
+04:18.590 --> 04:24.540
+is actually inside as a sibling but we don't want this.
+
+04:24.540 --> 04:30.020
+We want our content to always be in the center of our actual menu item.
+
+04:30.870 --> 04:39.390
+So what we're gonna do is we're going to add a display or so when I'm out of position absolute and position
+
+04:39.390 --> 04:46.350
+absolute is saying that no matter what happens no matter what other elements are on the page the position
+
+04:46.470 --> 04:54.120
+of this content will always be what ever the position calculation will be.
+
+04:54.120 --> 05:00.420
+So it's kind of like if we were to add like a right value of 100 pixels which would mean that it's coming
+
+05:00.420 --> 05:07.200
+in from the right side by 100 pixels we're saying that those are the only things that go into the calculation
+
+05:07.200 --> 05:08.710
+of the position of our content right.
+
+05:08.750 --> 05:09.450
+Nothing else.
+
+05:09.450 --> 05:18.550
+So now if we look we'll see that our content is always in the center and now our background image has
+
+05:18.790 --> 05:19.440
+no children.
+
+05:19.450 --> 05:24.900
+Because this removes this from the flow of the elements of our menu item.
+
+05:24.940 --> 05:30.550
+So now the background image is the only item that's getting calculated in its flow so it doesn't consider
+
+05:30.550 --> 05:36.690
+this anymore and now it's taking up the whole size of our menu item.
+
+05:36.750 --> 05:43.500
+Now we need that hover effect and the hover effect is actually going to go in the menu item so I actually
+
+05:43.500 --> 05:45.300
+have that code written for you right here.
+
+05:47.170 --> 05:54.340
+And let's paste that in and take a look at what it does so we're saying that using this hover selector
+
+05:54.390 --> 06:01.050
+right for menu item when you hover over it I want the cursor to go to a pointer instead of a arrow.
+
+06:01.060 --> 06:09.250
+We want the finger and then inside of that we're saying that any element with the class background image
+
+06:09.310 --> 06:13.120
+we want to give it a transform property of scaling it by 1.
+
+06:13.150 --> 06:19.800
+So whenever we hover we want to scale any background image inside of it by one point one.
+
+06:19.800 --> 06:23.950
+So essentially one point one times the size of the current image.
+
+06:23.950 --> 06:24.940
+Right.
+
+06:25.000 --> 06:28.880
+And then our transition property is saying that we want to target the transform.
+
+06:28.900 --> 06:35.650
+So whenever it scales we want to take 6 seconds and then we want to use a cubic bezel a value of this.
+
+06:35.650 --> 06:44.140
+So cubic Basa is a pretty complicated math calculation which determines the speed in which this transformation
+
+06:44.140 --> 06:45.390
+occurs.
+
+06:45.430 --> 06:50.260
+Now it's gonna be a lot to kind of explain this and it's quite a big detour but you can.
+
+06:50.260 --> 06:55.720
+I'm gonna give you a link that will show you how you can understand what cubit basis does but it just
+
+06:55.810 --> 07:00.610
+enables us to have a smoother transition as far as our transform goes.
+
+07:00.610 --> 07:05.440
+And then we're also saying we want to change our content opacity to zero point nine whenever we hover
+
+07:05.440 --> 07:06.640
+over it.
+
+07:06.670 --> 07:11.070
+Now if we look we see that our image is growing right.
+
+07:11.080 --> 07:16.130
+But it seems to be growing outside of the size of our menu item.
+
+07:16.240 --> 07:19.810
+So this is an overflow and we don't want that right.
+
+07:19.840 --> 07:21.470
+But we're getting that effect.
+
+07:21.490 --> 07:29.890
+So what we're going to do on our menu item is we're gonna do overflow hit it and now if we look we'll
+
+07:29.890 --> 07:38.890
+see that we have our transition effect and just like that our menu item now looks like our final product
+
+07:40.080 --> 07:44.610
+now before we continue let's just commit all our changes.
+
+07:44.610 --> 07:56.190
+Let's go back to our terminal and let's just add everything that we've done so we have broken our home
+
+07:56.190 --> 08:11.610
+page into smaller components and then we also finished styling our menu item component OK and now let's
+
+08:11.610 --> 08:12.750
+push to master
+
+08:15.860 --> 08:16.280
+awesome.
+
+08:16.690 --> 08:24.230
+OK now that we finished styling our menu item and our home page we're going to tackle routing and how
+
+08:24.230 --> 08:27.520
+we're going to render different pages in the next lesson.

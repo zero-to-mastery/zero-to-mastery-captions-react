@@ -1,0 +1,79 @@
+WEBVTT
+
+00:00.830 --> 00:10.660
+Now the next one we're going to look at is filter so to understand filter let's go back to our browser
+
+00:10.660 --> 00:22.040
+console so filter is very similar to map in the sense that it's also going to take a function that gets
+
+00:22.130 --> 00:25.070
+iterated over each element in our array.
+
+00:25.580 --> 00:38.750
+So let's do this again except this time I'm going to say my array is equal to 1 3 5 7 9 now.
+
+00:38.960 --> 00:41.500
+Filter is exactly as it sounds.
+
+00:41.750 --> 00:51.520
+We want to filter out the elements in our array based off of the function that we pass it and filter
+
+00:51.580 --> 00:58.260
+will also give us back a new array instead of modifying my array.
+
+00:58.340 --> 01:06.250
+So what we're gonna do in order to use filter is we're going to write dot filter and just like earlier
+
+01:06.280 --> 01:12.820
+with DOT math we're gonna get the element as the argument over function and what we're going to return
+
+01:12.880 --> 01:17.110
+is actually a true or false value.
+
+01:17.350 --> 01:24.280
+So let's say for example I wanted to filter out anything that was less than five.
+
+01:24.320 --> 01:36.980
+Well I would essentially say if the element is greater than four right so whatever returns true will
+
+01:36.980 --> 01:40.940
+be the thing that gets kept in our array.
+
+01:40.970 --> 01:47.660
+So whatever element we'll get kept in our array is based on whether or not the evaluation of this is
+
+01:47.660 --> 01:48.940
+true.
+
+01:48.950 --> 01:53.970
+So if for example we just return true Well we would get back our whole array.
+
+01:54.110 --> 01:55.850
+If we return false.
+
+01:55.850 --> 01:56.530
+Right.
+
+01:56.870 --> 02:06.710
+We would get back nothing so if we wanted just whatever was five or greater then we would say as long
+
+02:06.710 --> 02:16.530
+as the element is greater than four because if the element is one one is not greater than four.
+
+02:16.530 --> 02:17.310
+Right.
+
+02:17.370 --> 02:26.720
+So that will be false and that's why it'll filter out 1 and 3 and this array that we get back is a new
+
+02:26.720 --> 02:34.720
+array my array is still the same array and that's what filter is.
+
+02:34.740 --> 02:45.570
+So remember that filter also returns back a new array except it filters out the anything where the function
+
+02:45.870 --> 02:49.770
+condition returns false.
+
+02:49.770 --> 02:53.970
+Anything that returns true it'll keep in the new array.

@@ -1,0 +1,220 @@
+WEBVTT
+
+00:00.660 --> 00:08.230
+What we're going to tackle now is grouping the cart items inside of our cart reducer.
+
+00:08.340 --> 00:17.120
+So if I add this item four times what we will have is the same for items inside of our car.
+
+00:17.120 --> 00:20.430
+Items array which we don't want.
+
+00:20.610 --> 00:29.520
+We want to instead just add some quantity property to this object and increase or decrease it based
+
+00:29.520 --> 00:36.700
+on whether or not we add the same item or we want to remove the same item from our cart.
+
+00:36.720 --> 00:39.870
+Now how do we tackle this.
+
+00:39.900 --> 00:45.810
+Well we're going to write a utility function for this and there's actually many ways to handle this
+
+00:46.230 --> 00:55.600
+but I'm going to write the way that best obeys relax rules the rule being that when ever we make this
+
+00:55.690 --> 01:02.430
+update we always want to return a new array even if the object stays the same.
+
+01:02.440 --> 01:09.160
+And we're just increasing the property because in order for change detection to trigger we have to remember
+
+01:09.190 --> 01:16.150
+that if the object that is being used as a property to display stays the same and simply a property
+
+01:16.150 --> 01:20.020
+changes react will not re render the component.
+
+01:20.020 --> 01:28.510
+So we need to make sure that every time we pass in a new object with an increase in that quantity value
+
+01:29.170 --> 01:31.020
+so let's actually write this code.
+
+01:32.400 --> 01:38.100
+So the first thing we're going to do is we are going to know that we need to call that function that
+
+01:38.100 --> 01:46.020
+we're about to write on our reduce code and we are going to make it inside of a new file called cart
+
+01:46.050 --> 01:49.500
+dot utilize dot J S inside of here.
+
+01:49.530 --> 01:58.790
+We can add any utility functions related to our cart redux code so what I'm going to write is first
+
+01:59.330 --> 02:07.350
+this function called add item to cart which is gonna take two arguments.
+
+02:07.350 --> 02:16.710
+The first is all the existing cart items that are in our cart items array right now and then the second
+
+02:17.010 --> 02:25.240
+item is going to be the cart item that we want to add because what we are gonna do is we're going to
+
+02:25.240 --> 02:33.280
+look inside of our existing cart items to see if that cart item already exists and we are going to actually
+
+02:33.280 --> 02:35.660
+write that in this code.
+
+02:35.690 --> 02:39.470
+So we're gonna set it to the value of existing cart item.
+
+02:39.470 --> 02:47.630
+If cart items stuff find is true and cart items defined we'll return you the first item found in our
+
+02:47.630 --> 02:54.260
+array based off a condition that we pass in here and the condition is based off of this function where
+
+02:54.260 --> 03:01.880
+we get each individual cart item and we'll check the car items I.D. if it matches the cart item we're
+
+03:01.880 --> 03:03.230
+trying to add I.D.
+
+03:06.430 --> 03:12.270
+if it matches it we'll set that cart item where this condition is true to our constant.
+
+03:12.520 --> 03:17.470
+If it doesn't find anything after looping through all of it it will be undefined.
+
+03:17.470 --> 03:23.920
+So then we're going to check well if existing cart item exists then what we're going to return from
+
+03:23.920 --> 03:32.310
+our entire function is our car item stop map because car times not map will return us a new array and
+
+03:32.320 --> 03:39.850
+we remember that we need to return new versions of our state so that our components know to re render
+
+03:39.850 --> 03:45.430
+properly now what we're going to pass is cart item right inside of our dot map.
+
+03:45.430 --> 03:54.370
+So again each car item and we will do the same thing where if cart item to I.D. is equal to our car
+
+03:54.370 --> 04:08.660
+item to add dot idea then we will create a new object where we have the cart item except the quantity
+
+04:10.400 --> 04:16.670
+will be cart item quantity plus one.
+
+04:16.760 --> 04:22.120
+Now we don't have a quantity yet but we're going to solve that after.
+
+04:22.220 --> 04:28.340
+So first what we'll do is if that item doesn't match.
+
+04:28.360 --> 04:33.880
+We just want to return the original car item because there's no need to update any of the components
+
+04:33.880 --> 04:35.810
+that might be relying on our object.
+
+04:35.810 --> 04:38.440
+All right so we don't need to make any modifications.
+
+04:38.440 --> 04:41.810
+We'll just return the item as it is now.
+
+04:41.990 --> 04:51.000
+If the car item is not found inside of our array then we want to return a new array with all of our
+
+04:51.000 --> 04:54.130
+existing car items that were already there.
+
+04:54.540 --> 05:02.820
+But we also want to now add in an object which is equal to our cart item to add except we're gonna give
+
+05:02.820 --> 05:05.240
+it a base quantity of one.
+
+05:05.340 --> 05:11.820
+And this way whenever we add our car items in any subsequent cart items we'll be able to reference that
+
+05:11.820 --> 05:17.840
+quantity value that we have added to our objects when we store them.
+
+05:17.910 --> 05:21.480
+And now we just have to import this into our reducer
+
+05:24.890 --> 05:32.190
+from cart utilize and it is called add item to cart.
+
+05:32.540 --> 05:39.590
+And now we just have to replace this code with our add item to cart passing in our state dog cart items
+
+05:41.070 --> 05:48.840
+as well as our action payload which is the item that we want to add and now we actually need to make
+
+05:48.840 --> 05:50.630
+one more modification.
+
+05:50.850 --> 05:57.600
+So in our shop data code I accidentally set it so that the I.D. of the items actually repeat.
+
+05:57.600 --> 06:03.870
+So even though they're unique in their respective array so I was going to raise reference the same I.D.
+
+06:04.500 --> 06:10.440
+and based on the code we wrote this will cause a problem because it'll say that Brown brim is actually
+
+06:10.440 --> 06:13.650
+the same idea as Adidas NMD.
+
+06:13.650 --> 06:22.260
+So I've provided a new file with the updated simply so that the ideas are all unique on the items themselves.
+
+06:22.380 --> 06:28.020
+So you just need to replace this array with the new Array that I gave you
+
+06:31.100 --> 06:36.200
+and now we save that and if we check our code we'll see that.
+
+06:36.230 --> 06:44.670
+Let's say I add this brown brim hat we look inside of our cart items and there is our object except
+
+06:44.670 --> 06:47.790
+with the one quantity.
+
+06:47.790 --> 06:56.010
+But if I add it two more times if we look in our cart we'll see that our objects quantity value has
+
+06:56.100 --> 06:57.090
+increased.
+
+06:57.270 --> 06:59.790
+Which is exactly what we want to do.
+
+06:59.940 --> 07:08.070
+We are grouping our items together based on this quantity value and what we're also now able to do is
+
+07:08.130 --> 07:18.900
+if we need to create some kind of remove action we can easily do so because we have this quantity value
+
+07:18.930 --> 07:28.410
+as well so before we go on and build the actual cart component that displays the items inside of our
+
+07:28.410 --> 07:39.650
+cart dropdown let's commit our code so let's just check and we have some pretty simple stuff so we'll
+
+07:39.650 --> 07:55.520
+just say updated shop data with new data and then updated cart utilize to group items in cart reducer
+
+07:56.660 --> 07:57.750
+we'll push this up
+
+08:01.010 --> 08:01.780
+and let's move on.

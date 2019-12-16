@@ -1,0 +1,163 @@
+WEBVTT
+
+00:01.540 --> 00:02.760
+Welcome back.
+
+00:02.770 --> 00:10.360
+Let's use snapshot testing to test some of these other simple presentational components that are completely
+
+00:10.360 --> 00:11.200
+stateless.
+
+00:11.480 --> 00:13.230
+Since we saw how easy that is.
+
+00:13.450 --> 00:21.240
+So let me make this a little bit smaller and make sure we on NPM test to have it running in the background
+
+00:25.770 --> 00:31.730
+we see that our test or our car component is being tested now.
+
+00:32.040 --> 00:39.610
+So let's create another one let's create a test for the car list component.
+
+00:39.610 --> 00:45.290
+Now I'm going to remove the console log here because we don't need it and let's create a car list dot
+
+00:45.290 --> 00:52.190
+test file so a card list dot test dot J.S.
+
+00:55.880 --> 01:01.910
+and again it's failing because we need to make sure we have at least a single test we can actually go
+
+01:01.910 --> 01:09.080
+back to card dot test us and just copy and paste this go to car list component.
+
+01:09.290 --> 01:17.980
+Copy and paste whatever we had and just change our component to cordless so let's just do that quickly
+
+01:19.020 --> 01:22.720
+we can just select all of these and say card list.
+
+01:23.010 --> 01:28.970
+Let me save and we have some fails here.
+
+01:28.990 --> 01:37.880
+Let's see why we see that we get a type error cannot read property map of undefined and that is because
+
+01:38.210 --> 01:45.160
+card list you see card component is just rendering name and email but it's not doing anything to it.
+
+01:45.170 --> 01:50.920
+So if it doesn't get name in email I'll just render undefined when we go to card list.
+
+01:51.080 --> 01:55.990
+We see that we're actually receiving the robots and we need to map over them.
+
+01:56.480 --> 01:59.840
+But in our test we're a rendering card or.
+
+02:00.020 --> 02:01.190
+Let's go to car list.
+
+02:01.190 --> 02:02.120
+I'm going to close this.
+
+02:02.120 --> 02:04.370
+So we don't get confused.
+
+02:04.370 --> 02:06.200
+We're not passing down robots.
+
+02:06.590 --> 02:15.000
+So in this test when we try and render card lists it's going to fail because there's no robots to map
+
+02:15.000 --> 02:16.200
+over.
+
+02:16.200 --> 02:28.450
+So let's fix that all we need to do here is just mock our robots so we can just say const robots or
+
+02:28.450 --> 02:35.590
+let's just say mock robots is going to equal an array of some dummy data that we can create.
+
+02:35.590 --> 02:47.560
+So let's say that this is going to have an I.D. of one and we'll have the name of John Snow
+
+02:50.510 --> 02:59.560
+let's say user name is going to be John John and let's say that email.
+
+02:59.630 --> 03:03.620
+I don't think we're using your user name but I wanted to give that user name anyway.
+
+03:03.620 --> 03:08.870
+It is going to be John at gmail dot com now.
+
+03:08.990 --> 03:11.510
+We can just pass our mock robots
+
+03:15.090 --> 03:17.280
+as the robots
+
+03:20.760 --> 03:21.800
+so let's see if that works.
+
+03:21.960 --> 03:24.830
+I'm going to save all right.
+
+03:24.950 --> 03:33.300
+And we have our tests passing and if we go to our snapshot we see that we have a card list snapshot
+
+03:33.360 --> 03:35.020
+as well.
+
+03:35.080 --> 03:35.620
+That's good.
+
+03:35.620 --> 03:41.860
+Our tests failed because we weren't passing robots and while we want to make sure that we actually pass
+
+03:42.070 --> 03:49.660
+those properties and you can imagine you can probably do the same thing with card as well or maybe have
+
+03:49.660 --> 03:57.100
+a default in this component where if you don't receive name email and I.D. that it has some sort of
+
+03:57.400 --> 04:02.360
+an error boundary or an output that it does for the user.
+
+04:02.490 --> 04:12.150
+We now see the power of snapshot testing we see how we can mock some of our properties and you might
+
+04:12.450 --> 04:19.290
+want to just go ahead and do snapshot testing for some of these other cases that are quite simple to
+
+04:19.290 --> 04:22.020
+do to increase our test coverage.
+
+04:22.020 --> 04:28.170
+And I'm going to leave that up to you because well just to give you a bit of extra practice so let's
+
+04:28.170 --> 04:33.720
+move on to the next video where we do some things that are a little bit more difficult but just the
+
+04:33.720 --> 04:34.200
+check.
+
+04:34.650 --> 04:40.980
+Let's do our coverage to make sure that our coverage for the car list is now looking good to make this
+
+04:40.980 --> 04:43.980
+a little bit bigger and we see that.
+
+04:44.020 --> 04:44.450
+Yep.
+
+04:44.560 --> 04:45.450
+Look at that.
+
+04:45.550 --> 04:47.720
+Feels good getting 100 percent doesn't it.
+
+04:47.750 --> 04:52.910
+Carla's component is now well tested as well I'll see in the next one Bye.

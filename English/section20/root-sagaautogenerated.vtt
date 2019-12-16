@@ -1,0 +1,145 @@
+WEBVTT
+
+00:00.670 --> 00:09.030
+So we just learn about using take latest versus take every versus take let's actually switch our take
+
+00:09.060 --> 00:17.430
+every call here over to using take latest because in theory we only want to issue this API call one
+
+00:17.430 --> 00:26.180
+time versus firing multiple that might resolve multiple times if take latest ever fires multiple times.
+
+00:26.430 --> 00:32.220
+The last one is probably going to get the most up to date data from our database so it's safe to say
+
+00:32.220 --> 00:34.970
+using take latest is the best option.
+
+00:35.860 --> 00:44.410
+Now one thing that we're going to do next is we're actually going to create what's called a root saga
+
+00:45.160 --> 00:47.530
+just like a root reducer.
+
+00:47.530 --> 00:54.300
+We're going to make a root saga that issues and calls all of our other sagas.
+
+00:54.310 --> 01:01.630
+The reason for this is because inside of our saga middleware run if we wanted to run multiple sagas
+
+01:01.660 --> 01:07.780
+or have our saga middleware listening for multiple sagas we have to call dot run individually on every
+
+01:07.780 --> 01:10.480
+single saga that we want to be aware of.
+
+01:11.290 --> 01:15.280
+So instead what we'll do is we will run all of them at once.
+
+01:15.280 --> 01:19.210
+Once the application starts up in one large saga.
+
+01:19.360 --> 01:31.100
+So in order for us to do that we are going to make a route saga digest and inside we will import this
+
+01:31.580 --> 01:38.890
+new effect caught all and the call effect that we've used before.
+
+01:38.980 --> 01:49.260
+Now what we're going to export out is going to be a function that is a generator function called Root
+
+01:49.260 --> 01:59.150
+saga and what it does is it yields to this all call which gets an array of generators that we invoke.
+
+01:59.150 --> 02:04.600
+Now the saga that we do want to run first will be are
+
+02:07.270 --> 02:08.540
+tax collections start
+
+02:12.170 --> 02:16.310
+from our shop shops August
+
+02:19.280 --> 02:26.870
+and then inside of here we can either invoke it ourselves manually like so or we can just run call like
+
+02:26.870 --> 02:27.530
+this.
+
+02:29.810 --> 02:30.800
+Again it's preference.
+
+02:30.800 --> 02:38.830
+But most people prefer to use the call keyword here just because of practices and we import.
+
+02:38.840 --> 02:42.590
+This one saga in two are reducer.
+
+02:42.740 --> 02:52.520
+So instead of running this one as we did here we instead now just import in our route saga from Route
+
+02:52.520 --> 02:53.000
+saga
+
+02:56.640 --> 03:05.010
+and now we'll see our code works the same except whenever we add a new saga that we want to listen for.
+
+03:05.110 --> 03:13.360
+We just put it into this array write and call that saga just like we did with root reduces and our producers
+
+03:15.670 --> 03:17.400
+let's actually take a look at all.
+
+03:17.530 --> 03:23.980
+What is it that all does well all takes an array of sagas.
+
+03:23.980 --> 03:29.690
+If we wanted to say render three different sagas imagine we had three sagas.
+
+03:30.010 --> 03:34.240
+Typically what we would have to do is we would do this multiple times right.
+
+03:34.270 --> 03:39.470
+We would yield these different sagas right.
+
+03:39.470 --> 03:46.060
+Imagine the three different sagas we would have to write our code like this but this code is not running
+
+03:46.090 --> 03:49.060
+these three individual sagas concurrently.
+
+03:49.240 --> 03:56.440
+This next yield is actually waiting for this yield and this saga to resolve with some value or at least
+
+03:56.470 --> 04:04.450
+when that saga leaves at some point which gives control back to our roots saga so that it can continue
+
+04:04.540 --> 04:07.460
+on to executing the next saga.
+
+04:07.520 --> 04:08.390
+We don't want that.
+
+04:08.390 --> 04:14.990
+We want all our code to pretty much initialize as soon as possible side by side and that's what all
+
+04:14.990 --> 04:19.050
+allows us to do by using the yield all call.
+
+04:19.280 --> 04:28.550
+We're able to actually call any number of sagas inside of this array and initialize them all on separate
+
+04:28.550 --> 04:34.640
+task streams which is exactly as we learned with take every what we want to do we want to be able to
+
+04:34.640 --> 04:40.580
+have individual tasks that only care about the saga that they're looking for right and we want to initialize
+
+04:40.580 --> 04:47.590
+them all at once whenever possible and that's why we use the all effect.
+
+04:47.760 --> 04:54.120
+But with this we now have set up this pattern that allows us to add all our sagas to this root saga
+
+04:54.300 --> 04:59.280
+and not have to worry about adding more and more saga middleware to run calls.

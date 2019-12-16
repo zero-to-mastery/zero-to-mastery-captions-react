@@ -1,0 +1,382 @@
+WEBVTT
+
+00:01.080 --> 00:07.920
+So we wrote our first toggle car hit a mutation and we used it to leverage the local cache state of
+
+00:07.920 --> 00:16.230
+Apollo in order to modify our application so that now our cart hidden is stored in Apollo instead of
+
+00:16.230 --> 00:18.030
+redux.
+
+00:18.040 --> 00:19.000
+Now that's really good.
+
+00:19.000 --> 00:24.220
+With something where it's an easy boolean value that we're switching.
+
+00:24.220 --> 00:29.470
+But what about something more complicated like updating an array of some kind.
+
+00:29.470 --> 00:31.990
+Well that's exactly what we're gonna do next.
+
+00:32.020 --> 00:39.010
+What we're gonna do next is we are going to modify our array of carte items whenever the user adds them
+
+00:39.010 --> 00:48.820
+to their cart and by doing so hopefully we'll be able to see more of the way that we write these mutations.
+
+00:48.860 --> 00:56.690
+So what we're going to do is we're going to first identify what the actual initial state of the data
+
+00:56.690 --> 00:58.640
+will be for our cart item.
+
+00:59.360 --> 01:06.650
+So for us of course we know that we're gonna call it cart items as we did in our reducer with our cart
+
+01:06.650 --> 01:12.890
+reducer and we're gonna set it as a default value of an empty array.
+
+01:12.920 --> 01:22.150
+Now what we want to do inside of our resolves is we want to add in something to our item.
+
+01:22.400 --> 01:26.810
+So we know that whenever we add items we increase the quantity.
+
+01:26.900 --> 01:27.580
+Right.
+
+01:27.620 --> 01:35.270
+We had some code inside our cart utilized where depending on if the item was already in the cart or
+
+01:35.270 --> 01:41.210
+not we would either increase the quantity or add a new quantity.
+
+01:41.540 --> 01:44.140
+So we're gonna have to do something similar.
+
+01:44.420 --> 01:50.630
+So inside of our resolve as though we need to make sure that our code knows that that object that is
+
+01:50.630 --> 01:55.320
+an item might have this quantity property.
+
+01:55.640 --> 01:59.000
+So we'll say extend type item.
+
+01:59.000 --> 02:05.390
+So we're extending from the item type inside of our database in our graph queue all server and we want
+
+02:05.390 --> 02:11.220
+to put this new quantity value and it's going to be an integer that might or might not be there.
+
+02:13.210 --> 02:21.520
+Now inside of our mutation we know that we need our new add item to cart method and this is going to
+
+02:21.520 --> 02:31.880
+take an item which is going to be an item and what this returns back to us is an array of items.
+
+02:31.900 --> 02:34.340
+Now there may be items there they might not be items there.
+
+02:34.350 --> 02:41.660
+Well we don't have to ensure that this item exists in here but we know that this array must come back.
+
+02:41.770 --> 02:46.120
+Now what we're gonna do is we are going to write that new mutation.
+
+02:46.300 --> 02:55.900
+So we are going to say here after our toggle cart hit a mutation or add item to cart inside of here
+
+02:56.410 --> 03:04.680
+we are going to ignore the root and we are going to pass in a variable called item.
+
+03:04.680 --> 03:08.450
+So this item is going to represent the item we want to add to our cart.
+
+03:08.460 --> 03:20.030
+So here we'll just make sure to pluck it off of our arguments object and then we also want our cache.
+
+03:20.080 --> 03:28.840
+So what we're going to do is we are going to first get the cart items off of our cache state and what
+
+03:28.840 --> 03:34.330
+we're going to do is we're going to run those cart utilize that we did inside of our reducer that we're
+
+03:34.330 --> 03:41.580
+used to so we're actually going to copy these can't utilize and we're going to put them inside of our
+
+03:41.580 --> 03:47.810
+new graph Q all folder where we're going to use them whereas right here.
+
+03:47.880 --> 03:49.670
+So let's just drop them in here
+
+03:53.080 --> 03:59.650
+and now we have access to our add item to cart function which we're going to use so let's import that
+
+03:59.650 --> 03:59.820
+in
+
+04:02.560 --> 04:11.660
+from our cart details folder file sorry and now inside of our resolve our what we're going to do is
+
+04:11.660 --> 04:18.080
+we're going to first pluck off our cart items because as you remember this function expects both the
+
+04:18.110 --> 04:24.990
+cart items that currently exist and then the cart item we're trying to add now back inside of our resolve
+
+04:24.990 --> 04:31.760
+our we're going to need to pull off the cart items the same way that we did inside of our target cart
+
+04:31.760 --> 04:35.090
+hidden where we pulled off the cart hidden value.
+
+04:35.090 --> 04:45.290
+So let's write that query and we'll call it get cart items which is equal to this GQ El object where
+
+04:45.290 --> 04:54.650
+we simply pull cart items from the client almost identical to our pull car hidden query and now what
+
+04:54.650 --> 05:02.960
+we're going to do is we are just going to add that to our actual resolve or definition by saying that
+
+05:02.960 --> 05:16.690
+we get the cart items from the return of cash dark read query where we pass in our new query.
+
+05:16.700 --> 05:22.490
+Now of course the items will be the carte items that we're pulling from in our query.
+
+05:22.490 --> 05:30.220
+So we're just structuring them off and then what we're going to do is we are going to make the new carte
+
+05:30.280 --> 05:33.110
+items as a constant.
+
+05:33.370 --> 05:40.360
+And this is going to be our function where we add item to cart passing in our existing cart items as
+
+05:40.360 --> 05:43.070
+well as the new item we're trying to add.
+
+05:43.090 --> 05:48.640
+So now this will give us back the array that we're used to getting back whenever we called our add item
+
+05:48.640 --> 05:58.470
+to cart function next what we're going to do is we're going to say cache dot right query so just like
+
+05:58.470 --> 05:59.270
+we did here.
+
+05:59.310 --> 06:12.990
+We're going to write to this query of get cart items except now the data goes to our car items and our
+
+06:12.990 --> 06:14.840
+new car items.
+
+06:14.850 --> 06:21.640
+And that's literally all it is and then we're just gonna return our new car items so if you've noticed
+
+06:21.640 --> 06:26.380
+this pattern pretty much looks exactly like what we had up here.
+
+06:26.380 --> 06:30.640
+Any transformations we need to make we just do them inside of the function.
+
+06:30.640 --> 06:34.260
+We just make sure to return what it is that we're getting as the new values.
+
+06:34.270 --> 06:41.140
+And then we set them with cash right query and now we have the ability to add items to the cart lowercase
+
+06:41.150 --> 06:44.670
+that I accidentally kept that capital Yeah.
+
+06:44.730 --> 06:47.200
+So we have this mutation now.
+
+06:47.260 --> 06:53.890
+So now we can actually update our code to both use our car items inside of our cart dropdown as well
+
+06:53.890 --> 07:00.910
+as modify our checkout item or our collection item so that whenever you click the Add it adds the item
+
+07:00.910 --> 07:09.790
+to our cart items so let's do that inside of our cart dropdown first so inside of our cart dropdown
+
+07:10.830 --> 07:17.480
+we need to remove our current redux bindings what we have is this map states a props that we don't need
+
+07:17.480 --> 07:24.440
+anymore because this was what was pulling in the cart items but now we're going to use our local query.
+
+07:24.440 --> 07:28.690
+So let's get rid of this connect because we don't need that either.
+
+07:28.850 --> 07:36.240
+And then we can remove our imports that are calling our redux libraries that bring those in.
+
+07:36.530 --> 07:41.690
+Now we do have this last dispatch as well and we don't want to use this either.
+
+07:41.690 --> 07:49.040
+Instead now what we want to do is use the new toggle hidden that we have inside of our mutation.
+
+07:49.190 --> 07:54.760
+So I'm going to show you how we can actually add both the query and mutation to this cart dropdown component.
+
+07:55.640 --> 08:03.470
+So let's get rid of this dispatch let's get rid of this toggle car hin and instead here let's just call
+
+08:03.530 --> 08:14.820
+toggle cart hidden which is a prop that will pass in now inside of our car dropdown we will make a new
+
+08:14.880 --> 08:24.600
+cart dropdown container of Duchess X and what we'll do is we will import in react from react
+
+08:27.970 --> 08:36.310
+and we'll import in both our query and our mutation components because we need both our mutation and
+
+08:36.310 --> 08:40.340
+our query and I'll show you how we can actually write that out.
+
+08:41.160 --> 08:42.890
+So let's just first import energy.
+
+08:43.040 --> 08:45.990
+Well from Apollo boost
+
+08:49.260 --> 08:50.080
+and then import.
+
+08:50.100 --> 08:51.930
+In our cart dropdown component
+
+08:55.520 --> 09:02.960
+what we need is we need both the cart dropdown selector as well as the mutation selector that we wrote
+
+09:02.960 --> 09:03.690
+before.
+
+09:03.830 --> 09:04.730
+So not selector.
+
+09:04.760 --> 09:13.330
+The actual query object so we can use the same one that we had inside of our cart icon container
+
+09:16.740 --> 09:18.680
+just copy this over.
+
+09:18.690 --> 09:23.760
+Now again as the scales you might want to move these into their own files that we can just import from
+
+09:24.850 --> 09:26.560
+but right now it's not too big of a deal.
+
+09:27.860 --> 09:35.180
+And we also want to make sure that we get the get cart items that we just wrote right.
+
+09:35.310 --> 09:42.930
+The new get cart items that we have stored in our local cache so this will be equal to GQ Elle of an
+
+09:42.930 --> 09:46.650
+object or its cart items on the client
+
+09:49.600 --> 09:52.460
+so hopefully now this pattern is beginning to make sense.
+
+09:52.480 --> 09:54.910
+We've been writing it pretty much the same way.
+
+09:55.030 --> 10:02.930
+And this container pattern is very similar to what we've done already for the last few lessons and now
+
+10:02.930 --> 10:09.080
+we're just gonna write our card dropdown container which is equal to this function that will return
+
+10:09.080 --> 10:10.550
+back.
+
+10:10.550 --> 10:18.560
+So here what we're gonna do is we are just going to wrap both of our new query and mutation components
+
+10:18.650 --> 10:20.710
+around our cart dropdown component.
+
+10:20.780 --> 10:22.820
+The order does not really matter.
+
+10:22.910 --> 10:28.700
+You just have to make sure that you write the functions so that you get access to the actual value that
+
+10:28.700 --> 10:31.650
+we're trying to get from either the query or the mutation.
+
+10:32.030 --> 10:37.640
+So we can start with the mutation and we'll pass in our toggle cart hidden
+
+10:41.760 --> 10:50.280
+and then inside of here we have our function or we get the toggle part hidden and inside of this function
+
+10:50.320 --> 11:00.130
+what we will turn back is our query and in this query what we'll get back is are get cart items as the
+
+11:00.130 --> 11:00.490
+query
+
+11:04.900 --> 11:09.590
+and in here will be another function that gives us back our data.
+
+11:10.770 --> 11:13.070
+Which we know will be our cart items
+
+11:17.730 --> 11:21.120
+and out of this function will finally return our cart dropdown
+
+11:25.380 --> 11:28.460
+so hopefully that's not too too confusing right.
+
+11:28.470 --> 11:34.080
+This mutation is is a function that gives us our tall car hidden which in turn returns our query which
+
+11:34.350 --> 11:41.810
+gives us our data which all is wrapped around our car dropdown so here we're gonna pass our car items
+
+11:41.840 --> 11:44.770
+in as the cart items.
+
+11:44.980 --> 11:55.370
+And we're also going to pass in our toggle cart hidden as toggle cart hit in and now let's export this
+
+11:55.460 --> 11:59.410
+as the default value.
+
+11:59.460 --> 12:06.990
+So now that we have our new export ID card dropdown container we have to make sure that change where
+
+12:06.990 --> 12:14.860
+we were using our old cart dropdown inside of our header so here we're gonna say default as card dropdown
+
+12:15.490 --> 12:23.770
+and then change the component to container and now if we look we should see that we have our new card
+
+12:23.800 --> 12:28.750
+dropdown bound to our current toggle card hidden mutation.
+
+12:28.750 --> 12:31.190
+So if we click it we see it hides it.
+
+12:31.420 --> 12:33.070
+So everything is working.
+
+12:33.070 --> 12:39.430
+The only thing now is we have to modify our checkout item so that we're able to add those items into
+
+12:39.430 --> 12:40.890
+our cart.
+
+12:40.960 --> 12:43.240
+So let's do that in the next lesson.

@@ -1,0 +1,220 @@
+WEBVTT
+
+00:00.870 --> 00:09.330
+Before we dive deeply into building our big final react project we have to take some time to better
+
+00:09.450 --> 00:11.930
+understand class components.
+
+00:12.210 --> 00:19.770
+More specifically we have to understand the lifecycle methods that are present on them that we can leverage
+
+00:19.830 --> 00:25.530
+when writing our class components now inside of our monsters Rolodex project.
+
+00:25.540 --> 00:33.850
+We only used component did mount but there's actually a couple others that we need to explore because
+
+00:33.850 --> 00:42.180
+they all serve different purposes and they all trigger at different times in a components lifecycle.
+
+00:42.340 --> 00:46.880
+And I will show you what that is throughout the next couple lessons.
+
+00:47.050 --> 00:52.960
+But before we do that I'm just going to show you what this quick little crate reactive app project that
+
+00:52.960 --> 00:56.890
+I've got is about now.
+
+00:56.990 --> 01:03.440
+This is just a quick CRM project that I spun up the same way that we did with our monsters rolodex.
+
+01:03.440 --> 01:10.280
+Except I only want to use it for demonstration purposes of learning these concepts.
+
+01:10.280 --> 01:17.780
+Now if you want I have included the github link to this project but honestly it's not much that you
+
+01:17.780 --> 01:19.340
+need to code along with.
+
+01:19.490 --> 01:26.660
+It's more for you to see and watch and listen while I explain these upcoming concepts.
+
+01:26.660 --> 01:33.980
+But all this project really comprises of is it's slightly modified of what the base project that create
+
+01:33.980 --> 01:43.040
+react app gives us and in it I've just modified our app component to have these two buttons that decide
+
+01:43.100 --> 01:46.910
+on what to show for our lifecycle component.
+
+01:46.910 --> 01:51.920
+Now I know this lifecycle looks component just looks like a bit of text right now but I just put it
+
+01:51.920 --> 01:54.730
+here so that you can see whether or not it's there or not.
+
+01:55.030 --> 02:01.610
+And what I mean by that is whenever you click this toggle lifecycle button you'll see that that component
+
+02:01.610 --> 02:03.080
+disappears right.
+
+02:03.170 --> 02:09.170
+I'm pulling it off the DOM based on whether or not you've clicked or toggled the lifecycle button.
+
+02:10.450 --> 02:15.580
+And then the update text button whenever you click we'll just put this underscore.
+
+02:15.580 --> 02:16.470
+Hello.
+
+02:16.540 --> 02:22.920
+And the more you click it the more underscore hellos get appended to that text.
+
+02:22.940 --> 02:25.500
+Now let me show you what the code looks like.
+
+02:27.410 --> 02:34.860
+Now as you can see from the folder structure it's pretty much just the base create react at Project.
+
+02:34.890 --> 02:41.100
+The only difference is that we have this lifecycle component that will look at a little later that I
+
+02:41.190 --> 02:47.160
+import into our app component and then I append it right here.
+
+02:47.160 --> 02:52.950
+Now we'll explore this code but the first thing that we need to notice is that our app of course is
+
+02:52.950 --> 02:58.880
+a class based component that has a state where the initial values are.
+
+02:58.920 --> 03:05.020
+This show child property that is a boolean with the default value being true.
+
+03:05.370 --> 03:10.230
+And then this text value which is a string with the default value being an empty string
+
+03:13.390 --> 03:18.670
+if you ignore this div in this header in this image because these are pretty much just presentational
+
+03:18.750 --> 03:20.020
+HD him the elements.
+
+03:20.020 --> 03:28.970
+The main thing is to look at is these two buttons and then of course this code right here in this button.
+
+03:29.150 --> 03:37.130
+We have this on click that will fire off our function that calls set state where we set the show child
+
+03:37.130 --> 03:45.980
+property of our state equal to the opposite value of what it was currently we do that by using this
+
+03:45.980 --> 03:47.370
+bang operator.
+
+03:47.510 --> 03:55.340
+And what this bang operator does is it evaluates any boolean or any value to the opposite value that
+
+03:55.340 --> 03:56.270
+it is.
+
+03:56.270 --> 04:04.370
+So for example if show child is true then I want to set the state value of show child to the opposite
+
+04:04.370 --> 04:13.540
+value meaning that it will be bang true which is equal to False bang just says Give me the opposite
+
+04:13.550 --> 04:17.620
+boolean value of whatever that value is.
+
+04:17.630 --> 04:24.370
+So if state does show child is false then bang false is equal to true so that's all we do.
+
+04:24.380 --> 04:31.370
+It's a really handy way for us to toggle between a true and false state by simply calling this bang
+
+04:31.370 --> 04:32.150
+operator.
+
+04:32.150 --> 04:39.110
+So whenever you click it it will set the show child value to the opposite value as the next state value
+
+04:40.870 --> 04:47.350
+in this second button we have this on click that fires this anonymous function that will call a sad
+
+04:47.350 --> 04:49.330
+state that sets the state down.
+
+04:49.330 --> 04:56.780
+Text to whatever it currently is except adding on this extra underscore Hello string.
+
+04:57.070 --> 05:03.010
+So all we do is whenever we click it our state text just gets more and more underscore Hello strings
+
+05:03.100 --> 05:04.360
+appended to the end of it.
+
+05:04.450 --> 05:13.020
+As we saw whenever we click the button earlier finally we have this code here that determines whether
+
+05:13.020 --> 05:22.100
+or not to hide or show our life cycles component so this you might see is kind of odd looking.
+
+05:22.160 --> 05:28.900
+This is actually what's called a ternary operator and it sounds like a weird thing but it's actually
+
+05:28.900 --> 05:38.660
+just shorthand that allows us to write easier if else statements all it is is it takes the form of this
+
+05:38.900 --> 05:45.480
+question mark and this colon with different things between it so you can see it as three parts.
+
+05:45.860 --> 05:51.770
+The first part is what we want to evaluate as true or false.
+
+05:51.950 --> 05:53.560
+So what do I mean by that.
+
+05:53.570 --> 05:58.250
+Well if you can imagine that we had some if statement right
+
+06:01.500 --> 06:07.260
+this first initial if statement right where we evaluate something about whether or not it's true or
+
+06:07.260 --> 06:13.680
+false is pretty much what this is saying and that's why we use this boolean value that we have in our
+
+06:13.680 --> 06:23.260
+state as true or false so I'm saying if this dot state does show how it is true then I want to either
+
+06:23.260 --> 06:34.260
+render this or this so this first thing that we see after the question mark is what gets evaluated if
+
+06:34.260 --> 06:35.160
+show child.
+
+06:35.160 --> 06:35.420
+Right.
+
+06:35.450 --> 06:38.150
+So whatever's on this side is true.
+
+06:38.340 --> 06:44.200
+So if show child is true render the life cycles component.
+
+06:44.370 --> 06:51.510
+If this state does show child is false then render not so you can see this last section here.
+
+06:51.510 --> 06:58.510
+Pretty much being what goes into the L statement so you can see this as what goes here.
+
+06:58.880 --> 07:09.180
+This as what goes here and this as what goes here so it's pretty much just a really handy and quality
+
+07:09.180 --> 07:15.530
+of life coding a syntax that allows us to write if l statements in a much easier and readable way.

@@ -1,0 +1,361 @@
+WEBVTT
+
+00:00.570 --> 00:01.420
+OK.
+
+00:01.730 --> 00:08.980
+Now let's talk about includes now includes is a little different from the way that we've been writing
+
+00:09.040 --> 00:17.080
+the other array methods that we've covered so far includes is essentially a method that takes a single
+
+00:17.230 --> 00:24.820
+argument and that argument will be any element that we want and what it does is it checks inside the
+
+00:24.820 --> 00:29.710
+array to see if the element that we passed it exists in our array.
+
+00:29.860 --> 00:42.290
+So let's try this out well let's first make our array which is equal to let's say 1 2 3 4 5 if we do
+
+00:42.290 --> 00:44.360
+my array that includes
+
+00:47.100 --> 00:54.070
+three we'll see that it's true because three does exist in our array.
+
+00:54.150 --> 01:01.320
+Now if we were to say try something like nine then we will get false because nine is clearly not inside
+
+01:01.320 --> 01:02.450
+of our array.
+
+01:02.460 --> 01:10.690
+The second argument we could take in are includes is the index in which we want to start searching.
+
+01:10.710 --> 01:12.960
+So what do I mean by this.
+
+01:12.960 --> 01:22.380
+Well our array is actually indexed from our first element to its last element starting from 0 and counting
+
+01:22.470 --> 01:24.040
+up by 1.
+
+01:24.090 --> 01:31.940
+So 1 is our array element at index 0 2 is our element at index 1.
+
+01:31.950 --> 01:39.130
+Now I know with this example maybe it's a little confusing so let's do another array let's use const
+
+01:39.150 --> 01:49.170
+new Array equals these three objects while new array at index 0 is our first element right.
+
+01:49.180 --> 01:56.660
+Our first object i.e. 1 element at index 2 is our last one because this is 0.
+
+01:56.690 --> 02:05.170
+This is 1 and this is 2 1 thing to keep in mind with using includes and our second argument let's say
+
+02:05.260 --> 02:16.880
+in our original example with my array we wanted to see if the number 2 exists starting from our third
+
+02:18.160 --> 02:19.030
+index.
+
+02:19.300 --> 02:28.030
+This means that it's starting from 4 it's going to check if 4 includes are 2 it doesn't or a 5 has our
+
+02:28.030 --> 02:29.880
+2 which it doesn't.
+
+02:29.890 --> 02:40.000
+So here we'll see that we won't get false so essentially if we were to try this except instead we were
+
+02:40.000 --> 02:46.470
+to start from our second index well we'll find that it's true because starting from 2 it'll see that
+
+02:46.470 --> 02:54.940
+2 is included starting from this part of the array onwards but this is essentially how it works with
+
+02:55.210 --> 03:00.980
+includes when we're comes to using what are called primitive types.
+
+03:01.040 --> 03:03.970
+Now I'm going to explain what those are.
+
+03:04.040 --> 03:11.820
+But first I'm going to show you why this is important if with our new Array let's say for example we
+
+03:11.820 --> 03:16.590
+wanted to find our second object with I.D. too.
+
+03:16.770 --> 03:27.400
+If I did new Array dot includes and then I tried to find the object with Ida to well we'll get false.
+
+03:27.650 --> 03:34.420
+But why is that even though this object looks exactly like the element that does exist inside our array.
+
+03:34.430 --> 03:36.650
+Why would we get false.
+
+03:36.650 --> 03:45.050
+Well this is because of the way that JavaScript references objects versus primitive types.
+
+03:45.050 --> 03:46.760
+Now what are primitive types.
+
+03:46.760 --> 03:52.050
+Well let's actually look at this diagram here in this diagram.
+
+03:52.070 --> 03:58.490
+Imagine there is a memory bank and this is internal to JavaScript inside this memory bank.
+
+03:58.520 --> 04:03.170
+JavaScript has a reference to every primitive type.
+
+04:03.200 --> 04:04.790
+And there are six of them.
+
+04:04.940 --> 04:06.150
+There are strings.
+
+04:06.260 --> 04:11.450
+Strings being anything that we see between quotation marks.
+
+04:11.450 --> 04:19.730
+So this is a string is a string boolean is true or false.
+
+04:19.780 --> 04:20.490
+No.
+
+04:20.590 --> 04:28.860
+Is the null object undefined is also undefined a unique primitive type numbers.
+
+04:28.870 --> 04:30.530
+So this is any integer.
+
+04:30.550 --> 04:30.820
+Right.
+
+04:30.880 --> 04:34.900
+So that's not any whole number and also any float.
+
+04:34.910 --> 04:40.430
+So any decimal number these are also all primitive types that fall under the category of number and
+
+04:40.430 --> 04:47.090
+symbol which is a bit more complicated but it's essentially a unique thing.
+
+04:47.290 --> 04:52.570
+We don't really want to go too deeply into symbol because we're not really going to use it but these
+
+04:52.660 --> 05:01.550
+are the six primitive types and these primitive types all exist inside of JavaScript memory bank.
+
+05:01.620 --> 05:11.200
+Now when we set a constant or a variable equal to a primitive type like say the number three what drives
+
+05:11.200 --> 05:17.430
+a script is doing is it's setting it's creating this new variable that we want called a.
+
+05:17.430 --> 05:28.440
+And it's pointing its value to the number three in its memory so it's actually pointing to three in
+
+05:28.440 --> 05:30.700
+memory.
+
+05:30.750 --> 05:37.140
+Now when we set variable B to three it does the same thing.
+
+05:37.220 --> 05:45.230
+It creates this new variable called B and then it also points to the same three points to three in memory
+
+05:47.340 --> 05:57.940
+if we set variable C to be it's actually not pointing to our value of b instead it points to B which
+
+05:57.940 --> 06:08.180
+then points to our value in memory of three if we were to see this in action let's say we did var b
+
+06:08.270 --> 06:18.980
+equals three and var c equals B if we look at sea we'll see that the number is pointing to three.
+
+06:19.070 --> 06:27.600
+If we changed B to five B is now pointing to the value and memory of five right.
+
+06:28.950 --> 06:32.400
+It's not really setting a value it's worst.
+
+06:32.430 --> 06:36.600
+We're saying that our value of B wants to point to the five.
+
+06:36.630 --> 06:42.920
+That's in JavaScript memory but C is still pointing to 3.
+
+06:42.960 --> 06:50.850
+So C is not always going to equal whatever B becomes C will only point to the value that B pointed to
+
+06:51.120 --> 06:53.620
+when we set it.
+
+06:53.720 --> 06:57.800
+Why was it that this didn't work well inside of JavaScript.
+
+06:57.800 --> 07:06.830
+Anything that's not a primitive type so not any of these six types is called an object and an object
+
+07:06.950 --> 07:08.600
+is unique.
+
+07:08.600 --> 07:15.530
+Whenever an object gets in scanned created it gets its own unique reference in memory.
+
+07:15.530 --> 07:18.650
+Now before we explore this what is an object.
+
+07:18.650 --> 07:25.580
+Well everything else in javascript that is not one of these six primitive types as we mentioned is an
+
+07:25.580 --> 07:26.830
+object right.
+
+07:26.840 --> 07:36.020
+So arrays are also objects and you can essentially just see objects as collections of things that have
+
+07:36.350 --> 07:39.200
+properties that have values.
+
+07:39.200 --> 07:41.410
+So my array right.
+
+07:41.450 --> 07:49.040
+The arrays that we've created they all have properties right because they have these methods on them
+
+07:49.490 --> 07:55.520
+and methods are pretty much just properties that point to functions.
+
+07:55.520 --> 08:02.600
+That's why we're able to use them like functions but we call them with the dot notation like it's a
+
+08:02.600 --> 08:05.240
+property on the object right.
+
+08:05.250 --> 08:12.180
+And we're used to seeing objects as these curly braces with key value pairs inside them.
+
+08:12.260 --> 08:18.290
+Well you can pretty much see that as everything else in javascript that is not one of those six primitive
+
+08:18.290 --> 08:27.110
+types that we're talking about now when ever you see an object get instantiated for the first time or
+
+08:27.110 --> 08:35.740
+for any time for that matter what you're seeing is javascript store that object as a brand new reference
+
+08:36.400 --> 08:38.320
+in memory.
+
+08:38.380 --> 08:39.820
+So what do I mean by this.
+
+08:39.820 --> 08:48.790
+Well let's say we made a new concept object one which equals to this object with the idea of one.
+
+08:49.330 --> 08:57.940
+This I object gets a new reference in memory even if we were to make a new object to write.
+
+08:57.960 --> 09:04.810
+Let's say we were to point it to a different object but it looked the exact same.
+
+09:04.820 --> 09:12.950
+This is actually going to be different if we do object one equals object to it's going to give us false
+
+09:13.430 --> 09:20.300
+because what javascript is comparing if the reference in memory is the same.
+
+09:20.300 --> 09:26.900
+It's not comparing whether or not this value of this object is equal to each other.
+
+09:27.070 --> 09:35.380
+It's comparing if they're both pointing to the same place in memory this only works if we were to do
+
+09:35.380 --> 09:43.450
+something like we did earlier when we pointed our value of C to be but instead if we were to say point
+
+09:43.510 --> 09:45.650
+our concept OBJ 3.
+
+09:45.670 --> 09:45.940
+Right.
+
+09:45.970 --> 09:50.020
+So this new concept we want to point to object to
+
+09:52.700 --> 09:59.980
+one now we'll see that OBJ 3 is pointing to this object.
+
+10:00.060 --> 10:09.040
+Now we can see that because both object 3 and object 2 are pointing to the same object in memory if
+
+10:09.040 --> 10:16.460
+we do a comparison we'll see that it's actually true because the reference and memory is the same.
+
+10:16.560 --> 10:23.910
+Now the interesting thing about objects is that if we change the properties on them if we add them or
+
+10:24.240 --> 10:30.150
+or modify them they'll always point to the same object reference in memory.
+
+10:30.180 --> 10:43.050
+So if I were to do object to dot I d equals 17 while now object to is I'd be 17 but object 3 you'll
+
+10:43.050 --> 10:51.270
+see still points to the same object in memory so that would be how we would get our includes to work
+
+10:51.900 --> 10:56.250
+is we would actually do cost 0 1.
+
+10:56.260 --> 10:56.910
+Right.
+
+10:57.270 --> 11:09.620
+Equals a new object with idea of 1 const 0 2 is equal to another object with idea of 2 const 0 3 is
+
+11:09.650 --> 11:23.050
+equal to an object with idea 3 and now we'll say const newest array is equal to 0 1 0 2 and 0 3 so now
+
+11:23.080 --> 11:32.410
+if we were to display it we'll see that inside our array is those 3 objects that we just made and now
+
+11:32.410 --> 11:43.540
+if we do newest array dot includes and we were to point to let's say 0 1 we'll find that it's true because
+
+11:44.200 --> 11:47.200
+what we're referencing is that pointer in memory.
+
+11:47.200 --> 11:54.820
+So even though our array is this array the elements inside are not new objects but they're all pointing
+
+11:54.820 --> 12:01.900
+to the same elements in memory which is why when we do the includes the evaluation is true because that's
+
+12:01.900 --> 12:07.330
+essentially what includes is doing under the hood it's checking if the reference that we're passing
+
+12:07.390 --> 12:16.660
+in right is equal to the any of the elements inside by their memory reference.
+
+12:16.660 --> 12:23.860
+So this is a bit of a longer lesson because we have to understand this very fundamental thing about
+
+12:23.980 --> 12:33.160
+objects and how javascript stores things in memory but also how includes works when comparing and trying
+
+12:33.160 --> 12:38.020
+to find if an element exists in the array.
+
+12:38.020 --> 12:43.930
+We'll definitely explore these concepts a lot more as we code and they'll definitely make more sense
+
+12:43.990 --> 12:49.360
+why the code we write is structured the way it is based on these rules.

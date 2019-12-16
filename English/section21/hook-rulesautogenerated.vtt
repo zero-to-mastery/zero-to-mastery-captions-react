@@ -1,0 +1,91 @@
+WEBVTT
+
+00:00.300 --> 00:01.970
+Welcome back everyone.
+
+00:01.980 --> 00:08.760
+Now before we start converting our crown clothing application over to using hooks there is just one
+
+00:08.760 --> 00:10.960
+quick thing I want to mention.
+
+00:11.220 --> 00:15.460
+And this actually has to do with the rules of writing these hooks.
+
+00:15.510 --> 00:22.920
+Now as you remember from our use affect example in the last lesson we did set a default search query
+
+00:23.040 --> 00:31.680
+to Bret if for example however we had a default search where it was an empty string and we didn't want
+
+00:31.680 --> 00:39.180
+to make or fire off our use of fact hook because search query did not exist yet or at the very least
+
+00:39.180 --> 00:46.520
+it was not anything meaningful then perhaps we can think about a case where we only want a fire are
+
+00:46.580 --> 00:53.630
+a fact where we actually perform the search based on some conditional depending on the length of the
+
+00:53.630 --> 00:55.440
+search query string.
+
+00:55.550 --> 01:06.440
+Now you might imagine that if for example we say search query length is greater than zero then we actually
+
+01:06.440 --> 01:13.920
+want to use our effect if you were to write the code like this however this is actually incorrect.
+
+01:13.980 --> 01:21.140
+You will actually see that this error gets thrown in our linear will tell us that we cannot call use
+
+01:21.140 --> 01:28.070
+effect inside of a conditional they must be called at the top level of our component meaning that are
+
+01:28.640 --> 01:36.260
+actual hooks including both our set state and our use effect hook must be called at the very top of
+
+01:36.260 --> 01:42.950
+this component but also if we want to leverage a conditional we should actually put it inside of the
+
+01:42.950 --> 01:44.220
+effect.
+
+01:44.230 --> 01:51.130
+So for example what we can do with our use effect hook is add the conditional here where we actually
+
+01:51.130 --> 02:03.300
+say if search query length is greater than zero then we actually fire off the hook in itself.
+
+02:03.350 --> 02:11.180
+So this is the only case where if we ever have conditionals based on some prop or some state inside
+
+02:11.210 --> 02:18.110
+of our component where we want to conditionally fire the effect we just have to make sure that we only
+
+02:18.110 --> 02:21.020
+do it inside of the hook.
+
+02:21.060 --> 02:26.040
+Now we actually don't have an example like this inside of our application but this is a good thing to
+
+02:26.040 --> 02:28.290
+keep in mind when writing hooks.
+
+02:28.290 --> 02:34.290
+So if you want to conditionally use a hook make sure you do it inside of the hooks definition and not
+
+02:34.740 --> 02:39.170
+wrapping the actual hook itself inside of a conditional.
+
+02:39.450 --> 02:43.860
+It's just a quick rule and you can actually see it in this link that I'll provide and your resources
+
+02:43.950 --> 02:51.500
+about hook rules but this is pretty much the main rule about how to conditionally call your use a fact
+
+02:51.510 --> 02:51.720
+hook.
+
+02:52.440 --> 02:55.440
+So with that in mind let's move on with our course.

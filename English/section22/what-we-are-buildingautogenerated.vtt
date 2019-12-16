@@ -1,0 +1,172 @@
+WEBVTT
+
+00:00.390 --> 00:03.450
+Welcome back everyone before we proceed.
+
+00:03.480 --> 00:09.810
+Let's just quickly walk through what it is that we just did so from a high level what we did was set
+
+00:09.810 --> 00:11.360
+up our node server.
+
+00:11.580 --> 00:18.290
+We're leveraging the library Express which makes it really easy for us to write a node back in server
+
+00:18.860 --> 00:19.560
+Express.
+
+00:19.680 --> 00:25.890
+Actually makes it super easy for us to leverage other libraries and make the process of writing this
+
+00:25.890 --> 00:29.220
+back and server really really simple.
+
+00:29.280 --> 00:37.110
+Beyond that what else we need to do now in the next step is actually set up our first route that allows
+
+00:37.110 --> 00:40.070
+us to actually make the stripe charge.
+
+00:40.080 --> 00:47.100
+Now the reason why we need to make a strike charge through our back end server is because the way that
+
+00:47.100 --> 00:54.960
+stripe is setup in order for the charge to be legitimate it needs to actually come with a secret key
+
+00:55.410 --> 01:01.800
+that we get from stripe that we need to send with our request to stripe in order to make our charge
+
+01:02.280 --> 01:08.910
+so that stripe knows that the charge is coming from our account the one that we set up whenever we look
+
+01:08.910 --> 01:17.430
+at our stripe dashboard once we have our actual stripe key being integrated into our back and then stripe
+
+01:17.490 --> 01:20.640
+is validly letting us actually make charges.
+
+01:20.640 --> 01:27.780
+We are not able to make a stripe charge from the front end because we cannot ever truly encrypt a secret
+
+01:27.780 --> 01:29.560
+key through the front end.
+
+01:29.640 --> 01:32.910
+It has to be done through a back end request.
+
+01:32.910 --> 01:36.070
+Now this is the main reason why we're doing this now.
+
+01:36.150 --> 01:42.790
+What we actually need to do is build that route that allows us to one receive a request from our front
+
+01:42.810 --> 01:49.260
+and application but then we actually need to take that request that our front end application is making
+
+01:49.890 --> 01:53.790
+and then pass it as a charge to stripe.
+
+01:53.790 --> 01:55.170
+So we'll figure out how to do that.
+
+01:55.170 --> 02:01.620
+In this lesson and then after that we'll actually have to link this striped button in order to create
+
+02:01.620 --> 02:05.210
+the request to the new route that we end up building in our server.
+
+02:05.250 --> 02:06.410
+Yes.
+
+02:06.510 --> 02:11.820
+Now the thing is that right now what we're doing is we're passing this on token method to our strike
+
+02:11.820 --> 02:18.930
+checkout which gives us back the token object which we actually need to pass to stripe through this
+
+02:18.930 --> 02:24.900
+back end route that we're making because that token is going to be the legitimate charge that we're
+
+02:24.900 --> 02:25.980
+trying to make.
+
+02:25.980 --> 02:31.770
+It has all of the information regarding the credit card information that the user put in the cost of
+
+02:31.770 --> 02:38.130
+the charge itself and any other miscellaneous data that stripe needs in order to process the charge
+
+02:38.130 --> 02:40.130
+that we're trying to make.
+
+02:40.140 --> 02:45.690
+So let's actually look at an image in what it is that we're trying to set up in the next few lessons.
+
+02:45.750 --> 02:49.480
+So here we have this picture in this picture.
+
+02:49.490 --> 02:53.190
+We have our client site application which is our crown clothing.
+
+02:53.300 --> 02:56.360
+We have our back end express server that we're building.
+
+02:56.360 --> 02:59.210
+And then here we have our stripe service.
+
+02:59.660 --> 03:07.280
+So this is going to be the actual API that stripe is hosting that we need to create a charge request
+
+03:07.280 --> 03:08.410
+to.
+
+03:08.420 --> 03:15.020
+So from our Express server what we're going to do is create that payment route and then from our client
+
+03:15.020 --> 03:20.900
+site application we are going to send a payment token to this payment route.
+
+03:20.990 --> 03:27.140
+Our payment route is then going to take that token use the stripe library to actually make a payment
+
+03:27.140 --> 03:29.210
+charge to stripe.
+
+03:29.210 --> 03:32.150
+So this is kind of what it is that we're trying to do.
+
+03:32.150 --> 03:38.030
+We have this back in section that is going to actually make the stripe charge but it's waiting for some
+
+03:38.090 --> 03:44.930
+client side application to make a request against this route and pass it some token that it can then
+
+03:44.930 --> 03:47.900
+use to actually create a stripe charge.
+
+03:47.930 --> 03:51.400
+So this is kind of the flow that you can see that we need to build.
+
+03:51.410 --> 03:57.200
+So we have the express server we have our client side application but we've got to build the code that
+
+03:57.200 --> 03:58.970
+actually will send the payment token.
+
+03:59.030 --> 04:04.400
+And we also have to build the code that will represent our payment route as well as the code that will
+
+04:04.490 --> 04:10.900
+end up making the payment charge itself to stripe so this image I want you to keep it as a mental model
+
+04:10.900 --> 04:17.410
+in your head about what it is that we're building next because with this mental model in mind we are
+
+04:17.410 --> 04:24.730
+going to set up this payment route and then setup the actual payment token request and this will have
+
+04:24.730 --> 04:30.880
+to do some code before we can actually see it work inside of our application and we'll begin by building
+
+04:30.880 --> 04:33.070
+out our payment route in the next less.

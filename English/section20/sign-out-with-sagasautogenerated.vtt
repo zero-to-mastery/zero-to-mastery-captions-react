@@ -1,0 +1,232 @@
+WEBVTT
+
+00:00.890 --> 00:02.160
+Welcome back.
+
+00:02.210 --> 00:09.860
+Now in this lesson we are going to tackle our sign out process because right now what we have left over
+
+00:10.100 --> 00:14.180
+is our on click that calls our off sign out method.
+
+00:14.180 --> 00:20.190
+We actually also have to move our sign out into its own user actions.
+
+00:20.300 --> 00:24.960
+And as we know this off sign out is also an API call.
+
+00:24.980 --> 00:32.090
+So what we can do is we can wrap this as well inside of it's own sign out and sign out success sign
+
+00:32.090 --> 00:32.180
+up.
+
+00:32.180 --> 00:37.380
+Failure redux style that we are gotten so used to now.
+
+00:37.410 --> 00:44.940
+So what we're going to do is we are going to have to of course first make the action types so let's
+
+00:44.940 --> 00:52.310
+go to our user types and let's make a new sign out start
+
+00:56.240 --> 00:58.070
+our sign out our success
+
+01:04.200 --> 01:05.670
+and our sign out failure
+
+01:10.210 --> 01:13.860
+and then we'll also make of course the correct actions.
+
+01:13.900 --> 01:24.210
+So what we're gonna do is we're going to export the concept sign out start which is just a payload free
+
+01:24.210 --> 01:24.740
+component.
+
+01:24.750 --> 01:25.120
+Right.
+
+01:25.140 --> 01:32.610
+So it's gonna be our user action types sign out success.
+
+01:32.780 --> 01:38.680
+We're gonna do the same thing for our success and our failure.
+
+01:38.690 --> 01:47.240
+The only difference is that success takes no payload because it just issues the type.
+
+01:47.250 --> 01:54.420
+Once we succeed it pretty much just tells our application that the user has signed up and then we're
+
+01:54.420 --> 01:56.850
+gonna do a sign out failure
+
+02:00.420 --> 02:00.880
+failure.
+
+02:00.880 --> 02:01.320
+What's this.
+
+02:01.320 --> 02:03.570
+Should we start my mistake.
+
+02:04.020 --> 02:09.570
+And the failure will actually get the air right because we want to log an error in case something has
+
+02:09.570 --> 02:16.710
+happened something has gone wrong inside of our sign up for we've got to update our reducer to listen
+
+02:16.710 --> 02:25.490
+for these actions and what we're going to say is that if there is a sign in failure or a sign out failure
+
+02:28.010 --> 02:31.490
+we want to update our error because it's pretty much just one error property
+
+02:34.380 --> 02:38.970
+and what we want to do is we also want to make sure that if our sign
+
+02:42.140 --> 02:44.420
+success is also successful
+
+02:47.000 --> 02:56.530
+we want to return state except our current user will be no and we can also set our error to no
+
+03:01.010 --> 03:09.260
+now that we have this working we need to actually issue out the correct action in the right place inside
+
+03:09.260 --> 03:10.660
+of our header component.
+
+03:10.790 --> 03:18.940
+We now want to fire off our new sign out start action So here what we'll do is we will import in the
+
+03:19.030 --> 03:21.070
+action let's see if we only have one.
+
+03:21.070 --> 03:21.670
+No we don't.
+
+03:21.690 --> 03:32.270
+OK so let's import in sign out start from redux users.
+
+03:32.270 --> 03:32.870
+User action
+
+03:37.620 --> 03:40.090
+and then we're going to map dispatch to props
+
+03:45.250 --> 03:51.660
+have dispatched the props where sign out start goes to a function that pretty much just dispatches our
+
+03:51.700 --> 03:54.090
+sign out start action creator.
+
+03:54.490 --> 04:01.420
+We pass map dispatch to prop store connect and then we have to d structure this out of our property
+
+04:01.420 --> 04:08.980
+values and pass this like so.
+
+04:09.020 --> 04:13.250
+So now we have our sign out start being fired from our option link.
+
+04:13.310 --> 04:17.030
+We do need to write our saga as well that will listen for our sign out start
+
+04:19.810 --> 04:25.240
+so if you've noticed now this is pretty much just us jumping through all these redux files and then
+
+04:25.330 --> 04:27.980
+updating according to the right pattern right.
+
+04:28.030 --> 04:32.700
+We make the actions and now our components are purely action generators right.
+
+04:32.710 --> 04:38.110
+Any of the logic related to actual sign out or any of that stuff no longer happens in the components.
+
+04:38.110 --> 04:42.880
+We've moved them all out into their sagas so hopefully that's something that you've noticed that is
+
+04:42.880 --> 04:49.450
+happening and that's the whole thing about us writing these generators and the sagas is that they holds
+
+04:49.500 --> 04:57.430
+up much of the applications actual logic related to anything a synchronous or anything impure so here
+
+04:57.430 --> 05:07.140
+we're gonna make our on sign out start which will yield take latest of user action types.
+
+05:07.140 --> 05:14.670
+Dots sign out start and of course we're going to fire R sign out
+
+05:18.490 --> 05:28.440
+generator and inside of our tribe block we are going to yield off Dot's sign up so after our sign up
+
+05:28.980 --> 05:30.120
+comes through.
+
+05:30.840 --> 05:44.990
+We're then going to yield our plot sign out success which we have to import in to r saga file sign out
+
+05:45.470 --> 05:53.210
+excuse as well as sign out failure.
+
+05:53.230 --> 06:03.460
+So now if we succeed we're gonna put out sign out success but if we fail if our Sino call fails we are
+
+06:03.460 --> 06:13.210
+going to put out only those four brackets we are going to put out sign out failure with the error
+
+06:16.540 --> 06:25.530
+we're gonna add this to our chain of listeners and now if we go back to our application you have an
+
+06:25.530 --> 06:26.070
+error here.
+
+06:26.070 --> 06:26.520
+What is this.
+
+06:26.730 --> 06:28.180
+Let's see.
+
+06:28.500 --> 06:31.130
+Take lateness requires a saga parameter.
+
+06:31.370 --> 06:42.490
+Take the latest woops we didn't pass this on so let's pass in our sine function let's save and now we'll
+
+06:42.490 --> 06:44.170
+see that.
+
+06:44.230 --> 06:44.830
+Let's sign him
+
+06:48.140 --> 06:54.650
+we got our success if we had our sign up we trigger a sign up start and now we have our sign of success
+
+06:54.710 --> 06:56.510
+which is clearing out our user
+
+06:59.060 --> 07:01.220
+inside of our user reducer.
+
+07:01.460 --> 07:02.360
+So awesome.
+
+07:02.360 --> 07:08.150
+So now our sign up is working and the other great thing about doing it this way now is that we have
+
+07:08.150 --> 07:16.160
+this action now that other sagas can listen to in order to issue out their own respective actions in
+
+07:16.160 --> 07:21.950
+terms of perhaps doing something like resetting the application state in such a way that we would expect
+
+07:21.980 --> 07:29.960
+when a user signs out in fact let's leverage this sign up success method that we fire in order to clear
+
+07:29.960 --> 07:33.580
+out our carpe so let's do that in the next lesson.

@@ -1,0 +1,310 @@
+WEBVTT
+
+00:00.360 --> 00:01.260
+Welcome back guys.
+
+00:02.410 --> 00:10.810
+In this lesson I'm going to take a deeper dive into writing methods on classes because right now is
+
+00:10.810 --> 00:19.540
+actually a good opportunity for us to explore a very fundamental thing in not only javascript but also
+
+00:19.630 --> 00:21.430
+in react.
+
+00:21.520 --> 00:29.460
+And that's the idea of writing our own methods on our class components now.
+
+00:29.560 --> 00:37.990
+Right now we pass in this anonymous function into our search boxes handle change in order to set our
+
+00:37.990 --> 00:38.950
+state.
+
+00:39.340 --> 00:43.790
+And we know that we've seen the this keyword a couple of times now.
+
+00:43.890 --> 00:46.530
+What is it actually representing.
+
+00:46.530 --> 00:54.860
+Well this is a special keyword in javascript that references the context in which it's being invoked.
+
+00:54.870 --> 00:55.680
+So what does that mean.
+
+00:56.400 --> 01:04.820
+Well when I say this dot states we know that I'm trying to reference the state on r component right.
+
+01:04.860 --> 01:06.290
+Class component.
+
+01:06.330 --> 01:13.890
+The only reason that JavaScript is able to say oh When we're calling this dot state I want the state
+
+01:13.950 --> 01:23.470
+object on our component is because the this keyword is set to the context of our class component.
+
+01:23.510 --> 01:31.340
+Now the weird thing is that in JavaScript when we write our own class methods we'll see that the this
+
+01:31.340 --> 01:37.620
+keyword actually gets bound differently depending on how we write the class method.
+
+01:37.630 --> 01:44.020
+Now we've already seen class methods in our app component when we look at say the component did mount
+
+01:44.110 --> 01:49.510
+which is a lifecycle method as well as the render an inside of these methods.
+
+01:49.510 --> 01:54.470
+They take this format where it's the function name the brackets and then the squiggly brackets.
+
+01:54.580 --> 01:56.640
+But the this keyword is bound.
+
+01:56.650 --> 02:02.080
+Now the reason that this is actually happening where the this context is getting bound inside of these
+
+02:02.080 --> 02:10.750
+methods is because when we call super we're actually extending the functionality that exists on component
+
+02:10.810 --> 02:17.380
+which we get from react that has these lifecycle methods and render because we didn't write them were
+
+02:17.410 --> 02:20.030
+like borrowing them from component.
+
+02:20.270 --> 02:26.460
+And when we borrow them from component component actually sets the context of this inside of them for
+
+02:26.460 --> 02:34.940
+us to our class components if we were to write our own method for example to represent this method that
+
+02:34.940 --> 02:40.320
+we're passing in we would have to be careful about how we write it.
+
+02:40.360 --> 02:45.820
+Now let me show you now the reason in the first place we even want to rewrite this method in its own
+
+02:45.820 --> 02:51.160
+class method is because there's a chance that we might want to use it more than one place and we'd want
+
+02:51.160 --> 02:56.920
+to write code more than once which is not to put it in one place pass it in and then change it in one
+
+02:56.920 --> 02:57.220
+place.
+
+02:57.250 --> 03:01.120
+If we have to and not have to change it in multiple places.
+
+03:01.120 --> 03:06.150
+Now how we would do this is we would write this handle change method here.
+
+03:06.160 --> 03:06.590
+Right.
+
+03:06.610 --> 03:10.700
+Taking the same format that we see and it would take some event.
+
+03:10.710 --> 03:11.070
+Right.
+
+03:11.100 --> 03:18.270
+Which is the synthetic event we're getting back from our input as you remember and then we call this
+
+03:18.270 --> 03:19.280
+dot set stay in it.
+
+03:22.000 --> 03:31.690
+And now we're able to actually pass handle change into ah handle change property on our search box.
+
+03:31.790 --> 03:38.030
+Now we can write it like this because we're passing the whole callback through to it right.
+
+03:38.040 --> 03:40.790
+E is being referenced in the function definition.
+
+03:40.910 --> 03:45.710
+So we even though earlier we were explicitly writing it out like this.
+
+03:45.710 --> 03:51.470
+This is the same equivalent thing because this door handle change is referencing this full function
+
+03:51.770 --> 03:59.240
+with the E signature but if we were to save this we'll actually see that our original conversation which
+
+03:59.240 --> 04:04.930
+is about this context is undefined if we start typing.
+
+04:05.220 --> 04:06.900
+We'll see that we get an error.
+
+04:06.900 --> 04:13.160
+It says that cannot read properties set state of undefined and it seems that this is undefined.
+
+04:13.980 --> 04:15.950
+Well why is this.
+
+04:15.960 --> 04:23.480
+Well this is actually has to do with the way the functions behave in JavaScript when we put handle change
+
+04:23.750 --> 04:32.440
+on our app all it knows is that if we say this dot handle change inside the context of our app it points
+
+04:32.440 --> 04:37.980
+to this function but it doesn't actually set the context of this.
+
+04:38.140 --> 04:47.520
+The reason for this is because javascript by default doesn't set its scope of this on functions.
+
+04:47.740 --> 04:54.100
+You have to actually explicitly state what context you want this to be for us.
+
+04:54.160 --> 05:04.380
+We want this to be our app component and the method in which we can do it is to define it in our constructor
+
+05:05.010 --> 05:09.930
+because our constructor is the code that runs first before anything gets called right.
+
+05:09.930 --> 05:15.330
+So we want to make sure that the context of this is correct in all of our methods before any code gets
+
+05:15.330 --> 05:15.690
+written.
+
+05:16.500 --> 05:24.990
+So what we could do is we could say this dot handle change is equal to this done handle change dot bind
+
+05:25.470 --> 05:27.330
+and then this.
+
+05:27.410 --> 05:35.030
+Now what is dot bind what dot bind is a method on any function that returns a new function where the
+
+05:35.030 --> 05:42.290
+context of this is set to whatever we passed to it and the context of this that we're setting in handle
+
+05:42.290 --> 05:51.880
+change right here is the this keyword that is defined inside of our constructor which knows that it's
+
+05:52.060 --> 05:59.540
+our component and now if we save we'll actually see that it will work as it was before
+
+06:02.560 --> 06:08.950
+this is actually a very verbose way of writing code because that means that for every new class method
+
+06:08.950 --> 06:11.180
+that we write we have to bind it.
+
+06:11.350 --> 06:13.070
+We don't want to have to do that.
+
+06:13.120 --> 06:21.220
+We can actually leverage yes six arrow functions and a unique characteristic about them that allows
+
+06:21.220 --> 06:30.430
+them to set the context of this in whatever it was that declared it in the first place.
+
+06:30.460 --> 06:31.910
+So what do I mean.
+
+06:32.230 --> 06:40.030
+While arrow functions automatically allow you to set this when this thing is defined.
+
+06:40.210 --> 06:45.970
+So when our component is getting run by javascript for the first time and it's like oh I got to instantiate
+
+06:45.970 --> 06:52.420
+this new app class it checks inside and it sees that there's this handle change method that points to
+
+06:52.420 --> 06:53.550
+an arrow function.
+
+06:53.710 --> 06:58.250
+So then it defines the arrow function based on what code we've given it right.
+
+06:58.270 --> 07:03.970
+And the moment it sees the this keyword it's like oh this is an arrow function I'm going to automatically
+
+07:03.970 --> 07:12.580
+bind this to the place where this arrow function was defined in the first place and the context of this
+
+07:12.580 --> 07:21.370
+arrow function is r app component so that's the crazy thing about Arrow functions is that you actually
+
+07:21.370 --> 07:27.610
+cannot call dot bind on them they automatically get what's called lexical scoping which just means that
+
+07:27.610 --> 07:35.200
+they bind this context to the place where they were defined in the first place and we can actually see
+
+07:35.200 --> 07:41.660
+this now that it will continue to work as it did before right.
+
+07:41.730 --> 07:48.300
+Even though we're not calling the bind in the constructor anymore so this is really handy for us because
+
+07:48.300 --> 07:49.920
+it saves us that extra step.
+
+07:53.220 --> 07:58.500
+In order for me to prove that this is lexical scoping another way I can show you is inside of our browser
+
+07:59.040 --> 08:02.780
+the tightest level context is our window object.
+
+08:04.050 --> 08:12.570
+If I were to define a function called New func and what we're logging is console dot log this.
+
+08:13.040 --> 08:22.240
+When we invoke new func we'll see that this is that window object when javascript saw us define new
+
+08:22.240 --> 08:28.780
+func to this function and brought it into existence within our javascript context so we could start
+
+08:28.780 --> 08:29.940
+using it.
+
+08:30.100 --> 08:32.590
+It had to lack sickly scope.
+
+08:32.590 --> 08:41.890
+This to the window object because the window object was the context in which our new function our arrow
+
+08:41.890 --> 08:45.730
+function was given its existence.
+
+08:45.730 --> 08:53.090
+This is the same case with our handle change method when handle change was declared.
+
+08:53.290 --> 09:03.150
+Which means that when javascript first created our app component it also defined all of the methods
+
+09:03.150 --> 09:10.290
+on our components including handle change and it saw that this was an arrow function and because of
+
+09:10.290 --> 09:18.780
+this when this arrow function came into existence to JavaScript it was going to bind any references
+
+09:18.780 --> 09:28.100
+to this inside of it to the context in which it was defined which is our app component just like we
+
+09:28.100 --> 09:31.880
+saw with our my func in the browser.
+
+09:31.880 --> 09:38.630
+That's what happened with our handle change and this is great because if we want to write class methods
+
+09:39.050 --> 09:46.490
+we just write them with this arrow syntax and now the context of this is what we expected to be without
+
+09:46.490 --> 09:50.120
+us having to write all of that extensive binding code.
+
+09:50.150 --> 09:58.980
+If we were to write it the other way so with this in mind it makes it easier for us to write our class
+
+09:58.980 --> 10:01.170
+components and their methods.

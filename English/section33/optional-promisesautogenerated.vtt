@@ -1,0 +1,460 @@
+WEBVTT
+
+00:01.400 --> 00:10.970
+For we continue I think it's very important for us to take some time to better understand javascript
+
+00:11.120 --> 00:13.660
+a synchronous event handling.
+
+00:13.670 --> 00:21.410
+Now that's a mouthful but asynchronous event handling is a huge part of not only javascript but also
+
+00:21.410 --> 00:23.360
+the react ecosystem
+
+00:25.840 --> 00:27.440
+with iOS 6.
+
+00:27.460 --> 00:33.660
+There was promises that got introduced as a means of handling asynchronous events.
+
+00:33.880 --> 00:40.050
+We've already used them a little bit when we used fetch IN OUR MONSTER'S Rolodex project.
+
+00:40.180 --> 00:50.670
+But let's take a deeper dive into both fetch and promise as well as the new iOS 7 syntax of async await.
+
+00:50.710 --> 00:59.050
+These are three things that we're going to use a lot in our application so let's first look at what
+
+00:59.050 --> 01:01.710
+we had before promises.
+
+01:01.750 --> 01:10.870
+So we could understand how promises were now I've got some pseudocode here but you can imagine what
+
+01:10.870 --> 01:13.220
+it is that this code is trying to do.
+
+01:13.330 --> 01:20.860
+We have some function called get user which fetches it from this link right of Facebook slash you.
+
+01:20.890 --> 01:29.120
+So we're fetching our Facebook user Iowa and then we give it this function which is called a callback
+
+01:30.080 --> 01:37.020
+inside of it is either going to get the successfully retrieved user or an error.
+
+01:37.130 --> 01:44.480
+If something goes wrong along the way if there is an error we want to throw the error right.
+
+01:44.480 --> 01:52.190
+If there is no error then we want to get the user I.D. and set it to this constant of user I.D. and
+
+01:52.190 --> 01:58.020
+then we want to pass that into this new function get friends or we give it the user I.D..
+
+01:58.100 --> 01:58.390
+Right.
+
+01:58.400 --> 02:02.110
+And maybe that fetches friends from whatever back and API it is right.
+
+02:02.110 --> 02:07.240
+We don't really care and then we give it also another callback.
+
+02:07.240 --> 02:13.690
+But this time similar to what we just did with our get user it's either going to give us back our list
+
+02:13.690 --> 02:19.430
+of friends or it's going to give us back an error if something goes wrong we'll do the same thing right.
+
+02:19.450 --> 02:23.260
+If an errors we want to throw the error because we want to stop our code right.
+
+02:23.260 --> 02:30.970
+If there is an error and then we want to get our friend John from that list of friends if there is no
+
+02:30.970 --> 02:34.070
+error we want to do some find right.
+
+02:34.070 --> 02:39.920
+However it is that we get them and then we want to get his posts in a similar method as the one before
+
+02:40.610 --> 02:42.290
+we give posts.
+
+02:42.350 --> 02:43.760
+JOHN Right.
+
+02:43.760 --> 02:47.030
+It gets it from whatever back end and then we give it another callback.
+
+02:48.350 --> 02:49.880
+Posts error.
+
+02:50.450 --> 02:52.070
+If our throw the error.
+
+02:52.070 --> 02:52.480
+Right.
+
+02:52.490 --> 02:59.720
+If there is no error I want the first post and then finally I want to get the comments for the post
+
+03:00.500 --> 03:09.310
+similar method similar callback before we finally end up displaying the comments so this was as is as
+
+03:09.310 --> 03:13.590
+much of a mouthful to say as it is to read.
+
+03:13.630 --> 03:23.710
+Reading this code is really difficult because it's this massive pyramid tree like shape of nested callbacks
+
+03:24.800 --> 03:32.630
+and what we affectionately refer to this as is callback hell because this code is extensively difficult
+
+03:32.630 --> 03:39.530
+to read and debug now with the introduction of promises.
+
+03:39.550 --> 03:43.100
+Its aim was to extrapolate out a lot of the stuff.
+
+03:43.270 --> 03:51.120
+And the reason for it is because this code here these functions are all a synchronous functions.
+
+03:51.310 --> 03:58.090
+We don't know when those functions will complete and we have to nest a bunch of other function calls
+
+03:58.230 --> 04:07.150
+inside of each other because each one depends on the result and the return of the previous one in order
+
+04:07.150 --> 04:12.570
+for us to get our friends we need our user I.D. which we get after we fetch it right and then order
+
+04:12.580 --> 04:17.980
+to get the posts we need to get a friend after we've gotten our friends list after we've gotten it from
+
+04:17.980 --> 04:26.680
+our user like it's just this long repetitive process but this is also part of our coding.
+
+04:26.680 --> 04:32.650
+A lot of the times this is what we'll need to do in order to eventually get that right final set of
+
+04:32.650 --> 04:40.400
+data we need so promises has simplified this and promises was introduced in iOS 6.
+
+04:40.610 --> 04:47.470
+So let's take a look at what it is so let's get rid of this for now now.
+
+04:47.600 --> 04:57.260
+A promise is instantiated with this constructor so we'll say concert my promise is equal to new promise
+
+04:58.040 --> 05:06.000
+and then the promise is given a function and in this function it gets past two things a resolve and
+
+05:06.000 --> 05:07.930
+a reject.
+
+05:07.940 --> 05:10.990
+Now what is the resolve and what is the reject.
+
+05:11.000 --> 05:15.110
+While a promise is kind of exactly as what it's named.
+
+05:15.380 --> 05:22.220
+It is a promise that this object will eventually have a value.
+
+05:22.220 --> 05:32.990
+It will either be a resolved value or a rejected value the resolve value we use when our API call for
+
+05:32.990 --> 05:42.690
+example is successful our reject call we use when our API call gives us an error but the promise will
+
+05:42.690 --> 05:52.140
+be in a state where it's pending until either the resolve or the reject has been called now what does
+
+05:52.140 --> 05:53.270
+that mean.
+
+05:53.280 --> 06:04.340
+So let's say we have some set time now and set time out is just this function that takes a callback
+
+06:05.270 --> 06:11.020
+and a time as a second argument that time is in milliseconds.
+
+06:11.060 --> 06:18.740
+So we're saying after 1000 milliseconds or one second we want to run this function and the function
+
+06:18.740 --> 06:24.860
+we want to run is resolve with the term I have succeeded
+
+06:27.870 --> 06:29.380
+by doing this.
+
+06:29.580 --> 06:39.930
+We are saying that after one second I want this promise to call the resolve key with this value of I
+
+06:39.930 --> 06:41.310
+have succeeded.
+
+06:41.310 --> 06:47.910
+So when this happens when resolve finally gets called after one second I promise now holds this value
+
+06:48.150 --> 06:52.330
+that we pass to the resolve and order for us to access it.
+
+06:52.350 --> 06:55.370
+We have to say my promise.
+
+06:55.470 --> 07:03.610
+Then and then we pass the dot then a function where value will be resolved.
+
+07:03.620 --> 07:04.310
+Value.
+
+07:04.320 --> 07:09.230
+So now we can finally console log the value.
+
+07:09.380 --> 07:16.420
+Now let's open up our terminal and run this and see let's say we run our code.
+
+07:16.600 --> 07:24.150
+We will see that after one second it logged I have succeeded because our promise has resolved this value
+
+07:25.550 --> 07:26.740
+now reject.
+
+07:26.870 --> 07:36.920
+We'll work in a similar way except in how we end up accessing it what we would do is let's say we have
+
+07:36.920 --> 07:44.490
+some call where we say let's say we have a conditional and we'll just set this to true for now.
+
+07:44.490 --> 07:44.760
+Right.
+
+07:45.000 --> 07:58.750
+If it's true then we want to resolve our code otherwise we want to reject with I have failed.
+
+07:58.790 --> 08:06.230
+Now if we set our conditional to false right we will hit or else block and it will reject and the only
+
+08:06.230 --> 08:14.420
+way for us in our promise code following that instantiation to access the rejected value is to chain
+
+08:14.480 --> 08:20.690
+on a dot catch with the DOT catch we will get the reject value
+
+08:24.050 --> 08:26.490
+inside of the callback that we pass to it.
+
+08:26.540 --> 08:28.430
+So if we were to console log it
+
+08:31.440 --> 08:36.110
+then now we will see we get the I have failed.
+
+08:36.130 --> 08:45.860
+So what we're getting with this promise is control over what we want to do with asynchronous events.
+
+08:46.060 --> 08:54.870
+If they succeed or fail now sometimes if we're just using said time out there's no reason to reject.
+
+08:54.930 --> 09:01.410
+And that's perfectly fine if we just want to defer our promises resolution.
+
+09:01.410 --> 09:01.720
+Right.
+
+09:01.740 --> 09:06.010
+And we're using a set timeout and there's no reason to reject.
+
+09:06.270 --> 09:07.580
+That's perfectly fine too.
+
+09:07.590 --> 09:09.900
+There's no need to call reject.
+
+09:09.960 --> 09:10.260
+Right.
+
+09:10.260 --> 09:21.030
+We can only just resolve but by having a reject we are able to control the separation of a successful
+
+09:21.060 --> 09:29.520
+API callback from an unsuccessful API callback and that's the main benefit of using promises is because
+
+09:29.610 --> 09:35.660
+when we make an API call we don't know whether or not that will work 100 percent of the time.
+
+09:36.570 --> 09:40.200
+If we call a server we don't know if that's servers down.
+
+09:40.200 --> 09:47.560
+We also don't know if we made a mistake in the parameters that we're passing in that API call let's
+
+09:47.560 --> 09:51.030
+say our backend is expecting a user I.D..
+
+09:51.100 --> 09:51.590
+Right.
+
+09:51.610 --> 09:58.510
+When you fetch at a certain endpoint you don't give it the right sobriety or you forget to give it an
+
+09:58.510 --> 10:04.480
+I.D. then that API call will throw you back with an error saying that's not right.
+
+10:04.480 --> 10:06.700
+You didn't give me a user I.D..
+
+10:07.420 --> 10:13.680
+Well we want to handle that differently than we want to handle a successful API call.
+
+10:13.960 --> 10:22.160
+And that's why we have both this resolve and reject because we're able to separate our concerns our
+
+10:22.170 --> 10:31.280
+successes into then callback and our failure our error is in the reject callback which is in our catch
+
+10:32.760 --> 10:41.740
+there's another thing that we can do with our promises we're actually able to chain dot then together
+
+10:42.250 --> 10:47.470
+because the callback that we pass to it whatever gets returned.
+
+10:47.500 --> 10:47.870
+Right.
+
+10:47.890 --> 10:51.490
+In this case we're returning console law which actually doesn't return anything.
+
+10:51.490 --> 10:58.990
+It just returns undefined but let's say we were to return our value but we want to add a bunch of exclamation
+
+10:58.990 --> 10:59.880
+marks to it.
+
+10:59.960 --> 11:08.420
+Right so we're returning a new string plus four exclamation marks what dot then will do with that value
+
+11:08.510 --> 11:17.470
+is it will wrap it inside of a resolve promise that way we can change dot then on it with our new value
+
+11:19.390 --> 11:27.170
+and then console log that new value because the DOT then has wrapped this value in a resolve promise
+
+11:27.380 --> 11:30.710
+you can only call dot then on a resolved promise.
+
+11:30.710 --> 11:31.080
+Right.
+
+11:31.100 --> 11:33.570
+You can't call it on a normal string.
+
+11:33.590 --> 11:33.860
+Right.
+
+11:33.860 --> 11:42.590
+And the only reason we're able to do so is because each dot then is wrapping the value that gets returned
+
+11:42.590 --> 11:48.680
+from the callback that they get passed in a resolved promise.
+
+11:48.690 --> 11:55.680
+Now we can do this as many times as we want because every dot then will be wrapping that return in a
+
+11:55.740 --> 12:02.650
+resolve promise and we actually have seen promises before if you're keen.
+
+12:02.650 --> 12:11.390
+This actually looks a lot like when we used fetch if we look at this code we see that fact sheet looks
+
+12:11.390 --> 12:15.770
+very similar to the promise code we just wrote.
+
+12:15.770 --> 12:23.960
+The reason for this is because fetch returns us a promise when you call fetch it's returning you a promise
+
+12:24.020 --> 12:33.660
+value while it makes an API request to the you are all that you passed it if the end point for example
+
+12:33.870 --> 12:39.960
+throws an error like let's say we don't have the right permission to access it or the server is down
+
+12:40.680 --> 12:50.280
+or we misspelled the actual end your URL well instead of giving us back a value factual actually also
+
+12:50.340 --> 12:56.910
+reject that value in the promise that it gives back to us if it's successful instead it will resolve
+
+12:56.910 --> 13:04.350
+it which is how we're able to get a dot then response because that response is what that fetch gave
+
+13:04.350 --> 13:10.170
+us back we convert it to adjacent objects right by calling dot Jason on response.
+
+13:10.170 --> 13:16.770
+And as I mentioned before it ends up wrapping that Jason value in another resolve promise which it then
+
+13:16.770 --> 13:24.740
+passes to the next dot then which we then finally console log so if we were to look that's what's happening
+
+13:24.740 --> 13:30.410
+here that first promise is what gets returned from the fetch a pending promise.
+
+13:30.410 --> 13:30.810
+Right.
+
+13:30.830 --> 13:38.750
+Because it's not resolved or rejected but once that comes back it's successful it resolves it internally
+
+13:39.170 --> 13:48.540
+and then the dot then gets called because it resolved if we were to say mess up this you are all right.
+
+13:48.570 --> 13:49.790
+So now we know it's false.
+
+13:49.800 --> 13:50.570
+Right.
+
+13:50.610 --> 13:56.580
+If we catch instead let's not console log the error because the error is quite ugly.
+
+13:56.580 --> 13:59.360
+You can imagine we do whatever we want with the error.
+
+13:59.370 --> 13:59.990
+Right.
+
+14:00.030 --> 14:10.180
+But I'm just going to console log the string I have aired if we run this we'll see that the I have error
+
+14:10.180 --> 14:18.040
+string was the one that got console logged because the catch occurred right because the get call from
+
+14:18.040 --> 14:26.080
+our fetch failed and it came back with an error and internally fetch rejected that error on our promise
+
+14:26.080 --> 14:26.850
+object.
+
+14:26.890 --> 14:35.440
+Now while the chaining of our promises is rather easy there is a little bit of complexity when it comes
+
+14:35.440 --> 14:39.960
+to figuring out how to structure our actual promise wrapping.
+
+14:40.480 --> 14:48.940
+The good news is that with iOS 7 there was a new function that was introduced called async await that
+
+14:49.030 --> 14:54.780
+allows us to better handle how we write our asynchronous code.
+
+14:54.850 --> 14:56.680
+So let's take a look at that.
+
+14:56.680 --> 14:57.010
+Now.

@@ -1,0 +1,400 @@
+WEBVTT
+
+00:00.880 --> 00:08.320
+So the last lesson we added in our babble loader so that we can convert our Jesus and Jesus x files
+
+00:08.320 --> 00:15.950
+down into yes five jazz files that our browser can understand what we're going to do now is we need
+
+00:15.950 --> 00:23.180
+to actually bring in a another loader because we need to actually tell Westpac what it should do with
+
+00:23.180 --> 00:24.170
+CSX.
+
+00:24.290 --> 00:28.060
+It actually doesn't know how to render and bring in CSX yet.
+
+00:28.070 --> 00:34.910
+This is a thing that we have to do with Westpac what we're going to bring in is two new loaders one
+
+00:34.910 --> 00:41.210
+loader is called the style loader and the other loader is CSX loader now style loader is what allows
+
+00:41.210 --> 00:44.540
+it to convert different types of Style Files.
+
+00:44.660 --> 00:50.100
+The seller actually allows us to import install files into our ReACT component files.
+
+00:50.300 --> 00:56.420
+The actual CSX loader is what converts CSX into a version or not even a version but it's just what allows
+
+00:56.420 --> 01:03.650
+the CSX to be read by our JavaScript files we can use a SAS loader if we wanted to convert SAS over
+
+01:03.650 --> 01:04.640
+as well.
+
+01:04.640 --> 01:08.810
+But you always need CSX loader and star loader.
+
+01:08.810 --> 01:15.340
+So we're just gonna bring those in style loader as well as CSA lower
+
+01:18.430 --> 01:23.260
+now that we have those two loaders in we're going to define a new rule.
+
+01:23.530 --> 01:35.970
+And here we want to say that for any file that ends in CSX so just like our gas it's falling the very
+
+01:35.970 --> 01:40.560
+same conventional pattern except we don't have these brackets because we need the brackets when we do
+
+01:40.560 --> 01:41.430
+the ore.
+
+01:41.430 --> 01:48.840
+But we don't hear in this context we want to say for any CSX files we want to just run them through
+
+01:49.320 --> 01:54.990
+the two loaders and use can take an object with multiple options or it can take an array.
+
+01:55.110 --> 01:58.790
+And here we're gonna pass an array because we wanted to run through two loaders.
+
+01:58.800 --> 02:04.740
+Keep in mind here that the order does matter loaders evaluate from right to left and we want to render
+
+02:04.860 --> 02:08.400
+the CSX load a first before we do the style loader.
+
+02:08.400 --> 02:12.270
+So because we're going right to left and we want style loader to be last we're gonna say style loader
+
+02:12.270 --> 02:14.110
+first and then CSX loader.
+
+02:14.110 --> 02:17.590
+Second and that's all we need for CSX.
+
+02:17.610 --> 02:24.960
+The last thing that we need to do is we need to make sure that we can output and build a HCM metal file
+
+02:25.350 --> 02:30.060
+that we can actually finally read in our final production build in order to do that.
+
+02:30.090 --> 02:38.010
+We need to more tools so going back to our terminal we are going to add in HCM El loader which as you're
+
+02:38.010 --> 02:40.680
+familiar with now it's simply just a loader.
+
+02:40.680 --> 02:48.860
+But we also need HCM malware pack plugin so the HCM out loader is the thing that lets us read our HCM
+
+02:48.860 --> 02:51.570
+Al file inside of our ReACT application.
+
+02:51.740 --> 02:57.760
+But the Web pack plugin is what allows us to actually place the output somewhere.
+
+02:57.890 --> 03:03.230
+So what it's gonna do is it's going to build all of our HDMI files and it's going to create efficient
+
+03:03.260 --> 03:09.710
+chunks as we saw in our performance optimization courses where they're the HDMI email bundles with the
+
+03:09.710 --> 03:11.570
+javascript for each page.
+
+03:11.630 --> 03:18.360
+And this plugin actually helps us do that so here where you're going to add these two libraries and
+
+03:18.410 --> 03:26.060
+once we have that let's go back to our rules and let's add another one so here what we want to do is
+
+03:26.060 --> 03:29.930
+we want to say in order to use our HD him a plug in loader.
+
+03:29.930 --> 03:35.780
+It's pretty much going to be the exact same as what we saw with the star loader and the gas loader.
+
+03:35.780 --> 03:36.580
+We need a test.
+
+03:37.490 --> 03:46.600
+And just as we saw we're going to write that we're matching anything that ends and die each demo and
+
+03:46.600 --> 03:52.810
+then we're just going to use the loader HDMI loader
+
+03:55.630 --> 03:57.010
+so as simple as that.
+
+03:57.010 --> 04:02.680
+The only thing now is that after rules we have to actually bring in that HDMI plugin that we were talking
+
+04:02.680 --> 04:03.570
+about.
+
+04:03.610 --> 04:09.920
+So there's another property called plugins and inside of plugins we're going to call a new.
+
+04:10.050 --> 04:11.910
+And then we got a call the actual plugin.
+
+04:11.940 --> 04:16.230
+So we've got to bring that plug in into our web page config file.
+
+04:16.230 --> 04:28.090
+So we're gonna say const h the email web PAC plug in is equal to require HMO Westpac plug in so we're
+
+04:28.090 --> 04:29.860
+bringing it in here.
+
+04:29.950 --> 04:36.550
+We want to instantiate an instance of it and we're gonna pass to it a configuration object.
+
+04:36.550 --> 04:43.120
+This object is simply going to take the template of the actual file that it's going to use as the index
+
+04:43.160 --> 04:45.850
+HDL starting point in our ReACT application.
+
+04:45.850 --> 04:50.080
+So we wanted to take this one that we have in our source because this is the one that renders the div
+
+04:50.140 --> 04:58.470
+idea of root using the app J.S. code and all of the index jazz code that we have here what's going to
+
+04:58.470 --> 05:06.910
+happen is that inside of babble loader babble loader always by default tries to go for a index digest
+
+05:06.960 --> 05:08.580
+for inside of your source folder.
+
+05:08.580 --> 05:11.670
+That's why we always find index check us inside of source.
+
+05:11.670 --> 05:17.210
+So it's going to find this file it's going to run this code and it's going to use that index each time
+
+05:17.220 --> 05:24.090
+on thought that we supply to the actual HDMI plug in as the file that it needs to run the javascript
+
+05:24.090 --> 05:30.030
+on which is where we're going to end up using our ReACT arms out render in order to replace that did
+
+05:30.060 --> 05:33.340
+with the idea of root with our app component.
+
+05:33.420 --> 05:40.680
+So it's actually the combination of those two loaders together inside of our Web pack that ends up producing
+
+05:40.920 --> 05:47.220
+and providing outside the new javascript and HDMI files that we need for our final build.
+
+05:47.220 --> 05:52.000
+So finally with this template we're just going to pass it the string to our index each.
+
+05:52.500 --> 05:56.050
+And this is our Web pack config a lot of new concepts.
+
+05:56.310 --> 06:01.140
+But honestly if you think about what it is that we wrote It's actually quite simple We're just following
+
+06:01.140 --> 06:05.940
+along with some simple rules and using loaders it's just all configuration with Web site that's really
+
+06:05.940 --> 06:06.880
+all it is.
+
+06:06.990 --> 06:11.670
+Of course I'm going to link all of the documentation for this so that you can see what other options
+
+06:11.670 --> 06:12.320
+you have.
+
+06:12.390 --> 06:16.160
+Understand a little better what else you can do with these different options.
+
+06:16.290 --> 06:23.940
+But this is just a bare bones setup so that we can run our web pack and render our ReACT code now that
+
+06:23.940 --> 06:30.240
+we have all this let's just run built because we've got our config setup we've got Web hack.
+
+06:30.240 --> 06:31.870
+Well it looks like we have a little error here.
+
+06:31.920 --> 06:35.460
+Oh I put this in the wrong place.
+
+06:35.490 --> 06:42.750
+This should be one lower so plug ins comes after module and now let's try this again.
+
+06:44.150 --> 06:49.540
+So it's going to run the Web pack build can't find app inside of app.
+
+06:49.820 --> 06:51.320
+This is a syntax issue.
+
+06:51.560 --> 06:59.550
+So inside of index dot J S this should be app Dutch ASX because our loader is looking specifically for
+
+06:59.550 --> 07:00.690
+this it does not default.
+
+07:00.720 --> 07:04.290
+So that's actually one of the things with Westpac let's fix that.
+
+07:04.320 --> 07:05.190
+Let's try this again.
+
+07:06.530 --> 07:11.570
+So my autocomplete will automatically try and correct sometimes without doing the dodgy OSX as you've
+
+07:11.570 --> 07:14.630
+seen throughout this course as I've imported multiple files together.
+
+07:14.750 --> 07:18.770
+So there's just one of the caveats and nuances with web hack if you want that feature you actually have
+
+07:18.770 --> 07:21.350
+to write it yourself as a config option.
+
+07:21.350 --> 07:23.340
+But now we finished our build.
+
+07:23.450 --> 07:25.190
+But let's actually go over what just happened.
+
+07:25.190 --> 07:27.200
+We ran into a couple of minor errors.
+
+07:27.230 --> 07:30.040
+This is very normal with configuration of web hack.
+
+07:30.050 --> 07:31.880
+This is why the create RAC team.
+
+07:31.880 --> 07:36.920
+And actually many CLIA tools even for angular in view try and hide this away from developers because
+
+07:36.920 --> 07:38.330
+it's so error prone.
+
+07:38.330 --> 07:44.270
+There's so many little nuances you can miss with Westpac that it's really frustrating to work with.
+
+07:44.270 --> 07:46.550
+In that sense that's not to say that it's not worth learning.
+
+07:46.550 --> 07:49.640
+It definitely is worth learning at least what's happening.
+
+07:49.790 --> 07:56.270
+But the tools as Andre mentioned in an earlier lesson an entire team is dedicated to helping you build
+
+07:56.300 --> 08:03.070
+and set up your configuration with web hack and Babel to the most optimized degree possible it's worth
+
+08:03.070 --> 08:08.030
+knowing what's happening under the hood at least like demystifying what web hacking people do.
+
+08:08.050 --> 08:12.850
+But writing it from scratch could bring you a lot of headache and the configuration options are pretty
+
+08:12.850 --> 08:17.450
+much just things you have to do by memory and looking at the actual configuration.
+
+08:17.450 --> 08:22.640
+There's no real logic beyond what it is that each configuration tool is trying to do for you.
+
+08:23.510 --> 08:28.220
+But now that we have our final build we see that it succeeded inside.
+
+08:28.220 --> 08:31.190
+We now see we have this new disk folder and an HD email.
+
+08:31.970 --> 08:37.430
+So let's actually open this in the terminal but let's open up our index of each demo.
+
+08:37.940 --> 08:43.550
+Let's reveal and finder and let's just open it up in our browser and there we see we see our component
+
+08:43.550 --> 08:49.550
+rendered our reactors working so we know that our loader is working and we know that our web pack is
+
+08:49.640 --> 08:51.940
+all working and that's pretty much it.
+
+08:51.980 --> 08:58.220
+This is all web hack and Babel do it transforms it down it builds it into a final index not a channel
+
+08:58.250 --> 09:02.810
+as well as main jazz bundle that we download as we saw in a performance section.
+
+09:02.810 --> 09:07.100
+So this is actually what's helping web Park is helping us improve our performance by bundling these
+
+09:07.100 --> 09:09.540
+files for us when we make these requests.
+
+09:09.560 --> 09:12.560
+That's why we included the HCM l bundle.
+
+09:12.560 --> 09:17.780
+This is the main advantage of Westpac web pack allows us to increase our performance because it sets
+
+09:17.780 --> 09:19.420
+up a lot of these things for us.
+
+09:19.790 --> 09:26.180
+The react team by default assumes and must use Westpac all of these new technologies and frameworks
+
+09:26.270 --> 09:32.210
+all leverage Westpac under the hood to help them optimize the performance and build the code that you
+
+09:32.210 --> 09:38.730
+write in angular or in react down into a readable version for browsers but now that we finally have
+
+09:38.730 --> 09:46.140
+our Web pack and our configuration options we understand what it is that Westpac does dig around with
+
+09:46.140 --> 09:51.630
+the documentation play with it a little bit yourself if you want to for example include the SAS loader
+
+09:51.900 --> 09:56.160
+I can include a link to the SAS loader just try to follow the instructions and see if you can fit it
+
+09:56.160 --> 10:03.560
+in right a SAS file and see what happens so hopefully with that you understand at least conceptually
+
+10:03.590 --> 10:05.750
+what Westpac and Babel do.
+
+10:05.780 --> 10:09.860
+That's not to say that for your projects especially when you're on a new team that you suddenly write
+
+10:09.860 --> 10:16.130
+this yourself from scratch if you also want you can create a new create react app application eject
+
+10:16.130 --> 10:21.350
+it and look at how complicated that code is because now you at least have a better understanding of
+
+10:21.350 --> 10:23.450
+what it is that Westpac is doing.
+
+10:23.690 --> 10:29.250
+Look at the Bebo RC as well and see how many configuration options there are compare.
+
+10:29.240 --> 10:34.130
+Contrast that with the documentation and you'll at least see all of the available possibilities that
+
+10:34.130 --> 10:35.120
+you have in front of you.
+
+10:35.120 --> 10:40.040
+With Westpac and Babel so hopefully you've enjoyed this lesson and I'll see you in the next lesson.

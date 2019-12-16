@@ -1,0 +1,100 @@
+WEBVTT
+
+00:00.890 --> 00:08.830
+Ladies and gentlemen we've come to an important crossroad in our path to becoming a great reactive helper.
+
+00:08.840 --> 00:12.330
+You see we have two options here.
+
+00:12.370 --> 00:15.820
+The first option is we can keep going.
+
+00:15.820 --> 00:24.310
+We can keep learning react syntax small little tricks and pretty much learned the entire documentation
+
+00:24.790 --> 00:31.990
+which is right over here so that like a dictionary we understand every single thing about react.
+
+00:32.080 --> 00:34.300
+Every single tool in the library.
+
+00:34.300 --> 00:38.000
+But here's the thing you can do that on your own.
+
+00:38.050 --> 00:41.780
+You don't need me to tell you what the documentation sets.
+
+00:41.860 --> 00:45.420
+And as a developer you should learn how to read the documentation.
+
+00:46.150 --> 00:52.710
+However I do understand that sometimes it's nice to have somebody show you how things work how maybe
+
+00:52.750 --> 00:59.540
+something that isn't clear online is explained so we're going to take a different strategy than most
+
+00:59.540 --> 01:02.080
+courses here and I've talked about this before.
+
+01:02.180 --> 01:07.240
+What we're going to do is we're going to try and simulate a real work environment.
+
+01:07.430 --> 01:08.790
+What does that mean.
+
+01:08.810 --> 01:14.840
+Well moving forward we're gonna start off building our e-commerce Web site.
+
+01:14.840 --> 01:22.050
+We're going to build a full out online clothing shop from start all the way to finish where we put it
+
+01:22.050 --> 01:22.920
+online.
+
+01:22.920 --> 01:25.240
+It's going to allow us to do a ton of things.
+
+01:25.530 --> 01:32.130
+But what we want to mimic here is how in a real life scenario you would most likely be working with
+
+01:32.130 --> 01:40.330
+somebody perhaps a senior developer so along the way I'm going to ask you to code along have your code
+
+01:40.330 --> 01:42.470
+side by side next to the videos.
+
+01:42.580 --> 01:48.190
+As we work through the project together and as we build the project we're going to encounter different
+
+01:48.190 --> 01:54.220
+problems different things that perhaps we haven't learned yet and react and slowly we're gonna learn
+
+01:54.220 --> 02:01.330
+these things as we build the project because we could spend the next 20 hours just building five more
+
+02:01.450 --> 02:06.790
+useless projects that aren't impressive because there are things they can do in a day.
+
+02:06.790 --> 02:12.970
+What impresses employers and what gives you actual work experience is building these large projects
+
+02:12.970 --> 02:14.610
+from start to finish.
+
+02:14.770 --> 02:16.990
+So we're going to choose this path.
+
+02:16.990 --> 02:24.280
+So if you feel like hey I feel like I only know maybe 40 percent of react then that's OK because we
+
+02:24.280 --> 02:31.190
+have a long way to go I hope that you stick around because by the end of this course that 40 percent
+
+02:31.190 --> 02:37.970
+of knowledge is going to grow and we're going to try and build something from scratch so that at the
+
+02:37.970 --> 02:45.470
+end of the day you don't just learn a list of tools but you learn how to lead projects how to explain
+
+02:45.470 --> 02:51.500
+to people how react works how to decide on good architecture it's time to get started.

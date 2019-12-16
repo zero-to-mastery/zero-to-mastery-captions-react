@@ -1,0 +1,88 @@
+WEBVTT
+
+00:01.490 --> 00:05.360
+Hey it's Andre here in the last video.
+
+00:05.370 --> 00:12.400
+E wanted to use this idea of redux thunk and how it's a middleware that allows us to do asynchronous
+
+00:12.490 --> 00:13.240
+actions.
+
+00:13.660 --> 00:20.400
+But I want to take a second to just really make sure we understand what's happening we installed the
+
+00:20.400 --> 00:29.060
+redux thunk library and we added it to our middleware and if you remember a middleware is like a little
+
+00:29.060 --> 00:37.070
+tunnel here that intercepts our actions before they go into our reducer and modify them or add things
+
+00:37.070 --> 00:38.300
+to them.
+
+00:38.300 --> 00:45.800
+In our case every time we dispatched an action it just went straight to the reducer as an object.
+
+00:45.800 --> 00:46.370
+Right.
+
+00:46.400 --> 00:54.750
+We had the action type and the action payload but redux thunk allow us to do something interesting.
+
+00:54.750 --> 01:02.640
+It allows us to catch the action and it's only going to detect actions that aren't objects.
+
+01:02.640 --> 01:09.500
+So any thing that's not an object and instead is a function it's going to say oh I'm interested in it
+
+01:09.720 --> 01:13.030
+let's do something and what is it going to do.
+
+01:13.050 --> 01:20.850
+Well if you remember in the code it's going to ignore let's say Fetch collections failure because this
+
+01:21.300 --> 01:25.800
+is just an object redux thunk doesn't care about action objects.
+
+01:25.860 --> 01:33.250
+Instead it's only going to catch this thing because what this returns is a function.
+
+01:33.540 --> 01:40.020
+And as soon as redux thunk sees a function through that tunnel it's going to say oh I'm interested in
+
+01:40.020 --> 01:42.490
+it and what is it going to do.
+
+01:42.600 --> 01:52.010
+All it's going to do is it's going to give the dispatch functionality as the parameter.
+
+01:52.010 --> 01:53.420
+So that's all it's doing.
+
+01:53.540 --> 01:59.510
+It's detecting a function and then saying OK well here here's the dispatch so you can use it inside
+
+01:59.510 --> 02:00.160
+of it.
+
+02:00.590 --> 02:09.050
+And then we keep going so that now inside of this function we've went through that little tunnel we've
+
+02:09.140 --> 02:19.490
+received that dispatch so that now I can dispatch to my reducer the normal objects that it actually
+
+02:19.490 --> 02:22.280
+needs.
+
+02:22.290 --> 02:29.250
+So again it sounds a lot more complicated than it actually is but that's all it does gives us the dispatch
+
+02:29.250 --> 02:38.590
+so that we can go back to giving synchronous actions action objects to the route reducer let's keep
+
+02:38.590 --> 02:38.980
+going.
+
+02:39.570 --> 02:39.750
+Bobby.

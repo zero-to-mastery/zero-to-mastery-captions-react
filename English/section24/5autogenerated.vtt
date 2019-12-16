@@ -1,0 +1,382 @@
+WEBVTT
+
+00:00.780 --> 00:07.750
+OK so now we see what the shape of our requests looks like and how to use it when we have our client.
+
+00:07.830 --> 00:15.810
+Let's actually explore more of actually bringing in the Apollo features into our application so because
+
+00:15.810 --> 00:19.910
+we already fetched our collection let's just go and fetch more collections.
+
+00:20.130 --> 00:25.710
+Except this time Let's fetch all of our collections and replace our collections overview with it because
+
+00:25.710 --> 00:28.960
+that's the main place where we need access to all of the collections.
+
+00:30.160 --> 00:34.560
+Now and here we can see that we are currently using redux.
+
+00:34.600 --> 00:40.640
+And what we're doing is we're passing the collections into this collection component while we're actually
+
+00:40.640 --> 00:46.760
+going to leverage our higher order component pattern in order to use some of the new components that
+
+00:46.760 --> 00:49.140
+we get back from Apollo.
+
+00:49.430 --> 00:55.040
+And it's going to be very similar to the consumer pattern that we saw when we used the context API.
+
+00:55.070 --> 01:01.810
+The very first time not when we used the used context hook but do you remember when we used the context
+
+01:01.820 --> 01:07.110
+dog consumer tanks it's gonna be very similar and I'll show you how we'll use it.
+
+01:07.160 --> 01:14.330
+The first thing that we need to do is we need to remove this redux bindings that we have on our actual
+
+01:14.330 --> 01:16.350
+collections overview.
+
+01:16.550 --> 01:24.530
+So just remove the library and remove any of this data that you don't need and now what you need to
+
+01:24.530 --> 01:32.270
+do is you are going to make a new file inside of this collections overview and it's going to be called
+
+01:32.270 --> 01:36.390
+collections overview container dodge ASX.
+
+01:37.130 --> 01:42.960
+So we did something similar before when we built our containers but this time it's just gonna be a graft
+
+01:43.080 --> 01:44.020
+container.
+
+01:44.360 --> 01:50.280
+And what you're going to do is you are going to import in react from react because what we're going
+
+01:50.280 --> 01:58.220
+to write is a new component but we're now going to import in this new component called the query component
+
+01:59.320 --> 02:03.220
+and this comes from a react Apollo.
+
+02:03.240 --> 02:09.120
+We're also going to import into GQ all function because we need to make a graph Q all request
+
+02:12.880 --> 02:22.190
+and we're also going to import in both our collection overview collections overview as well as are spinner
+
+02:22.220 --> 02:22.640
+component
+
+02:25.980 --> 02:27.500
+spinner component.
+
+02:27.670 --> 02:28.890
+Okay.
+
+02:29.010 --> 02:36.780
+Now in order for us to use this query component this query component is going to receive the actual
+
+02:36.780 --> 02:37.250
+graft.
+
+02:37.310 --> 02:43.320
+Well query that we want to make and then it's gonna go fetch that data and it's going to give it back
+
+02:43.320 --> 02:49.590
+to us as a function pretty much just like the consumer when we used our context API where it gave us
+
+02:49.590 --> 02:53.100
+a function that had access to the data that we wanted.
+
+02:53.110 --> 02:57.700
+So what we're gonna do is we are going to write the actual request itself.
+
+02:57.700 --> 03:03.820
+So we're gonna stay constant get collections and use capitals and underscores here because it's never
+
+03:03.820 --> 03:04.420
+gonna change.
+
+03:04.420 --> 03:04.810
+Right.
+
+03:04.810 --> 03:10.170
+So when you see the syntax it means it is a constant.
+
+03:10.320 --> 03:15.780
+We're gonna say GQ well and then you're gonna use the back to X right because we're doing string interpolation
+
+03:16.110 --> 03:25.700
+like we did before and then we're going to say with these braces collections and we want the idea we
+
+03:25.700 --> 03:29.090
+want the title we want the items.
+
+03:29.090 --> 03:38.190
+And on those items we want the I.D. We want the name we want the price and we want the image URL very
+
+03:38.190 --> 03:38.930
+similar.
+
+03:39.000 --> 03:40.260
+Nothing new here.
+
+03:40.260 --> 03:44.130
+The only difference is that we have to declare it in a separate const.
+
+03:44.180 --> 03:51.200
+Now what we're gonna do is we are going to now make our new component our collections overview container
+
+03:51.410 --> 04:01.990
+component which is equal to this functional component that will return us back our query component wrapping
+
+04:01.990 --> 04:08.420
+around are actual collections overview component.
+
+04:08.440 --> 04:14.800
+But before we do that we're gonna pass this query into this query itself using the query key so we're
+
+04:14.800 --> 04:22.940
+gonna say the query goes to our Get collections query and now what will happen is it will give us back
+
+04:23.030 --> 04:24.180
+a function.
+
+04:24.470 --> 04:32.360
+And on that function is going to be a object that holds actually a lot of different properties that
+
+04:32.360 --> 04:39.090
+get passed in the main ones that we care about is the loading.
+
+04:39.090 --> 04:49.400
+So we're going to destructor these off we're gonna to structure off loading error and data and we're
+
+04:49.400 --> 04:52.310
+only going to the structure off the error so that we can actually see it.
+
+04:53.150 --> 05:01.850
+But here we're going to open up these braces and what we're gonna say is we want to render the spinner
+
+05:02.000 --> 05:03.090
+if loading is true.
+
+05:03.110 --> 05:10.990
+So going to say if loading right then return from this if statement are spinner so that's pretty much
+
+05:10.990 --> 05:18.720
+what's going to render out of this function if loading is true so this is pretty much a boolean in fact
+
+05:18.720 --> 05:22.950
+let's console log all of these so we can see what they are.
+
+05:22.980 --> 05:25.210
+So let's just wrap it in an object right.
+
+05:25.230 --> 05:30.580
+Using our object syntax so that we can know what each one is.
+
+05:30.930 --> 05:32.840
+Let's just console the log.
+
+05:32.850 --> 05:36.180
+The error as well as well as the data
+
+05:40.230 --> 05:45.590
+and then what we'll do is we will say if loading is false.
+
+05:45.870 --> 05:54.430
+So if the data has returned back to us then I want to return collections overview and I want to pass
+
+05:54.490 --> 05:58.390
+in collections as data Doc collections.
+
+06:00.010 --> 06:03.090
+We actually have to export this and use it in order to see what happens.
+
+06:04.390 --> 06:09.040
+Now I know that collections are going to come back from data because when we made the request manually
+
+06:09.040 --> 06:13.660
+here right when we made this query we knew that that was the shape that we were going to get.
+
+06:13.660 --> 06:20.120
+So if I just do I.T. and title we see that we always get data with collections as the query and then
+
+06:20.120 --> 06:22.610
+the actual value of what we're getting back.
+
+06:22.610 --> 06:26.600
+So that's how I knew that it was going to be collections because that data is pretty much just going
+
+06:26.600 --> 06:29.570
+to be this thing after the data key.
+
+06:30.020 --> 06:34.790
+So that's one thing to keep in mind for everything you get back from graphed you all it will always
+
+06:35.000 --> 06:41.630
+be nested under the name of the query that you made so let's export this out as the default so that
+
+06:41.630 --> 06:43.040
+we can actually see it in action.
+
+06:44.450 --> 06:52.700
+And what I'm going to show you is I'm actually going to show you a way that we can use this easier in
+
+06:52.700 --> 06:53.510
+our imports.
+
+06:54.050 --> 06:55.730
+So where do we use our collections.
+
+06:55.730 --> 06:58.490
+Overview is probably our shop page
+
+07:01.760 --> 07:07.440
+so inside our shop page right now we're importing in collections overview right from collections overview
+
+07:07.470 --> 07:08.570
+decomposing.
+
+07:08.960 --> 07:14.330
+You're going to switch this over to dot container which are our new container file and then instead
+
+07:14.330 --> 07:21.920
+of changing this you can add the braces and say default as collections overview.
+
+07:21.920 --> 07:27.980
+And the reason you can do this is because the default is actually already alias for you as an export
+
+07:28.070 --> 07:29.930
+with the E6 import.
+
+07:30.020 --> 07:36.610
+So we only ever see these curly braces in our import statements when we make non default imports.
+
+07:36.620 --> 07:42.020
+Well it turns out we actually have also access to this default alias which is always exported for us
+
+07:42.470 --> 07:45.040
+even when we export out something by default.
+
+07:45.140 --> 07:51.310
+So we can say I want to import in whatever gets export it by default from this file as collections overview.
+
+07:51.320 --> 07:51.560
+Right.
+
+07:51.560 --> 07:54.770
+So I want to set it as this constant name.
+
+07:54.770 --> 08:00.390
+So now we don't have to change it for anywhere we used it and it's easy for us to know where it is because
+
+08:00.390 --> 08:03.010
+we just know that what's it being imported is by default.
+
+08:03.030 --> 08:05.680
+This collections overview.
+
+08:05.810 --> 08:13.060
+So now if I say I go back to my application and if I go to the shop what will load is our collections
+
+08:13.060 --> 08:18.990
+overview and you'll see that the object is loading true the object here.
+
+08:19.000 --> 08:21.160
+Right that we actually have as our error is undefined.
+
+08:21.400 --> 08:26.100
+If we have to have there we would get the error object so we can do something with that.
+
+08:26.100 --> 08:31.000
+If we had say a component that handled error states but in our case we do.
+
+08:31.220 --> 08:34.980
+We also got our data object which initially was empty.
+
+08:35.030 --> 08:38.710
+So the first time this logged there was no data.
+
+08:38.730 --> 08:40.170
+That's why loading was true.
+
+08:40.320 --> 08:45.780
+And that's why we load our spinner now at the moment that loading is false.
+
+08:45.780 --> 08:51.030
+That means that we actually get the data we need it back and the data is the object with.
+
+08:51.030 --> 08:57.360
+Again the query that we made which was collections and then it gives us back the array of the collections
+
+08:57.360 --> 08:58.590
+objects that we need it.
+
+08:58.980 --> 09:05.820
+And as we see our shop overview page works the same as it did before but now of course none of these
+
+09:05.820 --> 09:13.560
+buttons that they're still linked up to redux but we have to switch this over to using Apollo but we've
+
+09:13.560 --> 09:21.560
+made our first query we've made our first request to get all of our collection items and it was pretty
+
+09:21.560 --> 09:24.260
+simple it wasn't that complicated.
+
+09:24.260 --> 09:24.560
+Right.
+
+09:24.920 --> 09:34.230
+And we were mainly able to continue using our components the same way that we did before we mainly were
+
+09:34.230 --> 09:40.710
+using a map state to props higher order component pattern with our redux bindings and now we're simply
+
+09:40.710 --> 09:46.890
+just wrapping over our presentation or collections overview component with this new container that does
+
+09:46.890 --> 09:53.210
+the fetching for us and then it'll pass the data into our collections overview component so it's actually
+
+09:53.210 --> 09:56.810
+really handy especially with this method of error handling.
+
+09:56.990 --> 10:04.250
+We don't have to worry about setting or loading stay or is fetching is true right when our request starts
+
+10:04.340 --> 10:11.240
+and then we got to set it to false when our request succeeds all of this gets handled for us by the
+
+10:11.240 --> 10:14.360
+Apollo client which is a beautiful thing.
+
+10:14.420 --> 10:16.480
+It's so easy to use for this reason.
+
+10:16.640 --> 10:19.660
+In fact our spare component is so simple as just a component now.
+
+10:19.670 --> 10:20.120
+Right.
+
+10:20.130 --> 10:25.240
+We'd have to worry about any of the patterns with higher order components anything like that so that's
+
+10:25.240 --> 10:32.240
+one of the big benefits of using this pattern and using the Apollo client.
+
+10:32.320 --> 10:39.010
+So now that we've rendered our collection page let's use another query and let's modify our specific
+
+10:39.220 --> 10:43.060
+individual collection page and I'll show you how to do that in the next lesson.

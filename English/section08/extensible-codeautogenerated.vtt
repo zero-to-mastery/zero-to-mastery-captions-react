@@ -1,0 +1,117 @@
+WEBVTT
+
+0
+00:01.440 --> 00:04.320
+Hello It's Andre here again.
+
+1
+00:04.320 --> 00:09.930
+I want you to notice what Yihua has been doing so far and he's going to continue to do throughout
+
+2
+00:09.930 --> 00:14.670
+the course that is he's writing extensible code.
+
+3
+00:14.730 --> 00:21.090
+Are you starting to feel like we're doing a lot of things over and over the same way we're creating
+
+4
+00:21.090 --> 00:29.550
+reduced hours and actions and selectors and connecting components and rendering components and if things
+
+5
+00:29.550 --> 00:31.450
+seem repetitive to you.
+
+6
+00:31.620 --> 00:40.830
+That's actually a good thing because what we're doing is we're making things very simple now we're creating
+
+7
+00:40.830 --> 00:48.930
+a lot of files in our project but these files are all usually under one hundred lines of code each file
+
+8
+00:48.930 --> 00:52.200
+is very very simple isn't it.
+
+9
+00:52.240 --> 00:56.950
+We haven't been any crazy long thousand line algorithms.
+
+10
+00:56.950 --> 01:00.220
+Everything is nice small and simple.
+
+11
+01:00.220 --> 01:09.100
+And if you notice each one makes each component very very small and also very extensible that is he
+
+12
+01:09.160 --> 01:17.650
+reuses components and features across the application so that he's not constantly doing the same thing
+
+13
+01:17.680 --> 01:26.710
+over and over it's OK if we're copying code that is well similar in let's say a selector or using map
+
+14
+01:26.710 --> 01:29.170
+state to props over and over.
+
+15
+01:29.200 --> 01:36.250
+The idea is that he's structured the project in such a way that your eye could come to the project and
+
+16
+01:36.250 --> 01:43.620
+really easily add features really easily add a custom button or a cart item.
+
+17
+01:44.050 --> 01:51.430
+And this is a sign of a really good developer because when he's coding He's coding for the future as
+
+18
+01:51.430 --> 01:51.980
+well.
+
+19
+01:52.060 --> 01:58.360
+He knows that by thinking a little bit about how to make the code more extensible in the future he'll
+
+20
+01:58.360 --> 02:04.570
+benefit as he takes on more and more features because he can use the same functionality in one part
+
+21
+02:04.570 --> 02:12.400
+of the app in another part of the app and react and Redux really allows us to create extensible code
+
+22
+02:13.440 --> 02:17.660
+and the other word that you might be thinking of is also predictable code.
+
+23
+02:17.760 --> 02:20.700
+There's nothing hard about what we're doing right now.
+
+24
+02:20.700 --> 02:27.360
+Everything is super easy and predictable at least it is once you get used to the react redux syntax.
+
+25
+02:27.360 --> 02:33.840
+But at the end of the day we're just creating really declarative code really predictable pure functions
+
+26
+02:34.350 --> 02:42.120
+that can be extended so keep an eye on that throughout the course because this is why you want to do.
+
+27
+02:42.300 --> 02:48.780
+You don't want to make code that makes you look impressive or clever or tough you want code so simple
+
+28
+02:48.900 --> 02:52.080
+that anybody can read it let's keep going.

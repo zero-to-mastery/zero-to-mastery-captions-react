@@ -1,0 +1,109 @@
+WEBVTT
+
+00:01.290 --> 00:01.770
+Hey there.
+
+00:01.770 --> 00:08.400
+It's time for another lesson and the lesson in this video is to be a late follower.
+
+00:08.400 --> 00:14.410
+What do I mean react is a tool that's constantly evolving.
+
+00:14.410 --> 00:17.800
+No program no software no library is ever perfect.
+
+00:18.250 --> 00:27.000
+So the community is constantly improving it right now reacts version is sixteen point eight but by the
+
+00:27.000 --> 00:32.910
+time you watch this video most likely it's going to be higher and higher because it's constantly improving.
+
+00:32.910 --> 00:36.780
+You have things like react hooks that were recently added.
+
+00:36.870 --> 00:45.420
+We're gonna have suspense concurrency mode and react there things like react fire react fiber.
+
+00:45.470 --> 00:52.150
+A lot of planned updates that are coming and sometimes it can be overwhelming to keep up with everything
+
+00:53.050 --> 00:54.180
+and this is my advice to you.
+
+00:57.220 --> 01:03.220
+Usually what happens when something gets announced is that people get really really excited and they
+
+01:03.220 --> 01:06.100
+start using it right away in their project.
+
+01:06.100 --> 01:11.440
+The problem is that sometimes developers don't get it right the first time.
+
+01:11.510 --> 01:15.350
+It takes some time to develop best practices.
+
+01:15.350 --> 01:22.750
+Sometimes maybe the API isn't good enough so they decide to change some things because of this.
+
+01:22.790 --> 01:30.440
+When you're looking at react for your project you want to make sure that you do things that aren't going
+
+01:30.440 --> 01:31.040
+to change.
+
+01:31.220 --> 01:33.580
+Ideally your project can last a long time.
+
+01:34.670 --> 01:40.640
+If you're adding the latest features what's going to happen is most likely a year down the road road
+
+01:40.910 --> 01:44.100
+somebody realizes that there's a better way of doing it.
+
+01:44.270 --> 01:46.670
+So take your time.
+
+01:46.670 --> 01:53.150
+If something's new learn about it get excited about it but be cautious that just assuming that it's
+
+01:53.150 --> 01:56.100
+the best way to do something is not always the case.
+
+01:56.150 --> 02:04.560
+Usually you want to give it a bit of time somewhere around a year until the community settles on best
+
+02:04.620 --> 02:06.240
+practices.
+
+02:06.270 --> 02:08.910
+If you were at the beginning when react got started.
+
+02:09.090 --> 02:13.680
+I remember people were doing things that well just doesn't exist anymore.
+
+02:13.680 --> 02:17.800
+People were building components in ways that actually doesn't exist anymore.
+
+02:17.850 --> 02:23.120
+So all those people had to update their code base because of these changes that were coming.
+
+02:23.130 --> 02:30.620
+I remember working at a company in Silicon Valley and we implemented the latest version of react to
+
+02:30.630 --> 02:35.720
+router and unfortunately it was not well documented because it was so new.
+
+02:35.820 --> 02:42.090
+So we had to spend a really really long time waiting for the API to settle before we had a working product
+
+02:42.090 --> 02:46.020
+because we chose to do something that well was at the very cutting edge.
+
+02:46.440 --> 02:49.440
+So be a late follower.
+
+02:49.440 --> 02:52.110
+You don't want to be the first one to try out something.
+
+02:52.830 --> 02:55.800
+Sometimes it's good to be behind the early adopters.

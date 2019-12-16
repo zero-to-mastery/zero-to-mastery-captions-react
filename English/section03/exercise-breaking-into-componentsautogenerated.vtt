@@ -1,0 +1,148 @@
+WEBVTT
+
+00:01.350 --> 00:02.560
+Hey it's Andre here.
+
+00:02.590 --> 00:03.980
+Just a quick question.
+
+00:04.030 --> 00:09.070
+Why do you think we keep breaking things down into components.
+
+00:09.070 --> 00:17.380
+I mean in the previous videos we created this card list component that renders this div with something
+
+00:17.380 --> 00:19.080
+inside it some children inside it.
+
+00:19.450 --> 00:26.930
+And then we broke that down even further to have cards that are being rendered and you might be asking
+
+00:26.930 --> 00:31.490
+yourself why exactly is that necessary.
+
+00:31.490 --> 00:33.610
+Why can't we just put everything in naptime.
+
+00:33.680 --> 00:41.120
+Yes and have just one big well J.S. sex isn't that simpler than dividing everything into all these small
+
+00:41.120 --> 00:43.040
+components and so many files.
+
+00:43.040 --> 00:46.430
+Isn't that confusing before I answer that question.
+
+00:46.430 --> 00:49.820
+I do have a question for you and a little exercise.
+
+00:49.880 --> 00:53.370
+When do we break things down into components.
+
+00:53.390 --> 00:59.120
+Pause the video here and think about what the benefits are of breaking things down into smaller and
+
+00:59.120 --> 01:04.950
+smaller components instead of one big giant one ready for the answer.
+
+01:04.980 --> 01:11.790
+Remember this when I told you that to be a great react developer you have to do these three things really
+
+01:11.790 --> 01:12.360
+well.
+
+01:12.420 --> 01:19.920
+This touches on the first point which is deciding on components and if you remember our example where
+
+01:19.920 --> 01:25.890
+we had this little Web site that we broke down into different components remember here and here and
+
+01:25.890 --> 01:30.090
+here you can see over here that each part is a component.
+
+01:30.120 --> 01:36.690
+Now the reason we would let's say if we had an app like this we wouldn't want to code it all into one
+
+01:36.690 --> 01:44.940
+file is that the benefit of React is in the idea of this component architecture that can be placed and
+
+01:44.940 --> 01:47.700
+used in multiple locations.
+
+01:47.700 --> 01:52.590
+So that means that when we do something like this.
+
+01:52.740 --> 02:00.930
+Sure we could have kept all the cards in here without creating a new card component but now this is
+
+02:00.930 --> 02:06.720
+more flexible because this card list can now be passed different properties.
+
+02:06.720 --> 02:13.050
+For example instead of the monsters maybe we have fairy tale characters in this card list component
+
+02:13.050 --> 02:21.120
+can be used on a different project or a different part of the app because it no longer cares what it
+
+02:21.120 --> 02:22.530
+prints out.
+
+02:22.530 --> 02:28.650
+I mean sure it can print out this card component but maybe we have a fairy tale card component now that
+
+02:28.710 --> 02:32.860
+we can just inject into here instead of this card one.
+
+02:32.940 --> 02:39.870
+And by breaking things down we're making things more flexible because each component does one thing
+
+02:40.020 --> 02:42.690
+and one thing really really well.
+
+02:42.690 --> 02:51.900
+So that it can be used in other places the bigger a file gets the more J.S. sex we have the more logic
+
+02:51.930 --> 02:55.650
+we have the harder it gets to be used in another place.
+
+02:55.830 --> 03:01.810
+And this idea of breaking things down into small individual chunks is really really important.
+
+03:01.950 --> 03:11.910
+And most good react projects break things down into a pretty small component file that the name pretty
+
+03:11.910 --> 03:13.840
+much tells it exactly what it does.
+
+03:13.860 --> 03:22.440
+Just one small thing and the other benefit that we will also encounter later on is that we also have
+
+03:22.440 --> 03:29.520
+this flexibility of performance improvements potentially as well as having components that are really
+
+03:29.520 --> 03:32.000
+easy to test because they're so simple.
+
+03:32.000 --> 03:34.590
+Now those are topics that will uncover later on.
+
+03:35.400 --> 03:41.130
+But the key here is that the reason we break things down into smaller and smaller components is that
+
+03:41.130 --> 03:48.570
+we combine each component with its concern and that concern is that this component is only concerned
+
+03:48.570 --> 03:49.920
+about card list.
+
+03:49.950 --> 03:53.720
+This component is only concerned about cards.
+
+03:53.850 --> 03:56.640
+Now this is an idea that we're going to explore throughout our course.
+
+03:56.640 --> 04:00.390
+So if you don't get it 100 percent don't worry we still have lots to cover.
+
+04:00.870 --> 04:01.580
+So let's keep going.

@@ -1,0 +1,196 @@
+WEBVTT
+
+00:01.290 --> 00:02.570
+Hey it's Andre here.
+
+00:02.580 --> 00:06.500
+I want to make a quick note about this on change event.
+
+00:06.600 --> 00:09.870
+Let's demystify some of the code here now.
+
+00:09.870 --> 00:16.440
+The first thing I want to point out is this on change remember is in J.S. sex.
+
+00:16.560 --> 00:18.440
+It's not actual H2 you know.
+
+00:20.080 --> 00:26.990
+Remember this diagram when the DOM changes or reacts to a user input.
+
+00:27.000 --> 00:34.020
+In our case searching for a monster it's going to say hey there's an event somebody has just typed in
+
+00:34.020 --> 00:36.240
+something into the input.
+
+00:36.240 --> 00:38.130
+However where we act does.
+
+00:38.130 --> 00:40.720
+Remember we don't manually touch the DOM.
+
+00:40.800 --> 00:50.820
+If that were the case we would be using the on change event natively in our H2 amount using something
+
+00:50.820 --> 00:51.500
+like this.
+
+00:51.630 --> 00:58.170
+But because we're using J as sex and by the way if you're not familiar with ECMO events I will link
+
+00:58.170 --> 01:02.080
+to a great resource that talks about this so you can learn more about them.
+
+01:02.190 --> 01:09.420
+But again it's just something that the DOM gives us in order for us to interact with user events react
+
+01:09.750 --> 01:12.580
+actually has something called synthetic events.
+
+01:12.720 --> 01:18.180
+And I do recommend that anytime you have questions throughout the course to Google things and go visit
+
+01:18.180 --> 01:25.130
+the react documentation because well they're the ultimate source of truth when it comes to react.
+
+01:25.200 --> 01:28.140
+Now what are these synthetic events.
+
+01:28.140 --> 01:35.310
+If we go back to our diagram when a dom event happens because let's say a user clicks or types something
+
+01:35.310 --> 01:40.290
+in an input the DOM on change event is going to say hey something changed.
+
+01:40.290 --> 01:45.060
+Now react intercepts that and says oh something has changed.
+
+01:45.060 --> 01:51.300
+Let me go tell my react ad that something's happened and this is what a synthetic event is a synthetic
+
+01:51.360 --> 01:52.020
+event.
+
+01:52.020 --> 01:58.860
+It's kind of like a fake event that we pretend is a dumb event but it's something that will our ReACT
+
+01:58.860 --> 02:05.980
+robot is telling us saying hey there was an event on the dam what should we do and this is our synthetic
+
+02:05.980 --> 02:06.580
+event.
+
+02:06.580 --> 02:08.870
+You see here that it's camel cased.
+
+02:08.950 --> 02:16.870
+So it's not actual a shemale but a synthetic event on change that we use to detect whenever that damn
+
+02:16.870 --> 02:17.890
+event happens.
+
+02:18.010 --> 02:23.850
+We receive that event because something has happened and then we update the state.
+
+02:23.890 --> 02:30.060
+Remember state is simply something that usually changes in our app due to a user action.
+
+02:30.400 --> 02:38.180
+In our case the search field is going to change because somebody has typed in into the text box.
+
+02:38.190 --> 02:44.910
+Now if we look at this code over here some of you might be asking why we don't just run this function.
+
+02:44.940 --> 02:50.520
+If you look over here all we're doing is actually defining the function and not running it.
+
+02:50.520 --> 02:57.180
+We could extract this entire piece of code and put it up here which by the way we will in a later video
+
+02:58.380 --> 03:00.170
+because we're not running it here.
+
+03:00.180 --> 03:05.940
+We're just saying this is a anonymous function that gets triggered on change.
+
+03:05.940 --> 03:12.280
+And this is an important distinction here because you would never run set state in render because well
+
+03:12.300 --> 03:13.630
+that's going to create some errors.
+
+03:13.650 --> 03:19.080
+You can actually try it out for yourself trying to call set state and render because every time you
+
+03:19.080 --> 03:24.280
+call set state it renders and every time you render it's going to call that state.
+
+03:24.390 --> 03:26.240
+It's just going to create a loop.
+
+03:26.280 --> 03:32.070
+So what we're doing here is we're actually defining a function not running it just letting them know
+
+03:32.070 --> 03:38.580
+hey on change I want this to happen and react internally with this synthetic event is going to say Hey
+
+03:38.920 --> 03:44.330
+any time on change happens it's going to be an event just run this function.
+
+03:44.350 --> 03:47.700
+Now the last part is this over here.
+
+03:47.910 --> 03:55.480
+Remember how you said that this doesn't get logged right away and that's because once again reactive
+
+03:55.500 --> 04:01.620
+smart we're not actually interacting with the dumb what it's going to say is when we do set state it's
+
+04:01.620 --> 04:08.300
+going to say hey react but we have some updates that we want to make to the dump.
+
+04:08.310 --> 04:13.940
+Can you do it for us and our little robot is going to say yep I can do it.
+
+04:13.950 --> 04:14.970
+But you know what.
+
+04:14.970 --> 04:18.150
+I know when the best time to do that is I know when to do it.
+
+04:18.150 --> 04:19.340
+Just let me handle it.
+
+04:19.380 --> 04:20.680
+I'll take care of it.
+
+04:20.700 --> 04:22.920
+So it actually doesn't happen right away.
+
+04:23.010 --> 04:26.840
+What it does is essentially it schedules and batches work.
+
+04:26.880 --> 04:33.150
+So if there may be multiple updates that need to be done then you can actually optimize that for us.
+
+04:34.170 --> 04:36.330
+And that's why react good.
+
+04:36.540 --> 04:37.040
+Right.
+
+04:37.050 --> 04:43.620
+Because it figures out for us the best time and the best way to update the Dom we just tell it that
+
+04:43.620 --> 04:44.670
+we want an update.
+
+04:44.670 --> 04:51.510
+It's declarative but we leave that internal working to this little smart react board that's constantly
+
+04:51.510 --> 04:58.440
+improving with new updates so that we don't have to worry ourselves with the dumb and that's it.
+
+04:58.790 --> 04:59.750
+Let's go to the next video.

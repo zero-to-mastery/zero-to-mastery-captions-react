@@ -1,0 +1,517 @@
+WEBVTT
+
+00:00.930 --> 00:10.030
+Now in the last lesson we learned how to add our add item to cart mutation to our collection item.
+
+00:10.200 --> 00:15.600
+We're now able to populate our cart dropdown which is listening to our car items local state on our
+
+00:15.600 --> 00:24.480
+Polo client but we need to also display the total quantity of items in our cart inside of our cart icon.
+
+00:24.500 --> 00:27.450
+Now you might already have an inkling of how to do this.
+
+00:27.620 --> 00:34.640
+But how do you actually attach it's you make sure that every time we add an item this count is also
+
+00:34.730 --> 00:36.180
+increasing.
+
+00:36.200 --> 00:41.690
+While unlike redux we don't have selectors that will depend on these other values so that whenever they
+
+00:41.750 --> 00:44.480
+update our values also update.
+
+00:44.480 --> 00:46.360
+That's a very redux like pattern.
+
+00:46.370 --> 00:52.790
+Instead what we have to do is we have to make sure to write it inside of our mutation itself that is
+
+00:52.790 --> 00:56.050
+doing the actual modification to the cart.
+
+00:56.090 --> 01:01.930
+So let me show you inside of our client our right deck data.
+
+01:01.930 --> 01:12.240
+We're going to make a new variable here called cart or let's just call it item count and this by default
+
+01:12.270 --> 01:14.520
+will be zero.
+
+01:14.540 --> 01:21.380
+Now the item count is going to literally be the count of the total items and for us we just have to
+
+01:21.380 --> 01:26.510
+make sure that we update it whenever we add clear or remove items.
+
+01:26.540 --> 01:26.840
+Right.
+
+01:26.840 --> 01:30.570
+We've got to make sure that we always we compute this value.
+
+01:30.620 --> 01:38.180
+Now how we're going to do this is we are going to modify our resolve to add item to cart code so that
+
+01:38.180 --> 01:40.500
+it knows to do that.
+
+01:40.850 --> 01:43.360
+And this is actually very easy.
+
+01:43.400 --> 01:51.140
+It sounds more complicated than is all we have to do is we have to first bring in the code that actually
+
+01:51.140 --> 01:55.320
+calculates quantity from our selector.
+
+01:55.430 --> 02:00.290
+So inside of our cart selector we had our select core items count.
+
+02:00.290 --> 02:08.800
+We just have to copy this over and what we'll do is we'll move it into our cart utilize so here we'll
+
+02:08.800 --> 02:20.870
+make a new function called Get cart quantity or get cart item count and this is going to get the items
+
+02:20.960 --> 02:25.720
+as the argument and it's just going to return an integer.
+
+02:25.730 --> 02:30.520
+So now we're just going to copy this over into our resolves
+
+02:33.810 --> 02:40.370
+and then we're also going to add in this value as a query.
+
+02:40.620 --> 02:50.350
+So we're gonna say concept yet item count is equal to GQ Well and as you expect it's just going to get
+
+02:50.350 --> 02:56.800
+the item count from the client.
+
+02:56.840 --> 02:58.240
+Let me just make sure I don't know yet.
+
+02:58.270 --> 02:59.130
+No we're fine.
+
+02:59.180 --> 03:02.330
+I thought I accidentally capitalized the I.
+
+03:02.450 --> 03:08.810
+So now that we have our item count what we're going to do is we are just going to make sure that we
+
+03:08.810 --> 03:12.950
+pluck it off inside of our add to cart as well.
+
+03:12.980 --> 03:20.650
+So here will say is that we want to also read down or set the value right.
+
+03:20.680 --> 03:22.600
+We don't need to read it inside of the item.
+
+03:22.750 --> 03:23.670
+Add to Cart.
+
+03:23.800 --> 03:29.000
+We just want to make sure that we set it every time the item gets increased.
+
+03:29.040 --> 03:39.830
+So what we'll do is we will write in this new function where we say cash not write query where what
+
+03:39.830 --> 03:43.270
+we pass to it is our query for it.
+
+03:43.270 --> 03:54.070
+Get item count and then the data that we're gonna set is equal to this object where item count goes
+
+03:54.070 --> 04:05.140
+to get item count and then we're gonna pass in our new car items and now what happens is that when ever
+
+04:05.200 --> 04:07.870
+the item gets added to the cart.
+
+04:07.870 --> 04:13.090
+So whenever this mutation fires it will also make sure to update our item count query.
+
+04:13.540 --> 04:15.710
+That's all this is doing.
+
+04:15.810 --> 04:23.350
+So now we're writing two different queries inside of one mutation let's just make sure to pull that
+
+04:23.410 --> 04:32.110
+query into our cart icon so inside of our car icon container we are already using the mutation.
+
+04:32.140 --> 04:42.000
+We just also need to use the query to pull that item count into our car item component so here will
+
+04:42.000 --> 04:57.590
+say const get item count is equal to GQ El with this object of item count off the client and just like
+
+04:57.590 --> 04:58.910
+we did before.
+
+04:59.120 --> 05:08.060
+We just have to make sure to wrap our mutation inside of our query where the query goes to get item
+
+05:08.060 --> 05:08.420
+count
+
+05:13.050 --> 05:20.780
+and then we also have to make sure that inside of our mutation we are properly wrapping this whole thing
+
+05:22.270 --> 05:27.440
+so that when we get back our data from this function.
+
+05:27.440 --> 05:27.680
+All right.
+
+05:27.680 --> 05:27.860
+Sorry.
+
+05:27.860 --> 05:35.780
+From this query as a function we can say that the data gives us the item count
+
+05:39.520 --> 05:42.730
+which we then want to pass into our Karp icon
+
+05:49.180 --> 05:54.250
+and now let's just make sure that in our car icon that's actually the property that it's expecting which
+
+05:54.250 --> 05:54.910
+is item count.
+
+05:55.750 --> 06:05.380
+So now we can actually remove its connection to state here remove our map states of props and remove
+
+06:05.440 --> 06:14.380
+all of these selectors and now if we go back to our app we'll see that the number is updating as expected
+
+06:16.070 --> 06:21.100
+and that's pretty much the majority of the kind of mutations that we're going to right now.
+
+06:21.110 --> 06:23.960
+There is one last thing I want to show you.
+
+06:24.200 --> 06:29.960
+So what I'm going to show you is actually a way where you can use the higher order component pattern
+
+06:30.350 --> 06:38.240
+to compose out this container in a way that looks way more similar to the Connect function that we're
+
+06:38.240 --> 06:40.900
+used to using with react readings.
+
+06:40.910 --> 06:49.070
+So what we're going to do is we're actually going to pull in the compose function and the graph Q all
+
+06:49.070 --> 06:56.970
+function so these are actually two functions that we can use in place of the query and the mutation
+
+06:56.970 --> 07:01.520
+components that we just explored in all these last few lessons.
+
+07:01.540 --> 07:08.110
+Now this pattern is going to look way closer to what we're used to earth react redux because we're able
+
+07:08.110 --> 07:14.450
+to pass in the query and mutation values that we get from these functions in as prompt since that.
+
+07:14.800 --> 07:16.500
+So let me show you how to do that.
+
+07:16.660 --> 07:24.240
+So let's first get rid of these query and these mutation components inside of our code and what we're
+
+07:24.240 --> 07:32.910
+going to do is we are going to call composed in the very similar way as how we called Connect now we're
+
+07:32.910 --> 07:39.960
+going to pass our car icon container to the return of this compose which will of course be a function
+
+07:40.020 --> 07:48.490
+that will group in all of these queries and mutations that we're trying to add to our car icon.
+
+07:48.490 --> 07:53.850
+And in order to do that we have to use this graph que el function that we just import.
+
+07:54.030 --> 07:56.920
+Now I'm going to post for you the docs for this graph.
+
+07:56.920 --> 07:57.820
+You all function.
+
+07:57.930 --> 07:59.240
+There's a lot you can do with it.
+
+07:59.250 --> 08:05.340
+But the main thing that it does is it takes mutations and queries and it binds them to some component
+
+08:05.370 --> 08:12.430
+that we can pass as the outcome of that function because it is a higher order component function.
+
+08:12.600 --> 08:16.500
+And as we've already explored with them they're pretty much just functions that take components and
+
+08:16.500 --> 08:19.650
+then amplify them with some additional behavior.
+
+08:19.740 --> 08:26.940
+In this case the additional behavior is the props and access to either query properties or mutation
+
+08:26.940 --> 08:27.450
+properties.
+
+08:28.170 --> 08:35.220
+So what we need to do in order to use it is we simply call graph Q Well and we pass it either a mutation
+
+08:35.220 --> 08:36.170
+or query.
+
+08:36.270 --> 08:39.900
+So let's first pass in our Get item count.
+
+08:39.900 --> 08:47.700
+With that we'll now have access to our data object inside of the props that this container gets.
+
+08:48.360 --> 08:54.150
+And that data will have our item count property the same way that we saw whenever we wrote our query
+
+08:54.210 --> 08:57.620
+function inside of our query component.
+
+08:57.620 --> 09:05.620
+Now the interesting thing about this graph queue I'll toggle card hidden value though is when we pass
+
+09:05.680 --> 09:11.200
+in toggle card hidden it will actually give us that mutation as a prop.
+
+09:11.320 --> 09:17.530
+The only thing is that mutation by default is not called whatever the actual mutations name is that
+
+09:17.530 --> 09:21.160
+we're plucking from this GQ Elle query string.
+
+09:21.160 --> 09:23.890
+Instead it's going to call it mutate.
+
+09:23.890 --> 09:25.230
+Now we don't want that.
+
+09:25.270 --> 09:30.120
+We want it to be named after something that we expect it to do right.
+
+09:30.130 --> 09:32.530
+We expect it to toggle cart hit it.
+
+09:32.590 --> 09:38.170
+So in order for us to do that we can actually pass in a configuration object as the second argument
+
+09:38.170 --> 09:39.030
+to this graph.
+
+09:39.040 --> 09:45.410
+You all function now this second argument can take a number of different configuration options which
+
+09:45.410 --> 09:48.550
+you'll find in the documentation that I've linked in your resources.
+
+09:48.740 --> 09:54.830
+But the main one that we want to access is name and for name we're just going to say toggle cart hit
+
+09:54.830 --> 09:57.310
+it that's all it is right.
+
+09:57.320 --> 10:01.970
+It's a property called name and it expects a string which you will then set as the actual name of the
+
+10:01.970 --> 10:09.820
+prop that gets passed in for this mutation we can do the same thing here for graph q l of our get item
+
+10:09.820 --> 10:16.210
+count as well if say we wanted this mutation named not to be called sorry if we wanted this query to
+
+10:16.210 --> 10:24.130
+not be called data and we wanted it to be called item count data we could do that as well especially
+
+10:24.160 --> 10:32.050
+when we start using multiple queries and multiple mutations we're going to want to use this name object
+
+10:32.050 --> 10:39.100
+property right as this configuration because then we'll be able to pluck the values off of all of these
+
+10:39.100 --> 10:46.120
+different props that are going to be passed into our props of our component with this what we'll see
+
+10:46.270 --> 10:53.960
+is actually the prompts so I'm actually going to show you what this prompts object looks like first
+
+10:54.140 --> 11:00.230
+before we start D structuring off the values that we meet so let's just get rid of this because it will
+
+11:00.230 --> 11:09.290
+break otherwise let's save this go back to our app and here we see we get both this data object as well
+
+11:09.290 --> 11:12.830
+as our toggle hard hitting mutation as a function.
+
+11:12.940 --> 11:18.780
+Now this data object is large and you probably won't see others actually you do see the item count.
+
+11:19.240 --> 11:24.340
+So there you see the data right it has all these other things that we can do with it if we wanted to
+
+11:24.340 --> 11:31.300
+trigger other actions that are actually way more verbose than we need but we see the item count so all
+
+11:31.300 --> 11:38.810
+we want to do is we want to pluck off the item count from our data
+
+11:41.580 --> 11:50.720
+and we also want to pluck off our toggle cart hit it so with this we are now accessing both our total
+
+11:50.720 --> 11:57.920
+car hit a mutation as well as our item count if we save this and we go back we see that our application
+
+11:58.430 --> 12:04.580
+still works as it did before our car icon behaves the way that we expected to it toggles car hit and
+
+12:04.640 --> 12:10.140
+with that mutation and it has the item count as the actual query value.
+
+12:10.490 --> 12:13.310
+So this pattern is probably way more familiar to you.
+
+12:13.370 --> 12:20.000
+As far as how it looks with react redux now I will mention that the Apollo team seems to be pushing
+
+12:20.000 --> 12:26.020
+harder for using the query and the mutation components that we did earlier.
+
+12:26.450 --> 12:29.340
+But honestly I think this pattern is perfectly fine.
+
+12:29.360 --> 12:34.640
+How are the components is a pattern that has been around in the react ecosystem for a really long time
+
+12:34.910 --> 12:38.120
+and it's really well fleshed out especially with redux.
+
+12:38.420 --> 12:45.570
+But again it's really up to you whatever you prefer component method is way more similar to the context
+
+12:45.600 --> 12:53.490
+API style of adding in components and nesting your component tree appropriately and this composed pattern
+
+12:53.520 --> 12:55.910
+is just the higher order component pattern.
+
+12:55.920 --> 13:01.230
+Personally I do prefer this compose pattern because it looks closer to what I'm used to working with
+
+13:01.740 --> 13:08.980
+but you can use either or if you have components that only need the one query or the one mutation component.
+
+13:09.000 --> 13:09.960
+Feel free to use that.
+
+13:10.440 --> 13:15.660
+It's only when you start meeting to nest the multiple mutations and multiple queries that it's obvious
+
+13:15.660 --> 13:22.570
+that the compose pattern is way better and simpler to use now you might be wondering should I instead
+
+13:22.580 --> 13:29.390
+move this compose into car icon because this container is literally just almost like another layer here
+
+13:29.480 --> 13:32.830
+that just plucks this data and we're just passing this in.
+
+13:32.990 --> 13:39.080
+Well you can but personally I prefer still keeping this container because this container layer is the
+
+13:39.080 --> 13:44.390
+one that D structures off the item count as well as the toggle cart hidden and then passes it into toggle
+
+13:44.390 --> 13:45.470
+cart hidden.
+
+13:45.470 --> 13:51.170
+This allows my car icon component to be a presentational component whereas the container layers are
+
+13:51.170 --> 13:57.500
+the ones that actually care about what to do with the car icon and how it ends up actually getting the
+
+13:57.500 --> 13:59.530
+data this way.
+
+13:59.570 --> 14:04.940
+If I needed this card icon in multiple places that might rely on multiple different queries in order
+
+14:04.940 --> 14:06.440
+to get their item count.
+
+14:06.440 --> 14:08.590
+I don't know it's a possibility.
+
+14:08.930 --> 14:15.350
+My car icon does not have to care about how that data comes in it simply cares about when it finally
+
+14:15.350 --> 14:17.100
+gets the added value.
+
+14:17.180 --> 14:22.820
+So this container style you can even do in your react redux co 2 instead of putting compose inside of
+
+14:22.820 --> 14:24.120
+our components as we did.
+
+14:24.200 --> 14:29.670
+We can make a new container files but it does increase more complexity and it increases the number of
+
+14:29.670 --> 14:30.340
+files.
+
+14:30.410 --> 14:35.540
+So there's always tradeoffs but hopefully now you're fully equipped with everything you need in order
+
+14:35.540 --> 14:41.540
+to convert the rest of the application over to using the Apollo clients local storage.
+
+14:41.540 --> 14:43.650
+So definitely give it a try.
+
+14:43.790 --> 14:48.170
+Re watch these videos if you need to get a refresher on how everything works.
+
+14:48.410 --> 14:54.830
+Otherwise I have included both a get hub repo as to everything that we've done up until this point as
+
+14:54.830 --> 15:00.950
+well as a get hub repo that has the completed version of this application using solutions that I've
+
+15:00.950 --> 15:01.730
+come up with.
+
+15:01.730 --> 15:04.100
+So you can compare your solutions to mine.
+
+15:04.100 --> 15:05.920
+I'm not saying mine are necessarily the best.
+
+15:05.930 --> 15:08.500
+It's just how I would do them.
+
+15:08.570 --> 15:11.010
+Those are the tradeoffs that I have decided to make.
+
+15:11.400 --> 15:16.400
+And in the next lesson we'll wrap up this section on graph Q all on Apollo and I'll leave you with some
+
+15:16.490 --> 15:17.430
+of my final thoughts.

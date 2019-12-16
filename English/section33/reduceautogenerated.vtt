@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.940 --> 00:10.090
+Let's talk about reduce now reduce is probably the trickiest of all array methods.
+
+00:10.090 --> 00:14.900
+So it's okay if it seems really overwhelming as we're going through it.
+
+00:15.190 --> 00:22.060
+But I promise you that once it clicks it will make total sense and it's actually one of the most useful
+
+00:22.060 --> 00:28.750
+array methods that we have in our repertoire as javascript developers.
+
+00:28.750 --> 00:33.400
+So in order to understand it let's go into our browser.
+
+00:33.640 --> 00:41.490
+Let's say I had some array which was equal to 1 2 3 4 5
+
+00:45.330 --> 00:50.510
+let's say I wanted to add all the values inside of my array.
+
+00:50.550 --> 00:52.290
+How would I do this.
+
+00:52.290 --> 00:58.980
+Well we could write a for loop right where we add all the values together and end up with some final
+
+00:58.980 --> 01:08.950
+value or this is actually the perfect time to use reduce reduce is a great array method to use when
+
+01:08.950 --> 01:12.680
+we want to do two things.
+
+01:12.700 --> 01:17.880
+The first is that we want to end up with one value in the end.
+
+01:17.880 --> 01:18.180
+Right.
+
+01:18.190 --> 01:22.640
+Not an array but some value in the end.
+
+01:22.680 --> 01:35.460
+The second is when we want to persist the return or the outcome of iterating over our elements in each
+
+01:35.460 --> 01:38.250
+subsequent iteration.
+
+01:38.250 --> 01:39.480
+Now what do I mean by that.
+
+01:39.480 --> 01:41.340
+That's a mouthful right.
+
+01:41.430 --> 01:45.120
+Well let's take a look at how the code actually looks.
+
+01:45.120 --> 01:54.250
+And then maybe it'll be better for us to understand let's say I call Ray dot reduce a red dot reduce
+
+01:54.250 --> 01:56.610
+takes two arguments.
+
+01:56.860 --> 02:02.680
+The last argument we won't focus on for now let's just focus on the first argument.
+
+02:02.890 --> 02:09.710
+The first argument is a function and that function has two parameters.
+
+02:09.710 --> 02:13.520
+The second parameter is the element itself.
+
+02:13.520 --> 02:21.090
+So it's the current element that we're on that we're iterating over the first one is what's call the
+
+02:21.090 --> 02:22.470
+accumulator.
+
+02:22.470 --> 02:23.450
+Right.
+
+02:23.580 --> 02:26.570
+The accumulator is exactly as it sounds.
+
+02:26.670 --> 02:35.640
+It's the accumulated value of calling this function on every element before the one that we're currently
+
+02:35.670 --> 02:37.150
+on.
+
+02:37.150 --> 02:46.180
+So what we would do if we wanted to add all these numbers together is if we said accumulator plus our
+
+02:46.300 --> 02:47.260
+current element
+
+02:50.710 --> 02:56.000
+and what we would pass to our second argument is zero.
+
+02:56.050 --> 03:01.210
+Now you might be wondering well what's the first value that accumulator has when we start at the first
+
+03:01.210 --> 03:01.960
+element.
+
+03:01.960 --> 03:04.990
+Well that's actually what the second argument is.
+
+03:04.990 --> 03:09.460
+And that's why we pass at zero because we want to add all of these values together.
+
+03:09.580 --> 03:11.570
+We want to start from zero.
+
+03:12.100 --> 03:18.270
+And if we call this Oh I think I have an extra bracket by accident.
+
+03:20.010 --> 03:22.210
+We will get 15.
+
+03:22.470 --> 03:25.350
+Now let's walk through how this works.
+
+03:25.470 --> 03:29.340
+So the first time this function gets called accumulator is zero.
+
+03:29.370 --> 03:29.690
+Right.
+
+03:29.770 --> 03:31.930
+1 and 1 is the current element.
+
+03:32.400 --> 03:34.990
+So it will be 0 plus 1.
+
+03:35.010 --> 03:35.280
+Right.
+
+03:35.280 --> 03:38.010
+Which gives us a value of 1.
+
+03:38.130 --> 03:40.360
+Then it moves on to the next element.
+
+03:40.650 --> 03:50.220
+And here accumulator will get the return of our last function call on this element which is 1 so accumulator
+
+03:50.250 --> 03:57.700
+is one current element is 2 and we'll get one plus two which equals three.
+
+03:57.750 --> 03:58.680
+Right.
+
+03:58.710 --> 04:04.990
+So 3 gets passed as the accumulator in the next element when this function is called and we'll get 3
+
+04:05.010 --> 04:07.570
+or accumulator and 3 for current element.
+
+04:07.620 --> 04:14.550
+So we get 3 plus three which is six which then gets passed as the accumulator for the next element which
+
+04:14.550 --> 04:15.650
+is 4.
+
+04:15.660 --> 04:21.780
+So accumulator of 6 current element of 4 6 plus 4 equals 10.
+
+04:21.780 --> 04:27.990
+And then finally one more time on 5 or 10 is the accumulator the credit element is 5.
+
+04:28.200 --> 04:38.210
+And that's how we end up with a value of 15 and this is how the reduced function works.
+
+04:38.250 --> 04:41.040
+Now you don't necessarily have to start with zero.
+
+04:41.070 --> 04:41.560
+Right.
+
+04:41.580 --> 04:49.560
+We only did this because the purpose of what we were trying to achieve was to add all the values together
+
+04:49.820 --> 04:59.950
+right in our array but if we wanted all this second arguments symbolizes is the first accumulator value.
+
+05:00.270 --> 05:10.030
+When we get called on the first element so if I said that this was 10 what happens is that 10 gets passed
+
+05:10.030 --> 05:13.280
+as the accumulator when this function first gets called on 1.
+
+05:13.560 --> 05:20.220
+So it's 10 current element is 1 10 plus one is 11 which to get then passed as the accumulator when we
+
+05:20.220 --> 05:21.590
+call it on to right.
+
+05:21.630 --> 05:28.770
+Eleven current element is to eleven plus two thirteen and so on and so forth for each subsequent element
+
+05:28.860 --> 05:32.380
+until we end up with twenty five.
+
+05:32.410 --> 05:35.440
+So this is how we write reduce.
+
+05:35.590 --> 05:42.460
+Now there's a lot more complicated ways that we can use reduce but the basics the fundamentals of how
+
+05:42.460 --> 05:46.540
+reduce works is in what we just wrote
+
+05:49.610 --> 05:56.930
+It's OK if you don't grab it all right away it's a lot and it's always one of the trickier parts of
+
+05:57.140 --> 06:00.520
+understanding this specific array method.
+
+06:00.830 --> 06:10.730
+Now we will definitely encounter more opportunities to use reduce throughout our course but right now
+
+06:11.120 --> 06:17.810
+I want you to just maybe play around with some of this array that we already have right play around
+
+06:17.810 --> 06:25.190
+with some of the numbers so that you get a familiar feel for it but in the future when we encounter
+
+06:25.220 --> 06:32.200
+opportunities to use produce we'll definitely slow down and take a look at how we're writing our code
+
+06:32.510 --> 06:41.960
+so we can better understand how to write reduce and when it's actually a good solution but understanding
+
+06:41.960 --> 06:50.990
+reduce and knowing when to use it will be a very powerful tool in our careers as javascript developers.

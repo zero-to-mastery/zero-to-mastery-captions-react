@@ -1,0 +1,271 @@
+WEBVTT
+
+00:00.900 --> 00:08.150
+So when the last lesson we made our first query against our graph que el database inside of our playground.
+
+00:08.460 --> 00:15.680
+By asking for collections and then the items on them but let's take a deeper dive into not only what
+
+00:15.680 --> 00:22.880
+other queries we have access to but also some other handy features that we have with this playground
+
+00:23.970 --> 00:30.450
+while one thing that we have other than the schema is actually the docs and the docs gets composed by
+
+00:30.450 --> 00:37.610
+the playground itself to tell us more about the things inside of it that we might be curious about.
+
+00:37.620 --> 00:40.540
+So here we see all the queries that we have access to.
+
+00:40.830 --> 00:48.600
+If we click it we can see that the details related to what we get back about it right here is that we
+
+00:48.600 --> 00:52.950
+get back a collection and this collection has these properties.
+
+00:52.950 --> 00:59.520
+Now if you're ever curious what the idea property with this type is if you click this it will tell you
+
+01:00.300 --> 01:05.190
+that it is a scalar type right that represents a unique identifier.
+
+01:05.190 --> 01:12.260
+It's often used to refresh an object or as a key for the cache and it comes back as a string.
+
+01:12.300 --> 01:16.110
+When we get it back as a Jason object.
+
+01:16.250 --> 01:23.960
+Now what this means is that a scalar type is something for the computer language to know that it is
+
+01:24.050 --> 01:28.610
+a single value single meaning that it's not comprised of multiple things.
+
+01:28.670 --> 01:33.100
+So it's not an object which might have multiple properties and multiple values.
+
+01:33.200 --> 01:39.680
+It's not an array which might contain multiple different things see type is either a string an integer
+
+01:39.740 --> 01:42.050
+or a boolean of some kind.
+
+01:42.050 --> 01:46.090
+It's more complicated than that but that's the main thing you need to understand about it.
+
+01:46.670 --> 01:52.550
+But the main thing you need to know is that when it comes back to us in the Jason object format that
+
+01:52.550 --> 01:56.420
+we want for our front end it comes in as a string.
+
+01:56.510 --> 01:58.210
+So that's the main thing.
+
+01:58.250 --> 02:04.370
+Now we can dig through these docs and look through all of the definitions for all of these things and
+
+02:04.370 --> 02:12.140
+this is a handy thing for us to use if we're ever curious to look more about the back end related side
+
+02:12.200 --> 02:19.750
+of graph QoL and how it really gives us access to what types of properties inside of our application.
+
+02:20.270 --> 02:25.730
+But let's just continue with working with the queries because we'll naturally get a better understanding
+
+02:25.730 --> 02:32.390
+of it by doing rather than reading at this point especially for this lesson so the next thing I want
+
+02:32.390 --> 02:40.400
+to show you is let's make a query for the actual collection by title before we do that.
+
+02:40.410 --> 02:46.230
+I actually want to highlight one thing you are actually not able to query for items specifically.
+
+02:46.230 --> 02:52.920
+I did not find that query for you guys because nowhere in our application do we actually make that request
+
+02:52.920 --> 02:54.240
+for items.
+
+02:54.240 --> 02:59.110
+So for example you cannot actually make a request for just the items.
+
+02:59.490 --> 03:07.890
+If I get rid of this and this so that what we're making is just simply a single query you'll see you'll
+
+03:07.890 --> 03:08.710
+get an error.
+
+03:08.760 --> 03:15.160
+You cannot query the field for items because I did not define that for you guys in the back end.
+
+03:15.510 --> 03:20.490
+So that's one instance where you got to really look at this schema to see what you have access to and
+
+03:20.490 --> 03:24.780
+the reason I restricted this access is simply because we actually never use anything like this in our
+
+03:24.780 --> 03:25.710
+front end.
+
+03:25.740 --> 03:33.200
+So this is a very live example of seeing what you might or might not have access to but let's make these
+
+03:33.200 --> 03:40.850
+other queries so let's go through collection by first the Query name will be exactly what it is that
+
+03:40.850 --> 03:42.840
+you see inside of that schema.
+
+03:42.860 --> 03:47.980
+So if we look at this autocomplete we'll see that we can query by this one collection and here.
+
+03:47.990 --> 03:53.920
+Let's say I want this one so I'm going to copy this string and in order for me to query by the collection
+
+03:53.980 --> 03:59.290
+I just look at the shape of what it expects it wants brackets and it wants me to pass this variable
+
+03:59.350 --> 04:02.920
+I.D. with a value of the idea itself.
+
+04:03.040 --> 04:08.440
+So I'm literally going to say I want I'm going to pass the I.D. and it's going to be equal to and then
+
+04:08.440 --> 04:15.230
+I'm going to pass in the string and now I again if I look at this highlight it says I must say what
+
+04:15.350 --> 04:17.960
+sub fields I want from this collection.
+
+04:18.030 --> 04:28.710
+If it gets returned back to me so if I want back let's say the title then when I make the request I'm
+
+04:28.710 --> 04:35.250
+just gonna get back this thing where I get back the data which will always have this data as well as
+
+04:35.250 --> 04:43.330
+this key that the collection is this object that simply has the title of hat so really easy here.
+
+04:43.430 --> 04:48.050
+And what if we say use a idea that doesn't exist.
+
+04:48.050 --> 04:50.030
+Something like whatever.
+
+04:50.300 --> 04:55.040
+If I make those requests now I'll see that I get back a null object.
+
+04:55.040 --> 05:04.550
+Now this is important because every single type inside of graph QoL is a null label type meaning that
+
+05:04.610 --> 05:06.940
+it can either be whatever it is.
+
+05:06.940 --> 05:07.160
+Right.
+
+05:07.160 --> 05:09.580
+So it can either be a string or it can be no.
+
+05:09.650 --> 05:10.810
+That's all it means.
+
+05:11.000 --> 05:14.060
+You can get back a string right or the object.
+
+05:14.060 --> 05:18.970
+So for us the collection if it exists but if it doesn't then we'll always get back.
+
+05:18.980 --> 05:19.610
+No.
+
+05:19.610 --> 05:24.620
+So that's a thing to keep in mind when we write on our front and if we make a request for say something
+
+05:24.620 --> 05:25.720
+like a specific I.D..
+
+05:25.760 --> 05:29.880
+But ideas wrong while we're gonna get back a null object.
+
+05:29.990 --> 05:35.960
+So that's a good thing to keep in mind especially when we start coding against this graphic UI API.
+
+05:35.980 --> 05:42.100
+Now let's test out our last query and our last query is going to be very similar from what we saw with
+
+05:42.100 --> 05:43.300
+this collection.
+
+05:43.330 --> 05:47.530
+The only difference is that we now pass in a title.
+
+05:47.530 --> 05:51.610
+And luckily for us this doesn't have to be case sensitive.
+
+05:51.610 --> 06:00.280
+So if I do lowercase hats and I want to see the title and the I.D. And let's just get the items as well
+
+06:01.460 --> 06:09.520
+and from the items I want the I.D. I want the name I want the price I know what the image URL.
+
+06:09.590 --> 06:16.460
+Now if I make the request you'll see that I get back this data object again by here you'll see that
+
+06:16.460 --> 06:23.880
+what I'm getting as the actual object itself is indicated by the name of the query.
+
+06:23.960 --> 06:26.450
+This was actually the case for all those other queries we made.
+
+06:26.450 --> 06:30.700
+They just also happened to look like what type we might be expecting.
+
+06:30.860 --> 06:36.770
+But just understand that the requests you make will give you back data where the actual data sits under
+
+06:36.770 --> 06:39.290
+the name of the query that we made.
+
+06:39.290 --> 06:46.970
+So for us it was get collections by title so here what we got back was the one object and the one object
+
+06:46.970 --> 06:51.550
+has the I.D. the title which as we see is capitalized.
+
+06:51.560 --> 06:52.770
+But ours was lowercase.
+
+06:52.910 --> 06:55.280
+So it's not case sensitive which is great.
+
+06:55.280 --> 06:56.890
+And then we get back our items.
+
+06:56.930 --> 07:01.760
+So this is gonna be very similar like what we're gonna use on our specific collection page component
+
+07:03.000 --> 07:08.670
+so here we have a good idea kind of of what it's like to actually make requests and queries against
+
+07:08.700 --> 07:09.880
+this database.
+
+07:10.320 --> 07:15.750
+But how do we actually do this on our front end and especially how do we do this in react.
+
+07:15.750 --> 07:17.580
+Well I'm going to show you.
+
+07:17.820 --> 07:25.440
+So in the next lesson we are going to actually integrate using this graph your server and replacing
+
+07:25.440 --> 07:32.800
+what we already have for fetching these specific items and data inside of our application.
+
+07:32.880 --> 07:34.200
+So I'll see you in the next lesson.

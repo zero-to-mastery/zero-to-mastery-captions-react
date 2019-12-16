@@ -1,0 +1,169 @@
+WEBVTT
+
+00:01.000 --> 00:08.260
+Now before we continue I just want to bring up something very important.
+
+00:08.350 --> 00:18.220
+So in this course we will cover extensively many concepts and react but also a lot of concepts in JavaScript
+
+00:18.580 --> 00:26.100
+because they will fundamentally play a large role in how we understand the code that we're writing.
+
+00:26.160 --> 00:36.660
+Now the first things I want to focus on are actually array methods particularly these five map filter
+
+00:36.750 --> 00:40.170
+reduce find and includes.
+
+00:40.410 --> 00:48.510
+Now we may not cover all of them right away because we're not going to use for example reduce until
+
+00:48.510 --> 00:56.300
+later in the code but I want to cover the ones that we will encounter immediately.
+
+00:56.320 --> 01:02.230
+So even though I'm showing you these five don't worry if you feel like you don't know them all right
+
+01:02.230 --> 01:04.330
+away I'm definitely going to cover them.
+
+01:04.360 --> 01:11.500
+Just before we have to use them or whenever we do use them I'll explain it then.
+
+01:11.740 --> 01:17.020
+But this is an important concept the idea of array methods.
+
+01:17.230 --> 01:25.810
+The reason for this is because we will use them a lot inside of Iraq code array methods are methods
+
+01:25.810 --> 01:35.500
+you can call on any array that will perform some kind of action on that array or with that array.
+
+01:35.500 --> 01:39.040
+So I will explore that a little bit later.
+
+01:39.100 --> 01:43.530
+But the way that you use these methods is you take any array.
+
+01:43.560 --> 01:50.490
+So let's say we make a new array called my array and it's equal to an array of these four numbers you're
+
+01:50.490 --> 02:02.130
+able to call my array dot map dot filter right Dot reduce dot find dot includes and inside you would
+
+02:02.130 --> 02:05.870
+pass it something that it needs in order for it to work.
+
+02:05.970 --> 02:10.020
+Now every Array method takes something different which we'll explore.
+
+02:10.170 --> 02:12.750
+But this is how you use them.
+
+02:12.750 --> 02:16.420
+Now the first one that I definitely want to cover is map.
+
+02:16.440 --> 02:23.350
+So in order for us to understand map let's go to our browser now inside of our browser.
+
+02:23.350 --> 02:31.700
+We want to access the javascript console so in order to do that we have to right click and click inspect.
+
+02:31.710 --> 02:35.550
+Now if you're familiar with the dev tools you'll know that the console is right here.
+
+02:35.550 --> 02:42.300
+But if you're not familiar with the dev tools this is a great tool that we're going to use to see how
+
+02:42.300 --> 02:48.870
+our web application is either performing or how it ends up being rendered.
+
+02:48.960 --> 02:57.090
+But there is lots about this tool that is a very good lens for us to use to see how our application
+
+02:57.090 --> 03:05.310
+is doing but for this case we're going to click this console tab up here to go to the javascript console.
+
+03:05.360 --> 03:11.570
+This allows us to write and run javascript code because the browser supports javascript.
+
+03:11.570 --> 03:20.090
+So what we're gonna do is we're going to disk Claire are array again so cost my array equals an array
+
+03:20.360 --> 03:32.110
+of 1 2 3 4 now what we want to do for example to better understand what map does is to understand what
+
+03:32.110 --> 03:33.100
+we're trying to get to.
+
+03:33.760 --> 03:35.810
+So let's say we have this array.
+
+03:35.860 --> 03:44.980
+What if I wanted to increase the value of each element in this array by 1 so that I get an array of
+
+03:45.040 --> 03:47.850
+2 3 4 5.
+
+03:47.930 --> 03:48.980
+How do we do this.
+
+03:49.580 --> 03:53.160
+Well one way might be to write a for loop which we're familiar with right.
+
+03:53.180 --> 03:58.820
+We might write something where we loop over the UN or read the array.
+
+03:58.820 --> 04:01.420
+We get the value right and then we increase it.
+
+04:01.700 --> 04:05.230
+But that's kind of very similar to what map does.
+
+04:05.240 --> 04:10.460
+But in a more efficient way plus map gives us a new array back.
+
+04:10.520 --> 04:20.190
+So what we would write is map my array dot map and then inside we pass a function that gets called on
+
+04:20.310 --> 04:25.050
+each element in the array in the order that they appear.
+
+04:25.050 --> 04:31.870
+We actually get that element in our function as the first parameter of our function.
+
+04:31.890 --> 04:38.730
+So our first parameter being the element and then whatever we return from this function will be the
+
+04:38.730 --> 04:46.370
+value in our new array in the place where that element was in the original array.
+
+04:46.410 --> 04:54.540
+So if we do element plus one then we'll get two three four or five because we're just taking the element
+
+04:54.540 --> 05:00.650
+from that place and adding one and returning it in a brand new Array.
+
+05:00.840 --> 05:07.040
+We don't even have to use the element we can actually instead of mapping with the element right.
+
+05:07.080 --> 05:17.010
+We could pass nothing through and just return the letter B and what we'll get don't need the return.
+
+05:17.700 --> 05:26.990
+And what we'll get is be in four places where this function was called on each element in the array.
+
+05:27.420 --> 05:29.310
+But this is also a new array.
+
+05:29.430 --> 05:34.370
+We know this because my array is still one two three four.
+
+05:34.530 --> 05:36.500
+So this is what map does.
+
+05:36.600 --> 05:41.830
+It lets us create new arrays based on our existing arrays.
+
+05:41.970 --> 05:47.580
+And this is really handy and we'll use it extensively when building our application.

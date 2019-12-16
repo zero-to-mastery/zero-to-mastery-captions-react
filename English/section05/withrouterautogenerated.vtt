@@ -1,0 +1,262 @@
+WEBVTT
+
+00:01.860 --> 00:09.630
+We just learn how to navigate throughout our application using the link component and the history property
+
+00:09.690 --> 00:12.750
+that we get from RAC router Dom.
+
+00:12.750 --> 00:19.500
+Now how would we actually go about setting up our menu item so that it allows us to navigate to different
+
+00:19.500 --> 00:20.770
+pages.
+
+00:20.790 --> 00:28.100
+More specifically we want to use our hearts menu item to navigate to our new hearts page.
+
+00:28.130 --> 00:36.800
+Well one of the caveats of using those properties that we get from root which is the match the history
+
+00:36.830 --> 00:45.140
+and the location property is that we actually only get access to them from the first component that
+
+00:45.140 --> 00:47.930
+gets passed into our route.
+
+00:47.930 --> 00:58.340
+So even though directory and menu item are children of our home page component only our home page component
+
+00:58.340 --> 01:04.340
+gets access to the history prop that we need because it's the home page component that we're passing
+
+01:04.340 --> 01:07.100
+into root so root only passes it.
+
+01:07.130 --> 01:10.010
+One child in which is its child.
+
+01:10.010 --> 01:17.700
+So our homepage one solution we could do is we can pass these props down into our directory.
+
+01:17.850 --> 01:26.250
+We could pass the history into our directory and then we can pass that history from our directory down
+
+01:26.250 --> 01:27.210
+into our menu item
+
+01:30.130 --> 01:32.420
+this stop prop start history.
+
+01:32.770 --> 01:39.180
+And by doing so our menu item now has access to the history in its props.
+
+01:39.180 --> 01:48.050
+The problem with doing it this way is that this is actually a bad pattern called Prop tunnelling because
+
+01:48.060 --> 01:55.220
+work tunneling these props multiple children deep in order to get them to the component that needs them.
+
+01:55.220 --> 02:03.770
+But the children in between don't actually need the history property for any reason other than to pass
+
+02:03.770 --> 02:04.570
+it to their children.
+
+02:06.090 --> 02:13.050
+Now luckily there is a solution that RAC router Dom provides us that allows us to not have to do this
+
+02:14.260 --> 02:15.940
+so let's take a look.
+
+02:15.970 --> 02:17.650
+So first let's undo
+
+02:20.220 --> 02:24.130
+prop tunneling code that we just wrote.
+
+02:24.350 --> 02:25.830
+We don't need that either.
+
+02:27.160 --> 02:34.890
+And what we're gonna use is actually a another component from react router Dom.
+
+02:35.200 --> 02:38.470
+And this component is called with the router
+
+02:43.870 --> 02:52.270
+now what with router is is it's a higher order component and a higher order component is essentially
+
+02:52.330 --> 03:00.200
+a function that takes a component as an argument and which turns you a modified component.
+
+03:00.340 --> 03:09.160
+So just like how our menu item is a function that takes props and renders out a component a higher order
+
+03:09.160 --> 03:17.200
+component is a function that takes any component and modifies it in some way and then returns you that
+
+03:17.200 --> 03:19.630
+new modified component.
+
+03:19.630 --> 03:26.680
+So it's kind of like a function that gives you back a powered up component.
+
+03:26.680 --> 03:35.230
+In this case where POWERING UP OUR MENU ITEM component to have access to those things related to our
+
+03:35.230 --> 03:36.620
+router.
+
+03:36.870 --> 03:42.990
+So what we would do is we just pass are not history.
+
+03:42.990 --> 03:46.320
+We just pass our menu item component into this.
+
+03:46.320 --> 03:54.040
+With router and with router will then return us back with the same name of this menu item right.
+
+03:54.100 --> 03:54.590
+What we're.
+
+03:54.610 --> 04:02.050
+Whatever it is that we're explaining by default it will return us back a super powered menu item component
+
+04:02.710 --> 04:10.780
+with access now to those location match and history prompts that we need access to.
+
+04:11.530 --> 04:15.100
+So by wrapping now we now have access to history
+
+04:18.380 --> 04:27.520
+and what we want to do with history is we want to wrap our whole div items so that on click we're gonna
+
+04:27.530 --> 04:35.290
+push history not push to some euro.
+
+04:35.340 --> 04:37.780
+Now how do we do this.
+
+04:37.800 --> 04:45.810
+Well what we want to be able to do is have these you are all ideas almost beat dynamically generated
+
+04:45.810 --> 04:54.410
+as well because we know that where we're going is going to be the hearts page so we know that our route
+
+04:54.410 --> 04:56.530
+needs a Hasbro right.
+
+04:56.570 --> 05:10.740
+So what we can do for now just a hardcoded is we can go into our directory component and add a You are
+
+05:10.740 --> 05:13.690
+all parameter here like a link of sorts right.
+
+05:13.690 --> 05:24.100
+Link you URL and we're just going to set this to hearts so after this we want to add the same value
+
+05:24.160 --> 05:26.040
+but to every other section.
+
+05:26.560 --> 05:34.690
+But for now we'll just keep it as an empty string because we don't actually have those other routes
+
+05:34.690 --> 05:35.470
+set up yet.
+
+05:37.540 --> 05:40.800
+Now we're going to pass this link url into our menu item.
+
+05:41.980 --> 05:49.330
+And it is on our section right that we're mapping through but because we're at we're getting more and
+
+05:49.330 --> 05:58.250
+more verbose it's very easy for us to just do this again link you URL and then to pass it in as Link
+
+05:58.340 --> 06:04.770
+URL but you'll notice that these keys that we're de structuring off are essentially equivalent to the
+
+06:04.770 --> 06:11.160
+exact same property name that we're also passing in to our menu item.
+
+06:11.190 --> 06:20.700
+So there's actually a little yes 6 trick we can do by spreading the rest of these values together that
+
+06:20.700 --> 06:31.310
+we don't need for key because I.D. We're not actually passing an I.D. we can remove that and then set
+
+06:31.310 --> 06:41.650
+the rest of them as section prompt or other section prompts and now we can spread those values in like
+
+06:41.650 --> 06:42.850
+this.
+
+06:43.150 --> 06:49.510
+And this is equivalent to us writing out what we did before by spreading these values through.
+
+06:49.540 --> 06:56.470
+We're saying that every other key value pair we want to pass in where the key of title goes to the value
+
+06:56.530 --> 06:57.710
+of men's.
+
+06:57.730 --> 07:01.450
+So this is equivalent to us having done that
+
+07:04.720 --> 07:17.330
+and now in our menu item we will have access to the link to Earl which we now want to push however we
+
+07:17.450 --> 07:23.810
+also don't know in our menu item where in our directory we will be.
+
+07:23.810 --> 07:28.100
+So what we can do is we can take the match
+
+07:30.900 --> 07:37.950
+as well and just like in our demonstration earlier we can do match.
+
+07:38.060 --> 07:41.650
+Got you Earl in to
+
+07:44.400 --> 07:52.940
+link you Earl and now if we save this we should see if we click our hearts page.
+
+07:52.940 --> 07:59.690
+It navigates us to our hearts page and if we were to change our you URL at any point our component is
+
+07:59.690 --> 08:07.370
+still fully aware and functional because it knows that it's just going to base where it's been matched
+
+08:07.370 --> 08:12.200
+up to and then append the euro.
+
+08:12.220 --> 08:20.760
+And with that we have some basic navigation setup inside of our menu item component.
+
+08:20.800 --> 08:30.760
+So now with this in mind let's commit our code so let's see what we have to commit so we have to now
+
+08:32.020 --> 08:39.210
+update our menu items to navigate
+
+08:42.390 --> 08:46.500
+router HFC.
+
+08:46.510 --> 08:51.100
+Now we're going to explore this concept of higher order component further.
+
+08:51.100 --> 08:59.000
+A little later when we write our own but for now just remember our higher order component is just a
+
+08:59.000 --> 09:09.140
+function that takes another component as an argument transforms it into another component and returns
+
+09:09.140 --> 09:16.360
+that transformed component out of itself so we'll definitely explore that further.
+
+09:16.460 --> 09:19.770
+But for now just think about it simply like that.
+
+09:19.850 --> 09:26.160
+So let's get push origin master our code and let's move on to the next lesson.

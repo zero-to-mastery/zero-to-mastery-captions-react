@@ -1,0 +1,298 @@
+WEBVTT
+
+00:00.600 --> 00:08.550
+OK in this lesson we are going to flush out our fetch collections async generator function so that it
+
+00:08.640 --> 00:17.170
+actually performs the asynchronous call of getting the collections inside of our firebase database before
+
+00:17.170 --> 00:23.800
+we continue though there is a bit of a theoretical shift that we have to acknowledge about writing sagas.
+
+00:23.800 --> 00:28.030
+That's different from how we wrote our thanks before.
+
+00:28.030 --> 00:37.060
+Now when we moved our asynchronous code into our thunk code here into our fetch collection start async
+
+00:37.060 --> 00:45.610
+method what we did was that we move the logic out of the shop component into this action which was great.
+
+00:45.620 --> 00:52.480
+It was a great way for us to separate out that concern however when we did this we had to essentially
+
+00:52.480 --> 00:58.090
+make this new action which was a thunk action that would be the one that dispatched fetch collection
+
+00:58.090 --> 01:03.860
+start or it would inside then dispatch the success or the failure.
+
+01:03.940 --> 01:10.570
+But this action was the thing that held the logic of dispatching the subsequent follow up actions of
+
+01:10.660 --> 01:19.010
+updating our reducer or informing us that we had an error now instead of doing it in an action.
+
+01:19.010 --> 01:27.140
+We now do it in a saga which is also why we switched our action that we fire inside of our shot page
+
+01:28.140 --> 01:32.340
+back to the original fetch collection start action.
+
+01:32.520 --> 01:40.950
+We no longer need an asynchronous action like our fetch collections start async to handle that logic.
+
+01:40.950 --> 01:49.320
+We now move all of this into a saga and then have the saga listen for the start of that API redux chain
+
+01:49.320 --> 01:51.800
+that we have whether it be the start.
+
+01:51.800 --> 01:53.310
+Success or failure.
+
+01:53.310 --> 02:00.540
+All of that logic is now going to be encapsulated inside of our fetch collections async generator function.
+
+02:00.540 --> 02:03.480
+So let's start moving that code over.
+
+02:03.540 --> 02:10.290
+While the first thing we gotta do is we are going to copy this code that has to deal with that asynchronous
+
+02:10.290 --> 02:15.440
+logic and write it in a generator fashion.
+
+02:15.500 --> 02:22.270
+Now we no longer need this dispatch anymore because we're not dispatching it from our saga.
+
+02:22.340 --> 02:30.420
+We just need the base start to happen and then we listen for it and we also need to bring in all of
+
+02:30.420 --> 02:37.620
+the tooling as well as the imported functionality that we need to use to do this logic.
+
+02:37.620 --> 02:46.610
+So we need to bring in the FIA store and the convert collection snapshots a map right.
+
+02:46.680 --> 02:51.050
+We need our utility functions from firebase firebase utility.
+
+02:51.720 --> 02:57.600
+We also need our action creators from our shop actions.
+
+03:00.230 --> 03:06.770
+And the ones we need is our fetch collections success and our fetch collections failure
+
+03:09.980 --> 03:16.310
+now that we have those we can comment this out and slowly modify our code to repeat what we were doing
+
+03:16.310 --> 03:17.880
+here before.
+
+03:18.010 --> 03:21.640
+Now what we did here was that we got our collection.
+
+03:22.030 --> 03:28.730
+After that we need to use this collection ref to actually get our snapshot but unlike before where we're
+
+03:28.730 --> 03:36.590
+using a promised oriented dot then style we are using a generator function which is very similar to
+
+03:36.590 --> 03:44.480
+async await in the sense that when we set this new snapshot value equal to the yielded value of running
+
+03:44.480 --> 03:45.590
+collection ref.
+
+03:45.660 --> 03:53.340
+Yet when this value comes back it comes back in a promised form that gets resolved with the value of
+
+03:53.370 --> 03:55.530
+our collection reference which is our snapshot.
+
+03:56.760 --> 04:01.650
+So instead of changing dot then and then getting the snapshot in the callback that we pass to our dot
+
+04:01.650 --> 04:08.010
+then just like with async await we get it back at the constant value that we set on the left side of
+
+04:08.070 --> 04:09.240
+our yield.
+
+04:09.450 --> 04:15.240
+That value goes into this yield statement and it will set into the snapshot value that we've declared
+
+04:15.330 --> 04:16.980
+right here.
+
+04:16.980 --> 04:22.930
+Very similar to async await and then we need to actually create our collections map.
+
+04:22.930 --> 04:29.740
+Now I'm going to show you something a little different about the way that we actually invoke our convert
+
+04:29.740 --> 04:39.580
+collections snapshot to map method we still set a collection map constant except instead of calling
+
+04:39.580 --> 04:41.670
+convert collection snapshots a map.
+
+04:41.680 --> 04:50.200
+This way we're going to leverage a nother affect called Call now.
+
+04:50.370 --> 04:55.580
+What call does is that call is the code.
+
+04:55.850 --> 05:03.440
+Call is the effect inside of our generator function that invokes the method.
+
+05:03.440 --> 05:06.730
+We can technically write this the exact same way.
+
+05:06.740 --> 05:18.810
+No problem we can do this but we want to yield this in case this call takes longer than we expect right.
+
+05:21.180 --> 05:25.900
+We want to be able to use this call method whenever we can.
+
+05:26.190 --> 05:28.530
+Which is an effect that invokes functions.
+
+05:28.560 --> 05:37.320
+All we did hear all the call syntax is is it's a method that takes as its first argument some function
+
+05:37.380 --> 05:44.680
+or method and then the subsequent arguments will be the parameters that you passed into this function
+
+05:44.680 --> 05:45.610
+call.
+
+05:45.810 --> 05:53.350
+And because we're yielding this call it allows again us to defer control at this point of the execution
+
+05:53.680 --> 05:55.700
+back to the saga middleware.
+
+05:55.750 --> 06:01.440
+So in case it needs to cancel we give it another place where it's able to do so.
+
+06:01.600 --> 06:08.880
+Beyond that this way of adding more yields wherever we can also makes it easier for us to test.
+
+06:09.100 --> 06:17.320
+But once we have our value of collections map we're yielding again to the call and that once this value
+
+06:17.320 --> 06:24.480
+gets evaluated we'll be set to our collections Matt so that's one thing about call we just have to keep
+
+06:24.480 --> 06:27.650
+this in mind and I'll show you also wherever we can use it.
+
+06:27.660 --> 06:32.640
+It's just a habit that we have to get used to after we do this.
+
+06:32.730 --> 06:39.250
+We want to fire off this collections map into a dispatched fetch collection success.
+
+06:39.330 --> 06:44.790
+If successful now you might be wondering before we had a catch on our promise.
+
+06:44.790 --> 06:45.100
+Right.
+
+06:45.120 --> 06:50.800
+How do we actually resolve and make sure that we're catching our errors.
+
+06:50.830 --> 06:55.370
+Well it's going to be exactly like async await where we use a try catch block.
+
+06:55.900 --> 07:04.890
+So here I'm going to do my try and put my code inside and then I'm going to catch my error and then
+
+07:04.890 --> 07:10.820
+we'll dispatch these subsequent collections failure with the error message.
+
+07:10.860 --> 07:17.040
+The other thing to remember is that inside of a generator function right inside of our saga generator
+
+07:17.040 --> 07:22.550
+function sagas do not dispatch actions using the dispatch keyword.
+
+07:22.560 --> 07:33.110
+Instead they use another effect called put puts is the saga effect for creating action and it's exactly
+
+07:33.170 --> 07:34.010
+like dispatch.
+
+07:34.010 --> 07:39.590
+The only difference is we have to yield it and we're just going to use it like a dispatch.
+
+07:39.710 --> 07:47.290
+So we'll say Fetch collections success here and pass on our collections map because again put just puts
+
+07:47.350 --> 07:53.890
+out or dispatches out an object right that it's expecting to have a type and a payload.
+
+07:53.890 --> 07:55.890
+And again our fetch collection success.
+
+07:55.960 --> 07:58.530
+These are all our action generators.
+
+07:58.540 --> 08:05.570
+They're just functions that return us those objects and inside of our air will also yield our put fetch
+
+08:05.570 --> 08:16.290
+collections failure with the error message and that is how we've converted our code to now use and leverage
+
+08:17.160 --> 08:25.380
+the generator function syntax in order to create the asynchronous logic that we had before inside of
+
+08:25.380 --> 08:26.360
+a thunk.
+
+08:26.430 --> 08:32.650
+We now have it isolated into this fetch collection async generator function.
+
+08:32.850 --> 08:34.650
+It's now saga RFID.
+
+08:34.950 --> 08:41.460
+And if we go back to our app we see there are app works and when we look in our console we'll actually
+
+08:41.460 --> 08:47.880
+see that fetch collections start happens and then when it succeeds you'll see here that it says that
+
+08:47.940 --> 08:55.710
+a redux saga action was the one that fired so that's the main thing too is that our logger is aware
+
+08:55.890 --> 09:00.960
+what type of action is being created and these are saga action.
+
+09:00.960 --> 09:06.330
+They're pretty much operate like our own actions and our dispatches and our reducer and our middleware
+
+09:06.330 --> 09:08.490
+treat them the exact same like there are actions.
+
+09:08.490 --> 09:12.330
+It's just for us to verify that these are also saga actions.
+
+09:12.330 --> 09:17.560
+So we know where our actions are coming from we'll see that all of our code in our application works
+
+09:17.560 --> 09:19.120
+the exact same.
+
+09:19.120 --> 09:25.690
+But the main difference is now we've moved our code out of our asynchronous action from before right
+
+09:25.690 --> 09:32.620
+where we're using things and into a saga in the next lesson we're gonna take a deeper dive into these
+
+09:32.620 --> 09:38.230
+takes because we've just written some sagas and there's probably still a couple questions that we need
+
+09:38.230 --> 09:42.250
+to resolve or at least take a deeper look at that we will explore in the next lesson.

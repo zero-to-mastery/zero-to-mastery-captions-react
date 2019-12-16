@@ -1,0 +1,382 @@
+WEBVTT
+
+00:00.910 --> 00:07.840
+So now that we've converted over our header component let's tackle something more challenging because
+
+00:07.960 --> 00:14.980
+all we've done with this header component and the homepage component is convert some pretty basic CSX
+
+00:15.070 --> 00:21.060
+over into a stock component but what about using the props that we were talking about.
+
+00:21.270 --> 00:28.740
+Well one of our biggest components that actually does that is our custom button component by using CSX
+
+00:28.980 --> 00:33.390
+and these props that we get in to custom button.
+
+00:33.390 --> 00:37.710
+We actually have three possible states right.
+
+00:37.710 --> 00:45.990
+Three possible CSX styles that we might apply on our button but this is actually pretty much exactly
+
+00:45.990 --> 00:51.870
+what styled components is meant to do what we're trying to do here with class names we can actually
+
+00:51.930 --> 00:54.780
+easily do with style components.
+
+00:55.050 --> 00:58.120
+Now how do we do this.
+
+00:58.150 --> 01:03.570
+Well let's make a new file called custom button dot styles Dot.
+
+01:03.580 --> 01:16.050
+Jessica and inside we want to import in styled and we also want CSF from stock components and we want
+
+01:16.050 --> 01:21.050
+to assess because we will be pretty much modifying the base component right.
+
+01:21.070 --> 01:24.340
+We're not going to conditionally render different components.
+
+01:24.340 --> 01:28.470
+We just want our stock component to have different styles in it.
+
+01:29.420 --> 01:32.490
+And we can easily do that with a CSX block.
+
+01:32.810 --> 01:38.060
+So instead of conditionally running class names we can conditionally render CSX blocks related to what
+
+01:38.060 --> 01:40.100
+the styles are nested in those class names
+
+01:42.940 --> 01:52.920
+so if we open up our style sheet as well we see that these styles are related to our custom button.
+
+01:52.920 --> 01:59.030
+These styles are related to the Google sign and these styles are related to the inverted right.
+
+01:59.070 --> 02:09.560
+So what we can do is we can separate these three chunks into their own styles or stock component.
+
+02:09.560 --> 02:18.040
+So what we'll do first is we will create our base style which is our base component which should be
+
+02:18.040 --> 02:28.120
+our custom button container which is equal to a styled button and in the stop button we are going to
+
+02:28.120 --> 02:30.780
+just put all of these styles that we know that we want
+
+02:37.770 --> 02:43.740
+and the great thing is that it's just supports pretty much the exact same syntax as we wrote with our
+
+02:43.740 --> 02:44.160
+SAS.
+
+02:44.160 --> 02:44.620
+Right.
+
+02:44.660 --> 02:48.810
+As we get all the benefits of SAS but we also get the benefits of JavaScript
+
+02:52.070 --> 02:58.280
+what we want to do is we also want to create these separate styles that we had for our Google sign in
+
+02:58.610 --> 03:00.780
+and our inverted button style.
+
+03:01.040 --> 03:11.630
+What we want to do is we can make a new concept called inverted button styles which is equal to a CSX
+
+03:11.660 --> 03:22.410
+block that holds the code to our inverted button styled so we'll just copy this.
+
+03:22.470 --> 03:25.560
+We also need our Google sign and styles
+
+03:30.120 --> 03:36.060
+which is also equal to a CSX block and we're just going to copy over our Google sign and styles
+
+03:39.290 --> 03:47.090
+and now what we need to do is instead of rendering just these thousand while we know that we can write
+
+03:47.090 --> 03:48.500
+JavaScript.
+
+03:48.500 --> 03:48.770
+Right.
+
+03:48.770 --> 03:57.640
+So what we can actually write is a function that we call inside of this component because it's just
+
+03:57.670 --> 03:58.590
+all javascript.
+
+03:58.960 --> 04:08.150
+So what we can write is can't get buttons styles is equal to a function that gets the props and what
+
+04:08.150 --> 04:11.890
+it returns is different styles depending on what we have.
+
+04:11.920 --> 04:22.680
+So we can say if props dot Google sign in which is the same props that we had from here right.
+
+04:22.680 --> 04:26.410
+We'll still just pass them in then.
+
+04:26.450 --> 04:32.320
+I want to return Google site and styles out of this function.
+
+04:32.320 --> 04:33.590
+So I want to return these styles.
+
+04:33.610 --> 04:42.710
+If the Google sign and property's true otherwise what we want to return if is prop star inverted if
+
+04:42.710 --> 04:48.250
+this is true then return inverted button stuff.
+
+04:49.750 --> 04:55.980
+Otherwise what we want to return is nothing or our base styles.
+
+04:55.990 --> 05:02.380
+So what we can actually do in fact is we can even make this a step further because now we can leverage
+
+05:02.380 --> 05:02.780
+this.
+
+05:02.800 --> 05:07.810
+What we will move out is the styles that are conflicting with our inverted button stuff so we can say
+
+05:07.810 --> 05:16.020
+concert buttons styles is equal to the CSF of our regular background right.
+
+05:16.050 --> 05:17.880
+What our background is black.
+
+05:17.880 --> 05:21.030
+So let's just pull that off.
+
+05:21.150 --> 05:24.050
+You know that when our background is black and our color is white
+
+05:28.360 --> 05:35.170
+we know when the color is white actually the color white is also in our Google stores.
+
+05:35.180 --> 05:42.430
+But that's OK we'll copy over our color is white and then we also want when our border is not
+
+05:46.520 --> 05:49.770
+and then on the hover.
+
+05:50.010 --> 05:55.670
+We also want our hover.
+
+05:55.750 --> 06:01.970
+Now what we'll do is if we don't return invert a button stores where we're just return buttons.
+
+06:02.580 --> 06:08.620
+So what we did is we pretty much wrote this function that checks first if you have Google sign in if
+
+06:08.670 --> 06:09.770
+it's Google sign and we don't.
+
+06:09.780 --> 06:11.190
+We know it's never gonna be inverted.
+
+06:11.190 --> 06:12.070
+Right.
+
+06:12.090 --> 06:17.250
+So then we never want to hit this part where we can return any of these styles we want to return our
+
+06:17.250 --> 06:23.130
+Google sign and style and then if this is not true if Google sign it is false then we check if it's
+
+06:23.130 --> 06:23.730
+inverted.
+
+06:23.730 --> 06:26.430
+If it's inverted then we return the inverted button styles.
+
+06:27.000 --> 06:34.280
+If it's not inverted then we returned the regular buttons that and then in order to use this we just
+
+06:34.280 --> 06:38.090
+call this inside of our component like so
+
+06:41.450 --> 06:50.110
+and just like that instead of writing all of that nested ugly looking ternary operators for our class
+
+06:50.110 --> 07:01.270
+names we can just now import in our button.
+
+07:01.480 --> 07:08.530
+We don't even need to spread in all of these other props like so we can just spread in all of our props.
+
+07:08.710 --> 07:09.250
+Right.
+
+07:09.370 --> 07:12.370
+Because our class name or sorry not our class name.
+
+07:12.700 --> 07:18.160
+Instead of doing it like this we don't even need to be structure anything anymore because we don't need
+
+07:18.160 --> 07:22.950
+that kind of specificity because we're not doing it in this file.
+
+07:22.950 --> 07:26.150
+We can now just spread in our props
+
+07:29.360 --> 07:31.720
+we do need to do structure off the children though.
+
+07:32.060 --> 07:34.970
+So let's this
+
+07:38.590 --> 07:43.190
+just like that we've reduced the amount of complexity and what we see here.
+
+07:43.480 --> 07:48.250
+And now if we want to know what styles get loaded we can tell because all we can just look at this function
+
+07:48.280 --> 07:48.510
+right.
+
+07:48.520 --> 07:51.400
+We see that we have some base styles on this button.
+
+07:51.400 --> 07:55.720
+And then what other styles get rendered is depending on what props we got passed in.
+
+07:56.110 --> 08:04.240
+And it's very easy to see what will get because each piece of code is now inside of its own section
+
+08:04.450 --> 08:06.240
+and it just reads like Javascript.
+
+08:06.610 --> 08:12.820
+But except we know that we're getting CSA styling and now if we look we'll see all our buttons still
+
+08:12.820 --> 08:16.830
+work the same way that they did before.
+
+08:16.850 --> 08:24.160
+Well I think I might have misspelled our Google sign just check what we're using.
+
+08:24.280 --> 08:25.790
+This is in our sign and
+
+08:28.870 --> 08:30.300
+oh is Google sign it.
+
+08:30.340 --> 08:34.800
+What's the Google's.
+
+08:35.010 --> 08:40.200
+Now if we save right we see everything still works the same as it did.
+
+08:40.260 --> 08:44.730
+So hopefully you see the benefits of using style components does already.
+
+08:44.730 --> 08:45.150
+Right.
+
+08:45.150 --> 08:47.370
+It's just more javascript.
+
+08:47.370 --> 08:52.800
+It's just easier to write JavaScript but it's not like we're giving up our understanding of CSX.
+
+08:52.800 --> 08:59.070
+All we're doing is just writing the javascript and following the javascript rules that we're already
+
+08:59.070 --> 08:59.970
+so used to.
+
+09:00.390 --> 09:04.050
+So now let's just remove this custom styles because we don't need anymore
+
+09:07.340 --> 09:14.810
+so hopefully you're familiar with what it is to move over some of our style sheets over to our S as
+
+09:14.810 --> 09:18.350
+in jazz style components at this point.
+
+09:18.350 --> 09:26.240
+What you can do is you have all of these other components that you can convert over to style components
+
+09:27.590 --> 09:31.430
+if you find that you're hitting a challenging area.
+
+09:31.430 --> 09:39.470
+I have included a link to the complete version where every component that we've ever written is switched
+
+09:39.500 --> 09:48.690
+over to a star component so you can just use and leverage that if you would prefer otherwise in the
+
+09:48.690 --> 09:49.610
+next few lessons.
+
+09:49.620 --> 09:55.080
+We're going to move on from style components because the concepts are pretty much just the same as what
+
+09:55.080 --> 09:57.190
+you've seen here.
+
+09:57.200 --> 10:03.860
+Now one of the things to consider is definitely that you don't have to convert all of these components
+
+10:03.860 --> 10:04.810
+at once.
+
+10:05.030 --> 10:08.250
+If you want to break from some of the future lessons right.
+
+10:08.330 --> 10:15.020
+If you feel like something is overwhelming it's actually kind of therapeutic to convert styles over
+
+10:15.020 --> 10:21.240
+to stores stock components and the more practice you get the better it'll be.
+
+10:21.260 --> 10:26.720
+I do think one last thing we have to do is remove our reference to the styles that SAS inside of our
+
+10:26.720 --> 10:31.910
+custom button component but going back to my original point.
+
+10:32.100 --> 10:33.120
+There's many ways.
+
+10:33.120 --> 10:33.320
+Right.
+
+10:33.330 --> 10:35.420
+And there's many ways you can learn.
+
+10:35.550 --> 10:39.540
+You don't have to just copy everything over right.
+
+10:39.540 --> 10:45.030
+You don't have to force yourself until you hit a wall before you check the final repo where everything
+
+10:45.030 --> 10:47.720
+is converted over to a stock component.
+
+10:47.850 --> 10:54.120
+You can definitely just use it as a reference if you even want to just look at what you have.
+
+10:54.150 --> 10:56.310
+Look at the final version right.
+
+10:56.310 --> 11:00.160
+Compare and even just copy it over OK.
+
+11:00.370 --> 11:02.050
+Now let's continue with our course.

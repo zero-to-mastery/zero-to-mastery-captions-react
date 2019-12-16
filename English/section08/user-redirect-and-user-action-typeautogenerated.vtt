@@ -1,0 +1,145 @@
+WEBVTT
+
+00:00.300 --> 00:05.310
+Let's make a small modification to our app right now.
+
+00:05.380 --> 00:12.820
+If the user signs in they are able to still access the sign and page which we don't want them to be
+
+00:12.820 --> 00:18.400
+able to do because they're still able to trigger any of the code in our sign in mess with the author
+
+00:18.400 --> 00:19.290
+flow.
+
+00:19.450 --> 00:20.590
+We don't want that.
+
+00:20.620 --> 00:23.650
+If they're already signed in so how do we do that.
+
+00:24.550 --> 00:33.880
+Well what we want to do is we want to set it so that if there have a current user inside of our application
+
+00:34.420 --> 00:36.900
+they shouldn't be able to access the sign in row.
+
+00:37.600 --> 00:41.460
+And in order to write that code we're gonna need two things.
+
+00:41.470 --> 00:48.010
+The first is we're going to need the redirect component from RAC writer Dom and then the second thing
+
+00:48.250 --> 00:52.290
+is we're gonna need the current user from our redux date.
+
+00:52.360 --> 01:01.820
+So just like we did in our header we're gonna need a concept map state to props and off of our state
+
+01:02.060 --> 01:12.310
+we're gonna d structure off our user reducer and what we'll return is our current user prop which is
+
+01:12.310 --> 01:19.660
+equal to user dot current user and now we're able to pass are maps.
+
+01:19.660 --> 01:28.110
+It's a prop store connect so that we have access to this stop prop stop current user now inside of our
+
+01:28.110 --> 01:37.620
+route we're gonna switch this first to exact and then instead of this sign in and sign up component
+
+01:37.620 --> 01:45.450
+property we're going to use render and render you can imagine is exactly like the render key that we
+
+01:45.450 --> 01:56.070
+use in our class components it's a JavaScript in location that determines what component to return in
+
+01:56.070 --> 02:00.520
+the same place where component would be instead it'll be some javascript.
+
+02:00.690 --> 02:04.680
+So here we can say that it will be a function
+
+02:07.270 --> 02:14.410
+that will determine based off of are this stop prop stock current user.
+
+02:14.410 --> 02:14.700
+Right.
+
+02:14.710 --> 02:22.990
+Because if it's present then what we want to render is our redirect component that we just imported
+
+02:23.470 --> 02:31.770
+and all it takes is that to property that tells it where we want them to redirect to and then if not
+
+02:31.770 --> 02:42.260
+that we want to instead render our sign in and sign up page and that's all there is to it.
+
+02:42.590 --> 02:51.150
+So now if we go to our app we'll see that we no longer are able to access sign in right.
+
+02:51.160 --> 02:52.930
+It'll redirect us.
+
+02:53.310 --> 03:00.030
+So now not only do we want that if we hit sign out and let's say we got to sign in.
+
+03:00.030 --> 03:04.310
+If we sign in it should redirect us to our home page.
+
+03:04.350 --> 03:05.210
+Okay.
+
+03:05.280 --> 03:15.200
+So now that we have our redirect setup one more modification that we should make is to our action.
+
+03:15.230 --> 03:18.970
+So right now we saw that we're using this string.
+
+03:19.040 --> 03:26.870
+Hardcoded string right and in our reducer we're referencing the same string but one best practice that
+
+03:26.870 --> 03:34.740
+we can implement is to make sure that it's consistent in any place that might be referencing this string.
+
+03:34.760 --> 03:40.280
+So what we'll make is a new file called user dot type stuff.
+
+03:40.280 --> 03:51.530
+J us and what we're gonna export from this file will be an object called user action types and on it
+
+03:51.530 --> 04:02.640
+will be the value that points to that exact string and now in our reducer we are just going to import
+
+04:02.640 --> 04:05.690
+that in let's just
+
+04:09.140 --> 04:16.640
+use the autocomplete and it should be user action types and instead of set current user we will say
+
+04:16.640 --> 04:20.440
+see user action type stuff set current user.
+
+04:20.450 --> 04:26.540
+So now we know that it's constant and we won't have accidental typos and not know why our code is not
+
+04:26.540 --> 04:38.340
+working we'll do the same thing in our action or import user action types from our user types.
+
+04:38.340 --> 04:45.070
+Dot J us and we'll just use the value.
+
+04:45.260 --> 04:49.020
+And now if we look we see our code is still working the same.
+
+04:49.790 --> 04:50.560
+OK.
+
+04:50.810 --> 04:59.390
+So now we've done our modifications let's commit this code as well so we'll check the status and we'll
+
+04:59.390 --> 05:13.190
+say get ad get commit updating our app to redirect to home if user is signed and then we'll get push
+
+05:15.810 --> 05:16.890
+and let's keep building.

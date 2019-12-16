@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.680 --> 00:07.430
+Hello everyone and welcome to this lesson on building a blog Web site with Gatsby.
+
+00:07.430 --> 00:11.450
+My name is you war and I'm one of the instructors alongside Andre.
+
+00:11.450 --> 00:17.150
+That teaches the react course from zero to mastery now in this lesson.
+
+00:17.150 --> 00:24.830
+I am going to talk about Gatsby and how we can leverage Gatsby in order to build a blog Web site.
+
+00:24.830 --> 00:32.180
+Now before we continue I do want to note that this lesson assumes that you know the basics of react
+
+00:32.240 --> 00:32.860
+and graft.
+
+00:32.900 --> 00:39.740
+Well we also make the assumption that you understand some of the caveats behind some of the libraries
+
+00:39.830 --> 00:45.170
+in the react ecosystem such as react ruder if you are unfamiliar with this.
+
+00:45.200 --> 00:51.860
+We do teach us in the course otherwise you may have to become more familiar with these concepts before
+
+00:51.860 --> 00:53.820
+proceeding with this lesson.
+
+00:53.840 --> 00:59.450
+You can definitely watch this lesson still but you might not be able to understand all of the code that
+
+00:59.450 --> 01:03.410
+will end up writing inside of this section.
+
+01:03.470 --> 01:11.460
+Now if that is not a problem for you then let's take a deep dive into what Gatsby is in the first place.
+
+01:11.490 --> 01:17.420
+So as I mentioned Gatsby is a framework that is written in react.
+
+01:17.490 --> 01:25.230
+It's a framework that has already combined together some of the best react ecosystem libraries into
+
+01:25.230 --> 01:31.940
+one bundle and as an opinionated way about how you should use it in order to build a static Web site
+
+01:32.670 --> 01:38.370
+in order for us to actually understand when we should use something like Gatsby we have to understand
+
+01:38.370 --> 01:45.290
+some of the competing technologies that you've definitely at least used or heard about so let's take
+
+01:45.290 --> 01:54.450
+a look at this image let us go over one high level concept in react so we know that React is a front
+
+01:54.570 --> 02:02.250
+end based UI rendering library we write react code which is a combination of JavaScript and J.S. X in
+
+02:02.250 --> 02:11.280
+order for us to compile that code that we've written and react down into JSC SS an HMO using a loader
+
+02:11.340 --> 02:15.420
+like web pack as well as a trans pilot like babble.
+
+02:15.560 --> 02:23.480
+Now those files are the files that any web page that our browser loads consumes in order to build such
+
+02:23.480 --> 02:24.650
+a web page.
+
+02:24.710 --> 02:28.800
+So when we build our Web sites and react we might be writing real code.
+
+02:28.940 --> 02:35.930
+But there is some compile step along the way that builds them into javascript CSX and HCM all files
+
+02:36.200 --> 02:39.240
+that our browser is able to consume.
+
+02:39.260 --> 02:46.340
+Now keeping this in mind let's take a breakdown of three technologies that we see in the react ecosystem
+
+02:46.370 --> 02:51.150
+that try and solve the problem of how you develop react applications.
+
+02:51.170 --> 02:56.770
+Now those are Gatsby create react app and next J us.
+
+02:56.810 --> 03:02.150
+Now you definitely heard of create react app and you've definitely used it if you've taken this course
+
+03:02.840 --> 03:10.520
+create react app is a very quick way for you to start up a react application and it leverage is what
+
+03:10.520 --> 03:12.900
+is called client side rendering.
+
+03:13.070 --> 03:20.420
+Now what client side rendering means is that leverage is the browser in order to build out the HCM AML
+
+03:20.460 --> 03:27.280
+that gets served whenever a user navigates to any page on your react application.
+
+03:27.320 --> 03:34.070
+So if you were to see this browser here when the user navigates to the home route and then loads up
+
+03:34.070 --> 03:41.960
+the home component what happens is that the react code that we've written is built and passed to that
+
+03:41.960 --> 03:44.660
+user's browser engine.
+
+03:44.690 --> 03:50.750
+Now that engine will end up being the one that actually generates the HCM all required for that home
+
+03:50.750 --> 03:55.180
+page and then loads it up onto the browser.
+
+03:55.300 --> 03:59.920
+The same thing happens whenever they navigate to any other route such as collections.
+
+03:59.920 --> 04:07.690
+But the main idea here is that the browser engine is the thing that is generating the HCM out pages
+
+04:07.690 --> 04:09.760
+that the browser needs to load.
+
+04:09.760 --> 04:15.580
+Related to our ReACT application everything is rendered on the client side.
+
+04:15.970 --> 04:22.950
+So on the browser now create wracked app is a great tool when you want to build a really dynamic web
+
+04:22.950 --> 04:30.850
+site in react but you don't have a lot of static images that come by default with the actual application
+
+04:31.270 --> 04:39.090
+or a lot of really deeply nested and really complex logic that ends up building your pages.
+
+04:39.100 --> 04:46.090
+Now when you do have a Web site that is performing slowly and can exceed the amount of power that our
+
+04:46.090 --> 04:52.130
+browser engine has then you want to use something like Next J.S..
+
+04:52.150 --> 04:57.910
+Now if you've never heard of Next j s it is a framework that allows you to write react and leverage
+
+04:57.910 --> 05:05.080
+server side rendering server side rendering is almost the exact same conceptually as client side rendering
+
+05:05.590 --> 05:12.700
+except instead of letting the client or the browsers engine be the actual thing that ends up compiling
+
+05:12.730 --> 05:17.080
+and generating the HD all code for our browser route.
+
+05:17.080 --> 05:25.210
+So whenever our users navigate to any of our pages we let the back end server build and generate the
+
+05:25.270 --> 05:32.620
+HDD him all files that the user needs in order to view the home route the collections route or any route
+
+05:32.680 --> 05:34.260
+for that matter.
+
+05:34.330 --> 05:41.050
+So whenever the user navigates to a another route for example like our home then this will communicate
+
+05:41.050 --> 05:47.620
+to our back end server that they need the HD email related to home so the server will start to generate
+
+05:47.620 --> 05:49.200
+using our ReACT code.
+
+05:49.300 --> 05:56.170
+The actual A.T.M. required and this is way more robust because our back and server is more powerful
+
+05:56.260 --> 06:01.510
+and it's capable of generating it really quickly compared to our browser.
+
+06:01.600 --> 06:07.660
+So you want to use next just when you need to build a really robust and large Web site that might end
+
+06:07.660 --> 06:12.130
+up having really complex logic to build out your views.
+
+06:12.160 --> 06:15.600
+Now the main thing here to remember though is that next J.
+
+06:15.610 --> 06:23.240
+S and create react app are both dynamically generated meaning that we directly generate the HDD CML
+
+06:23.290 --> 06:28.210
+whenever the browser navigates to different routes.
+
+06:28.210 --> 06:35.850
+So this is all live generated whereas something like Gatsby is what's called a static generated Web
+
+06:35.850 --> 06:36.160
+site.
+
+06:36.850 --> 06:44.230
+So what this means is that all of the code that builds to the HCM CML pages that end up comprising our
+
+06:44.230 --> 06:48.110
+application is all done at the build step.
+
+06:48.160 --> 06:55.930
+So similar to when we run builds with create react app when we push our Gatsby code up to a server or
+
+06:55.990 --> 06:59.530
+up to a hosting platform of some kind.
+
+06:59.530 --> 07:06.520
+They will run the build script which will automatically generate all of the static HCM Mel that our
+
+07:06.520 --> 07:14.140
+browsers end up using in order to display the views which means that none of this code is generated
+
+07:14.140 --> 07:15.060
+dynamically.
+
+07:15.130 --> 07:21.040
+It's all generated way ahead of time when you push your code up onto your server.
+
+07:21.040 --> 07:26.530
+So this is the main difference with Gatsby so it's really good when you want to build static web sites
+
+07:26.560 --> 07:32.380
+that generally don't need to dynamically change the views that often by doing so.
+
+07:32.380 --> 07:39.490
+This is actually exactly what we need for a blog Web site where much of the actual content is already
+
+07:39.490 --> 07:41.770
+predetermined it's already written.
+
+07:41.770 --> 07:47.650
+So all we want to do is just display a bunch of blog posts and navigate between them and Gatsby is the
+
+07:47.650 --> 07:49.280
+perfect solution for that.
+
+07:49.300 --> 07:54.760
+So in the next lesson I'm going to teach you how we can get started with Gatsby so I'll see you in the
+
+07:54.760 --> 07:55.320
+next lesson.

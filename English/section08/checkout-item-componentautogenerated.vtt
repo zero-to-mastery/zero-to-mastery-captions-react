@@ -1,0 +1,283 @@
+WEBVTT
+
+00:01.940 --> 00:05.330
+Now let's build our checkout item component.
+
+00:05.330 --> 00:11.930
+Now our checkout item component is going to use the cart items that we have stored in our state.
+
+00:11.930 --> 00:15.410
+Very similar to how we pull them into our cart dropdown.
+
+00:15.440 --> 00:21.830
+We're going to pull them into our checkout page and then populate that dropdown or not dropdown but
+
+00:21.830 --> 00:26.150
+that list of checkout items that we see in our final.
+
+00:26.150 --> 00:28.950
+So let's actually build this component.
+
+00:28.970 --> 00:33.770
+Now let's go into our application go to our checkout page
+
+00:36.430 --> 00:40.440
+and right here is where we're going to map out our checkout item.
+
+00:40.540 --> 00:43.460
+So let's build the component.
+
+00:43.510 --> 00:50.740
+Let's go to our component folder and make a new one called checkout item and inside we need our usual
+
+00:50.800 --> 01:00.660
+checkout item dock component ASX as well as our styles page checkout item dot styles dot SAS.
+
+01:00.780 --> 01:08.200
+Now inside of our component we've got to impart react from our act and import in our style sheet.
+
+01:08.270 --> 01:14.160
+Now as usual I've included the style sheet for you under your resources and you're just gonna copy it
+
+01:15.000 --> 01:17.610
+and put it inside of your style sheet.
+
+01:18.960 --> 01:26.550
+Now the main thing to note is that the width of these three categories is the same as the width of the
+
+01:26.640 --> 01:30.210
+three headers or the four headers that we have.
+
+01:30.350 --> 01:35.420
+The only difference is that there is a container for the actual image and the image itself sits inside.
+
+01:35.490 --> 01:40.350
+And we'll see what that looks like in terms of how we're laying it out in the H2 out but that's how
+
+01:40.350 --> 01:43.510
+we're able to align them together.
+
+01:43.550 --> 01:50.530
+So what we're gonna do is we're gonna declare our contents checkout item and it's gonna be a functional
+
+01:50.530 --> 02:02.610
+component that returns this div with the class name of checkout item and then inside we're gonna have
+
+02:02.670 --> 02:04.560
+that image container.
+
+02:04.560 --> 02:05.420
+I was telling you about.
+
+02:05.490 --> 02:11.070
+Which will just be a div but the class name of image container and then inside of that we're gonna have
+
+02:11.070 --> 02:12.360
+our image.
+
+02:12.360 --> 02:18.030
+Now the reason why we use a container for our image is because it's easier for us to control the size
+
+02:18.090 --> 02:22.050
+of this section that holds our image.
+
+02:22.050 --> 02:27.900
+We can throw some padding on it right and then give it that width and then to have our image inside
+
+02:27.900 --> 02:33.870
+be constrained by it and by constraint I just mean that we set the width and height based off of what
+
+02:33.870 --> 02:41.130
+the size of this container is and we can apply the padding here without having to affect the other sections
+
+02:41.160 --> 02:43.700
+because maybe we don't want the same kind of padding on those.
+
+02:44.160 --> 02:49.270
+It's just easier to put the image that we have inside of this container.
+
+02:49.330 --> 02:56.100
+Now we're going to provide the old key of item and this is just for those screenwriters because when
+
+02:56.430 --> 03:01.230
+people who have disabilities that use a screenwriter for the browser whenever they had an image they
+
+03:01.230 --> 03:02.510
+can actually see the image.
+
+03:02.580 --> 03:06.140
+So they get read out what that description will be.
+
+03:06.190 --> 03:11.100
+And for us it will just be item it just easier for us to say if they know that it's an image then they
+
+03:11.160 --> 03:16.680
+know item by the point that they actually use the screen or read it they know the item name so they
+
+03:16.680 --> 03:23.230
+don't really need to have a full understanding perhaps of what the image will be next we're going to
+
+03:23.230 --> 03:33.490
+add our spans and here's where we're going to use name and then let's just repeat this for the respective
+
+03:33.520 --> 03:38.790
+Quantity Price and then the last one.
+
+03:38.790 --> 03:41.060
+This will not be a span site.
+
+03:41.060 --> 03:51.110
+It will actually be a div because this is what's going to hold our Remove button now our Remove button
+
+03:51.200 --> 03:55.630
+is going to be a UTF 8 winging.
+
+03:55.760 --> 04:00.770
+Now you can actually find a good list of them right here at this W3 schools link that I'm gonna put
+
+04:01.010 --> 04:02.020
+on your screen right now.
+
+04:03.300 --> 04:12.270
+Now what UTF 8 is essentially a standard that most browsers have that represents what characters they're
+
+04:12.330 --> 04:15.400
+able to display or they're able to recognize.
+
+04:15.420 --> 04:15.690
+Right.
+
+04:15.690 --> 04:23.050
+So all the letters that we type that we're most familiar with those all fall into the UTF 8 categorization.
+
+04:23.280 --> 04:29.340
+But there are also these other additional symbols that we can render right that our browser knows what
+
+04:29.340 --> 04:30.000
+they represent.
+
+04:30.600 --> 04:37.250
+And we're just going to use this X for r x and the reason for it is because it's more balanced right.
+
+04:37.260 --> 04:44.250
+It's essentially like an icon that our browser is naturally aware of so in order for us to use it we
+
+04:44.250 --> 04:46.440
+can just copy this text right.
+
+04:46.470 --> 04:49.190
+In fact if you had Try it you'll see where it's demonstrated.
+
+04:49.260 --> 04:54.870
+We have to apply this Ampersand hashtag before we actually use the number.
+
+04:54.870 --> 04:59.380
+And then we've got to put a semicolon right and that's that same number.
+
+04:59.460 --> 05:06.120
+So inside of here we're just going to put this here and then we're actually going to pass on our problems.
+
+05:06.140 --> 05:12.050
+Now we know that we're going to use the card items that we have in our store but we're also going to
+
+05:12.050 --> 05:17.870
+pass on the full item and the reason why we want to pass on the full item rather than spread the props
+
+05:17.900 --> 05:25.130
+into our components as we would any other way is because we know that we eventually want to increase
+
+05:25.250 --> 05:33.050
+and decrease this quantity as well as hit the remove to remove all of the items that are in the store
+
+05:33.050 --> 05:36.700
+regarding this card item now.
+
+05:36.810 --> 05:42.870
+Passing the full item is mandatory because we know with our cart items when we wrote our card action
+
+05:42.930 --> 05:47.030
+an item we needed the whole item in order for it to work.
+
+05:47.040 --> 05:52.680
+So if we want to toggle and increase the quantity we're pretty much just firing our add item call.
+
+05:52.680 --> 05:58.590
+But this time we also want it to be done inside of this component.
+
+05:58.590 --> 06:02.750
+So we just gotta follow the same requirements as are ad item.
+
+06:02.760 --> 06:07.770
+Action creator so inside of a checkout item we're just going to make sure to pass the whole item as
+
+06:07.770 --> 06:08.890
+a prop as well.
+
+06:09.270 --> 06:15.780
+But we can just structure off the other values that we need in order to apply them into the component.
+
+06:16.560 --> 06:18.510
+So we're gonna need name.
+
+06:18.510 --> 06:21.610
+We're gonna need image you're all we're gonna need price.
+
+06:21.610 --> 06:24.780
+Now we're gonna need quantity now.
+
+06:24.960 --> 06:30.570
+Now that we have our values inside of our image we're just going to set the sauce equal to the image
+
+06:30.570 --> 06:32.430
+you are.
+
+06:32.470 --> 06:36.850
+As for the name we're just gonna render the name.
+
+06:36.990 --> 06:38.700
+Same thing with quantity and price
+
+06:42.150 --> 06:43.840
+and then let's just export this out
+
+06:47.190 --> 06:48.060
+as the default
+
+06:50.700 --> 06:52.770
+and bring it into our checkout page component
+
+06:55.800 --> 06:58.500
+and here we'll just import it in
+
+07:01.590 --> 07:10.460
+checkout item checkout item component and then instead of rendering this item name we'll just render
+
+07:10.460 --> 07:15.830
+out our cart our checkout item and pass cart item in as a prop
+
+07:18.770 --> 07:23.150
+we'll also make sure to set our key equal to our car.
+
+07:23.150 --> 07:35.020
+Item I.D. Now if we save go back to our application add some items and go to our checkout We'll see
+
+07:35.020 --> 07:43.830
+that we have our component now before we continue with building in the remove feature as well as decreasing
+
+07:43.920 --> 07:45.590
+and increasing the quantity.
+
+07:46.080 --> 07:47.240
+Let's just commit our code.
+
+07:48.150 --> 07:55.170
+So let's go back to our terminal and let's check what we've added so we've done our checkout page and
+
+07:55.170 --> 08:09.310
+we'll say added checkout page checkout item component and updated cart to use selectors from re select
+
+08:10.980 --> 08:12.300
+and now let's push it up
+
+08:15.570 --> 08:17.760
+and build our checkout item functionality.

@@ -1,0 +1,364 @@
+WEBVTT
+
+00:01.090 --> 00:08.230
+So now that we've built our application we need to host the life we want to put it up on some EU URL
+
+00:08.440 --> 00:15.100
+that people are able to access so that when they go to our you URL they get our project and then they
+
+00:15.100 --> 00:18.500
+can play around with it right now.
+
+00:18.510 --> 00:23.390
+We've only ever accessed our web application through local host three thousand.
+
+00:23.580 --> 00:31.420
+But what we're going to use is a service called Heroku and what Heroku is is it's a platform as a service
+
+00:31.690 --> 00:39.800
+that allows us to host our web application on a you are all that they provide for us for free.
+
+00:39.810 --> 00:48.060
+Now of course if you had more requirements and you needed more bandwidth for example because your web
+
+00:48.180 --> 00:55.260
+getting a lot of traffic you can upgrade the plan that you get by default with Heroku the free plan
+
+00:55.260 --> 01:03.060
+is pretty good for us because honestly for a portfolio project I do not expect that we would get that
+
+01:03.060 --> 01:12.100
+much traffic that it breaks the amount of bandwidth that Heroku gives us for the free plan but in order
+
+01:12.100 --> 01:14.160
+for us to explore what Heroku does.
+
+01:14.200 --> 01:19.090
+We just have to understand the basics of web hosting.
+
+01:19.130 --> 01:23.190
+So right now we have all of our real code written right.
+
+01:23.420 --> 01:30.590
+And we know that from our initial lesson I create racked up create racked up has all these scripts and
+
+01:30.590 --> 01:37.190
+configurations that help convert our ReACT code over to the basic javascript HDMI out and see us as
+
+01:37.190 --> 01:43.690
+code that browsers need but in order for the browsers to actually get our Web site they need to get
+
+01:43.690 --> 01:49.970
+it from a server of some kind just like how when we go to local host three thousand we get the javascript
+
+01:50.030 --> 01:56.800
+SS and HDMI all files that build our Web site from our local server that we're running and it's communicating
+
+01:56.800 --> 01:58.590
+support three thousand.
+
+01:58.630 --> 02:03.710
+Now this server is local and we can only we can access local host three thousand.
+
+02:03.770 --> 02:10.160
+But this is pretty much the same idea except when it comes to Web hosting this server needs to be on
+
+02:10.400 --> 02:11.490
+24 hours.
+
+02:11.540 --> 02:12.400
+Right.
+
+02:12.500 --> 02:21.470
+And Heroku is going to be the service that actually hosts the server that serves up are HDMI all javascript
+
+02:21.620 --> 02:23.480
+and CSX files.
+
+02:23.480 --> 02:30.950
+Whenever somebody accesses the you are out that they give us as well now in order to use Heroku you
+
+02:30.950 --> 02:35.240
+have to sign up for Heroku and it's a very easy setup process.
+
+02:35.270 --> 02:40.880
+There's nothing complicated about it and you can pretty much just go to the Heroku Web site and just
+
+02:40.880 --> 02:47.020
+sign up by going into this right button and then clicking the sign up.
+
+02:47.060 --> 02:51.660
+Now you can pause here and finish that sign up before we continue.
+
+02:52.450 --> 02:56.660
+But I already have a Heroku account so I'm just gonna log in to mine.
+
+02:56.830 --> 03:03.950
+And after you've signed up we'll both end up on the dashboard and on this dashboard is where we can
+
+03:03.950 --> 03:13.360
+see what projects we have currently hosted through Heroku so Heroku provides not only this dashboard
+
+03:13.390 --> 03:22.000
+but also a command line interface that allows us to access our Heroku account through our command line
+
+03:22.360 --> 03:28.220
+so that we can actually push our projects up onto the Heroku platform.
+
+03:28.300 --> 03:35.570
+Now there's a couple ways to download the Heroku CLIA which is the command line interface and you can
+
+03:35.570 --> 03:37.490
+get that through this link.
+
+03:37.490 --> 03:38.480
+I'm gonna provide you
+
+03:42.150 --> 03:45.510
+now on this Web site that I'm gonna give you.
+
+03:45.510 --> 03:52.060
+Down in the download and install just installed the specific one for your platform.
+
+03:52.080 --> 03:52.320
+Right.
+
+03:52.320 --> 03:57.810
+If you're using Windows or if using a bunch to just use that one for using Mac download the installer
+
+03:57.900 --> 04:00.970
+and then run it and after that.
+
+04:01.090 --> 04:07.210
+Make sure you follow the installation instructions that are underneath.
+
+04:07.210 --> 04:13.390
+And in order for you to verify that you've got Heroku installed you are just going to run Heroku dash
+
+04:13.390 --> 04:15.800
+dash version in your command line.
+
+04:15.970 --> 04:19.820
+So I'm gonna do that right now from this point forward.
+
+04:19.840 --> 04:28.160
+I'm assuming that you have your Heroku CLIA installed so from our terminal everyone Heroku version you
+
+04:28.160 --> 04:39.330
+should see some version of Heroku pop up now once you have Heroku you have to do Heroku log in so for
+
+04:39.330 --> 04:46.920
+me I'm just going to log out of mine first to demonstrate for you how Heroku log in works.
+
+04:46.920 --> 04:53.880
+So once we have Heroku we're gonna say Heroku log in and we just hit any button and it will ask us to
+
+04:53.880 --> 04:55.010
+log in with Heroku.
+
+04:55.200 --> 04:58.830
+If you're already logged in you pretty much simply click log in.
+
+04:58.950 --> 05:01.800
+It will tell you that you have now logged into your slot.
+
+05:02.370 --> 05:09.510
+So if we close this page and we go back we'll see that we're logged into our Heroku account and now
+
+05:09.510 --> 05:17.950
+we're able to access a plethora of Heroku related functionality through the CLIA now in order for us
+
+05:17.950 --> 05:22.430
+to get our application up onto Heroku.
+
+05:22.540 --> 05:30.260
+We have to use some of the commands from our hero who still like now hero whose projects are kind of
+
+05:30.260 --> 05:32.450
+like get hub repositories.
+
+05:32.750 --> 05:42.080
+You pretty much push commits up onto Heroku using get commands but they're Heroku specific it commands
+
+05:42.680 --> 05:49.700
+and then Heroku will naturally build it depending on what script we tell it to run and it will serve
+
+05:49.700 --> 05:57.570
+it from a Heroku Web site which we will get now how we're going to do that is we're going to first create
+
+05:57.570 --> 06:03.060
+a Heroku project which we can do from ah see a lot.
+
+06:03.060 --> 06:10.230
+So what we'll say is Heroku create and then the name of the project which you want and usually what
+
+06:10.230 --> 06:15.990
+it will do is it will use the name that you've given it except it will put Heroku in front of it.
+
+06:16.020 --> 06:23.620
+So let's say our Web site is Crown live then it will use it will pretty much be Heroku dot Crown live
+
+06:23.620 --> 06:24.960
+dot com.
+
+06:25.030 --> 06:29.160
+After this we're going to say dash dash build pack.
+
+06:29.620 --> 06:39.600
+And what a build pack is is it's essentially a specific configuration for the build that we want so
+
+06:39.600 --> 06:49.630
+that it deploys are react as a static web site and we want this because it's the best and most efficient
+
+06:49.630 --> 06:57.040
+way for us to host R react project created with create react out because this build pack is going to
+
+06:57.040 --> 07:00.550
+be a create react app build pack and we'll get it from this link.
+
+07:00.550 --> 07:07.630
+So what you're going to type in after you've typed in dash dash build pack is H T T P S slash slash
+
+07:07.990 --> 07:21.040
+get hub dot com slash Mars slash create react app slash build pack dot get and this bill pack is also
+
+07:21.040 --> 07:28.450
+great because it will also use the production build of our ReACT app for the deployment and you'll see
+
+07:28.450 --> 07:38.460
+this when we actually run are Heroku project so after we've done this we want to push our changes up
+
+07:38.460 --> 07:39.590
+to this project.
+
+07:39.780 --> 07:50.820
+So what we'll say is we'll say get push Heroku master now Heroku is the repository that are current
+
+07:50.910 --> 07:56.070
+Heroku project that we just credit is connected to in terms of our own project.
+
+07:56.250 --> 08:03.930
+So our project is pointing to this new Heroku project when we type get push Heroku and what we want
+
+08:03.930 --> 08:07.570
+we say Master we just want to push our master branch.
+
+08:07.770 --> 08:16.320
+So now when we do that we'll see that it will start building the source on to our Heroku project.
+
+08:16.320 --> 08:25.350
+So because of this build pack that we've set up it's going to optimize the build for Heroku to deploy
+
+08:25.410 --> 08:34.670
+our create react at Project and you'll see this log which is a live log of Heroku spinning up our project
+
+08:34.790 --> 08:42.860
+on its server that we've just created when we wrote Heroku create it's going to get all the packages
+
+08:42.890 --> 08:46.710
+related to our projects so all of the node modules right.
+
+08:46.790 --> 08:53.780
+It'll set up all the dependencies you know optimize the build using the create react app configurations
+
+08:53.780 --> 09:02.420
+for battle and web pack and then after some of these it will say optimizing build right there.
+
+09:02.420 --> 09:04.200
+So it'll say running built.
+
+09:04.220 --> 09:04.740
+Right.
+
+09:04.790 --> 09:12.350
+So it's running our yarn build script and it's now creating this optimized production build based off
+
+09:12.350 --> 09:21.280
+of the Create react app configuration and once it's done building it will host our Web site and serve
+
+09:21.280 --> 09:24.730
+it with this new hero who you are all that it will provide.
+
+09:24.730 --> 09:27.010
+So let's just wait for our bills to finish
+
+09:32.510 --> 09:38.150
+and then near the end here you'll see that it's successfully deployed to this Heroku link.
+
+09:38.180 --> 09:47.050
+So now if you copy this link and paste it into your browser you'll be able to access this project and
+
+09:47.050 --> 09:50.080
+now we'll see that our project is fully loaded.
+
+09:51.460 --> 09:57.940
+Now what we want to do is check the functionality and we'll actually see that everything is working
+
+09:58.540 --> 10:05.770
+as we wrote it if we go to our checkout We'll see that we're actually still able to go through our full
+
+10:05.770 --> 10:12.110
+checkout flow except because now our site is hosted over HDTV s Chrome.
+
+10:12.110 --> 10:18.560
+If you're using Chrome will allow any of the previously stored credit cards that you might have put
+
+10:18.620 --> 10:20.450
+in to display.
+
+10:20.450 --> 10:26.870
+So it offers that autocomplete feature using the stripe checkout now which we didn't have access to
+
+10:26.870 --> 10:35.310
+before because we were not hosting our application over HDTV s so I'm just gonna use the fake credit
+
+10:35.310 --> 10:36.690
+card that we have here
+
+10:40.070 --> 10:46.180
+and we'll see that our application is working as it was before.
+
+10:46.230 --> 10:53.490
+The only thing that might not work is actually our signing because if we try and sign in we'll get this
+
+10:53.490 --> 11:00.060
+message actually in our consoles that says that we are not authenticated right unauthorized domain.
+
+11:00.060 --> 11:07.050
+So this is because firebase wants to know which applications are allowed to access our authentication
+
+11:07.050 --> 11:08.160
+service.
+
+11:08.160 --> 11:10.930
+So what we can do is we can just copy.
+
+11:10.940 --> 11:12.150
+Are you all right.
+
+11:12.690 --> 11:16.380
+So before the signing you want to copy this you are.
+
+11:16.560 --> 11:23.880
+We're gonna go to our Firebase and go into our project and then inside of authentication we're gonna
+
+11:23.910 --> 11:29.660
+go to the sign and method tab and down in the authorized domain section.
+
+11:29.700 --> 11:38.430
+We're gonna click ad domain and paste our link and then click add and now we have to refresh our application
+
+11:40.640 --> 11:45.510
+and now if we click sign up with Google we'll see that it works
+
+11:48.700 --> 11:51.750
+just like it did before now.
+
+11:51.760 --> 11:57.880
+The only thing is that maybe we don't want to display all of these log messages of our actions right.
+
+11:57.880 --> 11:59.100
+We don't want to log anything.
+
+11:59.260 --> 12:06.250
+Once we're in production and I'll show you how we can remove this from only production in the next lesson.

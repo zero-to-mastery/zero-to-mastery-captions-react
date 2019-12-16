@@ -1,0 +1,112 @@
+WEBVTT
+
+00:01.330 --> 00:10.780
+OK let's look at the last one which is our unmatched face so inside of our unmanned phase all it happens
+
+00:11.290 --> 00:14.690
+is component will unmanned gets called.
+
+00:14.830 --> 00:22.450
+This is where we want to do anything before react strips that component off of our Don.
+
+00:22.700 --> 00:31.430
+So for example we in our app G.S. decide whether or not to show our life cycles component based on whether
+
+00:31.430 --> 00:33.390
+or not show child is true or false.
+
+00:33.410 --> 00:35.300
+Right on our app J.S. state
+
+00:38.040 --> 00:44.640
+if set state gets called and this property changes react renders and then it realizes that it no longer
+
+00:44.640 --> 00:49.530
+needs to render our life cycle component because for example this is now false.
+
+00:49.530 --> 00:51.470
+It doesn't what we want to show it anymore.
+
+00:51.660 --> 00:57.430
+React well then start going through the unmanned phase for the lifecycle component because our life
+
+00:57.430 --> 01:03.070
+cycle component is on the page right now it's there it's mounted right.
+
+01:03.090 --> 01:09.480
+So when we toggle it and react goes through its lifecycle method where it where it checks and it calls
+
+01:09.480 --> 01:15.990
+its render inside of our app component and it sees that oh I'm not rendering this anymore then reacts
+
+01:15.990 --> 01:22.050
+like OK let's go into this component we're no longer mounting and let's call component will on Mount
+
+01:22.170 --> 01:27.520
+in case there's anything it needs to do before I remove it from the Dom.
+
+01:27.540 --> 01:28.220
+Right.
+
+01:28.290 --> 01:30.970
+And that's what we'll see when we click toggle.
+
+01:31.320 --> 01:35.070
+We see that component will unmanned gets called and then it gets removed.
+
+01:35.480 --> 01:41.340
+And then we toggle it back it goes through the usual mount phase because it's re mounting so it's putting
+
+01:41.340 --> 01:45.050
+it back the whole cycle starts all over again.
+
+01:45.900 --> 01:52.080
+But in this UN mount this is where we want to clean up our component if there's anything regarding our
+
+01:52.080 --> 01:56.870
+component that might need some tidying up.
+
+01:56.940 --> 02:03.210
+And this usually has to do with if we want to remove anything that might be a memory leak which just
+
+02:03.210 --> 02:08.670
+means that there's some leftover code that the computer doesn't need to be aware of that the garbage
+
+02:08.670 --> 02:15.390
+collection can't access which just uses up excess memory inside of our browser that it doesn't need
+
+02:15.390 --> 02:16.050
+to.
+
+02:16.380 --> 02:21.980
+We won't really explore this part until later when we actually look at Firebase.
+
+02:21.990 --> 02:30.230
+But for now just know that this is a lifecycle method that we do have access to when react goes through
+
+02:30.230 --> 02:36.600
+its render phase and realizes oh whatever is already here I don't need anymore let me on mountain then
+
+02:36.600 --> 02:42.090
+component will unmanned gets called and this is the last like life cycle method because once our component
+
+02:42.090 --> 02:48.120
+is off the page there's nothing else it doesn't exist as far as the DOM is concerned anymore.
+
+02:48.120 --> 02:51.440
+So this is probably the easiest one to understand right.
+
+02:51.480 --> 02:58.380
+But how we're going to use all of these lifecycle methods in our reactive element will be fundamental
+
+02:58.470 --> 03:01.480
+in understanding how to best structure our code.
+
+03:01.650 --> 03:06.840
+I know this was definitely a lot of theoretical stuff but it's very important for us to understand all
+
+03:06.840 --> 03:09.470
+of this before we move forward.
+
+03:09.480 --> 03:13.080
+So thank you for our patients and let's continue with the course.

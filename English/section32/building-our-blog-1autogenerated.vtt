@@ -1,0 +1,376 @@
+WEBVTT
+
+00:00.180 --> 00:02.360
+Hello and welcome back.
+
+00:02.400 --> 00:08.850
+So in the last lesson we learned a little bit about this Gatsby's source file system plug in so plug
+
+00:08.850 --> 00:16.620
+ins are pretty much these tools that we can include inside of our Gatsby config in order for our Gatsby
+
+00:16.620 --> 00:20.030
+processes to get these bonus features.
+
+00:20.040 --> 00:25.740
+So for example our source file system as we know gave us access to that all file query inside of our
+
+00:25.740 --> 00:28.440
+graph Q all queries on our Web.
+
+00:28.440 --> 00:35.250
+Now the next thing that we need to add is actually going to be a new plug in that is called a transformer
+
+00:36.250 --> 00:43.510
+that transformer will allow us to take these files that we are pulling into our query using the all
+
+00:43.510 --> 00:49.840
+file query that gives us a no representation but we actually want the data that sits inside of those
+
+00:49.840 --> 00:50.350
+files.
+
+00:50.350 --> 00:52.740
+So we need a transformer to do that.
+
+00:52.810 --> 00:58.090
+The thing that we have to note though is that Transformers tend to be libraries that we need to install
+
+00:58.090 --> 00:59.950
+inside of our project.
+
+00:59.950 --> 01:06.550
+Now if you look inside of your directory you might see a yarn log file if you see a yarn log file.
+
+01:06.550 --> 01:09.580
+It means that by default this project comes with yarn.
+
+01:09.670 --> 01:14.100
+If you see a package LOC file then you actually don't have yarn installed.
+
+01:14.110 --> 01:20.930
+Instead what you're using is just NPM what we're going to do is we're just going to add this new file
+
+01:20.970 --> 01:26.840
+and depending on what you have whether it's yarn or NPM just use the respective one in order for you
+
+01:26.840 --> 01:28.880
+to add a new file in NPM.
+
+01:28.880 --> 01:33.860
+You do npm install and then you type the name of the file or the side of the package that we're adding
+
+01:34.100 --> 01:39.680
+If you're using yarn you're just gonna do yarn add and then the name of the package that we're adding.
+
+01:39.680 --> 01:48.290
+Now the name of the package is Gatsby transformer remark so simply add that in with your respective
+
+01:48.290 --> 01:55.270
+package manager depending on how your folder structure looks and what this will do is this will add
+
+01:55.270 --> 02:00.280
+in this new transformer object that we need to plug into our application.
+
+02:00.280 --> 02:08.450
+So you simply add these back six here and you type in Gatsby transformer.
+
+02:08.530 --> 02:16.450
+Now what Gatsby transformer remark does is it is a plug in that allows us to convert our markdown files
+
+02:16.960 --> 02:24.010
+into data and HDMI out the front matter portion of our markdown will get converted into a data object
+
+02:24.010 --> 02:30.610
+that we can access and everything in the actual markdown itself will be converted into HCM Mel that
+
+02:30.610 --> 02:35.890
+we can use to build the pages that we want inside of our application.
+
+02:35.890 --> 02:41.230
+Now keeping this in mind the other thing we have to do is remember to restart our server because we've
+
+02:41.230 --> 02:48.680
+added a new plug in in order for us to actually access what we're going to see with our transformer
+
+02:48.680 --> 02:56.010
+Mark is that once this server finishes rebuilding we get access to this new query inside of our graph.
+
+02:56.010 --> 03:03.020
+Q Well so let's just wait until this finishes building and we'll go back to our graph QoL and we'll
+
+03:03.020 --> 03:04.550
+refresh.
+
+03:04.550 --> 03:08.680
+Now what we'll see is this thing called all markdown remark.
+
+03:08.750 --> 03:14.830
+So if we add this and we simply fire this off we see that now we only get two notes.
+
+03:15.080 --> 03:18.760
+The reason for this is because these are actually our markdown nodes.
+
+03:18.830 --> 03:24.860
+So in order for us to see inside of the node itself here we have our front matter where we have an optional
+
+03:24.860 --> 03:32.900
+description title and the date as well as this HCM Al block which represents the actual body of the
+
+03:32.900 --> 03:34.090
+markdown that we've written.
+
+03:34.130 --> 03:42.350
+So we try this again here we see that the HDMI holds the markdown but now converted into HD CML as well
+
+03:42.530 --> 03:46.610
+as our front matter object that holds our description are title on our date.
+
+03:46.770 --> 03:48.630
+Now description of course is optional.
+
+03:48.710 --> 03:52.540
+That's why in some places we get null because we don't include one.
+
+03:52.550 --> 03:56.060
+So we just have to account for this when we actually build out our blog template.
+
+03:56.060 --> 04:02.180
+Now another property that we see that we have is this excerpt now the excerpt unlike the HD a mouth
+
+04:02.690 --> 04:07.850
+is what will give us this little snippet of what we're trying to show.
+
+04:07.880 --> 04:13.390
+So this is pretty much the body of our markdown except it truncate it automatically for us.
+
+04:13.460 --> 04:20.330
+Now this is really good when we want to actually show or highlight something inside of our blog preview
+
+04:20.330 --> 04:25.530
+for example where we don't want to show the full body but maybe just an excerpt from the top of it.
+
+04:25.580 --> 04:31.640
+So we want to use this property inside of our index page for example where we actually list out our
+
+04:31.640 --> 04:32.880
+blocks.
+
+04:33.050 --> 04:39.320
+So what we're going to do is exactly that Next we're gonna go to our index page and what we're going
+
+04:39.320 --> 04:49.250
+to do is we are going to bring in the graph QoL query so that we can actually start requesting for that
+
+04:49.250 --> 04:51.290
+data that we just wrote inside of our graph.
+
+04:51.290 --> 04:55.770
+Q Well so what we want to do is we want to copy this graph all.
+
+04:55.990 --> 05:03.880
+And then after where we export out our actual index page we want to make sure that what we export is
+
+05:04.030 --> 05:05.110
+a query.
+
+05:05.110 --> 05:10.890
+So we're just gonna export cost query which is equal to this graph.
+
+05:10.910 --> 05:18.940
+You all request an inside we're gonna say it's a query and then we're going to copy over this object
+
+05:18.940 --> 05:20.750
+that we wrote before.
+
+05:20.920 --> 05:28.750
+Now Gatsby is smart enough to know that if you export out some thing that has this graph q l almost
+
+05:28.750 --> 05:34.960
+body to it that this is probably a query that you want to use and pass into whatever component you're
+
+05:34.960 --> 05:37.100
+exporting out by default.
+
+05:37.120 --> 05:41.920
+Now we still have to export out our component by default and if we want to make this a bit more clear
+
+05:41.950 --> 05:43.600
+we don't have to export it like this.
+
+05:43.600 --> 05:49.510
+We can just copy our export default text and replace this index page like so.
+
+05:49.510 --> 05:55.630
+So by default we're just automatically exporting out our function that represents the actual component
+
+05:55.630 --> 05:58.320
+that we render render for our index page.
+
+05:58.390 --> 06:03.070
+And now what we're gonna do is we're gonna get in that props object and on that prompts object will
+
+06:03.070 --> 06:08.920
+be the data object that is our query return.
+
+06:08.920 --> 06:14.770
+So using that data we're going to now end up creating some kind of default.
+
+06:14.770 --> 06:19.850
+Look to our index page that shows us our list of blog posts.
+
+06:19.930 --> 06:26.550
+So what we're gonna do is we are just going to make sure that there is a div here we can actually keep
+
+06:26.550 --> 06:27.890
+this SCA at the top.
+
+06:27.900 --> 06:36.280
+It doesn't really matter and inside of this div we are going to have an H1 and in this H1 we're just
+
+06:36.280 --> 06:42.110
+going to say e was thoughts.
+
+06:42.130 --> 06:46.290
+Now we do also actually want the total count of our blog posts.
+
+06:46.450 --> 06:47.440
+So our how to do that.
+
+06:47.500 --> 06:49.660
+Let's actually first remove this.
+
+06:49.660 --> 06:55.030
+And what we're gonna do is we're going to add a new property to our all markdown remark called Total
+
+06:55.030 --> 06:56.350
+count.
+
+06:56.350 --> 07:04.840
+Now this actually exists right here on r all markdown remark as a property called Total count.
+
+07:04.840 --> 07:11.480
+And as you'll see what we'll get is the number of nodes that exist inside of this markdown remark.
+
+07:11.500 --> 07:16.390
+So by doing this we're now able to access it inside of our data object.
+
+07:16.390 --> 07:26.680
+So we're just gonna make an H for that says a javascript interpolation of data dot all markdown remark
+
+07:28.360 --> 07:34.860
+dot total count and now if we save and we go back to our actual application
+
+07:39.030 --> 07:41.750
+we see that we have our count here.
+
+07:41.820 --> 07:47.070
+Now let's actually log out the data to see what else we have access to before we continue because the
+
+07:47.070 --> 07:49.310
+shape is actually going to represent the query.
+
+07:49.320 --> 07:56.210
+But let's just make sure it doesn't hurt to always double check.
+
+07:56.240 --> 08:03.620
+Now if we open up our console we'll see this object that represents our data on it we see our all marked
+
+08:03.620 --> 08:11.390
+down remark and inside of it our edges inside of our edges array is each element that has our no property.
+
+08:11.390 --> 08:15.650
+And then on the Node property has those fields that we requested in our query.
+
+08:16.160 --> 08:22.310
+So as we can see the object that we get back resembles the exact shape of the object that we passed
+
+08:22.310 --> 08:23.220
+into our graph.
+
+08:23.240 --> 08:24.200
+You all query.
+
+08:24.200 --> 08:31.950
+So this format matches exactly this format so that's really great for us because now we know roughly
+
+08:31.950 --> 08:39.680
+what it is that we need to use on this element in order to actually build out our blog previews.
+
+08:39.780 --> 08:46.530
+So what we're going to do is we are going to make a another javascript tag and we're gonna say data
+
+08:46.880 --> 08:52.180
+dot all markdown remark dot edges dot map.
+
+08:52.240 --> 08:57.640
+So we want to map over each edge and on each edge we want the node object that we saw.
+
+08:57.640 --> 09:05.260
+So each of these and what we're going to do is we are going to return back a div where the key is equal
+
+09:05.260 --> 09:06.270
+to the node.
+
+09:08.370 --> 09:12.060
+And then inside of each div we're going to have a title.
+
+09:12.240 --> 09:14.390
+So let's just use an H2 for now.
+
+09:14.390 --> 09:21.790
+And what will render right here is our node dot front matter.
+
+09:21.800 --> 09:30.960
+Actually this might be lower cased all dot title and we'll ask gonna put a tab here that also loads
+
+09:30.990 --> 09:32.100
+the date
+
+09:36.680 --> 09:44.310
+I just have an H to let's use a span just so that it's not too big and then after we have this span
+
+09:45.090 --> 09:54.070
+we are also going to put a p tag and in the p tag is where we'll put our excerpt.
+
+09:54.170 --> 10:02.150
+Now if we save we go back we see that our blog data is showing up so it's not solved yet but so far
+
+10:02.150 --> 10:03.710
+it's all perfectly fine.
+
+10:03.740 --> 10:09.410
+So that's one of the great things about Gatsby is that by leveraging the flow that Gatsby expects us
+
+10:09.410 --> 10:15.770
+to use as well as tinkering around with some of the code we're now able to pull in our markdown files
+
+10:15.800 --> 10:19.940
+as the data that we use to actually populate this index page.
+
+10:20.000 --> 10:25.880
+So there's a great because whenever we add new markdown files now to that markdown pages folder we will
+
+10:25.880 --> 10:30.460
+automatically be able to pull it into our index j ust with our graph Q all query.
+
+10:30.710 --> 10:37.970
+And as you would expect our data would simply just populate out and give us new blog samples inside
+
+10:37.970 --> 10:41.160
+of this index without us ever having to modify that code.
+
+10:41.630 --> 10:43.160
+So this is really great.
+
+10:43.160 --> 10:47.960
+Now in the next lesson we're actually going to build out these blog post pages individually because
+
+10:47.960 --> 10:49.310
+right now we can't link to them.
+
+10:49.310 --> 10:51.520
+We're simply displaying it in our index.
+
+10:51.650 --> 10:52.970
+So let's do that in the next lesson.

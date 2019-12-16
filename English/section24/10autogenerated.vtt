@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00.880 --> 00:07.150
+In the last lesson we wrote this new mutation to add the item to our cart which we are now tracking
+
+00:07.240 --> 00:08.850
+inside of Apollo's local state.
+
+00:08.850 --> 00:16.380
+Management we sent up our cart dropdown so that it's actually listening to these cart items.
+
+00:16.380 --> 00:23.040
+And now we need to modify our collection items so that if fires off our new add item to cart query so
+
+00:23.150 --> 00:31.220
+in order to do so we have to modify our collection item component so that it no longer uses redux and
+
+00:31.220 --> 00:34.120
+instead uses our new function.
+
+00:34.140 --> 00:36.110
+So how do we do this.
+
+00:36.120 --> 00:42.720
+Well what we'll do is we have to keep in mind that this item has to get passed in as a function into
+
+00:42.720 --> 00:51.060
+this function call so we just gotta make sure that when we pass it in as the actual mutation that that's
+
+00:51.060 --> 00:52.890
+what will happen.
+
+00:52.890 --> 01:00.490
+So we'll see what that looks like when we write it so let's just remove all of our redux bindings and
+
+01:00.490 --> 01:09.440
+now what we'll do is we will create that new collection item container collection item dot container
+
+01:09.580 --> 01:16.630
+digest X what we need to do is import in react from react.
+
+01:16.630 --> 01:22.960
+So just important in all those things that we're so used to importing now we know we're writing a mutation.
+
+01:22.960 --> 01:31.360
+So we've got to import mutation from reactive Paula and then we need to import in GQ El from Apollo
+
+01:31.360 --> 01:31.780
+boost
+
+01:34.960 --> 01:41.710
+we've got to import in our collection item component so that we can wrap it inside of our new mutation.
+
+01:41.800 --> 01:52.460
+This mutation will be our add item to cart which is equal to GQ El with the mutation key of ADD item
+
+01:52.490 --> 02:05.110
+to cart that should keep capitalized where our dollar item is an item type that must be their and we're
+
+02:05.110 --> 02:13.480
+just going to call our add item to cart here passing our item in as the item getting it with our client
+
+02:13.480 --> 02:18.370
+directive so nothing different here.
+
+02:18.510 --> 02:26.720
+Now the actual component itself that we're writing is our collection item container and because we're
+
+02:26.720 --> 02:32.990
+going to use it in the place of our actual collection item we have to keep in mind that the place where
+
+02:32.990 --> 02:38.900
+it's using it is the collection preview component and it passes the item in as a property.
+
+02:38.900 --> 02:45.980
+So if we do this we actually get the item in as a props but our collection is expecting that item because
+
+02:45.980 --> 02:51.560
+it needs the name and the image you are L in order to show what it is inside of the HDMI out.
+
+02:52.340 --> 03:00.950
+So we actually have to pass that down into the component and as we saw before when we did our collection
+
+03:00.950 --> 03:05.730
+component sorry our collection container.
+
+03:06.370 --> 03:14.800
+We had to pass in the variable that this specific query was expecting and our component for mutation
+
+03:14.890 --> 03:16.310
+is the exact same way.
+
+03:16.510 --> 03:19.640
+But we actually don't have to pass it in as a property here.
+
+03:19.670 --> 03:21.960
+There is another way we can get it dynamically.
+
+03:22.030 --> 03:24.060
+And let me show you that now.
+
+03:24.130 --> 03:35.380
+So what we got to do is still pass our mutation add item to cart here except instead when we get our
+
+03:35.380 --> 03:44.080
+add item to cart mutation and we pass it into our collection item what we'll do is we will spread those
+
+03:44.300 --> 03:52.950
+these props in right that we're getting from our collection preview component including the item because
+
+03:53.040 --> 03:56.260
+our collection item depends on this item prop.
+
+03:56.640 --> 04:06.450
+We're also going to say that an item is equal to a function that gets the item and then it calls are
+
+04:06.510 --> 04:15.860
+an item to cart which is our mutation except we're gonna do is present an object where the variables
+
+04:15.860 --> 04:24.840
+key is equal to the item the object with item as the key and then item as the actual item.
+
+04:24.850 --> 04:30.850
+Now what this does is it allows us to dynamically pass variables we no longer have to pass it in when
+
+04:30.850 --> 04:32.860
+we instantiate the mutation.
+
+04:32.860 --> 04:39.310
+Instead what we do is we use the actual mutation that we get back and we pass that an object with the
+
+04:39.310 --> 04:43.450
+variables key and the actual item key that it's expecting.
+
+04:43.450 --> 04:49.960
+So this is very similar to how we did it before when we did our collection component with the container
+
+04:51.540 --> 04:56.460
+you saw that we had to pass an object where the title was the value and title being the actual thing
+
+04:56.460 --> 04:57.720
+that it's expecting.
+
+04:57.900 --> 04:59.140
+It's the exact same way.
+
+04:59.190 --> 05:00.650
+Item is the key right.
+
+05:00.690 --> 05:04.500
+But then item is also the object that we're passing through.
+
+05:04.520 --> 05:10.420
+So now if we save and we leverage this new collection item container where we're using it
+
+05:15.220 --> 05:21.780
+inside of that collection preview component we'll actually hopefully see everything work now.
+
+05:22.320 --> 05:30.740
+So default ask collection item and container and now if we go back to our app if we add items to our
+
+05:30.740 --> 05:35.720
+cart we see that we have our functionality in the.
+
+05:35.760 --> 05:40.780
+So this is really awesome because now we've pretty much got our cart working.
+
+05:40.920 --> 05:48.300
+The only last thing that we have to focus on before we actually add and remove and are clear is how
+
+05:48.360 --> 05:50.580
+this number is going to get stuck.
+
+05:51.390 --> 05:54.570
+So let me show you that as well.
+
+05:54.570 --> 05:55.950
+Inside of the next lesson.

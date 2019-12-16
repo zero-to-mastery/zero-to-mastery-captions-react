@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00.360 --> 00:06.260
+So now we have to introduce our ad item feature into our application.
+
+00:06.390 --> 00:12.720
+But let's take a look at it in our final application so we can understand what it needs to do so we
+
+00:12.720 --> 00:16.080
+can figure out the right strategy to approach building it.
+
+00:17.380 --> 00:26.440
+Well first we know that each item has a hover effect and when we click Add to cart it add that to this
+
+00:26.440 --> 00:32.910
+cart if the item already exists it will increase the count on it.
+
+00:33.330 --> 00:41.730
+But if it's something new it will add a new item here if we go to checkout we notice that almost the
+
+00:41.730 --> 00:50.070
+same component is displayed using the same data except this one can modify the quantity of those items
+
+00:51.440 --> 00:59.300
+but first let's just build out the basics of this feature while thinking about how we can reuse this
+
+00:59.510 --> 01:08.210
+capability because it seems like it's a very similar Add To Cart feature which pretty much does the
+
+01:08.210 --> 01:11.720
+same thing as hitting this icon.
+
+01:11.720 --> 01:17.950
+We're still adding these items to the cart and increasing the quantity but the first thing we should
+
+01:17.950 --> 01:28.560
+tackle is just converting our collection item to have this hover effect and then set up our redux files
+
+01:28.560 --> 01:38.240
+for our cart to be able to store our items so let's go back to our application and let's first modify
+
+01:38.330 --> 01:38.990
+this component
+
+01:41.760 --> 01:50.490
+what we need to do is actually go to our custom button component and we are going to first need to invert
+
+01:50.490 --> 01:58.150
+the colors based on a property just like we did when we added this custom class of Google sign in and
+
+01:58.170 --> 02:01.320
+those Google sign in styles.
+
+02:01.440 --> 02:08.000
+So what we'll do is we'll add an inverted prop that does the exact same thing as our Google sign in
+
+02:10.220 --> 02:20.430
+except instead of Google sign and we will say if inverted is true then add the inverted class and then
+
+02:20.430 --> 02:28.130
+in our custom button we will add in this inverted class.
+
+02:28.410 --> 02:34.880
+What it will do is the opposite of what our regular styling on our custom button is.
+
+02:36.160 --> 02:39.310
+So if it's inverted.
+
+02:39.460 --> 02:40.440
+Those are the styles.
+
+02:40.450 --> 02:40.770
+Right.
+
+02:40.780 --> 02:44.920
+Because when we hover we we flip the colors in our normal button.
+
+02:44.920 --> 02:48.130
+But if it's not then we want
+
+02:50.870 --> 02:54.250
+the same color and similarly if we hover.
+
+02:54.280 --> 03:01.190
+Then it switches to what our normal button styles are like with the border of non now that we have our
+
+03:01.190 --> 03:03.300
+inverted button.
+
+03:03.500 --> 03:10.850
+We just need to import this into our component so one more thing we want to add is just something to
+
+03:10.850 --> 03:18.710
+make sure that our text is always aligned and if we do display flex and justified content center anything
+
+03:18.710 --> 03:29.450
+in our button will always be centered inside of our element now let's go to our collection item and
+
+03:29.490 --> 03:35.720
+in our collection item what we are going to add is our custom button
+
+03:39.560 --> 03:46.810
+from our component custom button and we're just going to put it after our collection for
+
+03:50.480 --> 04:04.090
+an inside will be our text of add to cart and what we will also add is that inverted key and if we look
+
+04:04.540 --> 04:07.060
+we should at least see the button.
+
+04:07.060 --> 04:08.120
+There it is.
+
+04:08.530 --> 04:15.820
+Now we do need to add some styles to our custom button that are only unique to our collection item component.
+
+04:16.510 --> 04:24.040
+So what we can do is we can go into our collection item styles and we can just manually add them here
+
+04:24.760 --> 04:38.280
+so we can say that they're on our custom button we or first set the width to 80 percent will also set
+
+04:38.280 --> 04:41.790
+the opacity to zero point seven.
+
+04:41.820 --> 04:50.460
+We want a position of absolute because we want to always to be absolutely positioned at the bottom of
+
+04:50.520 --> 04:52.530
+our total height.
+
+04:52.770 --> 05:05.960
+And that will be a value of top 255 pixel we'll also need to add a position relative value to our collection
+
+05:05.960 --> 05:15.940
+item and now if we look we'll see that our button is positioned inside of our collection item but what
+
+05:15.940 --> 05:22.390
+else we're going to need to do is add that hover animation because by default our custom buttons should
+
+05:22.390 --> 05:23.510
+be hidden.
+
+05:23.560 --> 05:32.450
+So let's do display none and then add our hover feature on our collection item itself.
+
+05:32.450 --> 05:41.990
+And what we'll do is we'll first make our own image opacity set to zero point eight and we'll also make
+
+05:41.990 --> 05:50.530
+sure that our custom button gets an opacity value of zero point eight five.
+
+05:51.160 --> 06:02.220
+Also need to add our display flex so that we display it and now if we see we have are hovering feature
+
+06:02.490 --> 06:09.540
+on our collection item so those are a bit of style changes just to make it so that our application now
+
+06:09.840 --> 06:14.640
+can support that add item feature that we're about to implement.

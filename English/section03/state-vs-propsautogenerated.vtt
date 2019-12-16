@@ -1,0 +1,229 @@
+WEBVTT
+
+00:01.300 --> 00:05.500
+Let's talk a little bit about state versus props.
+
+00:05.680 --> 00:13.120
+Now one thing you may have noticed is that we have this parent component called APP THAT'S PRETTY MUCH
+
+00:13.120 --> 00:20.020
+surrounds everything in our app so far and only here we have state.
+
+00:20.020 --> 00:27.460
+Now this state we passed down to the card list component as well an attribute right.
+
+00:27.490 --> 00:34.000
+Just like we have HMO attributes we sent down monsters and give it our state.
+
+00:34.000 --> 00:41.920
+So what you notice here is that as soon as we pass our state down to a component this component receives
+
+00:41.920 --> 00:43.680
+it as a prop.
+
+00:43.960 --> 00:47.960
+And this is what you will usually see happening through our apps.
+
+00:48.010 --> 00:54.120
+We have state which often is something that changes because of user interaction.
+
+00:54.130 --> 01:00.760
+Well what changes because of user interaction the monster changes because when we click refresh on a
+
+01:00.760 --> 01:07.900
+page we update the state monsters from an empty array to a filled in users.
+
+01:07.900 --> 01:17.250
+Now this state trickles down our componentry as props to whoever needs it so if you remember this diagram
+
+01:18.150 --> 01:26.070
+this idea of one way data flow or unit directional data flow in our case we have this app component
+
+01:26.100 --> 01:27.300
+that's at the very top.
+
+01:27.300 --> 01:35.100
+It's the parent component and then this component has state that whenever something changes in the state
+
+01:35.940 --> 01:37.400
+it will trickle down.
+
+01:37.440 --> 01:43.350
+If we pass that information down to whatever component that cares about it remember we pass it down
+
+01:43.350 --> 01:44.190
+as an attribute.
+
+01:44.220 --> 01:51.180
+So that state gets turned into props into all these little components that we pass it down in our case
+
+01:51.480 --> 02:00.440
+the cordless component gets passed down the while the monsters and they use it as props so remember
+
+02:00.440 --> 02:08.240
+that state usually lives in just one location or a specific state only on one location and it trickles
+
+02:08.240 --> 02:17.180
+down as props if we go back to our monster's example if we open up developer tools here and remember
+
+02:17.270 --> 02:22.790
+we use the react developer tools if you don't have it by now I highly recommend that you download the
+
+02:22.790 --> 02:29.150
+extension from the Chrome Web Store you see that we have the app on the right hand side it shows me
+
+02:29.150 --> 02:35.940
+that the state is monsters which is array of 10 and search field.
+
+02:36.090 --> 02:40.110
+Now this search field that we haven't worked on it yet so don't worry about it yet.
+
+02:40.170 --> 02:47.970
+The key here is that we have these monsters and this state if we go down gets passed down to card list
+
+02:48.600 --> 02:52.050
+and right here you see that the props is monsters
+
+02:55.290 --> 03:01.450
+so even though it's the same thing state turns into props when it gets passed down.
+
+03:01.470 --> 03:09.310
+Now if we go down even further to the card items we see over here that these card items get past the
+
+03:09.490 --> 03:14.860
+monster prop because we only passed on one monster at a time.
+
+03:14.860 --> 03:23.710
+Now you might also notice here the key that we gave each card remember key is used by react to distinguish
+
+03:23.830 --> 03:27.500
+when multiple components are rendered one after another.
+
+03:27.520 --> 03:32.030
+See here how we have all these card components ten of them to be exact.
+
+03:32.110 --> 03:41.820
+If one of them changes React uses this key attribute to say hey key three changed do a quick render.
+
+03:41.890 --> 03:49.210
+So this is that internal react working for us to make sure that when they update the Dom it's going
+
+03:49.210 --> 03:55.880
+to be efficient and only update one of the cards if it updates instead of all the ones but the reactive
+
+03:55.880 --> 04:02.750
+obvious tool is really really useful to see how information is being passed down.
+
+04:02.840 --> 04:10.270
+Now again remember the keys to being a great reactive helper the second point was to decide the state
+
+04:10.420 --> 04:13.740
+and where it lives now.
+
+04:13.750 --> 04:20.820
+Up until now we've only had state in our app component but as we move further along in the course you'll
+
+04:20.820 --> 04:23.520
+notice that we can put state wherever we want.
+
+04:23.580 --> 04:32.270
+So before we even get to that let's think about this I have here just a simple little tree like structure
+
+04:32.900 --> 04:39.980
+and you can ignore the numbers for now but you can think of this as our app where we have the app J.S.
+
+04:40.220 --> 04:44.200
+that has different components down here now.
+
+04:44.220 --> 04:48.270
+Right now in this orange part this is where the state lives.
+
+04:48.270 --> 04:56.640
+So let me ask you this if the state changes right here let's say our monsters grows from having 10 users
+
+04:56.640 --> 04:58.430
+to 20 users.
+
+04:58.560 --> 04:59.880
+What happens.
+
+04:59.880 --> 05:06.780
+Well a state change it's going to happen with said state and then we're going to announce to whoever
+
+05:06.780 --> 05:12.290
+cares that hey the monsters array has changed.
+
+05:12.290 --> 05:20.630
+And whichever component has those monsters passed down to is going to say oh I received new props that
+
+05:20.630 --> 05:22.220
+means I have to re render.
+
+05:22.220 --> 05:29.120
+So again it's going to say hey I have a new prop information who needs it and whoever needs it gets
+
+05:29.120 --> 05:31.010
+passed down that prop information.
+
+05:31.010 --> 05:32.240
+So on and so forth.
+
+05:32.720 --> 05:38.390
+So if you think of this as a function call to render remember each component at the end of the day is
+
+05:38.390 --> 05:39.920
+a function that renders.
+
+05:39.920 --> 05:46.490
+So if state changes it's going to notify this component and say hey run the render function again.
+
+05:46.610 --> 05:48.500
+Hey run the render functioning again.
+
+05:48.980 --> 05:51.290
+Hey run the render function again.
+
+05:51.290 --> 06:00.000
+Hey run the render function again so when we talk about deciding where state lives and how we passed
+
+06:00.000 --> 06:06.430
+on props we can see here that there are some performance implications because every time state changes
+
+06:06.790 --> 06:13.410
+we're going to have to rerun functions because the properties or the inputs or the function change.
+
+06:13.870 --> 06:19.360
+Now this idea of performance is something we'll talk about later on in the course when we learn a little
+
+06:19.360 --> 06:19.990
+bit more.
+
+06:20.080 --> 06:27.250
+But I want you to start thinking in terms of this tree that we're creating and how every time we introduce
+
+06:27.340 --> 06:33.210
+state or data into our app that data gets passed down as props.
+
+06:33.220 --> 06:40.300
+Finally remember that this robo hash that we're using right now is an API.
+
+06:40.320 --> 06:44.350
+Same with the users data.
+
+06:44.360 --> 06:52.870
+So what we've done up to this point is essentially have an API call to get the users.
+
+06:52.880 --> 07:00.890
+When we initially load the page with our javascript CSX and HCM Alpha create react app just simulates
+
+07:00.890 --> 07:04.880
+when we run it a fake server that sends these files.
+
+07:04.880 --> 07:14.810
+We get the users and it then gets each image of our monsters from another API the rubble hash.
+
+07:14.840 --> 07:18.950
+So this is what we've built so far but we have a lot more to go through.
+
+07:19.040 --> 07:21.290
+So let's get started in the next video.

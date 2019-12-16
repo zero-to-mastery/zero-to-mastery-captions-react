@@ -1,0 +1,349 @@
+WEBVTT
+
+00:00.740 --> 00:08.990
+So continuing with building our new car provider component let's set up remove item and are clear item
+
+00:08.990 --> 00:09.800
+from cart.
+
+00:10.070 --> 00:15.640
+And then in the end we'll also set up cart items count so we've already done add item and we know it's
+
+00:15.640 --> 00:20.460
+going to be pretty much the same thing except with our remove item from cart.
+
+00:20.480 --> 00:25.520
+So what we know is that this function is going to be called remove item.
+
+00:25.520 --> 00:28.980
+It's going to get an item it's going to set the cart.
+
+00:29.000 --> 00:34.160
+Items that we currently store in the local state of cart provider except what we want to sell it to
+
+00:34.190 --> 00:40.010
+is the array that we get back from the remove item from cart function call passing in cart items and
+
+00:40.010 --> 00:48.370
+the item and then we're just going to pass remove item in as a function value to the value object that
+
+00:48.370 --> 00:54.090
+we're passing into our car context provider with this are remove item should work.
+
+00:54.190 --> 01:02.160
+In fact if we go to our actual checkout item we can actually modify it so that we can see it in action.
+
+01:02.320 --> 01:11.660
+So instead of getting ad item and remove item from redux we want to get it from our new context so we're
+
+01:11.660 --> 01:16.240
+going to bring any use context and then we're going to bring in the cart content
+
+01:21.970 --> 01:30.760
+and this of course comes from our provider's folder cart provider and then we're just going to d structure
+
+01:30.760 --> 01:39.970
+off our add item and remove item from the context value that we get back from saying use context with
+
+01:39.970 --> 01:44.470
+cart context.
+
+01:44.480 --> 01:49.520
+Now we do have to make sure that we have not replaced anything that we need.
+
+01:49.520 --> 01:56.750
+So here we see that we are no longer pulling in add item and remove item from our map dispatch the props
+
+01:57.110 --> 02:00.750
+but we haven't written our clear item yet so we can keep this here.
+
+02:00.860 --> 02:09.330
+Let's just remove the appropriate code here and then our checkout item should be working so here we
+
+02:09.330 --> 02:17.480
+see in our checkout item that we are inside but we are still leveraging cart items that come from redux.
+
+02:17.490 --> 02:26.470
+So let's modify our actual checkout page to also use our new cart items so as you've probably gotten
+
+02:26.470 --> 02:36.650
+familiar with now we're bringing in the use context hook we're bringing in our actual cart context from
+
+02:36.680 --> 02:45.510
+provider's cart provider and then we just gotta make sure we're doing the correct return.
+
+02:45.620 --> 02:51.020
+Now the total is actually going to be another thing that we need to add but I'm going to leave that
+
+02:51.020 --> 02:53.090
+for you as an exercise.
+
+02:53.090 --> 03:00.770
+So there's total value right now is coming from our redux but you're going to know how to actually change
+
+03:00.770 --> 03:01.460
+it as well.
+
+03:01.490 --> 03:05.630
+When we do the car items count and it's a good time for you to practice.
+
+03:05.930 --> 03:09.180
+So let's remove our car items from here.
+
+03:09.340 --> 03:14.120
+We don't need to select anymore and that's actually good enough for now.
+
+03:15.340 --> 03:26.030
+Now what we're going to pull off is carte items from our car context.
+
+03:26.180 --> 03:30.500
+In fact now we should have an empty array which we do.
+
+03:30.520 --> 03:37.320
+So what we'll do is we will add this in and if I hit this checkout I actually should see an error.
+
+03:37.380 --> 03:43.050
+So I do this is because we're still using dispatch which we're no longer leveraging for toggling the
+
+03:43.050 --> 03:44.400
+hidden value.
+
+03:44.400 --> 03:50.830
+So we actually need to modify our cart dropdown as well so with our cart dropdown we know that we are
+
+03:50.830 --> 03:56.060
+leveraging dispatch that we no longer have access to because we're not using connect anymore.
+
+03:56.080 --> 04:02.080
+So instead of dispatching toggle cart hidden we're just going to pull off the toggle cart hit in value
+
+04:02.590 --> 04:04.400
+that we have on our context.
+
+04:04.420 --> 04:06.450
+But I think we're calling it toggle hidden.
+
+04:06.730 --> 04:14.190
+So let's just make that change here.
+
+04:14.210 --> 04:23.230
+So now if we add in these cart items if we go to check out everything still works and in fact we see
+
+04:23.230 --> 04:30.820
+that our remove item code is working and it's reflecting inside of our car dropdown and just like that
+
+04:30.820 --> 04:36.300
+we've replaced redux with our context API in a very efficient manner.
+
+04:36.340 --> 04:41.650
+The only thing is that we've also learned how it is to use the provider pattern in order to actually
+
+04:41.650 --> 04:43.920
+make this look more efficient.
+
+04:43.930 --> 04:46.050
+So this is a really great thing.
+
+04:46.120 --> 04:47.590
+In fact let's keep going.
+
+04:47.590 --> 04:52.590
+Let's replace the clear item inside of our car context as well.
+
+04:52.810 --> 04:56.050
+So not in our car context but our car provider.
+
+04:56.050 --> 04:59.410
+We need to use this clear item from cart.
+
+04:59.410 --> 05:05.470
+Now in order for us to do this we need to actually define the utility function that will help us clear
+
+05:05.470 --> 05:13.030
+an item and we actually currently have the code related to it in our cart reducer so whenever this clear
+
+05:13.030 --> 05:19.810
+item from cart comes in we end up calling this dot filter method so we can copy this go into our cart
+
+05:19.840 --> 05:24.690
+utilize inside of our provider and make a new function.
+
+05:24.690 --> 05:31.140
+We're going to call this function filter item from cart and it's going to be equal to a function that
+
+05:31.140 --> 05:38.820
+gets cart items as well as the item that we're trying to remove and it's going to call cart items dot
+
+05:38.820 --> 05:45.750
+filter using the method that we had and copied from our reducer except instead of action a payload that
+
+05:45.750 --> 05:50.420
+I.D. it's just going to be item I.D. And we want to make sure to export this.
+
+05:51.330 --> 06:00.700
+So let's copy this and bring this into our actual car provider and let's just add this to our cart utilize
+
+06:02.010 --> 06:04.750
+and then let's define the function.
+
+06:04.820 --> 06:11.450
+Now the function is going to be called cost clear item from cart being the same name that we have defined
+
+06:11.450 --> 06:12.760
+in our context.
+
+06:13.100 --> 06:18.800
+And it's going to be equal to a function that gets the item and just as you've guessed with our add
+
+06:18.800 --> 06:23.210
+item and remove item because it is trying to set our car items.
+
+06:23.210 --> 06:29.750
+We're going to call set cart items passing our filter item from cart with our cart items and our item
+
+06:29.780 --> 06:36.670
+that we're trying to remove we'll pass this in to our value in our context provider.
+
+06:36.670 --> 06:41.050
+And now we have our ability to clear the item from a cart.
+
+06:41.260 --> 06:47.690
+We just have to add this to our checkout item and we can just add it like this
+
+06:51.140 --> 06:58.920
+and now if we check inside of our application we of course have to add some items and if we hit the
+
+06:58.920 --> 07:00.570
+remove we clear the item.
+
+07:01.470 --> 07:08.950
+So this is working we now just have to finish up with our cart item count and the way we actually update
+
+07:08.980 --> 07:17.790
+our cart item count is we want to make sure inside of our cart provider object that when ever this cart
+
+07:17.820 --> 07:25.230
+items value changes we fire often a fact that is going to update the cart item count that we currently
+
+07:25.230 --> 07:33.110
+have and luckily for us we've set it up locally already so all we have to do is just write the effect.
+
+07:33.200 --> 07:39.440
+Now we do need to actually get that item count and we actually currently have the code for it inside
+
+07:39.440 --> 07:44.500
+of our selectors because our selector code is what can get the item count.
+
+07:44.510 --> 07:53.570
+So pulling off this function here we can add it to our cart utilize and we can call it export cost get
+
+07:53.780 --> 08:03.000
+cart items count so this will be equal to us just getting our cart items and then returning cart items
+
+08:03.150 --> 08:05.610
+dot reduce.
+
+08:05.610 --> 08:10.620
+So in fact we didn't even need to write car items and this will give us back the numerical value of
+
+08:10.620 --> 08:14.570
+the total quantity so we just got to bring this in here.
+
+08:17.250 --> 08:24.540
+And then make sure we fire in effect whenever cart items updates so we can easily do this with our use
+
+08:24.630 --> 08:25.960
+affect.
+
+08:27.430 --> 08:35.560
+By passing a function that will call set cart items count with the actual cart items value.
+
+08:35.560 --> 08:42.820
+So using get cart items count passing in cart items will give us the actual value of the number of quantity
+
+08:42.820 --> 08:46.270
+of items we have which will set then locally to the car.
+
+08:46.270 --> 08:47.020
+Items count.
+
+08:47.020 --> 08:48.310
+Value.
+
+08:48.310 --> 08:54.130
+And in order for us to make sure this effect fires whenever car items updates we pass in that dependency
+
+08:54.160 --> 09:02.200
+as the second argument to our effect and now we just have to actually bring in this car.
+
+09:02.210 --> 09:09.620
+Items count to the cart icon that needs it so because we're already using the context we'll make sure
+
+09:09.620 --> 09:13.640
+that item count comes from here and not from redux.
+
+09:13.880 --> 09:21.280
+So we can actually finally remove this map state to props as well as this connect and we can remove
+
+09:21.280 --> 09:27.970
+all of this unnecessary code that we had that was leveraging redux before and now we see that our item
+
+09:27.970 --> 09:33.310
+count is up to date with what we're doing with our context API.
+
+09:33.310 --> 09:40.740
+So this is awesome because now our code is fully up to date leverage and context API instead of redux.
+
+09:40.750 --> 09:47.380
+So what I want you to do is actually convert the remaining code that we have inside of our application
+
+09:47.860 --> 09:53.320
+over to context API because I've shown you pretty much all of the patterns that you need in order to
+
+09:53.320 --> 09:54.810
+actually do this.
+
+09:54.880 --> 10:01.030
+The main one is that you also can set the total as well now that we have in our checkout page by doing
+
+10:01.030 --> 10:07.940
+the same thing we did with this effect so anywhere you see a connector we're using redux just modify
+
+10:07.940 --> 10:15.670
+it so that we're now using our existing context API code that we've learned how to write and hopefully
+
+10:16.030 --> 10:20.960
+in the process you'll definitely learn how to leverage context API as well.
+
+10:20.980 --> 10:26.650
+Now I want you to do it and I'm gonna provide you with two links one link is going to be all of the
+
+10:26.650 --> 10:32.620
+code that we've written up until this point and the other link is going to have the entire application
+
+10:32.620 --> 10:38.080
+fully converted in case you want the solution for everything that I've written regarding converting
+
+10:38.080 --> 10:44.620
+the application over and using context now in the next lesson I'm going to talk about some of my parting
+
+10:44.620 --> 10:51.400
+thoughts on context API because this will mark the end of our context API lessons but hopefully by doing
+
+10:51.400 --> 10:57.460
+so you've learned the newest feature of what react introduced with context API as well as some pretty
+
+10:57.460 --> 11:03.830
+advanced patterns and how you can use it inside of your existing and future application.
+
+11:03.910 --> 11:09.400
+So good luck with the exercise if you want to clone down what we've got from here just use one of the
+
+11:09.400 --> 11:11.840
+links that you'll see in the resources below.
+
+11:11.980 --> 11:17.440
+Otherwise you can just skip to the actual final solution which I will also provide you as a link.
+
+11:17.530 --> 11:20.050
+So good luck everybody and I'll see you in the next lesson.

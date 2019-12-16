@@ -1,0 +1,103 @@
+WEBVTT
+
+00:00.420 --> 00:08.130
+Before we build our checkout item we can actually make a small tweak to our Web site to make it more
+
+00:08.250 --> 00:11.730
+of a flowing user experience.
+
+00:11.730 --> 00:18.720
+Now in order for us to go to our checkout page we have to open up our cart dropdown and then click the
+
+00:18.720 --> 00:20.350
+go to checkout button.
+
+00:20.460 --> 00:27.090
+But once we get to this page our dropdown still open but we know that will end up displaying the same
+
+00:27.090 --> 00:33.720
+information to our user because the car items will be reflected in the checkout items and that just
+
+00:33.720 --> 00:35.860
+seems like a lot of redundancy.
+
+00:35.880 --> 00:44.070
+So what we can do is actually trigger a toggle whenever we click our go to checkout to toggle the hidden
+
+00:44.070 --> 00:51.710
+state of our cart because we know that in order for our user to access to go to checkout button the
+
+00:51.710 --> 00:55.390
+hidden state must be false because our dropdown is open.
+
+00:55.640 --> 01:02.450
+So we know that if we were to call our toggle there we're not going to get any unexpected behavior where
+
+01:02.480 --> 01:09.890
+we don't know the state of what our hidden is again because we know that dropdown must be open for them
+
+01:09.890 --> 01:13.490
+to have triggered the go to checkout button click.
+
+01:13.520 --> 01:16.330
+So what can we do in order to do this.
+
+01:16.400 --> 01:25.120
+Well we can just simply bring in our toggle hit and action into our cart dropdown component from redux
+
+01:25.630 --> 01:32.620
+cart cart actions and we'll bring in toggle cart hidden.
+
+01:32.860 --> 01:39.910
+Now the way that we're used to doing this inside our Kinect would be to write our map dispatch the props
+
+01:40.300 --> 01:49.360
+and then pass in a dispatched call of our action creator of toggle cart hit it now what we might not
+
+01:49.360 --> 01:59.050
+know is that connect actually passes dispatch into our components as a prop if we do not supply a second
+
+01:59.140 --> 02:01.060
+argument to connect.
+
+02:01.090 --> 02:07.810
+So if we don't supply map dispatch the props as the second parameter Connect will pass the dispatch
+
+02:07.990 --> 02:10.700
+into our dropdown.
+
+02:10.810 --> 02:19.430
+So our component as a property and the reason it does this is because if we need to make one off action
+
+02:19.440 --> 02:26.400
+dispatches Well there's no reason to write another map dispatch to props it might be more verbose so
+
+02:26.400 --> 02:34.230
+we can actually see this if we for example log out all the other props that we have access to.
+
+02:34.290 --> 02:43.960
+So just to demonstrate this let's just return and then console log all the other props that were knocked
+
+02:44.010 --> 02:53.670
+structuring so everything other than car items and history and now we'll see when we open that this
+
+02:53.670 --> 02:58.000
+is what we have we do have access to this dispatch.
+
+02:58.130 --> 03:04.310
+So what's great about that is that now instead of writing an unnecessary additional map dispatch the
+
+03:04.310 --> 03:15.630
+props we can just bring in dispatch like so expand our on click function using a multi line.
+
+03:15.740 --> 03:16.440
+Right.
+
+03:16.490 --> 03:26.220
+Which are the squiggles and then adding another dispatch passing in our toggle cart hit an action creator.
+
+03:26.420 --> 03:35.840
+And now if we save we'll see that if we go to our checkout our Togo card hidden action is being fired.
+
+03:35.870 --> 03:41.300
+So now that we have this improved user flow let's build out our checkout item.

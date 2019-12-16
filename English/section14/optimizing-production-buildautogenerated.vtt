@@ -1,0 +1,214 @@
+WEBVTT
+
+00:00.630 --> 00:06.180
+Now that we have our app up on Heroku we don't want to show our logger messages.
+
+00:06.180 --> 00:09.390
+When ever we fire redux action.
+
+00:09.590 --> 00:16.580
+So how do we remove it specifically only in production because we still want our logger during development
+
+00:17.580 --> 00:19.140
+well in order for us to do this.
+
+00:19.170 --> 00:25.830
+We have to understand what the logger is and understand what the logger is requires us to understand
+
+00:25.830 --> 00:29.530
+what Middleware is inside of redux.
+
+00:29.580 --> 00:34.020
+So when we built our store we understood what our route reducer was.
+
+00:34.020 --> 00:42.990
+And we also understand that when actions come through being dispatched by our action creators they hit
+
+00:42.990 --> 00:50.370
+the reducer and update the reducer but along the way they also pass through any middleware that we apply
+
+00:50.490 --> 00:58.140
+through this apply middleware call and all middleware are are essentially these functions that we can
+
+00:58.140 --> 01:06.450
+write that catch actions and do something and then return the action so that it continues down and updates
+
+01:06.450 --> 01:14.170
+are reduced as the way that we know that they do the logger for example is a middleware that catches
+
+01:14.170 --> 01:21.370
+the action and then logs it to us as well as logging what the state was before the actions update the
+
+01:21.370 --> 01:26.680
+reduced hours as well as what the state will be after they update the reducer.
+
+01:26.890 --> 01:36.250
+And all we need to do to make sure that we only apply the logger when we're in development is we set
+
+01:36.250 --> 01:38.680
+our middle whereas array to be empty.
+
+01:39.310 --> 01:49.330
+And then we say if the process dot environment dot note environment is equal to development then we
+
+01:49.330 --> 01:54.300
+will run middleware as Dot push our logger.
+
+01:54.340 --> 01:56.520
+Now what is this process environment.
+
+01:57.280 --> 02:02.480
+So inside of node there is a environment variable.
+
+02:02.890 --> 02:07.630
+We can set environment variables or Heroku sets environment variables.
+
+02:07.900 --> 02:14.860
+But luckily for us create react app actually sets an environment variable which can only be accessed
+
+02:14.890 --> 02:15.930
+through this process.
+
+02:15.930 --> 02:23.830
+Dot any call and there's node and being a property on as we can see the process is environment file
+
+02:24.490 --> 02:28.170
+it's either going to be development production or test.
+
+02:28.630 --> 02:36.220
+And this is useful because it allows us to know whether or not our app is being served in development
+
+02:36.280 --> 02:37.930
+or in production.
+
+02:37.930 --> 02:48.260
+And when we push to production when we called Yarn build it tells the thing that's serving are application
+
+02:48.740 --> 02:56.090
+that it needs to switch this node environment variable over to production whereas normally when we just
+
+02:56.090 --> 03:04.100
+run our yarn start and host it on our local server it sets this node environment variable over to development
+
+03:04.940 --> 03:08.940
+and we can just check for it using process Dot and Dot note.
+
+03:09.320 --> 03:14.360
+So what we're saying is that if the node environment is development then we want to push the logger
+
+03:14.450 --> 03:22.830
+into our array if it is anything else like production or like test we don't want it.
+
+03:22.850 --> 03:27.210
+So apply middleware we'll just call it with no middleware.
+
+03:27.470 --> 03:36.860
+And with this code we can now see that on our local post we still have our middleware running our logger
+
+03:36.860 --> 03:37.890
+is still working.
+
+03:38.680 --> 03:49.510
+But if we go back to our application and we say get ad get commit dash M removing redux logger from
+
+03:49.510 --> 03:50.600
+production build.
+
+03:52.060 --> 04:00.710
+Now if we get push Heroku M. This will push our live changes to Heroku and we will see that the logger
+
+04:00.740 --> 04:02.880
+will no longer fire.
+
+04:02.930 --> 04:07.280
+So let's just wait again for our Heroku build to complete
+
+04:12.510 --> 04:19.890
+it actually should be faster this time because we've cached our node modules from the first time it
+
+04:19.890 --> 04:20.880
+built.
+
+04:20.880 --> 04:28.640
+So if none of our node modules have updated then there's no reason it will rebuild our node modules.
+
+04:28.680 --> 04:30.280
+OK.
+
+04:30.410 --> 04:38.140
+Now if we go back to our application you know Heroku if we refresh we will see that the logger is no
+
+04:38.140 --> 04:39.170
+longer firing.
+
+04:39.400 --> 04:46.700
+And just like that our production application is pretty much finished so that was really easy.
+
+04:46.740 --> 04:53.310
+And that's the beautiful thing about Heroku is that we can easily deploy our ReACT Web sites on Heroku
+
+04:53.880 --> 04:59.960
+just by going through those quick simple steps that we went through to push this live.
+
+04:59.980 --> 05:10.750
+Now the caveat with Heroku is that the free account is running on a shared what they call diagnose and
+
+05:10.750 --> 05:18.070
+all that means is that we are only given a certain amount of time per month for free where we can build
+
+05:18.400 --> 05:19.340
+these projects.
+
+05:19.390 --> 05:25.220
+So whenever we push and you see us building this project we're using up that time.
+
+05:25.390 --> 05:30.760
+Now I think Heroku gives us something like 500 minutes which is pretty good considering that we're not
+
+05:30.760 --> 05:33.130
+going to be building that often per month.
+
+05:33.340 --> 05:36.980
+But the other thing is that whenever you try to access the Web site.
+
+05:37.000 --> 05:42.310
+So whenever somebody goes to the Web site it is usually in a sleeping state if the last time it was
+
+05:42.370 --> 05:48.040
+accessed was greater than 30 minutes ago which you'll see symbolized by the z z z.
+
+05:48.040 --> 05:55.300
+So when you access the Web site Heroku has to turn our website back on which might take a couple seconds.
+
+05:55.300 --> 05:57.720
+But generally speaking I mean it's all for free.
+
+05:57.730 --> 05:59.700
+So that's still pretty good for us.
+
+05:59.770 --> 06:05.500
+And people generally understand that if you're hosting on a Heroku Web site it's not a big deal.
+
+06:05.800 --> 06:16.320
+If you attach a credit card inside of your personal settings down here inside of account settings inside
+
+06:16.320 --> 06:24.330
+of the billing if you attach your credit card you will get more hours which is good for us.
+
+06:24.360 --> 06:27.750
+If you wanted more time and it's pretty easy.
+
+06:27.780 --> 06:34.060
+They won't charge you unless it actually has to and you update your pricing plan.
+
+06:34.110 --> 06:39.840
+So those are some of the caveats of using the free Heroku plant but it's so easy and it's so good to
+
+06:39.840 --> 06:47.300
+use and it's so well-supported that there's no reason for us not to use it but now that we have our
+
+06:47.300 --> 06:57.030
+Heroku serving up our live Web site we can move on to the next section of our course which is adding
+
+06:57.090 --> 07:01.080
+in optimizations on our existing application.

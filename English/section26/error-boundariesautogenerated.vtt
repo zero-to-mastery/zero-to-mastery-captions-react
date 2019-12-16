@@ -1,0 +1,511 @@
+WEBVTT
+
+00:00.420 --> 00:01.790
+Welcome back everyone.
+
+00:01.840 --> 00:08.520
+So hopefully you managed to convert these components over to Lazy loaded components and then render
+
+00:08.520 --> 00:12.940
+them with suspense wrapped around the actual two routes.
+
+00:13.020 --> 00:18.360
+It's pretty much the identically same code that we had in the app just in our last lesson except the
+
+00:18.360 --> 00:21.450
+only difference is we wrapped the roads itself.
+
+00:21.450 --> 00:23.730
+These root level components.
+
+00:23.730 --> 00:29.850
+Now some of you might be wondering what about wrapping the other components that are not page level
+
+00:29.850 --> 00:33.160
+components inside of a lazy import.
+
+00:33.330 --> 00:34.910
+Technically you can.
+
+00:34.950 --> 00:42.180
+But the benefits are not really there because if you think about it the components that you end up running
+
+00:42.210 --> 00:48.570
+that are not at the page level are not as large like our head or component for example is actually quite
+
+00:48.570 --> 00:56.310
+small whereas the page component has a lot of different things on it that make it a full home page component
+
+00:57.150 --> 01:03.020
+the home page component itself contains not only the home page content but the directory.
+
+01:03.150 --> 01:10.740
+And that in itself is another component set the shop component contains multiple other components in
+
+01:10.740 --> 01:16.120
+the roots that technically in their own way deserve to actually be separated.
+
+01:16.140 --> 01:21.900
+So unless you actually see that there's a certain component you have that isn't a page level component
+
+01:21.930 --> 01:28.830
+but is really big and needs to be possibly asynchronously loaded because it's slowing down the overall
+
+01:29.220 --> 01:35.370
+rendering speed of your Web site then you can actually do it but again you want to make sure that you
+
+01:35.460 --> 01:40.140
+actually see it first that it's really slowing down in production.
+
+01:40.140 --> 01:44.610
+Now of course we haven't actually been testing this in production we've only been testing this in our
+
+01:44.610 --> 01:45.440
+local.
+
+01:45.600 --> 01:47.110
+But we will do that later.
+
+01:47.130 --> 01:52.470
+Right now it's perfectly fine for us just to see our chunking occur inside of our local development
+
+01:52.470 --> 01:54.000
+server.
+
+01:54.000 --> 01:58.590
+The other thing we do have to think about though before we push the production is that with chunking
+
+01:58.590 --> 02:08.520
+now we are depending on our network being active and fast When ever we make requests to new routes because
+
+02:08.520 --> 02:15.240
+now whenever the user navigates to a different route such as our home page or shop or checkout or sign
+
+02:15.240 --> 02:21.450
+in we are watching from the back end the J.S. chunk related to that route now.
+
+02:21.510 --> 02:27.120
+This means that if the connection suddenly stops or slows down and throws an error of some kind.
+
+02:27.150 --> 02:31.480
+We don't know we could be any kind of issue related to network.
+
+02:31.530 --> 02:35.480
+Well we're not going to get anything back in our spinner is going to hang indefinitely.
+
+02:35.490 --> 02:40.680
+In fact if an error comes back we need some way to handle it because Spence is not going to know what
+
+02:40.680 --> 02:46.960
+to do with that error and our app is going to break the easiest way for us to do this is actually with
+
+02:46.960 --> 02:49.950
+something called an error boundary.
+
+02:49.950 --> 02:55.990
+Now what is an error boundary an Arab boundary is another feature that was introduced around the same
+
+02:55.990 --> 03:02.680
+time that reacts suspense got introduced in sixteen point six Arab boundaries is essentially a way for
+
+03:02.680 --> 03:10.150
+us to write this unique component that will very similarly to suspense catch an error and then render
+
+03:10.150 --> 03:16.240
+some fallback component or you eye instead of just letting that error occur the way that we've normally
+
+03:16.240 --> 03:20.530
+seen them occur where the app breaks and then it takes us to that weird page where it tells us about
+
+03:20.560 --> 03:21.990
+our error.
+
+03:22.070 --> 03:29.000
+So what we want to do is actually write an error boundary and this error boundary code is actually really
+
+03:29.030 --> 03:35.600
+easy to do react will naturally know that we're writing an error boundary if we use one of two lifecycle
+
+03:35.600 --> 03:43.600
+methods because an error boundary component is a class component that has either a component did catchment
+
+03:43.670 --> 03:48.410
+lifecycle method in it or get derive state from error.
+
+03:48.470 --> 03:54.050
+Now I'll actually show you what both of these are because they both serve different uses but this component
+
+03:54.080 --> 03:56.880
+is actually really easy to reason about.
+
+03:57.080 --> 04:01.940
+Now what we're going to do is we're going to make this new air boundary component and we can call it
+
+04:01.940 --> 04:10.360
+whatever we want in our case let's just call it error boundary now in this Arab boundary component we
+
+04:10.360 --> 04:19.690
+are just going to create our air boundary dot component dodgy ASX we're going to import react from react
+
+04:19.720 --> 04:25.480
+because we're pretty much just writing a component and we're just going to literally declare an error
+
+04:25.480 --> 04:32.440
+boundary component like so and this is going to be a class actually because we're writing a class component
+
+04:32.470 --> 04:35.140
+because we need access to those lifecycle methods I mentioned.
+
+04:35.920 --> 04:43.870
+So let's say a class air boundary extends react dot component now in order for react to know this is
+
+04:43.870 --> 04:50.290
+an error boundary component we need to use either one or both of these lifecycle methods that are unique
+
+04:50.290 --> 04:51.630
+to error boundaries.
+
+04:51.720 --> 04:56.890
+Now we do have access to them in any component that is a class component but the moment we have it it
+
+04:56.890 --> 05:05.110
+becomes an error boundary component the first one is a static method known as get derived state from
+
+05:05.440 --> 05:16.580
+error now inside of this first static lifecycle method what this does is it essentially catches any
+
+05:16.580 --> 05:22.400
+error that gets thrown in any of the children of this error boundary component.
+
+05:22.400 --> 05:28.280
+So what we're going to do is take this air boundary component and wrap it around a bunch of components
+
+05:28.340 --> 05:32.050
+or a single component and then whenever any of the children.
+
+05:32.070 --> 05:39.080
+So any of those wrapped components inside get an error or throw an error that error gets passed in as
+
+05:39.080 --> 05:45.170
+the parameter of get derived state from air inside of our air boundary component then what we can do
+
+05:45.200 --> 05:50.840
+is we can process the air somehow right we can do something with it we can look at it we don't even
+
+05:50.840 --> 05:58.370
+have to but all we have to do to make sure is return from this method some object that will set the
+
+05:58.370 --> 06:04.730
+state inside of this class now what do I mean by setting the state well because it's a class component
+
+06:04.760 --> 06:11.300
+we do have access of course to local state through the constructor calling our super and then selling
+
+06:11.330 --> 06:18.470
+this dot state what we want to set is probably something like has aired which is just a property that
+
+06:18.470 --> 06:27.140
+will yield a boolean that lets us know whether or not the state has aired inside or has not aired what
+
+06:27.140 --> 06:35.130
+we can do then is say that we want to return has error goes to true so just to go over quickly what
+
+06:35.130 --> 06:40.260
+we're doing with this error boundary class component we're instantiating this class component just like
+
+06:40.320 --> 06:45.630
+any other class component we're setting up our constructor calling super and then setting state to have
+
+06:45.630 --> 06:52.740
+some has added value inside of local state to be true or false this has aired stages lets us know whether
+
+06:52.740 --> 06:59.490
+or not any of the children inside of the air boundary has actually thrown an error now in the static
+
+06:59.490 --> 07:05.790
+get derived state from air lifecycle method this thing will actually get the literal error that was
+
+07:05.790 --> 07:11.940
+thrown if any children inside of this air boundary does throw an air and then we have to make sure to
+
+07:11.940 --> 07:17.700
+return from this method an object representing the new state that we want to set locally.
+
+07:17.760 --> 07:25.260
+So we want to say has aired is true and now the rest of the component is aware that this error has happened.
+
+07:25.560 --> 07:30.390
+The second lifecycle method we actually have access to that let's react know that this component is
+
+07:30.450 --> 07:35.580
+a error boundary component is component did catch
+
+07:38.330 --> 07:39.860
+now what component did catch.
+
+07:39.860 --> 07:47.220
+Does is it gives us access to both the air and the info related to the air and how it got through.
+
+07:47.240 --> 07:53.000
+So info might be which component actually through the air like which component actually broke and all
+
+07:53.000 --> 07:59.150
+you do here is really maybe you want to log it or maybe you want to send this information somewhere.
+
+07:59.150 --> 08:02.360
+It allows us to perform some side effects with the air itself.
+
+08:02.390 --> 08:07.730
+So for example we can console log out the air for our own benefit so we can see it.
+
+08:08.060 --> 08:10.440
+That's all this method does.
+
+08:10.490 --> 08:16.190
+The most important one though is get derive state from air because we need to do this manual set this
+
+08:16.190 --> 08:16.710
+way.
+
+08:16.730 --> 08:23.320
+Otherwise we're not aware of the children inside of this component actually throwing errors.
+
+08:23.330 --> 08:25.000
+That's the main thing.
+
+08:25.040 --> 08:31.220
+This method allows us to catch the error ahead of time when it gets thrown inside of any children nested
+
+08:31.220 --> 08:33.290
+in this error boundary component.
+
+08:33.560 --> 08:38.990
+And the reason we're gonna do this is because in the actual render statement of this component that
+
+08:38.990 --> 08:45.750
+we're writing we want to conditionally return different UI depending on whether or not the local state
+
+08:45.900 --> 08:48.390
+has aired is true or false.
+
+08:48.470 --> 08:59.110
+So if this start state DOT has aired is true then what we want to return might be a div that says something
+
+08:59.200 --> 09:00.120
+went wrong.
+
+09:01.910 --> 09:08.000
+Now if this dot state that has error is false then instead we will return this stuff promised our children.
+
+09:08.180 --> 09:15.050
+So literally what we're doing is we're just waiting to see if an error has happened inside of the children
+
+09:15.200 --> 09:17.270
+of this component.
+
+09:17.270 --> 09:23.720
+If something happened if an error gets thrown we set local state and in turn our render will then return
+
+09:23.810 --> 09:30.680
+a div that says something went wrong or any UI we want here to represent our error state.
+
+09:31.310 --> 09:33.340
+Otherwise just render the children normally.
+
+09:33.350 --> 09:37.550
+So if no errors occurred then the children are just going to render as they always will.
+
+09:38.180 --> 09:45.920
+So what we'll do in order to actually use it is we will export it as the default as our error boundary
+
+09:45.920 --> 09:46.620
+component.
+
+09:47.920 --> 09:52.020
+And then we can just bring it into our app for example.
+
+09:52.060 --> 10:04.120
+So let's just import in our new Arab boundary component from components error boundary error boundary
+
+10:04.120 --> 10:14.870
+component and let's get rid of those Jeff Sachs and then what we can do is now wrap our suspense inside
+
+10:14.930 --> 10:16.250
+of our air boundary
+
+10:19.370 --> 10:27.080
+so now what's really great about this air boundary is that now if any of these ever break so if any
+
+10:27.080 --> 10:33.530
+of our lazy loaded routes for example the network goes down something goes wrong inside of actually
+
+10:33.530 --> 10:40.310
+rendering this component then the Arab boundary will default to this fallback the fallback being that
+
+10:40.310 --> 10:47.490
+component that we supplied as what gets returned when something has aired.
+
+10:47.480 --> 10:55.130
+Now we can actually test this out if we go into say our home page component and what we do is we modify
+
+10:55.130 --> 10:58.810
+this code to manually throw an error.
+
+10:58.820 --> 11:05.240
+So let's just say we throw error like this if we now check our application we see that what gets rendered
+
+11:05.270 --> 11:06.980
+instead is something went wrong.
+
+11:07.760 --> 11:15.470
+So this is really great for us because we'd never have to show our users that ugly error state at any
+
+11:15.470 --> 11:22.670
+point if we don't know what might happen so similarly in everything else that we've done.
+
+11:22.670 --> 11:28.850
+One of the big things to consider is that because this is being placed in our componentry and it does
+
+11:28.850 --> 11:35.690
+nest certain components of our choice we have to think about the purpose of what we're using this Arab
+
+11:35.690 --> 11:37.000
+boundary for.
+
+11:37.160 --> 11:43.010
+So we can literally render different Arab boundaries and write multiple different Arab boundary components
+
+11:43.070 --> 11:48.110
+if we wanted to that do different things with the errors depending on where we place it.
+
+11:48.110 --> 11:51.170
+It's really just a tool that's for us to use.
+
+11:51.170 --> 11:56.900
+So that's one big important thing to remember with Arab boundary but it's really just that the Arab
+
+11:56.900 --> 12:03.560
+boundary code is really just a simple component that has access to these different lifecycle methods
+
+12:04.130 --> 12:09.820
+which allow us to do something with an error that gets thrown inside of any of the children.
+
+12:09.980 --> 12:16.520
+We simply set the state when whenever an error occurs and then conditionally render some specific you
+
+12:16.520 --> 12:22.550
+eye based on whether or not an error has occurred or not but let's render something a little more professional
+
+12:22.550 --> 12:25.660
+looking than just this div that says something went wrong.
+
+12:26.650 --> 12:34.750
+Instead of what we can render is actually a component that uses some image that is maybe a little bit
+
+12:34.750 --> 12:41.000
+cuter or at least a little bit more obvious that shows that we put a little bit of thought into it.
+
+12:41.230 --> 12:45.700
+So there's actually there's a great resource at this link that I will include for you as a resource
+
+12:46.240 --> 12:54.250
+that has a lot of images that kind of show you that there is something that went wrong with the page.
+
+12:54.250 --> 13:00.170
+Now I'm gonna use this one and it really just takes you to a you are all that gives you the image itself.
+
+13:00.220 --> 13:07.270
+We of course have to supply the text and I have created the stars components that you can bring into
+
+13:07.270 --> 13:10.200
+your air boundary component.
+
+13:10.450 --> 13:17.140
+And I will also give you the style components page and code in your resources as well.
+
+13:17.200 --> 13:27.290
+So what you do is you copy it and you will create a new air boundary got styles dot ASX and just pasted
+
+13:27.290 --> 13:33.090
+it then what you got to do is bring in these three components the air image overlay
+
+13:37.790 --> 13:55.300
+your image overlay o ver lay the air image container and the air image text from that styles so in order
+
+13:55.300 --> 14:04.260
+to use them instead of rendering out this div what you're going to use is the air image overlay first.
+
+14:04.830 --> 14:12.900
+And this is just the container that holds it and centers the image and the text this air image container
+
+14:12.960 --> 14:21.900
+simply takes a image your l string property which you can supply with any of these images that you want.
+
+14:21.960 --> 14:23.290
+It's entirely up to you.
+
+14:23.310 --> 14:29.790
+I'm going to use this cup so I was going to copy this in and paste this in here and then as far as the
+
+14:29.790 --> 14:32.740
+image text goes I'm just going to say sorry.
+
+14:32.760 --> 14:34.620
+This page is broken.
+
+14:37.360 --> 14:45.270
+And now if we save we go back to our application we'll see that when this if an error occurs instead
+
+14:45.300 --> 14:49.520
+they'll end up seeing this image which I think looks way nicer.
+
+14:49.530 --> 14:55.950
+So again this is just one example of what you can do with error boundaries but it's really flexible
+
+14:55.950 --> 14:57.970
+and it's actually really easy to use.
+
+14:58.200 --> 15:05.790
+And now we can have our suspense and our lazy loaded components without having to worry if say something
+
+15:05.790 --> 15:06.520
+goes wrong.
+
+15:06.540 --> 15:12.450
+If our app goes down or if our server goes down or if an Arab gets thrown inside of these components
+
+15:12.450 --> 15:14.610
+due to not being able to fetch it.
+
+15:14.700 --> 15:18.390
+This Arab boundary component is able to catch and handle it.
+
+15:19.410 --> 15:23.780
+So hopefully this Arab boundary lesson is interesting to you.
+
+15:23.970 --> 15:30.150
+It's something that was introduced pretty recently with the new react version and people have been playing
+
+15:30.150 --> 15:31.050
+around with it as well.
+
+15:31.050 --> 15:37.440
+And now you are fully equipped to tinker around and play with it to see how you like to use it again
+
+15:37.710 --> 15:39.870
+both suspense lazy loading error boundary.
+
+15:39.870 --> 15:45.450
+These are all just new tools that react keeps introducing in order for developers to have an easier
+
+15:45.450 --> 15:52.000
+time by extrapolating away some of the patterns required to handle errors with your components.
+
+15:52.080 --> 15:57.930
+Lazy load your components it's all just really easy to improve our performance and improve the overall
+
+15:57.930 --> 16:00.510
+user experience of our ReACT application.
+
+16:01.400 --> 16:06.860
+So with that let's move forward with more performance optimizations for our application.

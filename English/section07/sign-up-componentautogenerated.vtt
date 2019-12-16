@@ -1,0 +1,268 @@
+WEBVTT
+
+00:00.550 --> 00:11.490
+OK so now that we have our ability to store users let's actually create our sign up we'll go back to
+
+00:11.490 --> 00:19.650
+our components and we will make our sign up component so let's just add the regular files like we always
+
+00:19.650 --> 00:20.040
+do.
+
+00:20.070 --> 00:23.150
+Sign Up Doc component Dutch ASX.
+
+00:23.580 --> 00:30.130
+And sign up dot styles SAS.
+
+00:30.410 --> 00:34.280
+We are importing react from react.
+
+00:35.670 --> 00:46.210
+And we are going to import our form input because we need our form input and we also need our custom
+
+00:46.210 --> 00:46.540
+button
+
+00:50.790 --> 00:58.190
+and then we also need our off as well as our create user profile document
+
+01:01.450 --> 01:09.180
+from firebase because we are creating and authenticating new users.
+
+01:09.190 --> 01:21.130
+Now let's bring in our style sheet and create a state class because just like our sign and we need to
+
+01:21.130 --> 01:24.510
+store what the user is typing into our form input.
+
+01:24.520 --> 01:37.690
+So we're gonna have our component and we are going to do this dot state is equal to a display name of
+
+01:37.690 --> 01:40.080
+empty string Email
+
+01:45.140 --> 01:47.450
+and then confirm password
+
+01:50.080 --> 01:51.370
+all of empty strings.
+
+01:51.370 --> 01:55.700
+That's what the user is going to type in to those fields.
+
+01:55.710 --> 02:06.120
+Now what we'll do is we will in our render render a div pops got a return and put this in the return
+
+02:07.450 --> 02:18.950
+so we'll have our div that'll have our class name of sign up and inside will be an H H2 what the class
+
+02:18.950 --> 02:25.560
+name of title and it will say I already or so.
+
+02:25.680 --> 02:44.290
+I do not have a account and then our span will be sign up with your email and password and then we'll
+
+02:44.290 --> 02:53.120
+have a form and just like our sign in form it's pretty much going to be very similar.
+
+02:53.120 --> 02:53.870
+Right.
+
+02:53.990 --> 02:55.200
+Class name.
+
+02:55.310 --> 03:02.410
+Sign up form an hour on submit will be.
+
+03:02.450 --> 03:10.610
+This function that we will call handle submit which we haven't written yet but we will later we need
+
+03:10.640 --> 03:20.370
+form inputs and we're going to need four of them but for now for this first one it will be a type of
+
+03:20.370 --> 03:29.980
+text because this will be the display name name display name value.
+
+03:30.150 --> 03:35.100
+And then we got a D structure off those four values from our state
+
+03:38.170 --> 03:51.230
+we need display in an email password and confirmed password so the value of passing will be display
+
+03:51.230 --> 03:51.560
+name
+
+03:55.370 --> 04:05.200
+on change will be a method handle change that we also need to write and then the label will be display
+
+04:05.200 --> 04:08.030
+name and this will be required.
+
+04:09.780 --> 04:19.230
+So we just need to duplicate this four times except the second type will be email because inputs have
+
+04:19.230 --> 04:24.690
+their own email where they require you to have the at symbol in it in order for it to be a valid email
+
+04:24.690 --> 04:25.830
+string.
+
+04:25.830 --> 04:28.260
+This will be email.
+
+04:28.400 --> 04:30.170
+This will also be email
+
+04:34.240 --> 04:43.250
+and the second and third one will be password and they will automatically hide the actual text as the
+
+04:43.250 --> 04:43.970
+user types in
+
+04:48.330 --> 04:54.650
+and the same for this one so we'll call this confirm password
+
+05:00.560 --> 05:02.140
+confirm password.
+
+05:03.370 --> 05:08.040
+OK now if we are missing out.
+
+05:08.790 --> 05:12.860
+So we gotta make sure that these form inputs are all closing properly
+
+05:17.250 --> 05:19.460
+we need our final custom button
+
+05:22.580 --> 05:23.760
+to be type some.
+
+05:27.130 --> 05:37.350
+Because we just need to trigger the submit and then inside we will say sign up
+
+05:41.520 --> 05:52.520
+and now that we have our component let's just export default sign up and let's write those functions.
+
+05:52.520 --> 06:03.840
+Let's start with handles submit now handles submit will be an async function that gets the event and
+
+06:03.840 --> 06:08.410
+what we will do is prevent the default submitting.
+
+06:08.420 --> 06:08.750
+Right.
+
+06:08.760 --> 06:13.390
+We want to prevent the default action of a form submit action.
+
+06:13.470 --> 06:22.170
+And what we want to do here is we want to do almost the same thing we're doing with our app J.S. when
+
+06:22.410 --> 06:25.540
+we had a google authentication action happen.
+
+06:25.560 --> 06:26.400
+Right.
+
+06:26.400 --> 06:32.160
+So similar to our app Jess except this time we are manually creating it.
+
+06:32.190 --> 06:34.320
+So how does that work.
+
+06:34.320 --> 06:41.520
+Well first we are going to check if password and the confirmed password don't match because if they
+
+06:41.520 --> 06:44.240
+don't match then we don't want to proceed.
+
+06:44.310 --> 06:46.000
+So we want to just alert that.
+
+06:46.090 --> 06:52.510
+Passwords don't match let's just use a double quotes here
+
+06:55.800 --> 07:00.900
+and then we will return from this whole function because we don't want to do anything else.
+
+07:00.930 --> 07:11.330
+If their passwords don't match we want them to fix that then we are going to do a try catch block and
+
+07:11.330 --> 07:18.230
+inside of our try we're gonna use a new off method that comes with that auth library.
+
+07:18.230 --> 07:25.510
+And what we're gonna say is we're gonna get user write we're gonna destructor the user off the return
+
+07:25.630 --> 07:31.580
+of the await for off dock create user with email and password.
+
+07:32.110 --> 07:38.580
+So this one creates as we read right there in that little dropdown creates a new user account associated
+
+07:38.580 --> 07:42.610
+with the specific email address and password.
+
+07:42.640 --> 07:43.580
+Right.
+
+07:43.690 --> 07:49.120
+Now once this is successful the user gets assigned to our application from the authentication and then
+
+07:49.120 --> 07:57.760
+it gives us back a user auth object but that user off object is on the key user which is why we want
+
+07:57.760 --> 08:00.800
+to do that D structure that way.
+
+08:00.850 --> 08:07.340
+So create user with email and password and then we'll pass it the email and password that we have just
+
+08:07.340 --> 08:16.360
+destruction off our state once we get that back we want to run our create user profile document method
+
+08:17.350 --> 08:24.190
+with the user and the display name value which comes in as an object right where the name goes to the
+
+08:24.190 --> 08:32.900
+value and then if there's an error we want a console error the error.
+
+08:32.980 --> 08:38.170
+So if anything happens in that process whether it can't fetch it or it can't create it we want to throw
+
+08:38.170 --> 08:43.430
+an error if this succeeds right then we want to reset our state.
+
+08:43.640 --> 08:52.440
+So we're gonna wait for this to finish and when it does then we will run this dot set state and we want
+
+08:52.440 --> 08:58.640
+to set our state equal to our initial state where everything is empty
+
+09:02.500 --> 09:10.610
+and now after this we want to write our handle change and our handle change method is going to look
+
+09:10.700 --> 09:17.690
+almost identical to our sign in one we are just going to d structure off of the event the name and the
+
+09:17.690 --> 09:29.090
+value from the target and then we're just going to set state and dynamically set the name value to the
+
+09:29.210 --> 09:33.560
+value value and this has to be an object
+
+09:37.130 --> 09:45.730
+OK now that our sign up component is finished let's just apply the styles so what we'll do is very similar
+
+09:45.730 --> 09:54.610
+to sign and we'll say display flex flex direction of column because we want all those elements vertically
+
+09:54.610 --> 10:02.170
+aligned right and then we'll set the width to 380 pixels and then on the title we'll set a margin of
+
+10:02.170 --> 10:11.580
+10 pixels top bottom and 0 pixels left and right and now let's bring our sign up component into our
+
+10:11.580 --> 10:12.840
+sign in and sign up page.

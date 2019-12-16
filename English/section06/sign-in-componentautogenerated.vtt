@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.330 --> 00:06.150
+Now that we have our header the next thing we're going to build is our sign in page.
+
+00:06.150 --> 00:13.800
+Now if we look at our finished application and we look at the sign and page we see that there is a sign
+
+00:13.800 --> 00:16.330
+up section and a sign in section.
+
+00:16.380 --> 00:24.410
+They're quite similar with their own custom form input component and a custom button component so before
+
+00:24.410 --> 00:31.400
+we attach any of the functionality to this component let's take a look at what functionality we have
+
+00:31.400 --> 00:40.130
+available so we can actually sign and using an email and password and that signing is going to be based
+
+00:40.130 --> 00:43.710
+off of the accounts that we're signing up using this form.
+
+00:44.330 --> 00:52.240
+So if a new user signs up using this form we are able to sign in with that account.
+
+00:52.250 --> 01:00.900
+Alternatively if this step is too extensive then we can just sign in with Google and by using sign on
+
+01:00.900 --> 01:08.420
+with Google we load any Gmail accounts at the user is currently logged into or they can add another
+
+01:08.420 --> 01:16.420
+Gmail account and log in that way and authenticate into our application with very minimal effort.
+
+01:16.460 --> 01:20.180
+So let's begin how do we build this.
+
+01:20.180 --> 01:22.610
+Well first let's just set up the page.
+
+01:22.790 --> 01:31.930
+So let's go back to our application and let's build a sign in and sign up page so let's create our folder
+
+01:32.440 --> 01:35.620
+sign in and sign
+
+01:38.610 --> 01:47.080
+let's copy that text because we are going to have to write this twice Dow component dot Jeff Sachs and
+
+01:47.080 --> 01:51.900
+then also dot Stiles says.
+
+01:52.240 --> 02:01.840
+Now we just have to import in all of the usual things that we always have to including our style sheet
+
+02:03.690 --> 02:11.730
+and then we are going to use a functional component here.
+
+02:11.800 --> 02:18.280
+And the reason we're going to use a functional component and not a state full class component is because
+
+02:18.280 --> 02:27.250
+we're going to keep all of that on our sign in and sign up components respectively and then we will
+
+02:27.250 --> 02:42.270
+just write sign in for now support default support our component and now import it into our app J.S.
+
+02:44.010 --> 02:44.410
+help.
+
+02:44.450 --> 02:58.610
+These are leftovers that we don't need from our import so let's pages and now let's duplicate its root
+
+02:59.270 --> 03:10.260
+for sign in using our new component now if we navigate to an we see our page.
+
+03:10.340 --> 03:18.520
+So now let's build our sign in component first before we bill our sign up component.
+
+03:18.530 --> 03:25.060
+Now the reason we're going to build our signing component first is because we're going to set up our
+
+03:25.070 --> 03:33.020
+fire base database in the next section and that is what we're going to use in order to handle any of
+
+03:33.020 --> 03:36.530
+our authentication as well as signing up users.
+
+03:36.650 --> 03:45.980
+So signing is easier to explain if we do it with firebase first and I'll show you why so let's first
+
+03:45.980 --> 03:56.390
+just make our files son and styles dot SAS and for our sign in we are going to use
+
+03:59.200 --> 04:03.890
+a class component because we have to store what the users typing in.
+
+04:04.270 --> 04:22.580
+So let's do class sign in x component and in our constructor we are going to need access to state and
+
+04:22.580 --> 04:23.330
+on our state.
+
+04:23.330 --> 04:32.310
+What we're going to store is an empty string for email and an empty string for a password in our render.
+
+04:32.310 --> 04:40.650
+We are going to return a div that contains our entire sign in component
+
+04:43.410 --> 04:49.000
+and in it will be an H H2 for the title so here.
+
+04:49.010 --> 04:59.730
+We're going to say I already have an account and then let's use a span for our subtext where we will
+
+04:59.730 --> 05:02.970
+say sign in with your e-mail password
+
+05:07.710 --> 05:08.530
+awesome.
+
+05:08.550 --> 05:16.820
+Now for actual form we're gonna use a native form element and in it.
+
+05:16.820 --> 05:21.180
+So we have custom components here that we're not going to use yet.
+
+05:21.200 --> 05:28.670
+We're going to code those out later but first I'm just going to put in an input with a name of email
+
+05:29.470 --> 05:33.800
+and a value of email.
+
+05:34.130 --> 05:35.380
+This does state.
+
+05:35.480 --> 05:40.850
+Email and then I'm going to set required to be true.
+
+05:43.860 --> 05:49.710
+And then we're going to add a label that says email and we're gonna repeat this twice so that this one
+
+05:49.710 --> 05:51.960
+will say password.
+
+05:52.150 --> 05:55.750
+This one's type will be email as well.
+
+05:55.750 --> 05:59.600
+And this one's type will be password
+
+06:03.030 --> 06:09.900
+and then at the end we will have a input with a type of submit
+
+06:13.500 --> 06:25.540
+and here we will all set the value to be submit for let's export this out as the default.
+
+06:25.550 --> 06:28.010
+So this is all just very basic setup for now.
+
+06:28.040 --> 06:28.300
+Right.
+
+06:28.310 --> 06:34.940
+We don't actually have any of the bindings to the code but what we're gonna need to add is we are going
+
+06:34.940 --> 06:48.190
+to add on our form an on submit function that calls our method handle submit which for now will simply
+
+06:48.820 --> 07:00.480
+prevent the default submit action from firing because we want full control over exactly what this summit
+
+07:00.480 --> 07:01.660
+is going to do.
+
+07:01.800 --> 07:07.230
+But for now what we'll do is we will prevent it and then we will clear out our fields.
+
+07:07.230 --> 07:14.130
+So we'll set our email and our password back to an empty string and that's what we will pass.
+
+07:14.120 --> 07:26.490
+Here handle submit and ask for our actual inputs what we're gonna do is we are going to set a on change
+
+07:26.580 --> 07:40.370
+value two point two are on handle or so our handle change function which also again takes an event except
+
+07:40.370 --> 07:51.550
+for this we are going to pull both the value and the name off of our event dot target the event target
+
+07:51.550 --> 07:58.750
+will end up being our input element itself and we want the name value that we just set as well as the
+
+08:00.130 --> 08:06.250
+actual value on that target that they've just typed in and what we're going to do is we're going to
+
+08:06.250 --> 08:12.740
+dynamically set our state so that it sets that name.
+
+08:12.810 --> 08:19.160
+So it'll render whatever that value that comes in will be if name is password.
+
+08:19.160 --> 08:24.380
+It will say password and then point to the value that they typed in and then the same will apply for
+
+08:24.380 --> 08:30.560
+email if it's the email then this event targets dot name will be email and then that value will be what
+
+08:30.560 --> 08:31.320
+they're typing in there.
+
+08:32.030 --> 08:45.880
+So this way we can pass the same function in to the same input and this is awesome because we don't
+
+08:45.880 --> 08:52.300
+have to write separate functions that do pretty much the same thing by dynamically setting our property
+
+08:52.300 --> 08:54.190
+value.
+
+08:54.240 --> 09:06.740
+Now let's import this into our sign and Page sign in from opponents sign in and let's just render this
+
+09:06.800 --> 09:08.930
+out and take a look.
+
+09:08.960 --> 09:09.650
+Awesome.
+
+09:09.650 --> 09:15.770
+So there we go there is our form we hit our submit form it clears the fields exactly what we're looking
+
+09:15.770 --> 09:16.980
+for.
+
+09:17.060 --> 09:21.590
+Okay now let's actually style this and attach the functionality.

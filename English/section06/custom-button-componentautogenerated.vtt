@@ -1,0 +1,148 @@
+WEBVTT
+
+00:01.200 --> 00:11.000
+Now that we have our form input component we also want a button component that's custom this button
+
+00:11.060 --> 00:17.030
+is also going to be a presentational component similar to our form input.
+
+00:17.030 --> 00:24.980
+And the reason why we're building them as their own component is so that this component can be used
+
+00:25.220 --> 00:33.530
+in any other component that might need consistent input styling that we have across our application.
+
+00:33.530 --> 00:35.590
+So what do I mean by this.
+
+00:35.600 --> 00:44.300
+Well up till this point we've pretty much limited all of our styling for our titles and our menu items
+
+00:44.870 --> 00:54.510
+and our collection items all in this or whichever respective component that they're in.
+
+00:54.510 --> 01:00.330
+So any styling for the home page sits in the home page style store SAS fun.
+
+01:00.510 --> 01:09.350
+But now we're running into components that we know are going to be reused across the application so
+
+01:09.350 --> 01:15.110
+if we look at our final application we see that we're going to use the button in our sign and we're
+
+01:15.110 --> 01:17.410
+gonna use the button in our sign up.
+
+01:17.630 --> 01:22.370
+And we're also going to use our form input across both the sign and the sign up.
+
+01:22.370 --> 01:29.420
+So limiting our form input styles to just the signing would cause us to have to repeat that same style
+
+01:29.420 --> 01:34.620
+code inside of our sign up as well but we don't want to do that.
+
+01:34.670 --> 01:42.140
+We want to make components that we can reuse across our application and even our button is used in more
+
+01:42.140 --> 01:44.170
+than just our sign and page.
+
+01:44.240 --> 01:51.760
+We know it's going to be used inside of our checkout and we see that this is actually inverse.
+
+01:51.860 --> 01:57.320
+So it's going to have to be a pretty flexible button including in our shop we use something similar
+
+01:57.320 --> 02:01.900
+as well so how are we going to build this.
+
+02:01.900 --> 02:11.500
+Well first let's just start with building our signing button for our sign and Page will add the functionality
+
+02:11.680 --> 02:13.210
+as we require it.
+
+02:13.240 --> 02:20.470
+Because this way it allows us to re-evaluate and properly consider the tradeoffs of how we should build
+
+02:20.620 --> 02:31.060
+our button so let's go back to our component and let's add in this new custom button component
+
+02:34.460 --> 02:47.730
+and let's just make custom button dock component Dutch ASX and custom button dot styles dot SAS will
+
+02:47.820 --> 02:53.890
+import react from react or import in our style sheet
+
+02:57.140 --> 03:04.490
+and then we're just going to export a stateless Functional Component called custom button
+
+03:08.240 --> 03:11.180
+and it's just going to render a button component
+
+03:14.930 --> 03:24.810
+and then we're going to attach the styling to our custom button class name you might wonder if this
+
+03:24.810 --> 03:32.910
+is a button but in our actual sign in component we were using an input to do our H terminals form submission
+
+03:34.000 --> 03:37.270
+how would it continue to work if we switched it to a button.
+
+03:37.270 --> 03:44.410
+Well for both button and input they can both take this property of type submit and they can both submit
+
+03:44.530 --> 03:52.930
+the form that they're in they'll both trigger when clicked if the other types submit the on submit method
+
+03:53.200 --> 03:54.940
+on our form.
+
+03:55.110 --> 03:58.740
+So what we want to do is we want to be able to pass that in.
+
+03:58.740 --> 04:05.790
+So what we'll do is we'll first pull the children off of our props that get passed into our custom button
+
+04:06.540 --> 04:13.740
+and then we're gonna d structure all the other prompts into this other props property and spread that
+
+04:14.520 --> 04:19.830
+into our custom button.
+
+04:19.840 --> 04:26.680
+Now if we have a type submit being passed into custom button the button will get that and then we'll
+
+04:26.680 --> 04:37.840
+put children inside of our button component and now if we export our custom button and then we add in
+
+04:37.840 --> 04:42.190
+our custom button styles which I have provided right here
+
+04:45.960 --> 04:50.670
+we can now import our custom button into our component
+
+04:55.320 --> 04:57.310
+and replace this input with it.
+
+05:01.390 --> 05:10.510
+Now instead of doing a value here because we have children we're just going to put sign in like so and
+
+05:10.510 --> 05:18.290
+now we have our button there is a little bit of styling we need to add to our sign and component itself.
+
+05:19.750 --> 05:32.290
+And what we will do is we will go to our sign in styles and we're just going to add a display flex a
+
+05:32.370 --> 05:40.050
+flex direction of column because we want all of our elements inside of our sign and to sit vertically
+
+05:42.230 --> 05:46.940
+and then we're also going to add a bit of a margin between our title.
+
+05:46.970 --> 05:59.040
+So we're gonna put margin of 10 pixels on the top in the bottom and now we have air our assignment component.
+
+05:59.040 --> 06:06.610
+So next we're gonna start integrating with Firebase and that is gonna be a really exciting lesson.

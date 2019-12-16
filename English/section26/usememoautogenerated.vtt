@@ -1,0 +1,187 @@
+WEBVTT
+
+00:00.760 --> 00:06.400
+Now in this lesson we are going to look at one of our last optimizations and it's going to be another
+
+00:06.400 --> 00:07.570
+hook.
+
+00:07.570 --> 00:11.540
+So in the last lesson we learned about our use callback hook.
+
+00:11.680 --> 00:19.000
+But in this lesson what we're going to learn about is the use memo hook and use memo is very similar
+
+00:19.000 --> 00:27.500
+to use callback in both the format that it's used but also in its conceptualization of when to use it.
+
+00:27.520 --> 00:35.530
+The only thing about use memo is that you actually use it when you want to cache the value of a function
+
+00:35.560 --> 00:38.050
+that does something complex.
+
+00:38.050 --> 00:39.800
+So what I mean by this.
+
+00:39.940 --> 00:42.400
+Well as we know with use callback.
+
+00:42.400 --> 00:50.050
+Now what use callback does is it essentially wraps a function and memorizes it so that if none of the
+
+00:50.050 --> 00:58.240
+dependencies that this function depends on changes we always get back a cached memorized version of
+
+00:58.240 --> 01:05.730
+the function whereas use memo is going to be called in a similar manner as use callback.
+
+01:05.730 --> 01:15.050
+So let me show you so I have the hook imported from react and what I do is I wrap this function called
+
+01:15.050 --> 01:22.430
+Do Something complicated and it might just be something that's computationally expensive like some intense
+
+01:22.430 --> 01:23.360
+math for example.
+
+01:23.360 --> 01:24.740
+This isn't even that complex.
+
+01:24.740 --> 01:31.910
+But imagine if that was something that is very expensive for the browser to do for us to run it every
+
+01:31.910 --> 01:39.440
+time it's something that takes a lot of browsers performance power in order to do so in a situation
+
+01:39.440 --> 01:48.050
+like this where we see that we are displaying the output of this do something complicated which is some
+
+01:48.050 --> 01:50.140
+kind of value.
+
+01:50.190 --> 01:52.980
+What happens is that let's say we increase the count.
+
+01:53.010 --> 01:59.130
+So this computes that new value every time we increase count which is expected because count 1 is a
+
+01:59.130 --> 02:07.480
+dependency inside of the output of this function but what happens when we input count two we see that
+
+02:07.480 --> 02:13.120
+our function is still firing which as we learned in the last lesson is because we inline this function
+
+02:13.300 --> 02:20.200
+and whenever our component renders this function is getting called and regenerated every single time
+
+02:21.380 --> 02:30.750
+now what we want to do is actually not read compute this value every time we re render the component.
+
+02:30.770 --> 02:34.340
+This takes a step beyond just memorizing the function.
+
+02:34.340 --> 02:41.990
+We actually want to memorize the output of the function because performing the function itself is also
+
+02:41.990 --> 02:43.760
+computationally expensive.
+
+02:43.790 --> 02:52.860
+So what we do with use memo is we actually are able to get the return value of this function and then
+
+02:52.890 --> 02:57.120
+cache that value and use it instead of invoking the function set.
+
+02:57.270 --> 02:59.070
+So let's just actually do it.
+
+02:59.070 --> 03:07.180
+So in order to use it we're going to wrap this function inside of use memo and just like use callback
+
+03:07.240 --> 03:14.440
+we're gonna pass it an array as the second argument that is also the dependencies that it relies on.
+
+03:14.440 --> 03:20.380
+Now because we are passing code one inside of this function we do need to make sure that we do keep
+
+03:20.380 --> 03:27.370
+count one here as well which means that this function will only ever read compute when the count 1 value
+
+03:27.400 --> 03:28.470
+changes.
+
+03:28.480 --> 03:36.070
+So now instead of using do something complicated as a function it is simply a value that actually will
+
+03:36.070 --> 03:42.520
+be invoked when our javascript evaluates this line twelve when it's going through our code it's gonna
+
+03:42.550 --> 03:48.430
+see the user name a hook and it's going to say OK what they want to do is they want me to memorize the
+
+03:48.520 --> 03:51.740
+output of this function so that's what it'll do.
+
+03:51.740 --> 04:00.350
+It'll compute the value of this function once it has to actually evaluate this value and then whenever
+
+04:00.350 --> 04:05.630
+we use it it's just going to use the cash value even when we re render our component.
+
+04:05.630 --> 04:11.010
+As long as Count 1 has not changed it's just going to continue to use that memorized value.
+
+04:11.120 --> 04:16.370
+You can kind of see this like our selectors in the sense that our selectors also memorize the values
+
+04:16.400 --> 04:18.990
+until the prompts going into them have changed.
+
+04:19.610 --> 04:25.070
+So now what we'll see is that we have our initial I am computing something complex if we update count
+
+04:25.100 --> 04:32.090
+one we are of course going to read fire and regenerate that function value because count one is changed
+
+04:32.120 --> 04:37.220
+and count one as we know is a dependency of this do something complicated.
+
+04:37.220 --> 04:38.100
+Function call.
+
+04:38.270 --> 04:40.040
+So we're going to see it again.
+
+04:40.130 --> 04:46.910
+But now whenever I read instantiate and re update the state of my component and re render this component
+
+04:47.210 --> 04:49.640
+you'll see that the function doesn't fire.
+
+04:49.640 --> 04:57.720
+This is because now this value has been memorized so that's the main difference between when we use
+
+04:57.780 --> 05:04.770
+use memo and when we use used callback we want to use use callback when we simply want a memorized function
+
+05:05.130 --> 05:11.160
+and we use the use memo when we want a memorized value and we only want to memorize value when the function
+
+05:11.160 --> 05:16.460
+itself is generally going to be very computationally expensive.
+
+05:16.680 --> 05:24.640
+So hopefully with that you're now equipped with the two new hooks that help us make our code more perform.
+
+05:25.260 --> 05:33.930
+And with that you are now fully equipped with a lot of the tools required to understand how to optimize
+
+05:33.930 --> 05:40.800
+the performance of your components and your functions inside of your code and always remember the times
+
+05:40.800 --> 05:46.890
+to use these tools will always depend on the context of the problem you're trying to solve and you always
+
+05:46.890 --> 05:52.440
+want to encounter the optimization problem first before you start actually optimizing your code.

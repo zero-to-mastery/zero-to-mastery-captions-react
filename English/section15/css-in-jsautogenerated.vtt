@@ -1,0 +1,352 @@
+WEBVTT
+
+00:00.730 --> 00:09.430
+Into day's lesson and in this section we are going to cover one of the most contested topics in web
+
+00:09.430 --> 00:11.100
+development today.
+
+00:11.350 --> 00:14.740
+See SS in J.S..
+
+00:14.970 --> 00:23.970
+Now you might have heard or read about C Ss and J.S. all over the web development community but in order
+
+00:23.970 --> 00:34.840
+for us to explore why it's such a hot topic we need to understand what it is in order to understand
+
+00:34.840 --> 00:35.860
+what it is.
+
+00:35.920 --> 00:44.790
+Let's just quickly go over what we already know about C Ss so the current way in reactor applications
+
+00:44.790 --> 00:54.660
+that we add CSF to our application is we import them into our component files and we try to namespace
+
+00:54.780 --> 01:04.530
+R CSX to the top level components classes or any of the children's classes but we scope them as best
+
+01:04.530 --> 01:07.560
+as we can with the C Ss that we write.
+
+01:07.590 --> 01:16.310
+We've done this extensively in our application that we just built but our application is still rather
+
+01:16.310 --> 01:18.320
+small in scale.
+
+01:18.320 --> 01:28.400
+One of the big issues with CSX is that when it was created we were only making Web sites that were single
+
+01:28.400 --> 01:32.880
+pages or a collection of maybe four or five pages at most.
+
+01:32.930 --> 01:40.520
+And the styling if you remember from the 90s was very basic browsers were not that powerful back then
+
+01:41.120 --> 01:48.190
+and the web was not as evolved as it is today in today's day and age.
+
+01:48.200 --> 01:55.010
+We've built these complex applications that people could not even imagine back in the day.
+
+01:56.140 --> 02:03.910
+And as a result coding standards have changed and adapted to these large scale web applications that
+
+02:03.910 --> 02:05.230
+we build now.
+
+02:05.270 --> 02:12.640
+Now what I have here is actually a quick little create react app application to demonstrate CSX and
+
+02:12.720 --> 02:13.510
+yes.
+
+02:13.990 --> 02:19.410
+But before I go further we have to talk more about the flaws in CSX.
+
+02:19.750 --> 02:27.770
+So inside of this application what I have is just this basic app component that renders a car component
+
+02:28.630 --> 02:34.880
+and what the car component is is it's just a display component so it just wraps whatever components
+
+02:34.940 --> 02:36.410
+are nested inside of it.
+
+02:36.740 --> 02:43.790
+So ergo the children property and it wraps it in a div with the class name ID card and then the card
+
+02:43.790 --> 02:45.760
+has these styles on it.
+
+02:45.950 --> 02:51.690
+Very simple very basic component but it's a very generic component
+
+02:55.060 --> 03:03.780
+what we do is we scope RC SS to the class component that represents our car component.
+
+03:03.800 --> 03:11.840
+If however we were building a very large application with many elements that possibly resemble cards
+
+03:12.470 --> 03:18.860
+you can imagine that if I implemented this card component near the start of the application by two years
+
+03:18.890 --> 03:25.580
+down the road or even one year down the road another developer has to also implement something similar
+
+03:26.790 --> 03:34.350
+maybe they have a component that has a card inside of it but they do not know that my card component
+
+03:34.440 --> 03:37.260
+already uses the class name card.
+
+03:37.260 --> 03:40.620
+Then what happens is that he might write another component.
+
+03:40.620 --> 03:45.970
+Use the class name card and then suddenly he suddenly gets my classes.
+
+03:46.020 --> 03:53.970
+The reason for this is because CSX all share one single global namespace the moment that we import this
+
+03:53.970 --> 04:02.100
+CSX into our card component and our car component is rendered javascript puts this styling into the
+
+04:02.100 --> 04:07.590
+head of our application so we can actually see this when we look inside of our elements.
+
+04:07.830 --> 04:13.840
+We'll see right in the head all of the stores that we've got these are all the style sheets that we've
+
+04:13.840 --> 04:14.410
+written.
+
+04:14.410 --> 04:16.390
+That's the index that's CSX.
+
+04:16.420 --> 04:17.740
+This is my car.
+
+04:17.740 --> 04:19.760
+Does CSX that I imported in.
+
+04:20.110 --> 04:21.870
+And then this is my ab CSX.
+
+04:21.880 --> 04:22.660
+Right.
+
+04:22.660 --> 04:31.480
+That's what happens whenever we import styles into our components react separates it in such a way so
+
+04:31.480 --> 04:38.790
+that we're able to visualize that the style sheet is related to our component for our mentality sake.
+
+04:38.920 --> 04:47.970
+But the rules of CSX have not changed this store card class name and this talk card styling will apply
+
+04:47.970 --> 04:51.450
+to any component that has dock card in it.
+
+04:52.570 --> 04:59.950
+Now of course there are solutions that have been implemented in CSX such as the ban naming convention
+
+05:00.880 --> 05:02.320
+and all them.
+
+05:02.350 --> 05:13.980
+Is is that it's a style of naming your CSX so that you follow a certain format known as The Block the
+
+05:13.980 --> 05:16.320
+element and then the modifier.
+
+05:16.320 --> 05:23.850
+So here if we look at the naming we can see that if we had a class of block what we would do is we would
+
+05:23.910 --> 05:33.730
+apply a class name selector as we've done however as you start nesting deeper you start adding more
+
+05:33.730 --> 05:36.770
+to the name so that it becomes more specific.
+
+05:36.820 --> 05:37.590
+Right.
+
+05:37.630 --> 05:42.960
+So if this span class is inside of our block then what we'll do is we'll say.
+
+05:42.970 --> 05:47.830
+BLOCK underscore underscore element so that we're targeting this span
+
+05:50.590 --> 05:51.300
+as a result.
+
+05:51.310 --> 05:58.960
+What ends up happening is you have these really really nested and really long class names on all of
+
+05:58.960 --> 06:00.000
+your components.
+
+06:00.340 --> 06:06.620
+But this is a huge mental overhead especially for new developers coming onto the application.
+
+06:06.970 --> 06:12.970
+Not to mention that there's so much class names now that you have to be aware of what everything will
+
+06:12.970 --> 06:20.360
+be but that adds extra mental overhead for us as developers which is always a bad thing.
+
+06:20.540 --> 06:27.860
+But this is the default problem with CSX as mentioned them is a solution that was created based on the
+
+06:27.860 --> 06:30.470
+way that CSX was built.
+
+06:30.790 --> 06:31.040
+Right.
+
+06:31.040 --> 06:40.340
+It's still a solution but based on the cards that were dealt to us when CSX created now because in the
+
+06:40.340 --> 06:47.450
+modern world now browsers are WAY faster way more performance and way more powerful we can leverage
+
+06:47.480 --> 06:51.240
+javascript to actually create the CSX for us.
+
+06:51.390 --> 06:58.520
+There is actually a way that you can do this with react and the way you do it with react is you simply
+
+06:59.030 --> 07:08.350
+use a style property inside of our components our HCM Al element and what you would do is you would
+
+07:08.350 --> 07:10.560
+make a javascript object.
+
+07:10.720 --> 07:19.740
+So for example if I said text styles and I made it an object and in the object we just write CSX rules
+
+07:20.160 --> 07:25.860
+with the property being the real name and the value being what we actually want it to be but we instead
+
+07:25.860 --> 07:33.000
+of using the kabob case we're used to we would have to use camel case so I could say color goes to red
+
+07:34.320 --> 07:44.730
+and font size goes to twenty four pixels I can now pass this textiles into this div using that style
+
+07:44.730 --> 07:54.660
+property which exists on every HDMI element and now if we look we'll see that the component actually
+
+07:54.660 --> 08:00.130
+gets the style directly written into the element.
+
+08:00.220 --> 08:08.910
+Now the issue with doing it this way is that one we actually don't have access to all of the CSA selectors
+
+08:09.370 --> 08:09.660
+right.
+
+08:09.660 --> 08:15.720
+So there's more specific selectors that we might want to leverage that we actually can't such as the
+
+08:15.750 --> 08:25.290
+disabled selector or we also cannot access and child or the before selector but these they're just there's
+
+08:25.290 --> 08:27.930
+a list of selectors that we cannot access.
+
+08:27.930 --> 08:37.190
+Doing it this way whereas using C Ss and J Yes it takes the approach in a completely different way now.
+
+08:37.190 --> 08:44.610
+Before we explore the libraries or one of the libraries I want to talk briefly about it.
+
+08:44.670 --> 08:52.620
+So there have been numerous libraries released to tackle this problem of CFS in J.S. but the one that's
+
+08:52.620 --> 08:58.230
+the most popular and the most supported is styled components to this point.
+
+08:58.230 --> 09:04.890
+It has twenty four thousand stars like get hub and I think the next closest is either radium or Aphrodite
+
+09:04.920 --> 09:06.360
+but they aren't even close.
+
+09:06.360 --> 09:12.960
+They're barely at ten thousand stars so we're going to explore styled components because it's the most
+
+09:12.960 --> 09:21.400
+popular one but before we do I just want to talk about what are the cons of doing CSF suggests and as
+
+09:21.400 --> 09:28.240
+I mentioned also SS and Jess it's using a javascript library to render our styles very similar in a
+
+09:28.240 --> 09:35.230
+way to what we did here where we wrote them the stars that we wanted for example inside of our javascript
+
+09:35.290 --> 09:37.860
+and then added it to our javascript code.
+
+09:37.870 --> 09:43.270
+The only difference is the way that this was handled is that it got placed on our div but what's still
+
+09:43.270 --> 09:52.250
+happening is that we're letting our javascript add our styles to our HMO.
+
+09:52.440 --> 09:59.160
+A lot of web purists believe that CSF should be in C Ss and then and that CSF should not be in J.S.
+
+09:59.190 --> 10:05.910
+Right because there is an overhead there does require a learning of it especially for developers that
+
+10:05.910 --> 10:09.320
+have been writing front end applications for a long time.
+
+10:09.330 --> 10:18.220
+They might be very comfortable with having CSX and CSX and having J.S. and J.S. but the pro is that
+
+10:18.430 --> 10:21.300
+the performance is extremely fast.
+
+10:21.300 --> 10:28.810
+Now having javascript render the CSF is minimal practically non-existent on performance.
+
+10:28.810 --> 10:35.950
+Not only that but it actually gives us a closer alignment to the component driven architecture that
+
+10:35.950 --> 10:40.270
+we're so used to today and how we write our ReACT code.
+
+10:40.270 --> 10:47.140
+We write our ReACT code because we compartmentalize all of the code that we're writing into components
+
+10:47.380 --> 10:50.530
+that have their own function out as a result.
+
+10:50.540 --> 10:56.530
+Would it not make sense that we have our C.S. s also scoped purely to that component.
+
+10:56.660 --> 11:04.430
+We don't want this possibility of our styles leaking all over the place due to the CSX global namespace
+
+11:04.430 --> 11:05.260
+that it occupies.
+
+11:06.050 --> 11:15.320
+Well this is actually exactly what CSX and J S aims to solve by using JavaScript to render our CSX and
+
+11:15.320 --> 11:16.590
+our styling.
+
+11:16.790 --> 11:26.840
+We are able to encapsulate all of our CSX to just the component that is relevant and I will show you
+
+11:27.140 --> 11:31.600
+how we'll do that using the styled components library.
+
+11:31.640 --> 11:35.170
+So let's take a look at how it works.

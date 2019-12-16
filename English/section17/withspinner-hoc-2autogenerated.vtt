@@ -1,0 +1,271 @@
+WEBVTT
+
+00:01.410 --> 00:09.110
+OK in this lesson we are going to actually finally use R with Spinner a higher order component.
+
+00:09.240 --> 00:16.650
+Now I mentioned before that with our with Spinner component R is loading is going to be a true false
+
+00:16.650 --> 00:21.280
+value that gets determined by some outside logic now.
+
+00:21.290 --> 00:27.770
+That logic is going to be contained within our shop page because our shop page is actually the one that
+
+00:27.770 --> 00:35.180
+knows when technically speaking our shop data is finished loading because the moment that snapshot comes
+
+00:35.180 --> 00:43.520
+back and it's converted and then we update our reducer at that point we know that technically speaking
+
+00:43.610 --> 00:48.440
+our shop page is good to render the collection object.
+
+00:48.490 --> 00:58.350
+So what we're going to do is we are going to first import in our new higher order component with Spinner
+
+00:59.340 --> 01:05.340
+from components with Spinner with a spare component
+
+01:08.790 --> 01:09.700
+before we do this.
+
+01:09.720 --> 01:16.360
+We need to actually figure out how we're going to set the loading value whether it be true or false.
+
+01:16.440 --> 01:21.450
+And the best way to do that is inside of our component state now.
+
+01:21.460 --> 01:24.570
+In another lesson we are going to actually put it in the reducer.
+
+01:24.580 --> 01:28.210
+But first let's just see this work inside of our own components state.
+
+01:29.200 --> 01:32.200
+So what we can do shorthand.
+
+01:32.290 --> 01:34.230
+Now we tend to use the constructor.
+
+01:34.240 --> 01:38.330
+So we've done this before where we call our constructor we call our super.
+
+01:38.470 --> 01:45.790
+And then we call this dot state equals and then we would do a loading equals true for example there
+
+01:45.950 --> 01:51.320
+is actually a shorter way to do this if we don't need the constructor and all we want to set a state
+
+01:51.800 --> 01:59.310
+we can actually just do state equals and then loading goes to true and the constructor and super call
+
+01:59.320 --> 02:01.870
+setup react will handle on the back end for us.
+
+02:01.880 --> 02:07.370
+This was introduced a couple versions back and it's just a more simplified way so that we don't have
+
+02:07.370 --> 02:13.490
+to write constructor super every time react we'll know that if you're in a class component and you write
+
+02:13.520 --> 02:19.610
+a state property like so at the top of your component declaration that you probably are just invoking
+
+02:19.610 --> 02:20.150
+state.
+
+02:20.180 --> 02:27.630
+So it will under the hood invoke the super for us so that we can actually leverage the state value and
+
+02:27.630 --> 02:33.720
+now that we have our state we are just going to make sure that after our update collections is called
+
+02:33.900 --> 02:43.090
+we'll just call this dot said state where loading equals false now that we have our loading boolean
+
+02:43.090 --> 02:47.410
+value as well as determining where in the logic that it will fire.
+
+02:47.410 --> 02:54.920
+We have to figure out how to use R with spin or higher order component that we just made now as we know
+
+02:55.450 --> 03:02.240
+are with Spinner is a high order component that takes a component as an argument and gives us back a
+
+03:02.240 --> 03:08.780
+spin or component that will render the component we passed in when the loading is false.
+
+03:09.470 --> 03:15.290
+So we have to actually make that component first and then pass this new component we get out of our
+
+03:15.290 --> 03:20.330
+hard component R is loading property and then render it in the place where we would originally have
+
+03:20.330 --> 03:27.440
+rendered our past in component so if that sounds confusing don't worry we will write it out and we will
+
+03:27.440 --> 03:28.330
+see what that's like.
+
+03:29.990 --> 03:35.760
+Now the two places where we know on this component tree that will need to know whether or not the loading
+
+03:35.760 --> 03:40.290
+is true or false will be obviously are two root components.
+
+03:40.290 --> 03:45.660
+These two components right now just render their respective components when in reality they need to
+
+03:45.660 --> 03:49.180
+be aware of whether or not the loading is still happening.
+
+03:49.200 --> 03:58.530
+So what we can do here is declare a new component called collection overview with Spinner and this will
+
+03:58.530 --> 04:05.490
+be equal to us calling with Spinner and passing in our collections overview.
+
+04:05.600 --> 04:13.570
+As we know this will give us back a new component wrapped around the component that we passed in and
+
+04:13.570 --> 04:15.040
+using this new component.
+
+04:15.040 --> 04:20.890
+We can just pass this component the loading value and we'll do the same thing for our collections page
+
+04:20.950 --> 04:22.900
+and we'll see how we'll use this.
+
+04:22.900 --> 04:28.540
+So we'll make a collection page with Spinner equal to with Spinner and then passing in the collection
+
+04:28.540 --> 04:34.290
+page and now we have our collections overview with Spinner component.
+
+04:34.290 --> 04:37.130
+We just need to render it inside or root and pass it.
+
+04:37.140 --> 04:39.960
+The loading prop on our state.
+
+04:39.960 --> 04:46.710
+So how we'll do this is actually instead of using this component value we can actually use the render
+
+04:46.710 --> 04:54.420
+value and render is a method that takes a function where the parameters and the function are pretty
+
+04:54.420 --> 05:01.410
+much just the parameters that the component will receive which in our case are going to be the match
+
+05:01.410 --> 05:07.230
+location and history props that our route passes into our component which is what gives in fact our
+
+05:07.230 --> 05:14.910
+collection page access to the match object that we use inside of our selector which we pull off of own
+
+05:14.910 --> 05:15.940
+props.
+
+05:16.050 --> 05:22.470
+So because this function will be getting it we have to make sure the past those properties right those
+
+05:22.590 --> 05:32.030
+match history and location props down into our component and what we do here is we just render in our
+
+05:32.030 --> 05:35.560
+new collection overview with spin or component.
+
+05:35.960 --> 05:43.060
+We set this is loading value here and then what we'll do is we will spread in the other props
+
+05:46.750 --> 05:53.110
+and first what we're going to do is we are going to just d structure off the loading value from our
+
+05:53.110 --> 05:54.340
+struct from our state
+
+06:00.490 --> 06:01.430
+and then we'll just have it in
+
+06:04.960 --> 06:07.630
+and we'll do the exact same thing for our collection page
+
+06:13.460 --> 06:23.320
+and similarly is loading goes to loading and then we'll just spread the props and now if we go back
+
+06:23.320 --> 06:32.240
+to our application we'll see that there's that spinner that loads while our component is fetching the
+
+06:32.240 --> 06:35.910
+back and data the moment it comes back and updates the reducer.
+
+06:36.080 --> 06:41.400
+It flips the loading to false which then renders our actual final component.
+
+06:41.600 --> 06:49.420
+We'll see this works for our collections page but we'll see this also works for our shop page and there
+
+06:49.420 --> 06:52.180
+we see our spinner component.
+
+06:52.240 --> 06:58.240
+And with that we have now used and built our loading component.
+
+06:58.750 --> 07:04.810
+So now this pattern that we have here we can leverage in any place where we need some asynchronous data
+
+07:05.290 --> 07:11.680
+from the back end before we initialize the actual components that we need.
+
+07:11.680 --> 07:17.560
+Now I know maybe it's a little bit confusing but if you watch these videos a couple times this higher
+
+07:17.560 --> 07:23.320
+order component pattern will make a lot of sense because there's going to be a lot of projects out there
+
+07:23.560 --> 07:30.580
+that leverage this higher order component pattern of wrapping components and returning other components
+
+07:30.910 --> 07:37.850
+to extend and reuse functionality just like we did with our with spin or component.
+
+07:37.860 --> 07:40.790
+Now I know it's confusing for me when I first learn it.
+
+07:40.800 --> 07:46.590
+It was really confusing but now it makes more sense because the more you look at it and the more you
+
+07:46.590 --> 07:49.280
+practice it will all click.
+
+07:50.380 --> 07:51.940
+And that's all it comes down to.
+
+07:52.070 --> 07:59.480
+I promise you the more practice you have with it the more you'll see how to use and leverage this higher
+
+07:59.480 --> 08:02.740
+order component pattern OK.
+
+08:02.780 --> 08:10.220
+So just like that our application is now wired with our backend we've built in our back backend into
+
+08:10.220 --> 08:15.570
+our application and now if we were to say update our back in with anything right.
+
+08:15.770 --> 08:23.120
+With a new document object or we were to add values in here are Crown clothing application we'll update
+
+08:23.180 --> 08:28.640
+accordingly we don't have to worry about handling any of that information on our front end code all
+
+08:28.640 --> 08:35.050
+of that is now separate it into a back end just like a real life application will be.
+
+08:35.090 --> 08:42.800
+So you now understand how real life code works when it comes to building a front end application where
+
+08:42.800 --> 08:45.200
+it leverages data on a backend.

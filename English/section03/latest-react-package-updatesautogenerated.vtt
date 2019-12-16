@@ -1,0 +1,352 @@
+WEBVTT
+
+00:00.620 --> 00:02.930
+Hello everyone and welcome back.
+
+00:02.930 --> 00:04.880
+This is actually you from the future.
+
+00:04.880 --> 00:12.800
+Taking a quick little detour in our currently scheduled course outline to mention how you can update
+
+00:12.800 --> 00:14.510
+your packages.
+
+00:14.510 --> 00:20.060
+So because I'm in the future the version of react that I'm seeing that just got released is different
+
+00:20.060 --> 00:24.430
+from the version that we are using throughout this course right now.
+
+00:24.440 --> 00:31.190
+Right now the latest version is sixteen point ten point two as of the time of the recording of this
+
+00:31.190 --> 00:32.270
+video.
+
+00:32.270 --> 00:37.660
+In the course though the version of react that we're using is sixteen point eight point six.
+
+00:37.670 --> 00:44.120
+It's a very minor version change but there are a couple of new things that came out in that react version.
+
+00:44.120 --> 00:51.080
+But even then I think it's important to understand how we can update our packages as well as see some
+
+00:51.200 --> 00:55.940
+other issues that might come up that are very easy to resolve.
+
+00:56.000 --> 01:03.370
+I'm going to show you in this lesson how you can do so with both yarn or NPM as your main package manager.
+
+01:03.470 --> 01:06.170
+But we're going to start with you first.
+
+01:06.290 --> 01:12.590
+So the first thing to do is check what version of whatever packages that you want to upgrade are that
+
+01:12.590 --> 01:14.010
+you are currently running.
+
+01:14.120 --> 01:20.500
+The easiest way to do so is simply using inside of your terminal yarn list.
+
+01:20.540 --> 01:24.020
+So if you type in your own list and then the name of the packages.
+
+01:24.020 --> 01:34.080
+So for me I'm checking out react react Dom and react scripts I will see that react on and react out
+
+01:34.090 --> 01:37.640
+sixteen point eight point six and react scripts as three point 0 point.
+
+01:37.660 --> 01:46.300
+Oh I know that react on and react can be upgraded to sixteen point ten point two which is the latest
+
+01:46.300 --> 01:50.390
+version and react scripts to three point two point zero.
+
+01:50.440 --> 01:56.500
+Now instead of directly modifying the value here there is another thing that we can do to make sure
+
+01:56.500 --> 02:01.900
+that whenever we either want to upgrade we can always use the latest version.
+
+02:01.900 --> 02:08.460
+Now the way to do that is simply to go to our package Doc Jason inside of our project.
+
+02:08.590 --> 02:16.930
+So inside of our package that Jason you'll see that I have inside of these two dependencies for react
+
+02:16.930 --> 02:23.230
+and react on sixteen point eight point six and sixteen point eight point six and three point 0 point
+
+02:23.290 --> 02:31.030
+0 so if you have used create react app to create your application as you've been following on this course
+
+02:31.150 --> 02:37.870
+you may see that there's this little carat symbol in front of your version all that means is that this
+
+02:37.870 --> 02:45.010
+is a rule that tells whatever package manager we're using whether it be Ana NPM when ever it sees NPM
+
+02:45.160 --> 02:52.070
+upgrade or yarn upgrade to update to the latest stable non breaking version.
+
+02:52.120 --> 02:58.210
+So if you see this carat then you see that whenever you installed your package even if it's six sixteen
+
+02:58.210 --> 03:02.300
+point eight point six It will try and get the latest version.
+
+03:02.490 --> 03:10.560
+In my case though because I did not have it whenever I run yarn install or npm install it will find
+
+03:10.800 --> 03:16.020
+just the exact version which is sixteen point eight point six.
+
+03:16.110 --> 03:23.410
+So I'm just going to add this carrot in to all these locations here here and here.
+
+03:23.540 --> 03:30.760
+And what this will now do is whenever I run yarn upgrade it will try and upgrade with these new rules.
+
+03:30.870 --> 03:37.520
+The issue that you will encounter if you change your package that Jason and then try to simply run your
+
+03:37.530 --> 03:45.880
+and upgrade is that you will see that you have an outdated log file please run your on a solid try again.
+
+03:45.890 --> 03:47.300
+This is perfectly fine.
+
+03:47.870 --> 03:53.780
+All this means is that you aren't upgrading is not going to work here because we updated the rules in
+
+03:53.780 --> 03:55.010
+our package not Jason.
+
+03:55.010 --> 03:57.170
+Well we added that carrot.
+
+03:57.170 --> 04:01.980
+Instead we have to run yarn install instead now.
+
+04:02.080 --> 04:08.260
+While this is installing this is actually a good time to take a look at this lock file that gets mentioned
+
+04:08.350 --> 04:13.810
+because I'm sure some of you may or may not have noticed that there is a yarn thought lock or a package
+
+04:13.810 --> 04:17.160
+that lock inside of your application folder.
+
+04:17.250 --> 04:21.310
+So what is this lock file on this lock file.
+
+04:21.310 --> 04:29.560
+Is it isn't auto generated file by either NPM or a yarn that locks the version of all the packages inside
+
+04:29.620 --> 04:35.770
+of our application within a specific range based on the rules that we set inside of package.
+
+04:35.800 --> 04:36.740
+Jason.
+
+04:36.940 --> 04:40.530
+So the rules being simply what we saw here as our version number.
+
+04:40.810 --> 04:42.370
+If I use this carrot.
+
+04:42.430 --> 04:48.580
+It's saying that I want it to be at least sixteen point eight point six or greater but not breaking
+
+04:50.890 --> 04:56.710
+what that means is that when we had it before without this carrot the yarn log file was generated saying
+
+04:56.710 --> 05:03.040
+that the version of react and react on and react scripts are locked to exactly that version.
+
+05:03.040 --> 05:07.150
+Now that we've added this carrot it gives more flexibility which means the yard lock fall is out of
+
+05:07.150 --> 05:09.030
+date and needs to be updated.
+
+05:09.190 --> 05:12.970
+And this lock file only updates whenever you run yarn install.
+
+05:13.840 --> 05:20.140
+So why do we need a lock file the lock file is simply there so that if multiple people are working on
+
+05:20.140 --> 05:27.730
+this application they are all using versions of these dependencies that don't conflict with each other
+
+05:27.760 --> 05:34.180
+because maybe somebody is running react 17 someone is running react 16 and there is a difference in
+
+05:34.180 --> 05:39.820
+features that might be breaking in the application that your unlock file just ensures that everybody
+
+05:39.820 --> 05:48.660
+is using a consistent version of these dependencies but with that after we ran your install we generated
+
+05:48.690 --> 05:54.450
+a new lock file and from now on you can simply run your upgrade whenever you want to upgrade these dependencies
+
+05:55.080 --> 06:00.660
+and we can just double check to make sure the version of these packages that we got are updated.
+
+06:00.660 --> 06:10.520
+So if I run your yarn list react react and react scripts I'll see that they're now at sixteen point
+
+06:10.520 --> 06:16.290
+ten point two for react on and react as well as three point two point 0 4 react scripts.
+
+06:16.310 --> 06:21.350
+So with this I have now updated my packages to the latest version.
+
+06:21.350 --> 06:28.830
+Now let's see how we do this and NPM so here I have a separate repository that is a complete clone of
+
+06:28.830 --> 06:30.080
+our last repository.
+
+06:30.120 --> 06:35.910
+The only difference is that in this one I'm using NPM as my package manager instead of yarn.
+
+06:36.030 --> 06:41.260
+All I have to do in order to update these packages is run NPM update.
+
+06:41.310 --> 06:47.250
+The main difference here is that NPM update will force the versions to update to their latest versions.
+
+06:47.790 --> 06:51.230
+However it's still good to be explicit in our rules and package.
+
+06:51.360 --> 06:56.570
+Jason so that we know what kind of versioning we want to do.
+
+06:56.610 --> 07:03.760
+So first let's just check what versions we have actually installed for react react on and react scripts.
+
+07:03.760 --> 07:04.810
+Is that a yarn list.
+
+07:04.830 --> 07:12.490
+We use NPM list and then we type out the actual package names the same way.
+
+07:12.760 --> 07:13.890
+I had a typo there
+
+07:17.820 --> 07:23.310
+so here with this it's just like yarn before we see that our versions are sixteen point eight point
+
+07:23.310 --> 07:28.210
+six for react and react on entry point 0 0 point 0 4 react scripts.
+
+07:28.320 --> 07:36.510
+So in order to update this we can go into our package our Jason and we can add Tilda in front of react
+
+07:36.570 --> 07:44.770
+react and react scripts just to be explicit and then we simply run NPM update.
+
+07:44.780 --> 07:49.790
+One thing I want to note is that even if you don't add the tilde it will update the version numbers
+
+07:49.820 --> 07:51.880
+and it will overwrite your package.
+
+07:52.040 --> 07:59.150
+Jason File to show the latest version so NPM update and then npm install are both a little different
+
+07:59.180 --> 08:05.900
+because npm install sometimes will skip over certain versions if it doesn't see that it's a major update.
+
+08:06.080 --> 08:11.600
+The safest way to make sure that you actually do update all your versions if you want to is run NPM
+
+08:11.660 --> 08:13.890
+update it takes a little longer.
+
+08:13.910 --> 08:19.820
+So let's just fast forward through the section so here we'll see already that it's told us that it's
+
+08:19.850 --> 08:26.270
+updated react on to sixteen point ten point two react scripts the three point two point 0 and react
+
+08:26.270 --> 08:29.140
+to sixteen point ten point two now.
+
+08:29.180 --> 08:33.440
+You'll also see down here that it says found zero vulnerabilities.
+
+08:33.440 --> 08:39.960
+So what are our vulnerabilities you might see this number change sometimes whether you see it as a warning
+
+08:39.960 --> 08:40.930
+and you get hub.
+
+08:40.940 --> 08:46.940
+Or maybe when you do something with your NPM it'll show you that there's certain vulnerabilities vulnerabilities
+
+08:46.940 --> 08:49.760
+are essentially at these minor security concerns.
+
+08:49.760 --> 08:50.900
+Sometimes they're major.
+
+08:50.900 --> 08:52.490
+Most of the time they're minor.
+
+08:52.690 --> 08:59.870
+That has to do with either a dependency that you have installed or a dependency that your packages depend
+
+08:59.870 --> 09:03.610
+upon that you yourself don't know that you also installed.
+
+09:03.620 --> 09:08.690
+So for example react probably has something like 60 other packages that it depends upon.
+
+09:08.900 --> 09:11.460
+And one of those might have a security concern.
+
+09:11.480 --> 09:19.760
+The easiest way to actually fix this inside of NPM is to run NPM audit fix and this command will go
+
+09:19.760 --> 09:25.220
+through and update the versions to a version of a package where it doesn't have the security concern
+
+09:25.220 --> 09:26.090
+anymore.
+
+09:26.180 --> 09:29.160
+Unfortunately with yarn This is not so easy.
+
+09:29.240 --> 09:36.740
+While yarn does have access to a yarn audit all it will do is we'll audit all of the packages as well
+
+09:36.740 --> 09:42.980
+as those packages dependency packages to see if there's any vulnerabilities in any of them.
+
+09:42.980 --> 09:46.570
+If it does it will list them to you and show you at what severity.
+
+09:46.580 --> 09:52.970
+But for you to actually update it there's no such easy command as NPM audit fix in yard.
+
+09:53.390 --> 09:59.980
+Well you'll have to do is manually install and upgrade all of those packages that you see with a vulnerability.
+
+10:00.020 --> 10:06.560
+If you do use yarn as your main package manager so that's just one thing to highlight as the main difference
+
+10:06.560 --> 10:10.280
+between NPM and yarn as well as how the commands work.
+
+10:10.280 --> 10:15.980
+So hopefully with this you now know how to update your packages whether you're using yarn or NPM as
+
+10:15.980 --> 10:22.670
+well as fix security vulnerabilities and with that good luck and I'll see everyone in the next lesson.

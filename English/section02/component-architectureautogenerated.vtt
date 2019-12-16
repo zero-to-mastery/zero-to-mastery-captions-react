@@ -1,0 +1,163 @@
+WEBVTT
+
+00:01.350 --> 00:08.730
+So we learned that react had this revolutionary idea of let me handle the damn updates because I know
+
+00:08.730 --> 00:11.150
+the best way to do them the most efficient way.
+
+00:11.190 --> 00:12.220
+You don't have to do that.
+
+00:12.240 --> 00:14.990
+Just tell me what the page should look like.
+
+00:15.000 --> 00:24.540
+Next big game changer was this idea of building Web sites like Lego blocks reactors designed around
+
+00:24.540 --> 00:34.220
+the concept of reusable components just like you see in this app how each square or rectangle has different
+
+00:34.220 --> 00:35.420
+color.
+
+00:35.420 --> 00:37.650
+Well these are all components.
+
+00:37.790 --> 00:43.220
+Each of these individual pieces create this whole app react.
+
+00:43.220 --> 00:49.490
+Had this idea of small components that you put them together to form bigger components.
+
+00:49.490 --> 00:51.880
+So you had the profile picture component.
+
+00:51.980 --> 01:00.460
+You had the add component and then you had the navigation bar component and within here you had components
+
+01:00.550 --> 01:01.750
+containing components.
+
+01:01.900 --> 01:07.940
+So you had a component in here that was surrounded by another component that was surrounded by an ever
+
+01:08.170 --> 01:16.900
+bigger component just like Lego blocks and all these small components whether they're large or big can
+
+01:16.900 --> 01:18.850
+be used in different places.
+
+01:18.850 --> 01:24.580
+For example I can have this component just copied over to multiple locations because while they're the
+
+01:24.580 --> 01:34.030
+same thing and I can even move these over to different projects and reuse them so people can build these
+
+01:34.030 --> 01:42.580
+components like material UI components that I could just copy and paste this code and added to my projects
+
+01:43.180 --> 01:51.770
+like so you had different component libraries like react bootstrap again or something like blueprint
+
+01:53.010 --> 01:59.580
+so people can now share these components across different Web sites across different projects and they
+
+01:59.580 --> 02:01.940
+will all work.
+
+02:02.010 --> 02:12.200
+Now this idea of components and react in a simple term is just plain JavaScript functions that we write
+
+02:13.870 --> 02:19.610
+so we have the state over app or that is any data that describes our app.
+
+02:19.690 --> 02:27.640
+For example the user is logged in whether it's true or false and maybe friends then components are created
+
+02:27.640 --> 02:32.490
+based on that data well simply as functions.
+
+02:32.690 --> 02:33.560
+And don't worry.
+
+02:33.590 --> 02:34.940
+Don't get intimidated by this.
+
+02:34.940 --> 02:37.820
+This is something that we'll cover throughout the course.
+
+02:37.820 --> 02:46.730
+But components are simply just JavaScript functions that received some sort of input or attributes which
+
+02:46.730 --> 02:48.320
+we call props.
+
+02:48.320 --> 02:56.160
+And in return it returns this thing that kind of looks like HDMI all but inside of JavaScript and these
+
+02:56.160 --> 03:00.540
+components can be built like this as a function or even as a class.
+
+03:00.660 --> 03:08.550
+But the key here is that based on the state and these components that we built we have an entire component
+
+03:08.550 --> 03:14.500
+that we can add to our page and reuse maybe over here as well if we wanted to.
+
+03:14.790 --> 03:18.130
+Just like Lego blocks now.
+
+03:18.280 --> 03:21.600
+Here is a simple react to do application.
+
+03:22.090 --> 03:27.130
+And I'm going to be using something called the react developer tools which I recommend you install as
+
+03:27.130 --> 03:29.220
+well in the Chrome Web Store.
+
+03:29.320 --> 03:35.980
+You can add it to Google as an extension and what it allows you is when you click view developer developer
+
+03:35.980 --> 03:46.170
+tools you'll now have the element stamp which shows you the dom of your app which you can see over here
+
+03:47.440 --> 03:59.060
+but also a new tab called react and this react plugin actually allows you to see the components that
+
+03:59.060 --> 04:02.210
+we built into an application.
+
+04:02.230 --> 04:11.750
+Now you can see over here that this isn't exactly HCM l we're creating custom tags like header or filtered
+
+04:11.750 --> 04:16.790
+list or footer that isn't valid HDMI all but you'll see that inside here.
+
+04:16.910 --> 04:27.280
+All of these are actually well built by a shim on elements like header H1 or input.
+
+04:27.290 --> 04:34.910
+So again this idea of a components architecture means that we can have some sort of data about our application
+
+04:35.600 --> 04:42.440
+and we build these components ourselves and these components are what we call react components that
+
+04:42.440 --> 04:52.760
+we built out of a metal tags that signify a component and each of these components work together to
+
+04:52.760 --> 05:01.030
+eventually have our app and this component architecture is really really key in react because it allows
+
+05:01.030 --> 05:08.530
+us to reuse and share components between projects so that if you wanted a date picker on your app well
+
+05:08.590 --> 05:14.320
+instead of maybe building it yourself you can just google for it and say react date picker component
+
+05:14.680 --> 05:20.890
+and just use somebody else's code but there's two more key concepts to get through.
+
+05:20.980 --> 05:22.570
+So let's do that in the next video.
